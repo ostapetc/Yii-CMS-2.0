@@ -1,0 +1,7 @@
+INSERT INTO `settings` (`module_id`, `code`, `name`, `value`, `element`, `hidden`) VALUES
+('users','registration_mail_body','Шаблон письма регистрации','<p>Здравствуйте {LAST_NAME} {FIRST_NAME} {PATRONYMIC}!</p>\r\n<p>Вы зарегистрировались на сайте {SITE_NAME}.</p>\r\n<p>Для завершения регистрации пройдите <a href=\"%7BACTIVATE_ACCOUNT_URL%7D\">по этой ссылке.</a></p>\r\n<p>Адрес ссылки: {ACTIVATE_ACCOUNT_URL}</p>  ','editor',0),
+('users','registration_mail_subject','Тема письма регистрации','Регистрация на сайте {SITE_NAME}','text',0),
+('users','registration_done_message','Сообщение о завершении регистрации','<p>Вы успешно зарегистрированы в системе, на ваш Email отправлено письмо с инструкциями завершения регистрации.</p>','editor',0),
+('users','activate_request_done_message','Сообщение после повторного запроса активации аккаунта','Мы выслали на ваш Email письмо, в котором нужно будет пройти по ссылке для активации аккаунта!','textarea',0),
+('users','change_password_request_mail_body','Шаблон письма запроса на смену пароля','<p>Здравствуйте {LAST_NAME} {FIRST_NAME} {PATRONYMIC}!</p>\r\n<p>Вы сделали запрос на восстановление пароля на сайте {SITE_NAME}.</p>\r\n<p>Для того чтобы изменить пароль пройдите <a href=\"%7BLINK%7D\">по этой ссылке.</a></p>\r\n<p>Адрес ссылки: {LINK}</p>  ','editor',0),
+('users','change_password_request_mail_subject','Тема письма запроса на смену пароля','Запрос на смену пароля {SITE_NAME}  ','editor',0);
