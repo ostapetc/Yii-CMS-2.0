@@ -1,0 +1,3 @@
+'admin' => 'main/mainAdmin',
+'<lang:[a-z]{2}>/search'   => 'main/main/search',
+'<lang:[a-z]{2}>/feedback' => 'main/feedback/create',

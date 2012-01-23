@@ -1,0 +1,2 @@
+'<lang:[a-z]{2}>/documents'          => 'documents/document/index',
+'<lang:[a-z]{2}>/documents/<id:\d+>' => 'documents/document/view',

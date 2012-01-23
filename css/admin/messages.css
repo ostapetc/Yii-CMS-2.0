@@ -1,0 +1,58 @@
+/* Messages */
+
+.message {
+    padding: 10px 15px 10px 40px;
+    margin: 10px 0;
+    font-weight: bold;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.message p {
+    padding: 0;
+    width: 93%;
+    float: left;
+}
+
+.message.error {
+    border: 1px solid #e9c59b;
+    background: #ffecce url(/images/admin/error.gif) 12px 12px no-repeat;
+    color: #e3302c;
+}
+
+.message.ok {
+    border: 1px solid #bfde84;
+    background: #edfbd8 url(/images/admin/success.gif) 12px 12px no-repeat;
+    color: #508600;
+}
+
+.message.info {
+    border: 1px solid #bbdbe0;
+    background: #ecf9ff url(/images/admin/info.gif) 12px 12px no-repeat;
+    color: #0888c3;
+}
+
+.message.warning {
+    border: 1px solid #e5e181;
+    background: #fefde2 url(/images/admin/warning.gif) 12px 12px no-repeat;
+    color: #666;
+}
+
+.message .close {
+    display: block;
+    float: right;
+    width: 16px;
+    height: 16px;
+    background: url(/images/admin/close.png) 0 0 no-repeat;
+    margin-top: 2px;
+    cursor: pointer;
+    -moz-opacity: 0.7;
+    opacity: 0.7;
+}
+
+.message .close.hover {
+    -moz-opacity: 1;
+    opacity: 1;
+}

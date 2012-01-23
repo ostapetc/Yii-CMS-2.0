@@ -1,0 +1,3 @@
+.pct {border-bottom: solid 3px #0000e6;}
+.grid-view table.items .pct tr.odd {background: #FFF;}
+.grid-view table.items .pct tr.even {background: #EEE;}

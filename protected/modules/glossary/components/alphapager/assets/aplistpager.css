@@ -1,0 +1,7 @@
+/* To be honest: i dont know what to put in here. 
+But if you'll use the list pager and you want to style the gui than you'll be happy 
+to have the possibility to easily assign CSS - i'm kind of sure ;-) 
+
+Ohh and if you don't want to style your list pager and also don't want this CSS file to show up 
+than just set ApListPager->cssFile=false; and the CSS file will not be included in your page.
+*/

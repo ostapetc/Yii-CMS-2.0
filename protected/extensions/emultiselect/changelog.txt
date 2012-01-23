@@ -1,0 +1,31 @@
+------------------------------------
+EMultiSelect
+By: Loren
+TigerPaw Productions
+Clemson University
+------------------------------------
+
+------------------------------------
+Usage
+------------------------------------
+Place emultiselect folder in /protected/extensions/
+Add to form views as needed:
+$this->widget(
+      'application.widget.emultiselect.EMultiSelect',
+      array('sortable'=>false/true, 'searchable'=>false/true)
+);
+Add the class multiselect and multiselect to dropdowns that you want to be multiselected.
+
+Eg:
+echo $form->dropDownList(
+    $model,
+    'trainings',
+    $trainings,
+    array('multiple'=>'multiple',
+        'key'=>'trainings', 'class'=>'multiselect')
+);
+
+------------------------------------
+1.0
+------------------------------------
+Initial Release

@@ -1,0 +1,149 @@
+.grid-view-loading
+{
+	background:url(loading.gif) no-repeat;
+}
+
+.grid-view
+{
+	padding: 15px 0;
+}
+
+.grid-view table.items
+{
+	background: white;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.grid-view table.items th a.asc
+{
+	background:url(up.gif) right center no-repeat;
+	padding-right: 10px;
+}
+
+.grid-view table.items th a.desc
+{
+	background:url(down.gif) right center no-repeat;
+	padding-right: 10px;
+}
+
+
+.grid-view table.items tr.selected
+{
+	background: #BCE774;
+}
+
+.grid-view table.items tr:hover
+{
+	background: #ECFBD4;
+}
+
+.grid-view .link-column img
+{
+	border: 0;
+}
+
+.grid-view .button-column
+{
+	text-align: center;
+	width: 60px;
+}
+
+.grid-view .button-column img
+{
+	border: 0;
+}
+
+.grid-view .checkbox-column
+{
+	width: 15px;
+}
+
+.grid-view .summary
+{
+	margin: 0 0 5px 0;
+	float: right;
+}
+.grid-view .pager-select
+{
+    margin: 0 0 0 5px;
+    float: right;
+}
+
+.grid-view .pager
+{
+	margin: 5px 0 0 0;
+	text-align: right;
+}
+
+.grid-view .empty
+{
+	font-style: italic;
+}
+
+.grid-view .filters input,
+.grid-view .filters select
+{
+	width: 100%;
+	border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #333;
+    background: #fefefe;
+}
+
+.filters_link {
+    color: green;
+    text-decoration: underline !important;
+}
+
+.filters {
+    display: none;
+}
+
+
+.placeholder{
+    background: url(/img/admin/placeholder.png);
+}
+
+
+.block table {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.block table tr.even td {
+    background: #fbfbfb;
+}
+
+.block table tr td,
+.block table tr th {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    line-height: normal;
+    text-align: left;
+}
+
+.block table tr th.headerSortUp {
+    color: #333;
+    background: url(/images/admin/sortd.gif) 95% center no-repeat;
+}
+
+.block table tr th.headerSortDown {
+    color: #333;
+    background: url(/images/admin/sorta.gif) 95% center no-repeat;
+}
+
+.block table tr td.delete {
+    text-align: right;
+    font-size: 11px;
+}
+
+.block table tr td.delete a {
+    color: #666;
+}
+
+.block table tr td.delete a:hover {
+    color: #dd0000;
+}

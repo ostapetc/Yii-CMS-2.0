@@ -1,0 +1,351 @@
+/* Forms */
+
+.form p{
+    overflow: hidden;
+    clear:    both;
+}
+
+select{
+    background:            #fefefe;
+    border:                1px solid #bbb;
+    font-family:           "Lucida Grande", Verdana, sans-serif;
+    font-size:             14px;
+    color:                 #333;
+    padding:               3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius:    3px;
+    border-radius:         3px;
+    outline:               none;
+    vertical-align:        middle;
+    min-width:             200px;
+}
+
+select.chzn{
+    min-width: 500px;
+    width:     500px
+}
+
+input.text{
+    width:                 410px;
+    background:            #fefefe;
+    border:                1px solid #bbb;
+    font-family:           "Lucida Grande", Verdana, sans-serif;
+    font-size:             14px;
+    color:                 #333;
+    padding:               7px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius:    3px;
+    border-radius:         3px;
+    outline:               none;
+    vertical-align:        middle;
+    /*height: 26px;*/
+}
+
+input.text.medium{
+    width: 600px;
+}
+
+input.text.big{
+    width: 98%;
+}
+
+input.text.date_picker{
+    width:         100px;
+    padding-right: 36px;
+    cursor:        pointer;
+    background:    url(/images/admin/cal.jpg) center right no-repeat;
+}
+
+textarea{
+    width:                 98%;
+    height:                140px;
+    padding:               5px;
+    background:            #fefefe;
+    border:                1px solid #bbb;
+    font-family:           "Lucida Grande", Verdana, sans-serif;
+    font-size:             14px;
+    color:                 #333;
+    -webkit-border-radius: 3px;
+    -moz-border-radius:    3px;
+    border-radius:         3px;
+    outline:               none;
+}
+
+textarea.wysiwyg{
+    width:   98%;
+    padding: 0;
+}
+
+input.radio,
+input.checkbox{
+    vertical-align: middle;
+}
+
+/* Custom form select element */
+
+.cmf-skinned-select{
+    padding:               7px;
+    display:               block;
+    margin-right:          20px;
+    border:                1px solid #bbb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius:    3px;
+    border-radius:         3px;
+    background:            url('/images/admin/sdd.jpg') center right no-repeat;
+}
+
+.cmf-skinned-select:hover{
+    background: url('/images/admin/sdd_.jpg') center right no-repeat;
+}
+
+div.cmf-skinned-text{
+    padding:     5px 7px;
+    font-family: "Lucida Grande", Verdana, sans-serif;
+    font-size:   14px;
+    color:       #333;
+}
+
+/* Custom file input */
+
+.fileupload{
+    position: relative;
+}
+
+.fileupload #uploadmsg{
+    display:     block;
+    position:    absolute;
+    top:         20px;
+    left:        350px;
+    height:      30px;
+    line-height: 30px;
+    margin-left: 5px;
+    font-size:   11px;
+}
+
+.fileupload #uploadmsg.loading{
+    background:   url(/img/admin/ajax-loader.gif) center left no-repeat;
+    width:        30px;
+    padding-left: 20px;
+}
+
+input.file{
+    width:                             250px;
+    height:                            20px;
+    background:                        #fefefe;
+    border-right:                      0;
+    font-family:                       "Lucida Grande", Verdana, sans-serif;
+    font-size:                         14px;
+    color:                             #333;
+    padding:                           0;
+    outline:                           none;
+}
+
+.note{
+    padding-left:   10px;
+    font-size:      11px;
+    font-weight:    bold;
+    color:          #757575;
+    vertical-align: middle;
+}
+
+.note.error{
+    color: #e3302c;
+}
+
+input.submit{
+    width:          85px;
+    height:         30px;
+    line-height:    30px;
+    background:     url(/images/admin/btns.gif) top center no-repeat;
+    border:         0;
+    font-family:    "Titillium800", "Trebuchet MS", Arial, sans-serif;
+    font-size:      14px;
+    font-weight:    normal;
+    text-transform: uppercase;
+    color:          #fff;
+    text-shadow:    1px 1px 0 #0a5482;
+    cursor:         pointer;
+    margin-right:   10px;
+    vertical-align: middle;
+}
+
+input.submit:hover{
+    background:  url(/images/admin/btns_.gif) top center no-repeat;
+    text-shadow: 1px 1px 0 #b55f10;
+}
+
+input.submit.tiny{
+    width:          105px;
+    height:         20px;
+    line-height:    20px;
+    padding-bottom: 2px;
+    vertical-align: middle;
+    font-family:    "Lucida Grande", Arial, Helvetica, sans-serif;
+    font-size:      12px;
+    font-weight:    bold;
+    text-transform: none;
+    background:     url(/images/admin/tiny.gif) top center no-repeat;
+}
+
+input.submit.tiny.red{
+    background: url(/images/admin/tiny_red.gif) top center no-repeat;
+}
+
+input.submit.tiny:hover{
+    background: url(/images/admin/tiny_.gif) top center no-repeat;
+}
+
+input.submit.mid{
+    width:      115px;
+    background: url(/images/admin/btnm.gif) top center no-repeat;
+}
+
+input.submit.mid:hover{
+    background: url(/images/admin/btnm_.gif) top center no-repeat;
+}
+
+input.submit.long{
+    width:      165px;
+    background: url(/images/admin/btnb.gif) top center no-repeat;
+}
+
+input.submit.long:hover{
+    background: url(/images/admin/btnb_.gif) top center no-repeat;
+}
+
+input.back_button.submit.small{
+    background: url(/images/admin/btns_red.gif) top center no-repeat;
+}
+
+.form .editor{
+    border: 1px solid red;
+}
+
+.errorMessage{
+    color:         #E3302C;
+    margin-bottom: 10px;
+}
+
+.checkbox_input{
+    width:  13px;
+    float:  left;
+    margin: 5px 14px 0 0;
+}
+
+.checkbox_label{
+    padding: 0 !important;
+}
+
+input[disabled]{
+    background-color: #E0E0E0 !important;
+}
+
+label{
+    font-family:    "Lucida Grande", Verdana, sans-serif;
+    font-size:      12px;
+    font-weight:    bold;
+    color:          #555;
+    margin-right:   10px;
+    vertical-align: middle;
+    display:        block;
+}
+
+.hint{
+    background: url('/images/admin/hint.png') no-repeat;
+    float: left;
+    width: 17px;
+    height: 16px;
+}
+
+.label_table td{
+    padding: 0 !important;
+    border:  0 !important;
+}
+
+.label_table{
+    margin: 0 0 4px 0 !important;
+}
+
+.radio-list dt{
+    display: inline-block;
+}
+.radio-list dd{
+    display:     inline-block;
+    margin-left: 5px;
+}
+
+fieldset{
+    border:        1px solid #E0E0E0;
+    margin-bottom: 20px;
+    padding:       15px 30px;
+}
+
+fieldset .portlet-content{
+    padding: 10px 15px;
+    display: none;
+}
+
+fieldset legend{
+    padding:     0 5px;
+    font-weight: bold;
+    color:       black;
+}
+
+.ui-multiselect-input{
+    min-height: 20px;
+}
+
+form dl{
+    clear:  both;
+    margin: 5px 0;
+}
+
+form input.radio{
+    float: left;
+}
+form .radio label{
+    padding-left: 20px;
+    line-height:  12px;
+}
+
+
+dl {
+   margin-bottom:13px !important;
+}
+
+
+.fieldset-checker
+{
+    margin-bottom: 20px !important;
+    text-decoration: underline;
+    display: block;
+}
+
+.files{margin: 0 !important;}
+.files .title span, .files .descr span{border-bottom: 1px dashed #48f; cursor: pointer}
+.files .title, .files .descr{min-width:250px; min-height: 50px;}
+.files .title, .files .descr{min-width:250px; min-height: 50px;}
+
+.ui-autocomplete
+{
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+
+.checkbox_label {
+    padding: 0 !important;
+}
+
+input[disabled] {
+    background-color: #E0E0E0 !important;
+}
+
+
+.uploader .descr{
+    width: 200px;
+}
+.uploader .editable_wrapper{
+    padding: 0 10px 0 0;
+}
+

@@ -1,0 +1,3 @@
+'<lang:[a-z]{2}>/faq/create'                   => 'faq/faq/create',
+'<lang:[a-z]{2}>/faq/section/<section_id:\d+>' => 'faq/faq/index',
+'<lang:[a-z]{2}>/faq/create'                   => 'faq/faq/create',

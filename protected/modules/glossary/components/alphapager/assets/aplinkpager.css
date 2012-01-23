@@ -1,0 +1,55 @@
+.alphaPager {
+
+    padding: 11px 20px 11px 25px;
+    background: url(/images/alpha_back.png) no-repeat;
+    font-weight:bold;
+    margin-bottom: 20px;
+    height:48px;
+}
+
+ul.yiiAlphaPager{
+    display:block;
+    text-align: left;
+}
+ul.yiiAlphaPager a:link,
+ul.yiiAlphaPager a:visited, ul.yiiAlphaPager a:hover{
+    color:#231F20;
+    text-decoration:none;
+}
+ul.yiiAlphaPager .selected a{
+    color:#FFF;
+}
+ul.yiiAlphaPager li{
+    display: block;
+    float:left;
+    text-align: center;
+    padding: 0;
+    margin: 3px 0 5px 0;
+}
+ul.yiiAlphaPager li.selected{
+    background: url(/images/alphapage_active.png) no-repeat;
+    width: 17px;
+    height:17px;
+    margin: 3px 2px 5px 2px;
+}
+li.selected .wrap_alpha{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    height:17px;
+    width:17px;
+}
+li.page .wrap_alpha{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    height:17px;
+    width:14px;
+}
+ul.yiiAlphaPager .hidden a,
+ul.yiiAlphaPager span{
+    color:#999;
+}
+
+/* Uncomment following line to hide the ALL-button */
+/*ul.alphaPager .all { display:none; }*/
