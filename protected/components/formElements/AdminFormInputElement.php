@@ -15,8 +15,8 @@ class AdminFormInputElement extends CFormInputElement
     public static $default_widget_settings = array(
         'alias'             => array('class' => 'text'),
         'date'              => array(
-            'options'  => array('dateFormat'=> 'd.m.yy'),
-            'language' => 'ru'
+            'options'    => array('dateFormat'=> 'd.m.yy'),
+            'language'   => 'ru',
         ),
         'autocomplete'      => array(
             'minChars'   => 2,

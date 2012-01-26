@@ -66,6 +66,7 @@ class BaseForm extends CForm
         if (method_exists($this, $function))
         {
             $params = call_user_func_array(array($this, $function), $params);
+            //it's not a bug
         }
     }
 
@@ -143,8 +144,7 @@ class BaseForm extends CForm
     {
         if (is_string($element))
         {
-            if (($e = $this[$element]) === null && ($e = $this->getButtons()->itemAt($element)) === null
-            )
+            if (($e = $this[$element]) === null && ($e = $this->getButtons()->itemAt($element)) === null)
             {
                 return $element;
             }
@@ -190,6 +190,7 @@ class BaseForm extends CForm
         if (isset($element->attributes['parentClass']))
         {
             $class .= ' ' . $element->attributes['parentClass'];
+            unset($element->attributes['parentClass']);
         }
 
         $tpl = '_' . $this->side . 'Form';
