@@ -26,7 +26,7 @@ class FileManagerModule extends WebModule
 
     public static function version()
     {
-        return '3.0';
+        return '2.0';
     }
 
 
