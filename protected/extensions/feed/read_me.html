@@ -1,0 +1,270 @@
+<div class="grid_9 alpha">
+									<div class="layout-main-body">
+						<div class="extension-view">
+	<h1>efeed <div id="___plusone_0" style="height: 15px; width: 70px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;"><iframe width="100%" scrolling="no" frameborder="0" title="+1" vspace="0" tabindex="-1" style="position: static; left: 0pt; top: 0pt; width: 70px; margin: 0px; border-style: none; height: 15px; visibility: visible;" src="https://plusone.google.com/u/0/_/+1/fastbutton?url=http%3A%2F%2Fwww.yiiframework.com%2Fextension%2Fefeed%2F&amp;size=small&amp;count=true&amp;annotation=&amp;hl=en-US&amp;jsh=r%3Bgc%2F24479126-6666cb8c#id=I1_1318703104429&amp;parent=http%3A%2F%2Fwww.yiiframework.com&amp;rpctoken=31739347&amp;_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe" name="I1_1318703104429" marginwidth="0" marginheight="0" id="I1_1318703104429" hspace="0" allowtransparency="true"></iframe></div></h1>
+
+	<div class="tagline">Feed Writer Generator Extension (RSS 1.0, RSS 2.0, and ATOM 1.0)</div>
+
+	<div class="g-voter-reporter">
+		<a href="/site/report/?type=Extension&amp;id=361" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>		<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Extension&amp;id=361&amp;vote=1" class="g-login" title="Thumb up"><span>18</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Extension&amp;id=361&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>	</div>
+	<div class="g-starring">
+		<span class="widget-follower"><a href="/site/star/?type=Extension&amp;id=361&amp;v=1" title="Click to follow" class="g-login"><img width="15" height="15" title="" src="/images/star_off.gif" alt="Click to follow"></a><span>19 followers</span></span>	</div>
+	<div class="clear"></div>
+
+	<div class="content g-markdown">
+		<div class="toc"><div class="ref level-2"><a href="#hh0">Requirements</a></div>
+<div class="ref level-2"><a href="#hh1">Usage</a></div>
+<div class="ref level-2"><a href="#hh2">Change Log</a></div>
+<div class="ref level-2"><a href="#hh3">Resources</a></div></div>
+<p>Feed Writer Generator Extension to create your feeds. Currently supports RSS 1.0, RSS 2.0 and ATOM 1.0.</p>
+
+<h2 id="hh0">Requirements <a href="#hh0" class="anchor">�</a></h2>
+
+<ul><li>Developed using Yii version 1.1.5    </li>
+</ul><h2 id="hh1">Usage <a href="#hh1" class="anchor">�</a></h2>
+
+<p>Unzip the contents of the package and place it on your protected/extensions folder.</p>
+
+<p><strong>Examples of use</strong></p>
+
+<p>RSS 1.0</p>
+
+<div class="hl-code"><div class="hl-main"><pre><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">import</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">ext.feed.*</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-comment">//</span><span class="hl-comment"> specify feed type</span>
+<span class="hl-var">$feed</span><span class="hl-code"> = </span><span class="hl-reserved">new</span> <span class="hl-identifier">EFeed</span><span class="hl-brackets">(</span><span class="hl-identifier">EFeed</span><span class="hl-code">::</span><span class="hl-identifier">RSS1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">Testing the RSS 1 EFeed class</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">link</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">description</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">This is test of creating a RSS 1.0 feed by Universal Feed Writer</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">RSS1ChannelAbout</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com/about</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> create our item  </span>
+<span class="hl-var">$item</span><span class="hl-code"> = </span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">createNewItem</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">The first feed</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">link</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">http://www.yiiframework.com</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">date</span><span class="hl-code"> = </span><span class="hl-identifier">time</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">description</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">Amaz-ii-ng &lt;b&gt;Yii Framework&lt;/b&gt;</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">dc:subject</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">Subject Testing</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addItem</span><span class="hl-brackets">(</span><span class="hl-var">$item</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">generateFeed</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+<p>RSS 2.0</p>
+
+<div class="hl-code"><div class="hl-main"><pre><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">import</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">ext.feed.*</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> RSS 2.0 is the default type</span>
+<span class="hl-var">$feed</span><span class="hl-code"> = </span><span class="hl-reserved">new</span> <span class="hl-identifier">EFeed</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">= </span><span class="hl-quotes">'</span><span class="hl-string">Testing RSS 2.0 EFeed class</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">description</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">This is test of creating a RSS 2.0 Feed</span><span class="hl-quotes">'</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">setImage</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">Testing RSS 2.0 EFeed class</span><span class="hl-quotes">'</span><span class="hl-code">,</span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com/rss</span><span class="hl-quotes">'</span><span class="hl-code">,
+</span><span class="hl-quotes">'</span><span class="hl-string">http://www.yiiframework.com/forum/uploads/profile/photo-7106.jpg</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addChannelTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">language</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">en-us</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addChannelTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">pubDate</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-identifier">date</span><span class="hl-brackets">(</span><span class="hl-identifier">DATE_RSS</span><span class="hl-code">, </span><span class="hl-identifier">time</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addChannelTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">link</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com/rss</span><span class="hl-quotes">'</span> <span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-comment">//</span><span class="hl-comment"> * self reference</span>
+<span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addChannelTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">atom:link</span><span class="hl-quotes">'</span><span class="hl-code">,</span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com/rss/</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$item</span><span class="hl-code"> = </span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">createNewItem</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string">first Feed</span><span class="hl-quotes">"</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">link</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string">http://www.yahoo.com</span><span class="hl-quotes">"</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">date</span><span class="hl-code"> = </span><span class="hl-identifier">time</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">description</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">This is test of adding CDATA Encoded description &lt;b&gt;EFeed Extension&lt;/b&gt;</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> this is just a test!!</span>
+<span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">setEncloser</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">http://www.tester.com</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">1283629</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">audio/mpeg</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">author</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">thisisnot@myemail.com (Antonio Ramirez)</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">guid</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com/</span><span class="hl-quotes">'</span><span class="hl-code">,</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">isPermaLink</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">true</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addItem</span><span class="hl-brackets">(</span><span class="hl-var">$item</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">generateFeed</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">end</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+<p>ATOM 1.0</p>
+
+<div class="hl-code"><div class="hl-main"><pre><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">import</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">ext.feed.*</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code"> = </span><span class="hl-reserved">new</span> <span class="hl-identifier">EFeed</span><span class="hl-brackets">(</span><span class="hl-identifier">EFeed</span><span class="hl-code">::</span><span class="hl-identifier">ATOM</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-comment">//</span><span class="hl-comment"> IMPORTANT : No need to add id for feed or channel. It will be automatically created from link.</span>
+<span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">Testing the ATOM RSS EFeed class</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">link</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com</span><span class="hl-quotes">'</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addChannelTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">updated</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-identifier">date</span><span class="hl-brackets">(</span><span class="hl-identifier">DATE_ATOM</span><span class="hl-code">, </span><span class="hl-identifier">time</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addChannelTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">author</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-reserved">array</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">name</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">Antonio Ramirez Cobos</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$item</span><span class="hl-code"> = </span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">createNewItem</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">The first Feed</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">link</span><span class="hl-code">  = </span><span class="hl-quotes">'</span><span class="hl-string">http://www.ramirezcobos.com</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> we can also insert well formatted date strings</span>
+<span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">date</span><span class="hl-code"> =</span><span class="hl-quotes">'</span><span class="hl-string">2010/24/12</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$item</span><span class="hl-code">-&gt;</span><span class="hl-identifier">description</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">Test of CDATA Encoded description &lt;b&gt;EFeed Extension&lt;/b&gt;</span><span class="hl-quotes">'</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">addItem</span><span class="hl-brackets">(</span><span class="hl-var">$item</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$feed</span><span class="hl-code">-&gt;</span><span class="hl-identifier">generateFeed</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+<h2 id="hh2">Change Log <a href="#hh2" class="anchor">�</a></h2>
+
+<ul><li>v.1.2 Added support for <a title="" href="http://workbench.cadenhead.org/news/3284/adding-atomlink-your-rss-feed">atom:link</a> </li>
+<li>v.1.1 Fixed bug on EFeedItemAtom thanks to <a title="Flokey" href="http://www.yiiframework.com/forum/index.php?/user/25919-flokey82/">Flokey82</a></li>
+</ul><h2 id="hh3">Resources <a href="#hh3" class="anchor">�</a></h2>
+
+<ul><li><a href="http://www.yiiframework.com/forum/index.php?/topic/14663-extension-efeed-extension/">Forum Post</a></li>
+</ul>	</div>
+
+	<div id="comments" class="widget-comment-list">
+	<div class="comments">
+		<h3>Total 10 comments</h3>
+				<div class="comment alt-0">
+			<a href="#c5426" title="permalink to this comment" id="c5426" class="cid">#5426</a>
+			<a href="/site/report/?type=Comment&amp;id=5426" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=5426&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=5426&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/3958/" class="g-user-rank-link">omarxp</a> at 2011/10/11 01:32am</div>
+			<div class="title">error has been fixed</div>
+			<div class="content"><p>@tonydspaniard
+error has been fixed, I upgraded to the latest framework yii</p>
+</div>
+					</div>
+				<div class="comment alt-1">
+			<a href="#c5390" title="permalink to this comment" id="c5390" class="cid">#5390</a>
+			<a href="/site/report/?type=Comment&amp;id=5390" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=5390&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=5390&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/7106/" class="g-user-rank-link gold">tonydspaniard</a> at 2011/10/09 06:02am</div>
+			<div class="title">@omarxp</div>
+			<div class="content"><p>Please post your issues at the forum post. Will be happy to hear but it sounds you have an issue with your Yii configuration. CTypedMap is part of Yii core.</p>
+
+<p><a title="" href="http://www.yiiframework.com/doc/api/1.1/CTypedMap">http://www.yiiframework.com/doc/api/1.1/CTypedMap</a></p>
+</div>
+					</div>
+				<div class="comment alt-0">
+			<a href="#c5244" title="permalink to this comment" id="c5244" class="cid">#5244</a>
+			<a href="/site/report/?type=Comment&amp;id=5244" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=5244&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=5244&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/3958/" class="g-user-rank-link">omarxp</a> at 2011/09/26 07:20am</div>
+			<div class="title">Error..</div>
+			<div class="content"><p>i use this ext, and find error :
+include(CTypedMap.php): failed to open stream: No such file or directory,</p>
+
+<p>can help me?</p>
+</div>
+					</div>
+				<div class="comment alt-1">
+			<a href="#c4009" title="permalink to this comment" id="c4009" class="cid">#4009</a>
+			<a href="/site/report/?type=Comment&amp;id=4009" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=4009&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=4009&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/7106/" class="g-user-rank-link gold">tonydspaniard</a> at 2011/05/27 02:21am</div>
+			<div class="title">@cstdenis</div>
+			<div class="content"><p>Great suggestion!</p>
+
+<p>I am in the middle of adding MRSS and iTunes support to the extension. Unfortunately I am very busy at the moment.</p>
+
+<p>I will consider the dataProvider recommendation aswel. Very good feedback, thanks.</p>
+</div>
+					</div>
+				<div class="comment alt-0">
+			<a href="#c3899" title="permalink to this comment" id="c3899" class="cid">#3899</a>
+			<a href="/site/report/?type=Comment&amp;id=3899" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=3899&amp;vote=1" class="g-login" title="Thumb up"><span>1</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=3899&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/19435/" class="g-user-rank-link">cstdenis</a> at 2011/05/18 08:50pm</div>
+			<div class="title">Nice, class but could use some improvments.</div>
+			<div class="content"><p>I need MRSS (Media RSS) support so I tried to extend your class to add the necessary second xmlns, but I found $type and renderHead() private rather than protected preventing this.</p>
+
+<p>You should change your private classes, when appropriate, protected to make it more extensible.</p>
+
+<p>Even better, for my particular needs, would have been for renderHead() to either get the header from the appropriate EFeedItem class (not sure how you would structure that well) or to build it's data from a modifiable associative array.</p>
+
+<p>I would also be nice to have it behave like classes such as CGridView where a dataProvider can be passed to it along with a list of column names and the items auto populated from that.</p>
+</div>
+					</div>
+				<div class="comment alt-1">
+			<a href="#c3022" title="permalink to this comment" id="c3022" class="cid">#3022</a>
+			<a href="/site/report/?type=Comment&amp;id=3022" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=3022&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=3022&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/4032/" class="g-user-rank-link">danaluther</a> at 2011/03/08 10:17am</div>
+			<div class="title">Love It</div>
+			<div class="content"><p>This extension was very easy to get running, and quite effective. Thank you for sharing it.</p>
+</div>
+					</div>
+				<div class="comment alt-0">
+			<a href="#c2895" title="permalink to this comment" id="c2895" class="cid">#2895</a>
+			<a href="/site/report/?type=Comment&amp;id=2895" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=2895&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=2895&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/8105/" class="g-user-rank-link">emilevdh</a> at 2011/02/23 06:31am</div>
+			<div class="title">ITunes</div>
+			<div class="content"><p>@tonydspaniard: Thanks! Looks like an awesome extension.</p>
+
+<p>Please keep us posted with your progress with making your extension more universal.</p>
+
+<p>We will need to use itunes specific tags.</p>
+</div>
+					</div>
+				<div class="comment alt-1">
+			<a href="#c2631" title="permalink to this comment" id="c2631" class="cid">#2631</a>
+			<a href="/site/report/?type=Comment&amp;id=2631" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=2631&amp;vote=1" class="g-login" title="Thumb up"><span>1</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=2631&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/7106/" class="g-user-rank-link gold">tonydspaniard</a> at 2011/01/24 07:09am</div>
+			<div class="title">@Sarke &amp; @gusnips</div>
+			<div class="content"><p>Any feedback to create a better extension always welcome. I would love to make this RSS feed much more universal (iTunes for example?)</p>
+</div>
+					</div>
+				<div class="comment alt-0">
+			<a href="#c2629" title="permalink to this comment" id="c2629" class="cid">#2629</a>
+			<a href="/site/report/?type=Comment&amp;id=2629" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=2629&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=2629&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/7491/" class="g-user-rank-link">Sarke</a> at 2011/01/24 04:39am</div>
+			<div class="title">Small and simple</div>
+			<div class="content"><p>Thank you!  Very easy to use, and doesn't have to include parts of other frameworks to use! ;)</p>
+</div>
+					</div>
+				<div class="comment alt-1">
+			<a href="#c2625" title="permalink to this comment" id="c2625" class="cid">#2625</a>
+			<a href="/site/report/?type=Comment&amp;id=2625" title="Please report to us if you find any inappropriate content." class="widget-reporter"><span>report it</span></a>			<div class="widget-voter"><ul>
+	<li class="vote up"><a href="/site/vote/?type=Comment&amp;id=2625&amp;vote=1" class="g-login" title="Thumb up"><span>0</span></a></li>
+	<li class="vote down"><a href="/site/vote/?type=Comment&amp;id=2625&amp;vote=0" class="g-login" title="Thumb down"><span>0</span></a></li>
+</ul>
+<div class="clear"></div></div>			<div class="meta"><a href="/user/6112/" class="g-user-rank-link silver">gusnips</a> at 2011/01/24 12:48am</div>
+			<div class="title">Thanks for sharing</div>
+			<div class="content"><p>Looks great, I'll be definitively using it soon and then I'll give you my feedback</p>
+</div>
+					</div>
+			</div>
+	<div id="comment-add">
+		<h3 id="add-comment">Leave a comment</h3>
+
+			<p>Please <a href="#" rel="/extension/efeed/#add-comment" class="g-login">login</a> to leave your comment.</p>
+		</div>
+</div>
+</div>
+
+					</div>
+								</div>
