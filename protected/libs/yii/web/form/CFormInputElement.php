@@ -212,7 +212,7 @@ class CFormInputElement extends CFormElement
 			$attributes['model']=$this->getParent()->getModel();
 			$attributes['attribute']=$this->name;
 			ob_start();
-			$this->getParent()->getOwner()->widget($this->type, $attributes);
+            $this->getParent()->getOwner()->widget($this->type, $attributes);
 			return ob_get_clean();
 		}
 	}

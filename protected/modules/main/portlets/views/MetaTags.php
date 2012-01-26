@@ -1,6 +1,5 @@
 <style type="text/css">
 #meta_tags_fs {
-    display: none;
 }
 
 #meta_tags_l {
@@ -11,23 +10,7 @@
 </style>
 
 
-<script type="text/javascript">
-$(function()
-{
-    $('#meta_tags_l').live('click', function()
-    {
-        $('#meta_tags_fs').slideDown();
-        $(this).remove();
-        return false;
-    });
-});
-</script>
-
-
-
 <?php $class = get_class($this->model); ?>
-
-<a href="" id="meta_tags_l">Мета-тэги</a>
 
 <fieldset id="meta_tags_fs">
     <legend>Мета-тэги</legend>

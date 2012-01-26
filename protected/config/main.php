@@ -19,6 +19,41 @@ foreach ($modules_dirs as $module)
 }
 
 
+
+$modules['webshell'] = array(
+    'class'          => 'ext.webshell.WebShellModule',
+    // when typing 'exit', user will be redirected to this URL
+    'exitUrl'        => '/',
+    // custom wterm options
+    'wtermOptions'   => array(
+        // linux-like command prompt
+        'PS1' => '%',
+    ),
+    // additional commands (see below)
+    'commands'       => array(
+        'test' => array('js:function(){return "Hello, world!";}', 'Just a test.'),
+    ),
+    // uncomment to disable yiic
+    // 'useYiic' => false,
+
+    // adding custom yiic commands not from protected/commands dir
+    'ipFilters'      => array('*', '::1'),
+    'yiicCommandMap' => array(
+        'email'  => array(
+            'class'=> 'ext.mailer.MailerCommand',
+            'from' => 'www.pismeco@gmail.com',
+        ),
+        'migrate'=> array(
+            'class'          => 'system.cli.commands.MigrateCommand',
+            'migrationPath'  => 'application.migrations',
+            'migrationTable' => 'tbl_migration',
+            'connectionID'   => 'db',
+            'templateFile'   => 'application.migrations.template',
+            'interactive'    => false, //in web not define STDIN
+        ),
+    ),
+);
+
 $modules['gii'] = array(
     'class'          => 'system.gii.GiiModule',
     'generatorPaths' => array('application.gii'),
