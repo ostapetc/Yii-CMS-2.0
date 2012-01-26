@@ -280,7 +280,7 @@
                     input.blur(function(e) {
                         /* prevent double submit if submit was clicked */
                         t = setTimeout(function() {
-                            form.submit();
+                            form.trigger('save');
                         }, 200);
                     });
                 } else if ($.isFunction(settings.onblur)) {
@@ -293,9 +293,9 @@
                     });
                 }
 
-                form.submit(function(e) {
+                form.bind('save',function(e) {
 
-                    if (t) { 
+                    if (t) {
                         clearTimeout(t);
                     }
 
@@ -418,13 +418,13 @@
                         /* if given html string use that */
                         if (settings.submit.match(/>$/)) {
                             var submit = $(settings.submit).click(function() {
-                                if (submit.attr("type") != "submit") {
-                                    form.submit();
+                                if (submit.attr("type") != "save") {
+                                    form.trigger('save');
                                 }
                             });
                         /* otherwise use button with given string as text */
                         } else {
-                            var submit = $('<button type="submit" />');
+                            var submit = $('<button type="save" />');
                             submit.html(settings.submit);                            
                         }
                         $(this).append(submit);

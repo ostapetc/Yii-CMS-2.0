@@ -21,6 +21,7 @@ class FileManagerAdminController extends AdminController
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
 
+
         $existFiles = FileManager::model()->parent($model_id, $object_id)->tag($tag)->findAll();
         $this->sendFilesAsJson($existFiles);
     }
@@ -67,19 +68,15 @@ class FileManagerAdminController extends AdminController
         {
             $res[] = array(
                 'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
-                'text'           => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
+                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
+//                'descr2'         => $file['descr2'] ? $file['descr2'] : 'Кликните для редактирования',
                 'size'           => $file['size'],
                 'url'            => $file['href'],
                 'thumbnail_url'  => $file['icon'],
                 'delete_url'     => $file['deleteUrl'],
                 'delete_type'    => "GET",
-                'edit_title_url' => $this->url('/fileManager/fileManagerAdmin/updateAttr', array(
+                'edit_url'       => $this->url('/fileManager/fileManagerAdmin/updateAttr', array(
                     'id'  => $file['id'],
-                    'attr'=> 'title'
-                )),
-                'edit_descr_url' => $this->url('/fileManager/fileManagerAdmin/updateAttr', array(
-                    'id'  => $file['id'],
-                    'attr'=> 'descr'
                 )),
                 'id'             => 'File_' . $file->id,
             );
@@ -115,7 +112,7 @@ class FileManagerAdminController extends AdminController
 
     public function actionDelete()
     {
-        $model = $this->loadModel()->delete();
+        $this->loadModel()->delete();
     }
 
 
@@ -126,7 +123,7 @@ class FileManagerAdminController extends AdminController
         $model->scenario = 'update';
 
         $this->performAjaxValidation($model);
-        $attr = $_GET['attr'];
+        $attr = $_POST['attr'];
         if (isset($_POST[$attr]))
         {
             $model->$attr = trim(strip_tags($_POST[$attr]));

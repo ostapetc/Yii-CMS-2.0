@@ -8,12 +8,21 @@ class BaseForm extends CForm
 
     public $cancel_button_show = true;
 
+    public $inputElementClass = null;
+
+
     public function __construct($config, $model = null, $parent = null)
     {
         if ($this->side == null)
         {
             $this->side = Yii::app()->controller instanceof AdminController ? 'admin' : 'client';
         }
+
+        if ($this->inputElementClass == null)
+        {
+            $this->inputElementClass = $this->side . 'FormInputElement';
+        }
+
 
         if (is_string($config))
         {
@@ -50,7 +59,7 @@ class BaseForm extends CForm
 
     public function runSideMethod()
     {
-        $params = func_get_args();
+        $params         = func_get_args();
         $func_base_name = array_shift($params);
 
         $function = $func_base_name . ucfirst($this->side);
@@ -98,9 +107,7 @@ class BaseForm extends CForm
             ->registerScriptFile('/js/admin/admin_form.js')
             ->registerScriptFile('/js/plugins/adminForm/buttonSet.js')
             ->registerScriptFile('/js/plugins/adminForm/tooltips/jquery.atooltip.js')
-            ->registerCssFile('/js/plugins/adminForm/tooltips/atooltip.css')
-            ->registerScriptFile('/js/plugins/adminForm/chosen/chosen.jquery.js')
-            ->registerCssFile('/js/plugins/adminForm/chosen/chosen.css');
+            ->registerCssFile('/js/plugins/adminForm/tooltips/atooltip.css');
     }
 
 
@@ -177,7 +184,7 @@ class BaseForm extends CForm
             return $element->render();
         }
 
-        $this->runSideMethod('_addClasses',$element);
+        $this->runSideMethod('_addClasses', $element);
 
         $class = $element->type;
         if (isset($element->attributes['parentClass']))

@@ -19,11 +19,6 @@ $(document).ready(function()
         self.replaceWith(a);
     });
 
-    $('.chosen select').chosen({
-        no_results_text:"Выберите один из вариантов",
-        allow_single_deselect:true
-    });
-
     /**
      * Help to add validation to new field in form, ex: add field by ajax.
      * You need write: $.fn.yiiactiveform.addFields($(form), $(fields)), and ajax validation stay working

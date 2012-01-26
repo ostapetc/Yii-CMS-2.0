@@ -1,10 +1,10 @@
-.file-list{ margin: 30px 0 35px 0; clear: both; }
+.file-list{ margin: 30px 0 35px 0;}
 .file-list .header{ font-weight: bold; }
 .file-list .file{ margin: 0 0 20px 0; }
 .file-list .item{
-    float:  right;
-    width:  680px;
-    margin: 0 0 0 10px;
+    display: table-cell;
+    vertical-align: top;
+    padding: 5px 0 0 15px;
 }
 .file-list .icon{ width: 48px; display: table-cell; }
 /*.file-list .link{ width: 400px; display: table-cell; vertical-align: middle; }*/

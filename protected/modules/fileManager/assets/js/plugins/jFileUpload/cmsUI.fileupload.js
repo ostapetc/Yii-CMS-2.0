@@ -56,6 +56,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
             var self = $(this),
                 action = self.data('save-url'),
                 options = {
+                    submitdata:{'attr':self.data('attr')},
                     name:self.data('attr'),
                     type:self.data('editable-type'),
                     rows:3,

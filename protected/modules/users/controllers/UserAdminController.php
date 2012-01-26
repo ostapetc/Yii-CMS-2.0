@@ -40,7 +40,7 @@ class UserAdminController extends AdminController
 
                 if ($identity->authenticate(true))
                 {
-                    $this->redirect($this->url("main/mainAdmin"));
+                    $this->redirect($this->url("/main/mainAdmin"));
                 }
                 else
                 {

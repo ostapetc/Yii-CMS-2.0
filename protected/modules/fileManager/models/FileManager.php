@@ -127,8 +127,14 @@ class FileManager extends ActiveRecordModel
         ));
     }
 
+	public function getIsFileExist()
+	{
+		$filename = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
+		return file_exists($filename) && is_file($filename);
+	}
 
-    public function getIsArchive()
+
+	public function getIsArchive()
     {
         return in_array($this->extension, array(
             'zip', 'rar', 'tar', 'gz'
@@ -271,7 +277,7 @@ class FileManager extends ActiveRecordModel
 
     public function fill()
     {
-        $file            = $this->path . '/' . $this->name;
+        $file            = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
         $this->size      = is_file($file) ? filesize($file) : NULL; //$this->formatSize($this->basePath.$this->name);
         $this->size      = $this->getFormatSize();
         $this->extension = pathinfo($this->name, PATHINFO_EXTENSION);

@@ -8,7 +8,9 @@ class FileManagerController extends BaseController
         );
     }
 
+
     public $x_send_file_enabled = true;
+
 
     public function actionDownloadFile($hash)
     {
@@ -23,8 +25,8 @@ class FileManagerController extends BaseController
         if ($this->x_send_file_enabled)
         {
             Yii::app()->request->xSendFile($model->server_path, array(
-                'saveName'=>$model->name,
-                'terminate'=>false,
+                'saveName' => $model->name,
+                'terminate'=> false,
             ));
         }
         else

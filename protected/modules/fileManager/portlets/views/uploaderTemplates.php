@@ -55,22 +55,20 @@
             {{html thumbnail_url}}
             {{/if}}
         </td>
-        <td style="width: 150px;">
-            <div class="title editable" data-attr="title" data-editable-type="text" data-save-url="${edit_title_url}">
-                <span>${title}</span>
-            </div>
-        </td>
-        <td style="width: 250px;">
-            <div class="descr editable" data-attr="descr" data-editable-type="textarea" data-save-url="${edit_descr_url}">
-                <span>${text}</span>
-            </div>
-        </td>
+        <?php foreach ($this->fields as $field=>$sett): ?>
+			<td style="width: <?php echo $sett['size'];?>px;">
+				<div class="<?php echo $field ?> editable" data-attr="<?php echo $field;?>" data-editable-type="<?php echo $sett['type'];?>"
+                     data-save-url="${edit_url}">
+					<span>${<?php echo $field;?>}</span>
+				</div>
+			</td>
+		<?php endforeach; ?>
         <td class="dnd-handler"><img height="20" src="<?php echo $this->assets?>/img/hand.png"/></td>
         <td class="size">${size}</td>
         {{/if}}
         <td></td>
         <td class="delete">
-            <button data-type="${delete_type}" data-url="${delete_url}">Delete</button>
+            <button data-type="${delete_type}" data-url="${delete_url}">Удалить</button>
         </td>
     </tr>
 </script>

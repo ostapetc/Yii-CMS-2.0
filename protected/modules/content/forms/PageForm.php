@@ -9,7 +9,7 @@ return array(
     ),
     'elements' => array(
         'title'        => array('type' => 'text'),
-        'url'          => array('type' => 'AliasField', 'source'=>'title'),
+        'url'          => array('type' => 'alias', 'source'=>'title'),
         'text'         => array('type' => 'editor'),
         'is_published' => array('type' => 'checkbox'),
         'meta_tags'    => array('type' => 'MetaTags')

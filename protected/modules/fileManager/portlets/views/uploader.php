@@ -14,8 +14,9 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Название</th>
-                    <th>Описание</th>
+                    <?php foreach ($this->fields as $header): ?>
+						<th><?php echo $header['header'];?></th>
+					<?php endforeach; ?>
                     <th>Сортировка</th>
                     <th>Размер</th>
                     <th></th>
