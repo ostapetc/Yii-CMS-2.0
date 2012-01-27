@@ -22,6 +22,8 @@ the author information below intact.
 Yii::import('zii.widgets.jui.CJuiDatePicker');
 class FJuiDatePicker extends CJuiDatePicker
 {
+    public $form_id;
+
     /**
     * Range name, specified in case the widget is used with another one
     * to allow user to select from - to dates

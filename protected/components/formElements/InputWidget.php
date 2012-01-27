@@ -6,7 +6,7 @@ abstract class InputWidget extends CInputWidget
     public $class; //this field use in _form layout
     public $type = 'text';
 
-    public $form;
+    public $form_id;
 
     protected $_id;
 

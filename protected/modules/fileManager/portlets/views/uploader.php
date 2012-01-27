@@ -1,4 +1,4 @@
-<div id="<?php echo $this->id ?>" class="uploader portlet-content">
+<div id="<?php echo $this->id ?>" class="uploader portlet-content" style="display: none">
     <div class="fileupload-buttonbar">
         <label class="fileinput-button">
             <span>Добавить файлы...</span>
@@ -13,14 +13,14 @@
         <table class="files">
             <thead>
                 <tr>
-                    <th></th>
+                    <th style="width: 60px"></th>
                     <?php foreach ($this->fields as $header): ?>
-						<th><?php echo $header['header'];?></th>
+						<th style="width: 150px"><?php echo $header['header'];?></th>
 					<?php endforeach; ?>
-                    <th>Сортировка</th>
-                    <th>Размер</th>
-                    <th></th>
-                    <th>Удалить</th>
+                    <th style="width: 100px">Сортировка</th>
+                    <th style="width: 50px">Размер</th>
+                    <th style="width: 50px"></th>
+                    <th style="width: 50px">Удалить</th>
                 </tr>
             </thead>
             <tbody></tbody>

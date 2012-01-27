@@ -2,7 +2,7 @@
 
 Yii::import('zii.widgets.jui.CJuiWidget');
 
-class Uploader extends CJuiWidget
+class Uploader extends JuiInputWidget
 {
     public $model;
     public $id;
@@ -76,7 +76,7 @@ class Uploader extends CJuiWidget
         $this->id = 'uploader_'.get_class($this->model).$this->tag;
         $this->assets = Yii::app()->getModule('fileManager')->assetsUrl();
 
-        $this->uploadUrl = UploadHtml::url('fileManagerAdmin/upload', array(
+        $this->uploadUrl = Yii::app()->createUrl('/fileManager/fileManagerAdmin/upload', array(
             'model_id'  => get_class($this->model),
             'object_id' => $this->model->id ? $this->model->id : 0,
             'data_type' => $this->data_type,
@@ -90,9 +90,9 @@ class Uploader extends CJuiWidget
             'maxFileSize'               => $this->maxFileSize,
             'acceptFileTypes'           => $this->allowType[$this->data_type],
 //            'maxChunkSize'              => 1*1000*1000,
-            'sortableSaveUrl'           => UploadHtml::url('fileManagerAdmin/savePriority'),
+            'sortableSaveUrl'           => Yii::app()->createUrl('/fileManager/fileManagerAdmin/savePriority'),
             'limitConcurrentUploads'    => 0,
-            'existFilesUrl'             => UploadHtml::url('fileManagerAdmin/existFiles', array(
+            'existFilesUrl'             => Yii::app()->createUrl('/fileManager/fileManagerAdmin/existFiles', array(
                                                 'model_id'  => get_class($this->model),
                                                 'object_id' => $this->model->id ? $this->model->id : 0,
                                                 'tag'       => $this->tag
@@ -129,7 +129,11 @@ class Uploader extends CJuiWidget
             self::$isTemplatesRender = true;
         }
 
-        $this->render('uploader');
+        $this->renderDialog('uploader', array(
+            'dialogOptions' => array(
+                'title' => $this->title,
+            )
+        ));
     }
 
 }

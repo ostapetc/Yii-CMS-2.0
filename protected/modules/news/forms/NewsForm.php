@@ -19,9 +19,9 @@ return array(
             'items' => News::$states
         ),
         'date'  => array('type' => 'date'),
-        'meta'  => array(
-            'type'   => 'MetaTags'
-        ),
+//        'meta'  => array(
+//            'type'   => 'meta_tags'
+//        ),
         'files' => array(
             'type'      => 'file_manager',
             'tag'       => 'file',

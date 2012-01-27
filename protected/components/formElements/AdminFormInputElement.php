@@ -10,6 +10,8 @@ class AdminFormInputElement extends CFormInputElement
         'multi_autocomplete'=> 'MultiAutocomplete',
         'editor'            => 'TinyMCE',
         'autocomplete'      => 'zii.widgets.jui.CAutoComplete',
+        'meta_tags'         => 'main.portlets.MetaTags',
+        'file_manager'      => 'fileManager.portlets.Uploader',
     );
 
     public static $default_widget_settings = array(
@@ -43,8 +45,14 @@ class AdminFormInputElement extends CFormInputElement
         //replace sinonym on full alias
         if (isset(self::$widgets[$this->type]))
         {
-            $this->type = $this->widgets_path . str_repeat('.' . self::$widgets[$this->type], 2);
+            $this->attributes['form_id'] = $this->getParent()->activeFormWidget->id;
+            $this->type = self::$widgets[$this->type];
+            if (strpos($this->type, '.') === false)
+            {
+                $this->type = $this->widgets_path . str_repeat('.' . $this->type, 2);
+            }
         }
+
         return parent::renderInput();
     }
 }

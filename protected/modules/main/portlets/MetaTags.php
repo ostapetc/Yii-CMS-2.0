@@ -1,6 +1,6 @@
 <?php
 
-class MetaTags extends InputWidget
+class MetaTags extends JuiInputWidget
 {
     public function init()
     {
