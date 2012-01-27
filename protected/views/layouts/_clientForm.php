@@ -1,9 +1,10 @@
 <?php
-echo $form->getActiveFormWidget()->labelEx($form->model, $element->name);
+$active_form = $form->getActiveFormWidget();
+echo $active_form->labelEx($form->model, $element->name);
 
 if ($element->name == 'captcha')
 {
-    echo $form->getActiveFormWidget()->error($form->model, 'captcha');
+    echo $active_form->error($form->model, 'captcha');
     echo CHtml::activeTextField($form->model, 'captcha', array('data-label' => $label));
     $this->widget('Captcha');
 
@@ -11,7 +12,7 @@ if ($element->name == 'captcha')
 else if ($element->type == 'date')
 {
     $model_class = get_class($form->model);
-    echo $form->getActiveFormWidget()->textField($form->model, $element->name, $element->attributes);
+    echo $active_form->textField($form->model, $element->name, $element->attributes);
     $this->widget('application.extensions.calendar.SCalendar', array(
         'inputField' => "{$model_class}_{$element->name}",
         'ifFormat'   => '%d.%m.%Y',
@@ -29,15 +30,9 @@ else
     </span>
     <?php
     }
-
-//    if ($element->type == 'dropdownlist')
-//    {
-//        $element->items[''] = $label;
-//    }
-
     echo $element->renderInput();
 
 }
-echo $form->getActiveFormWidget()->error($form->model, $element->name);
+echo $active_form->error($form->model, $element->name);
 
 ?>

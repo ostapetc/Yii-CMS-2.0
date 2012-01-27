@@ -14,22 +14,6 @@ class AdminFormInputElement extends CFormInputElement
         'file_manager'      => 'fileManager.portlets.Uploader',
     );
 
-    public static $default_widget_settings = array(
-        'alias'             => array('class' => 'text'),
-        'date'              => array(
-            'options'    => array('dateFormat'=> 'd.m.yy'),
-            'language'   => 'ru',
-        ),
-        'autocomplete'      => array(
-            'minChars'   => 2,
-            'delay'      => 500,
-            'matchCase'  => false,
-            'htmlOptions'=> array(
-                'size'  => '40',
-                'class' => 'text'
-            )
-        )
-    );
 
     public $widgets_path = 'application.components.formElements';
 
@@ -37,16 +21,13 @@ class AdminFormInputElement extends CFormInputElement
     public function renderInput()
     {
         //set default settings
-        if (isset(self::$default_widget_settings[$this->type]))
-        {
-            $this->attributes = CMap::mergeArray(self::$default_widget_settings[$this->type], $this->attributes);
-        }
+        $this->attributes = CMap::mergeArray($this->defaultWidgetSettings, $this->attributes);
 
         //replace sinonym on full alias
         if (isset(self::$widgets[$this->type]))
         {
             $this->attributes['form_id'] = $this->getParent()->activeFormWidget->id;
-            $this->type = self::$widgets[$this->type];
+            $this->type                  = self::$widgets[$this->type];
             if (strpos($this->type, '.') === false)
             {
                 $this->type = $this->widgets_path . str_repeat('.' . $this->type, 2);
@@ -54,5 +35,42 @@ class AdminFormInputElement extends CFormInputElement
         }
 
         return parent::renderInput();
+    }
+
+
+    public function getDefaultWidgetSettings()
+    {
+        switch ($this->type)
+        {
+            case 'file_manager':
+                $id    = isset($this->id) ? $this->id : 'uploader' . $this->attributes['tag'];
+                $title = isset($this->attributes['title']) ? $this->attributes['title'] : 'Файлы';
+                return array(
+                    'name'        => $this->attributes['tag'],
+                    'id'          => $id,
+                    'title'       => $title
+                );
+            case 'alias':
+                return array('class' => 'text');
+            case 'date':
+                return array(
+                    'options'    => array(
+                        'dateFormat'=> 'd.m.yy'
+                    ),
+                    'language'   => 'ru',
+                );
+            case 'autocomplete':
+                return array(
+                    'minChars'   => 2,
+                    'delay'      => 500,
+                    'matchCase'  => false,
+                    'htmlOptions'=> array(
+                        'size'  => '40',
+                        'class' => 'text'
+                    )
+                );
+            default:
+                return array();
+        }
     }
 }
