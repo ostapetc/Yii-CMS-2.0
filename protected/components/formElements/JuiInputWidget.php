@@ -4,6 +4,8 @@ abstract class JuiInputWidget extends CJuiInputWidget
     public $name;
     public $class; //this field use in _form layout
 
+    public $form;
+
     protected $_id;
 
     public $assets = __DIR__;

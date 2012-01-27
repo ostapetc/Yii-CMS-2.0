@@ -39,7 +39,6 @@ function getFileLink($data)
         {
             $content = $data->title;
         }
-
         return Chtml::link($content, $data->url);
     }
     else

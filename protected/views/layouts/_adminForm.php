@@ -39,6 +39,10 @@ switch ($element->type)
         $this->type  = 'dropdownlist';
         $this->class = 'chosen';
         break;
+    case 'MetaTags':
+        $element->attributes['form'] = $form;
+        echo $element->renderInput();
+        break;
     case 'multi_select':
         echo $this->getParent()->getActiveFormWidget()
             ->dropdownlist($this->model, $this->name, $this->items, array(
