@@ -17,6 +17,11 @@ class Chosen extends InputWidget
         Yii::app()->clientScript
             ->registerScriptFile($this->assets . '/chosen.jquery.js')
             ->registerCssFile($this->assets . '/chosen.css')
-            ->registerScript($this->id . '_chosen', "$('#{$this->id} select').chosen($options);");
+            ->registerScript($this->id . '_chosen', "$('#{$this->id}').chosen($options);");
+    }
+
+    public function run()
+    {
+        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->input_element->items, $this->input_element->attributes);
     }
 }

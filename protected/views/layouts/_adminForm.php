@@ -13,16 +13,6 @@ if (!in_array($element->type, $no_label))
     echo $active_form->labelEx($form->model, $element->name);
 }
 
-//widgets
-switch ($element->type)
-{
-    case 'chosen':
-        $this->type  = 'dropdownlist';
-        $this->class = 'chosen';
-        break;
-    default:
-        echo $element->renderInput();
-        break;
-}
+echo $element->renderInput();
 
 echo $active_form->error($form->model, $element->name);

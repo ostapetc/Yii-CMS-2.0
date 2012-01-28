@@ -9,7 +9,7 @@ return array(
     ),
     'elements'   => array(
         'section_id' => array(
-            'type'  => 'dropdownlist',
+            'type'  => 'chosen',
             'items' => CHtml::listData(ArticleSection::model()->findAll(), 'id', 'name')
         ),
         'title'      => array(
