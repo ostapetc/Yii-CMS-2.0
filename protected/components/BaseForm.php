@@ -184,8 +184,6 @@ class BaseForm extends CForm
             return $element->render();
         }
 
-        $this->runSideMethod('_addClasses', $element);
-
         $class = $element->type;
         if (isset($element->attributes['parentClass']))
         {
@@ -203,36 +201,6 @@ class BaseForm extends CForm
         $res .= '</dd></dl>';
 
         return $res;
-    }
-
-
-    private function _addClassesAdmin($element)
-    {
-        $data = $element->type;
-        $attr = 'class';
-        switch ($element->type)
-        {
-            case 'date':
-                $data = array('class'=> $data . ' text date_picker');
-                $attr = 'htmlOptions';
-                break;
-            case 'password':
-                $data = $data . ' text';
-                break;
-            case 'dropdownlist':
-                $data = $data . ' cmf-skinned-select';
-                break;
-            default:
-                ;
-        }
-        $element->attributes[$attr] = $data;
-        return $element;
-    }
-
-
-    private function _addClassesClient(&$element)
-    {
-
     }
 
 

@@ -27,6 +27,7 @@ class AdminFormInputElement extends CFormInputElement
         if (isset(self::$widgets[$this->type]))
         {
             $this->attributes['form_id'] = $this->getParent()->activeFormWidget->id;
+            $this->attributes['form_input_element'] = $this;
             $this->type                  = self::$widgets[$this->type];
             if (strpos($this->type, '.') === false)
             {
@@ -58,6 +59,7 @@ class AdminFormInputElement extends CFormInputElement
                         'dateFormat'=> 'd.m.yy'
                     ),
                     'language'   => 'ru',
+                    'htmlOptions'=> array('class'=> 'date text date_picker')
                 );
             case 'autocomplete':
                 return array(
@@ -69,8 +71,18 @@ class AdminFormInputElement extends CFormInputElement
                         'class' => 'text'
                     )
                 );
+            case 'dropdownlist':
+                return array(
+                    'class'=> 'dropdownlist cmf-skinned-select'
+                );
+            case 'password':
+                return array(
+                    'class'=> 'dropdownlist text'
+                );
             default:
-                return array();
+                return array(
+                    'class' => $this->type
+                );
         }
     }
 }

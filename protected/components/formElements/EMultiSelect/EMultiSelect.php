@@ -11,7 +11,6 @@
  * @link     http://www.vencidi.com/ Vencidi
  * @since    3.0
  */
-Yii::import('zii.widgets.jui.CJuiWidget');
 /**
  * EMultiSelect Creates Multiple Select Boxes
  *
@@ -30,17 +29,6 @@ class EMultiSelect extends JuiInputWidget
     public $height = '175px';
     public $onchange;
     public $class;
-
-
-    /**
-     * Run not used...
-     *
-     * @return void
-     */
-    function run()
-    {
-
-    }
 
 
     /**
@@ -63,14 +51,10 @@ class EMultiSelect extends JuiInputWidget
     protected function registerScripts()
     {
         parent::registerCoreScripts();
-        $basePath = Yii::getPathOfAlias('ext.emultiselect.assets');
-        $baseUrl  = Yii::app()->getAssetManager()->publish($basePath);
 
         $cs = Yii::app()->getClientScript();
-        $cs->registerCssFile($baseUrl . '/' . 'ui.multiselect.css');
-
-        $this->scriptUrl = $baseUrl;
-        $this->registerScriptFile('ui.multiselect.js');
+        $cs->registerCssFile($this->assets . '/ui.multiselect.css');
+        $cs->registerScriptFile($this->assets . '/ui.multiselect.js');
 
         $parameters = CJavaScript::encode(array(
             'sortable'     => $this->sortable,
@@ -85,6 +69,14 @@ class EMultiSelect extends JuiInputWidget
     }
 
 
+    public function run()
+    {
+        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->form_input_element->items, array(
+            'multiple' => 'multiple',
+            'key'      => isset($this->key) ? $this->key : 'id',
+            'class'    => 'multiselect'
+        ));
+    }
 }
 
 ?>

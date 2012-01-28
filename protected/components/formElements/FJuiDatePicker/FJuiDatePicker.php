@@ -23,6 +23,7 @@ Yii::import('zii.widgets.jui.CJuiDatePicker');
 class FJuiDatePicker extends CJuiDatePicker
 {
     public $form_id;
+    public $form_input_element;
 
     /**
     * Range name, specified in case the widget is used with another one

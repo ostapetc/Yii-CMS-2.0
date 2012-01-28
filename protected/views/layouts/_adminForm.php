@@ -20,19 +20,9 @@ switch ($element->type)
         $this->type  = 'dropdownlist';
         $this->class = 'chosen';
         break;
-    case 'multi_select':
-        echo $active_form->dropdownlist($this->model, $this->name, $this->items, array(
-            'multiple' => 'multiple',
-            'key'      => isset($this->key) ? $this->key : 'id',
-            'class'    => 'multiselect'
-        ));
-        break;
     default:
         echo $element->renderInput();
         break;
 }
 
 echo $active_form->error($form->model, $element->name);
-?>
-
-

@@ -13,17 +13,17 @@ return array(
         'enableAjaxValidation' => true,
     ),
     'elements'   => array(
-        'name'        => array('type' => 'text'),
-        'page_id'     => array(
-            'type'   => 'dropdownlist',
-            'prompt' => 'нет',
-            'items'  => CHtml::listData($pages, 'id', 'title')
-        ),
-        'url'         => array(
-            'type' => 'text',
-            'hint' => 'например: http://website.ru'
-        ),
-        'image'       => array('type' => 'file'),
+//        'name'        => array('type' => 'text'),
+//        'page_id'     => array(
+//            'type'   => 'dropdownlist',
+//            'prompt' => 'нет',
+//            'items'  => CHtml::listData($pages, 'id', 'title')
+//        ),
+//        'url'         => array(
+//            'type' => 'text',
+//            'hint' => 'например: http://website.ru'
+//        ),
+//        'image'       => array('type' => 'file'),
         'roles'       => array(
             'type'  => 'multi_select',
             'items' => CHtml::listData(AuthItem::model()->roles, 'name', 'description'),

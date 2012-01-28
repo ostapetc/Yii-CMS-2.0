@@ -1,4 +1,5 @@
 <?php
+Yii::import('zii.widgets.jui.CJuiInputWidget');
 abstract class JuiInputWidget extends CJuiInputWidget
 {
     public $name;
@@ -8,7 +9,7 @@ abstract class JuiInputWidget extends CJuiInputWidget
 
     protected $_id;
 
-    public $assets = __DIR__;
+    public $form_input_element;
 
 
     public function init()

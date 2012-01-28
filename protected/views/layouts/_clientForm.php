@@ -4,7 +4,6 @@ echo $active_form->labelEx($form->model, $element->name);
 
 if ($element->name == 'captcha')
 {
-    echo $active_form->error($form->model, 'captcha');
     echo CHtml::activeTextField($form->model, 'captcha', array('data-label' => $label));
     $this->widget('Captcha');
 
