@@ -5,7 +5,6 @@ class Chosen extends InputWidget
 
     public $type = 'dropdownlist';
 
-
     public function init()
     {
         parent::init();
