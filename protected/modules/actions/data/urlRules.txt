@@ -1,2 +1,0 @@
-'<lang:[a-z]{2}>/actions' => 'actions/action/index',
-'<lang:[a-z]{2}>/action/<id:\d+>' => 'actions/action/view',
