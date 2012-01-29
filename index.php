@@ -24,7 +24,6 @@ $config = $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? 'development' : 'production';
 $config = PROTECTED_PATH . '/config/' . $config . '.php';
 
 Yii::createWebApplication($config)->run();
-//TEst commit
 ?>
 
 
