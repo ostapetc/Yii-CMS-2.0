@@ -19,7 +19,6 @@ foreach ($modules_dirs as $module)
 }
 
 
-
 $modules['webshell'] = array(
     'class'          => 'ext.webshell.WebShellModule',
     // when typing 'exit', user will be redirected to this URL
