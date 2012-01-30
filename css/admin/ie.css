@@ -1,39 +1,42 @@
-.block { padding-bottom: 0 !important; }
-.block form input.file { height: 19px; }
-.block .visualize { margin-top: 30px; }
-.block .visualize ul.visualize-key .visualize-key-color { margin-top: -2px; }
-.block .block_content .imglist { padding-bottom: 20px; }
-.block .block_content .imglist li img { top: 1px; }
+.quick_search {
+    text-align: center;
+    padding: 14px 0 0px 0;
+}
 
-.block .paggination.right,
-.block .tableactions { padding-bottom: 0; }
+.quick_search input[type=text] {
+    text-align: left;
+    height: 22px;
+    width: 88%;
+    color: #ccc;
+    padding-left: 2%;
+    padding-top: 5px;
+    background: #fff url(/images/admin/icn_search.png) no-repeat;
+    background-position: 10px 6px;
+}
 
-.block,
-*html .block .block_head,
-*html .block .block_content,
-*html .block .block_content form input,
-*html .block .message,
-*html .block .paggination,
-*html .block .tableactions,
-*html .block .block_content .imglist {
-	zoom: 1;
-	}
-	
-*html .wrapper { width:expression(document.body.clientWidth < 1024 ? "960px" : "90%" ); }
-*html .bendl, *html .bendr { font-size: 1px; }
-*html .block .block_content .imglist li { margin: 13px 24px 13px 3px; }
-*html .block form .cmf-skinned-select { background: none; border: 0; padding: 0; }
-*html #header #nav li:hover li a, #header #nav li.iehover li a { background: none; }
+.toggleLink {
+    display: inline;
+    float: none;
+    margin-left: 2%
+}
 
-/* Navigation 2nd level */
-*html #header #nav ul li { background: #1c1c1c; }
-*html #header #nav ul li.iehover { background: #000; }
+html ul.tabs li.active, html ul.tabs li.active a:hover {
+    background: #ccc;
+}
 
-/* Navigation 3rd level */
-*html #header #nav li.iehover li.iehover li a { background: #1c1c1c; }
-*html #header #nav li.iehover li.iehover li a:hover,
-*html #header #nav li.iehover li.iehover li.iehover a { background: #000; }
+input[type=submit].btn_post_message {
+    background: url(/images/admin/post_message.png) no-repeat;
+}
 
-/* Navigation 4th level */
-*html #header #nav li.iehover li.iehover li.iehover li a { background: #1c1c1c; }
-*html #header #nav li.iehover li.iehover li.iehover li a:hover { background: #000; }
+fieldset input[type=text] {
+    margin-left: -10px;
+}
+
+fieldset select {
+    margin-left: -10px
+}
+
+fieldset textarea {
+    margin-left: -10px;
+}
+

@@ -91,7 +91,6 @@ return array(
         ),
         'clientScript' => array(
             'class'    => 'CClientScript',
-            'packages' => require_once('packages.php')
         ),
         'session'      => array(
             'autoStart'=> true
