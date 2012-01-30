@@ -1,7 +1,7 @@
 <?php
-abstract class BaseFormInputElement extends BaseFormInputElement
+abstract class BaseFormInputElement extends CFormInputElement
 {
-    public static $widgets = array();
+    public $widgets = array();
 
     public $widgets_path = 'application.components.formElements';
 
@@ -12,10 +12,10 @@ abstract class BaseFormInputElement extends BaseFormInputElement
         $this->attributes = CMap::mergeArray($this->defaultWidgetSettings, $this->attributes);
 
         //replace sinonym on full alias
-        if (isset(self::$widgets[$this->type]))
+        if (isset($this->widgets[$this->type]))
         {
             $this->attributes['form_id'] = $this->getParent()->activeFormWidget->id;
-            $this->type                  = self::$widgets[$this->type];
+            $this->type                  = $this->widgets[$this->type];
             if (strpos($this->type, '.') === false)
             {
                 $this->type = $this->widgets_path . str_repeat('.' . $this->type, 2);

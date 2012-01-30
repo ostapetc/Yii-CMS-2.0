@@ -1,7 +1,7 @@
 <?php
 class AdminFormInputElement extends BaseFormInputElement
 {
-    public static $widgets = array(
+    public $widgets = array(
         'alias'             => 'AliasField',
         'captcha'           => 'Captcha',
         'chosen'            => 'Chosen',
