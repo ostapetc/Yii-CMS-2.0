@@ -17,9 +17,9 @@ class UserAdminController extends AdminController
 
     public function actionLogin()
     {
-        if (!Yii::app()->user->isGuest)
-        {
-            throw new CException('Вы уже авторизованы!');
+            if (!Yii::app()->user->isGuest)
+            {
+                throw new CException('Вы уже авторизованы!');
         }
 
         $this->layout = "//layouts/adminLogin";
