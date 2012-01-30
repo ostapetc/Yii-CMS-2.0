@@ -7,7 +7,7 @@ return CMap::mergeArray(
 		        'connectionString' => 'mysql:host=localhost;dbname=yii_cms',
 		        'emulatePrepare'   => true,
 		        'username'         => 'root',
-		        'password'         => '1',
+		        'password'         => '',
 		        'charset'          => 'utf8',
 		        'enableProfiling'  => true,
 	        )
