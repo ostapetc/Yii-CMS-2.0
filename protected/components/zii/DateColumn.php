@@ -16,7 +16,7 @@ class DateColumn extends CDataColumn
         $_GET[$start] = isset($_GET[$start]) ? $_GET[$start] : 'От';
         $_GET[$end]   = isset($_GET[$end]) ? $_GET[$end] : 'До';
 
-        $widget = 'application.components.FJuiDatePicker.FJuiDatePicker';
+        $widget = 'application.components.formElements.FJuiDatePicker.FJuiDatePicker';
         $this->filter = Yii::app()->controller->widget($widget, array(
             'name'     => $start,
             'value'    => $_GET[$start],
