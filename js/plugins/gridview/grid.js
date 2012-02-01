@@ -82,6 +82,7 @@
         _initFilters:function()
         {
             var self = this;
+
             var inputs = $('.filters input, .filters select', self.element), //TODO: what with dropdownlist???
                 inputs_count = inputs.length;
 
@@ -99,10 +100,7 @@
                 }
             });
 
-            if (show_filters)
-            {
-                $('.filters:first', self.element).slideToggle();
-            }
+            $('.filters:first', self.element)[show_filters ? 'slideDown' : 'slideUp']();
 
             $('th', self.element).each(function()
             {
