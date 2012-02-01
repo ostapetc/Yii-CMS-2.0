@@ -16,7 +16,8 @@ class DateColumn extends CDataColumn
         $_GET[$start] = isset($_GET[$start]) ? $_GET[$start] : 'От';
         $_GET[$end]   = isset($_GET[$end]) ? $_GET[$end] : 'До';
 
-        $this->filter = Yii::app()->controller->widget('ext.jui.FJuiDatePicker', array(
+        $widget = 'application.components.FJuiDatePicker.FJuiDatePicker';
+        $this->filter = Yii::app()->controller->widget($widget, array(
             'name'     => $start,
             'value'    => $_GET[$start],
             'language' => 'ru',
@@ -25,7 +26,7 @@ class DateColumn extends CDataColumn
             ),
             'range'    => $attr . '_diapason'
         ), true);
-        $this->filter .= Yii::app()->controller->widget('ext.jui.FJuiDatePicker', array(
+        $this->filter .= Yii::app()->controller->widget($widget, array(
             'name'     => $end,
             'value'    => $_GET[$end],
             'language' => 'ru',
