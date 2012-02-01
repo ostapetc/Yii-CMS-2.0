@@ -13,6 +13,13 @@
     $cs->registerScriptFile('/js/admin/hideshow.js');
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
     $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');
+
+
+    $cs->registerScriptFile('/js/plugins/blockUI/blockUI.js');
+    $cs->registerScriptFile('/js/plugins/blockUI/loaders.js');
+    $cs->registerScriptFile('/js/plugins/jgrowl/jquery.jgrowl.js');
+    $cs->registerCssFile('/js/plugins/jgrowl/jquery.jgrowl.css');
+
     ?>
 
     <!--[if lt IE 9]>

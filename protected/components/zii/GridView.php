@@ -19,9 +19,9 @@ class GridView extends CGridView
     public $_pocket;
 
     public $mass_removal = false;
+    public $filter_hint = false;
 
     public $jsPlugin = 'grid';
-
     public $template = '{pagerSelect}{summary}<br/>{pager}<br/>{pocket}{items}<br/>{pager}';
 
 
@@ -291,7 +291,8 @@ class GridView extends CGridView
             $cs->registerScriptFile("/js/plugins/gridview/{$this->jsPlugin}.js");
         }
         $options = CJavaScript::encode(array(
-            'mass_removal' => $this->mass_removal
+            'mass_removal' => $this->mass_removal,
+            'filter_hint' => $this->filter_hint
         ));
         $cs->registerScript($this->getId() . 'CmsUI', "
             $('#{$this->getId()}').{$this->jsPlugin}({$options});

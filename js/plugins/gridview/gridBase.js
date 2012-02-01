@@ -48,6 +48,12 @@
         _initHandlers:function()  //there run functions for initialize some event handlers
         {
         },
+        update:function()
+        {
+            var self = this,
+                id = self.element.attr('id');
+            $.fn.yiiGridView.update(id);
+        },
 
 
         //default settings for plugins
@@ -76,8 +82,8 @@
             //            helper:'clone',
             start:function(event, ui)
             {
-                ui.placeholder.html("<td colspan='100%'>&nbsp;</td>"); //fix width
-                ui.placeholder.css('height', ui.item.height());        //fix height when has multiline text
+                ui.placeholder.html("<td colspan='100%'>&nbsp;</td>");
+                ui.placeholder.css('height', ui.item.height());
             }
         },
 
