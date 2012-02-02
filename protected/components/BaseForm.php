@@ -20,7 +20,7 @@ class BaseForm extends CForm
 
         if ($this->inputElementClass == null)
         {
-            $this->inputElementClass = $this->side . 'FormInputElement';
+            $this->inputElementClass = ucfirst($this->side) . 'FormInputElement';
         }
 
 

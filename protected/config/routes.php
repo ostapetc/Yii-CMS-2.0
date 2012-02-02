@@ -11,6 +11,7 @@ return array(
 
     '<lang:[a-z]{2}>/login'                                 => 'users/user/login',
     '<lang:[a-z]{2}>/logout'                                => 'users/user/logout',
+    'logout'                                                => 'users/user/logout',
     '<lang:[a-z]{2}>/registration'                          => 'users/user/registration',
     '<lang:[a-z]{2}>/activateAccount/<code:.*>/<email:.*>'  => 'users/user/activateAccount',
     '<lang:[a-z]{2}>/activateAccountRequest'                => 'users/user/activateAccountRequest',

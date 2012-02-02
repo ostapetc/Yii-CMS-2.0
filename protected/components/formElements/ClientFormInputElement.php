@@ -1,7 +1,7 @@
 <?php
 class ClientFormInputElement extends BaseFormInputElement
 {
-    public static $widgets = array(
+    public $widgets = array(
         'captcha' => 'Captcha',
     );
 

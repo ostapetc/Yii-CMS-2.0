@@ -30,6 +30,12 @@
         }
     </style>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.dropdown-toggle').dropdown()
+        });
+    </script>
+    
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -53,9 +59,23 @@
                 <?php $this->widget('TopMenu') ?>
 
                 <p class="navbar-text pull-right">
-                <?php $this->widget('main.portlets.LanguageSwitcher') ?>
+                    <?php $this->widget('main.portlets.LanguageSwitcher') ?>
                 </p>
+
                 <p class="navbar-text pull-right divider-vertical"></p>
+
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+                            <b class="caret"></b></a>
+                    </li>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <?php $this->widget('users.portlets.LoginPanel') ?>
+                        </li>
+                    </ul>
+                </ul>
+
             </div>
             <!--/.nav-collapse -->
         </div>
