@@ -4,6 +4,8 @@ abstract class AdminController extends BaseController
 {
     public $layout='//layouts/admin/main';
 
+    public $footer;
+
     public $tabs;
 
     public function init()

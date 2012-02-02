@@ -1,39 +1,39 @@
 //  Andy Langton's show/hide/mini-accordion @ http://andylangton.co.uk/jquery-show-hide
 
 // this tells jquery to run the function below once the DOM is ready
-$(document).ready(function() {
+$(document).ready(function () {
 
 // choose text for the show/hide link - can contain HTML (e.g. an image)
-var showText='Show';
-var hideText='Hide';
+    var showText = $("#T").data('show');
+    var hideText = $("#T").data('hide');
 
 // initialise the visibility check
-var is_visible = false;
+    var is_visible = false;
 
 // append show/hide links to the element directly preceding the element with a class of "toggle"
-$('.toggle').prev().append(' <a href="#" class="toggleLink">'+hideText+'</a>');
+    $('.toggle').prev().append(' <a href="#" class="toggleLink">' + hideText + '</a>');
 
 // hide all of the elements with a class of 'toggle'
-$('.toggle').show();
+    $('.toggle').show();
 
 // capture clicks on the toggle links
-$('a.toggleLink').click(function() {
+    $('a.toggleLink').click(function () {
 
 // switch visibility
-is_visible = !is_visible;
+        is_visible = !is_visible;
 
 // change the link text depending on whether the element is shown or hidden
-if ($(this).text()==showText) {
-$(this).text(hideText);
-$(this).parent().next('.toggle').slideDown('slow');
-}
-else {
-$(this).text(showText);
-$(this).parent().next('.toggle').slideUp('slow');
-}
+        if ($(this).text() == showText) {
+            $(this).text(hideText);
+            $(this).parent().next('.toggle').slideDown('slow');
+        }
+        else {
+            $(this).text(showText);
+            $(this).parent().next('.toggle').slideUp('slow');
+        }
 
 // return false so any link destination is not followed
-return false;
+        return false;
 
-});
+    });
 });
