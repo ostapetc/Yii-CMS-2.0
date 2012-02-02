@@ -1,10 +1,6 @@
 <?php 
 $this->page_title = 'Задачи'; 
 
-$this->tabs = array(
-    "Добавить задачу" => $this->createUrl("create")
-);
-
 $this->widget('AdminGrid', array(
 	'id' => 'task-grid',
 	'dataProvider' => $model->search(AuthItem::TYPE_TASK),

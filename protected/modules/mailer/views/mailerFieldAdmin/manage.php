@@ -1,10 +1,6 @@
 <?php
 $this->page_title = 'Управление генерируемыми полями';
 
-$this->tabs = array(
-    'добавить поле' => $this->createUrl('create')
-);
-
 $this->widget('AdminGrid', array(
 	'id' => 'mailer-field-grid',
 	'dataProvider' => $model->search(),

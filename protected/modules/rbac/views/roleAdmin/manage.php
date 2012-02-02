@@ -1,10 +1,6 @@
 <?php
 $this->page_title = 'Роли';
 
-$this->tabs = array(
-    "Создать роль" => $this->createUrl("create")
-);
-
 function tasksLink($role)
 {
 	return "<a href='/rbac/TaskAdmin/RolesTasks/role/{$role}'>перейти</a>";

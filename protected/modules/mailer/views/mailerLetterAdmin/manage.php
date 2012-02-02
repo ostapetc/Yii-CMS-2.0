@@ -32,10 +32,6 @@ function getStatistics($model)
     return implode("<br/>", $statistics);
 }
 
-$this->tabs = array(
-    'создать рассылку' => $this->createUrl('create')
-);
-
 $this->widget('AdminGrid', array(
 	'id' => 'mailer-letter-grid',
 	'dataProvider' => $model->search(),

@@ -6,7 +6,8 @@ abstract class AdminController extends BaseController
 
     public $footer;
 
-    public $tabs;
+    public $crumbs = array();
+
 
     public function init()
     {
@@ -17,28 +18,6 @@ abstract class AdminController extends BaseController
         {
             $this->redirect($admin_url);
         }
-
-        $this->initTabs();
-        //$this->initAssets();
-    }
-
-
-    private function initTabs()
-    {
-        $tabs = array();
-
-        $actions_titles = call_user_func(array(get_class(Yii::app()->controller), 'actionsTitles'));
-        foreach ($actions_titles as $action => $title)
-        {
-            if (in_array($action, array('Delete', 'Update', 'View')))
-            {
-                continue;
-            }
-
-            $tabs[$title] = $this->createUrl($action);
-        }
-
-        $this->tabs = $tabs;
     }
 
 

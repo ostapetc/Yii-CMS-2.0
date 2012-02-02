@@ -1,10 +1,4 @@
 <?php
-
-$this->tabs = array(
-    'управление мета-тегами' => $this->createUrl('manage'),
-    'редактировать'          => $this->createUrl('update', array('id' => $model->id))
-);
-
 $model_id = $model->model_id;
 
 $this->widget('DetailView', array(

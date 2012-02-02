@@ -1,9 +1,4 @@
 <?php
-
-$this->tabs = array(
-    'добавить мета-тег' => $this->createUrl('create')
-);
-
 $this->widget('GridView', array(
 	'id' => 'meta-tag-grid',
 	'dataProvider' => $model->search(),

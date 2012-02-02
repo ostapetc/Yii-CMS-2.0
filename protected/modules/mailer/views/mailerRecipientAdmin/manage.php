@@ -17,10 +17,6 @@
 
 <?php
 
-$this->tabs = array(
-    'добавить' => $this->createUrl('create')
-);
-
 $this->widget('AdminGrid', array(
 	'id' => 'mailer-recipient-grid',
 	'dataProvider' => $model->search(),

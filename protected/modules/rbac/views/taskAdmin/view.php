@@ -1,11 +1,4 @@
 <?php
-
-$this->tabs = array(
-    'задачи'        => $this->createUrl('manage'),
-    'редактировать' => $this->createUrl('update', array('id' => $model->name)),
-    'добавить'      => $this->createUrl('create')
-);
-
 $operations = array();
 
 if ($model->operations) 

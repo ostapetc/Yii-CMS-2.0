@@ -1,10 +1,6 @@
 <?php
 $this->page_title = 'Управление вопросами';
 
-$this->tabs = array(
-    $this->t('admin', 'create') => $this->createUrl("create"),
-);
-
 $this->widget('AdminGrid', array(
 	'id'=>'faq-grid',
 	'dataProvider'=>$model->search(),

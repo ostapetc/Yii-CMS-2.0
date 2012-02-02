@@ -1,10 +1,6 @@
 <?php
 $this->page_title = 'Страницы сайта';
 
-$this->tabs = array(
-
-);
-
 $this->widget('GridView', array(
 	'id' => 'page-grid',
 	'dataProvider' => $model->search(),

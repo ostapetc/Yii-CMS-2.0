@@ -1,11 +1,6 @@
 <?php
 $this->page_title = "Просмотр Пользователя: {$model->name}";
 
-$this->tabs = array(
-    "управление пользователями" => $this->createUrl("manage"),
-    "редактировать" => $this->createUrl("update", array("id" => $model->id))
-);
-
 $this->widget('DetailView', array(
 	'data'=>$model,
 	'attributes'=>array(

@@ -1,10 +1,6 @@
 <?php 
 $this->page_title = 'Меню сайта'; 
 
-$this->tabs = array(
-    $this->t('admin', 'create')  => $this->createUrl('create')
-);
-
 $this->widget('AdminGrid', array(
 	'id' => 'menu-grid',
 	'dataProvider' => $model->search(),

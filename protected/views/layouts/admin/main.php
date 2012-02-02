@@ -42,7 +42,20 @@
             <article class="breadcrumbs">
                 <a href="/">Админ панель</a>
                 <div class="breadcrumb_divider"></div>
-                <a class="current">Dashboard</a></article>
+                <a class="current">Dashboard</a>
+
+                <?php
+                $crumbs = array_merge(
+                    array("Админ панель" => $this->createUrl("ds")),
+                    $this->crumbs
+                );
+
+                $this->widget('zii.widgets.CBreadcrumbs', array(
+                    'links' => $crumbs
+                ));
+                ?>
+
+            </article>
         </div>
     </section>
 

@@ -1,12 +1,5 @@
 <?php
-
 $this->page_title = $model->title;
-
-$this->tabs = array(
-    $this->t('admin', 'manage') => $this->createUrl('manage'),
-    $this->t('admin', 'create') => $this->createUrl('create'),
-    $this->t('admin', 'update') => $this->createUrl('update', array('id' => $model->id))
-);
 
 $this->widget('DetailView', array(
 	'data'=>$model,

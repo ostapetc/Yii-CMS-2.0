@@ -1,10 +1,6 @@
 <?php
 $this->page_title = 'Страницы сайта';
 
-$this->tabs = array(
-    $this->t('admin', 'create')  => $this->createUrl('create')
-);
-
 $this->widget('AdminGrid', array(
 	'id' => 'page-grid',
 	'dataProvider' => $model->search(),

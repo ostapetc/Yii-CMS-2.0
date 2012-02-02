@@ -1,7 +1,3 @@
-<?php 
-$this->tabs = array(
-    'Управление задачами' => $this->createUrl('manage')
-);
-
+<?php
 echo $form; 
 ?>

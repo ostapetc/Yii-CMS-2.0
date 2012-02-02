@@ -1,10 +1,4 @@
 <?php
-$this->tabs = array(
-    'управление шаблонами' => $this->createUrl('manage'),
-    'редактировать'        => $this->createUrl('update', array('id' => $model->id))
-);
-
-
 $this->widget('DetailView', array(
 	'data' => $model,
 	'attributes' => array(
