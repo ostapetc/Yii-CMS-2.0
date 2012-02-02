@@ -44,5 +44,5 @@ build/config/buildinfo.properties
 ./assets/
 ./upload/fileManager
 ./protected/config/development.php
-./protected/runtime/
+./protected/runtime
 

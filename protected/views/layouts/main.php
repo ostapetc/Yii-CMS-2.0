@@ -32,7 +32,8 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $('.dropdown-toggle').dropdown()
+            $('.dropdown-toggle').dropdown();
+            $('.dropdown-toggle').dropdown();
         });
     </script>
     
