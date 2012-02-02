@@ -1,5 +1,4 @@
 <?php
-
 $this->tabs = array(
     $this->t('admin', 'manage') => $this->createUrl('manage'),
     $this->t('admin', 'update') => $this->createUrl('update', array('id' => $model->id))
