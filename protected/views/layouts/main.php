@@ -20,7 +20,6 @@
     $cs->registerCoreScript('jquery');
     $cs->registerScriptFile('/bootstrap/js/bootstrap.js');
     ?>
-
     <style type="text/css">
         body{
             padding-top:    60px;
@@ -52,7 +51,11 @@
 
             <div class="nav-collapse">
                 <?php $this->widget('TopMenu') ?>
-                <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
+
+                <p class="navbar-text pull-right">
+                <?php $this->widget('main.portlets.LanguageSwitcher') ?>
+                </p>
+                <p class="navbar-text pull-right divider-vertical"></p>
             </div>
             <!--/.nav-collapse -->
         </div>

@@ -1,16 +1,17 @@
-<div id="lang_div">
-    <?php $max_index = count($langs) - 1; ?>
-
-    <?php foreach ($langs as $i => $lang): ?>
-        <?php if ($lang->id == Yii::app()->language): ?>
-            <b><?php echo $lang->name; ?></b>
-        <?php else: ?>
-            <a href="/<?php echo $lang->id; ?>"><?php echo $lang->name; ?></a>
-        <?php endif ?>
-
-        <?php if ($max_index > $i): ?>
-            &nbsp;|&nbsp;
-        <?php endif ?>
-
-    <?php endforeach ?>
-</div>
+<?php
+$max_index = count($langs) - 1;
+foreach ($langs as $i => $lang)
+{
+    if ($lang->id == Yii::app()->language)
+    {
+        echo '<b>' . $lang->name . '</b>';
+    }
+    else
+    {
+        echo CHtml::link($lang->name, '/' . $lang->id);
+    }
+    if ($max_index > $i)
+    {
+        echo '&nbsp;|&nbsp;';
+    }
+}

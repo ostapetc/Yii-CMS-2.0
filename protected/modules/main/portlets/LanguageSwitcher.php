@@ -1,8 +1,7 @@
 <?php
-
-class LanguageSwitcher extends Portlet
+class LanguageSwitcher extends CWidget
 {
-    public function renderContent()
+    public function run()
     {
         $this->render('LanguageSwitcher', array(
             'langs' => Language::model()->findAll()

@@ -1,14 +1,15 @@
 <?php
 class SidebarMenu extends ClientMenu
 {
-    public $htmlOptions = array('class'=> 'nav nav-list');
+    public $htmlOptions = array(
+        'class'=> 'nav nav-list',
+        'id'   => 'sidebar-menu'
+    );
 
 
     public function init()
     {
-        parent::init();
-
-        $this->items = array(
+        $this->items             = array(
             array(
                 'label'       => 'Главное',
                 'itemOptions' => array('class'=> 'nav-header'),
@@ -42,6 +43,10 @@ class SidebarMenu extends ClientMenu
                 'url'   => array('/'),
             ),
         );
+
+        $this->htmlOptions['id'] = 'sidebar-menu';
+        $route                   = $this->getController()->getRoute();
+        $this->items             = $this->normalizeItems($this->items, $route, $hasActiveChild);
     }
 
 }
