@@ -40,19 +40,6 @@ class WebUser extends CWebUser
     }
 
 
-    public function getName()
-    {   
-        if ($user = $this->getModel())
-        {
-            return implode(' ', array(
-                $user->last_name ,
-                $user->first_name ,
-                $user->patronymic
-            ));
-        }
-    }   
-
-
     public function getModel()
     {
         if (!$this->isGuest && $this->_model === null)

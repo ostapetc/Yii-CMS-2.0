@@ -2,7 +2,7 @@
  
 abstract class AdminController extends BaseController
 {
-    public $layout='//layouts/admin';
+    public $layout='//layouts/admin/main';
 
     public $tabs;
 
