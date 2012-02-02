@@ -38,6 +38,7 @@ class PageController extends BaseController
 
     public function actionMain()
     {
-        $this->render('main');
+        $page = $this->loadModel('/', array('published'), 'url');
+        $this->render('main', array('page' => $page));
     }
 }
