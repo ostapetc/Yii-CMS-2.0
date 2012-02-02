@@ -13,27 +13,34 @@ class DateColumn extends CDataColumn
 
         $start        = '_' . $attr . '_start';
         $end          = '_' . $attr . '_end';
-        $_GET[$start] = isset($_GET[$start]) ? $_GET[$start] : 'От';
-        $_GET[$end]   = isset($_GET[$end]) ? $_GET[$end] : 'До';
+        $_GET[$start] = isset($_GET[$start]) ? $_GET[$start] : '';
+        $_GET[$end]   = isset($_GET[$end]) ? $_GET[$end] : '';
 
-        $widget = 'application.components.formElements.FJuiDatePicker.FJuiDatePicker';
-        $this->filter = Yii::app()->controller->widget($widget, array(
+        $widget   = 'application.components.formElements.FJuiDatePicker.FJuiDatePicker';
+        $settings = array(
+            'language'   => 'ru',
+            'options'    => array(
+                'dateFormat'=> $this->uiDateFormat
+            ),
+            'htmlOptions'=> array(
+                'style' => 'display:inline-block;width:70px;float:right'
+            ),
+            'range'      => $attr . '_diapason'
+        );
+        $res = CHtml::tag('span', array('style'=> 'float:left'), 'До:');
+        $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $start,
             'value'    => $_GET[$start],
-            'language' => 'ru',
-            'options'  => array(
-                'dateFormat'=> $this->uiDateFormat
-            ),
-            'range'    => $attr . '_diapason'
-        ), true);
-        $this->filter .= Yii::app()->controller->widget($widget, array(
+        )), true);
+
+        $this->filter .= CHtml::tag('div', array('style'=>'min-width: 115px;'), $res);
+
+        $res = CHtml::tag('span', array('style'=> 'float:left'), 'После:');
+        $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $end,
             'value'    => $_GET[$end],
-            'language' => 'ru',
-            'options'  => array(
-                'dateFormat'=> $this->uiDateFormat
-            ),
-            'range'    => $attr . '_diapason'
-        ), true);
+        )), true);
+
+        $this->filter .= CHtml::tag('div', array('style'=>'min-width: 115px;'), $res);
     }
 }
