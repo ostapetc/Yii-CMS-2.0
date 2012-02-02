@@ -3,9 +3,9 @@
 $this->page_title = $model->title;
 
 $this->tabs = array(
-    "список страниц"    => $this->createUrl('manage'),
-	"добавить страницу" => $this->createUrl('create'),
-    "редактировать"     => $this->createUrl('update', array('id' => $model->id))
+    $this->t('admin', 'manage') => $this->createUrl('manage'),
+    $this->t('admin', 'create') => $this->createUrl('create'),
+    $this->t('admin', 'update') => $this->createUrl('update', array('id' => $model->id))
 );
 
 $this->widget('DetailView', array(

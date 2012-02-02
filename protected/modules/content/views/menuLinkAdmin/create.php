@@ -1,6 +1,6 @@
 <?php
 $this->tabs = array(
-    "управление ссылками" => $this->createUrl("index", array("menu_id" => $model->menu->id))
+    $this->t('admin', 'manage')  => $this->createUrl("index", array("menu_id" => $model->menu->id))
 );
 
 echo $form;

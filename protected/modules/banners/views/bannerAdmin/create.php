@@ -4,7 +4,7 @@ Yii::app()->clientScript->registerScriptFile(
 );
 
 $this->tabs = array(
-    'управление банерами' => $this->createUrl('manage')
+    $this->t('admin', 'manage') => $this->createUrl('manage')
 );
 
 echo $form;

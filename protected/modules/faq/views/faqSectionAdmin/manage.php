@@ -2,7 +2,7 @@
 $this->page_title = 'Управление разделами FAQ';
 
 $this->tabs = array(
-    "добавить раздел" => $this->createUrl("create")
+    $this->t('admin', 'create') => $this->createUrl("create")
 );
 
 $this->widget('AdminGrid', array(

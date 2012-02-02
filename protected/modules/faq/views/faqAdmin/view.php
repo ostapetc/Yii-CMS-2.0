@@ -1,9 +1,10 @@
+
 <?php
 $this->page_title = 'Просмотр вопроса';
 
 $this->tabs = array(
-    "управление вопросами и ответами" => $this->createUrl("manage"),
-    "редактировать" => $this->createUrl("update", array("id" => $model->id))
+    $this->t('admin', 'manage') => $this->createUrl("manage"),
+    $this->t('admin', 'update') => $this->createUrl("update", array("id" => $model->id))
 );
 
 $this->widget('DetailView', array(

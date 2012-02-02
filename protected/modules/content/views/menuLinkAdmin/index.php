@@ -4,8 +4,8 @@ Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl() . '/js/m
 $this->page_title = $this->page_title . ' :: ' . $menu->name;
 
 $this->tabs = array(
-    "управление меню" => $this->createUrl("menuAdmin/manage"),
-    "добавить ссылку" => $this->createUrl('create', array('menu_id' => $menu->id))
+    $this->t('admin', 'manage')  => $this->createUrl("menuAdmin/manage"),
+    $this->t('admin', 'create')  => $this->createUrl('create', array('menu_id' => $menu->id))
 );
 
 $this->widget('TreeView',array(

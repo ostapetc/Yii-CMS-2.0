@@ -1,7 +1,7 @@
 <?php
 
 $this->tabs = array(
-    'добавить' => $this->createUrl('create')
+    $this->t('admin', 'create') => $this->createUrl('create')
 );
 
 $this->widget('AdminGrid', array(
