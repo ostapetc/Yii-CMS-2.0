@@ -4,10 +4,12 @@ class UserController extends BaseController
 {
     const ERROR_PASSWORD_RECOVER_AUTH = 'Вы не можете восстановить пароль будучи авторизованным!';
 
+
     public function filters()
     {
         return array('accessControl');
     }
+
 
     public function accessRules()
     {
@@ -15,12 +17,8 @@ class UserController extends BaseController
             array(
                 'deny',
                 'actions' => array(
-                    'ActivateAccountRequest',
-                    'ChangePasswordRequest',
-                    'ActivateAccount',
-                    'Registration',
-                    'ChangePassword',
-                    'Login'
+                    'ActivateAccountRequest', 'ChangePasswordRequest', 'ActivateAccount', 'Registration',
+                    'ChangePassword', 'Login'
                 ),
                 'users'   => array('@')
             )
@@ -42,31 +40,11 @@ class UserController extends BaseController
     }
 
 
-    public function loadModel($id)
-    {
-        $model = User::model()->findByPk((int)$id);
-        if ($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-        return $model;
-    }
-
-
-    protected function performAjaxValidation($model)
-    {
-        if (isset($_POST['ajax']))
-        {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-    }
-
-
     public function actionLogin()
     {
         $model = new User(User::SCENARIO_LOGIN);
+
+        $this->performAjaxValidation($model);
 
         $form = new BaseForm('users.LoginForm', $model);
 
@@ -86,13 +64,13 @@ class UserController extends BaseController
                     $auth_error = $identity->errorCode;
                     if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
                     {
-                        $auth_error .= "<br/><a href='".$this->url('activateAccountRequest')."'>
+                        $auth_error .= "<br/><a href='" . $this->url('activateAccountRequest') . "'>
                     							Мне не пришло письмо, активировать аккаунт повторно
                     						</a>";
                     }
                     else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
                     {
-                        $auth_error .= "<br/><a href='".$this->url('changePasswordRequest')."'>
+                        $auth_error .= "<br/><a href='" . $this->url('changePasswordRequest') . "'>
                     							Восстановить пароль
                     						</a>";
                     }
@@ -117,8 +95,7 @@ class UserController extends BaseController
     public function actionRegistration()
     {
         Setting::model()->checkRequired(array(
-            User::SETTING_REGISTRATION_MAIL_BODY,
-            User::SETTING_REGISTRATION_MAIL_SUBJECT,
+            User::SETTING_REGISTRATION_MAIL_BODY, User::SETTING_REGISTRATION_MAIL_SUBJECT,
             User::SETTING_REGISTRATION_DONE_MESSAGE
         ));
 
@@ -141,7 +118,8 @@ class UserController extends BaseController
 
                 $user->sendActivationMail();
 
-                Yii::app()->user->setFlash('done', Setting::model()->getValue(User::SETTING_REGISTRATION_DONE_MESSAGE));
+                Yii::app()->user->setFlash('done', Setting::model()
+                    ->getValue(User::SETTING_REGISTRATION_DONE_MESSAGE));
 
                 $this->redirect($_SERVER['REQUEST_URI']);
             }
@@ -254,7 +232,8 @@ class UserController extends BaseController
                 {
                     if ($user->status == User::STATUS_ACTIVE)
                     {
-                        $user->password_change_code = md5($user->password.$user->email.$user->id.time());
+                        $user->password_change_code = md5(
+                            $user->password . $user->email . $user->id . time());
                         $user->password_change_date = new CDbExpression('NOW()');
                         $user->save();
 

@@ -9,4 +9,5 @@ $form['elements'] = array(
 
 $form['action']                     = Yii::app()->controller->url('/users/user/login');
 $form['buttons']['submit']['value'] = 'Войти';
+
 return $form;

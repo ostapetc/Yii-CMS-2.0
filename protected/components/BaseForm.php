@@ -224,7 +224,12 @@ class BaseForm extends CForm
             ));
         }
 
-        return parent::renderButtons();
+        $output = '';
+        foreach ($this->getButtons() as $button)
+        {
+            $output .= $this->renderElement($button);
+        }
+        return $output !== '' ? "<div class=\"buttons\">" . $output . "</div>\n" : '';
     }
 
 
@@ -288,5 +293,6 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
+
 
 }
