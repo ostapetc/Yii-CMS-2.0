@@ -358,5 +358,29 @@ class User extends ActiveRecordModel
         $url .= Yii::app()->controller->url('/changePassword/'.$this->password_change_code.'/'.md5($this->email));
         return $url;
     }
+
+
+    public function getFullName()
+    {
+        $name_attrs = array('last_name', 'first_name', 'patronymic');
+        $full_name  = array();
+
+        foreach ($name_attrs as $i => $attr)
+        {
+            if (!empty($this->$attr))
+            {
+                $full_name[] = $this->$attr;
+            }
+        }
+
+        if ($full_name)
+        {
+            return implode(' ', $full_name);
+        }
+        else
+        {
+            return $this->email;
+        }
+    }
 }
 
