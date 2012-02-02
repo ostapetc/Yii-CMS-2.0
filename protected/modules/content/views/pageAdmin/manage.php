@@ -2,7 +2,7 @@
 $this->page_title = 'Страницы сайта';
 
 $this->tabs = array(
-    "добавить страницу" => $this->createUrl('create')
+    $this->t('admin', 'create')  => $this->createUrl('create')
 );
 
 $this->widget('AdminGrid', array(

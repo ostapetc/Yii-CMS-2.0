@@ -2,7 +2,7 @@
 $this->page_title = 'Меню сайта'; 
 
 $this->tabs = array(
-	'добавить меню' => $this->createUrl('create')
+    $this->t('admin', 'create')  => $this->createUrl('create')
 );
 
 $this->widget('AdminGrid', array(

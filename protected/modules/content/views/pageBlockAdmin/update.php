@@ -2,7 +2,7 @@
 
 <?php
 $this->tabs = array(
-    "управление блоками" => $this->createUrl("manage")
+    $this->t('admin', 'manage')  => $this->createUrl("manage")
 );
 ?>
 

@@ -1,11 +1,9 @@
 <?php
-Yii::app()->clientScript->registerScriptFile(
-    $this->module->assetsUrl() . '/js/BannerForm.js'
-);
+Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl() . '/js/BannerForm.js');
 
 $this->tabs = array(
-    'управление банерами' => $this->createUrl('manage'),
-    'просмотр'            => $this->createUrl('view', array('id' => $form->model->id))
+    $this->t('admin', 'manage') => $this->createUrl('manage'),
+    $this->t('admin', 'view')   => $this->createUrl('view', array('id' => $form->model->id))
 );
 
 echo $form;

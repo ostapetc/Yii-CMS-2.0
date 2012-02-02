@@ -2,7 +2,7 @@
 $this->page_title = 'Добавление страницы';
 
 $this->tabs = array(
-    "список страниц" => $this->createUrl('manage')
+    $this->t('admin', 'manage') => $this->createUrl('manage')
 );
 
 echo $form;

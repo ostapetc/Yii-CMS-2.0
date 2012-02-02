@@ -14,11 +14,11 @@
     <!-- Le styles -->
     <?php
     $cs = Yii::app()->clientScript;
-    $cs->registerCssFile('/bootstrap/css/bootstrap.css');
-    $cs->registerCssFile('/bootstrap/css/bootstrap-responsive.css');
+    $cs->registerCssFile('/js/plugins/bootstrap/css/bootstrap.css');
+    $cs->registerCssFile('/js/plugins/bootstrap/css/bootstrap-responsive.css');
 
     $cs->registerCoreScript('jquery');
-    $cs->registerScriptFile('/bootstrap/js/bootstrap.js');
+    $cs->registerScriptFile('/js/plugins/bootstrap/js/bootstrap.js');
     ?>
     <style type="text/css">
         body{
