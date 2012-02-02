@@ -45,6 +45,9 @@ class Image_GD_Driver extends Image_Driver {
 			case IMAGETYPE_PNG:
 				$create = 'imagecreatefrompng';
 			break;
+            case IMAGETYPE_BMP:
+                $create = 'imagecreatefrombmp';
+            break;
 		}
 
 		// Set the "save" function
@@ -57,10 +60,14 @@ class Image_GD_Driver extends Image_Driver {
 			case 'gif':
 				$save = 'imagegif';
 			break;
-			case 'png':
+            case 'bmp':
+                $save = 'imagebmp';
+            break;
+            case 'png':
 				$save = 'imagepng';
-			break;
+            break;
 		}
+
 
 		// Make sure the image type is supported for import
 		if (empty($create) OR ! function_exists($create))

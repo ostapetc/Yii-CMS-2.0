@@ -71,7 +71,7 @@ class EMultiSelect extends JuiInputWidget
 
     public function run()
     {
-        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->form_input_element->items, array(
+        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->input_element->items, array(
             'multiple' => 'multiple',
             'key'      => isset($this->key) ? $this->key : 'id',
             'class'    => 'multiselect'

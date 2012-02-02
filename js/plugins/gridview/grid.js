@@ -5,7 +5,8 @@
 
         // default options
         options:{
-            mass_removal:false
+            mass_removal:false,
+            filter_hint:false
         },
         parent:function()
         {
@@ -82,6 +83,7 @@
         _initFilters:function()
         {
             var self = this;
+
             var inputs = $('.filters input, .filters select', self.element), //TODO: what with dropdownlist???
                 inputs_count = inputs.length;
 
@@ -99,17 +101,27 @@
                 }
             });
 
-            if (show_filters)
-            {
-                $('.filters:first', self.element).slideToggle();
-            }
+            $('.filters:first', self.element)[show_filters ? 'slideDown' : 'slideUp']();
 
             $('th', self.element).each(function()
             {
-                if ($(this).html() == '&nbsp;')
+                if ($(this).html() != '&nbsp;')
                 {
-                    $(this).html("<a href='' class='filters_link'>фильтры</a>");
+                    return true;
                 }
+
+                var html = $('<div>').css({width:'80px'});
+                if (self.options.filter_hint)
+                {
+                    var a = $("<a href='#' class='hint' style='float:left'>").click(function() {
+                        hint(self.options.filter_hint);
+                        return false;
+                    });
+                    html.append(a);
+                }
+
+                html.append($("<a href='#' class='filters_link'>фильтры</a>"));
+                $(this).html(html);
             });
 
             $('.filters_link', self.element).click(function()
@@ -117,8 +129,26 @@
                 $('.filters', self.element).slideToggle();
                 return false;
             });
+
+            $('.filters > td:last', self.element).each(function()
+            {
+                if ($(this).html() == '&nbsp;')
+                {
+                    $(this).html("<a href='' class='filters_clear_link' style='color:#A00'>очистить</a>");
+                }
+            });
+
+            $('.filters_clear_link', self.element).click(function()
+            {
+                inputs.val('');
+                self.update();
+                return false;
+            });
+
         }
-    });
-})(jQuery);
+    })
+    ;
+})
+    (jQuery);
 
 

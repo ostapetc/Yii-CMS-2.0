@@ -1,7 +1,7 @@
 function blockUI()
 {
     $.blockUI({
-        message:'<h1>Идет обработка...</h1>',
+        message:'<h2>Пожалуйста, подождите...</h2>',
         css:{
             border:'none',
             padding:'15px',
@@ -17,4 +17,14 @@ function blockUI()
 function unblockUI()
 {
     $.unblockUI();
+}
+
+function hint(text)
+{
+    $.jGrowl(text,
+        {
+            closer:false,
+            speed:500,
+            life:7000
+        });
 }

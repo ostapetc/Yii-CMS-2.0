@@ -30,7 +30,7 @@ class Image_ImageMagick_Driver extends Image_Driver {
 	 */
 	public function __construct($config)
 	{
-		if (empty($config['directory']))
+        if (empty($config['directory']))
 		{
 			// Attempt to locate IM by using "which" (only works for *nix!)
 			if ( ! is_file($path = exec('which convert')))
@@ -122,7 +122,10 @@ class Image_ImageMagick_Driver extends Image_Driver {
 
 		// Set the IM geometry based on the properties
 		$geometry = escapeshellarg($prop['width'].'x'.$prop['height'].'+'.$prop['left'].'+'.$prop['top']);
-
+        if (substr('.gif', $this->cmd_image) >= 0)
+        {
+            escapeshellcmd(exec("convert $this->cmd_image -coalesce $this->cmd_image"));
+        }
 		if ($error = exec(escapeshellcmd($this->dir.'convert'.$this->ext).' -crop '.$geometry.' '.$this->cmd_image.' '.$this->cmd_image))
 		{
 			$this->errors[] = $error;
@@ -157,7 +160,12 @@ class Image_ImageMagick_Driver extends Image_Driver {
 				$dim = escapeshellarg('x'.$prop['height']);
 			break;
 			case Image::AUTO:   // WxH
-				$dim = escapeshellarg($prop['width'].'x'.$prop['height']);
+                $cmd =$prop['width'];
+                if ($prop['height'])
+                {
+                    $cmd .= 'x'.$prop['height'];
+                }
+				$dim = escapeshellarg($cmd);
 			break;
 			case Image::NONE:   // WxH!
 				$dim = escapeshellarg($prop['width'].'x'.$prop['height'].'!');

@@ -1,8 +1,10 @@
 <?php
-class AdminFormInputElement extends CFormInputElement
+class AdminFormInputElement extends BaseFormInputElement
 {
-    public static $widgets = array(
+    public $widgets = array(
         'alias'             => 'AliasField',
+        'captcha'           => 'Captcha',
+        'chosen'            => 'Chosen',
         'all_in_one_input'  => 'AllInOneInput',
         'multi_select'      => 'EMultiSelect',
         'date'              => 'FJuiDatePicker',
@@ -13,30 +15,6 @@ class AdminFormInputElement extends CFormInputElement
         'meta_tags'         => 'main.portlets.MetaTags',
         'file_manager'      => 'fileManager.portlets.Uploader',
     );
-
-
-    public $widgets_path = 'application.components.formElements';
-
-
-    public function renderInput()
-    {
-        //set default settings
-        $this->attributes = CMap::mergeArray($this->defaultWidgetSettings, $this->attributes);
-
-        //replace sinonym on full alias
-        if (isset(self::$widgets[$this->type]))
-        {
-            $this->attributes['form_id'] = $this->getParent()->activeFormWidget->id;
-            $this->attributes['form_input_element'] = $this;
-            $this->type                  = self::$widgets[$this->type];
-            if (strpos($this->type, '.') === false)
-            {
-                $this->type = $this->widgets_path . str_repeat('.' . $this->type, 2);
-            }
-        }
-
-        return parent::renderInput();
-    }
 
 
     public function getDefaultWidgetSettings()

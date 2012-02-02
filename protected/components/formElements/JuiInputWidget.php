@@ -9,7 +9,7 @@ abstract class JuiInputWidget extends CJuiInputWidget
 
     protected $_id;
 
-    public $form_input_element;
+    public $input_element;
 
 
     public function init()

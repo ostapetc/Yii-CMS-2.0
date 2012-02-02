@@ -30,6 +30,7 @@ class Image {
 		IMAGETYPE_GIF => 'gif',
 		IMAGETYPE_JPEG => 'jpg',
 		IMAGETYPE_PNG => 'png',
+		IMAGETYPE_BMP => 'bmp',
 		IMAGETYPE_TIFF_II => 'tiff',
 		IMAGETYPE_TIFF_MM => 'tiff',
 	);
@@ -181,8 +182,8 @@ class Image {
 
 		$this->actions['resize'] = array
 		(
-			'width'  => $width,
-			'height' => $height,
+			'width'  => $width ? $width : null,
+			'height' => $height ? $height : null,
 			'master' => $master,
 		);
 
