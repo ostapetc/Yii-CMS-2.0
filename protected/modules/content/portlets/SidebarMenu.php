@@ -7,9 +7,8 @@ class SidebarMenu extends ClientMenu
     public function init()
     {
         parent::init();
+
         $this->items = array(
-            // Important: you need to specify url as 'controller/action',
-            // not just as 'controller' even if default acion is used.
             array(
                 'label'       => 'Sidebar',
                 'itemOptions' => array('class'=> 'nav-header'),

@@ -21,7 +21,6 @@
     $cs->registerScriptFile('/bootstrap/js/bootstrap.js');
     ?>
 
-
     <style type="text/css">
         body{
             padding-top:    60px;
@@ -49,7 +48,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">Yii-CMS 2.0</a>
+            <a class="brand" href="/">Yii-CMS 2.0</a>
 
             <div class="nav-collapse">
                 <?php $this->widget('TopMenu') ?>
@@ -84,10 +83,6 @@
 
 </div>
 <!--/.fluid-container-->
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 
 </body>
 </html>
