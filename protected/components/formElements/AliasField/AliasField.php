@@ -31,8 +31,8 @@ class AliasField extends InputWidget
             'urlSeparator' => $this->divider,
         ));
         Yii::app()->clientScript
-            ->registerScriptFile('/js/plugins/adminForm/alias/jquery.synctranslit.js')
-            ->registerScriptFile('/js/plugins/adminForm/alias/alias.js')
+            ->registerScriptFile($this->assets.'/jquery.synctranslit.js')
+            ->registerScriptFile($this->assets.'/alias.js')
             ->registerScript($this->id . '_alias', "$('#{$this->id}').alias({$options});");
     }
 

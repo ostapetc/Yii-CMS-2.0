@@ -13,9 +13,9 @@ class FeedbackController extends BaseController
     public function actionCreate()
     {   
         $model = new Feedback;
-        $form  = new BaseForm('main.FeedbackForm', $model);
-
         $this->performAjaxValidation($model);
+
+        $form  = new BaseForm('main.FeedbackForm', $model);
 
         if ($form->submitted('submit'))
         {

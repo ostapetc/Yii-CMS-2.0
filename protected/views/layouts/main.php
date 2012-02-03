@@ -19,6 +19,11 @@
 
     $cs->registerCoreScript('jquery');
     $cs->registerScriptFile('/js/plugins/bootstrap/js/bootstrap.js');
+
+    if (YII_DEBUG)
+    {
+        $cs->registerScriptFile('/js/plugins/debug.js');
+    }
     ?>
     <style type="text/css">
         body{
@@ -33,10 +38,9 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
-//            $('.dropdown-toggle').dropdown();
-            //            $('#login').modal();
+            $('.modal').appendTo('body');
         });
-    </script>
+    </script>-
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="/favicon.ico">
@@ -69,10 +73,8 @@
 
                 <ul class="nav pull-right">
                     <li>
-                        <a data-toggle="modal" href="#login">Login</a>
+                        <a data-toggle="modal" href="#login"><?php $this->widget('users.portlets.LoginPanel') ?></a>
                     </li>
-                </ul>
-                </li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -105,21 +107,6 @@
 </div>
 <!--/.fluid-container-->
 
-
-<div class="modal hide fade" id="login">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-
-        <h3>Вход</h3>
-    </div>
-    <div class="modal-body">
-        <?php $this->widget('users.portlets.LoginPanel') ?>
-    </div>
-    <div class="modal-footer">
-<!--        <a href="#" class="btn btn-primary">Save changes</a>-->
-<!--        <a href="#" class="btn">Close</a>-->
-    </div>
-</div>
 
 </body>
 </html>
