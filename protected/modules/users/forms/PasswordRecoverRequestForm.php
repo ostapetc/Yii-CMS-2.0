@@ -2,7 +2,7 @@
 
 $form = include "UserForm.php";
 
-$form['activeForm']['enableAjaxValidation'] = false;
+$form['activeForm']['enableAjaxValidation'] = true;
 
 $form['elements'] = array(
     'email'    => $form['elements']['email'],

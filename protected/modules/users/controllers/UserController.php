@@ -101,6 +101,7 @@ class UserController extends BaseController
 
         $user = new User(User::SCENARIO_REGISTRATION);
         $form = new BaseForm('users.RegistrationForm', $user);
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
         {
@@ -167,6 +168,7 @@ class UserController extends BaseController
         $model = new User(User::SCENARIO_ACTIVATE_REQUEST);
 
         $form = new BaseForm('users.ActivateRequestForm', $model);
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
         {
@@ -221,6 +223,7 @@ class UserController extends BaseController
 
         $model = new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST);
         $form  = new BaseForm('users.ChangePasswordRequestForm', $model);
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
         {
@@ -279,6 +282,7 @@ class UserController extends BaseController
     {
         $model = new User(User::SCENARIO_CHANGE_PASSWORD);
         $form  = new BaseForm('users.ChangePasswordForm', $model);
+        $this->performAjaxValidation($model);
 
         $user = User::model()->findByAttributes(array('password_change_code' => $code));
 

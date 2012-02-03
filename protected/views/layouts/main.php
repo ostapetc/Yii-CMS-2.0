@@ -40,7 +40,7 @@
         {
             $('.modal').appendTo('body');
         });
-    </script>-
+    </script>
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="/favicon.ico">
@@ -70,10 +70,11 @@
 
                 <p class="navbar-text pull-right divider-vertical"></p>
 
-
                 <ul class="nav pull-right">
                     <li>
-                        <a data-toggle="modal" href="#login"><?php $this->widget('users.portlets.LoginPanel') ?></a>
+                        <a data-toggle="modal" href="#login">
+                            <?php $this->widget('users.portlets.LoginPanel') ?>
+                        </a>
                     </li>
                 </ul>
             </div>
