@@ -7,6 +7,7 @@ return array(
         'id'                   => 'user-form',
         'class'                => 'CActiveForm',
         'enableAjaxValidation' => true,
+        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => true)
     ),
     'elements'       => array(
         'email'      => array('type' => 'text'),

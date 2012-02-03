@@ -39,23 +39,14 @@
             <p><?php echo Yii::app()->user->model->full_name; ?></p>
         </div>
         <div class="breadcrumbs_container">
-            <article class="breadcrumbs">
-                <a href="/">Админ панель</a>
-                <div class="breadcrumb_divider"></div>
-                <a class="current">Dashboard</a>
-
-                <?php
-                $crumbs = array_merge(
-                    array("Админ панель" => $this->createUrl("ds")),
-                    $this->crumbs
-                );
-
-                $this->widget('zii.widgets.CBreadcrumbs', array(
-                    'links' => $crumbs
-                ));
-                ?>
-
-            </article>
+            <?php
+            $this->widget('zii.widgets.CBreadcrumbs', array(
+                'links'     => $this->crumbs,
+                'separator' => '<div class="breadcrumb_divider"></div>',
+                'tagName'   => 'article',
+                'homeLink'  => '<a href="/admin">Админ панель</a>'
+            ));
+            ?>
         </div>
     </section>
 

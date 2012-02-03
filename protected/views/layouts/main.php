@@ -19,6 +19,11 @@
 
     $cs->registerCoreScript('jquery');
     $cs->registerScriptFile('/js/plugins/bootstrap/js/bootstrap.js');
+
+    if (YII_DEBUG)
+    {
+        $cs->registerScriptFile('/js/plugins/debug.js');
+    }
     ?>
     <style type="text/css">
         body{
@@ -31,11 +36,12 @@
     </style>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('.dropdown-toggle').dropdown()
+        $(document).ready(function()
+        {
+            $('.modal').appendTo('body');
         });
     </script>
-    
+
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -65,17 +71,12 @@
                 <p class="navbar-text pull-right divider-vertical"></p>
 
                 <ul class="nav pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                            <b class="caret"></b></a>
-                    </li>
-                    <ul class="dropdown-menu">
-                        <li>
+                    <li>
+                        <a data-toggle="modal" href="#login">
                             <?php $this->widget('users.portlets.LoginPanel') ?>
-                        </li>
-                    </ul>
+                        </a>
+                    </li>
                 </ul>
-
             </div>
             <!--/.nav-collapse -->
         </div>
@@ -100,6 +101,7 @@
     </footer>
 
 </div>
+
 
 </body>
 </html>

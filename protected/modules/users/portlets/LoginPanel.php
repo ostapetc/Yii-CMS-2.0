@@ -1,21 +1,39 @@
 <?php
-class LoginPanel extends Portlet
+class LoginPanel extends Widget
 {
     public function init()
     {
         parent::init();
     }
 
-    public function renderContent()
+
+    public function run()
     {
+        echo Yii::app()->user->isGuest ? 'Login' : 'Cabinet';
+
         if (Yii::app()->user->isGuest)
         {
-            $model = new User(User::SCENARIO_LOGIN);
-            echo new BaseForm('users.LoginForm', $model);
+            $model    = new User(User::SCENARIO_LOGIN);
+            $login    = new BaseForm('users.LoginForm', $model);
+            $register = new BaseForm('users.RegistrationForm', $model);
+            $forgot   = new BaseForm('users.PasswordRecoverRequestForm', $model);
+
+            $title = 'Вход';
+            $this->render('LoginPanel', array(
+                'title'     => $title,
+                'login'     => $login,
+                'register'  => $register,
+                'forgot'    => $forgot
+            ));
         }
         else
         {
-            $this->render('LoginPanel');
+            $content = 'Привет, ' . Yii::app()->user->model->email;
+            $title   = 'Кабинет';
+            $this->render('CabinetPanel', array(
+                'content'=> $content,
+                'title'  => $title
+            ));
         }
     }
 

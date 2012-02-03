@@ -7,7 +7,7 @@ class SettingAdminController extends AdminController
         return array(
             'View'   => 'Просмотр настройки',
             'Update' => 'Редактирование настройки',
-            'Manage' => 'Управление настройками'
+            'Manage' => 'Управление настройками',
         );
     }
 

@@ -75,6 +75,17 @@ class BaseForm extends CForm
     {
         $cs = Yii::app()->clientScript;
 
+        if ($this->side == 'client') //only bootstrap
+        {
+            $this->activeForm['errorMessageCssClass'] = "help-block";
+            $this->activeForm['clientOptions']['afterValidateAttribute']= 'js:function(form, attribute, data, hasError) {
+                var dd = $("#"+attribute.inputID).closest("dd");
+                var add = hasError ? "error" : "success";
+                var remove = hasError ? "success" : "error";
+                dd.addClass(add).removeClass(remove);
+            }';
+        }
+
         if (!($this->parent instanceof self))
         {
             $this->runSideMethod('_registerScripts');
@@ -193,7 +204,7 @@ class BaseForm extends CForm
 
         $tpl = '_' . $this->side . 'Form';
 
-        $res = "<dl class='$class'><dd>";
+        $res = "<dl class='$class'><dd class='control-group'>";
         $res .= Yii::app()->controller->renderPartial('application.views.layouts.' . $tpl, array(
             'element' => $element,
             'form'    => $element->parent
@@ -224,7 +235,12 @@ class BaseForm extends CForm
             ));
         }
 
-        return parent::renderButtons();
+        $output = '';
+        foreach ($this->getButtons() as $button)
+        {
+            $output .= $this->renderElement($button);
+        }
+        return $output !== '' ? "<div class=\"buttons\">" . $output . "</div>\n" : '';
     }
 
 
@@ -288,5 +304,6 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
+
 
 }

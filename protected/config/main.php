@@ -1,4 +1,4 @@
-    <?php
+<?php
 $modules_includes = array();
 $modules_dirs     = scandir(MODULES_PATH);
 

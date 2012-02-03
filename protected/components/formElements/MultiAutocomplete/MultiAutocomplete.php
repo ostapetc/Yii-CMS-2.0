@@ -36,7 +36,7 @@ class MultiAutocomplete extends InputWidget
 
     public function registerScripts()
     {
-        $assets = $this->assets . '/js/plugins/multi_autocomplete';
+        $assets = $this->assets;
 
         $options = CJavaScript::encode(array(
             'url' => $this->url
