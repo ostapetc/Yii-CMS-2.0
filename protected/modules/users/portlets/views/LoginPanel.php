@@ -12,9 +12,9 @@
         </ul>
 
         <div class="tab-content">
-          <div class="tab-pane fade active in" id="login-tab"><?php echo $login ?></div>
-          <div class="tab-pane fade" id="register-tab"><?php echo $register ?></div>
-          <div class="tab-pane fade" id="forgot-tab"><?php echo $forgot ?></div>
+          <div class="tab-pane fade active in" id="login-tab"><?php //echo $login ?></div>
+          <div class="tab-pane fade" id="register-tab"><?php //echo $register ?></div>
+          <div class="tab-pane fade" id="forgot-tab"><?php //echo $forgot ?></div>
         </div>
     </div>
     <div class="modal-footer">

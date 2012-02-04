@@ -27,7 +27,7 @@
         <hgroup>
             <h1 class="site_title"><a href="/admin">Yii CMS</a></h1>
 
-            <h2 class="section_title">Админ панель</h2>
+            <h2 class="section_title"><?php echo Yii::t('main', 'Пароль'); ?></h2>
 
             <div class="btn_view_site"><a href="/">На сайт</a></div>
         </hgroup>
