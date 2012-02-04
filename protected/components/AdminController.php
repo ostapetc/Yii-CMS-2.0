@@ -8,6 +8,8 @@ abstract class AdminController extends BaseController
 
     public $crumbs = array();
 
+    public $tabs;
+
 
     public function init()
     {

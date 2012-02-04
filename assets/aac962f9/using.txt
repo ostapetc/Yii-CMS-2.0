@@ -1,0 +1,31 @@
+     <!-- Load TinyMCE -->
+<script type="text/javascript" src="/lib/tiny_mce/jquery.tinymce.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('textarea.tinymce').tinymce({
+			// Location of TinyMCE script
+			script_url : '/js/tiny_mce/tiny_mce.js',
+
+			// General options
+			theme : "advanced",
+			convert_urls : false,
+			plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave,jaretypograph",
+		skin : "cirkuit",
+        extended_valid_elements : "iframe[src|width|height|name|align|frameborder|scrolling]",
+        height : "450",
+        width: "100%" ,
+			// Theme options
+			theme_advanced_buttons1 : "undo,redo,|,bold,italic,underline,strikethrough,sub,sup,|,bullist,numlist,|,charmap,|,justifyleft,justifycenter,justifyright,justifyfull,|,outdent,indent,blockquote,formatselect",
+			theme_advanced_buttons2 : "image,media,link,unlink,anchor,|,cut,copy,paste,pastetext,pasteword,|,newdocument,pagebreak,|,jaretypograph,visualaid,cleanup,removeformat,|,fullscreen,|,code",
+			theme_advanced_buttons3 : "",
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "bottom",
+			theme_advanced_resizing : true,
+            file_browser_callback : "tinyBrowser",
+			language : "ru"
+            //content_css : "/style.css",
+		});
+	});
+</script>
+<!-- /TinyMCE -->

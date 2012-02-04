@@ -921,3 +921,11 @@ fieldset textarea:focus {
     text-indent: 40px;
     font-size: 14px;
 }
+
+.underline {
+    text-decoration: underline !important;
+}
+
+.float_right {
+    float: right !important;
+}

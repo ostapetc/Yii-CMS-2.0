@@ -30,13 +30,15 @@
             <h2 class="section_title">Админ панель</h2>
 
             <div class="btn_view_site"><a href="/">На сайт</a></div>
-            <div class="btn_view_site"><a href="<?php echo $this->createUrl('/users/user/logout'); ?>">Выйти</a></div>
         </hgroup>
     </header>
 
     <section id="secondary_bar">
         <div class="user">
-            <p><?php echo Yii::app()->user->model->full_name; ?></p>
+            <p>
+                <?php echo Yii::app()->user->model->full_name; ?>
+                <a href="<?php echo $this->createUrl('/users/user/logout'); ?>" class="underline float_right">Выйти</a>
+            </p>
         </div>
         <div class="breadcrumbs_container">
             <?php
@@ -66,10 +68,20 @@
     <section id="main" class="column">
         <div class="clear"></div>
             <article class="module width_full">
-                <header><h3><?php echo $this->page_title; ?></h3></header>
-                <div class="module_content">
-                    <?php echo $content; ?>
-                </div>
+                <header>
+                    <h3 class="tabs_involved"><?php echo $this->page_title; ?></h3>
+                    <?php if (is_array($this->tabs)): ?>
+                        <ul class="tabs">
+                            <?php foreach ($this->tabs as $title => $url): ?>
+                                <li>
+                                    <a href="<?php echo $url; ?>"><?php echo $title; ?></a>
+                                </li>
+                            <?php endforeach ?>
+                        </ul>
+                    <?php endif ?>
+                </header>
+
+                <?php echo $content; ?>
 
                 <?php if ($this->footer): ?>
                     <footer><?php echo $this->footer; ?></footer>

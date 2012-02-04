@@ -16,7 +16,7 @@ class MailerModule extends WebModule
     const SETTING_PORT               = 'port';	
 	
 	
-	public static $active = true;
+	public static $active = false;
 
 
     public static function name()
