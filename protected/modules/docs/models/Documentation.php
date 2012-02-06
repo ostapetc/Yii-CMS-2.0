@@ -69,11 +69,10 @@ class Documentation extends ActiveRecordModel
     public function relations()
     {
         return array(
-            'links' => array(
-                self::HAS_MANY,
-                'MenuLink',
-                'menu_id',
-                'condition' => "lang = '".Yii::app()->language."'"
+            'category' => array(
+                self::BELONGS_TO,
+                'DocumentationCategory',
+                'cat_id',
             ),
         );
     }
@@ -91,37 +90,4 @@ class Documentation extends ActiveRecordModel
         ));
     }
 
-
-    public function getSections()
-    {
-        $sections = array();
-
-        $role     = Yii::app()->user->role;
-
-        foreach ($this->visible()->links as $link)
-        {
-            if ($link->parent_id)
-            {
-                continue;
-            }
-
-            if ($link->user_role && ($link->user_role != $role))
-            {
-                continue;
-            }
-            else if ($link->not_user_role && ($link->not_user_role == $role))
-            {
-                continue;
-            }
-
-            if ($link->page && !$link->page->is_published)
-            {
-                continue;
-            }
-
-            $sections[] = $link;
-        }
-
-        return $sections;
-    }
 }
