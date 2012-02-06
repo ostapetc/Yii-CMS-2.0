@@ -11,6 +11,7 @@ class AdminFormInputElement extends BaseFormInputElement
         'checkbox'          => 'IphoneCheckbox',
         'multi_autocomplete'=> 'MultiAutocomplete',
         'editor'            => 'TinyMCE',
+        'markdown'          => 'EMarkitupWidget',
         'autocomplete'      => 'zii.widgets.jui.CAutoComplete',
         'meta_tags'         => 'main.portlets.MetaTags',
         'file_manager'      => 'fileManager.portlets.Uploader',
