@@ -9,7 +9,7 @@ class MenuLink extends ActiveRecordModel
 
     public function name()
     {
-        return 'Ссылки меню';
+        return t('Ссылки меню');
     }
 
 	
@@ -94,7 +94,7 @@ class MenuLink extends ActiveRecordModel
 		if (!empty($this->user_role) && !empty($this->not_user_role)) 
 		{
 			
-			$this->addError($attr, 'Выберите только для кого видно или для всех кроме');
+			$this->addError($attr, t('Выберите только для кого видно или для всех кроме'));
 		}	
 	}
 	

@@ -13,7 +13,7 @@ return array(
     'buttons'    => array(
         'submit' => array(
             'type'  => 'submit',
-            'value' => $this->model->isNewRecord ? 'Далее' : 'Сохранить'
+            'value' => $this->model->isNewRecord ? t('Далее' : t('Сохранить'
         ),
     )
 );

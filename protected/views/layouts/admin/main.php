@@ -27,9 +27,9 @@
         <hgroup>
             <h1 class="site_title"><a href="/admin">Yii CMS</a></h1>
 
-            <h2 class="section_title"><?php echo Yii::t('main', 'Пароль'); ?></h2>
+            <h2 class="section_title"><?php echo t('Админ панель'); ?></h2>
 
-            <div class="btn_view_site"><a href="/">На сайт</a></div>
+            <div class="btn_view_site"><a href="/"><?php echo t('На сайт'); ?></a></div>
         </hgroup>
     </header>
 
@@ -37,7 +37,7 @@
         <div class="user">
             <p>
                 <?php echo Yii::app()->user->model->full_name; ?>
-                <a href="<?php echo $this->createUrl('/users/user/logout'); ?>" class="underline float_right">Выйти</a>
+                <a href="<?php echo $this->createUrl('/users/user/logout'); ?>" class="underline float_right"><?php echo t('Выйти'); ?></a>
             </p>
         </div>
         <div class="breadcrumbs_container">
@@ -46,7 +46,7 @@
                 'links'     => $this->crumbs,
                 'separator' => '<div class="breadcrumb_divider"></div>',
                 'tagName'   => 'article',
-                'homeLink'  => '<a href="/admin">Админ панель</a>'
+                'homeLink'  => '<a href="/admin">' . t("Админ панель") . '</a>'
             ));
             ?>
         </div>
@@ -92,8 +92,8 @@
 </body>
 
 <div id="T"
-     data-hide="Скрыть"
-     data-show="показать"
+     data-hide="<?php echo t('Скрыть'); ?>"
+     data-show="<?php echo t('показать'); ?>"
         >
 </div>
 

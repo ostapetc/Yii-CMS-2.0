@@ -7,7 +7,7 @@ class PageBlock extends ActiveRecordModel
 
     public function name()
     {
-        return 'Блоки страниц';
+        return t('Блоки страниц';
     }
 
 
@@ -27,7 +27,7 @@ class PageBlock extends ActiveRecordModel
 	{
 		return array(
 			array('title, text, name, lang', 'required'),
-			array('name', 'match', 'pattern' => '|^[a-z_]+$|', 'message' => 'только латиница и знак подчеркивания "_"'),
+			array('name', 'match', 'pattern' => '|^[a-z_]+$|', 'message' => t('только латиница и знак подчеркивания "_"'),
 			array('title', 'length', 'max'=>250),
 			array('title', 'groupUnique', 'group' => array('lang')),
             array('name', 'groupUnique', 'group' => array('lang')),
@@ -40,12 +40,12 @@ class PageBlock extends ActiveRecordModel
     {
         if (!isset($params['group']))
         {
-            throw new CException('Забыли указать параметр group в валидаторе groupUnique');
+            throw new CException(t('Забыли указать параметр group в валидаторе groupUnique');
         }
 
         if (!is_array($params['group']) || !$params['group'])
         {
-            throw new CException('Параметр group валидатора groupUnique должен являться непустым массивом');
+            throw new CException(t('Параметр group валидатора groupUnique должен являться непустым массивом');
         }
 
         $params['group'][] = $main_attr;
@@ -74,10 +74,10 @@ class PageBlock extends ActiveRecordModel
                     $labels[] = $all_labels[$attr];
                 }
 
-                $message = "Поля: " . implode(', ', $labels) . ' в сочетании должны быть уникальны!';
+                $message = "t(Поля: " . implode(', ', $labels) . ' t(в сочетании должны быть уникальны!';
             }
     
-            $this->addError($main_attr, Yii::t('main', $message));
+            $this->addError($main_attr, t($message));
         }
     }
 
@@ -113,7 +113,7 @@ class PageBlock extends ActiveRecordModel
 
         	if (RbacModule::isAllow('PageBlockAdmin_Update'))
         	{   
-				$text.= "&nbsp; <a href='/content/pageBlockAdmin/update/id/{$block['id']}' class='admin_link'>Редактировать</a>";
+				$text.= "&nbsp; <a href='/content/pageBlockAdmin/update/id/{$block['id']}' class='admin_link'>t(Редактировать</a>";
         	}
         
         	return $text;

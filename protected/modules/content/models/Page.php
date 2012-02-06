@@ -8,7 +8,7 @@ class Page extends ActiveRecordModel
 
     public function name()
     {
-        return 'Страницы';
+        return t('Страницы');
     }
 
 
@@ -110,7 +110,7 @@ class Page extends ActiveRecordModel
 
         if (RbacModule::isAllow('PageAdmin_Update'))
         {
-            $content.= "<br/><a href='/content/pageAdmin/update/id/{$this->id}' class='admin_link'>Редактировать</a>";
+            $content.= "<br/><a href='/content/pageAdmin/update/id/{$this->id}' class='admin_link'>t(Редактировать</a>";
         }
     	
     	return $content;

@@ -55,4 +55,17 @@ class Language extends ActiveRecordModel
 			'criteria' => $criteria
 		));
 	}
+
+
+    public static function getArray()
+    {
+        $languages = Yii::app()->cache->get('languages');
+        if (!$languages)
+        {
+            $languages = ArrayHelper::extract(Language::model()->findAll(), 'id', 'name');
+            Yii::app()->cache->set('languages', $languages);
+        }
+
+        return $languages;
+    }
 }

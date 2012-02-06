@@ -19,7 +19,7 @@ return array(
 	'buttons' => array(
 		'submit' => array(
 			'type'  => 'submit', 
-			'value' => Yii::t('main', 'Отправить'),
+			'value' => t('Отправить'),
 			'id'    => 'feedback_button'
 		)
 	)

@@ -5,8 +5,8 @@ class PageController extends BaseController
     public static function actionsTitles()
     {
         return array(
-            "View" => "Просмотр страницы",
-            "Main" => "Главная страница"
+            "View" => t("Просмотр страницы"),
+            "Main" => t("Главная страница")
         );
     }
 

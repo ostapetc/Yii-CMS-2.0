@@ -14,8 +14,7 @@ error_reporting(E_ALL);
 date_default_timezone_set('Europe/Moscow');
 
 require_once($yii);
-require_once(LIBRARY_PATH.'functions/debug_functions.php');
-require_once(LIBRARY_PATH.'functions/php_5_3_functions.php');
+require_once(LIBRARY_PATH.'functions.php');
 
 $session = new CHttpSession;
 $session->open();

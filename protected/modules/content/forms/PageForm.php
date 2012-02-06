@@ -15,7 +15,7 @@ return array(
         'meta_tags'    => array('type' => 'meta_tags')
     ),
     'buttons' => array(
-        'submit' => array('type' => 'submit', 'value' => 'сохранить')
+        'submit' => array('type' => 'submit', 'value' => t('сохранить')
     )
 );
 

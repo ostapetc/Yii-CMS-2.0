@@ -1,5 +1,5 @@
 <?php
-$this->page_title = 'Просмотр страницы';
+$this->page_title = t('Просмотр страницы');
 
 $this->tabs = array(
     'редактировать'  => $this->createUrl('update', array('id' => $model->id)),
@@ -14,11 +14,11 @@ $this->widget('DetailView', array(
 		'url',
 		array(
             'name'  => 'is_published',
-            'value' => $model->is_published ? "да" : "нет"
+            'value' => $model->is_published ? t('да') : t('нет')
         ),
 		'date_create',
         array(
-            'name'  => 'Мета-теги',
+            'name'  => t('Мета-теги'),
             'value' => MetaTag::model()->html($model->id, get_class($model)),
             'type'  => 'raw'
         ),

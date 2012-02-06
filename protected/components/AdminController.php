@@ -11,18 +11,6 @@ abstract class AdminController extends BaseController
     public $tabs;
 
 
-    public function init()
-    {
-        parent::init();
-
-        $admin_url = $this->url('/users/userAdmin/login');
-        if (Yii::app()->user->isGuest && trim($_SERVER['REQUEST_URI'], '/') != trim($admin_url, '/'))
-        {
-            $this->redirect($admin_url);
-        }
-    }
-
-
     private function initAssets()
     {
         $assets_dir = MODULES_PATH . Yii::app()->controller->module->id . '/assets/';
@@ -62,5 +50,16 @@ abstract class AdminController extends BaseController
                 }
             }
         }
+    }
+
+
+    public function beforeAction($action)
+    {
+        if (Yii::app()->user->isGuest && ($action->id != 'login'))
+        {
+            $this->redirect(array('/admin/login'));
+        }
+
+        return true;
     }
 }

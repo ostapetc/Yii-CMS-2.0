@@ -25,7 +25,7 @@
 </script>
 
 <?php
-$def_value = Yii::t('main', 'Поиск по сайту');
+$def_value = t('Поиск по сайту');
 if (isset($_GET['query']))
 {
     $search_value = addslashes(strip_tags($_GET['query']));

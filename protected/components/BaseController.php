@@ -38,8 +38,9 @@ abstract class BaseController extends CController
 
     public function beforeAction($action)
     {
-        $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
+        $this->_redirectIfRequire();
 
+        $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         if (!RbacModule::isAllow($item_name))
         {
             $this->forbidden();
@@ -54,6 +55,33 @@ abstract class BaseController extends CController
         $this->_setMetaTags($action);
 
         return true;
+    }
+
+
+    private function _redirectIfRequire()
+    {
+        if ($this->request->isPostRequest)
+        {
+            return;
+        }
+
+        $languages = Language::getArray();
+
+        $url_parts = explode('/', $_SERVER['REQUEST_URI']);
+
+        if (!isset($languages[$url_parts[1]]))
+        {
+            //$this->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
+        }
+    }
+
+
+    public function createUrl($route, $params = array())
+    {
+        $url = parent::createUrl($route, $params);
+        $url = '/' . Yii::app()->session['language'] . $url;
+
+        return $url;
     }
 
 
@@ -190,26 +218,4 @@ abstract class BaseController extends CController
 
         return $model;
     }
-
-    /**
-     * Обертка для Yii::t, выполняет перевод по словарям текущего модуля.
-     * Так же перевод осуществляется по словорям с префиксом {modelId},
-     * где modelId - приведенная к нижнему регистру база имени контроллера
-     *
-     * Например: для контроллера ProductInfoAdminController, находящегося в модуле ProductsModule
-     * перевод будет осуществляться по словарю ProductsModule.product_info_{первый параметр метода}
-     *
-     * @param string $dictionary словарь
-     * @param string $alias      фраза для перевода
-     * @param array  $params
-     * @param string $language
-     *
-     * @return string переводa
-     */
-    public function t($dictionary, $alias, $params = array(), $source = null, $language = null)
-    {
-        $file_prefix = StringHelper::camelCaseToUnderscore($this->getModelClass());
-        return Yii::t(get_class($this->module).'.'.$file_prefix.'_'.$dictionary, $alias, $params, $source, $language);
-    }
-
 }

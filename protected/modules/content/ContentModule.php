@@ -4,13 +4,13 @@ class ContentModule extends WebModule
 {
     public static function name()
     {
-        return 'Контент';
+        return t('Контент');
     }
 
 
     public static function description()
     {
-        return 'Свободно редактируемые страницы, контентные блоки, меню сайта';
+        return t('Свободно редактируемые страницы, контентные блоки, меню сайта');
     }
 
 

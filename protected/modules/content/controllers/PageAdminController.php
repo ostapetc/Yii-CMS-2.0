@@ -5,12 +5,12 @@ class PageAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Manage"      => "Управление страницами",
-            "Create"      => "Добавление страницы",
-            "View"        => "Просмотр страницы",
-            "Update"      => "Редактирование страницы",
-            "Delete"      => "Удаление страницы",
-            "GetJsonData" => "Получение данных страницы (JSON)"
+            "Manage"      => t("Управление страницами",
+            "Create"      => t("Добавление страницы",
+            "View"        => t("Просмотр страницы",
+            "Update"      => t("Редактирование страницы",
+            "Delete"      => t("Удаление страницы",
+            "GetJsonData" => t("Получение данных страницы (JSON)"
         );
     }
 

@@ -115,11 +115,7 @@ class BaseForm extends CForm
 
     private function _registerScriptsAdmin()
     {
-        Yii::app()->clientScript->registerScriptFile('/js/admin/admin_form.js')
-            ->registerScriptFile('/js/admin/admin_form.js')
-            ->registerScriptFile('/js/plugins/adminForm/buttonSet.js')
-            ->registerScriptFile('/js/plugins/adminForm/tooltips/jquery.atooltip.js')
-            ->registerCssFile('/js/plugins/adminForm/tooltips/atooltip.css');
+
     }
 
 
@@ -143,7 +139,7 @@ class BaseForm extends CForm
             if ($this->side == 'admin')
             {
                 $this->attributes['class'] = 'admin_form';
-                return $this->getParent()->msg('Поля отмеченные * обязательны.', 'info') . $output;
+                return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
             }
         }
 
@@ -229,7 +225,7 @@ class BaseForm extends CForm
         {
             $this->buttons->add("back", array(
                 'type'  => 'button',
-                'value' => 'Отмена',
+                'value' => t('Отмена'),
                 'url'   => Yii::app()->controller->createUrl('manage'),
                 'class' => 'back_button submit small'
             ));

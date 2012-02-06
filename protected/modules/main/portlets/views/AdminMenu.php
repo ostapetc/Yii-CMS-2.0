@@ -6,7 +6,7 @@
     }
     ?>
 
-    <h3><?php echo $module['name']; ?></h3>
+    <h3><?php echo t($module['name']); ?></h3>
     <ul class="toggle">
         <?php foreach ($module['admin_menu'] as $title => $url): ?>
             <?php
@@ -55,7 +55,7 @@
             }
             ?>
             <li class="action_icon" icon_url="<?php echo $icon_url; ?>">
-                <a href="<?php echo $url; ?>" style="background: url(<?php echo $icon_url; ?>) no-repeat center left;"><?php echo $title; ?></a>
+                <a href="<?php echo $url; ?>" style="background: url(<?php echo $icon_url; ?>) no-repeat center left;"><?php echo t($title); ?></a>
             </li>
         <?php endforeach ?>
     </ul>

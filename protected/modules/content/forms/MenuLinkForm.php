@@ -14,24 +14,24 @@ return array(
         'parent_id'      => array(
             'type'   => 'dropdownlist',
             'items'  => MenuLink::model()->optionsTree($this->model->id, $this->model->menu_id),
-            'prompt' => 'отсутствует'
+            'prompt' => t('отсутствует'
         ),
         'page_id'        => array(
             'type'   => 'dropdownlist',
             'items'  => CHtml::listData(Page::model()->findAll(), 'id', 'title'),
-            'prompt' => 'отсутствует'
+            'prompt' => t('отсутствует'
         ),
         'title'          => array('type' => 'text'),
         'url'            => array('type' => 'text'),
         'user_role'      => array(
             'type'   => 'dropdownlist',
             'items'  => $roles,
-            'prompt' => 'не указано'
+            'prompt' => t('не указано'
         ),
         'not_user_role'  => array(
             'type'   => 'dropdownlist',
             'items'  => $roles,
-            'prompt' => 'не указано'
+            'prompt' => t('не указано'
         ),
         'order'          => array(
             'type'      => 'text',
@@ -43,7 +43,7 @@ return array(
     'buttons'    => array(
         'submit' => array(
             'type'  => 'submit',
-            'value' => $this->model->isNewRecord ? 'Добавить' : 'Сохранить'
+            'value' => $this->model->isNewRecord ? t('Добавить' : t('Сохранить'
         )
     )
 );

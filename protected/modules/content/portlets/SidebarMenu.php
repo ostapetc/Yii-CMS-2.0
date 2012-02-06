@@ -11,35 +11,35 @@ class SidebarMenu extends ClientMenu
     {
         $this->items             = array(
             array(
-                'label'       => 'Главное',
+                'label'       => t('Главное'),
                 'itemOptions' => array('class'=> 'nav-header'),
                 'active'      => false,
             ), array(
-                'label' => 'Главная',
+                'label' => t('Главная'),
                 'url'   => array('/'),
             ), array(
-                'label' => 'Возможности',
+                'label' => t('Возможности'),
                 'url'   => array('/'),
             ), array(
-                'label' => 'Разработчики',
+                'label' => t('Разработчики'),
                 'url'   => array('/'),
             ), array(
-                'label'       => 'Инструменты',
+                'label'       => t('Инструменты'),
                 'itemOptions' => array('class'=> 'nav-header'),
             ), array(
-                'label' => 'Обзор',
+                'label' => t('Обзор'),
                 'url'   => array('/'),
             ), array(
-                'label' => 'Документация',
+                'label' => t('Документация'),
                 'url'   => array('/'),
             ), array(
-                'label'       => 'Будущее',
+                'label'       => t('Будущее'),
                 'itemOptions' => array('class'=> 'nav-header'),
             ), array(
-                'label' => 'Планы на будущее',
+                'label' => t('Планы на будущее'),
                 'url'   => array('/'),
             ), array(
-                'label' => 'А что еще?',
+                'label' => t('А что еще?'),
                 'url'   => array('/'),
             ),
         );

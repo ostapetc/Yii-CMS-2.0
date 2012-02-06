@@ -1,3 +1,3 @@
-<?php $this->page_title = 'Редактирование блока страницы'; ?>
+<?php $this->page_title = t('Редактирование блока страницы'); ?>
 
 <?php echo $form; ?>

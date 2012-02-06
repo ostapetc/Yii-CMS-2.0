@@ -1,5 +1,5 @@
 <?php
-$this->page_title = 'Рекдирование страницы';
+$this->page_title = t('Рекдирование страницы');
 
 echo $form;
 ?>

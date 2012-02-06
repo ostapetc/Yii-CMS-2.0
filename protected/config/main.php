@@ -114,7 +114,8 @@ return array(
         'urlManager'   => array(
             'urlFormat'      => 'path',
             'showScriptName' => false,
-            'rules'          => require('routes.php'),
+            'rules'          => require_once('routes.php'),
+            'class'          => 'UrlManager'
         ),
 
         'errorHandler' => array(

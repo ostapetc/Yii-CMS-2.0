@@ -1,5 +1,5 @@
 <?php
-$this->page_title = 'Просмотр блока страницы';
+$this->page_title = t('Просмотр блока страницы');
 
 $this->widget('DetailView', array(
     'data'      => $model,
@@ -7,7 +7,10 @@ $this->widget('DetailView', array(
         'title', array(
             'name'  => 'lang',
             'value' => $model->language->name
-        ), 'name', 'date_create', array(
+        ),
+        'name',
+        'date_create',
+        array(
             'name' => 'text',
             'type' => 'raw'
         )

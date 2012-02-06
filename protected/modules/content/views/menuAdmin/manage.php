@@ -1,5 +1,5 @@
 <?php 
-$this->page_title = 'Меню сайта'; 
+$this->page_title = t('Меню сайта');
 
 $this->widget('AdminGrid', array(
 	'id' => 'menu-grid',
@@ -13,7 +13,7 @@ $this->widget('AdminGrid', array(
             'template' => '{links} {update} {delete}',
             'buttons'  => array(
                 'links' => array(
-                    'label'    => 'ссылки',
+                    'label'    => t('ссылки'),
                     'imageUrl' => '/images/icons/links.gif',
                     'url'      => 'Yii::app()->createUrl("content/menuLinkAdmin/index", array("menu_id" => $data->id))'
                 )

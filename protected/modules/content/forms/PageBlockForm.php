@@ -14,7 +14,7 @@ return array(
     'buttons'    => array(
         'submit' => array(
             'type'  => 'submit',
-            'value' => 'Сохранить'
+            'value' => t('Сохранить'
         )
     )
 );

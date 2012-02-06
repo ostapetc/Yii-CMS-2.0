@@ -26,5 +26,5 @@
 	</table>
 	
 <?php else: ?>
-	<div class='warning_box'>Для данного меню еще не добавляли ссылки.</div>
+	<div class='warning_box'><?php t('Для данного меню еще не добавляли ссылки'); ?>.</div>
 <?php endif ?>

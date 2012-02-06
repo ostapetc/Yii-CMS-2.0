@@ -1,5 +1,5 @@
 <?php
-$this->page_title = 'Страницы сайта';
+$this->page_title = t('Страницы сайта');
 
 $this->widget('AdminGrid', array(
 	'id' => 'page-grid',
@@ -14,7 +14,7 @@ $this->widget('AdminGrid', array(
 		'url',
 		array(
 			'name'  => 'is_published',
-			'value' => '$data->is_published ? "Да" : "Нет"'
+			'value' => '$data->is_published ? t("Да") : t("Нет")'
 		),
         array('name' => 'lang', 'value' => '$data->language->name'),		
 		array(

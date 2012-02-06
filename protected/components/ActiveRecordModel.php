@@ -51,7 +51,7 @@ abstract class ActiveRecordModel extends CActiveRecord
 
         foreach ($meta as $field_data)
         {
-            $labels[$field_data["Field"]] = Yii::t('main', $field_data["Comment"]);
+            $labels[$field_data["Field"]] = t($field_data["Comment"]);
         }
 
         return $labels;

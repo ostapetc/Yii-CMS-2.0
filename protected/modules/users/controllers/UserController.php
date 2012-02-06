@@ -86,7 +86,7 @@ class UserController extends BaseController
 
 
     public function actionLogout()
-    {
+    {   die('actionLogout');
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }

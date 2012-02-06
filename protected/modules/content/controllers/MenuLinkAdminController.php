@@ -5,12 +5,12 @@ class MenuLinkAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Index"        => "Управление ссылками меню",
-            "AjaxFillTree" => "Загрузка дерева ссылок",
-            "Update"       => "Редактирование ссылки меню",
-            "Create"       => "Добавление ссылки меню",
-            "View"         => "Просмотр ссылки меню",
-            "Delete"       => "Удаление ссылки меню",
+            "Index"        => t("Управление ссылками меню",
+            "AjaxFillTree" => t("Загрузка дерева ссылок",
+            "Update"       => t("Редактирование ссылки меню",
+            "Create"       => t("Добавление ссылки меню",
+            "View"         => t("Просмотр ссылки меню",
+            "Delete"       => t("Удаление ссылки меню",
         );
     }
 
@@ -110,7 +110,7 @@ class MenuLinkAdminController extends AdminController
         $menu = Menu::model()->findByPk($menu_id);
         if ($menu === null)
         {
-            throw new CException("Меню c id '{$menu_id}' не найдено!");
+            throw new CException(t("Меню c id '{$menu_id}' не найдено!");
         }
 
         $criteria         = new CDbCriteria();

@@ -249,7 +249,7 @@ $.Autocompleter = function(input, options) {
 		if ( !value ) {
 			return [""];
 		}
-		var words = value.split( options.multipleSeparator );
+		var words = value.split(options.multipleSeparator );
 		var result = [];
 		$.each(words, function(i, value) {
 			if ( $.trim(value) )
@@ -673,14 +673,14 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		},
 		pageUp: function() {
 			if (active != 0 && active - 8 < 0) {
-				moveSelect( -active );
+				moveSelect(-active );
 			} else {
 				moveSelect(-8);
 			}
 		},
 		pageDown: function() {
 			if (active != listItems.size() - 1 && active + 8 > listItems.size()) {
-				moveSelect( listItems.size() - 1 - active );
+				moveSelect(listItems.size() - 1 - active );
 			} else {
 				moveSelect(8);
 			}

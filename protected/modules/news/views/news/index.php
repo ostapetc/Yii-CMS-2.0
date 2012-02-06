@@ -8,7 +8,7 @@ $this->page_title = Yii::t('NewsModule.main', 'Новости');
 $this->widget('zii.widgets.CListView', array(
     'dataProvider'     => $data_provider,
     'itemView'         => '_view',
-    'emptyText'        => $this->msg(Yii::t('main', 'ничего не найдено'), 'info'),
+    'emptyText'        => $this->msg(t('ничего не найдено'), 'info'),
     'enablePagination' => true,
     'summaryText'      => false,
     'ajaxUpdate'       => false,

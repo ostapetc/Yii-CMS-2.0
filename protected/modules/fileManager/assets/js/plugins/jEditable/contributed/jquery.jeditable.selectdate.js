@@ -166,9 +166,9 @@ $.editable.addInputType('selectdate', {
 
         /* Select correct Year, Month and Day in pulldowns.  */  
         var ymd = datestring.split('-'); // YYYY-MM-DD
-        year  = parseInt( ymd[0], 10 );
-        month = parseInt( ymd[1], 10 );
-        day   = parseInt( ymd[2], 10 );        
+        year  = parseInt(ymd[0], 10 );
+        month = parseInt(ymd[1], 10 );
+        day   = parseInt(ymd[2], 10 );
 
       $("#day_", this).children().each(function() { 
               if(day == $(this).val()) { 

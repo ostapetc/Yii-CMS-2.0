@@ -1,3 +1,3 @@
 <?php
-$this->crumbs = array("Главная страница" => "");
+$this->crumbs = array(t("Главная страница") => "");
 ?>

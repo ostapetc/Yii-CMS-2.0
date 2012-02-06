@@ -8,6 +8,6 @@ $form['elements'] = array(
 );
 
 $form['action']                     = Yii::app()->controller->url('/users/user/login');
-$form['buttons']['submit']['value'] = 'Войти';
+$form['buttons']['submit']['value'] = t('Войти');
 
 return $form;

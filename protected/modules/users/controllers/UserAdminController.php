@@ -17,18 +17,22 @@ class UserAdminController extends AdminController
 
     public function actionLogin()
     {
-            if (!Yii::app()->user->isGuest)
-            {
-                throw new CException('Вы уже авторизованы!');
+        if (!Yii::app()->user->isGuest)
+        {
+            throw new CException(t('Вы уже авторизованы!'));
         }
 
         $this->layout = "//layouts/adminLogin";
 
         $model = new User("Login");
 
+        $form = new BaseForm('users.LoginForm', $model);
+        $form->action = $this->createUrl('/users/userAdmin/login');
+
         $params = array(
             "model"      => $model,
-            "error_code" => null
+            "error_code" => null,
+            "form"       => $form
         );
 
         if (isset($_POST["User"]))
@@ -36,7 +40,9 @@ class UserAdminController extends AdminController
             $model->attributes = $_POST["User"];
             if ($model->validate())
             {
-                $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $_POST["User"]["remember_me"]);
+                $remember_me = isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
+
+                $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
 
                 if ($identity->authenticate(true))
                 {

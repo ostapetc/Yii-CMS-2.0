@@ -1,3 +1,3 @@
 <form class="quick_search">
-    <input type="text" value="Быстрый поиск">
+    <input type="text" placeholder="<?php echo t('Быстрый поиск'); ?>">
 </form>

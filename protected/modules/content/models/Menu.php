@@ -7,7 +7,7 @@ class Menu extends ActiveRecordModel
 
     public function name()
     {
-        return 'Меню';
+        return t('Меню');
     }
 
 
