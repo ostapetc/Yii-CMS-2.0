@@ -7,14 +7,11 @@ abstract class JuiInputWidget extends CJuiInputWidget
 
     public $form_id;
 
-    protected $_id;
-
     public $input_element;
-
 
     public function init()
     {
-        list($this->name, $this->_id) = $this->resolveNameID();
+        list($this->name, $this->id) = $this->resolveNameID();
         $this->attachBehaviors($this->behaviors());
 
         parent::init();
@@ -28,17 +25,6 @@ abstract class JuiInputWidget extends CJuiInputWidget
                 'class' => 'application.components.behaviors.InputWidgetBehavior'
             )
         );
-    }
-
-
-    /**
-     * Возвращает id виджета, созданный функцией CJuiInputWidget::reloveNameId()
-     *
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->_id;
     }
 
 

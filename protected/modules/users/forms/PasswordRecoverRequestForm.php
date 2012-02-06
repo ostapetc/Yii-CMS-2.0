@@ -6,7 +6,7 @@ $form['activeForm']['enableAjaxValidation'] = true;
 
 $form['elements'] = array(
     'email'    => $form['elements']['email'],
-    'captcha'    => array('type' => 'captcha', 'id'=>'recovery_captcha_input'),
+    'captcha'  => array('type' => 'captcha', 'id'=>'recovery_captcha_input'),
 );
 
 return $form;

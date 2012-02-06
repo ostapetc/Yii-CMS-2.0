@@ -158,6 +158,7 @@ class CWidgetFactory extends CApplicationComponent implements IWidgetFactory
 					$properties=$properties===array() ? $skin : CMap::mergeArray($skin,$properties);
 			}
 		}
+
 		foreach($properties as $name=>$value)
 			$widget->$name=$value;
 		return $widget;

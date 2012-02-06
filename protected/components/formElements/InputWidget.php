@@ -11,16 +11,12 @@ abstract class InputWidget extends CInputWidget
     public $input_element;
 
 
-    protected $_id;
-
     public function init()
     {
-        list($this->name, $this->_id) = $this->resolveNameID(); //не стал делать сеттер, если хочешь допиши
+        list($this->name, $this->id) = $this->resolveNameID(); //не стал делать сеттер, если хочешь допиши
         $this->attachBehaviors($this->behaviors());
-
         parent::init();
     }
-
 
     public function behaviors()
     {
@@ -30,18 +26,6 @@ abstract class InputWidget extends CInputWidget
             )
         );
     }
-
-
-    /**
-     * Возвращает id виджета, созданный функцией CInputWidget::reloveNameId()
-     *
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->_id;
-    }
-
 
     /**
      * Обязательный метод для $parent {@link CFormElement}, почему его нет Yii я не понял, спрошу у авторов
