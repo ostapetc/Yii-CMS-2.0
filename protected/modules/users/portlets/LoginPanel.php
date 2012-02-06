@@ -22,8 +22,6 @@ class LoginPanel extends Widget
             $this->render('LoginPanel', array(
                 'title'     => $title,
                 'login'     => $login,
-                'register'  => $register,
-                'forgot'    => $forgot
             ));
         }
         else

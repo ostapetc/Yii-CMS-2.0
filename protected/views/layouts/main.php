@@ -39,6 +39,14 @@
         $(document).ready(function()
         {
             $('.modal').appendTo('body');
+
+            $('a[data-toggle=tab][data-url]').on('shown', function(e)
+            {
+                var tab = $(e.target); // activated tab
+                $(tab.attr('href')).load(tab.data('url'));
+                e.relatedTarget // previous tab
+            });
+
         });
     </script>
 

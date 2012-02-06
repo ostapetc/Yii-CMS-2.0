@@ -1,5 +1,10 @@
 <?php
 
+if (!$_SERVER['DOCUMENT_ROOT']) //for console application
+{
+    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../').'/';
+}
+
 defined('PROTECTED_PATH') || define('PROTECTED_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected/');
 
 defined('MODULES_PATH') || define('MODULES_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected/modules/');
