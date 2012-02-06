@@ -4,6 +4,8 @@ return array(
     ''                                        => 'content/page/main',
     '/page/<id:\d+>'                          => 'content/page/view',
     '/page/<url:.*>'                          => 'content/page/view',
+    'docs/<view>'                             => 'docs/mark/index',
+    'docs/<folder>/<view>'                    => 'docs/mark/index',
 
     '/admin'                                  => 'main/mainAdmin',
     '/admin/login'                            => 'users/userAdmin/login',

@@ -6,15 +6,25 @@
     </div>
     <div class="modal-body">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#login-tab">Вход</a></li>
-          <li><a data-toggle="tab" href="#register-tab">Регистрация</a></li>
-          <li><a data-toggle="tab" href="#forgot-tab">Забыли пароль?</a></li>
+            <li class="active"><a data-toggle="tab" href="#login-tab" data-url="/">Вход</a></li>
+            <li><a data-toggle="tab" href="#register-tab" data-url="/">Регистрация</a></li>
+            <li><a data-toggle="tab" href="#forgot-tab" data-url="/">Забыли пароль?</a></li>
         </ul>
 
         <div class="tab-content">
-          <div class="tab-pane fade active in" id="login-tab"><?php //echo $login ?></div>
-          <div class="tab-pane fade" id="register-tab"><?php //echo $register ?></div>
-          <div class="tab-pane fade" id="forgot-tab"><?php //echo $forgot ?></div>
+            <div class="tab-pane fade active in" id="login-tab">
+<!--                --><?php //echo $login ?>
+            </div>
+            <div class="tab-pane fade" id="register-tab">
+                <div class="progress progress-info progress-striped active">
+                    <div class="bar" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="forgot-tab">
+                <div class="progress progress-info progress-striped active">
+                    <div class="bar" style="width: 100%;"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal-footer">
