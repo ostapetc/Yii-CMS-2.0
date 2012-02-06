@@ -289,14 +289,12 @@ class User extends ActiveRecordModel
 
     public function attributeLabels()
     {
-        $attrs = array_merge(parent::attributeLabels(), array(
+        return array_merge(parent::attributeLabels(), array(
                 "password_c"   => "Пароль еще раз",
                 "remember_me"  => "Запомни меня",
                 "captcha"      => "Введите код",
                 "role"         => "Роль"
             ));
-
-        return $attrs;
     }
 
 

@@ -3,8 +3,8 @@
 $form = include "UserForm.php";
 
 $form['elements'] = array(
-    'email'    => $form['elements']['email'],
-    'password' => $form['elements']['password']
+    'email'    => array('type' => 'text','id'=>'login_email_input'),
+    'password' => array('type' => 'password','id'=>'login_password_input'),
 );
 
 $form['action']                     = Yii::app()->controller->url('/users/user/login');

@@ -10,9 +10,8 @@ $no_label = array('meta_tags', 'file_manager');
 if (!in_array($element->type, $no_label))
 {
     echo $element->renderHint();
-    echo $active_form->labelEx($form->model, $element->name);
+    echo $element->renderLabel();
 }
 
 echo $element->renderInput();
-
-echo $active_form->error($form->model, $element->name);
+echo $element->renderError();

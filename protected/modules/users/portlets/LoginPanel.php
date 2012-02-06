@@ -22,17 +22,18 @@ class LoginPanel extends Widget
             $this->render('LoginPanel', array(
                 'title'     => $title,
                 'login'     => $login,
+                'register'  => $register,
+                'forgot'    => $forgot,
             ));
         }
         else
         {
             $content = 'Привет, ' . Yii::app()->user->model->email;
             $title   = 'Кабинет';
-            $this->render('LoginPanel', array(
+            $this->render('Cabinet', array(
                 'content'=> $content,
                 'title'  => $title
             ));
         }
     }
-
 }

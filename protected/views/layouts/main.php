@@ -22,8 +22,7 @@
 
     if (YII_DEBUG)
     {
-        /*Файла нет в репе*/
-        //$cs->registerScriptFile('/js/plugins/debug.js');
+        $cs->registerScriptFile('/js/plugins/debug.js');
     }
     ?>
     <style type="text/css">

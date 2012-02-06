@@ -1,6 +1,6 @@
 <?php
 return array(
-    '<language:(en|ru)>/<route:[w\/]+>'       => '<route>',
+    '<language:(en|ru)>/<route:[\w\/]+>'       => '<route>',
     ''                                        => 'content/page/main',
     '/page/<id:\d+>'                          => 'content/page/view',
     '/page/<url:.*>'                          => 'content/page/view',

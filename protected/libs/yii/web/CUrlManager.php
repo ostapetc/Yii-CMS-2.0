@@ -313,7 +313,8 @@ class CUrlManager extends CApplicationComponent
 		if($this->getUrlFormat()===self::PATH_FORMAT)
 		{
 			$rawPathInfo=$request->getPathInfo();
-			$pathInfo=$this->removeUrlSuffix($rawPathInfo,$this->urlSuffix);
+
+            $pathInfo=$this->removeUrlSuffix($rawPathInfo,$this->urlSuffix);
 			foreach($this->_rules as $rule)
 			{
 				if(($r=$rule->parseUrl($this,$request,$pathInfo,$rawPathInfo))!==false)
@@ -720,6 +721,7 @@ class CUrlRule extends CComponent
 	 */
 	public function parseUrl($manager,$request,$pathInfo,$rawPathInfo)
 	{
+
 		if($this->verb!==null && !in_array($request->getRequestType(), $this->verb, true))
 			return false;
 
@@ -743,7 +745,6 @@ class CUrlRule extends CComponent
 			$pathInfo=strtolower($request->getHostInfo()).rtrim('/'.$pathInfo,'/');
 
 		$pathInfo.='/';
-
 		if(preg_match($this->pattern.$case,$pathInfo,$matches))
 		{
 			foreach($this->defaultParams as $name=>$value)

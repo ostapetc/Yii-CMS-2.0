@@ -8,7 +8,7 @@ class MarkController extends CController
     public static function actionsTitles()
     {
         return array(
-            "Mark" => "Список новостей",
+            "Index" => "Стартовая страница",
         );
     }
 

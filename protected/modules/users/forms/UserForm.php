@@ -30,9 +30,7 @@ return array(
         ),
         'password'   => array('type' => 'password'),
         'password_c' => array('type' => 'password'),
-        'captcha'    => array(
-            'type' => 'captcha'
-        ),
+        'captcha'    => array('type' => 'captcha'),
     ),
     'buttons'        => array(
         'submit' => array(
