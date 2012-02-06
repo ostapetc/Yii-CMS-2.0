@@ -28,7 +28,7 @@ class LoginPanel extends Widget
         {
             $content = 'Привет, ' . Yii::app()->user->model->email;
             $title   = 'Кабинет';
-            $this->render('CabinetPanel', array(
+            $this->render('LoginPanel', array(
                 'content'=> $content,
                 'title'  => $title
             ));

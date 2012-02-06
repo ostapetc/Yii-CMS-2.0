@@ -1,9 +1,5 @@
 <?php 
-$this->page_title = 'Добавление всех операций из модулей'; 
-
-$this->tabs = array(
-    'Операции' => $this->createUrl('manage'),
-);
+$this->page_title = 'Добавление всех операций из модулей';
 ?>
 
 <?php if ($actions): ?>

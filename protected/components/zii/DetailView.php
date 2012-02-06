@@ -4,6 +4,35 @@ Yii::import('zii.widgets.CDetailView');
 
 class DetailView extends CDetailView
 {
+    public function init()
+   	{
+   		if($this->data===null)
+   			throw new CException(Yii::t('zii','Please specify the "data" property.'));
+   		if($this->attributes===null)
+   		{
+   			if($this->data instanceof CModel)
+   				$this->attributes=$this->data->attributeNames();
+   			else if(is_array($this->data))
+   				$this->attributes=array_keys($this->data);
+   			else
+   				throw new CException(Yii::t('zii','Please specify the "attributes" property.'));
+   		}
+   		if($this->nullDisplay===null)
+   			$this->nullDisplay='<span class="null">'.Yii::t('zii','Not set').'</span>';
+   		$this->htmlOptions['id']=$this->getId();
+
+   		if($this->baseScriptUrl===null)
+               $this->baseScriptUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.zii.assets')).'/detailview';
+
+   		if($this->cssFile!==false)
+   		{
+   			if($this->cssFile===null)
+   				$this->cssFile=$this->baseScriptUrl.'/styles.css';
+   			Yii::app()->getClientScript()->registerCssFile($this->cssFile);
+   		}
+   	}
+
+
 	public function run()
 	{
 		$formatter=$this->getFormatter();

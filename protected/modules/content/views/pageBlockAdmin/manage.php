@@ -1,10 +1,6 @@
 <?php
 $this->page_title = 'Управление блоками страниц';
 
-$this->tabs = array(
-    $this->t('admin', 'create') => $this->createUrl("create"),
-);
-
 $this->widget('AdminGrid', array(
     'id'          => 'page-part-grid',
     'dataProvider'=> $model->search(),

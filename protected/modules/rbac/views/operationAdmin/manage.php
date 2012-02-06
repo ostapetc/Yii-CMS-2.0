@@ -1,10 +1,5 @@
 <?php 
-$this->page_title = 'Операции'; 
-
-$this->tabs = array(
-    "Добавить операцию" => $this->createUrl("create"),
-    "Добавить все операции модулей" => $this->createUrl("addAllOperations")
-);
+$this->page_title = 'Операции';
 
 $this->widget('AdminGrid', array(
 	'id' => 'operations-grid',

@@ -2,7 +2,7 @@
 
 class UsersModule extends WebModule
 {
-	public static $active = true;
+	public static $active = false;
 		
 	
     public static $base_module = true;

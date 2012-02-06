@@ -498,6 +498,7 @@ class CGridView extends CBaseListView
 			echo '<tr class="'.$this->rowCssClass[$row%$n].'">';
 		else
 			echo '<tr>';
+
 		foreach($this->columns as $column)
 			$column->renderDataCell($row);
 		echo "</tr>\n";

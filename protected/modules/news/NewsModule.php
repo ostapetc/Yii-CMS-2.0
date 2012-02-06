@@ -2,6 +2,9 @@
 
 class NewsModule extends WebModule
 {
+    public static $active = false;
+
+
     public static function name()
     {
         return 'Новости';

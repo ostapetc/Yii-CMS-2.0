@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -97,16 +97,11 @@
             <div class="well sidebar-nav">
                 <?php $this->widget('SidebarMenu') ?>
             </div>
-            <!--/.well -->
         </div>
-        <!--/span-->
         <div class="span9">
             <?php echo $content ?>
         </div>
-        <!--/span-->
     </div>
-    <!--/row-->
-
     <hr>
 
     <footer>
@@ -114,7 +109,6 @@
     </footer>
 
 </div>
-<!--/.fluid-container-->
 
 
 </body>
