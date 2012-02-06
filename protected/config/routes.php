@@ -1,6 +1,8 @@
 <?php
 return array(
     ''                                                      => 'content/page/main',
+    'docs/<view>'                                           => 'docs/mark/index',
+    'docs/<folder>/<view>'                                  => 'docs/mark/index',
     '<lang:[a-z]{2}>'                                       => 'content/page/main',
     '<lang:[a-z]{2}>/page/<id:\d+>'                         => 'content/page/view',
     '<lang:[a-z]{2}>/page/<url:.*>'                         => 'content/page/view',

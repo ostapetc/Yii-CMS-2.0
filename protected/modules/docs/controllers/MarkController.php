@@ -1,13 +1,12 @@
 <?php
 class MarkController extends CController
 {
-    public $layout = 'layouts/mark';
+    public $layout = '/layouts/mark';
 
     public $meta_title;
     
     public static function actionsTitles()
     {
-
         return array(
             "Mark" => "Список новостей",
         );

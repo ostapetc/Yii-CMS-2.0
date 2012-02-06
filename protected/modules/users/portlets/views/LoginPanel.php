@@ -13,7 +13,7 @@
 
         <div class="tab-content">
             <div class="tab-pane fade active in" id="login-tab">
-                <?php echo $login ?>
+<!--                --><?php //echo $login ?>
             </div>
             <div class="tab-pane fade" id="register-tab">
                 <div class="progress progress-info progress-striped active">
