@@ -5,12 +5,12 @@ class PageAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Manage"      => t("Управление страницами",
-            "Create"      => t("Добавление страницы",
-            "View"        => t("Просмотр страницы",
-            "Update"      => t("Редактирование страницы",
-            "Delete"      => t("Удаление страницы",
-            "GetJsonData" => t("Получение данных страницы (JSON)"
+            "Manage"      => t("Управление страницами"),
+            "Create"      => t("Добавление страницы"),
+            "View"        => t("Просмотр страницы"),
+            "Update"      => t("Редактирование страницы"),
+            "Delete"      => t("Удаление страницы"),
+            "GetJsonData" => t("Получение данных страницы (JSON)")
         );
     }
 
@@ -34,19 +34,15 @@ class PageAdminController extends AdminController
     public function actionCreate()
     {
         $model = new Page(ActiveRecordModel::SCENARIO_CREATE);
-        $this->performAjaxValidation($model);
         $form  = new BaseForm('content.PageForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id' => $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id' => $model->id
+            ));
         }
 
         $this->render('create', array('form' => $form));
@@ -72,24 +68,17 @@ class PageAdminController extends AdminController
     {
         $model = $this->loadModel($id);
 
-        $this->performAjaxValidation($model);
         $form = new BaseForm('content.PageForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id'=> $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id'=> $model->id
+            ));
         }
-
-        $this->render('update', array(
-            'form' => $form,
-        ));
+        $this->render('update', array('form' => $form,));
     }
 
 

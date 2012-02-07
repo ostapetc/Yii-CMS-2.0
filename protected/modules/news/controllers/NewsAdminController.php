@@ -41,16 +41,12 @@ class NewsAdminController extends AdminController
         $this->performAjaxValidation($model);
         $form = new BaseForm('news.NewsForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id' => $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id' => $model->id
+            ));
         }
 
         $this->render('create', array(
@@ -66,21 +62,15 @@ class NewsAdminController extends AdminController
         $this->performAjaxValidation($model);
         $form = new BaseForm('news.NewsForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id'=> $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id'=> $model->id
+            ));
         }
 
-        $this->render('update', array(
-            'form' => $form,
-        ));
+        $this->render('update', array('form' => $form,));
     }
 
 

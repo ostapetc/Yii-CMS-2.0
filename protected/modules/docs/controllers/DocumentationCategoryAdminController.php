@@ -22,15 +22,9 @@ class DocumentationCategoryAdminController extends AdminController
         $form = new BaseForm('products.CategoryForm', $model);
         $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->appendTo($parent) && $model->save())
         {
-            $model = $form->model;
-
-            if ($model->appendTo($parent))
-            {
-                $model->save();
-                $this->redirect($model->manageUrl);
-            }
+            $this->redirect($model->manageUrl);
         }
 
         $this->render('create', array('form' => $form));
@@ -43,13 +37,9 @@ class DocumentationCategoryAdminController extends AdminController
         $form  = new BaseForm('products.CategoryForm', $model);
         $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect($model->manageUrl);
-            }
+            $this->redirect($model->manageUrl);
         }
 
         $this->render('update', array('form' => $form));

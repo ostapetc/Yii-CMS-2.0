@@ -27,19 +27,15 @@ class FaqAdminController extends AdminController
     {
         $model = new Faq;
 
-        $this->performAjaxValidation($model);
         $form = new BaseForm('faq.FaqForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id' => $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id' => $model->id
+            ));
         }
 
         $this->render('create', array(
@@ -52,19 +48,15 @@ class FaqAdminController extends AdminController
     {
         $model = $this->loadModel($id);
 
-        $this->performAjaxValidation($model);
         $form = new BaseForm('faq.FaqForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id'=> $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id'=> $model->id
+            ));
         }
 
         $this->render('update', array(
@@ -104,6 +96,7 @@ class FaqAdminController extends AdminController
             'model' => $model,
         ));
     }
+
 
     public function actionSendNotification($id)
     {

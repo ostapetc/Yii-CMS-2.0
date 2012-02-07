@@ -5,11 +5,11 @@ class PageBlockAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "View"   => t("Просмотр контентного блока",
-            "Create" => t("Добавление контентного блока",
-            "Update" => t("Редактирование контентного блока",
-            "Delete" => t("Удаление контентного блока",
-            "Manage" => t("Управление контентными блоками"
+            "View"   => t("Просмотр контентного блока"),
+            "Create" => t("Добавление контентного блока"),
+            "Update" => t("Редактирование контентного блока"),
+            "Delete" => t("Удаление контентного блока"),
+            "Manage" => t("Управление контентными блоками")
         );
     }
 
@@ -26,19 +26,15 @@ class PageBlockAdminController extends AdminController
     {
         $model = new PageBlock;
 
-        $this->performAjaxValidation($model);
         $form = new BaseForm('content.PageBlockForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id' => $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id' => $model->id
+            ));
         }
 
         $this->render('create', array(
@@ -51,24 +47,19 @@ class PageBlockAdminController extends AdminController
     {
         $model = $this->loadModel($id);
 
-        $this->performAjaxValidation($model);
         $form = new BaseForm('content.PageBlockForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id'=> $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id'=> $model->id
+            ));
         }
 
-        $this->render('update', array(
-            'form' => $form,
-        ));
+
+        $this->render('update', array('form' => $form,));
     }
 
 

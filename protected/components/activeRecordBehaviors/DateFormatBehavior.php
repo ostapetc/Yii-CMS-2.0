@@ -69,11 +69,11 @@ class DateFormatBehavior extends CActiveRecordBehavior
 
         if (isset($_GET[$start]) && ($start = strtotime($_GET[$start])))
         {
-            $criteria->addCondition($attribute_name . ">'" . date('Y-m-d 00:00:00', $start) . "'");
+            $criteria->addCondition($attribute_name . ">='" . date('Y-m-d 00:00:00', $start) . "'");
         }
         if (isset($_GET[$end]) && ($end = strtotime($_GET[$end])))
         {
-            $criteria->addCondition($attribute_name . "<'" . date('Y-m-d 23:59:59', $end) . "'");
+            $criteria->addCondition($attribute_name . "<='" . date('Y-m-d 23:59:59', $end) . "'");
         }
         return $criteria;
     }

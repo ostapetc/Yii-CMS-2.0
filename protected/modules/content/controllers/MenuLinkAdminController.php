@@ -5,12 +5,12 @@ class MenuLinkAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Index"        => t("Управление ссылками меню",
-            "AjaxFillTree" => t("Загрузка дерева ссылок",
-            "Update"       => t("Редактирование ссылки меню",
-            "Create"       => t("Добавление ссылки меню",
-            "View"         => t("Просмотр ссылки меню",
-            "Delete"       => t("Удаление ссылки меню",
+            "Index"        => t("Управление ссылками меню"),
+            "AjaxFillTree" => t("Загрузка дерева ссылок"),
+            "Update"       => t("Редактирование ссылки меню"),
+            "Create"       => t("Добавление ссылки меню"),
+            "View"         => t("Просмотр ссылки меню"),
+            "Delete"       => t("Удаление ссылки меню"),
         );
     }
 
@@ -84,13 +84,12 @@ class MenuLinkAdminController extends AdminController
         $this->performAjaxValidation($model);
         $form = new BaseForm('content.MenuLinkForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted())
         {
             if (!$_POST['MenuLink']['page_id'])
             {
                 $model->scenario = 'pageRefNull';
             }
-            $model = $form->model;
 
             if ($model->save())
             {
@@ -110,7 +109,7 @@ class MenuLinkAdminController extends AdminController
         $menu = Menu::model()->findByPk($menu_id);
         if ($menu === null)
         {
-            throw new CException(t("Меню c id '{$menu_id}' не найдено!");
+            throw new CException(t("Меню c id '{$menu_id}' не найдено!"));
         }
 
         $criteria         = new CDbCriteria();
@@ -128,14 +127,13 @@ class MenuLinkAdminController extends AdminController
         $form = new BaseForm('content.MenuLinkForm', $model);
         $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted())
         {
             if (!$_POST['MenuLink']['page_id'])
             {
                 $model->scenario = 'pageRefNull';
             }
 
-            $model = $form->model;
             if ($model->save())
             {
                 $this->redirect($this->createUrl('index', array('menu_id' => $model->menu_id)));

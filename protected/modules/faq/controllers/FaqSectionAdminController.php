@@ -26,16 +26,12 @@ class FaqSectionAdminController extends AdminController
     {
         $model = new FaqSection;
 
-        $this->performAjaxValidation($model);
         $form = new BaseForm('faq.FaqSectionForm', $model);
+        $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array('manage'));
-            }
+            $this->redirect(array('manage'));
         }
 
         $this->render('create', array(
@@ -51,13 +47,9 @@ class FaqSectionAdminController extends AdminController
         $this->performAjaxValidation($model);
         $form = new BaseForm('faq.FaqSectionForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array('manage'));
-            }
+            $this->redirect(array('manage'));
         }
 
         $this->render('update', array(

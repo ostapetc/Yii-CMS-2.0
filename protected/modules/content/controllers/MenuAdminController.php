@@ -5,10 +5,10 @@ class MenuAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Create" => t("Добавление меню",
-            "Update" => t("Редактирование меню",
-            "Manage" => t("Управление меню",
-            "Delete" => t("Удаление меню",
+            "Create" => t("Добавление меню"),
+            "Update" => t("Редактирование меню"),
+            "Manage" => t("Управление меню"),
+            "Delete" => t("Удаление меню"),
         );
     }
 
@@ -18,16 +18,14 @@ class MenuAdminController extends AdminController
         $model = new Menu;
 
         $form = new BaseForm('content.MenuForm', $model);
-
         $this->performAjaxValidation($model);
-        if ($form->submitted('submit'))
+
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->validate())
-            {
-                $model->save(false);
-                $this->redirect(array('/content/menuLinkAdmin/index', 'menu_id'=> $model->id));
-            }
+            $this->redirect(array(
+                '/content/menuLinkAdmin/index',
+                'menu_id'=> $model->id
+            ));
         }
 
         $this->render('create', array('form' => $form));
@@ -39,16 +37,13 @@ class MenuAdminController extends AdminController
         $model = $this->loadModel($id);
 
         $form = new BaseForm('content.MenuForm', $model);
-
         $this->performAjaxValidation($model);
-        if ($form->submitted('submit'))
+
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect($this->createUrl('manage'));
-            }
+            $this->redirect($this->createUrl('manage'));
         }
+
 
         $this->render('update', array('form' => $form));
     }
@@ -64,7 +59,7 @@ class MenuAdminController extends AdminController
 
     public function actionDelete($id)
     {
-        $model = $this->loadModel($id)->delete();
+        $this->loadModel($id)->delete();
 
         $this->redirect($this->createUrl('manage'));
     }

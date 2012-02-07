@@ -36,9 +36,8 @@ class BannerAdminController extends AdminController
         $this->performAjaxValidation($model);
         $form = new BaseForm('banners.BannerForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted())
         {
-            $model              = $form->model;
             $model->date_active = $_POST['Banner']['date_active'];
 
 			if($model->save())
@@ -61,9 +60,8 @@ class BannerAdminController extends AdminController
         $this->performAjaxValidation($model);
         $form = new BaseForm('banners.BannerForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted())
         {
-            $model              = $form->model;
             $model->date_active = $_POST['Banner']['date_active'];
 
 			if($model->save())

@@ -1,13 +1,15 @@
 <?php
 class DateColumn extends CDataColumn
 {
-    public $uiDateFormat = 'd.m.yy';
+    public $uiDateFormat = 'dd.mm.yy';
     public $attribute;
 
-
-    public function init()
+    public function renderFilterCellContent()
     {
-        parent::init();
+        if ($this->filter === false)
+        {
+            return false;
+        }
         $this->uiDateFormat = $this->uiDateFormat ? $this->uiDateFormat : "yy-mm-dd";
         $attr               = $this->attribute = $this->attribute ? $this->attribute : $this->name;
 
@@ -23,17 +25,17 @@ class DateColumn extends CDataColumn
                 'dateFormat'=> $this->uiDateFormat
             ),
             'htmlOptions'=> array(
-                'style' => 'display:inline-block;width:70px;float:right'
+                'style' => 'display:inline-block;width:100px;float:right'
             ),
             'range'      => $attr . '_diapason'
         );
-        $res = CHtml::tag('span', array('style'=> 'float:left'), 'От:');
+        $res      = CHtml::tag('span', array('style'=> 'float:left'), 'От:');
         $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $start,
             'value'    => $_GET[$start],
         )), true);
 
-        $this->filter .= CHtml::tag('div', array('style'=>'min-width: 115px;'), $res);
+        echo CHtml::tag('div', array('style'=> 'min-width: 130px;'), $res);
 
         $res = CHtml::tag('span', array('style'=> 'float:left'), 'До:');
         $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
@@ -41,6 +43,6 @@ class DateColumn extends CDataColumn
             'value'    => $_GET[$end],
         )), true);
 
-        $this->filter .= CHtml::tag('div', array('style'=>'min-width: 115px;'), $res);
+        echo CHtml::tag('div', array('style'=> 'min-width: 130px;'), $res);
     }
 }
