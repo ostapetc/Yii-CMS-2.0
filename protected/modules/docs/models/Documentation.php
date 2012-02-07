@@ -27,52 +27,33 @@ class Documentation extends ActiveRecordModel
     {
         return array(
             array(
-                'title', 'content',
-                'required'
-            ),
-            array(
-                'is_visible',
-                'numerical',
+                'title, content', 'required'
+            ), array(
+                'is_published', 'numerical',
                 'integerOnly' => true
-            ),
-            array(
-                'id',
-                'length',
+            ), array(
+                'id', 'length',
                 'max' => 11
-            ),
-            array(
-                'title',
-                'length',
+            ), array(
+                'title', 'length',
                 'max' => 250
-            ),
-            array(
-                'name',
-                'unique',
-            ),
-            array(
-                'id, title, is_visible',
-                'safe',
+            ), array(
+                'title, alias', 'unique'
+            ), array(
+                'alias', 'AliasValidator'
+            ), array(
+                'id, title, is_published', 'safe',
                 'on' => 'search'
             ),
         );
     }
 
 
-    public function scopes()
-    {
-        $alias = $this->getTableAlias();
-        return array(
-            'visible' => array('condition' => $alias.'.is_visible = 1')
-        );
-    }
-
     public function relations()
     {
         return array(
             'category' => array(
-                self::BELONGS_TO,
-                'DocumentationCategory',
-                'cat_id',
+                self::BELONGS_TO, 'DocumentationCategory', 'cat_id',
             ),
         );
     }

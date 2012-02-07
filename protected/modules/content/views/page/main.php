@@ -1,8 +1,6 @@
-<div class="hero-unit">
-    <h1><?php echo $page->title ?></h1>
+<div class="content">
+    <h2><?php echo $page->title ?></h2>
 
     <p><?php echo $page->content ?></p>
-
-    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
 </div>
 <?php $this->widget('news.portlets.LastNews') ?>

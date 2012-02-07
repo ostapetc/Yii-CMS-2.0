@@ -52,7 +52,7 @@ class DocumentationCategory extends ActiveRecordModel
                 'title', 'safe',
                 'on' => 'search'
             ), array(
-                'all_metadata, products', 'safe'
+                'docs', 'safe'
             ),
         );
     }

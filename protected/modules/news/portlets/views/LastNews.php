@@ -10,7 +10,7 @@ foreach ($news_list as $news)
 
 
 <div class="span4">
-    <h2><?php echo $news->title ?></h2>
+    <h3><?php echo $news->title ?></h3>
     <?php if ($news->photo): ?>
     <a href="<?php echo $news->url; ?>">
         <?php echo ImageHelper::thumb(News::PHOTOS_DIR, $news->photo, News::PHOTO_SMALL_WIDTH, News::PHOTO_SMALL_HEIGHT, true); ?>

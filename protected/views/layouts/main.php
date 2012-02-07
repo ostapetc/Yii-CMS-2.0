@@ -17,6 +17,8 @@
     $cs->registerCssFile('/js/plugins/bootstrap/css/bootstrap.css');
     $cs->registerCssFile('/js/plugins/bootstrap/css/bootstrap-responsive.css');
 
+    $cs->registerCssFile('/css/site/extend.css');
+
     $cs->registerCoreScript('jquery');
     $cs->registerScriptFile('/js/plugins/bootstrap/js/bootstrap.js');
 
