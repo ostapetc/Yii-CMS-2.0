@@ -60,6 +60,6 @@ abstract class AdminController extends BaseController
             $this->redirect(array('/admin/login'));
         }
 
-        return true;
+        return parent::beforeAction($action);;
     }
 }

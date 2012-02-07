@@ -33,4 +33,13 @@ class DocsModule extends WebModule
     {
         return array();
     }
+
+
+    public static function routes()
+    {
+        return array(
+            '/docs/<view>'          => 'docs/mark/index',
+            '/docs/<folder>/<view>' => 'docs/mark/index',
+        );
+    }
 }

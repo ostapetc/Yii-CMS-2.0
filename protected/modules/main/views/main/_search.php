@@ -36,7 +36,7 @@ else
 }
 ?>
 <div class="searchform">
-    <form id="formsearch" name="formsearch" method="get" action="<?php echo $this->url('/search'); ?>">
+    <form id="formsearch" name="formsearch" method="get" action="<?php echo $this->createUrl('/search'); ?>">
         <span>
             <input name="query" class="editbox_search" id="editbox_search" maxlength="80" value="<?php echo $search_value; ?>" def_val="<?php echo $def_value; ?>" type="text"/>
         </span>

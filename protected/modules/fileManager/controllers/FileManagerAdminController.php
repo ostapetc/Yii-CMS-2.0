@@ -75,7 +75,7 @@ class FileManagerAdminController extends AdminController
                 'thumbnail_url'  => $file['icon'],
                 'delete_url'     => $file['deleteUrl'],
                 'delete_type'    => "GET",
-                'edit_url' => $this->url('/fileManager/fileManagerAdmin/updateAttr', array(
+                'edit_url' => $this->createUrl('/fileManager/fileManagerAdmin/updateAttr', array(
                     'id'  => $file['id'],
                 )),
                 'id'             => 'File_' . $file->id,

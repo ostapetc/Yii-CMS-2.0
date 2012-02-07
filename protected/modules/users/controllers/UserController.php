@@ -64,13 +64,13 @@ class UserController extends BaseController
                     $auth_error = $identity->errorCode;
                     if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
                     {
-                        $auth_error .= "<br/><a href='" . $this->url('activateAccountRequest') . "'>
+                        $auth_error .= "<br/><a href='" . $this->createUrl('activateAccountRequest') . "'>
                     							Мне не пришло письмо, активировать аккаунт повторно
                     						</a>";
                     }
                     else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
                     {
-                        $auth_error .= "<br/><a href='" . $this->url('changePasswordRequest') . "'>
+                        $auth_error .= "<br/><a href='" . $this->createUrl('changePasswordRequest') . "'>
                     							Восстановить пароль
                     						</a>";
                     }
@@ -86,7 +86,7 @@ class UserController extends BaseController
 
 
     public function actionLogout()
-    {   die('actionLogout');
+    {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
     }
@@ -192,7 +192,7 @@ class UserController extends BaseController
 
                             Yii::app()->user->setFlash('done', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
 
-                            $this->redirect($this->url('activateAccountRequest'));
+                            $this->redirect($this->createUrl('activateAccountRequest'));
                             break;
 
                         case User::STATUS_ACTIVE:
@@ -252,7 +252,7 @@ class UserController extends BaseController
 
                         Yii::app()->user->setFlash('done', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
 
-                        $this->redirect($this->url('changePasswordRequest'));
+                        $this->redirect($this->createUrl('changePasswordRequest'));
 
                     }
                     else if ($user->status == User::STATUS_NEW)

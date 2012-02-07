@@ -39,7 +39,7 @@ class FaqSectionController extends BaseController
         
         if ($sections_with_questions && count($sections_with_questions) == 1)
         {
-            $this->redirect($this->url("/faq/section/" . $sections_with_questions[0]->id));
+            $this->redirect($this->createUrl("/faq/section/" . $sections_with_questions[0]->id));
         }
             
         $this->render('index', array(

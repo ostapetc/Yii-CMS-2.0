@@ -5,8 +5,9 @@ class MainController extends BaseController
     public static function actionsTitles() 
     {
         return array(
-            "Error"  => "Ошибка на странице",
-            "Search" => "Поиск по сайту"
+            "Error"          => "Ошибка на странице",
+            "Search"         => "Поиск по сайту",
+            "ChangeLanguage" => "Смена языка"
         );
     }
     
@@ -67,4 +68,20 @@ class MainController extends BaseController
 	        }	
 	    }
 	}
+
+
+    public function actionChangeLanguage($set_language, $back_url)
+    {
+        $languages = Language::getArray();
+        if (!isset($languages[$set_language]))
+        {
+            throw new CHttpException("Неизвестный системе язык: '{$set_language}'");
+        }
+
+        $back_url    = explode('/', base64_decode($back_url));
+        $back_url[1] = $set_language;
+        $back_url    = implode('/', $back_url);
+
+        $this->redirect($back_url);
+    }
 }

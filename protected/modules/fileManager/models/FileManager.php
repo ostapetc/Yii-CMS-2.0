@@ -85,7 +85,7 @@ class FileManager extends ActiveRecordModel
 
     public function getDeleteUrl()
     {
-        return Yii::app()->controller->url('fileManagerAdmin/delete', array('id' => $this->id));
+        return Yii::app()->controller->createUrl('fileManagerAdmin/delete', array('id' => $this->id));
     }
 
 

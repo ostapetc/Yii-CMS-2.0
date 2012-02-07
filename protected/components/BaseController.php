@@ -16,18 +16,20 @@ abstract class BaseController extends CController
 
     abstract public static function actionsTitles();
 
+
     public function init()
     {
         parent::init();
         $this->_initLanguage();
     }
 
+
     private function _initLanguage()
     {
-        if (isset($_GET['lang']))
+        if (isset($_GET['language']))
         {
-            Yii::app()->setLanguage($_GET['lang']);
-            Yii::app()->session['language'] = $_GET['lang'];
+            Yii::app()->setLanguage($_GET['language']);
+            Yii::app()->session['language'] = $_GET['language'];
         }
 
         if (!isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language)
@@ -35,6 +37,7 @@ abstract class BaseController extends CController
             Yii::app()->session['language'] = Yii::app()->language;
         }
     }
+
 
     public function beforeAction($action)
     {
@@ -71,17 +74,8 @@ abstract class BaseController extends CController
 
         if (!isset($languages[$url_parts[1]]))
         {
-            //$this->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
+            $this->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
         }
-    }
-
-
-    public function createUrl($route, $params = array())
-    {
-        $url = parent::createUrl($route, $params);
-        $url = '/' . Yii::app()->session['language'] . $url;
-
-        return $url;
     }
 
 
@@ -133,13 +127,6 @@ abstract class BaseController extends CController
         $this->page_title = $title;
     }
 
-
-    public function url($route, $params = array(), $ampersand = '&')
-    {
-        $url = $this->createUrl($route, $params, $ampersand);
-
-        return $url;
-    }
 
     /**
      * @throws CHttpException

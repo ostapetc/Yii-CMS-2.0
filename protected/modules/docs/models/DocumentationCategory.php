@@ -169,19 +169,19 @@ class DocumentationCategory extends ActiveRecordModel
     /**** URL's and LINK's *****/
     public function getHref()
     {
-        return Yii::app()->controller->url('/products/category/view', array('id'=> $this->id));
+        return Yii::app()->controller->createUrl('/products/category/view', array('id'=> $this->id));
     }
 
 
     public function getAddChildUrl()
     {
-        return Yii::app()->controller->url('/products/categoryAdmin/create', array('parent_id'=> $this->id));
+        return Yii::app()->controller->createUrl('/products/categoryAdmin/create', array('parent_id'=> $this->id));
     }
 
 
     public function getManageUrl()
     {
-        return Yii::app()->controller->url('/products/categoryAdmin/manage');
+        return Yii::app()->controller->createUrl('/products/categoryAdmin/manage');
     }
 
 

@@ -209,7 +209,7 @@ public $roles;
 
     public function getUrl()
     {
-        return Yii::app()->controller->url("/news/{$this->id}");
+        return Yii::app()->controller->createUrl("/news/{$this->id}");
     }
 
 

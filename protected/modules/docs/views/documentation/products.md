@@ -204,7 +204,7 @@ if ($form->submitted('submit'))
 
     if ($saved)
     {
-        $this->redirect($this->url('manage'));
+        $this->redirect($this->createUrl('manage'));
     }
 }
 //При этом нужно оставить только те связи которые пришли с клиента

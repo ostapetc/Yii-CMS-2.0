@@ -4,13 +4,13 @@ class ContentModule extends WebModule
 {
     public static function name()
     {
-        return t('Контент');
+        return 'Контент';
     }
 
 
     public static function description()
     {
-        return t('Свободно редактируемые страницы, контентные блоки, меню сайта');
+        return 'Свободно редактируемые страницы, контентные блоки, меню сайта';
     }
 
 
@@ -38,6 +38,16 @@ class ContentModule extends WebModule
             'Добавить блок'     => '/content/pageBlockAdmin/create',
             'Управление меню'   => '/content/menuAdmin/manage',
             'Добавить меню'     => '/content/menuAdmin/create'
+        );
+    }
+
+
+    public static function routes()
+    {
+        return array(
+            '/'              => 'content/page/main',
+            '/page/<id:\d+>' => 'content/page/view',
+            '/page/<url:.*>' => 'content/page/view',
         );
     }
 }

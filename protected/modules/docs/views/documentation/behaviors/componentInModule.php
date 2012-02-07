@@ -6,4 +6,4 @@
 
 - Путь до ассетов модуля: `$this->assets`
 - Модуль в котором находится видежт: `$this->module`
-- Метод `$this->url()` алиас `Yii::app()->controller->createUrl()`
+- Метод `$this->createUrl()` алиас `Yii::app()->controller->createUrl()`

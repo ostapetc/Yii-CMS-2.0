@@ -98,7 +98,7 @@ class DocumentationCategoryAdminController extends AdminController
             $command->execute();
             echo CJSON::encode(array(
                 'status'  => 'ok',
-                'redirect'=> $this->url('manage')
+                'redirect'=> $this->createUrl('manage')
             ));
             Yii::app()->end();
         }
