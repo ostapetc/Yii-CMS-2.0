@@ -72,4 +72,13 @@ class MainModule extends WebModule
 
         $site_action->save();
     }
+
+
+    public static function routes()
+    {
+        return array(
+            '/admin'  => 'main/mainAdmin',
+            '/search' => 'main/main/search',
+        );
+    }
 }

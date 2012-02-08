@@ -72,7 +72,7 @@ $.fn.yiiactiveform.addFields($('#category-form'), $(html).find('input[type=text]
 
 - Путь до ассетов модуля: `$this->assets`
 - Модуль в котором находится видежт: `$this->module`
-- Метод `$this->url()` алиас `Yii::app()->controller->createUrl()`
+- Метод `$this->createUrl()` алиас `Yii::app()->controller->createUrl()`
 - Модель: `$this->model`
 - Атрибут: `$this->name`
 - id элемента формы: `$this->id`

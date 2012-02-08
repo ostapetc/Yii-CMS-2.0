@@ -1,6 +1,6 @@
 <?php $this->page_title = Yii::t('FaqModule.main', 'Часто задаваемые вопросы') . " :: {$section->name}"; ?>
 
-<div class='submit_feedback'><a href="<?php echo $this->url("/faq/create"); ?>"><?php echo Yii::t('FaqModule.main', 'задать вопрос'); ?></a></div>
+<div class='submit_feedback'><a href="<?php echo $this->createUrl("/faq/create"); ?>"><?php echo Yii::t('FaqModule.main', 'задать вопрос'); ?></a></div>
 <br/>
 
 <?php if (!$faqs): ?>

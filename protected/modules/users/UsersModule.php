@@ -2,7 +2,7 @@
 
 class UsersModule extends WebModule
 {
-	public static $active = false;
+	public static $active = true;
 		
 	
     public static $base_module = true;
@@ -40,6 +40,22 @@ class UsersModule extends WebModule
         return array(
             'Все пользователи '     => '/users/userAdmin/manage',
             'Добавить пользователя' => '/users/userAdmin/create',
+        );
+    }
+
+
+    public static function routes()
+    {
+        return array(
+            '/admin/login'                          => 'users/userAdmin/login',
+            '/login'                                => 'users/user/login',
+            '/logout'                               => 'users/user/logout',
+            '/logout'                               => 'users/user/logout',
+            '/registration'                         => 'users/user/registration',
+            '/activateAccount/<code:.*>/<email:.*>' => 'users/user/activateAccount',
+            '/activateAccountRequest'               => 'users/user/activateAccountRequest',
+            '/changePasswordRequest'                => 'users/user/changePasswordRequest',
+            '/changePassword/<code:.*>/<email:.*>'  => 'users/user/changePassword',
         );
     }
 }

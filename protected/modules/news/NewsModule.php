@@ -31,11 +31,21 @@ class NewsModule extends WebModule
 		));
 	}
 
+
     public static function adminMenu()
     {
         return array(
 			'Все новости'      => '/news/newsAdmin/manage/News_sort/date.desc',
 			'Добавить новость' => '/news/newsAdmin/create'
+        );
+    }
+
+
+    public static function routes()
+    {
+        return array(
+            '/news/<id:\d+>' => 'news/news/view',
+            '/news'          => 'news/news/index',
         );
     }
 }

@@ -40,4 +40,10 @@ abstract class WebModule extends CWebModule
     {
         return strtolower(str_replace('Module', '', get_called_class()));
     }
+
+
+    public static function routes()
+    {
+        return array();
+    }
 }

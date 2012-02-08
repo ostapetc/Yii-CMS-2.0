@@ -30,6 +30,9 @@
             <h2 class="section_title"><?php echo t('Админ панель'); ?></h2>
 
             <div class="btn_view_site"><a href="/"><?php echo t('На сайт'); ?></a></div>
+
+            <div style="float: left"><?php $this->widget('LanguageSwitcherAdmin'); ?></div>
+
         </hgroup>
     </header>
 

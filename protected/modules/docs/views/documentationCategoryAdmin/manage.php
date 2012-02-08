@@ -2,8 +2,8 @@
 $this->page_title = $this->t('admin', 'manage');
 
 $this->tabs = array(
-    $this->t('admin', 'create')  => $this->url("create", array('parent_id'=>1)),
-    $this->t('admin', 'sorting') => $this->url("sorting"),
+    $this->t('admin', 'create')  => $this->createUrl("create", array('parent_id'=>1)),
+    $this->t('admin', 'sorting') => $this->createUrl("sorting"),
 );
 
 

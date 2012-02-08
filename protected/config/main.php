@@ -116,7 +116,6 @@ return array(
         'urlManager'   => array(
             'urlFormat'      => 'path',
             'showScriptName' => false,
-            'rules'          => require_once('routes.php'),
             'class'          => 'UrlManager'
         ),
 
@@ -150,6 +149,9 @@ return array(
             'class'=>'system.caching.CFileCache',
         ),
     ),
+
+    'onBeginRequest' => array('UrlManager', 'collectRules'),
+
     'params'     => array(
         'save_site_actions' => false
     )

@@ -31,23 +31,4 @@ return array(
 	'Неверный формат! Пример: +7-903-5492969' => 'Wrong format! example: +7-903-5492969',
 	'только русский или латинский алфавит' => 'only Russian or Latin alphabet',
 	'только русский или латинский алфавит с учетом пробелов' => 'only Russian or Latin alphabet, including spaces',
-
-
-    'Контент'           => 'Content',
-    'Список страниц'    => 'Pages list',
-    'Добавить страницу' => 'Create page',
-    'Блоки страниц'     => 'Page blocks',
-    'Добавить блок'     => 'Create page block',
-    'Управление меню'   => 'Manage menu',
-    'Добавить меню'     => 'Ceate menu',
-
-    'Система'           => 'System',
-    'Мета-теги'         => 'Meta tags',
-    'Добавить мета-тег' => 'Add meta tag',
-    'Логирование'       => 'Logging',
-    'Действия сайта'    => 'Site actions',
-    'Обратная связь'    => 'Feedback',
-    'Языки'             => 'Languages',
-    'Добавить язык'     => 'Add language',
-    'Настройки'         => 'Settings',
 );
