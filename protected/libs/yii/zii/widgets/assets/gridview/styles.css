@@ -98,13 +98,9 @@
 .grid-view .summary
 {
 	margin: 0 0 5px 0;
-    float: right;
+	text-align: right;
 }
-.grid-view .pager-select
-{
-    margin: 0 0 0 5px;
-    float: right;
-}
+
 .grid-view .pager
 {
 	margin: 5px 0 0 0;
@@ -121,18 +117,4 @@
 {
 	width: 100%;
 	border: 1px solid #ccc;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    color: #333;
-    background: #fefefe;
-}
-
-.filters_link {
-    color: green;
-    text-decoration: underline !important;
-}
-
-.filters {
-    display: none;
 }

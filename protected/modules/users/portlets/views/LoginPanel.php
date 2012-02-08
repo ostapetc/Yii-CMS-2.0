@@ -16,10 +16,10 @@
                 <?php echo $login ?>
             </div>
             <div class="tab-pane fade" id="register-tab">
-                <?php echo $register ?>
+<!--                --><?php //echo $register ?>
             </div>
             <div class="tab-pane fade" id="forgot-tab">
-                <?php echo $forgot ?>
+<!--                --><?php //echo $forgot ?>
             </div>
         </div>
     </div>

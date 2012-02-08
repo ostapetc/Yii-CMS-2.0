@@ -12,7 +12,7 @@
  * CLinkPager displays a list of hyperlinks that lead to different pages of target.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CLinkPager.php 2799 2011-01-01 19:31:13Z qiang.xue $
+ * @version $Id: CLinkPager.php 3515 2011-12-28 12:29:24Z mdomba $
  * @package system.web.widgets.pagers
  * @since 1.0
  */
@@ -179,15 +179,12 @@ class CLinkPager extends CBasePager
 	public function registerClientScript()
 	{
 		if($this->cssFile!==false)
-        {
-            self::registerCssFile($this->cssFile);
-        }
+			self::registerCssFile($this->cssFile);
 	}
 
 	/**
 	 * Registers the needed CSS file.
 	 * @param string $url the CSS URL. If null, a default CSS URL will be used.
-	 * @since 1.0.2
 	 */
 	public static function registerCssFile($url=null)
 	{

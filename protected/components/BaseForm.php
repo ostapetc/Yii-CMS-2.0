@@ -77,8 +77,11 @@ class BaseForm extends CForm
 
         if ($this->side == 'client') //only bootstrap
         {
-            $this->activeForm['errorMessageCssClass'] = "help-block";
-            $this->activeForm['clientOptions']['afterValidateAttribute']= 'js:function(form, attribute, data, hasError) {
+
+            $this->activeForm['class']                                   = 'BootActiveForm';
+//            $this->activeForm['errorMessageCssClass']                    = "help-block";
+            $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError) {
+alert(3);
                 var dd = $("#"+attribute.inputID).closest("dd");
                 var add = hasError ? "error" : "success";
                 var remove = hasError ? "success" : "error";
@@ -126,7 +129,7 @@ class BaseForm extends CForm
             ->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
             ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
             ->registerCssFile('/js/plugins/clientForm/form.css')->registerScript(
-            $id . '_baseForm', "$('#{$id}').clientForm()");
+            $id . '_baseForm', "$('#{$id}').clientForm();");
     }
 
 

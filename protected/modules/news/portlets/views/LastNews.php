@@ -30,5 +30,5 @@ foreach ($news_list as $news)
     }
 } ?>
 
-<?php echo CHtml::link(Yii::t('NewsModule.main', 'Все новости'), array('/news/news/index'))?>
+<?php echo CHtml::link(Yii::t('NewsModule.main', 'Все новости'), array('/news/news/index')) ?>
 

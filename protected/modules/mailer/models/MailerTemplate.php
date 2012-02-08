@@ -40,7 +40,7 @@ class MailerTemplate extends ActiveRecordModel
 		return array(
 			'mailerLetters' => array(self::HAS_MANY, 'MailerLetters', 'template_id'),
 			'recipients'    => array(self::HAS_MANY, 'MailerTemplateRecipient', 'template_id'),
-            'users'         => array(self::HAS_MANY, 'User', 'user_id', 'through' => 'recipients')
+            'users'         => array(self::HAS_MANY, 'User', array('user_id'=>'id'), 'through' => 'recipients')
 		);
 	}
 	
