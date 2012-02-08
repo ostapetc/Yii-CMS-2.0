@@ -1,7 +1,7 @@
 <?php
 $model_id = $model->model_id;
 
-$this->widget('DetailView', array(
+$this->widget('AdminDetailView', array(
 	'data' => $model,
 	'attributes' => array(
 		array('name' => 'model_id', 'value' => $model_id::name()),

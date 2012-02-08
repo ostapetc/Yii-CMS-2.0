@@ -11,7 +11,7 @@ if ($model->operations)
 
 $operations = implode("<br/>", $operations);
 
-$this->widget('DetailView', array(
+$this->widget('AdminDetailView', array(
     'data' => $model,
     'attributes' => array(
         'name',

@@ -1,7 +1,7 @@
 <?php
 $this->page_title = $this->t('admin', 'view');
 
-$this->widget('DetailView', array(
+$this->widget('AdminDetailView', array(
 	'data' => $model,
 	'attributes' => array(
 		array('name' => 'title'),
