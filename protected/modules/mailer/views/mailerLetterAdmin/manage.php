@@ -32,7 +32,7 @@ function getStatistics($model)
     return implode("<br/>", $statistics);
 }
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'mailer-letter-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

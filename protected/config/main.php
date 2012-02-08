@@ -67,8 +67,7 @@ return array(
     'language'   => 'ru',
     'basePath'   => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'       => '',
-    'preload'    => array('log'),
-
+    'preload'      => array('log', 'bootstrap'),
     'import'     => array_merge($modules_includes, array(
             'application.components.*',
             'application.components.validators.*',
@@ -83,6 +82,9 @@ return array(
     'modules'    => $modules,
 
     'components' => array(
+        'bootstrap'=>array(
+            'class'=>'application.components.bootstrap.components.Bootstrap'
+        ),
         'assetManager' => array(
             'class'       => 'CAssetManager',
             'newDirMode'  => 0755,
@@ -144,7 +146,6 @@ return array(
 //                ),
 //        ),
 
-        'preload'      => array('log'),
         'cache' => array(
             'class'=>'system.caching.CFileCache',
         ),

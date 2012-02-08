@@ -1,5 +1,5 @@
 <?php
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'banner-grid',
 	'dataProvider' => $model->search(),
 	'filter'   => $model,

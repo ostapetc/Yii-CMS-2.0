@@ -17,7 +17,7 @@
 
 <?php
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'mailer-recipient-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

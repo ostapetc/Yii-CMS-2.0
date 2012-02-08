@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Управление';
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'language-grid',
 	'dataProvider' => $model->search(),
 	'filter'   => $model,

@@ -1,6 +1,6 @@
 <?php
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'site-action-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

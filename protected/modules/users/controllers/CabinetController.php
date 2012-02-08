@@ -7,7 +7,6 @@ class CabinetController extends BaseController
             "Index" => "Личный кабинет",
         );
     }
-
     public function actionIndex()
     {
         if (Yii::app()->user->isGuest)

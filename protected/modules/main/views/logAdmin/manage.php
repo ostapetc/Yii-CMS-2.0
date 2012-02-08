@@ -1,7 +1,7 @@
 <?php $this->page_title = 'Просмотр логов'; ?>
 
 <?php
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'grid',
 	'dataProvider' => $model->search(),
     'filter' => $model,

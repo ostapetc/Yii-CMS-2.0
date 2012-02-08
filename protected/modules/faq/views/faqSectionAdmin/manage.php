@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Управление разделами FAQ';
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id'=>'faq-section-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,

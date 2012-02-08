@@ -1,7 +1,7 @@
 <?php
 $this->page_title = t('Управление блоками страниц');
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
     'id'          => 'page-part-grid',
     'dataProvider'=> $model->search(),
     'filter'      => $model,

@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Управление вопросами';
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id'=>'faq-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,

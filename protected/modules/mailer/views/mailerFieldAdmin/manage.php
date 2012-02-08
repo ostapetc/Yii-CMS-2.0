@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Управление генерируемыми полями';
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'mailer-field-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

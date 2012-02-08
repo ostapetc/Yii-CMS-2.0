@@ -1,7 +1,7 @@
 <?php 
 $this->page_title = 'Задачи'; 
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'task-grid',
 	'dataProvider' => $model->search(AuthItem::TYPE_TASK),
 	'filter'       => $model,

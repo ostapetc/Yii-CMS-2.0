@@ -1,7 +1,7 @@
 <?php
 $this->page_title = $this->t('admin', 'manage');
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id'=>'news-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

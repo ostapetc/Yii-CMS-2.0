@@ -1,7 +1,7 @@
 <?php
 $this->page_title = t('Страницы сайта');
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'page-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

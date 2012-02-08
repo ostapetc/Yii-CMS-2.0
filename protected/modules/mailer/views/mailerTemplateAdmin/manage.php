@@ -1,6 +1,6 @@
 <?php
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'mailer-template-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,

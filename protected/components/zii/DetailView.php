@@ -1,8 +1,6 @@
 <?php
 
-Yii::import('zii.widgets.CDetailView');
-
-class DetailView extends CDetailView
+class DetailView extends BootDetailView
 {
     public function init()
    	{

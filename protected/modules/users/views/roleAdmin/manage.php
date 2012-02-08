@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Управление ролями пользователей';
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id'=>'role-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,

@@ -23,7 +23,11 @@ class NewsController extends BaseController
 	{
         $model = News::model();
         $data_provider = new ActiveDataProvider(get_class($model), array(
-            'criteria' => $model->active()->last()->getDbCriteria()
+            'criteria' => $model->active()->last()->getDbCriteria(),
+
+            'pagination'=>array(
+                'pageSize'=>2
+            )
         ));
 
 		$this->render('index', array(

@@ -1,7 +1,7 @@
 <?php 
 $this->page_title = t('Меню сайта');
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'menu-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,
