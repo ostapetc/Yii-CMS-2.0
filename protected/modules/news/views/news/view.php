@@ -1,30 +1,25 @@
 <?php
+
+$this->widget('Crumbs', array(
+    'links'=> array(
+        t('News') => array('/news/news/index'),
+        $model->title
+    )
+));
+
 if ($model->photo)
 {
-    $thumb = ImageHelper::thumb(
-        News::PHOTOS_DIR,
-        $model->photo,
-        News::PHOTO_BIG_WIDTH,
-        null,
-        false
-    );
+    echo ImageHelper::thumb(News::PHOTOS_DIR, $model->photo, News::PHOTO_BIG_WIDTH, null, false);
 }
+
+echo $model->content;
 ?>
 
-<?php if (isset($thumb)): ?>
-    <?php echo $thumb; ?>
-    <br/>
-    <br/>
-<?php endif ?>
+<br clear='all'/>
 
-<?php echo $model->content; ?>
-
-<br clear='all' />
-
-<?php $this->widget('fileManager.portlets.FileList', array(
+<?php
+$this->widget('fileManager.portlets.FileList', array(
     'model' => $model,
-    'tag' => 'files'
-)) ?>
-
-
+    'tag'   => 'files'
+));
 

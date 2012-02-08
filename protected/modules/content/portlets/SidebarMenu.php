@@ -18,8 +18,8 @@ class SidebarMenu extends ClientMenu
                 'label' => t('Главная'),
                 'url'   => array('/'),
             ), array(
-                'label' => t('Возможности'),
-                'url'   => array('/'),
+                'label' => t('Новости'),
+                'url'   => array('/news/news/index'),
             ), array(
                 'label' => t('Разработчики'),
                 'url'   => array('/'),
