@@ -209,12 +209,12 @@ public $roles;
 
     public function getUrl()
     {
-        return Yii::app()->controller->createUrl("/news/{$this->id}");
+        return Yii::app()->controller->createUrl("/news/news/view", array('id'=>$this->id));
     }
 
 
     public function getUpdateUrl()
     {
-        return "/news/newsAdmin/update/id/{$this->id}";
+        return Yii::app()->controller->createUrl("/news/newsAdmin/update", array('id'=>$this->id));
     }
 }
