@@ -183,7 +183,7 @@ public $roles;
     {
         if (RbacModule::isAllow('NewsAdmin_Update'))
         {
-            $this->text .= "<br/> <a href='{$this->updateUrl}' class='admin_link'>Редактировать</a>";
+            $this->text .= "<br/>".CHtml::link('Редактировать',$this->updateHref, array('class'=>'admin_link'));
         }
 
         return $this->text;
@@ -207,13 +207,13 @@ public $roles;
     }
 
 
-    public function getUrl()
+    public function getHref()
     {
         return Yii::app()->controller->createUrl("/news/news/view", array('id'=>$this->id));
     }
 
 
-    public function getUpdateUrl()
+    public function getUpdateHref()
     {
         return Yii::app()->controller->createUrl("/news/newsAdmin/update", array('id'=>$this->id));
     }
