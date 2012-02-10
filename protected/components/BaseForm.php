@@ -195,11 +195,6 @@ class BaseForm extends CForm
         }
 
         $class = $element->type;
-        if (isset($element->attributes['parentClass']))
-        {
-            $class .= ' ' . $element->attributes['parentClass'];
-            unset($element->attributes['parentClass']);
-        }
 
         $tpl = '_' . $this->side . 'Form';
 

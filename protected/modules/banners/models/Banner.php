@@ -2,7 +2,10 @@
 
 class Banner extends ActiveRecordModel
 {
-    const SIZE_WIDTH = 250;
+    public static $sidebar_size = array(
+        'width' => 250,
+        'height'=> null
+    );
 
     const IMAGES_DIR = 'upload/banners';
 
@@ -133,9 +136,7 @@ class Banner extends ActiveRecordModel
 
     public function render($return = false)
     {
-        $thumb = ImageHelper::thumb(self::IMAGES_DIR, $this->image, self::SIZE_WIDTH, null, false);
-
-        $img = CHtml::image($thumb, '', array(
+        $thumb = ImageHelper::thumb(self::IMAGES_DIR, $this->image, self::$sidebar_size)->htmlOptions(array(
             'alt'         => '',
             'title'       => $this->name,
             'data-content'=> $this->content
@@ -143,11 +144,11 @@ class Banner extends ActiveRecordModel
 
         if ($return)
         {
-            return $img;
+            return $thumb;
         }
         else
         {
-            echo $img;
+            echo $thumb;
         }
     }
 

@@ -348,104 +348,104 @@ class BootActiveForm extends CActiveForm
 		return parent::errorSummary($models, $header, $footer, $htmlOptions);
 	}
 
-//	/**
-//	 * Displays the first validation error for a model attribute.
-//	 * @param CModel $model the data model
-//	 * @param string $attribute the attribute name
-//	 * @param array $htmlOptions additional HTML attributes to be rendered in the container div tag.
-//	 * @param boolean $enableAjaxValidation whether to enable AJAX validation for the specified attribute.
-//	 * @param boolean $enableClientValidation whether to enable client-side validation for the specified attribute.
-//	 * @return string the validation result (error display or success message).
-//	 */
-//	public function error($model, $attribute, $htmlOptions = array(), $enableAjaxValidation = true, $enableClientValidation = true)
-//	{
-//		if (!$this->enableAjaxValidation)
-//			$enableAjaxValidation = false;
-//
-//		if (!$this->enableClientValidation)
-//			$enableClientValidation = false;
-//
-//		if (!isset($htmlOptions['class']))
-//			$htmlOptions['class'] = $this->errorMessageCssClass;
-//
-//		$tag = $this->inlineErrors ? 'span' : 'p';
-//
-//		if (!$enableAjaxValidation && !$enableClientValidation)
-//			return $this->getErrorHtml($model, $attribute, $htmlOptions, $tag);
-//
-//		$id = CHtml::activeId($model,$attribute);
-//		$inputID = isset($htmlOptions['inputID']) ? $htmlOptions['inputID'] : $id;
-//		unset($htmlOptions['inputID']);
-//		if (!isset($htmlOptions['id']))
-//			$htmlOptions['id'] = $inputID.'_em_';
-//
-//		$option = array(
-//			'id'=>$id,
-//			'inputID'=>$inputID,
-//			'errorID'=>$htmlOptions['id'],
-//			'model'=>get_class($model),
-//			'name'=>CHtml::resolveName($model, $attribute),
-//			'enableAjaxValidation'=>$enableAjaxValidation,
-//			'inputContainer'=>'div.clearfix', // Bootstrap requires this
-//		);
-//
-//		$optionNames = array(
-//			'validationDelay',
-//			'validateOnChange',
-//			'validateOnType',
-//			'hideErrorMessage',
-//			'inputContainer',
-//			'errorCssClass',
-//			'successCssClass',
-//			'validatingCssClass',
-//			'beforeValidateAttribute',
-//			'afterValidateAttribute',
-//		);
-//
-//		foreach ($optionNames as $name)
-//		{
-//			if (isset($htmlOptions[$name]))
-//			{
-//				$option[$name] = $htmlOptions[$name];
-//				unset($htmlOptions[$name]);
-//			}
-//		}
-//
-//		if ($model instanceof CActiveRecord && !$model->isNewRecord)
-//			$option['status'] = 1;
-//
-//		if ($enableClientValidation)
-//		{
-//			$validators = isset($htmlOptions['clientValidation']) ? array($htmlOptions['clientValidation']) : array();
-//			foreach ($model->getValidators($attribute) as $validator)
-//			{
-//				if ($enableClientValidation && $validator->enableClientValidation)
-//				{
-//					if (($js = $validator->clientValidateAttribute($model,$attribute)) != '')
-//						$validators[] = $js;
-//				}
-//			}
-//
-//			if ($validators !== array())
-//				$option['clientValidation']="js:function(value, messages, attribute) {\n".implode("\n",$validators)."\n}";
-//		}
-//
-//		$html = $this->getErrorHtml($model, $attribute, $htmlOptions, $tag);
-//
-//		if ($html === '')
-//		{
-//			if (isset($htmlOptions['style']))
-//				$htmlOptions['style'] = rtrim($htmlOptions['style'], ';').';display: none';
-//			else
-//				$htmlOptions['style'] = 'display: none';
-//
-//			$html = CHtml::tag('span', $htmlOptions, '');
-//		}
-//
-//		$this->attributes[$inputID] = $option;
-//		return $html;
-//	}
-//
+	/**
+	 * Displays the first validation error for a model attribute.
+	 * @param CModel $model the data model
+	 * @param string $attribute the attribute name
+	 * @param array $htmlOptions additional HTML attributes to be rendered in the container div tag.
+	 * @param boolean $enableAjaxValidation whether to enable AJAX validation for the specified attribute.
+	 * @param boolean $enableClientValidation whether to enable client-side validation for the specified attribute.
+	 * @return string the validation result (error display or success message).
+	 */
+	public function error($model, $attribute, $htmlOptions = array(), $enableAjaxValidation = true, $enableClientValidation = true)
+	{
+		if (!$this->enableAjaxValidation)
+			$enableAjaxValidation = false;
+
+		if (!$this->enableClientValidation)
+			$enableClientValidation = false;
+
+		if (!isset($htmlOptions['class']))
+			$htmlOptions['class'] = $this->errorMessageCssClass;
+
+		$tag = $this->inlineErrors ? 'span' : 'p';
+
+		if (!$enableAjaxValidation && !$enableClientValidation)
+			return $this->getErrorHtml($model, $attribute, $htmlOptions, $tag);
+
+		$id = CHtml::activeId($model,$attribute);
+		$inputID = isset($htmlOptions['inputID']) ? $htmlOptions['inputID'] : $id;
+		unset($htmlOptions['inputID']);
+		if (!isset($htmlOptions['id']))
+			$htmlOptions['id'] = $inputID.'_em_';
+
+		$option = array(
+			'id'=>$id,
+			'inputID'=>$inputID,
+			'errorID'=>$htmlOptions['id'],
+			'model'=>get_class($model),
+			'name'=>CHtml::resolveName($model, $attribute),
+			'enableAjaxValidation'=>$enableAjaxValidation,
+			'inputContainer'=>'div.clearfix', // Bootstrap requires this
+		);
+
+		$optionNames = array(
+			'validationDelay',
+			'validateOnChange',
+			'validateOnType',
+			'hideErrorMessage',
+			'inputContainer',
+			'errorCssClass',
+			'successCssClass',
+			'validatingCssClass',
+			'beforeValidateAttribute',
+			'afterValidateAttribute',
+		);
+
+		foreach ($optionNames as $name)
+		{
+			if (isset($htmlOptions[$name]))
+			{
+				$option[$name] = $htmlOptions[$name];
+				unset($htmlOptions[$name]);
+			}
+		}
+
+		if ($model instanceof CActiveRecord && !$model->isNewRecord)
+			$option['status'] = 1;
+
+		if ($enableClientValidation)
+		{
+			$validators = isset($htmlOptions['clientValidation']) ? array($htmlOptions['clientValidation']) : array();
+			foreach ($model->getValidators($attribute) as $validator)
+			{
+				if ($enableClientValidation && $validator->enableClientValidation)
+				{
+					if (($js = $validator->clientValidateAttribute($model,$attribute)) != '')
+						$validators[] = $js;
+				}
+			}
+
+			if ($validators !== array())
+				$option['clientValidation']="js:function(value, messages, attribute) {\n".implode("\n",$validators)."\n}";
+		}
+
+		$html = $this->getErrorHtml($model, $attribute, $htmlOptions, $tag);
+
+		if ($html === '')
+		{
+			if (isset($htmlOptions['style']))
+				$htmlOptions['style'] = rtrim($htmlOptions['style'], ';').';display: none';
+			else
+				$htmlOptions['style'] = 'display: none';
+
+			$html = CHtml::tag('span', $htmlOptions, '');
+		}
+
+		$this->attributes[$inputID] = $option;
+		return $html;
+	}
+
 	/**
 	 * Displays the first validation error for a model attribute.
 	 * @param CModel $model the data model

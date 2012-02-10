@@ -10,7 +10,6 @@ class SidebarBanners extends Portlet
                     SELECT banner_id FROM banners_roles WHERE role = "' . Yii::app()->user->role . '"
                 )';
 
-
         $banners = Banner::model()->published()->ordered()->findAll($cond);
         foreach ($banners as $i => $banner)
         {
