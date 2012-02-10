@@ -24,7 +24,7 @@ class UserAdminController extends AdminController
 
         $this->layout = "//layouts/adminLogin";
 
-        $model = new User("Login");
+        $model = new User(User::SCENARIO_LOGIN);
 
         $form = new BaseForm('users.LoginForm', $model);
         $form->action = $this->createUrl('/users/userAdmin/login');
