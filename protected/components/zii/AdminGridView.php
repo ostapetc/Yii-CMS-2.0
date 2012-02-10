@@ -2,14 +2,14 @@
 Yii::import("zii.widgets.grid.CGridView");
 class AdminGridView extends BootGridView
 {
+    public $itemsCssClass = "table table-striped table-bordered table-condensed";
+
     public $cssFile = null;
 
     public $filters;
 
     public $order_links = false;
     public $pager = array('class'=> 'AdminLinkPager');
-
-    public $itemsCssClass = 'tablesorter';
 
     public $buttons = null;
 

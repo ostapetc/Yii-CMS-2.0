@@ -18,9 +18,10 @@ class Bootstrap extends CApplicationComponent
 	 */
 	public function init()
 	{
-		if (!Yii::getPathOfAlias('bootstrap'))
+        if (!Yii::getPathOfAlias('bootstrap'))
 			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__).'/..'));
         Yii::import('bootstrap.widgets.*');
+        $this->registerCss();
 	}
 
 	/**
