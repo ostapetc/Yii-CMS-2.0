@@ -4,8 +4,7 @@ return array(
     'activeForm'=>array(
         'id' => 'page-form',
         'class' => 'CActiveForm',
-        'enableAjaxValidation' => false,
-        'clientOptions' => array('validateOnSubmit' => true, 'validateOnChange' => true)
+        'enableAjaxValidation' => true,
     ),
     'elements' => array(
         'title'        => array('type' => 'text'),
@@ -15,7 +14,7 @@ return array(
         'meta_tags'    => array('type' => 'meta_tags')
     ),
     'buttons' => array(
-        'submit' => array('type' => 'submit', 'value' => t('сохранить')
+        'submit' => array('type' => 'submit', 'value' => t('сохранить'))
     )
 );
 

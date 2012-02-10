@@ -32,15 +32,6 @@ class SidebarMenu extends ClientMenu
             ), array(
                 'label' => t('Документация'),
                 'url'   => array('/'),
-            ), array(
-                'label'       => t('Будущее'),
-                'itemOptions' => array('class'=> 'nav-header'),
-            ), array(
-                'label' => t('Планы на будущее'),
-                'url'   => array('/'),
-            ), array(
-                'label' => t('А что еще?'),
-                'url'   => array('/'),
             ),
         );
 
