@@ -4,7 +4,7 @@ class Banner extends ActiveRecordModel
 {
     const SIZE_WIDTH = 250;
 
-    const IMAGES_DIR = '/upload/banners/';
+    const IMAGES_DIR = 'upload/banners';
 
     const PAGE_SIZE = 10;
 
