@@ -6,7 +6,7 @@ $form['activeForm']['id'] = 'password-recovery-form';
 
 $form['elements'] = array(
     'email'    => $form['elements']['email'],
-    'captcha'  => array('type' => 'captcha', 'inputID'=>'recovery_captcha_input'),
+    'captcha'  => array('type' => 'captcha', 'id'=>'recovery_captcha_input'),
 );
 $form['action'] = Yii::app()->controller->createUrl('/users/user/changePasswordRequest');
 

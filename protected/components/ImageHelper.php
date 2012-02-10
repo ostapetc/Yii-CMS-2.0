@@ -2,7 +2,7 @@
 ini_set("memory_limit", -1); //GD - memory killer
 class ImageHelper
 {
-    public static function thumb($dir, $file, $width = null, $height = null, $crop = false, $attr_string = "border='0'")
+    public static function thumb($dir, $file, $width = null, $height = null, $crop = false)
     {
         if (!$file)
         {
@@ -86,6 +86,6 @@ class ImageHelper
             $thumb_path = "/" . $thumb_path;
         }
 
-        return "<img src='{$thumb_path}' {$attr_string} />";
+        return $thumb_path;
     }
 }

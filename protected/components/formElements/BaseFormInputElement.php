@@ -11,6 +11,16 @@ abstract class BaseFormInputElement extends CFormInputElement
         //set default settings
         $this->attributes = CMap::mergeArray($this->defaultWidgetSettings, $this->attributes);
 
+        /*
+         * if we have more than 1 forms on page for single model,
+         * than at some input will be same id. we must set different id.
+         * but Yii generate non different id for error tag.
+         */
+        if (!isset($this->errorOptions['inputID']) && isset($this->attributes['id']))
+        {
+            $this->errorOptions['inputID'] = $this->attributes['id'];
+        }
+
         //replace sinonym on full alias
         if (isset($this->widgets[$this->type]))
         {

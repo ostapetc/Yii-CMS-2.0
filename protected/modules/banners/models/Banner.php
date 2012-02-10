@@ -2,7 +2,7 @@
 
 class Banner extends ActiveRecordModel
 {
-    const SIZE_WIDTH = 150;
+    const SIZE_WIDTH = 250;
 
     const IMAGES_DIR = '/upload/banners/';
 
@@ -13,16 +13,16 @@ class Banner extends ActiveRecordModel
     public $src;
 
 
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
 
 
-	public function tableName()
-	{
-		return 'banners';
-	}
+    public function tableName()
+    {
+        return 'banners';
+    }
 
 
     public function name()
@@ -31,25 +31,28 @@ class Banner extends ActiveRecordModel
     }
 
 
-	public function rules()
-	{
-		return array(
-			array('name', 'required'),
-			array('is_active, page_id', 'numerical', 'integerOnly' => true),
-			array('name', 'length', 'max' => 50),
-			array(
-                'image',
-                'file',
-                'types' => 'jpg, jpeg, png, gif',
+    public function rules()
+    {
+        return array(
+            array('name', 'required'), array(
+                'is_published, page_id', 'numerical',
+                'integerOnly' => true
+            ), array(
+                'name', 'length',
+                'max' => 50
+            ), array(
+                'image', 'file',
+                'types'      => 'jpg, jpeg, png, gif',
                 'allowEmpty' => true
+            ), array('date_start', 'validateDateInterInterVal'), array(
+                'url', 'length',
+                'max' => 500
+            ), array('date_start, date_end, date_active', 'safe'), array('roles', 'safe'), array(
+                'id, name, image, url, is_published, date_start, date_end', 'safe',
+                'on' => 'search'
             ),
-            array('date_start', 'validateDateInterInterVal'),
-			array('url', 'length', 'max' => 500),
-			array('date_start, date_end, date_active', 'safe'),
-            array('roles', 'safe'),
-			array('id, name, image, url, is_active, date_start, date_end', 'safe', 'on' => 'search'),
-		);
-	}
+        );
+    }
 
 
     public function validateDateInterInterVal($attr)
@@ -63,9 +66,7 @@ class Banner extends ActiveRecordModel
             }
 
             if ($this->$attr && $this->date_end)
-            {   //v($this->$attr);
-                //v($this->date_end);
-                //die;
+            {
                 $date_start = strtotime($this->$attr);
                 $date_end   = strtotime($this->date_end);
 
@@ -78,46 +79,48 @@ class Banner extends ActiveRecordModel
     }
 
 
-	public function relations()
-	{
-		return array(
-			'banners_roles' => array(self::HAS_MANY, 'BannerRole', 'banner_id'),
-            'roles' => array(self::HAS_MANY, 'AuthItem', 'role', 'through' => 'banners_roles'),
-            'page'  => array(self::BELONGS_TO, 'Page', 'page_id')
-		);
-	}
+    public function relations()
+    {
+        return array(
+            'banners_roles' => array(self::HAS_MANY, 'BannerRole', 'banner_id'),
+            'roles'         => array(
+                self::HAS_MANY, 'AuthItem', 'role',
+                'through' => 'banners_roles'
+            ),
+            'page'          => array(self::BELONGS_TO, 'Page', 'page_id')
+        );
+    }
 
 
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['sortable'] = array(
-            'class'=> 'ext.sortable.SortableBehavior'
-        );
-        $behaviors['MaxMinBehavior'] = array(
-            'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
-        );
-
-        return $behaviors;
+        return array_merge(parent::behaviors(), array(
+            'sortable'       => array(
+                'class'=> 'ext.sortable.SortableBehavior'
+            ),
+            'MaxMinBehavior' => array(
+                'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
+            )
+        ));
     }
 
 
-	public function search()
-	{
-		$criteria = new CDbCriteria;
-		$criteria->compare('id', $this->id, true);
-		$criteria->compare('name', $this->name, true);
-		$criteria->compare('image', $this->image, true);
-		$criteria->compare('url', $this->url, true);
-		$criteria->compare('is_active', $this->is_active);
-		$criteria->compare('date_start', $this->date_start, true);
-		$criteria->compare('date_end', $this->date_end, true);
-        $criteria->order = 'priority';
+    public function search()
+    {
+        $criteria = new CDbCriteria;
+        $criteria->compare('id', $this->id, true);
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('image', $this->image, true);
+        $criteria->compare('url', $this->url, true);
+        $criteria->compare('is_published', $this->is_published);
+        $criteria->compare('date_start', $this->date_start, true);
+        $criteria->compare('date_end', $this->date_end, true);
 
-		return new ActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria
-		));
-	}
+        return new ActiveDataProvider(get_class($this), array(
+            'criteria' => $criteria,
+            'sort'     => array('defaultOrder'=> 'order')
+        ));
+    }
 
 
     public function uploadFiles()
@@ -130,22 +133,21 @@ class Banner extends ActiveRecordModel
 
     public function render($return = false)
     {
-        $thumb = ImageHelper::thumb(
-            self::IMAGES_DIR,
-            $this->image,
-            self::SIZE_WIDTH,
-            null,
-            false,
-            'alt = "' . $this->name . '"'
-        );
+        $thumb = ImageHelper::thumb(self::IMAGES_DIR, $this->image, self::SIZE_WIDTH, null, false);
+
+        $img = CHtml::image($thumb, '', array(
+            'alt'         => '',
+            'title'       => $this->name,
+            'data-content'=> $this->content
+        ));
 
         if ($return)
         {
-            return $thumb;
+            return $img;
         }
         else
         {
-            echo $thumb;
+            echo $img;
         }
     }
 
@@ -160,9 +162,9 @@ class Banner extends ActiveRecordModel
             {
                 foreach ($this->roles as $role)
                 {
-                    $banner_role = new BannerRole;
+                    $banner_role            = new BannerRole;
                     $banner_role->banner_id = $this->id;
-                    $banner_role->role = $role;
+                    $banner_role->role      = $role;
                     $banner_role->save();
                 }
             }
@@ -174,7 +176,7 @@ class Banner extends ActiveRecordModel
 
     public function attributeLabels()
     {
-        $labels = parent::attributeLabels();
+        $labels          = parent::attributeLabels();
         $labels['roles'] = 'Отображается для ролей';
         return $labels;
     }
@@ -192,10 +194,4 @@ class Banner extends ActiveRecordModel
         }
     }
 
-
-
-    public function beforeSave()
-    {
-        return parent::beforeSave();
-    }
 }

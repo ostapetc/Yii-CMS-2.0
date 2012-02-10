@@ -99,6 +99,7 @@
             <div class="well sidebar-nav">
                 <?php $this->widget('SidebarMenu') ?>
             </div>
+            <?php $this->widget('SidebarBanners') ?>
         </div>
         <div class="span9">
             <?php echo $content ?>

@@ -22,6 +22,7 @@ class Bootstrap extends CApplicationComponent
 			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__).'/..'));
         Yii::import('bootstrap.widgets.*');
         $this->registerCss();
+        $this->registerResponsiveCss();
 	}
 
 	/**
