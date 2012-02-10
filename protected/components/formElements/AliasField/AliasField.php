@@ -46,7 +46,7 @@ class AliasField extends InputWidget
             'class'   => 'text',
             'disabled'=> 'disabled'
         ));
-        echo CHtml::link(CHtml::image('/images/admin/editable.gif', '', array('height'=> 16)), '#', array('class'=> 'change_alias'));
+        echo CHtml::link('','#', array('class'=> 'icon-pencil change_alias'));
         echo CHtml::link('Сохранить', '#', array('class'=> 'save_alias'));
         echo '<div class="alias_preloader" ></div>';
     }

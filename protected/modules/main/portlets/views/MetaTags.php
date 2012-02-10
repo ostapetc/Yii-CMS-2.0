@@ -1,5 +1,8 @@
+<style type="text/css">
+    .save_alias, .meta-tags-form{display: none}
+</style>
 <?php $class = get_class($this->model); ?>
-<div id="<?php echo $this->id ?>" style="display: none">
+<div id="<?php echo $this->id ?>" class="meta-tags-form">
 
 
     <p>
