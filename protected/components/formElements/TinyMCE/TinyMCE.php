@@ -24,7 +24,7 @@ class TinyMCE extends   InputWidget
 			'theme_advanced_resizing' => 'true',
             'file_browser_callback' => "tinyBrowser",
 
-		'width'=>'100%',
+		'width'=>'99%',
         'height'=>'350',
     );
 
