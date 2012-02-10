@@ -1,6 +1,6 @@
 <?php
 Yii::import("zii.widgets.grid.CGridView");
-class AdminGridView extends CGridView
+class AdminGridView extends BootGridView
 {
     public $cssFile = null;
 
