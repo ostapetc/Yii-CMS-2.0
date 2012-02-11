@@ -410,7 +410,7 @@ code{
                     $tmp = array(
                         'label'       => $doc->title,
                         'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
-                        'active'      => false,
+                        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
 
                     );
                     if ($doc->depth > 2)
