@@ -67,10 +67,14 @@ class ImageHelper
         $width  = isset($size['width']) && is_numeric($size['width']) ? $size['width'] : 0;
         $height = isset($size['height']) && is_numeric($size['height']) ? $size['height'] : 0;
 
-        //normalize deir
-        $dir = $_SERVER['DOCUMENT_ROOT'] . ltrim($dir, $_SERVER["DOCUMENT_ROOT"]);
-        $dir = rtrim($dir, '/') . '/';
+        //normalize dir
+        $doc_root = $_SERVER['DOCUMENT_ROOT'];
+        if (substr($dir, 0, strlen($doc_root) !== $doc_root))
+        {
+            $dir = $doc_root . $dir;
+        }
 
+        $dir = rtrim($dir, '/') . '/';
         $path_info = pathinfo($file);
 
         $thumb_name = $width . "x" . $height;
@@ -126,7 +130,7 @@ class ImageHelper
             @chmod($thumb_path, 0777);
         }
 
-        $thumb_path = ltrim($thumb_path, $_SERVER["DOCUMENT_ROOT"]);
+        $thumb_path = str_replace($_SERVER["DOCUMENT_ROOT"], "", $thumb_path);
         $thumb_path = '/' . ltrim($thumb_path, '/');
 
         return $thumb_path;

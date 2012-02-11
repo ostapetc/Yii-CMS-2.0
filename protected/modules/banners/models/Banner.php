@@ -141,7 +141,6 @@ class Banner extends ActiveRecordModel
             'title'       => $this->name,
             'data-content'=> $this->content
         ));
-
         if ($return)
         {
             return $thumb;
