@@ -1,29 +1,19 @@
-<?php echo '<?php'; ?>
-
-class <?php echo $this->_migrateName; ?> extends CDbMigration
+<?php
+class m120211_110937_menu_links extends CDbMigration
 {
 	public function up()
 	{
-    $a = <<<HEAD
-    <?php echo strtr($this->code, array('$' => '\$', "'"=>"\'")); ?>
-
-HEAD;
-		$this->execute($a);
+		$this->execute("DELETE FROM menu_links WHERE id IN (4, 6, 10, 13, 12);");
 		
-<?php if($this->clearCache):?>
 		if(Yii::app()->hasComponent('cache'))
 		{
 			Yii::app()->getComponent('cache')->flush();
 			echo "Cache flused\n";
 		}
-<?php endif;?>
 		
-<?php if($this->clearAssets): ?>
 		$this->clearAssets();
-<?php endif; ?>
 	}
 	
-<?php if($this->clearAssets): ?>
 	private function clearAssets()
 	{
 		$path = Yii::app()->getComponent('assetManager')->getBasePath();
@@ -52,11 +42,10 @@ HEAD;
 		else
 			unlink($folder);
 	}
-<?php endif; ?>
 
 	public function down()
 	{
-		echo "<?php echo $this->_migrateName; ?> does not support migration down.\n";
+		echo "m120211_110937_menu_links does not support migration down.\n";
 		return false;
 		
 		$this->execute("");

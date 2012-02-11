@@ -1,29 +1,29 @@
-<?php echo '<?php'; ?>
-
-class <?php echo $this->_migrateName; ?> extends CDbMigration
+<?php
+class m120211_105306_captcha extends CDbMigration
 {
 	public function up()
 	{
-    $a = <<<HEAD
-    <?php echo strtr($this->code, array('$' => '\$', "'"=>"\'")); ?>
-
-HEAD;
-		$this->execute($a);
+		$this->execute("INSERT INTO  `yii_base`.`auth_items` (
+`name` ,
+`type` ,
+`description` ,
+`bizrule` ,
+`data` ,
+`allow_for_all`
+)
+VALUES (
+'Help_Captcha',  '0', NULL , NULL , NULL ,  '1'
+);");
 		
-<?php if($this->clearCache):?>
 		if(Yii::app()->hasComponent('cache'))
 		{
 			Yii::app()->getComponent('cache')->flush();
 			echo "Cache flused\n";
 		}
-<?php endif;?>
 		
-<?php if($this->clearAssets): ?>
 		$this->clearAssets();
-<?php endif; ?>
 	}
 	
-<?php if($this->clearAssets): ?>
 	private function clearAssets()
 	{
 		$path = Yii::app()->getComponent('assetManager')->getBasePath();
@@ -52,11 +52,10 @@ HEAD;
 		else
 			unlink($folder);
 	}
-<?php endif; ?>
 
 	public function down()
 	{
-		echo "<?php echo $this->_migrateName; ?> does not support migration down.\n";
+		echo "m120211_105306_captcha does not support migration down.\n";
 		return false;
 		
 		$this->execute("");
