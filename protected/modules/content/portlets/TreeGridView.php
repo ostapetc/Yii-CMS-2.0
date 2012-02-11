@@ -1,5 +1,5 @@
 <?php
-class TreeGridView extends AdminGrid
+class TreeGridView extends AdminGridView
 {
     public $baseTreeTableUrl;
 
@@ -77,8 +77,8 @@ class TreeGridView extends AdminGrid
     public function behaviors()
     {
         return array(
-            'Widget' => array(
-                'class' => 'application.components.behaviors.ComponentBehavior'
+            'ComponentInModule' => array(
+                'class' => 'application.components.behaviors.ComponentInModuleBehavior'
             )
         );
     }

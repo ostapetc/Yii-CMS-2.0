@@ -1,18 +1,15 @@
 <?php
 $elements = array(
+    'content'               => array('type'=>'markdown'),
     'title'                 => array('type' => 'text'),
     'alias'                 => array(
         'type'   => 'alias',
         'source' => 'title',
         'hint'   => 'Этот параметр будет использован для построения красивого URL. Он генерируется на основании названия, однако до сохранения его можно изменить. После сохранения изменить значение этого поля будет невозможно.'
     ),
-    'content'               => 'markdown',
     'is_published'          => array('type' => 'checkbox'),
 );
-if ($this->model->is_system)
-{
-    unset($elements['alias']);
-}
+
 return array(
     'activeForm' => array(
         'id'                     => 'category-form',

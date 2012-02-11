@@ -17,9 +17,9 @@ class DocumentationAdminController extends AdminController
     {
         $parent = $this->loadModel($parent_id);
 
-        $model = new Category;
+        $model = new Documentation;
 
-        $form = new BaseForm('products.CategoryForm', $model);
+        $form = new BaseForm('docs.DocumentationForm', $model);
         $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->appendTo($parent) && $model->save())
@@ -34,7 +34,7 @@ class DocumentationAdminController extends AdminController
     public function actionUpdate($id)
     {
         $model = $this->loadModel($id);
-        $form  = new BaseForm('products.CategoryForm', $model);
+        $form  = new BaseForm('docs.DocumentationForm', $model);
         $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
@@ -48,7 +48,7 @@ class DocumentationAdminController extends AdminController
 
     public function actionManage()
     {
-        $model = new Category();
+        $model = new Documentation();
 
         $this->render('manage', array('model' => $model));
     }

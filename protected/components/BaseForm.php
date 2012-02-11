@@ -73,6 +73,7 @@ class BaseForm extends CForm
 
     public function __toString()
     {
+
         $cs = Yii::app()->clientScript;
 
         if ($this->side == 'client') //only bootstrap

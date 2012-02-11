@@ -30,7 +30,7 @@ class Documentation extends ActiveRecordModel
 
     public function name()
     {
-        return 'Модель DocumentationCategory';
+        return 'Модель Documentation';
     }
 
 
@@ -43,7 +43,7 @@ class Documentation extends ActiveRecordModel
             ), array(
                 'title', 'required'
             ), array(
-                'is_published', 'safe'
+                'is_published, content', 'safe'
             ), array(
                 'title, alias', 'unique'
             ), array(
@@ -51,8 +51,6 @@ class Documentation extends ActiveRecordModel
             ), array(
                 'title', 'safe',
                 'on' => 'search'
-            ), array(
-                'docs', 'safe'
             ),
         );
     }
@@ -61,13 +59,6 @@ class Documentation extends ActiveRecordModel
     public function relations()
     {
         return array(
-            'docs'         => array(
-                self::HAS_MANY, 'Documentations', 'cat_id',
-                'order' => 'order DESC'
-            ),
-            'docs_count'   => array(
-                self::STAT, 'Documentation', 'cat_id',
-            ),
         );
     }
 
