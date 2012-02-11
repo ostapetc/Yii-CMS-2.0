@@ -18,13 +18,13 @@
 
         <div class="tab-content">
             <div class="tab-pane fade active in" id="login-tab">
-                <?php echo $login ?>
+                <?php echo $login_form ?>
             </div>
             <div class="tab-pane fade" id="register-tab">
-                <?php echo $register ?>
+                <?php echo $register_form ?>
             </div>
             <div class="tab-pane fade" id="forgot-tab">
-                <?php echo $forgot ?>
+                <?php echo $forgot_form ?>
             </div>
         </div>
     </div>

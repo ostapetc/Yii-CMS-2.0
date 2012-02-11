@@ -251,7 +251,7 @@ class User extends ActiveRecordModel
             'role'       => array(
                 self::HAS_ONE,
                 'AuthItem',
-                array('name'=>'itemname'),
+                array('itemname'=>'name'),
                 'through' => 'assignment'
             )
         );
