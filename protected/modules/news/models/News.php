@@ -6,9 +6,6 @@ class News extends ActiveRecordModel
 
     const PHOTOS_DIR = 'upload/news';
 
-    const STATE_ACTIVE = 'active';
-    const STATE_HIDDEN = 'hidden';
-
     public static $photo_small_size = array(
         'width'  => 230,
         'height' => 200
@@ -18,12 +15,6 @@ class News extends ActiveRecordModel
         'width'  => 580,
         'height' => null
     );
-
-    public static $states = array(
-        self::STATE_ACTIVE => 'Активна',
-        self::STATE_HIDDEN => 'Скрыта'
-    );
-
 
     public function name()
     {
