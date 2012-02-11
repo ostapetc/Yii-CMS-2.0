@@ -23,27 +23,27 @@ class MainModule extends WebModule
     }
 
 
-	public function init()
-	{
-		$this->setImport(array(
-        	'main.models.*',
-            'main.components.*',
-		));
-	}
+    public function init()
+    {
+        $this->setImport(array(
+            'main.models.*', 'main.components.*',
+        ));
+    }
 
-	public static function adminMenu()
-	{
+
+    public static function adminMenu()
+    {
         return array(
             'Мета-теги'         => '/main/MetaTagAdmin/manage',
             'Добавить мета-тег' => '/main/MetaTagAdmin/create',
-			'Логирование'       => '/main/logAdmin/manage',
-			'Действия сайта'    => '/main/SiteActionAdmin/manage',
-			'Обратная связь'    => '/main/feedbackAdmin/manage',
-			'Языки'             => '/main/LanguageAdmin/manage',
-			'Добавить язык'     => '/main/LanguageAdmin/create',
+            'Логирование'       => '/main/logAdmin/manage',
+            'Действия сайта'    => '/main/SiteActionAdmin/manage',
+            'Обратная связь'    => '/main/feedbackAdmin/manage',
+            'Языки'             => '/main/LanguageAdmin/manage',
+            'Добавить язык'     => '/main/LanguageAdmin/create',
             'Настройки'         => '/main/SettingAdmin/manage',
-		);
-	}
+        );
+    }
 
 
     public static function saveSiteAction()
@@ -59,7 +59,7 @@ class MainModule extends WebModule
 
         $title = $action_titles[ucfirst($action->id)];
 
-        $site_action = new SiteAction();
+        $site_action             = new SiteAction();
         $site_action->title      = $title;
         $site_action->module     = $action->controller->module->id;
         $site_action->controller = $action->controller->id;
@@ -77,8 +77,11 @@ class MainModule extends WebModule
     public static function routes()
     {
         return array(
-            '/admin'  => 'main/mainAdmin',
-            '/search' => 'main/main/search',
+            '/admin'     => 'main/mainAdmin',
+            '/search'    => 'main/main/search',
+            'sitemap'    => 'main/help/sitemap',
+            'sitemap.xml'=> 'main/help/sitemapxml'
+
         );
     }
 }

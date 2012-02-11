@@ -1,29 +1,22 @@
-<?php echo '<?php'; ?>
-
-class <?php echo $this->_migrateName; ?> extends CDbMigration
+<?php
+class m120211_165455_sitempa extends CDbMigration
 {
 	public function up()
 	{
     $a = <<<HEAD
-    <?php echo strtr($this->code, array('$' => '\$')); ?>
-
+    INSERT INTO `yii_base`.`auth_items` (`name`, `type`, `description`, `bizrule`, `data`, `allow_for_all`) VALUES ('Help_Sitemap', '0', NULL, NULL, NULL, '1'), ('Help_Sitemapxml', '0', NULL, NULL, NULL, '1');
 HEAD;
 		$this->execute($a);
 		
-<?php if($this->clearCache):?>
 		if(Yii::app()->hasComponent('cache'))
 		{
 			Yii::app()->getComponent('cache')->flush();
 			echo "Cache flused\n";
 		}
-<?php endif;?>
 		
-<?php if($this->clearAssets): ?>
 		$this->clearAssets();
-<?php endif; ?>
 	}
 	
-<?php if($this->clearAssets): ?>
 	private function clearAssets()
 	{
 		$path = Yii::app()->getComponent('assetManager')->getBasePath();
@@ -52,11 +45,10 @@ HEAD;
 		else
 			unlink($folder);
 	}
-<?php endif; ?>
 
 	public function down()
 	{
-		echo "<?php echo $this->_migrateName; ?> does not support migration down.\n";
+		echo "m120211_165455_sitempa does not support migration down.\n";
 		return false;
 		
 		$this->execute("");

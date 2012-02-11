@@ -9,13 +9,13 @@ class News extends ActiveRecordModel
     const STATE_ACTIVE = 'active';
     const STATE_HIDDEN = 'hidden';
 
-    public static $photo_small_size =array(
-        'width'=> 230,
+    public static $photo_small_size = array(
+        'width'  => 230,
         'height' => 200
     );
 
-    public static $photo_big_size =array(
-        'width'=> 580,
+    public static $photo_big_size = array(
+        'width'  => 580,
         'height' => null
     );
 
@@ -59,60 +59,46 @@ class News extends ActiveRecordModel
 
     public function scopes()
     {
-        return array(
+        return CMap::mergeArray(parent::scopes(), array(
             'last'   => array('order' => 'date DESC'),
-            'active' => array('condition' => "state = '" . self::STATE_ACTIVE . "'")
-        );
+        ));
     }
 
-public $roles;
+
+    public $roles;
+
+
     public function rules()
     {
         return array(
             array(
-                'user_id, title, text, state, lang',
-                'required'
-            ),
-            array(
-                'photo',
-                'file',
+                'user_id, title, text, state, lang', 'required'
+            ), array(
+                'photo', 'file',
                 'types'      => 'jpg, jpeg, gif, png, tif',
                 'allowEmpty' => true,
                 'maxSize'    => 1024 * 1024 * 2.5,
                 'tooLarge'   => 'Максимальный размер файла 2.5 Мб'
-            ),
-            array(
-                'meta_tags, roles',
-                'safe',
+            ), array(
+                'meta_tags, roles', 'safe',
                 'on' => array(
-                    self::SCENARIO_CREATE,
-                    self::SCENARIO_UPDATE
+                    self::SCENARIO_CREATE, self::SCENARIO_UPDATE
                 )
-            ),
-            array(
-                'user_id',
-                'length',
+            ), array(
+                'user_id', 'length',
                 'max' => 11
-            ),
-            array(
-                'date',
-                'type',
+            ), array(
+                'date', 'type',
                 'type'       => 'date',
                 'dateFormat' => 'dd.mm.yyyy'
-            ),
-            array(
-                'title',
-                'length',
+            ), array(
+                'title', 'length',
                 'max' => 250
-            ),
-            array(
-                'state',
-                'length',
+            ), array(
+                'state', 'length',
                 'max' => 6
-            ),
-            array(
-                'id, user_id, title, text, photo, state, date, date_create',
-                'safe',
+            ), array(
+                'id, user_id, title, text, photo, state, date, date_create', 'safe',
                 'on' => 'search'
             ),
         );
@@ -123,19 +109,13 @@ public $roles;
     {
         return array(
             'user'     => array(
-                self::BELONGS_TO,
-                'User',
-                'user_id'
+                self::BELONGS_TO, 'User', 'user_id'
             ),
             'language' => array(
-                self::BELONGS_TO,
-                'Language',
-                'lang'
+                self::BELONGS_TO, 'Language', 'lang'
             ),
             'files'    => array(
-                self::HAS_MANY,
-                'FileManager',
-                'object_id',
+                self::HAS_MANY, 'FileManager', 'object_id',
                 'condition' => 'files.model_id = "' . get_class($this) . '" AND files.tag="images"',
                 'order'     => 'files.order DESC'
             )
@@ -189,7 +169,8 @@ public $roles;
     {
         if (RbacModule::isAllow('NewsAdmin_Update'))
         {
-            $this->text .= "<br/>".CHtml::link('Редактировать',$this->updateHref, array('class'=>'admin_link'));
+            $this->text .=
+                "<br/>" . CHtml::link('Редактировать', $this->updateHref, array('class'=> 'admin_link'));
         }
 
         return $this->text;
@@ -215,12 +196,12 @@ public $roles;
 
     public function getHref()
     {
-        return Yii::app()->controller->createUrl("/news/news/view", array('id'=>$this->id));
+        return Yii::app()->controller->createUrl("/news/news/view", array('id'=> $this->id));
     }
 
 
     public function getUpdateHref()
     {
-        return Yii::app()->controller->createUrl("/news/newsAdmin/update", array('id'=>$this->id));
+        return Yii::app()->controller->createUrl("/news/newsAdmin/update", array('id'=> $this->id));
     }
 }

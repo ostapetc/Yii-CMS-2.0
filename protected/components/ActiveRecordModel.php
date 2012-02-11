@@ -127,8 +127,9 @@ abstract class ActiveRecordModel extends CActiveRecord
         $alias = $this->getTableAlias();
         return array(
             'published' => array('condition' => $alias . '.is_published = 1'),
+            'sitemap'   => array('condition' => $alias . '.is_published = 1'),
             'ordered'   => array('order' => $alias . '.`order` DESC'),
-            'last'      => array('order' => $alias . '.date_create DESC')
+            'last'      => array('order' => $alias . '.date_create DESC'),
         );
     }
 
