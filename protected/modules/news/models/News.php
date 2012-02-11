@@ -9,9 +9,15 @@ class News extends ActiveRecordModel
     const STATE_ACTIVE = 'active';
     const STATE_HIDDEN = 'hidden';
 
-    const PHOTO_SMALL_WIDTH  = "230";
-    const PHOTO_SMALL_HEIGHT = "200";
-    const PHOTO_BIG_WIDTH    = "580";
+    public static $photo_small_size =array(
+        'width'=> 230,
+        'height' => 200
+    );
+
+    public static $photo_big_size =array(
+        'width'=> 580,
+        'height' => null
+    );
 
     public static $states = array(
         self::STATE_ACTIVE => 'Активна',

@@ -9,7 +9,7 @@ $this->widget('Crumbs', array(
 
 if ($model->photo)
 {
-    echo ImageHelper::thumb(News::PHOTOS_DIR, $model->photo, News::PHOTO_BIG_WIDTH, null, false);
+    echo ImageHelper::thumb(News::PHOTOS_DIR, $model->photo, News::$photo_big_size, false);
 }
 
 echo $model->content;

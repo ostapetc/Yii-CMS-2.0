@@ -14,14 +14,14 @@ foreach ($news_list as $news)
     <?php
     if ($news->photo)
     {
-        $thumb = ImageHelper::thumb(News::PHOTOS_DIR, $news->photo, News::PHOTO_SMALL_WIDTH, News::PHOTO_SMALL_HEIGHT, true);
+        $thumb = ImageHelper::thumb(News::PHOTOS_DIR, $news->photo, News::$photo_small_size, true);
         echo  CHtml::link($thumb, $news->href);
     }
     ?>
 
     <p><?php echo Yii::app()->text->cut($news->text, 200, "."); ?></p>
 
-    <p><?php echo CHtml::link('View details &raquo;', $news->href, array('class'=> 'btn')) ?></p>
+    <p><?php echo CHtml::link(t('View details') . '&raquo;', $news->href, array('class'=> 'btn')) ?></p>
 </div>
 
 
