@@ -11,6 +11,7 @@ class ImageHolder //Класс Image занять под расширение
     private $_size;
     private $_crop;
 
+
     public function __construct($dir, $file, $size, $crop = false)
     {
         $this->_dir  = $dir;
@@ -55,6 +56,7 @@ class ImageHelper
         return new ImageHolder($dir, $file, $size, $crop);
     }
 
+
     public static function process($dir, $file, $size, $crop = false)
     {
         if (!$file)
@@ -65,16 +67,8 @@ class ImageHelper
         $width  = isset($size['width']) && is_numeric($size['width']) ? $size['width'] : 0;
         $height = isset($size['height']) && is_numeric($size['height']) ? $size['height'] : 0;
 
-        $doc_root = $_SERVER['DOCUMENT_ROOT'];
-        if (substr($dir, 0, strlen($doc_root)) != $doc_root)
-        {
-            $dir = $doc_root . $dir;
-        }
-
-        if (substr($dir, -1) != '/')
-        {
-            $dir .= '/';
-        }
+        $dir = $_SERVER['DOCUMENT_ROOT'] . ltrim($dir, $_SERVER["DOCUMENT_ROOT"]);
+        $dir = rtrim($dir, '/') . '/';
 
         $path_info = pathinfo($file);
 
@@ -131,12 +125,8 @@ class ImageHelper
             @chmod($thumb_path, 0777);
         }
 
-        $thumb_path = str_replace($_SERVER["DOCUMENT_ROOT"], "", $thumb_path);
-
-        if (substr($thumb_path, 0, 1) != "/")
-        {
-            $thumb_path = "/" . $thumb_path;
-        }
+        $thumb_path = ltrim($thumb_path, $_SERVER["DOCUMENT_ROOT"]);
+        $thumb_path = '/' . ltrim($thumb_path, '/');
 
         return $thumb_path;
     }

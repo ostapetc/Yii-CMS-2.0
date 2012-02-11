@@ -9,8 +9,8 @@ return array(
     'elements' => array(
         'title'        => array('type' => 'text'),
         'url'          => array('type' => 'alias', 'source'=>'title'),
-        'text'         => array('type' => 'editor'),
         'is_published' => array('type' => 'checkbox'),
+        'text'         => array('type' => 'editor'),
         'meta_tags'    => array('type' => 'meta_tags')
     ),
     'buttons' => array(
