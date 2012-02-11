@@ -58,7 +58,7 @@ class AdminFormInputElement extends BaseFormInputElement
                 return array(
                     'class'=> 'dropdownlist text'
                 );
-            case 'settings':
+            case 'markdown':
                 return array(
                     'settings' => 'markdown'
                 );
