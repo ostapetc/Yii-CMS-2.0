@@ -12,7 +12,7 @@ class ImageHolder //Класс Image занять под расширение
     private $_crop;
 
 
-    public function __construct($dir, $file, $size, $crop = false)
+    public function __construct($dir, $file, array $size, $crop = false)
     {
         $this->_dir  = $dir;
         $this->_file = $file;
@@ -51,13 +51,13 @@ class ImageHolder //Класс Image занять под расширение
 class ImageHelper
 {
 
-    public static function thumb($dir, $file, $size, $crop = false)
+    public static function thumb($dir, $file, array $size, $crop = false)
     {
         return new ImageHolder($dir, $file, $size, $crop);
     }
 
 
-    public static function process($dir, $file, $size, $crop = false)
+    public static function process($dir, $file, array $size, $crop = false)
     {
         if (!$file)
         {
@@ -67,6 +67,7 @@ class ImageHelper
         $width  = isset($size['width']) && is_numeric($size['width']) ? $size['width'] : 0;
         $height = isset($size['height']) && is_numeric($size['height']) ? $size['height'] : 0;
 
+        //normalize deir
         $dir = $_SERVER['DOCUMENT_ROOT'] . ltrim($dir, $_SERVER["DOCUMENT_ROOT"]);
         $dir = rtrim($dir, '/') . '/';
 
