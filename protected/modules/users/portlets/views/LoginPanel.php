@@ -1,3 +1,8 @@
+<li>
+    <?php
+    echo CHtml::link('Login', '#login', array('data-toggle'=> "modal"));
+    ?>
+</li>
 <div class="modal hide fade" id="login">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>

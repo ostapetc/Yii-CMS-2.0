@@ -81,11 +81,7 @@
                 <p class="navbar-text pull-right divider-vertical"></p>
 
                 <ul class="nav pull-right">
-                    <li>
-                        <a data-toggle="modal" href="#login">
-                            <?php $this->widget('users.portlets.LoginPanel') ?>
-                        </a>
-                    </li>
+                    <?php $this->widget('users.portlets.LoginPanel') ?>
                 </ul>
             </div>
             <!--/.nav-collapse -->
