@@ -5,7 +5,7 @@
  *
  * @property products
  */
-class DocumentationCategory extends ActiveRecordModel
+class Documentation extends ActiveRecordModel
 {
     const PAGE_SIZE = 10;
 
@@ -169,7 +169,7 @@ class DocumentationCategory extends ActiveRecordModel
     /**** URL's and LINK's *****/
     public function getHref()
     {
-        return Yii::app()->controller->createUrl('/products/category/view', array('id'=> $this->id));
+        return Yii::app()->controller->createUrl('/docs/documentation/index', array('alias'=> $this->alias));
     }
 
 

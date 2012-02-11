@@ -128,8 +128,7 @@ class BaseForm extends CForm
         Yii::app()->clientScript
             ->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
             ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
-            ->registerCssFile('/js/plugins/clientForm/form.css')->registerScript(
-            $id . '_baseForm', "$('#{$id}').clientForm();");
+            ->registerCssFile('/js/plugins/clientForm/form.css');
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-class MarkController extends CController
+class DocumentationController extends CController
 {
     public $layout = '/layouts/mark';
 
@@ -12,16 +12,15 @@ class MarkController extends CController
         );
     }
 
-    public function actionIndex($view, $folder = '')
+    public function actionIndex($alias, $folder = '')
     {
         $md = new CMarkdown;
         if ($folder)
         {
-            $view = $folder.'/'.$view;
+            $view = $folder.'/'.$alias;
         }
-
-        $str = $this->renderPartial($view, array(), true);
-        $str = $md->transform($str);
+        $model = Documentation::model()->findByAttributes(array('alias'=>$alias));
+        $str = $md->transform($model->content);
 
         $this->render('tmpl',array('content'=>
             $this->compileDocSyntax($str)

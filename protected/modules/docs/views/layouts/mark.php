@@ -11,24 +11,23 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 
 <!--стили навигаторов-->
-<link rel="stylesheet" type="text/css" href="/css/site/alphapager.css"/>
-<link rel="stylesheet" type="text/css" href="/css/site/pager.css"/>
 
 <!--стили форм-->
 <!--<link rel="stylesheet" type="text/css" href="/css/site/form.css"/>-->
 
 <!--стили виджетов-->
-<link rel="stylesheet" type="text/css" href="/css/site/gridview/styles.css"/>
-<link rel="stylesheet" type="text/css" href="/css/site/detailview/styles.css"/>
-<link rel="stylesheet" type="text/css" href="/css/site/listview/styles.css"/>
 
 <?php Yii::app()->clientScript->registerCoreScript('jquery') ?>
 
 <style type="text/css">
-    /*
-    yiiext CSS
-    Alexander Makarov, sam@rmcreative.ru
-    */
+body{
+    padding-top:    60px;
+    padding-bottom: 40px;
+}
+.sidebar-nav{
+    padding: 9px 0;
+}
+
 body{
     font:       normal 10pt Arial, Helvetica, sans-serif;
     background: #fff;
@@ -172,19 +171,18 @@ div.image > p{
 
 #content li{
     line-height: 160%;
-    text-align: left;
+    text-align:  left;
 }
 
 #content ul li ul{
     list-style-type: none;
     margin:          0 0 0 20px;
-
 }
 
 #content ul, #content ol{
-    margin: 0 0 1em 2em;
+    margin:  0 0 1em 2em;
     padding: 0;
-   }
+}
 
 #content ul p, #content ol p{
     display: inline;
@@ -216,11 +214,16 @@ pre{
 }
 
 code{
-    border-bottom: 1px dotted #ccc;
-    color:         #555;
-    font-size:     10pt;
-    font-family:   Consolas, "Courier New", Courier, monospace;
-    line-height:   130%;
+    padding:               0;
+    border-radius:         0;
+    -webkit-border-radius: 0;
+    background:            none;
+    border:                none;
+    border-bottom:         1px dotted #ccc;
+    color:                 #555;
+    font-size:             10pt;
+    font-family:           Consolas, "Courier New", Courier, monospace;
+    line-height:           130%;
 }
 
     /* --- code highlighting --- */
@@ -371,114 +374,67 @@ code{
         });
     });
 </script>
-<div>
-    <?php
-    $introduction = array(
-        'О главном'                  => '',
-        'Требования к серверу'       => '',
-        'Лог изменений'              => '',
-        'Разработчики'               => '',
-    );
-    $conventions  = array(
-        'Стандарты именования и кодирования'=> '/conventions/naming',
-        'Структура директорий'              => '/conventions/directoryStructure',
-        'Написание основных компонентов'    => '/conventions/mvc',
-        'Совместная работа над проектом'    => '/conventions/cooperation',
-    );
-    $main_themes  = array(
-        'Установка'         => '',
-        'ActiveRecordModel' => '/mainThemes/activeRecordModel',
-        'BaseController'    => '',
-        'AdminController'   => '',
-        'DbLogRoute'        => '',
-        'GridView'          => '/mainThemes/gridView',
-    );
-    $modules      = array(
-        'main'                           => '/main',
-        'content - Контент'              => '/content',
-        'products - Каталог продуктов'   => '/products',
-        'orders - Заказы'                => '/orders',
-        'fileManager - Файловый менеджер'=> '/fileManager',
-        'rbac'                           => '/rbac',
-        'faq'                            => '',
-        'glossary'                       => '/glossary',
-        'users'                          => '',
-        'geo'                            => '',
-        'mailer - Отправка почты'        => '',
-    );
-    ksort($modules);
-    $helpers = array(
-        'ImageHelper'      => '',
-        'ArrayHelper'      => '',
-        'FileSystem'       => '',
-        'PasswordGenerator'=> '',
-        'StringHelper'     => '',
-    );
-    ksort($helpers);
-    $behaviors = array(
-        'componentInModule' => '/behaviors/componentInModule',
-        'metaTags'          => '/behaviors/metaTags',
-    );
-    ksort($behaviors);
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
 
-    $app_components = array(
-        'dater'      => '/applicationComponents/dater',
-        'text'       => '/applicationComponents/text',
-        'appManager' => '',
-    );
-    ksort($app_components);
-    $special = array(
-        'Виджеты для форм' => '/special/formWidgets',
-    );
-    ksort($special);
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/">Yii-CMS 2.0</a>
 
-    function show_menu($name, $data)
-    {
-        echo CHtml::tag('h3', array(), $name);
-        echo '<ul>';
-        foreach ($data as $key => $val)
-        {
-            echo '<li>';
-            $data = $val == '' ? array('class' => 'no-complete') : array();
-            echo CHtml::link($key, '/index.php' . $val, $data);
-            echo '</li>';
-        }
-        echo '</ul>';
-    }
-    ?>
-
-    <div id="header">
-        <table style="width: 98%;" border="0" cellpadding="0" cellspacing="0">
-            <tbody>
-            <tr>
-                <td>
-                    <?php show_menu('Введение', $introduction) ?>
-                    <?php show_menu('Соглашения', $conventions) ?>
-                </td>
-                <td class="sep">
-                    <?php show_menu('Общие темы', $main_themes) ?>
-                    <?php show_menu('Поведения', $behaviors) ?>
-                    <?php show_menu('Компоненты приложения', $app_components) ?>
-                </td>
-                <td class="sep">
-                    <?php show_menu('Модули', $modules) ?>
-                </td>
-                <td class="sep">
-                    <?php show_menu('Вспомогательные классы', $helpers) ?>
-                    <?php show_menu('Специальные темы', $special) ?>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div id="toogle-menu">
-        <a href="#">
-            <img src="/images/nav_toggle.jpg" width="153" height="44" border="0" title="Содержание" alt="Содержание">
-        </a>
-    </div>
-    <div id="content">
-        <?php echo $content ?>
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
     </div>
 </div>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <?php
+                $items = array();
+                foreach (Documentation::model()->orderByLft()->findAll() as $doc)
+                {
+                    if ($doc->depth == 1)
+                    {
+                        continue;
+                    }
+                    $tmp = array(
+                        'label'       => $doc->title,
+                        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
+                        'active'      => false,
+
+                    );
+                    if ($doc->depth > 2)
+                    {
+                        $tmp['url'] = $doc->href;
+                    }
+                    $items[] = $tmp;
+                }
+                $this->widget('ClientMenu', array(
+                    'items'       => $items,
+                    'htmlOptions' => array(
+                        'class'=> 'nav nav-list',
+                        'id'   => 'sidebar-docs-menu'
+                    )
+                )) ?>
+            </div>
+        </div>
+        <div class="span9">
+            <?php echo $content ?>
+        </div>
+    </div>
+    <hr>
+</div>
+
+
 </body>
 </html>

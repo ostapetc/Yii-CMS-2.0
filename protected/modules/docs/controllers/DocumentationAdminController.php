@@ -1,5 +1,5 @@
 <?php
-class DocumentationCategoryAdminController extends AdminController
+class DocumentationAdminController extends AdminController
 {
     public static function actionsTitles()
     {
