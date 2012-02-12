@@ -6,3 +6,9 @@
     padding-left: 2px;
     padding-right: 2px;
 }
+
+.grid-view input[type=text], .grid-view select {
+    font-size: 11px !important;
+    padding: 2px !important;
+}
+
