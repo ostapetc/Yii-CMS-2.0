@@ -38,7 +38,7 @@ class AdminGridView extends BootGridView
 
         if($this->baseScriptUrl===null)
         {
-            $this->baseScriptUrl=Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.zii.assets')).'/adminGrid';
+            $this->baseScriptUrl=Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.zii.assets'), false, -1, true).'/adminGrid';
         }
 
         if($this->cssFile!==false)

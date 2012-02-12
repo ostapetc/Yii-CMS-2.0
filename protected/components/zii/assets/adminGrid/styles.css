@@ -6,3 +6,23 @@
     padding-left: 2px;
     padding-right: 2px;
 }
+
+.grid-view input[type=text], .grid-view select {
+    font-size: 11px !important;
+    padding: 2px !important;
+    display: block !important;
+    width: 96% !important;
+    margin-bottom: 0 !important;
+}
+
+.grid-view th a {
+    font-weight: bold;
+    color: #333333;
+    text-decoration: underline;
+}
+
+.grid-view .button-column {
+    width: 1px !important;
+    white-space: nowrap !important;
+}
+
