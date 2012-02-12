@@ -6,7 +6,6 @@ define('LIBRARY_PATH', PROTECTED_PATH . 'libs' . DIRECTORY_SEPARATOR);
 defined('YII_DEBUG')       || define('YII_DEBUG',true);
 defined('YII_TRACE_LEVEL') || define('YII_TRACE_LEVEL',3);
 
-
 $config = 'development';
 //$config = 'production';
 

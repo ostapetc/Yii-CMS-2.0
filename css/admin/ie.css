@@ -10,7 +10,7 @@
     color: #ccc;
     padding-left: 2%;
     padding-top: 5px;
-    background: #fff url(/images/admin/icn_search.png) no-repeat;
+    background: #fff url(/img/admin/icn_search.png) no-repeat;
     background-position: 10px 6px;
 }
 
@@ -25,7 +25,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover {
 }
 
 input[type=submit].btn_post_message {
-    background: url(/images/admin/post_message.png) no-repeat;
+    background: url(/img/admin/post_message.png) no-repeat;
 }
 
 fieldset input[type=text] {

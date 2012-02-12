@@ -88,7 +88,7 @@
         },
 
         defaultJeditable:{
-            indicator:'<img src=\'/images/admin/ajax-loader.gif\'>',
+            indicator:'<img src=\'/img/admin/ajax-loader.gif\'>',
             tooltip:'Клик для редактирования...',
             event:'click',
             style:'inherit',
