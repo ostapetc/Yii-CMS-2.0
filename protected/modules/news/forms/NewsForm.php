@@ -8,21 +8,18 @@ return array(
         'enableAjaxValidation' => true,
     ),
     'elements'   => array(
-        'title' => array(
+        'title'        => array(
             'type'  => 'text',
             'class' => 'big'
         ),
-        'text'  => array('type' => 'editor'),
-        'photo' => array('type' => 'file'),
-        'state' => array(
-            'type'  => 'dropdownlist',
-            'items' => News::$states
-        ),
-        'date'  => array('type' => 'date'),
+        'text'         => array('type' => 'editor'),
+        'photo'        => array('type' => 'file'),
+        'is_published' => array('type'  => 'checkbox'),
+        'date'         => array('type' => 'date'),
 //        'meta'  => array(
 //            'type'   => 'meta_tags'
 //        ),
-        'files' => array(
+        'files'        => array(
             'type'      => 'file_manager',
             'tag'       => 'file',
             'data_type' => 'any',

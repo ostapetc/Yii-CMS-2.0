@@ -73,17 +73,21 @@ class BaseForm extends CForm
 
     public function __toString()
     {
+
         $cs = Yii::app()->clientScript;
 
         if ($this->side == 'client') //only bootstrap
         {
-            $this->activeForm['errorMessageCssClass'] = "help-block";
-            $this->activeForm['clientOptions']['afterValidateAttribute']= 'js:function(form, attribute, data, hasError) {
-                var dd = $("#"+attribute.inputID).closest("dd");
-                var add = hasError ? "error" : "success";
-                var remove = hasError ? "success" : "error";
-                dd.addClass(add).removeClass(remove);
-            }';
+
+            $this->activeForm['class']                                   = 'BootActiveForm';
+//            $this->activeForm['errorMessageCssClass']                    = "help-block";
+//            $this->activeForm['clientOptions']['afterValidate'] = 'js:function (form, data, hasError) {
+//
+//                var dd = $("#"+attribute.inputID).closest("dd");
+//                var add = hasError ? "error" : "success";
+//                var remove = hasError ? "success" : "error";
+//                dd.addClass(add).removeClass(remove);
+//            }';
         }
 
         if (!($this->parent instanceof self))
@@ -125,8 +129,7 @@ class BaseForm extends CForm
         Yii::app()->clientScript
             ->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
             ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
-            ->registerCssFile('/js/plugins/clientForm/form.css')->registerScript(
-            $id . '_baseForm', "$('#{$id}').clientForm()");
+            ->registerCssFile('/js/plugins/clientForm/form.css');
     }
 
 
@@ -192,11 +195,6 @@ class BaseForm extends CForm
         }
 
         $class = $element->type;
-        if (isset($element->attributes['parentClass']))
-        {
-            $class .= ' ' . $element->attributes['parentClass'];
-            unset($element->attributes['parentClass']);
-        }
 
         $tpl = '_' . $this->side . 'Form';
 

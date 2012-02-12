@@ -1,5 +1,5 @@
 <?php
-class TinyMCE extends   InputWidget
+class TinyMCE extends InputWidget
 {
 	public $editorOptions = array();
     private $defaultOptions = array(
@@ -24,7 +24,7 @@ class TinyMCE extends   InputWidget
 			'theme_advanced_resizing' => 'true',
             'file_browser_callback' => "tinyBrowser",
 
-		'width'=>'100%',
+		'width'=>'99%',
         'height'=>'350',
     );
 

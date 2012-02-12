@@ -1,6 +1,7 @@
-CREATE TABLE `documentation_category` (
+CREATE TABLE `documentation` (
   `id`  int(11) UNSIGNED NULL AUTO_INCREMENT ,
   `title`  varchar(250) NULL DEFAULT '' COMMENT 'Название' ,
+  `content`  text NULL COMMENT 'Контент',
   `alias`  varchar(250) NULL COMMENT 'Алиас' ,
   `lft`  int(11) NULL ,
   `rgt`  int(11) NULL ,

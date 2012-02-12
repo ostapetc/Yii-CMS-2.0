@@ -187,7 +187,7 @@ class CMenu extends CWidget
 			$count++;
 			$options=isset($item['itemOptions']) ? $item['itemOptions'] : array();
 			$class=array();
-			if(isset($item['active']) && $item['active'] && $this->activeCssClass!='')
+			if($item['active'] && $this->activeCssClass!='')
 				$class[]=$this->activeCssClass;
 			if($count===1 && $this->firstItemCssClass!==null)
 				$class[]=$this->firstItemCssClass;

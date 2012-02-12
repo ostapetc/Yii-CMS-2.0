@@ -14,6 +14,7 @@ abstract class BaseController extends CController
 
     public $crumbs = array();
 
+
     abstract public static function actionsTitles();
 
 
@@ -32,7 +33,9 @@ abstract class BaseController extends CController
             Yii::app()->session['language'] = $_GET['language'];
         }
 
-        if (!isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language)
+        if (
+            !isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language
+        )
         {
             Yii::app()->session['language'] = Yii::app()->language;
         }
@@ -105,21 +108,22 @@ abstract class BaseController extends CController
         }
     }
 
+
     private function getModelClass()
     {
         return ucfirst(str_replace('Admin', '', $this->id));
     }
 
+
     public function setTitle($action)
     {
         $action_titles = call_user_func(array(
-            get_class($action->controller),
-            'actionsTitles'
+            get_class($action->controller), 'actionsTitles'
         ));
 
         if (!isset($action_titles[ucfirst($action->id)]))
         {
-            throw new CHttpException('Не найден заголовок для дейсвия '.ucfirst($action->id));
+            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
         $title = $action_titles[ucfirst($action->id)];
@@ -135,6 +139,7 @@ abstract class BaseController extends CController
     {
         throw new CHttpException(404, 'Страница не найдена!');
     }
+
 
     /**
      * @throws CHttpException
@@ -158,6 +163,7 @@ abstract class BaseController extends CController
                 </div>";
     }
 
+
     protected function performAjaxValidation($model)
     {
         if (isset($_POST['ajax']))
@@ -166,6 +172,7 @@ abstract class BaseController extends CController
             Yii::app()->end();
         }
     }
+
 
     /**
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,
@@ -204,5 +211,28 @@ abstract class BaseController extends CController
         }
 
         return $model;
+    }
+
+
+    /**
+     * Обертка для Yii::t, выполняет перевод по словарям текущего модуля.
+     * Так же перевод осуществляется по словорям с префиксом {modelId},
+     * где modelId - приведенная к нижнему регистру база имени контроллера
+     *
+     * Например: для контроллера ProductInfoAdminController, находящегося в модуле ProductsModule
+     * перевод будет осуществляться по словарю ProductsModule.product_info_{первый параметр метода}
+     *
+     * @param string $dictionary словарь
+     * @param string $alias      фраза для перевода
+     * @param array  $params
+     * @param string $language
+     *
+     * @return string переводa
+     */
+    public function t($dictionary, $alias, $params = array(), $source = null, $language = null)
+    {
+        $file_prefix = StringHelper::camelCaseToUnderscore($this->getModelClass());
+        return Yii::t(get_class($this->module) . '.' . $file_prefix . '_' .
+            $dictionary, $alias, $params, $source, $language);
     }
 }

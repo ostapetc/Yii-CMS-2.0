@@ -2,8 +2,7 @@
 
 $form = include "UserForm.php";
 
-unset($form['activeForm']['enableAjaxValidation']);
-unset($form['activeForm']['clientOptions']);
+$form['activeForm']['id'] = 'login-form';
 
 $form['elements'] = array(
     'email'    => array('type' => 'text','id'=>'login_email_input'),

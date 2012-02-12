@@ -91,7 +91,7 @@ class AuthItem extends ActiveRecordModel
                 'condition' => 'type = "' . self::TYPE_TASK . '"'
             ),
             'assignments' => array(self::HAS_MANY, 'AuthAssignment', 'itemname'),
-            'users'       => array(self::HAS_MANY, 'User', 'userid', 'through' => 'assignments')
+            'users'       => array(self::HAS_MANY, 'User', array('userid'=>'id'), 'through' => 'assignments')
 		);
 	}
 

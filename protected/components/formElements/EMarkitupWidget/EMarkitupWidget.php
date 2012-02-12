@@ -9,7 +9,7 @@
  * @link http://code.google.com/p/yiiext/
  * @link http://markitup.jaysalvat.com/
  */
-class EMarkitupWidget extends CInputWidget
+class EMarkitupWidget extends InputWidget
 {
 	/**
 	 * @var string URL where to look for markItUp assets.

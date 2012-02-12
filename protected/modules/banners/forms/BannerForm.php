@@ -1,7 +1,4 @@
 <?php
-
-$this->model->roles = array_keys(CHtml::listData($this->model->roles, 'name', 'description'));
-
 $pages = Page::model()->published()->findAll("", array('order' => 'title'));
 
 return array(
@@ -13,41 +10,45 @@ return array(
         'enableAjaxValidation' => true,
     ),
     'elements'   => array(
-//        'name'        => array('type' => 'text'),
-//        'page_id'     => array(
-//            'type'   => 'dropdownlist',
-//            'prompt' => 'нет',
-//            'items'  => CHtml::listData($pages, 'id', 'title')
-//        ),
-//        'url'         => array(
-//            'type' => 'text',
-//            'hint' => 'например: http://website.ru'
-//        ),
-//        'image'       => array('type' => 'file'),
-        'roles'       => array(
-            'type'  => 'multi_select',
-            'items' => CHtml::listData(AuthItem::model()->roles, 'name', 'description'),
+        'name'        => array('type' => 'text'),
+        'page_id'     => array(
+            'type'   => 'dropdownlist',
+            'prompt' => 'нет',
+            'items'  => CHtml::listData($pages, 'id', 'title')
         ),
-
-        'is_active'   => array('type' => 'checkbox'),
+        'url'         => array(
+            'type' => 'text',
+            'hint' => 'например: http://website.ru'
+        ),
+        'image'       => array(
+            'type' => 'file',
+            'hint' => 'Рекомендованный размер изображения: 275px в ширину'
+        ),
+        'pages'       => array(
+            'type'  => 'multi_select',
+            'items' => $this->model->allPages,
+        ),
+        'is_published'   => array('type' => 'checkbox'),
         'date_active' => array(
             'type'    => 'checkbox',
-            'label'   => 'Активировать по заданной дате',
+            'hint'    => 'Вы можете задать даты, в которые баннер будет отображаться.<br/>
+<b>Дата начала показа</b> - дата с которой баннер будет отображаться на сайте.<br/>
+<b>Дата окончания показа</b> - дата в которую баннер будет скрыт с сайта.',
             'checked' => (bool)$this->model->date_active || $this->model->date_start || $this->model->date_end
         ),
         'date_start'  => array(
-            'type'  => 'date',
-            'range' => 'show_banner_period'
+            'type' => 'date',
+            'range'=> 'banner_activate'
         ),
         'date_end'    => array(
-            'type'  => 'date',
-            'range' => 'show_banner_period'
+            'type' => 'date',
+            'range'=> 'banner_activate'
         ),
+
         'src'         => array(
             'type'  => 'hidden',
             'value' => $this->model->render(true)
         )
-
     ),
     'buttons'    => array(
         'submit' => array(

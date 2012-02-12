@@ -18,8 +18,8 @@ class SidebarMenu extends ClientMenu
                 'label' => t('Главная'),
                 'url'   => array('/'),
             ), array(
-                'label' => t('Возможности'),
-                'url'   => array('/'),
+                'label' => t('Новости'),
+                'url'   => array('/news/news/index'),
             ), array(
                 'label' => t('Разработчики'),
                 'url'   => array('/'),
@@ -31,16 +31,7 @@ class SidebarMenu extends ClientMenu
                 'url'   => array('/'),
             ), array(
                 'label' => t('Документация'),
-                'url'   => array('/'),
-            ), array(
-                'label'       => t('Будущее'),
-                'itemOptions' => array('class'=> 'nav-header'),
-            ), array(
-                'label' => t('Планы на будущее'),
-                'url'   => array('/'),
-            ), array(
-                'label' => t('А что еще?'),
-                'url'   => array('/'),
+                'url'   => array('/doc/naming'),
             ),
         );
 

@@ -1,29 +1,20 @@
 <?php
 class LoginPanel extends Widget
 {
-    public function init()
-    {
-        parent::init();
-    }
-
-
     public function run()
     {
-        echo Yii::app()->user->isGuest ? 'Login' : 'Cabinet';
-
         if (Yii::app()->user->isGuest)
         {
-            $model    = new User(User::SCENARIO_LOGIN);
-            $login    = new BaseForm('users.LoginForm', $model);
-            $register = new BaseForm('users.RegistrationForm', $model);
-            $forgot   = new BaseForm('users.PasswordRecoverRequestForm', $model);
+            $login_form    = new BaseForm('users.LoginForm', new User(User::SCENARIO_LOGIN));
+            $register_form = new BaseForm('users.RegistrationForm', new User(User::SCENARIO_REGISTRATION));
+            $forgot_form   = new BaseForm('users.PasswordRecoverRequestForm', new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST));
 
             $title = 'Вход';
             $this->render('LoginPanel', array(
-                'title'     => $title,
-                'login'     => $login,
-                'register'  => $register,
-                'forgot'    => $forgot,
+                'title'          => $title,
+                'login_form'     => $login_form,
+                'register_form'  => $register_form,
+                'forgot_form'    => $forgot_form,
             ));
         }
         else

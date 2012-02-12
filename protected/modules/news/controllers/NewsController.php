@@ -15,7 +15,7 @@ class NewsController extends BaseController
 	public function actionView($id) 
 	{
         $this->render('view', array(
-			'model'      => $this->loadModel($id, array('active'))
+			'model'      => $this->loadModel($id, array('published'))
 		));	
 	}
 	

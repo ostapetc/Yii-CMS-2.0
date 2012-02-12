@@ -1,0 +1,132 @@
+Copy the /sitemap folder into the protected/extensions/ folder.
+
+Move the files from the sitemap/views/ folder (sitemap.php and sitemapxml.php) into the views/site/ folder, or to whichever controller's view folder that you are going to attach the actions to.
+
+Update your controller's actions to include the ESitemapAction and/or ESitemapXMLAction files, as follows:
+
+public function actions()
+{
+    return array(
+        'sitemap'=>array(
+            'class'=>'ext.sitemap.ESitemapAction',
+            'importListMethod'=>'getBaseSitePageList',
+            'classConfig'=>array(
+                array('baseModel'=>'Task',
+                      'route'=>'/task/view',
+                      'params'=>array('id'=>'taskId')),         
+            ),              
+        ),
+        'sitemapxml'=>array(
+            'class'=>'ext.sitemap.ESitemapXMLAction',
+            'classConfig'=>array(
+                array('baseModel'=>'Task',
+                      'route'=>'/task/view',
+                      'params'=>array('id'=>'taskId')),         
+            ),
+            //'bypassLogs'=>true, // if using yii debug toolbar enable this line
+            'importListMethod'=>'getBaseSitePageList',
+        ),          
+    );
+}
+
+And, update your URL rules to include a redirect for sitemap.xml:
+
+'urlManager'=>array(
+    ...
+    'rules'=>array(
+        ...
+        'sitemap.xml'=>'site/sitemapxml'
+    ),
+),
+
+The importListMethod allows you to use a custom method on your controller to import a list of non-dynamic page arrays which you wish to include in the sitemap, like so:
+
+class SiteController extends Controller
+{
+    ....
+ 
+    /**
+     * Provide the static site pages which are not database generated
+     *
+     * Each array element represents a page and should be an array of
+     * 'loc', 'frequency' and 'priority' keys
+     * 
+     * @return array[]
+     */
+    public function getBaseSitePageList(){
+ 
+        $list = array(
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/'),
+                        'frequency'=>'weekly',
+                        'priority'=>'1',
+                        ),
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/site/contact'),
+                        'frequency'=>'yearly',
+                        'priority'=>'0.8',
+                        ),
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/site/page', array('view'=>'about')),
+                        'frequency'=>'monthly',
+                        'priority'=>'0.8',
+                        ),
+                    array(
+                        'loc'=>Yii::app()->createAbsoluteUrl('/site/page', array('view'=>'privacy')),
+                        'frequency'=>'yearly',
+                        'priority'=>'0.3',
+                        ),
+                );
+        return $list;
+    }
+    ...
+}
+
+And finally, the heart of the matter, to include a list of model based links, provide a configuration array to the classConfig property of the action, like so:
+
+'classConfig'=>array(
+    array(
+        'baseModel'=>'ModelNameOne',
+        'route'=>'/route/to/controller',
+        'params'=>array('property_key'=>'attribute_name')
+        ),
+    array(
+        'baseModel'=>'Post',
+        'route'=>'/post/view',
+        'params'=>array('id'=>'postId')
+        'scopeName'=>'sitemap'
+    ),
+)
+
+To utilize the ActiveRecord, you need to have a scope named 'sitemap' which will select the proper criteria, or specify an alternate scopeName like so:
+
+'classConfig'=>array(
+    array(
+        'baseModel'=>'Post',
+        'route'=>'/post/view',
+        'params'=>array('id'=>'postId')
+        'scopeName'=>'approvedPosts'
+    ),
+)
+
+Additional Class Configuration options: priority, changefreq (see ESitemapModel)
+
+Sample scope:
+
+public function scopes()
+{
+    return array(
+        'sitemap'=>array('select'=>'id', 'condition'=>'startDate <= NOW()', 'order'=>'dateAdded ASC'),
+    );
+}
+
+Future Enhancements ¶
+
+    * Cached output: I'd like to add a param to the configuration that will specify how frequently the sitemap will be rebuilt, and create a flat XML output file which will be checked for expiration and if fresh, served, else rebuilt. That's a project for another day though ;)
+    * Make the scopeName optional and/or validate that the scopeName exists on the model.
+
+All feedback is welcome! I tried to simplify the syntax as much as possible, but it was hard to get my head around all the possible options that might be desired and still create something that would meet a wide range of needs in a single extension.
+
+A Unit Test is available - ESitemapTest, simply add it to your tests/ directory
+NOTE: When testing, if you wish to run the third test, you need to ensure that your SERVER_NAME is set or you will get errors from Yii::app()->createAbsoluteUrl()
+

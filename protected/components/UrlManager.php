@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-class UrlManager extends CUrlManager 
+class UrlManager extends CUrlManager
 {
     public function createUrl($route, $params = array())
     {
@@ -8,7 +8,6 @@ class UrlManager extends CUrlManager
 
         return $url;
     }
-
 
     public function collectRules()
     {
@@ -31,10 +30,7 @@ class UrlManager extends CUrlManager
         {
             if (method_exists($class, 'routes'))
             {
-                $routes = array_merge(
-                    $routes,
-                    call_user_func(array($class, 'routes'))
-                );
+                $routes = array_merge($routes, call_user_func(array($class, 'routes')));
             }
         }
 
@@ -55,10 +51,11 @@ class UrlManager extends CUrlManager
             $routes[$pattern] = $route;
         }
 
-        $routes = array_reverse($routes);
+        $routes                                  = array_reverse($routes);
         $routes['<language:(en|ru)>/<route:.*>'] = '<route>';
 
         Yii::app()->urlManager->addRules($routes);
     }
+
 }
 

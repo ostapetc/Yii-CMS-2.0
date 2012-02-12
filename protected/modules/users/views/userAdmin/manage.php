@@ -13,7 +13,7 @@ $this->widget('AdminGridView', array(
 		'birthdate',
 		array(
 			'name'  => 'gender',
-			'value' => 'User::$gender_list[$data->gender]'
+			'value' => 'is_numeric($data->gender) ? User::$gender_list[$data->gender] : ""'
 		),
 		array(
 			'name'  => 'status', 

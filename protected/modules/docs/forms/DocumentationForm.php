@@ -1,19 +1,27 @@
 <?php
+$elements = array(
+    'content'               => array('type'=>'markdown'),
+    'title'                 => array('type' => 'text'),
+    'alias'                 => array(
+        'type'   => 'alias',
+        'source' => 'title',
+        'hint'   => 'Этот параметр будет использован для построения красивого URL. Он генерируется на основании названия, однако до сохранения его можно изменить. После сохранения изменить значение этого поля будет невозможно.'
+    ),
+    'is_published'          => array('type' => 'checkbox'),
+);
 
 return array(
     'activeForm' => array(
-        'id'                   => 'menu-form',
-        'class'                => 'CActiveForm',
-        'enableAjaxValidation' => true,
+        'id'                     => 'category-form',
+        'class'                  => 'CActiveForm',
+        'enableAjaxValidation'   => true,
+        'htmlOptions'            => array('enctype'=> 'multipart/form-data'),
     ),
-    'elements'   => array(
-        'name'       => array('type' => 'text'),
-        'is_visible' => array('type' => 'checkbox')
-    ),
+    'elements'   => $elements,
     'buttons'    => array(
         'submit' => array(
             'type'  => 'submit',
-            'value' => $this->model->isNewRecord ? 'Далее' : 'Сохранить'
-        ),
+            'value' => Yii::t('main', 'Отправить'),
+        )
     )
 );

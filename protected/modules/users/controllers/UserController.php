@@ -101,7 +101,7 @@ class UserController extends BaseController
 
         $user = new User(User::SCENARIO_REGISTRATION);
         $form = new BaseForm('users.RegistrationForm', $user);
-        $this->performAjaxValidation($model);
+        $this->performAjaxValidation($user);
 
         if (isset($_POST['User']))
         {

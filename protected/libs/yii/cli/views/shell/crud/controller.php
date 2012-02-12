@@ -83,7 +83,7 @@ class <?php echo $controllerClass; ?> extends Controller
 		{
 			$model->attributes=$_POST['<?php echo $modelClass; ?>'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>)));
+				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>));
 		}
 
 		$this->render('create',array(
@@ -106,7 +106,7 @@ class <?php echo $controllerClass; ?> extends Controller
 		{
 			$model->attributes=$_POST['<?php echo $modelClass; ?>'];
 			if($model->save())
-				$this->redirect($this->createUrl(array('view','id'=>$model-><?php echo $ID; ?>)));
+				$this->redirect(array('view','id'=>$model-><?php echo $ID; ?>));
 		}
 
 		$this->render('update',array(
@@ -127,7 +127,7 @@ class <?php echo $controllerClass; ?> extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect($this->createUrl(array('index')));
+				$this->redirect(array('index'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');

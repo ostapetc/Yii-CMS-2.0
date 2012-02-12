@@ -4,7 +4,11 @@ class <?php echo $this->_migrateName; ?> extends CDbMigration
 {
 	public function up()
 	{
-		$this->execute("<?php echo strtr($this->code, array('"'=>'\"','$'=>'\$')); ?>");
+    $a = <<<HEAD
+    <?php echo strtr($this->code, array('$' => '\$')); ?>
+
+HEAD;
+		$this->execute($a);
 		
 <?php if($this->clearCache):?>
 		if(Yii::app()->hasComponent('cache'))

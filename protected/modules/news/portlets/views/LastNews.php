@@ -11,15 +11,17 @@ foreach ($news_list as $news)
 
 <div class="span4">
     <h3><?php echo $news->title ?></h3>
-    <?php if ($news->photo): ?>
-    <a href="<?php echo $news->url; ?>">
-        <?php echo ImageHelper::thumb(News::PHOTOS_DIR, $news->photo, News::PHOTO_SMALL_WIDTH, News::PHOTO_SMALL_HEIGHT, true); ?>
-    </a>
-    <?php endif ?>
+    <?php
+    if ($news->photo)
+    {
+        $thumb = ImageHelper::thumb(News::PHOTOS_DIR, $news->photo, News::$photo_small_size, true);
+        echo  CHtml::link($thumb, $news->href);
+    }
+    ?>
 
     <p><?php echo Yii::app()->text->cut($news->text, 200, "."); ?></p>
 
-    <p><?php echo CHtml::link('View details &raquo;', $news->url, array('class'=> 'btn')) ?></p>
+    <p><?php echo CHtml::link(t('View details') . '&raquo;', $news->href, array('class'=> 'btn')) ?></p>
 </div>
 
 
@@ -30,5 +32,5 @@ foreach ($news_list as $news)
     }
 } ?>
 
-<?php echo CHtml::link(Yii::t('NewsModule.main', 'Все новости'), array('/news/news/index'))?>
+<?php echo CHtml::link(Yii::t('NewsModule.main', 'Все новости'), array('/news/news/index')) ?>
 
