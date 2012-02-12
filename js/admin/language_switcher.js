@@ -58,7 +58,7 @@ function createDropDown() {
 
     $(".flag").each(function() {
         var icon= $(this).attr('lang').toUpperCase() + '.png';
-        $(this).attr('style', 'background-image: url(/images/icons/flags/' + icon + ')');
+        $(this).attr('style', 'background-image: url(/img/icons/flags/' + icon + ')');
     });
 }
 
