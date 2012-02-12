@@ -11,14 +11,14 @@ Yii::import('zii.widgets.grid.CButtonColumn');
 
 /**
  * Bootstrap button column widget.
- * Used to set buttons to use Glyphicons instead of the defaults.
+ * Used to set zbuttons to use Glyphicons instead of the defaults.
  * @since 0.9.8
  */
 class BootButtonColumn extends CButtonColumn
 {
-	public $viewButtonIconCssClass = 'icon-search';
-	public $updateButtonIconCssClass = 'icon-pencil';
-	public $deleteButtonIconCssClass = 'icon-trash';
+	public $viewButtonIcon = 'eye-open';
+	public $updateButtonIcon = 'pencil';
+	public $deleteButtonIcon = 'trash';
 
 	/**
 	 * Initializes the default buttons (view, update and delete).
@@ -27,12 +27,12 @@ class BootButtonColumn extends CButtonColumn
 	{
 		parent::initDefaultButtons();
 
-		if ($this->viewButtonIconCssClass !== false)
-			$this->buttons['view']['iconCssClass'] = $this->viewButtonIconCssClass;
-		if ($this->updateButtonIconCssClass !== false)
-			$this->buttons['update']['iconCssClass'] = $this->updateButtonIconCssClass;
-		if ($this->deleteButtonIconCssClass !== false)
-			$this->buttons['delete']['iconCssClass'] = $this->deleteButtonIconCssClass;
+		if ($this->viewButtonIcon !== false)
+			$this->buttons['view']['icon'] = $this->viewButtonIcon;
+		if ($this->updateButtonIcon !== false)
+			$this->buttons['update']['icon'] = $this->updateButtonIcon;
+		if ($this->deleteButtonIcon !== false)
+			$this->buttons['delete']['icon'] = $this->deleteButtonIcon;
 	}
 
 	/**
@@ -42,25 +42,31 @@ class BootButtonColumn extends CButtonColumn
 	 * @param integer $row the row number (zero-based)
 	 * @param mixed $data the data object associated with the row
 	 */
-	protected function renderButton($id,$button,$row,$data)
+	protected function renderButton($id, $button, $row, $data)
 	{
-		if (isset($button['visible']) && !$this->evaluateExpression($button['visible'],array('row'=>$row,'data'=>$data)))
+		if (isset($button['visible']) && !$this->evaluateExpression($button['visible'], array('row'=>$row, 'data'=>$data)))
 			return;
 
-		$label=isset($button['label']) ? $button['label'] : $id;
-		$url=isset($button['url']) ? $this->evaluateExpression($button['url'],array('data'=>$data,'row'=>$row)) : '#';
-		$options=isset($button['options']) ? $button['options'] : array();
+		$label = isset($button['label']) ? $button['label'] : $id;
+		$url = isset($button['url']) ? $this->evaluateExpression($button['url'], array('data'=>$data, 'row'=>$row)) : '#';
+		$options = isset($button['options']) ? $button['options'] : array();
 
 		if (!isset($options['title']))
-			$options['title']=$label;
+			$options['title'] = $label;
 
-		if (isset($button['iconCssClass']))
-			$linkContent = '<i class="'.$button['iconCssClass'].'"></i>';
+		if (!isset($options['rel']))
+			$options['rel'] = 'tooltip';
+
+		if (isset($button['icon']))
+		{
+			if (strpos($button['icon'], 'icon') === false)
+				$button['icon'] = 'icon-'.$button['icon'];
+
+			echo CHtml::link('<i class="'.$button['icon'].'"></i>', $url, $options);
+		}
 		else if (isset($button['imageUrl']) && is_string($button['imageUrl']))
-			$linkContent = CHtml::image($button['imageUrl'],$label);
+			echo CHtml::link(CHtml::image($button['imageUrl'], $label), $url, $options);
 		else
-			$linkContent = $label;
-
-		echo CHtml::link($linkContent,$url,$options);
+			echo CHtml::link($label, $url, $options);
 	}
 }

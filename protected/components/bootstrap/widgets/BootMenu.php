@@ -13,6 +13,7 @@ Yii::import('bootstrap.widgets.BootWidget');
  * Bootstrap menu widget.
  * Used for rendering of bootstrap menus with support dropdown sub-menus and scroll-spying.
  * @since 0.9.8
+ * @todo Fix scrollspy.
  */
 class BootMenu extends BootWidget
 {
@@ -32,9 +33,9 @@ class BootMenu extends BootWidget
 	 */
 	public $stacked = false;
 	/**
-	 * @var boolean whether to enable the scroll-spy.
+	 * @var array the scroll-spy configuration.
 	 */
-	public $scrollspy = false;
+	public $scrollspy;
 	/**
 	 * @var array the menu items.
 	 */
@@ -90,8 +91,18 @@ class BootMenu extends BootWidget
 
 			Yii::app()->bootstrap->registerDropdown();
 
-			if ($this->scrollspy)
-				Yii::app()->bootstrap->registerScrollSpy('#'.$this->id);
+			if (isset($this->scrollspy) && is_array($this->scrollspy) && isset($this->scrollspy['spy']))
+			{
+				Yii::app()->bootstrap->registerScrollSpy();
+
+				if (!isset($this->scrollspy['subject']))
+					$this->scrollspy['subject'] = 'body';
+
+				if (!isset($this->scrollspy['offset']))
+					$this->scrollspy['offset'] = null;
+
+				Yii::app()->bootstrap->spyOn($this->scrollspy['subject'], $this->scrollspy['spy'], $this->scrollspy['offset']);
+			}
 		}
 	}
 
@@ -161,6 +172,13 @@ class BootMenu extends BootWidget
 	 */
 	protected function renderItem($item)
 	{
+		if (isset($item['icon'])) {
+			if (strpos($item['icon'], 'icon') === false)
+				$item['icon'] = 'icon-'.$item['icon'];
+
+			$item['label'] = '<i class="'.$item['icon'].'"></i> '.$item['label'];
+		}
+
 		if (isset($item['items']))
 		{
 			if (!isset($item['url']))
