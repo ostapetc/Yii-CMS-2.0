@@ -4,17 +4,26 @@
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package bootstrap.widgets
  */
 
-Yii::import('bootstrap.widgets.BootInput');
+Yii::import('bootstrap.widgets.input.BootInput');
 
+/**
+ * Bootstrap active form widget.
+ */
 class BootActiveForm extends CActiveForm
 {
 	// The different form types.
-	const TYPE_VERTICAL = 'form-vertical';
-	const TYPE_INLINE = 'form-inline';
-	const TYPE_SEARCH = 'form-search';
-	const TYPE_HORIZONTAL = 'form-horizontal';
+	const TYPE_VERTICAL = 'vertical';
+	const TYPE_INLINE = 'inline';
+	const TYPE_HORIZONTAL = 'horizontal';
+	const TYPE_SEARCH = 'search';
+
+	const INPUT_HORIZONTAL = 'bootstrap.widgets.input.BootInputHorizontal';
+	const INPUT_INLINE = 'bootstrap.widgets.input.BootInputInline';
+	const INPUT_SEARCH = 'bootstrap.widgets.input.BootInputSearch';
+	const INPUT_VERTICAL = 'bootstrap.widgets.input.BootInputVertical';
 
 	/**
 	 * @var string the form type. See class constants.
@@ -33,9 +42,9 @@ class BootActiveForm extends CActiveForm
 	public function init()
 	{
 		if (!isset($this->htmlOptions['class']))
-			$this->htmlOptions['class'] = $this->type;
+			$this->htmlOptions['class'] = 'form-'.$this->type;
 		else
-			$this->htmlOptions['class'] .= ' '.$this->type;
+			$this->htmlOptions['class'] .= ' form-'.$this->type;
 
 		if ($this->inlineErrors)
 			$this->errorMessageCssClass = 'help-inline';
@@ -45,30 +54,7 @@ class BootActiveForm extends CActiveForm
 		parent::init();
 	}
 
-	/**
-	 * Creates an input row of a specific type.
-	 * @param string $type the input type
-	 * @param CModel $model the data model
-	 * @param string $attribute the attribute
-	 * @param array $data the data for list inputs
-	 * @param array $htmlOptions additional HTML attributes
-	 * @return string the generated row
-	 */
-	public function inputRow($type, $model, $attribute, $data = null, $htmlOptions = array())
-	{
-		ob_start();
-		Yii::app()->controller->widget('BootInput',array(
-			'type'=>$type,
-			'form'=>$this,
-			'model'=>$model,
-			'attribute'=>$attribute,
-			'data'=>$data,
-			'htmlOptions'=>$htmlOptions,
-		));
-		return ob_get_clean();
-	}
-
-	/**
+/**
 	 * Renders a checkbox input row.
 	 * @param CModel $model the data model
 	 * @param string $attribute the attribute
@@ -90,7 +76,7 @@ class BootActiveForm extends CActiveForm
 	 */
 	public function checkBoxListRow($model, $attribute, $data = array(), $htmlOptions = array())
 	{
-		return $this->inputRow(BootInput::TYPE_CHECKBOXES, $model, $attribute, $data, $htmlOptions);
+		return $this->inputRow(BootInput::TYPE_CHECKBOXLIST, $model, $attribute, $data, $htmlOptions);
 	}
 
 	/**
@@ -103,7 +89,7 @@ class BootActiveForm extends CActiveForm
 	 */
 	public function checkBoxListInlineRow($model, $attribute, $data = array(), $htmlOptions = array())
 	{
-		return $this->inputRow(BootInput::TYPE_CHECKBOXES_INLINE, $model, $attribute, $data, $htmlOptions);
+		return $this->inputRow(BootInput::TYPE_CHECKBOXLIST_INLINE, $model, $attribute, $data, $htmlOptions);
 	}
 
 	/**
@@ -165,7 +151,7 @@ class BootActiveForm extends CActiveForm
 	 */
 	public function radioButtonListRow($model, $attribute, $data = array(), $htmlOptions = array())
 	{
-		return $this->inputRow(BootInput::TYPE_RADIOS, $model, $attribute, $data, $htmlOptions);
+		return $this->inputRow(BootInput::TYPE_RADIOLIST, $model, $attribute, $data, $htmlOptions);
 	}
 
 	/**
@@ -178,7 +164,7 @@ class BootActiveForm extends CActiveForm
 	 */
 	public function radioButtonListInlineRow($model, $attribute, $data = array(), $htmlOptions = array())
 	{
-		return $this->inputRow(BootInput::TYPE_RADIOS_INLINE, $model, $attribute, $data, $htmlOptions);
+		return $this->inputRow(BootInput::TYPE_RADIOLIST_INLINE, $model, $attribute, $data, $htmlOptions);
 	}
 
 	/**
@@ -470,5 +456,56 @@ class BootActiveForm extends CActiveForm
 		}
 		else
 			return '';
+	}
+
+	/**
+	 * Creates an input row of a specific type.
+	 * @param string $type the input type
+	 * @param CModel $model the data model
+	 * @param string $attribute the attribute
+	 * @param array $data the data for list inputs
+	 * @param array $htmlOptions additional HTML attributes
+	 * @return string the generated row
+	 */
+	public function inputRow($type, $model, $attribute, $data = null, $htmlOptions = array())
+	{
+		ob_start();
+		Yii::app()->controller->widget($this->getInputClassName(), array(
+			'type'=>$type,
+			'form'=>$this,
+			'model'=>$model,
+			'attribute'=>$attribute,
+			'data'=>$data,
+			'htmlOptions'=>$htmlOptions,
+		));
+		return ob_get_clean();
+	}
+
+	/**
+	 * Returns the input widget class name suitable for the form.
+	 * @return string the class name
+	 */
+	protected function getInputClassName()
+	{
+		// Determine the input widget class name.
+		switch ($this->type)
+		{
+			case self::TYPE_HORIZONTAL:
+				return self::INPUT_HORIZONTAL;
+				break;
+
+			case self::TYPE_INLINE:
+				return self::INPUT_INLINE;
+				break;
+
+			case self::TYPE_SEARCH:
+				return self::INPUT_SEARCH;
+				break;
+
+			case self::TYPE_VERTICAL:
+			default:
+				return self::INPUT_VERTICAL;
+				break;
+		}
 	}
 }

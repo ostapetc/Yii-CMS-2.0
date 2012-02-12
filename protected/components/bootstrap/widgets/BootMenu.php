@@ -4,14 +4,15 @@
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package bootstrap.widgets
  */
 
 Yii::import('bootstrap.widgets.BootWidget');
 
 /**
- * Bootstrap menu widget with support for dropdown sub-menus.
+ * Bootstrap menu widget.
+ * Used for rendering of bootstrap menus with support dropdown sub-menus and scroll-spying.
  * @since 0.9.8
- * @todo Add api and target support. http://twitter.github.com/bootstrap/javascript.html#dropdowns
  */
 class BootMenu extends BootWidget
 {
@@ -30,6 +31,10 @@ class BootMenu extends BootWidget
 	 * @var boolean whether to stack navigation items.
 	 */
 	public $stacked = false;
+	/**
+	 * @var boolean whether to enable the scroll-spy.
+	 */
+	public $scrollspy = false;
 	/**
 	 * @var array the menu items.
 	 */
@@ -52,7 +57,9 @@ class BootMenu extends BootWidget
 	 */
 	public function init()
 	{
-		$this->htmlOptions['id'] = $this->getId();
+        if (!isset($this->htmlOptions['id']))
+            $this->htmlOptions['id'] = $this->getId();
+
 		$route = $this->controller->getRoute();
 		$this->items = $this->normalizeItems($this->items, $route);
 	}
@@ -80,6 +87,11 @@ class BootMenu extends BootWidget
 			echo CHtml::openTag('ul', $this->htmlOptions).PHP_EOL;
 			$this->renderItems($this->items);
 			echo '</ul>';
+
+			Yii::app()->bootstrap->registerDropdown();
+
+			if ($this->scrollspy)
+				Yii::app()->bootstrap->registerScrollSpy('#'.$this->id);
 		}
 	}
 
@@ -95,24 +107,22 @@ class BootMenu extends BootWidget
 				echo '<li class="divider"></li>';
 			else
 			{
-				$options = isset($item['itemOptions']) ? $item['itemOptions'] : array();
-				$class = array();
+				$htmlOptions = isset($item['itemOptions']) ? $item['itemOptions'] : array();
 
-				if (isset($item['items']))
-					$class[] = 'dropdown';
+				$cssClass = '';
 
 				if ($item['active'])
-					$class[] = 'active';
+					$cssClass .= ' active';
 
-				if($class !== array())
-				{
-					if(empty($options['class']))
-						$options['class'] = implode(' ',$class);
-					else
-						$options['class'] .= ' '.implode(' ',$class);
-				}
+				if (isset($item['items']))
+					$cssClass .= ' dropdown';
 
-				echo CHtml::openTag('li', $options);
+				if(isset($htmlOptions['class']))
+					$htmlOptions['class'] .= $cssClass;
+				else
+					$htmlOptions['class'] = $cssClass;
+
+				echo CHtml::openTag('li', $htmlOptions);
 
 				$menu = $this->renderItem($item);
 

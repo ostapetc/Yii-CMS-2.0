@@ -4,37 +4,38 @@
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @since 0.9.3
+ * @package bootstrap.widgets
  */
 
 Yii::import('bootstrap.widgets.BootWidget');
 
-// todo: update to work with Bootstrap 2.
+/**
+ * Bootstrap modal widget.
+ * @since 0.9.3
+ */
 class BootModal extends BootWidget
 {
-	/**
-	 * @var string the name of the container element. Defaults to 'div'.
-	 */
-	public $tagName = 'div';
-
 	/**
 	 * Initializes the widget.
 	 */
 	public function init()
 	{
 		parent::init();
-		$this->registerScriptFile('jquery.ui.boot-modal.js');
 
-		$id = $this->getId();
-		if (isset($this->htmlOptions['id']))
-			$id = $this->htmlOptions['id'];
+		Yii::app()->bootstrap->registerModal();
+
+		if (!isset($this->htmlOptions['id']))
+			$this->htmlOptions['id'] = $this->getId();
+
+		if (isset($this->htmlOptions['class']))
+			$this->htmlOptions['class'] .= ' modal';
 		else
-			$this->htmlOptions['id'] = $id;
+			$this->htmlOptions['class'] = 'modal';
 
-		$options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
-        $this->registerScript(__CLASS__.'#'.$id, "jQuery('#{$id}').bootModal($options);");
+		if (Yii::app()->bootstrap->isPluginRegistered(Bootstrap::PLUGIN_TRANSITION))
+			$this->htmlOptions['class'] .= ' fade';
 
-		echo CHtml::openTag($this->tagName, $this->htmlOptions).PHP_EOL;
+		echo CHtml::openTag('div', $this->htmlOptions).PHP_EOL;
 	}
 
 	/**
@@ -42,6 +43,38 @@ class BootModal extends BootWidget
 	 */
 	public function run()
 	{
-		echo CHtml::closeTag($this->tagName);
+		echo '</div>';
+
+		// Register the "show" event-handler.
+		if (isset($this->events['show']))
+		{
+			$fn = CJavaScript::encode($this->events['show']);
+			Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id.'.show',
+					"jQuery('#{$this->id}').on('show', {$fn});");
+		}
+
+		// Register the "shown" event-handler.
+		if (isset($this->events['shown']))
+		{
+			$fn = CJavaScript::encode($this->events['shown']);
+			Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id.'.shown',
+					"jQuery('#{$this->id}').on('shown', {$fn});");
+		}
+
+		// Register the "hide" event-handler.
+		if (isset($this->events['hide']))
+		{
+			$fn = CJavaScript::encode($this->events['hide']);
+			Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id.'.hide',
+					"jQuery('#{$this->id}').on('hide', {$fn});");
+		}
+
+		// Register the "hidden" event-handler.
+		if (isset($this->events['hidden']))
+		{
+			$fn = CJavaScript::encode($this->events['hidden']);
+			Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id.'.hidden',
+					"jQuery('#{$this->id}').on('hidden', {$fn});");
+		}
 	}
 }

@@ -1,6 +1,3 @@
-#
-# Структура для таблицы `auth_objects`: 
-#
 
 CREATE TABLE `auth_objects` (
   `id` INTEGER(11) UNSIGNED NOT NULL AUTO_INCREMENT,

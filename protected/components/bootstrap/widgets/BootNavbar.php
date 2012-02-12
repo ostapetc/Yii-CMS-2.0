@@ -4,14 +4,14 @@
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package bootstrap.widgets
  */
 
 Yii::import('bootstrap.widgets.BootWidget');
 
 /**
- * Bootstrap navigation widget with support for dropdown menus.
+ * Bootstrap navigation bar widget.
  * @since 0.9.7
- * @todo Add collapse support. http://twitter.github.com/bootstrap/javascript.html#collapse
  */
 class BootNavbar extends BootWidget
 {
@@ -33,26 +33,35 @@ class BootNavbar extends BootWidget
 	 */
 	public $items = array();
 	/**
-	 * @var boolean flag that indicates if the nav should use the full width available. Defaults to false.
+	 * @var boolean whether the nav span over the full width. Defaults to false.
 	 * @since 0.9.8
 	 */
 	public $fluid = false;
 	/**
-	 * @var boolean flag that indicates if the nav bar should be fixed to the top of the page. Defaults to true.
+	 * @var boolean whether the nav bar is fixed to the top of the page. Defaults to true.
 	 * @since 0.9.8
 	 */
 	public $fixed = true;
+	/**
+	 * @var boolean whether to enable collapsing on narrow screens. Default to false.
+	 */
+	public $collapse = false;
 
 	/**
 	 * Initializes the widget.
 	 */
 	public function init()
 	{
-		if (!isset($this->brand))
+		if (!$this->brand)
+		{
 			$this->brand = CHtml::encode(Yii::app()->name);
 
-		if (!isset($this->brandUrl))
-			$this->brandUrl = Yii::app()->homeUrl;
+			if (!isset($this->brandUrl))
+				$this->brandUrl = Yii::app()->homeUrl;
+		}
+
+		if ($this->collapse)
+			Yii::app()->bootstrap->registerCollapse();
 	}
 
 	/**
@@ -67,6 +76,8 @@ class BootNavbar extends BootWidget
 
 		if ($this->fixed)
 			$this->htmlOptions['class'] .= ' navbar-fixed-top';
+		else
+			$this->htmlOptions['class'] .= ' navbar-static';
 
 		if (isset($this->brandOptions['class']))
 			$this->brandOptions['class'] .= ' brand';
@@ -80,12 +91,19 @@ class BootNavbar extends BootWidget
 
 		echo CHtml::openTag('div', $this->htmlOptions);
 		echo '<div class="navbar-inner"><div class="'.$containerCssClass.'">';
-		echo '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"></a>';
 
-        if ($this->brand)
+		if ($this->collapse)
+		{
+			echo '<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">';
+			echo '<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>';
+			echo '</a>';
+		}
+
+        if ($this->brand !== false)
             echo CHtml::openTag('a', $this->brandOptions).$this->brand.'</a>';
-        
-		echo '<div class="nav-collapse">';
+
+		if ($this->collapse)
+			echo '<div class="nav-collapse">';
 
 		foreach ($this->items as $item)
 		{
@@ -93,16 +111,19 @@ class BootNavbar extends BootWidget
 				echo $item;
 			else
 			{
-				if (!isset($item['class']))
-					$item['class'] = 'bootstrap.widgets.BootMenu';
+				if (isset($item['class']))
+				{
+					$className = $item['class'];
+					unset($item['class']);
 
-				$className = $item['class'];
-				unset($item['class']);
-
-				$this->controller->widget($className, $item);
+					$this->controller->widget($className, $item);
+				}
 			}
 		}
 
-		echo '</div></div></div></div>';
+		if ($this->collapse)
+			echo '</div>';
+
+		echo '</div></div></div>';
 	}
 }

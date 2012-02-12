@@ -1,7 +1,19 @@
 <?php
+/**
+ * BootButtonColumn class file.
+ * @author Christoffer Niska <ChristofferNiska@gmail.com>
+ * @copyright  Copyright &copy; Christoffer Niska 2011-
+ * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package bootstrap.widgets
+ */
 
 Yii::import('zii.widgets.grid.CButtonColumn');
 
+/**
+ * Bootstrap button column widget.
+ * Used to set buttons to use Glyphicons instead of the defaults.
+ * @since 0.9.8
+ */
 class BootButtonColumn extends CButtonColumn
 {
 	public $viewButtonIconCssClass = 'icon-search';

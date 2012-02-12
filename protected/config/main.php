@@ -12,6 +12,7 @@ foreach ($modules_dirs as $module)
 
     $modules_includes[] = "application.modules.{$module}.*";
     $modules_includes[] = "application.modules.{$module}.models.*";
+    $modules_includes[] = "application.components.bootstrap.widgets.*";
     $modules_includes[] = "application.modules.{$module}.portlets.*";
     $modules_includes[] = "application.modules.{$module}.forms.*";
     $modules_includes[] = "application.modules.{$module}.components.*";

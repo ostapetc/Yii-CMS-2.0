@@ -4,10 +4,15 @@
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright  Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @package bootstrap.widgets
  */
 
 Yii::import('bootstrap.widgets.BootWidget');
 
+/**
+ * Bootstrap alert widget.
+ * @todo Fix event support. http://twitter.github.com/bootstrap/javascript.html#alerts
+ */
 class BootAlert extends BootWidget
 {
 	/**
@@ -17,7 +22,7 @@ class BootAlert extends BootWidget
 	/**
 	 * @var string the template to use for displaying flash messages.
 	 */
-	public $template = '<div class="alert alert-block alert-{key}"><a class="close">&times;</a>{message}</div>';
+	public $template = '<div class="alert alert-block alert-{key}{class}"><a class="close" data-dismiss="alert">&times;</a>{message}</div>';
 	/**
 	 * @var array the html options.
 	 */
@@ -29,7 +34,11 @@ class BootAlert extends BootWidget
 	public function init()
 	{
 		parent::init();
-		$this->registerScriptFile('jquery.ui.boot-alert.js');
+
+		Yii::app()->bootstrap->registerAlert();
+
+		if (!isset($this->htmlOptions['id']))
+			$this->htmlOptions['id'] = $this->getId();
 	}
 
 	/**
@@ -37,28 +46,44 @@ class BootAlert extends BootWidget
 	 */
 	public function run()
 	{
-		$id = $this->getId();
-
-		if (isset($this->htmlOptions['id']))
-			$id = $this->htmlOptions['id'];
-		else
-			$this->htmlOptions['id'] = $id;
-
 		if (is_string($this->keys))
 			$this->keys = array($this->keys);
 
-		echo CHtml::openTag('div',$this->htmlOptions);
+		echo CHtml::openTag('div', $this->htmlOptions);
+
+		$transitions = Yii::app()->bootstrap->isPluginRegistered(Bootstrap::PLUGIN_TRANSITION);
 
 		foreach ($this->keys as $key)
+		{
 			if (Yii::app()->user->hasFlash($key))
-				echo strtr($this->template, array('{key}'=>$key, '{message}'=>Yii::app()->user->getFlash($key)));
+			{
+				echo strtr($this->template, array(
+					'{class}'=>$transitions ? ' fade in' : '',
+					'{key}'=>$key,
+					'{message}'=>Yii::app()->user->getFlash($key),
+				));
+			}
+		}
 
 		echo '</div>';
 
-		$this->options['keys'] = $this->keys;
-		$this->options['template'] = $this->template;
+		$selector = "#{$this->id} .alert";
+		Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id, "jQuery('{$selector}').alert();");
 
-		$options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
-		Yii::app()->clientScript->registerScript(__CLASS__.'#'.$id,"jQuery('#{$id}').bootAlert({$options});");
+		/*
+		// Register the "close" event-handler.
+		if (isset($this->events['close']))
+		{
+			$fn = CJavaScript::encode($this->events['close']);
+			Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id.'.close', "jQuery('{$selector}').bind('close', {$fn});");
+		}
+
+		// Register the "closed" event-handler.
+		if (isset($this->events['closed']))
+		{
+			$fn = CJavaScript::encode($this->events['closed']);
+			Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id.'.closed', "jQuery('{$selector}').bind('closed', {$fn});");
+		}
+		*/
 	}
 }
