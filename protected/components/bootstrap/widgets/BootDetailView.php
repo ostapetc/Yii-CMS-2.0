@@ -16,6 +16,14 @@ Yii::import('zii.widgets.CDetailView');
 class BootDetailView extends CDetailView
 {
 	/**
+	 * @var string the template used to render a single attribute. Defaults to a table row.
+	 */
+	public $itemTemplate="<tr class=\"{class}\"><th style=\"width: 160px\">{label}</th><td>{value}</td></tr>\n";
+	/**
+	 * @var array the CSS class names for the items displaying attribute values.
+	 */
+	public $itemCssClass = array();
+	/**
 	 * @var array the HTML attributes for the container.
 	 */
 	public $htmlOptions = array('class'=>'table table-striped table-condensed detail-view');

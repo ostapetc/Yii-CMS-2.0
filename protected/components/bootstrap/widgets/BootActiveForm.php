@@ -54,7 +54,7 @@ class BootActiveForm extends CActiveForm
 		parent::init();
 	}
 
-/**
+	/**
 	 * Renders a checkbox input row.
 	 * @param CModel $model the data model
 	 * @param string $attribute the attribute

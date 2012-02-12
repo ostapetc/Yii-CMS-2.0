@@ -101,21 +101,12 @@ class BootTabbed extends BootWidget
 
 	    foreach ($tabs as $tab)
 	    {
-		    $i++;
 			$item = $tab;
-
-			if (!isset($item['id']))
-				$item['id'] = $id.'_tab_'.$i;
-
-			if (!isset($item['label']))
-				$item['label'] = '';
-
-			$item['url'] = '#'.$item['id'];
 
 			if (!isset($item['itemOptions']))
 				$item['itemOptions'] = array();
 
-		    if ($i === 1)
+		    if ($i === 0)
 		    {
 			    if (isset($item['itemOptions']['class']))
 	                $item['itemOptions']['class'] .= ' active';
@@ -126,42 +117,47 @@ class BootTabbed extends BootWidget
 			$item['linkOptions']['data-toggle'] = 'tab';
 
 		    if (isset($tab['items']))
-			{
 				$item['items'] = $this->normalizeTabs($item['items'], $panes, $i);
-				unset($item['url']);
+			else
+			{
+				if (!isset($item['id']))
+					$item['id'] = $id.'_tab_'.++$i;
+
+				$item['url'] = '#'.$item['id'];
+
+				if (!isset($item['content']))
+					$item['content'] = '';
+
+				$content = $item['content'];
+				unset($item['content']);
+
+				if (!isset($item['paneOptions']))
+					$item['paneOptions'] = array();
+
+				$paneOptions = $item['paneOptions'];
+				unset($item['paneOptions']);
+
+				$paneOptions['id'] = $item['id'];
+
+				if (isset($tab['paneOptions']['class']))
+					$paneOptions['class'] .= ' tab-pane';
+				else
+					$paneOptions['class'] = 'tab-pane';
+
+				if ($transitions)
+					$paneOptions['class'] .= ' fade';
+
+				if ($i === 1)
+				{
+					if ($transitions)
+						$paneOptions['class'] .= ' in';
+
+					$paneOptions['class'] .= ' active';
+				}
+
+				$panes[] = CHtml::tag('div', $paneOptions, $content);
 			}
 
-		    if (!isset($item['content']))
-			    $item['content'] = '';
-
-			$content = $item['content'];
-			unset($item['content']);
-
-		    if (!isset($item['paneOptions']))
-				$item['paneOptions'] = array();
-
-			$paneOptions = $item['paneOptions'];
-			unset($item['paneOptions']);
-
-			$paneOptions['id'] = $item['id'];
-
-		    if (isset($tab['paneOptions']['class']))
-				$paneOptions['class'] .= ' tab-pane';
-		    else
-				$paneOptions['class'] = 'tab-pane';
-
-		    if ($transitions)
-				$paneOptions['class'] .= ' fade';
-
-		    if ($i === 1)
-		    {
-			    if ($transitions)
-					$paneOptions['class'] .= ' in';
-
-				$paneOptions['class'] .= ' active';
-		    }
-
-		    $panes[] = CHtml::tag('div', $paneOptions, $content);
 			$items[] = $item;
 	    }
 
