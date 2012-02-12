@@ -45,7 +45,7 @@ $modules['webshell'] = array(
         ),
         'migrate'=> array(
             'class'          => 'system.cli.commands.MigrateCommand',
-            'migrationPath'  => 'application.migrations',
+            'migrationPath'  => 'application.components.migrations',
             'migrationTable' => 'tbl_migration',
             'connectionID'   => 'db',
             'templateFile'   => 'application.migrations.template',
@@ -56,7 +56,7 @@ $modules['webshell'] = array(
 
 $modules['gii'] = array(
     'class'          => 'system.gii.GiiModule',
-    'generatorPaths' => array('application.gii'),
+    'generatorPaths' => array('application.components.gii'),
     'password'       => 'giisecret',
     'ipFilters'      => array(
         '127.0.0.1',
