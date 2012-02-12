@@ -45,6 +45,10 @@
         </div>
         <div class="breadcrumbs_container">
             <?php
+            Yii::app()->clientScript->registerScript(
+                'CBreadcrumbs',
+                '$(".breadcrumbs a").last().addClass("current")'
+            );
             $this->widget('zii.widgets.CBreadcrumbs', array(
                 'links'     => $this->crumbs,
                 'separator' => '<div class="breadcrumb_divider"></div>',

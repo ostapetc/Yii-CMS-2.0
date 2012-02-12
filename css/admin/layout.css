@@ -218,6 +218,8 @@ aside#sidebar {
     padding: 14px 0 10px 0;
 }
 
+
+
 .quick_search input[type=text] {
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -232,6 +234,8 @@ aside#sidebar {
     text-indent: 30px;
     background: #fff url(/img/admin/icn_search.png) no-repeat;
     background-position: 10px 6px;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
 }
 
 .quick_search input[type=text]:focus {
@@ -263,6 +267,14 @@ aside#sidebar {
     display: block;
     float: right;
     margin-right: 2%
+}
+
+#sidebar hr {
+    margin: 1px 0 !important;
+}
+
+#sidebar form {
+    margin-bottom: 5px !important;
 }
 
 #sidebar .toggleLink:hover {

@@ -14,7 +14,7 @@ $this->widget('AdminGridView', array(
             'buttons'  => array(
                 'links' => array(
                     'label'    => t('ссылки'),
-                    'imageUrl' => '/images/icons/links.gif',
+                    'imageUrl' => '/img/icons/links.gif',
                     'url'      => 'Yii::app()->createUrl("content/menuLinkAdmin/index", array("menu_id" => $data->id))'
                 )
             ),

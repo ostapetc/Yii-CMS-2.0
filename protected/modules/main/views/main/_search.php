@@ -40,6 +40,6 @@ else
         <span>
             <input name="query" class="editbox_search" id="editbox_search" maxlength="80" value="<?php echo $search_value; ?>" def_val="<?php echo $def_value; ?>" type="text"/>
         </span>
-        <input name="button_search" src="/images/site/search_btn.gif" class="button_search" type="image"/>
+        <input name="button_search" src="/img/site/search_btn.gif" class="button_search" type="image"/>
     </form>
 </div>

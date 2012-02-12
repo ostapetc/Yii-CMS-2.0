@@ -303,7 +303,7 @@ code{
     padding:   0;
 }
 #toogle-menu{
-    background: #fff url(/images/nav_bg.jpg) repeat-x left top;
+    background: #fff url(/img/nav_bg.jpg) repeat-x left top;
     padding:    0 240px 0 0;
     margin:     0;
     text-align: right;
@@ -313,7 +313,7 @@ code{
     /*background: none*/
     /*}*/
 #header .sep{
-    background: transparent url(/images/nav_separator.jpg) repeat-y left top;
+    background: transparent url(/img/nav_separator.jpg) repeat-y left top;
 }
 #header td{
     vertical-align: top;
@@ -328,7 +328,7 @@ code{
     margin:           0 0 10px 0;
 }
 #header ul{
-    list-style-image: url(/images/arrow.gif);
+    list-style-image: url(/img/arrow.gif);
     padding:          0 0 0 18px;
     margin:           8px 0 12px 0;
 }

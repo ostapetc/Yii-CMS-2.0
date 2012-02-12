@@ -34,24 +34,24 @@
 
                 if (!$icon_url)
                 {
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . 'images/admin/actions_icons/' . $icon))
+                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . 'img/admin/actions_icons/' . $icon))
                     {
-                        $icon_url = '/images/admin/actions_icons/' . $icon;
+                        $icon_url = '/img/admin/actions_icons/' . $icon;
                     }
                 }
 
                 if (!$icon_url)
                 {
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . 'images/admin/actions_icons/' . $action . '.png'))
+                    if (file_exists($_SERVER['DOCUMENT_ROOT'] . 'img/admin/actions_icons/' . $action . '.png'))
                     {
-                        $icon_url = '/images/admin/actions_icons/' . $action . '.png';
+                        $icon_url = '/img/admin/actions_icons/' . $action . '.png';
                     }
                 }
             }
 
             if (!$icon_url)
             {
-                $icon_url = '/images/admin/actions_icons/tags.png';
+                $icon_url = '/img/admin/actions_icons/tags.png';
             }
             ?>
             <li class="action_icon" icon_url="<?php echo $icon_url; ?>">

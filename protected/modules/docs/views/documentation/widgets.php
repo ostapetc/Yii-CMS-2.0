@@ -568,7 +568,7 @@ form input[type=text], form textarea, form div.dropdownlist, form div.dropdownli
 form input[type=text] {
     width: 183px;
     height: 31px;
-    background: url(images/input.png) no-repeat;
+    background: url(img/input.png) no-repeat;
     margin: 0;
     padding: 0 8px;
     overflow: hidden;
@@ -578,7 +578,7 @@ form input[type=text] {
 form textarea {
     width: 384px;
     height: 110px;
-    background: url(images/textarea.png) no-repeat;
+    background: url(img/textarea.png) no-repeat;
     padding: 8px;
     margin: 0 0 23px 0;
 }
@@ -586,7 +586,7 @@ form textarea {
 form input[type=submit] {
     width: 103px;
     height: 27px;
-    background: url(images/submit.png) no-repeat;
+    background: url(img/submit.png) no-repeat;
     font-size: 14px;
     color: #000;
     line-height: 2;
@@ -596,13 +596,13 @@ form input[type=submit] {
 }
 
 form input[type=submit]:hover {
-    background: url(images/submit_hover.png) no-repeat;
+    background: url(img/submit_hover.png) no-repeat;
 }
 
 form div.dropdownlist {
     width: 183px;
     height: 31px;
-    background: url(images/input.png) no-repeat;
+    background: url(img/input.png) no-repeat;
     padding: 0 8px;
     margin: 0 20px 0 0;
 }
@@ -630,7 +630,7 @@ form .file-input-box {
     position: relative;
     width: 287px;
     height: 31px;
-    background: url(images/input_file.png) no-repeat right top;
+    background: url(img/input_file.png) no-repeat right top;
     cursor: pointer;
 }
 
@@ -651,7 +651,7 @@ form .file-input {
 
 form input.input-middle {
     width: 97px !important;
-    background: url(images/input_middle.png) no-repeat !important;
+    background: url(img/input_middle.png) no-repeat !important;
 }
 ~~~
 
