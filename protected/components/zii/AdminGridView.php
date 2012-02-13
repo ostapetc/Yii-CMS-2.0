@@ -26,7 +26,7 @@ class AdminGridView extends BootGridView
     public $filter_hint = false;
 
     public $jsPlugin = 'grid';
-    public $template = '{pagerSelect}{summary}<br/>{pager}<br/>{pocket}{items}<br/>{pager}';
+    public $template = '{pagerSelect}{summary}<br/>{pocket}{items}<br/>{pager}';
 
 
     public function init()

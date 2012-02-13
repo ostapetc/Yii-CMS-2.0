@@ -71,7 +71,7 @@ abstract class BaseController extends CController
             return;
         }
 
-        $languages = Language::getArray();
+        $languages = Language::getCachedArray();
 
         $url_parts = explode('/', $_SERVER['REQUEST_URI']);
 

@@ -38,22 +38,19 @@ if (function_exists('lcfirst') === false)
 
 function t($message)
 {
-    $modules_classes = array_keys(AppManager::getModulesData(true));
-
-    $modules_classes[] = 'MainModule';
-    $modules_classes[] = get_class(Yii::app()->controller->module);
-
-    krsort($modules_classes);
-
-    $modules_classes = array_unique($modules_classes);
-
-    foreach ($modules_classes as $module_class)
+    $translated_message = Yii::t('main', $message);
+    if ($translated_message != $message)
     {
-        $translated_message = Yii::t($module_class . '.main', $message);
-        if ($translated_message != $message)
-        {
-            return $translated_message;
-        }
+        return $translated_message;
+    }
+
+    $messages = LanguageMessage::getCachedArray();
+    if (!in_array($message, $messages))
+    {
+        $language_message = new LanguageMessage();
+        $language_message->message  = $message;
+        $language_message->category = LanguageMessage::DEFAULT_CATEGORY;
+        //$language_message->save();
     }
 
     return $message;
