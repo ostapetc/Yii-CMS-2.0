@@ -42,7 +42,7 @@
  * @property CHtmlPurifier $htmlPurifier The HTML purifier instance.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CFormatter.php 3426 2011-10-25 00:01:09Z alexander.makarow $
+ * @version $Id: CFormatter.php 3553 2012-02-06 22:07:58Z alexander.makarow $
  * @package system.utils
  * @since 1.1.0
  */
@@ -184,8 +184,7 @@ class CFormatter extends CApplicationComponent
 	 * Formats the value as a boolean.
 	 * @param mixed $value the value to be formatted
 	 * @return string the formatted result
-	 * @see trueText
-	 * @see falseText
+	 * @see booleanFormat
 	 */
 	public function formatBoolean($value)
 	{

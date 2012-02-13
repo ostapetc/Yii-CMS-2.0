@@ -77,7 +77,7 @@ Yii::import('zii.widgets.grid.CCheckBoxColumn');
  * @property CFormatter $formatter The formatter instance. Defaults to the 'format' application component.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CGridView.php 3426 2011-10-25 00:01:09Z alexander.makarow $
+ * @version $Id: CGridView.php 3551 2012-02-02 12:45:25Z mdomba $
  * @package zii.widgets.grid
  * @since 1.1
  */
@@ -198,7 +198,7 @@ class CGridView extends CBaseListView
 	 */
 	public $selectableRows=1;
 	/**
-	 * @var string the base script URL for all grid view resources (e.g. javascript, CSS file, images).
+	 * @var string the base script URL for all grid view resources (eg javascript, CSS file, images).
 	 * Defaults to null, meaning using the integrated grid view resources (which are published as assets).
 	 */
 	public $baseScriptUrl;

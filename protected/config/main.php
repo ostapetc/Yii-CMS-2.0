@@ -68,7 +68,7 @@ return array(
     'language'   => 'ru',
     'basePath'   => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'       => '',
-    'preload'    => array('log', 'bootstrap'),
+    'preload'    => array('log'),
     'import'     => array_merge($modules_includes, array(
             'application.components.*',
             'application.components.validators.*',

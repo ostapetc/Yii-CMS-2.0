@@ -34,7 +34,7 @@
  * @property string $tableAlias The default table alias.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */
@@ -463,7 +463,7 @@ abstract class CActiveRecord extends CModel
 	 * Note, for composite foreign keys, they can be either listed together, separated by commas or specified as an array
 	 * in format of array('key1','key2'). In case you need to specify custom PK->FK association you can define it as
 	 * array('fk'=>'pk'). For composite keys it will be array('fk_c1'=>'pk_с1','fk_c2'=>'pk_c2').
-	 * and for foreign keys used in MANY_MANY relation, the joining table must be declared as well
+	 * For foreign keys used in MANY_MANY relation, the joining table must be declared as well
 	 * (e.g. 'join_table(fk1, fk2)').
 	 *
 	 * Additional options may be specified as name-value pairs in the rest array elements:
@@ -1861,7 +1861,7 @@ abstract class CActiveRecord extends CModel
 /**
  * CBaseActiveRelation is the base class for all active relations.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  */
 class CBaseActiveRelation extends CComponent
@@ -2002,7 +2002,7 @@ class CBaseActiveRelation extends CComponent
 /**
  * CStatRelation represents a statistical relational query.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  */
 class CStatRelation extends CBaseActiveRelation
@@ -2038,7 +2038,7 @@ class CStatRelation extends CBaseActiveRelation
 /**
  * CActiveRelation is the base class for representing active relations that bring back related objects.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */
@@ -2132,7 +2132,7 @@ class CActiveRelation extends CBaseActiveRelation
 /**
  * CBelongsToRelation represents the parameters specifying a BELONGS_TO relation.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */
@@ -2144,7 +2144,7 @@ class CBelongsToRelation extends CActiveRelation
 /**
  * CHasOneRelation represents the parameters specifying a HAS_ONE relation.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */
@@ -2162,7 +2162,7 @@ class CHasOneRelation extends CActiveRelation
 /**
  * CHasManyRelation represents the parameters specifying a HAS_MANY relation.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */
@@ -2213,7 +2213,7 @@ class CHasManyRelation extends CActiveRelation
 /**
  * CManyManyRelation represents the parameters specifying a MANY_MANY relation.
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */
@@ -2226,7 +2226,7 @@ class CManyManyRelation extends CHasManyRelation
  * CActiveRecordMetaData represents the meta-data for an Active Record class.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveRecord.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveRecord.php 3533 2012-01-08 22:07:55Z mdomba $
  * @package system.db.ar
  * @since 1.0
  */

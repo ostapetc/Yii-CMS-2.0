@@ -6,8 +6,9 @@
     <title>Yii CMS Admin Panel</title>
 
     <?php
+    Yii::app()->bootstrap->init();
+
     $cs = Yii::app()->clientScript;
-    $cs->registerCoreScript('jquery');
     $cs->registerCoreScript('jquery.ui');
     $cs->registerCssFile('/css/admin/layout.css');
     $cs->registerScriptFile('/js/admin/hideshow.js');

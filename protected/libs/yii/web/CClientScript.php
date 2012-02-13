@@ -14,7 +14,7 @@
  * @property string $coreScriptUrl The base URL of all core javascript files.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CClientScript.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CClientScript.php 3559 2012-02-09 21:12:53Z alexander.makarow $
  * @package system.web
  * @since 1.0
  */
@@ -744,11 +744,13 @@ class CClientScript extends CApplicationComponent
 	 * @param string $name the name of the script package.
 	 * @param array $definition the definition array of the script package,
 	 * @see CClientScript::packages.
+	 * @return CClientScript the CClientScript object itself (to support method chaining, available since version 1.1.10).
 	 *
 	 * @since 1.1.9
 	 */
 	public function addPackage($name,$definition)
 	{
 		$this->packages[$name]=$definition;
+		return $this;
 	}
 }

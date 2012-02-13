@@ -15,7 +15,7 @@
  * {@link CActiveRecord}.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveFinder.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveFinder.php 3562 2012-02-13 01:27:06Z qiang.xue $
  * @package system.db.ar
  * @since 1.0
  */
@@ -319,7 +319,7 @@ class CActiveFinder extends CComponent
  * CJoinElement represents a tree node in the join tree created by {@link CActiveFinder}.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveFinder.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveFinder.php 3562 2012-02-13 01:27:06Z qiang.xue $
  * @package system.db.ar
  * @since 1.0
  */
@@ -1089,6 +1089,8 @@ class CJoinElement
 	{
 		$schema=$this->_builder->getSchema();
 		$joins=array();
+		if(is_string($fks))
+			$fks=preg_split('/\s*,\s*/',$fks,-1,PREG_SPLIT_NO_EMPTY);
 		foreach($fks as $i=>$fk)
 		{
 			if(!is_int($i))
@@ -1204,7 +1206,7 @@ class CJoinElement
  * CJoinQuery represents a JOIN SQL statement.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveFinder.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveFinder.php 3562 2012-02-13 01:27:06Z qiang.xue $
  * @package system.db.ar
  * @since 1.0
  */
@@ -1363,7 +1365,7 @@ class CJoinQuery
  * CStatElement represents STAT join element for {@link CActiveFinder}.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CActiveFinder.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CActiveFinder.php 3562 2012-02-13 01:27:06Z qiang.xue $
  * @package system.db.ar
  */
 class CStatElement

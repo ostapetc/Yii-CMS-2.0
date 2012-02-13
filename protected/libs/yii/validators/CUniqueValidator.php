@@ -20,7 +20,7 @@
  * </ul>
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CUniqueValidator.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CUniqueValidator.php 3549 2012-01-27 15:36:43Z qiang.xue $
  * @package system.validators
  * @since 1.0
  */
@@ -122,7 +122,7 @@ class CUniqueValidator extends CValidator
 		if($exists)
 		{
 			$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} "{value}" has already been taken.');
-			$this->addError($object,$attribute,$message,array('{value}'=>$value));
+			$this->addError($object,$attribute,$message,array('{value}'=>CHtml::encode($value)));
 		}
 	}
 }
