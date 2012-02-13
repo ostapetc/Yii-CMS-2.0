@@ -1,4 +1,9 @@
 <?php
+
+echo t('Скрыть');
+echo t('Система');
+
+
 $this->page_title = t('Страницы сайта');
 $this->widget('AdminGridView', array(
 	'id' => 'page-grid',
@@ -15,7 +20,7 @@ $this->widget('AdminGridView', array(
 			'name'  => 'is_published',
 			'value' => '$data->is_published ? t("Да") : t("Нет")'
 		),
-        array('name' => 'lang', 'value' => '$data->language->name'),		
+        array('name' => 'lang', 'value' => '$data->language->name'),
 		array(
 			'class'=>'CButtonColumn',
 		),

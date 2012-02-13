@@ -13,7 +13,7 @@ class UrlManager extends CUrlManager
     {
         $multi_language_site = true;
 
-        $languages = Language::getArray();
+        $languages = Language::getCachedArray();
         $languages = array_keys($languages);
         $languages = implode('|', $languages);
 

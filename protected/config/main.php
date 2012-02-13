@@ -65,24 +65,27 @@ $modules['gii'] = array(
 );
 
 return array(
-    'language'   => 'ru',
-    'basePath'   => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'       => '',
-    'preload'    => array('log', 'bootstrap'),
-    'import'     => array_merge($modules_includes, array(
-            'application.components.*',
-            'application.components.validators.*',
-            'application.components.zii.*',
-            'application.components.formElements.*',
-            'application.components.baseWidgets.*',
-            'application.libs.tools.*',
-            'ext.yiiext.filters.setReturnUrl.ESetReturnUrlFilter',
-            'application.modules.srbac.controllers.SBaseController',
-        )),
-
+    'language' => 'ru',
+    'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+    'name'     => '',
+    'preload'  => array('log', 'bootstrap'),
+    'import'   => array_merge($modules_includes, array(
+        'application.components.*',
+        'application.components.validators.*',
+        'application.components.zii.*',
+        'application.components.formElements.*',
+        'application.components.baseWidgets.*',
+        'application.libs.tools.*',
+        'ext.yiiext.filters.setReturnUrl.ESetReturnUrlFilter',
+        'application.modules.srbac.controllers.SBaseController',
+    )),
     'modules'    => $modules,
-
     'components' => array(
+        'messages' => array(
+            'class' => 'CDbMessageSource',
+            'sourceMessageTable'     => 'languages_messages',
+            'translatedMessageTable' => 'languages_translations'
+        ),
         'bootstrap'=>array(
             'class'=>'application.components.bootstrap.components.Bootstrap'
         ),

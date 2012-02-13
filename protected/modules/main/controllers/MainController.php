@@ -72,7 +72,7 @@ class MainController extends BaseController
 
     public function actionChangeLanguage($set_language, $back_url)
     {
-        $languages = Language::getArray();
+        $languages = Language::getCachedArray();
         if (!isset($languages[$set_language]))
         {
             throw new CHttpException("Неизвестный системе язык: '{$set_language}'");

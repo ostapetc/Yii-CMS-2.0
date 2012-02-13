@@ -4,6 +4,7 @@ abstract class ActiveRecordModel extends CActiveRecord
 {
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
+    const SCENARIO_SEARCH = 'search';
 
 
     abstract public function name();

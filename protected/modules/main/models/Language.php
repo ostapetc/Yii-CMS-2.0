@@ -57,7 +57,7 @@ class Language extends ActiveRecordModel
 	}
 
 
-    public static function getArray()
+    public static function getCachedArray()
     {
         $languages = Yii::app()->cache->get('languages');
         if (!$languages)
