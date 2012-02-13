@@ -8,16 +8,12 @@
 
 
 <!--стили сайта-->
-<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<?php
+Yii::app()->bootstrap->init();
+$assets = Yii::app()->getModule('docs')->assetsUrl();
+Yii::app()->clientScript->registerCssFile($assets.'/css/styles.css');
+?>
 
-<!--стили навигаторов-->
-
-<!--стили форм-->
-<!--<link rel="stylesheet" type="text/css" href="/css/site/form.css"/>-->
-
-<!--стили виджетов-->
-
-<?php Yii::app()->clientScript->registerCoreScript('jquery') ?>
 
 <style type="text/css">
 body{
@@ -398,7 +394,7 @@ code{
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3">
-            <div class="well sidebar-nav">
+            <div class="well sidebar-nav" style="position: fixed; width: auto;">
                 <?php
                 $items = array();
                 foreach (Documentation::model()->orderByLft()->findAll() as $doc)

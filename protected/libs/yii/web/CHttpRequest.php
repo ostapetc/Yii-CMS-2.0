@@ -53,7 +53,7 @@
  * @property string $csrfToken The random token for CSRF validation.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CHttpRequest.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CHttpRequest.php 3560 2012-02-10 14:13:00Z mdomba $
  * @package system.web
  * @since 1.0
  */
@@ -383,7 +383,7 @@ class CHttpRequest extends CApplicationComponent
 			if(($pos=strpos($pathInfo,'?'))!==false)
 			   $pathInfo=substr($pathInfo,0,$pos);
 
-			$pathInfo=$this->urldecode($pathInfo);
+			$pathInfo=$this->decodePathInfo($pathInfo);
 
 			$scriptUrl=$this->getScriptUrl();
 			$baseUrl=$this->getBaseUrl();
@@ -402,15 +402,16 @@ class CHttpRequest extends CApplicationComponent
 	}
 
 	/**
-	 * Improved variant of urldecode.
-	 * Properly decodes both UTF-8 and ISO-8859-1 encoded URIs.
-	 *
-	 * @param string $str encoded string
-	 * @return string decoded string
+	 * Decodes the path info.
+	 * This method is an improved variant of the native urldecode() function and used in {@link getPathInfo getPathInfo()} to
+	 * decode the path part of the request URI. You may override this method to change the way the path info is being decoded.
+	 * @param string $pathInfo encoded path info
+	 * @return string decoded path info
+	 * @since 1.1.10
 	 */
-	private function urldecode($str)
+	protected function decodePathInfo($pathInfo)
 	{
-		$str = urldecode($str);
+		$pathInfo = urldecode($pathInfo);
 
 		// is it UTF-8?
 		// http://w3.org/International/questions/qa-forms-utf-8.html
@@ -423,13 +424,13 @@ class CHttpRequest extends CApplicationComponent
 		 | \xF0[\x90-\xBF][\x80-\xBF]{2}      # planes 1-3
 		 | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
 		 | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
-		)*$%xs', $str))
+		)*$%xs', $pathInfo))
 		{
-			return $str;
+			return $pathInfo;
 		}
 		else
 		{
-			return utf8_encode($str);
+			return utf8_encode($pathInfo);
 		}
 	}
 
@@ -792,8 +793,8 @@ class CHttpRequest extends CApplicationComponent
 	 * As this header directive is non-standard different directives exists for different web servers applications:
 	 * <ul>
 	 * <li>Apache: {@link http://tn123.org/mod_xsendfile X-Sendfile}</li>
-	 * <li>Lighttpd v1.4: {@link http://redmine.lighttpd.net/wiki/lighttpd/X-LIGHTTPD-send-file X-LIGHTTPD-send-file}</li>
-	 * <li>Lighttpd v1.5: X-Sendfile {@link http://redmine.lighttpd.net/wiki/lighttpd/X-LIGHTTPD-send-file X-Sendfile}</li>
+	 * <li>Lighttpd v1.4: {@link http://redmine.lighttpd.net/projects/lighttpd/wiki/X-LIGHTTPD-send-file X-LIGHTTPD-send-file}</li>
+	 * <li>Lighttpd v1.5: {@link http://redmine.lighttpd.net/projects/lighttpd/wiki/X-LIGHTTPD-send-file X-Sendfile}</li>
 	 * <li>Nginx: {@link http://wiki.nginx.org/XSendfile X-Accel-Redirect}</li>
 	 * <li>Cherokee: {@link http://www.cherokee-project.com/doc/other_goodies.html#x-sendfile X-Sendfile and X-Accel-Redirect}</li>
 	 * </ul>
@@ -810,29 +811,26 @@ class CHttpRequest extends CApplicationComponent
 	 * <b>Example</b>:
 	 * <pre>
 	 * <?php
-	 *   Yii::app()->request->xSendFile('/home/user/Pictures/picture1.jpg',array(
-	 *	  'saveName'=>'image1.jpg',
-	 *	  'mimeType'=>'image/jpeg',
-	 *	  'terminate'=>false,
-	 *   ));
+	 *    Yii::app()->request->xSendFile('/home/user/Pictures/picture1.jpg',array(
+	 *        'saveName'=>'image1.jpg',
+	 *        'mimeType'=>'image/jpeg',
+	 *        'terminate'=>false,
+	 *    ));
 	 * ?>
 	 * </pre>
 	 * @param string $filePath file name with full path
 	 * @param array $options additional options:
 	 * <ul>
 	 * <li>saveName: file name shown to the user, if not set real file name will be used</li>
-	 * <li>mimeType: mime type of the file, if not set it will be guessed automatically based on the file name.</li>
+	 * <li>mimeType: mime type of the file, if not set it will be guessed automatically based on the file name, if set to null no content-type header will be sent.</li>
 	 * <li>xHeader: appropriate x-sendfile header, defaults to "X-Sendfile"</li>
 	 * <li>terminate: whether to terminate the current application after calling this method, defaults to true</li>
-	 * <li>forceDownload: specifies whether the file will be downloaded or shown inline. Defaults to true. (Since version 1.1.9.)</li>
+	 * <li>forceDownload: specifies whether the file will be downloaded or shown inline, defaults to true. (Since version 1.1.9.)</li>
+	 * <li>addHeaders: an array of additional http headers in header-value pairs (available since version 1.1.10)</li>
 	 * </ul>
-	 * @return boolean false if file not found, true otherwise.
 	 */
 	public function xSendFile($filePath, $options=array())
 	{
-		if(!is_file($filePath))
-			return false;
-
 		if(!isset($options['forceDownload']) || $options['forceDownload'])
 			$disposition='attachment';
 		else
@@ -850,14 +848,18 @@ class CHttpRequest extends CApplicationComponent
 		if(!isset($options['xHeader']))
 			$options['xHeader']='X-Sendfile';
 
-		header('Content-type: '.$options['mimeType']);
+		if($options['mimeType'] !== null)
+			header('Content-type: '.$options['mimeType']);
 		header('Content-Disposition: '.$disposition.'; filename="'.$options['saveName'].'"');
+		if(isset($options['addHeaders']))
+		{
+			foreach($options['addHeaders'] as $header=>$value)
+				header($header.': '.$value);
+		}
 		header(trim($options['xHeader']).': '.$filePath);
 
 		if(!isset($options['terminate']) || $options['terminate'])
 			Yii::app()->end();
-
-		return true;
 	}
 
 	/**
@@ -944,7 +946,7 @@ class CHttpRequest extends CApplicationComponent
  * </pre>
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CHttpRequest.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CHttpRequest.php 3560 2012-02-10 14:13:00Z mdomba $
  * @package system.web
  * @since 1.0
  */

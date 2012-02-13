@@ -24,7 +24,13 @@ class ImageHolder //Класс Image занять под расширение
 
     public function __toString()
     {
-        return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
+        try
+        {
+            return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
+        } catch (Exception $e)
+        {
+            Yii::app()->handleException($e);
+        }
     }
 
 
@@ -74,7 +80,7 @@ class ImageHelper
             $dir = $doc_root . $dir;
         }
 
-        $dir = rtrim($dir, '/') . '/';
+        $dir       = rtrim($dir, '/') . '/';
         $path_info = pathinfo($file);
 
         $thumb_name = $width . "x" . $height;

@@ -23,7 +23,7 @@
  * </ul>
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CExistValidator.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id: CExistValidator.php 3549 2012-01-27 15:36:43Z qiang.xue $
  * @package system.validators
  */
 class CExistValidator extends CValidator
@@ -85,7 +85,7 @@ class CExistValidator extends CValidator
 		if(!$finder->exists($criteria))
 		{
 			$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} "{value}" is invalid.');
-			$this->addError($object,$attribute,$message,array('{value}'=>$value));
+			$this->addError($object,$attribute,$message,array('{value}'=>CHtml::encode($value)));
 		}
 	}
 }
