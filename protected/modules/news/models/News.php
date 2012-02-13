@@ -16,6 +16,7 @@ class News extends ActiveRecordModel
         'height' => null
     );
 
+
     public function name()
     {
         return 'Новости';
@@ -63,7 +64,7 @@ class News extends ActiveRecordModel
     {
         return array(
             array(
-                'user_id, title, text, state, lang', 'required'
+                'user_id, title, text, lang', 'required'
             ), array(
                 'photo', 'file',
                 'types'      => 'jpg, jpeg, gif, png, tif',
@@ -86,10 +87,10 @@ class News extends ActiveRecordModel
                 'title', 'length',
                 'max' => 250
             ), array(
-                'state', 'length',
-                'max' => 6
+                'is_published', 'length',
+                'max' => 1
             ), array(
-                'id, user_id, title, text, photo, state, date, date_create', 'safe',
+                'id, user_id, title, text, photo, is_published, date, date_create', 'safe',
                 'on' => 'search'
             ),
         );
@@ -124,7 +125,7 @@ class News extends ActiveRecordModel
         $criteria->compare($alias . '.title', $this->title, true);
         $criteria->compare($alias . '.text', $this->text, true);
         $criteria->compare($alias . '.photo', $this->photo);
-        $criteria->compare($alias . '.state', $this->state, true);
+        $criteria->compare($alias . '.is_published', $this->is_published, true);
         $criteria->compare($alias . '.date', $this->date, true);
         $criteria->compare($alias . '.date_create', $this->date_create, true);
 
