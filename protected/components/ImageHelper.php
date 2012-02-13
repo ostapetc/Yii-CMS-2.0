@@ -29,7 +29,7 @@ class ImageHolder //Класс Image занять под расширение
             return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
         } catch (Exception $e)
         {
-            Yii::app()->handleException($e);
+//            Yii::app()->handleException($e);
         }
     }
 
