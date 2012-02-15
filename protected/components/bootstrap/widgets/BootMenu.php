@@ -174,7 +174,7 @@ class BootMenu extends BootWidget
 	{
 		if (isset($item['icon'])) {
 			if (strpos($item['icon'], 'icon') === false)
-				$item['icon'] = 'icon-'.$item['icon'];
+                $item['icon'] = 'icon-'.implode(' icon-', explode(' ', $item['icon']));
 
 			$item['label'] = '<i class="'.$item['icon'].'"></i> '.$item['label'];
 		}
