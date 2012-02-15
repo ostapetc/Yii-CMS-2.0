@@ -57,20 +57,6 @@ class BaseForm extends CForm
     }
 
 
-    public function runSideMethod()
-    {
-        $params         = func_get_args();
-        $func_base_name = array_shift($params);
-
-        $function = $func_base_name . ucfirst($this->side);
-        if (method_exists($this, $function))
-        {
-            $params = call_user_func_array(array($this, $function), $params);
-            //it's not a bug
-        }
-    }
-
-
     public function __toString()
     {
 
@@ -79,20 +65,27 @@ class BaseForm extends CForm
         if ($this->side == 'client') //only bootstrap
         {
 
-            $this->activeForm['class']                                   = 'BootActiveForm';
-//            $this->activeForm['errorMessageCssClass']                    = "help-block";
-//            $this->activeForm['clientOptions']['afterValidate'] = 'js:function (form, data, hasError) {
-//
-//                var dd = $("#"+attribute.inputID).closest("dd");
-//                var add = hasError ? "error" : "success";
-//                var remove = hasError ? "success" : "error";
-//                dd.addClass(add).removeClass(remove);
-//            }';
+            $this->activeForm['class']                = 'BootActiveForm';
+            $this->activeForm['errorMessageCssClass'] = "help-block";
+            //            $this->activeForm['clientOptions']['afterValidate'] = 'js:function (form, data, hasError) {
+            //
+            //                var dd = $("#"+attribute.inputID).closest("dd");
+            //                var add = hasError ? "error" : "success";
+            //                var remove = hasError ? "success" : "error";
+            //                dd.addClass(add).removeClass(remove);
+            //            }';
         }
 
         if (!($this->parent instanceof self))
         {
-            $this->runSideMethod('_registerScripts');
+            if ($this->side == 'client')
+            {
+                Yii::app()->clientScript
+                    ->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
+                    ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
+                    ->registerCssFile('/js/plugins/clientForm/form.css');
+
+            }
 
             if ($this->_clear)
             {
@@ -117,33 +110,14 @@ class BaseForm extends CForm
     }
 
 
-    private function _registerScriptsAdmin()
-    {
-
-    }
-
-
-    private function _registerScriptsClient()
-    {
-        $id = $this->activeForm['id'];
-        Yii::app()->clientScript
-            ->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
-            ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
-            ->registerCssFile('/js/plugins/clientForm/form.css');
-    }
-
-
     public function renderBody()
     {
         $output = parent::renderBody();
 
-        if (!($this->getParent() instanceof self))
+        if (!($this->getParent() instanceof self) && $this->side == 'admin')
         {
-            if ($this->side == 'admin')
-            {
-                $this->attributes['class'] = 'admin_form';
-                return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
-            }
+            $this->attributes['class'] = 'admin_form';
+            return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
         }
 
         return $output;
@@ -199,7 +173,7 @@ class BaseForm extends CForm
         $tpl = '_form';
         if ($this->side == 'admin')
         {
-            $tpl= 'admin.' . $tpl;
+            $tpl = 'admin.' . $tpl;
         }
 
         $res = "<dl class='$class control-group'><dd class='input-prepend'>";
@@ -233,54 +207,17 @@ class BaseForm extends CForm
             ));
         }
 
-        $output = '';
-        foreach ($this->getButtons() as $button)
-        {
-            $output .= $this->renderElement($button);
-        }
-        return $output !== '' ? "<div class=\"buttons\">" . $output . "</div>\n" : '';
+        return parent::renderButtons();
     }
 
 
     /***** Функции оформления формы *******/
-
     function addAttributesToButtons()
     {
         foreach ($this->buttons as $i => $button)
         {
-            $this->runSideMethod('_addAttributesToButtons', $button);
             $this->buttons[$i] = $button;
         }
-    }
-
-
-    private function _addAttributesToButtonsAdmin($button)
-    {
-        $length = mb_strlen($button->value, 'utf-8');
-
-        $class = isset($button->attributes['class']) ? $button->attributes['class'] . " submit" : "submit";
-
-        if ($length > 11)
-        {
-            $class .= ' long';
-        }
-        elseif ($length > 6)
-        {
-            $class .= ' mid';
-        }
-        else
-        {
-            $class .= ' small';
-        }
-
-        $button->attributes['class'] = $class;
-        return $button;
-    }
-
-
-    private function _addAttributesToButtonsClient($button)
-    {
-        return $button;
     }
 
 
@@ -302,6 +239,5 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
-
 
 }
