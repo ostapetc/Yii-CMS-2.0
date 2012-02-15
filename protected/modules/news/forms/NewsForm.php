@@ -10,7 +10,7 @@ return array(
     'elements'   => array(
         'title'        => array(
             'type'  => 'text',
-            'class' => 'big'
+            'class' => 'big',
         ),
         'text'         => array('type' => 'editor'),
         'photo'        => array('type' => 'file'),

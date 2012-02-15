@@ -11,7 +11,7 @@
 <?php
 Yii::app()->bootstrap->init();
 $assets = Yii::app()->getModule('docs')->assetsUrl();
-Yii::app()->clientScript->registerCssFile($assets.'/css/styles.css');
+Yii::app()->clientScript->registerCssFile($assets . '/css/styles.css');
 ?>
 
 
@@ -289,72 +289,14 @@ code{
 }
 
     /*menu*/
-#header{ background: #5D5D5D; display: none }
-#header table{ margin: 10px 0 20px 0; }
-#header, #header table, #header tbody, #header tr{ overflow: hidden; }
-#header h3{
-    font-size: 14px;
-    color:     #fff;
-    margin:    0;
-    padding:   0;
-}
-#toogle-menu{
-    background: #fff url(/img/nav_bg.jpg) repeat-x left top;
-    padding:    0 240px 0 0;
-    margin:     0;
-    text-align: right;
-}
-    /*#header td:first-child{*/
-    /*{*/
-    /*background: none*/
-    /*}*/
-#header .sep{
-    background: transparent url(/img/nav_separator.jpg) repeat-y left top;
-}
-#header td{
-    vertical-align: top;
-    border:         none !important;
-    width:          25%;
-    padding:        0 0 0 20px;
-}
-#header p{
-    color:            #eee;
-    background-color: transparent;
-    padding:          0;
-    margin:           0 0 10px 0;
-}
-#header ul{
-    list-style-image: url(/img/arrow.gif);
-    padding:          0 0 0 18px;
-    margin:           8px 0 12px 0;
-}
-#header li{
-    padding: 0;
-    margin:  0 0 4px 0;
+.sidebar{
+    position: fixed;
+    width:    200px;
 }
 
-#header a{
-    color:            #eee !important;
-    background-color: transparent;
-    text-decoration:  none;
-    font-weight:      normal;
+.center{
+    padding: 0 0 0 200px
 }
-
-#header a:visited{
-    color:            #eee !important;
-    background-color: transparent;
-    text-decoration:  none;
-}
-
-#header a:hover{
-    color:            #ccc !important;
-    text-decoration:  none;
-    background-color: transparent;
-}
-#header .no-complete, #header .no-complete:hover{
-    color: #999 !important;
-}
-
 
 </style>
 
@@ -370,6 +312,28 @@ code{
         });
     });
 </script>
+<?php
+$items = array();
+foreach (Documentation::model()->orderByLft()->findAll() as $doc)
+{
+    if ($doc->depth == 1)
+    {
+        continue;
+    }
+    $tmp = array(
+        'label'       => $doc->title,
+        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
+        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
+
+    );
+    if ($doc->depth > 2)
+    {
+        $tmp['url'] = $doc->href;
+    }
+    $items[] = $tmp;
+}
+
+?>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -394,27 +358,8 @@ code{
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3">
-            <div class="well sidebar-nav" style="position: fixed; width: auto;">
+            <div class="well sidebar-nav sidebar">
                 <?php
-                $items = array();
-                foreach (Documentation::model()->orderByLft()->findAll() as $doc)
-                {
-                    if ($doc->depth == 1)
-                    {
-                        continue;
-                    }
-                    $tmp = array(
-                        'label'       => $doc->title,
-                        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
-                        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
-
-                    );
-                    if ($doc->depth > 2)
-                    {
-                        $tmp['url'] = $doc->href;
-                    }
-                    $items[] = $tmp;
-                }
                 $this->widget('ClientMenu', array(
                     'items'       => $items,
                     'htmlOptions' => array(
@@ -424,11 +369,10 @@ code{
                 )) ?>
             </div>
         </div>
-        <div class="span9">
+        <div class="span9 center">
             <?php echo $content ?>
         </div>
     </div>
-    <hr>
 </div>
 
 

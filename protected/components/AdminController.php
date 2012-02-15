@@ -10,6 +10,12 @@ abstract class AdminController extends BaseController
 
     public $tabs;
 
+    public function filters()
+    {
+        return array(
+            'postOnly + delete'
+        );
+    }
 
     private function initAssets()
     {
@@ -55,6 +61,8 @@ abstract class AdminController extends BaseController
 
     public function beforeAction($action)
     {
+        Yii::app()->bootstrap->init();
+
         if (Yii::app()->user->isGuest && ($action->id != 'login'))
         {
             $this->redirect(array('/admin/login'));
