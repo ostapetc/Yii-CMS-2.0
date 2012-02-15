@@ -57,7 +57,7 @@ function createDropDown() {
     });
 
     $(".flag").each(function() {
-        var icon= $(this).attr('lang').toUpperCase() + '.png';
+        var icon= $(this).attr('lang') + '.png';
         $(this).attr('style', 'background-image: url(/img/icons/flags/' + icon + ')');
     });
 }

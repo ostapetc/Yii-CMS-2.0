@@ -1,6 +1,8 @@
 <?php
 $this->page_title = 'Управление';
 
+$config = AppManager::getConfig();
+
 $this->widget('AdminGridView', array(
 	'id' => 'language-grid',
 	'dataProvider' => $model->search(),
@@ -9,8 +11,16 @@ $this->widget('AdminGridView', array(
 	    'id',
 		'name',
 		array(
-			'class' => 'CButtonColumn',
-			'template' => '{update}{delete}'
+			'class'    => 'CButtonColumn',
+			'template' => '{update}{delete}',
+            'buttons'  => array(
+                'delete' => array(
+                    'visible' => function($i, $data) {
+                        $config = AppManager::getConfig();
+                        return $config["language"] != $data->id;
+                    }
+                )
+            )
 		),
 	),
 )); 

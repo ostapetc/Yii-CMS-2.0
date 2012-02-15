@@ -6,6 +6,8 @@ class LanguageMessage extends ActiveRecordModel
 
     const DEFAULT_CATEGORY = 'main';
 
+    public $translations;
+
 
 	public static function model($className=__CLASS__)
 	{

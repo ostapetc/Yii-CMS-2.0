@@ -1,0 +1,8 @@
+#lang_label {
+    width: 16px;
+    height: 11px;
+    border: 1px solid red;
+    /*position: absolute;*/
+    margin-top: 4px;
+    margin-left: 10px;
+}
