@@ -41,8 +41,8 @@ class MainModule extends WebModule
             'Обратная связь'           => '/main/feedbackAdmin/manage',
             'Языки'                    => '/main/LanguageAdmin/manage',
             'Добавить язык'            => '/main/LanguageAdmin/create',
-            'Языки (переводы)'         => '/main/LanguageTranslationAdmin/manage',
-            'Языки (добавить перевод)' => '/main/LanguageTranslationAdmin/create',
+            'Языки (переводы)'         => '/main/LanguageMessageAdmin/manage',
+            'Языки (добавить перевод)' => '/main/LanguageMessageAdmin/create',
             'Настройки'                => '/main/SettingAdmin/manage',
         );
     }
@@ -83,7 +83,6 @@ class MainModule extends WebModule
             '/search'    => 'main/main/search',
             'sitemap'    => 'main/help/sitemap',
             'sitemap.xml'=> 'main/help/sitemapxml'
-
         );
     }
 }

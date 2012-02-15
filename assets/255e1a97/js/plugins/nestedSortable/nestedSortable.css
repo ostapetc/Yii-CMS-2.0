@@ -1,0 +1,35 @@
+.notice {
+    color: #c33;
+}
+.nestedSortable{
+    margin: 0 0 20px 0;
+}
+.nestedSortable .ui-nestedSortable-error {
+    background: #fbe3e4;
+    color: #8a1f11;
+}
+
+.nestedSortable ul {
+    margin: 0 0 0 25px !important;
+    padding: 0 !important;
+    padding-left: 30px;
+    list-style-type: none;
+}
+
+.nestedSortable li {
+    margin: 7px 0 0 0;
+    padding: 0;
+}
+
+.nestedSortable li div {
+    padding: 3px;
+    margin: 0;
+    position: relative;
+}
+
+.drag{
+    cursor: move;
+    position: absolute;
+    top:6px;
+    margin: 0 0 0 10px;
+}
