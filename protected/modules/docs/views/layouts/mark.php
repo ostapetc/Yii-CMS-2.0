@@ -347,14 +347,6 @@ foreach (Documentation::model()->orderByLft()->findAll() as $doc)
 
             <div class="nav-collapse">
                 <ul class="nav pull-right">
-                    <?php
-                    foreach ($items as $item)
-                    {
-                        echo '<li>';
-                        echo CHtml::link('Action','#');
-                        echo '</li>';
-                    }
-                    ?>
                 </ul>
             </div>
             <!--/.nav-collapse -->

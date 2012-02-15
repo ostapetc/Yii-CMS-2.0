@@ -95,7 +95,7 @@ class Bootstrap extends CApplicationComponent
 	 * @since 0.9.8
 	 */
 	protected function registerCorePlugins()
-	{
+    {
 		if (!$this->isPluginDisabled(self::PLUGIN_TRANSITION))
 			$this->enableTransitions();
 

@@ -10,6 +10,12 @@ abstract class AdminController extends BaseController
 
     public $tabs;
 
+    public function filters()
+    {
+        return array(
+            'postOnly + delete'
+        );
+    }
 
     private function initAssets()
     {

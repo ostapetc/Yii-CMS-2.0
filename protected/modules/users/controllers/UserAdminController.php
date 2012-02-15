@@ -26,7 +26,7 @@ class UserAdminController extends AdminController
 
         $model = new User(User::SCENARIO_LOGIN);
 
-        $form = new BaseForm('users.LoginForm', $model);
+        $form         = new BaseForm('users.LoginForm', $model);
         $form->action = $this->createUrl('/users/userAdmin/login');
 
         $params = array(
@@ -40,7 +40,8 @@ class UserAdminController extends AdminController
             $model->attributes = $_POST["User"];
             if ($model->validate())
             {
-                $remember_me = isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
+                $remember_me =
+                    isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
 
                 $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
 
@@ -146,7 +147,7 @@ class UserAdminController extends AdminController
 
                 Implex::refreshXLS(get_class($model));
 
-                $this->redirect('view',array(
+                $this->redirect('view', array(
                     'id'=> $model->id
                 ));
             }
@@ -160,21 +161,14 @@ class UserAdminController extends AdminController
 
     public function actionDelete($id)
     {
-        if (Yii::app()->request->isPostRequest)
-        {
-            $model = $this->loadModel($id);
-            $model->delete();
+        $model = $this->loadModel($id);
+        $model->delete();
 
-            if (!isset($_GET['ajax']))
-            {
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-            }
-
-            Implex::refreshXLS(get_class($model));
-        }
-        else
+        if (!isset($_GET['ajax']))
         {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
+
+        Implex::refreshXLS(get_class($model));
     }
 }
