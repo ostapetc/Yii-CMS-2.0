@@ -5,3 +5,6 @@ a.btn:hover, a.btn:visited, a.btn:link{
 {
     line-height: 25px
 }
+.errorMessage{
+    color:#B94A48
+}
