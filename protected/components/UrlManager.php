@@ -6,8 +6,19 @@ class UrlManager extends CUrlManager
     {
         $url = parent::createUrl($route, $params);
 
+//        $url_parts = explode('/', $url);
+//
+//        if (isset($url_parts[1]))
+//        {
+//            if (!in_array($url_parts[1], array_keys(Language::getCachedArray())))
+//            {
+//                $url = '/' . Yii::app()->session['language'] . $url;
+//            }
+//        }
+
         return $url;
     }
+
 
     public function collectRules()
     {
@@ -56,6 +67,5 @@ class UrlManager extends CUrlManager
 
         Yii::app()->urlManager->addRules($routes);
     }
-
 }
 

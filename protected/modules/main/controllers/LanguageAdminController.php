@@ -63,7 +63,7 @@ class LanguageAdminController extends AdminController
 
         if (!isset($_GET['ajax']))
         {
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
         }
     }
 

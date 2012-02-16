@@ -290,6 +290,12 @@ class AppManager
 
         return self::$_modules_client_menu;
     }
+
+
+    public static function getConfig()
+    {
+        return include PROTECTED_PATH . 'config/main.php';
+    }
 }
 
 

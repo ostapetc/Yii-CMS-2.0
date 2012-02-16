@@ -33,7 +33,7 @@ class ContentModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Список страниц'    => '/content/pageAdmin/manage',
+            'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
             'Добавить страницу' => '/content/pageAdmin/create',
             'Блоки страниц'     => '/content/pageBlockAdmin/manage',
             'Добавить блок'     => '/content/pageBlockAdmin/create',

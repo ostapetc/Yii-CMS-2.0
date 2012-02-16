@@ -78,6 +78,8 @@ class MainController extends BaseController
             throw new CHttpException("Неизвестный системе язык: '{$set_language}'");
         }
 
+        Yii::app()->session['language'] = $set_language;
+
         $back_url    = explode('/', base64_decode($back_url));
         $back_url[1] = $set_language;
         $back_url    = implode('/', $back_url);

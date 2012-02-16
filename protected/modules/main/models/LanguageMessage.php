@@ -6,6 +6,8 @@ class LanguageMessage extends ActiveRecordModel
 
     const DEFAULT_CATEGORY = 'main';
 
+    public $translations;
+
 
 	public static function model($className=__CLASS__)
 	{
@@ -28,19 +30,11 @@ class LanguageMessage extends ActiveRecordModel
 	public function rules()
 	{
 		return array(
-            array('message, category', 'required'),
+            array('message', 'required'),
 			array('category', 'length', 'max' => 32),
 			array('message', 'safe'),
             array('message', 'unique'),
 			array('id, category, message', 'safe', 'on' => 'search'),
-		);
-	}
-
-
-	public function relations()
-	{
-		return array(
-			'languagesTranslations' => array(self::HAS_MANY, 'LanguagesTranslations', 'id'),
 		);
 	}
 
@@ -82,5 +76,23 @@ class LanguageMessage extends ActiveRecordModel
                              id = {$this->id}";
 
         return Yii::app()->db->createCommand($sql)->queryScalar();
+    }
+
+
+    public function afterSave()
+    {
+        LanguageTranslation::model()->deleteAll('id = ' . $this->id);
+
+        if ($this->translations)
+        {
+            foreach ($this->translations as $language => $translation)
+            {
+                $language_translation = new LanguageTranslation();
+                $language_translation->id          = $this->id;
+                $language_translation->translation = $translation;
+                $language_translation->language    = $language;
+                $language_translation->save();
+            }
+        }
     }
 }
