@@ -1,3 +1,7 @@
 a.btn:hover, a.btn:visited, a.btn:link{
     color:#FFF;
 }
+.pagination a
+{
+    line-height: 25px
+}
