@@ -147,7 +147,7 @@ class AdminGridView extends BootGridView
         {
             $this->addColumn(array(
                 'class' => 'ext.sortable.ManyManySortableColumn',
-                'header'=> 'Сортировка'
+                'header'=> t('Сортировка')
             ), -1);
         }
 
@@ -155,7 +155,7 @@ class AdminGridView extends BootGridView
         {
             $this->addColumn(array(
                 'class' => 'ext.sortable.SortableColumn',
-                'header'=> 'Сортировка'
+                'header'=> t('Сортировка')
             ), -1);
         }
 
@@ -289,7 +289,7 @@ class AdminGridView extends BootGridView
             'model' => get_class($this->filter)
         ));
 
-        echo "&nbsp; &nbsp;Показывать на странице: {$select}";
+        echo "&nbsp; &nbsp;" . t("Показывать на странице") . ": {$select}";
         echo '</div>';
     }
 

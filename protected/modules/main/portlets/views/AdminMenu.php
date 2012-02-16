@@ -15,21 +15,20 @@
 
             if (count($url_parts) > 2)
             {
-                $action = lcfirst($url_parts[3]);
+                $action = ucfirst($url_parts[3]);
+                $model  = ucfirst($url_parts[2]);
 
-                if (mb_substr($url_parts[2], -5) == 'Admin')
+                if (mb_substr($model, -5) == 'Admin')
                 {
-                    $url_parts[2] = mb_substr($url_parts[2], 0, mb_strlen($url_parts[2]) - 5);
+                    $model = mb_substr($model, 0, mb_strlen($model) - 5);
                 }
-
-                $url_parts[2] = lcfirst($url_parts[2]);
-
-                $icon = $url_parts[2] . '_' . $action . '.png';
+                $icon = $model . '_' . $action . '.png';
 
                 $assets_url = Yii::app()->getModule($url_parts[1])->assetsUrl();
-                if (file_exists($_SERVER['DOCUMENT_ROOT'] . $assets_url . '/actions_icons/' . $icon))
+                //echo $_SERVER['DOCUMENT_ROOT'] . $assets_url . '/actions_icons/' . $icon . "<br/>";
+                if (file_exists($_SERVER['DOCUMENT_ROOT'] . $assets_url . '/img/actions_icons/' . $icon))
                 {
-                    $icon_url = $assets_url . '/actions_icons/' . $icon;
+                    $icon_url = $assets_url . '/img/actions_icons/' . $icon;
                 }
 
                 if (!$icon_url)
@@ -41,7 +40,7 @@
                 }
 
                 if (!$icon_url)
-                {
+                {   //echo $_SERVER['DOCUMENT_ROOT'] . 'img/admin/actions_icons/' . $action . '.png' . "<br/>";
                     if (file_exists($_SERVER['DOCUMENT_ROOT'] . 'img/admin/actions_icons/' . $action . '.png'))
                     {
                         $icon_url = '/img/admin/actions_icons/' . $action . '.png';
@@ -51,7 +50,7 @@
 
             if (!$icon_url)
             {
-                $icon_url = '/img/admin/actions_icons/tags.png';
+                $icon_url = '/img/admin/actions_icons/action.png';
             }
             ?>
             <li class="action_icon" icon_url="<?php echo $icon_url; ?>">

@@ -34,16 +34,17 @@ class MainModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Мета-теги'                => '/main/MetaTagAdmin/manage',
-            'Добавить мета-тег'        => '/main/MetaTagAdmin/create',
-            'Логирование'              => '/main/logAdmin/manage',
-            'Действия сайта'           => '/main/SiteActionAdmin/manage',
-            'Обратная связь'           => '/main/feedbackAdmin/manage',
-            'Языки'                    => '/main/LanguageAdmin/manage',
-            'Добавить язык'            => '/main/LanguageAdmin/create',
-            'Языки (переводы)'         => '/main/LanguageMessageAdmin/manage',
-            'Языки (добавить перевод)' => '/main/LanguageMessageAdmin/create',
-            'Настройки'                => '/main/SettingAdmin/manage',
+            'Мета-теги'                       => '/main/MetaTagAdmin/manage',
+            'Добавить мета-тег'               => '/main/MetaTagAdmin/create',
+            'Логирование'                     => '/main/logAdmin/manage',
+            'Действия сайта'                  => '/main/SiteActionAdmin/manage',
+            'Обратная связь'                  => '/main/feedbackAdmin/manage',
+            'Языки'                           => '/main/LanguageAdmin/manage',
+            'Добавить язык'                   => '/main/LanguageAdmin/create',
+            'Языки (переводы)'                => '/main/LanguageMessageAdmin/manage',
+            'Языки (добавить перевод)'        => '/main/LanguageMessageAdmin/create',
+            'Языки (Неиспользуемые переводы)' => '/main/LanguageMessageAdmin/notUsableList',
+            'Настройки'                       => '/main/SettingAdmin/manage',
         );
     }
 
