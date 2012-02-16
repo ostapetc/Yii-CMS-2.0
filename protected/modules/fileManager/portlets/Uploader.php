@@ -132,6 +132,9 @@ class Uploader extends JuiInputWidget
         $this->renderDialog('uploader', array(
             'dialogOptions' => array(
                 'title' => $this->title,
+            ),
+            'linkOptions'=>array(
+                'class'=> 'btn btn-info'
             )
         ));
     }

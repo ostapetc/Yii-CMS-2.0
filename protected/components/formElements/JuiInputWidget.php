@@ -9,6 +9,7 @@ abstract class JuiInputWidget extends CJuiInputWidget
 
     public $input_element;
 
+
     public function init()
     {
         list($this->name, $this->id) = $this->resolveNameID();
@@ -56,15 +57,22 @@ abstract class JuiInputWidget extends CJuiInputWidget
         }
         $js_options = CJavaScript::encode($options);
 
-        // the link that may open the dialog
-        echo CHtml::link($options['title'], '#', array(
+        $linkOptions = array(
             'onclick'=> "
-            $('#{$this->id}').dialog({$js_options}).bind('dialogclose',function(event) {
-                $(this).dialog('destroy').appendTo('#{$this->form_id}').hide();
-            });
-            return false;
-        ",
-        ));
+                $('#{$this->id}').dialog({$js_options}).bind('dialogclose',function(event) {
+                    $(this).dialog('destroy').appendTo('#{$this->form_id}').hide();
+                });
+                return false;
+            ",
+        );
+        if (isset($params['linkOptions']))
+        {
+            $linkOptions = CMap::mergeArray($linkOptions, $params['linkOptions']);
+            unset($params['linkOptions']);
+        }
+
+        // the link that may open the dialog
+        echo CHtml::link($options['title'], '#', $linkOptions);
 
         return $this->render($view, $params, $return);
     }
