@@ -7,6 +7,10 @@
     padding-right: 2px;
 }
 
+.grid-view .filters
+{
+    display: none;
+}
 .grid-view .filters input[type=text], .grid-view .filters select{
     font-size:     11px;
     padding:       2px;
@@ -42,4 +46,8 @@
 .grid-view .summary{
     float:  right;
     margin: 5px;
+}
+.grid-view-loading
+{
+    background: url(preloader.gif) no-repeat;
 }

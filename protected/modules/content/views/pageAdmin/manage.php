@@ -1,9 +1,4 @@
 <?php
-
-echo t('Скрыть');
-echo t('Система');
-
-
 $this->page_title = t('Страницы сайта');
 $this->widget('AdminGridView', array(
 	'id' => 'page-grid',
