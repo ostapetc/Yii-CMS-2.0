@@ -10,6 +10,7 @@
     $cs->registerCoreScript('jquery.ui');
     $cs->registerScriptFile('/js/admin/main.js');
     $cs->registerCssFile('/css/admin/layout.css');
+    $cs->registerCssFile('/css/admin/extend.css');
     $cs->registerScriptFile('/js/admin/hideshow.js');
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
     $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');

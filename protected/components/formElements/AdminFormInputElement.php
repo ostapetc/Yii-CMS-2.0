@@ -62,6 +62,10 @@ class AdminFormInputElement extends BaseFormInputElement
                 return array(
                     'settings' => 'markdown'
                 );
+            case 'checkbox':
+                return array(
+                    'class' => ''
+                );
             default:
                 return array(
                     'class' => $this->type
