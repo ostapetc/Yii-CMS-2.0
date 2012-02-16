@@ -51,7 +51,7 @@ class TinyMCE extends InputWidget
         );
 
         $this->htmlOptions['id'] = $id;
-        $this->htmlOptions['style'] = 'height:374px';
+        $this->htmlOptions['style'] = 'height:374px;width:98%';
 
         if($this->hasModel())
             $html = CHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);
