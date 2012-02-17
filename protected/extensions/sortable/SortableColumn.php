@@ -6,6 +6,7 @@ class SortableColumn extends CDataColumn
     public $value = 3;
     public $assets = 'ext.sortable.assets.sortable';
 
+    public $headerHtmlOptions = array('style'=>'width: 50px');
 
     public function init()
     {
@@ -54,7 +55,7 @@ class SortableColumn extends CDataColumn
 
     public function renderDataCellContent()
     {
-        echo "<div class='positioner'><img src='" . $this->assets . "/img/hand.png' width='16'></div>";
+        echo "<div class='positioner icon-sortable'></div>";
     }
 
     public function renderDataCell($row)

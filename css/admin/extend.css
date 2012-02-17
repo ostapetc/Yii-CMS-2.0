@@ -16,6 +16,8 @@ a.btn:hover, a.btn:visited, a.btn:link{
     background-repeat:   no-repeat;
     background-position: 0 0;
     cursor:              pointer;
+    display:             block;
+    margin:              0 auto;
 }
 
 .icon-loader{
@@ -56,7 +58,7 @@ a.btn:hover, a.btn:visited, a.btn:link{
     border-bottom: 1px #AAF dashed;
 }
 
-.editable textarea,.editable input{
-    display: block;
+.editable textarea, .editable input{
+    display:       block;
     margin-bottom: 1px;
 }

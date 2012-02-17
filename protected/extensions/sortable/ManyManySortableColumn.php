@@ -7,6 +7,8 @@ class ManyManySortableColumn extends CDataColumn
     public $assets = 'ext.sortable.assets.manyManySortable';
     public $value = 3;
 
+    public $headerHtmlOptions = array('style'=>'width: 50px');
+
     public function init()
     {
         parent::init();
@@ -88,7 +90,7 @@ class ManyManySortableColumn extends CDataColumn
 
     protected function renderDataCellContentEx()
     {
-        return "<div class='positioner'><img src='" . $this->assets . "/img/hand.png' width='16'></div>";
+        return "<div class='positioner icon-sortable'></div>";
     }
 
     public function renderDataCell($row, $data = null)
