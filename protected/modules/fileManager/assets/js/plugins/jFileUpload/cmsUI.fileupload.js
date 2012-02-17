@@ -1,7 +1,8 @@
 $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
     options:{
         version:'1.0',
-        existFilesUrl:''
+        existFilesUrl:'',
+        autoUpload: true
     },
     _create:function()
     {

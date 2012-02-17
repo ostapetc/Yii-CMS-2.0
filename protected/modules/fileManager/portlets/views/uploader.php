@@ -4,7 +4,6 @@
             <span>Добавить файлы...</span>
             <input type="file" name="file" multiple>
         </label>
-        <button type="submit" class="start">Начать загрузку</button>
     </div>
     <div id="<?php echo $this->id ?>-drop-zone" class="drop-zone">
         Перетащите сюда файлы
