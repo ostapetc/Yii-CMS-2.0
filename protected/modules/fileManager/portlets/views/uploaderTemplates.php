@@ -22,7 +22,9 @@
         </td>
         {{/if}}
         <td class="cancel">
-            <button>Cancel</button>
+            <button class="btn btn-danger">
+                <i class="icon-remove"></i>
+            </button>
         </td>
     </tr>
 </script>
@@ -55,20 +57,24 @@
             {{html thumbnail_url}}
             {{/if}}
         </td>
-        <?php foreach ($this->fields as $field=>$sett): ?>
-			<td style="width: <?php echo $sett['size'];?>px;">
-				<div class="<?php echo $field ?> editable" data-attr="<?php echo $field;?>" data-editable-type="<?php echo $sett['type'];?>"
-                     data-save-url="${edit_url}">
-					<span>${<?php echo $field;?>}</span>
-				</div>
-			</td>
-		<?php endforeach; ?>
-        <td class="dnd-handler"><img height="20" src="<?php echo $this->assets?>/img/hand.png"/></td>
+        <?php foreach ($this->fields as $field=> $sett): ?>
+        <td style="width: <?php echo $sett['size'];?>px;">
+            <div class="<?php echo $field ?> editable" data-attr="<?php echo $field;?>" data-editable-type="<?php echo $sett['type'];?>"
+                 data-save-url="${edit_url}">
+                <span>${<?php echo $field;?>}</span>
+            </div>
+        </td>
+        <?php endforeach; ?>
+        <td class="dnd-handler">
+            <i class="icon-sortable"></i>
+        </td>
         <td class="size">${size}</td>
         {{/if}}
         <td></td>
         <td class="delete">
-            <button data-type="${delete_type}" data-url="${delete_url}">Удалить</button>
+            <button data-type="${delete_type}" data-url="${delete_url}" class="btn btn-danger">
+                <i class="icon-remove"></i>
+            </button>
         </td>
     </tr>
 </script>

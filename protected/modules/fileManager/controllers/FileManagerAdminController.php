@@ -110,15 +110,15 @@ class FileManagerAdminController extends AdminController
     }
 
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        $this->loadModel()->delete();
+        $this->loadModel($id)->delete();
     }
 
 
-    public function actionUpdateAttr()
+    public function actionUpdateAttr($id)
     {
-        $model = $this->loadModel();
+        $model = $this->loadModel($id);
 
         $model->scenario = 'update';
 
@@ -134,33 +134,6 @@ class FileManagerAdminController extends AdminController
             }
         }
     }
-
-
-    public function loadModel()
-    {
-        if (isset($_GET['id']))
-        {
-            $model = FileManager::model()->findByPk($_GET['id']);
-        }
-
-        if ($model === null)
-        {
-            throw new CHttpException(404, 'The requested page does not exist.');
-        }
-
-        return $model;
-    }
-
-
-    public function performAjaxValidation($model)
-    {
-        if (isset($_POST['ajax']))
-        {
-            print_r(CActiveForm::validate($model));
-            Yii::app()->end();
-        }
-    }
-
 
     public function actionManage()
     {

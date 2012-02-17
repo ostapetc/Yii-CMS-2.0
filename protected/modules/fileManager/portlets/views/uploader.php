@@ -16,7 +16,7 @@
                     <?php foreach ($this->fields as $header): ?>
 						<th style="width: 150px"><?php echo $header['header'];?></th>
 					<?php endforeach; ?>
-                    <th style="width: 100px">Сортировка</th>
+                    <th style="width: 50px"></th>
                     <th style="width: 50px">Размер</th>
                     <th style="width: 50px"></th>
                     <th style="width: 50px">Удалить</th>

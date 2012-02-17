@@ -63,9 +63,9 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                     rows:3,
                     cols:20,
                     onblur:'ignore',
-                    submit:'<img src="/img/admin/ok_16.png" />',
-                    cancel:'<img src="/img/admin/cancel_16.png" />',
-                    indicator:'<img src="/img/admin/ajax-loader.gif" />',
+                    submit:'<i class="icon-ok-btn"></i>',
+                    cancel:'<i class="icon-cancel-btn"></i>',
+                    indicator:'<i class="icon-loader"></i>',
                     placeholder:'Кликните для редактирования'
 //                    callback:function()
 //                    {
