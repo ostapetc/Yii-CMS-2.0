@@ -51,8 +51,16 @@
         update:function()
         {
             var self = this,
-                id = self.element.attr('id');
-            $.fn.yiiGridView.update(id);
+                id = self.element.attr('id'),
+                settings = self.element.yiiGridView.settings,
+                inputSelector = '#' + id + ' .' + settings.filterClass + ' input, ' + '#' + id + ' .' + settings.filterClass + ' select',
+                data = $(inputSelector).serialize();
+
+            if (settings.pageVar !== undefined)
+            {
+                data += '&' + settings.pageVar + '=1';
+            }
+            $.fn.yiiGridView.update(id, {url:data});
         },
 
 
