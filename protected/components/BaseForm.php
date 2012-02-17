@@ -179,7 +179,7 @@ class BaseForm extends CForm
             $tpl = 'admin.' . $tpl;
         }
 
-        $res = "<dl class='$class control-group'><dd class=''>";
+        $res = "<dl class='{$class} control-group'><dd>";
         $res .= Yii::app()->controller->renderPartial('application.views.layouts.' . $tpl, array(
             'element' => $element,
             'form'    => $element->parent

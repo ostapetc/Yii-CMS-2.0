@@ -86,11 +86,14 @@ EOD;
                 $this->htmlOptions['class']=$this->range;
         }
 
-        if($this->hasModel())
-            echo CHtml::activeTextField($this->model,$this->attribute,$this->htmlOptions);
-        else
-            echo CHtml::textField($name,$this->value,$this->htmlOptions);
+        $icon = CHtml::tag('span', array('class'=>'add-on'), '<i class="icon-calendar"></i>');
 
+        if($this->hasModel())
+            $field = CHtml::activeTextField($this->model,$this->attribute,$this->htmlOptions);
+        else
+            $field = CHtml::textField($name,$this->value,$this->htmlOptions);
+
+        echo CHtml::tag('div', array("class"=>"input-prepend"), $icon.$field);
 
         $options=CJavaScript::encode($this->options);
 
