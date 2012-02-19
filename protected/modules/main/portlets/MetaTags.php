@@ -37,6 +37,9 @@ class MetaTags extends JuiInputWidget
             'model'         => $model,
             'dialogOptions' => array(
                 'title' => 'Мета-Теги',
+            ),
+            'linkOptions'=>array(
+                'class'=> 'btn btn-info'
             )
         ));
     }

@@ -1,7 +1,7 @@
 <?php
 class IphoneCheckbox extends InputWidget
 {
-    public $type = 'checkbox';
+    public $type = 'iphone_checkbox';
     public $checkedLabel = 'Да';
     public $uncheckedLabel = 'Нет';
     public $onChange = 'Tiny';
@@ -26,17 +26,6 @@ class IphoneCheckbox extends InputWidget
 
     public function run()
     {
-        $attributes = array();
-        if ($this->checked !== null)
-        {
-            $attributes['checked'] = $this->checked;
-        }
-
-        $el = new CFormInputElement(array(
-            'type' => $this->type,
-            'name' => $this->attribute,
-            'attributes' => $attributes,
-        ), $this);
-        echo $el->renderInput();
+        echo CHtml::activeCheckBox($this->model, $this->attribute, $this->htmlOptions);
     }
 }

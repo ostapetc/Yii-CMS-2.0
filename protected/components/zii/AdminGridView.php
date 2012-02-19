@@ -11,7 +11,6 @@ class AdminGridView extends BootGridView
 
     public $filters;
 
-    public $order_links = false;
     public $pager = array('class'=> 'AdminLinkPager');
 
     public $buttons = null;
@@ -25,7 +24,6 @@ class AdminGridView extends BootGridView
     public $mass_removal = false;
     public $filter_hint = false;
 
-    public $jsPlugin = 'grid';
     public $template = '{pagerSelect}{summary}<br/>{pocket}{items}<br/>{pager}';
 
 
@@ -33,18 +31,29 @@ class AdminGridView extends BootGridView
     {
         $this->attachBehaviors($this->behaviors());
 
-        if(!isset($this->htmlOptions['class']))
-            $this->htmlOptions['class']='grid-view';
-
-        if($this->baseScriptUrl===null)
+        if (!isset($this->htmlOptions['class']))
         {
-            $this->baseScriptUrl=Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.zii.assets'), false, -1, true).'/adminGrid';
+            $this->htmlOptions['class'] = 'grid-view';
         }
 
-        if($this->cssFile!==false)
+        if (!isset($this->htmlOptions['id']))
         {
-            if($this->cssFile===null)
-                $this->cssFile=$this->baseScriptUrl.'/styles.css';
+            $this->htmlOptions['id'] = $this->getId();
+        }
+
+        if ($this->baseScriptUrl === null)
+        {
+            $this->baseScriptUrl = Yii::app()->getAssetManager()
+                ->publish(Yii::getPathOfAlias('application.components.zii.assets'), false, -1, true) .
+                '/adminGrid';
+        }
+
+        if ($this->cssFile !== false)
+        {
+            if ($this->cssFile === null)
+            {
+                $this->cssFile = $this->baseScriptUrl . '/styles.css';
+            }
             Yii::app()->getClientScript()->registerCssFile($this->cssFile);
         }
 
@@ -159,16 +168,6 @@ class AdminGridView extends BootGridView
             ), -1);
         }
 
-        if ($this->order_links)
-        {
-            $this->addColumn(array(
-                'class' => 'CDataColumn',
-                'header'=> 'Порядок',
-                'value' => 'GridView::orderLinks($data)',
-                'type'  => 'raw'
-            ), -1);
-        }
-
         if ($this->mass_removal)
         {
             $this->addColumn(array(
@@ -181,22 +180,6 @@ class AdminGridView extends BootGridView
             ));
         }
         parent::initColumns();
-    }
-
-
-    public static function orderLinks($data)
-    {
-        $class = get_class($data);
-
-        return "<a href='/main/mainAdmin/changeOrder/id/{$data->id}/order/up/class/{$class}/from/" .
-            base64_encode($_SERVER["REQUEST_URI"]) . "' />
-                    <img src='/img/admin/icons/arrow_up.png' border='0' />
-                </a>
-                &nbsp;
-                <a href='/main/mainAdmin/changeOrder/id/{$data->id}/order/down/class/{$class}/from/" .
-            base64_encode($_SERVER["REQUEST_URI"]) . "' />
-                    <img src='/img/admin/icons/arrow_down.png' border='0'  />
-                </a>";
     }
 
 
@@ -277,26 +260,31 @@ class AdminGridView extends BootGridView
 
     public function renderPagerSelect()
     {
-        echo '<div class="pager-select">';
         $value = null;
-        if (isset(Yii::app()->session[get_class($this->filter) . "PerPage"]))
+        if ($per_page = Yii::app()->request->getParam('per_page'))
         {
-            $value = Yii::app()->session[get_class($this->filter) . "PerPage"];
+            Yii::app()->user->setState(get_class($this->filter) . "per_page", $per_page);
         }
+        $value = Yii::app()->user->getState(get_class($this->filter) . "per_page");
 
-        $select = CHtml::dropDownList("pager_pages", $value, array_combine(range(10, 500, 5), range(10, 500, 5)), array(
-            'class' => 'pager_select',
-            'model' => get_class($this->filter)
+        echo '<div class="pager-select">';
+        echo "&nbsp; &nbsp;" . t("Показывать на странице") . ": ";
+        Yii::app()->controller->widget('application.components.formElements.Chosen.ChosenWidget', array(
+            'name'       => "pager_pages",
+            'current'    => $value,
+            'items'      => array_combine(range(10, 500, 5), range(10, 500, 5)),
+            'htmlOptions'=> array(
+                'class' => 'pager_select',
+                'model' => get_class($this->filter)
+            )
         ));
-
-        echo "&nbsp; &nbsp;" . t("Показывать на странице") . ": {$select}";
         echo '</div>';
     }
 
 
     /**
      * Изначально регистрируются 2 плагина gridBase и grid
-     * Если установить значение свойства jsPlugin, то подключится так же плагин /css/admin/gridview/{$this->jsPlugin}.js
+     * Если установить значение свойства jsPlugin, то подключится так же плагин /css/admin/gridview/grid.js
      * И на сам grid будет инициализироват плагин с названием из jsPlugin
      */
     public function registerClientScript()
@@ -307,19 +295,12 @@ class AdminGridView extends BootGridView
         $cs->registerScriptFile("/js/plugins/gridview/gridBase.js");
         $cs->registerScriptFile("/js/plugins/gridview/grid.js");
 
-        if ($this->jsPlugin != 'grid')
-        {
-            $cs->registerScriptFile("/js/plugins/gridview/{$this->jsPlugin}.js");
-        }
         $options = CJavaScript::encode(array(
             'mass_removal' => $this->mass_removal,
-            'filter_hint' => $this->filter_hint
+            'filter_hint'  => $this->filter_hint
         ));
-        $cs->registerScript($this->getId() . 'CmsUI', "
-            $('#{$this->getId()}').{$this->jsPlugin}({$options});
-        ");
-        Yii::app()->clientScript->registerScript($this->getId().'CmsUI', "
-            $('#{$this->getId()}').grid();
+        $cs->registerScript($this->getId() . '.grid', "
+            $('#{$this->getId()}').grid({$options});
         ");
 
         $this->onRegisterScript(new CEvent);

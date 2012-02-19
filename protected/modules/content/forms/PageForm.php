@@ -5,6 +5,7 @@ return array(
         'id' => 'page-form',
         'class' => 'CActiveForm',
         'enableAjaxValidation' => true,
+        'clientOptions'=>array('validateOnSubmit'=>true)
     ),
     'elements' => array(
         'title'        => array('type' => 'text'),

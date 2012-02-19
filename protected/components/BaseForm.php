@@ -78,13 +78,16 @@ class BaseForm extends CForm
 
         if (!($this->parent instanceof self))
         {
+            $cs = Yii::app()->clientScript;
             if ($this->side == 'client')
             {
-                Yii::app()->clientScript
-                    ->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
+                $cs->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
                     ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
-                    ->registerCssFile('/js/plugins/clientForm/form.css');
-
+                    ->registerCssFile('/css/site/form.css');
+            }
+            elseif ($this->side == 'admin')
+            {
+                $cs->registerCssFile('/css/admin/form.css');
             }
 
             if ($this->_clear)
@@ -176,7 +179,7 @@ class BaseForm extends CForm
             $tpl = 'admin.' . $tpl;
         }
 
-        $res = "<dl class='$class control-group'><dd class='input-prepend'>";
+        $res = "<dl class='{$class} control-group'><dd>";
         $res .= Yii::app()->controller->renderPartial('application.views.layouts.' . $tpl, array(
             'element' => $element,
             'form'    => $element->parent
@@ -199,15 +202,20 @@ class BaseForm extends CForm
             $this->cancel_button_show && $this->side == 'admin'
         )
         {
+
             $this->buttons->add("back", array(
-                'type'  => 'button',
-                'value' => t('Отмена'),
+                'type'  => 'link',
+                'label' => t('Отмена'),
                 'url'   => Yii::app()->controller->createUrl('manage'),
-                'class' => 'back_button submit small'
+                'class' => 'back_button btn btn-danger'
             ));
         }
 
-        return parent::renderButtons();
+        $output = '';
+        foreach ($this->getButtons() as $button) {
+            $output .= $this->renderElement($button);
+        }
+        return $output !== '' ? "<dl class=\"buttons control-group\"><dd>" . $output . "<dd></dl>\n" : '';
     }
 
 
@@ -216,6 +224,7 @@ class BaseForm extends CForm
     {
         foreach ($this->buttons as $i => $button)
         {
+            $button->attributes['class'] = 'btn';
             $this->buttons[$i] = $button;
         }
     }
@@ -239,5 +248,7 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
+
+
 
 }

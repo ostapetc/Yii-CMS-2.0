@@ -33,7 +33,9 @@ abstract class BaseController extends CController
             Yii::app()->session['language'] = $_GET['language'];
         }
 
-        if (!isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language)
+        if (
+            !isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language
+        )
         {
             Yii::app()->session['language'] = Yii::app()->language;
         }
@@ -156,9 +158,7 @@ abstract class BaseController extends CController
 
     public function msg($msg, $type)
     {
-        return "<div class='message {$type}' style='display: block;'>
-                    <p>{$msg}</p>
-                </div>";
+        return CHtml::tag('div', array('class'=>"alert alert-{$type}"), $msg);
     }
 
 

@@ -75,8 +75,7 @@
             var self = this;
             $('.pager_select', self.element).change(function()
             {
-                var params = '/model/' + $(this).attr('model') + '/per_page/' + $(this).val() + '/back_url/' + $("#back_url").val();
-                location.href = '/main/mainAdmin/SessionPerPage' + params;
+                location.href = '?per_page=' + $(this).val();
             });
 
         },
@@ -100,7 +99,6 @@
                     show_filters = true;
                 }
             });
-
             $('.filters:first', self.element)[show_filters ? 'slideDown' : 'slideUp']();
 
             $('th', self.element).each(function()
@@ -119,7 +117,6 @@
                     });
                     html.append(a);
                 }
-
                 html.append($("<a href='#' class='filters_link'>фильтры</a>"));
                 $(this).html(html);
             });

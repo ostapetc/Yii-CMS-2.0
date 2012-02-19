@@ -1,13 +1,16 @@
 <?php
 
-class AdminLinkPager extends LinkPager
+class AdminLinkPager extends BootPager
 {
-    public $cssFile = '/css/yii/pager.css'; //надо бы в директорию admin перетащить
+
+    public $displayFirstAndLast = true;
+
+    public $cssFile = false;
 
     public $lastPageLabel = 'Конец';
     public $firstPageLabel = 'Начало';
-    public $prevPageLabel = '';
-    public $nextPageLabel = '';
+    public $prevPageLabel = '←';
+    public $nextPageLabel = '→';
 
     public $header = '';
 

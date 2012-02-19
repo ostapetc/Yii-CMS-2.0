@@ -97,6 +97,7 @@ class CFormButtonElement extends CFormElement
 	public function render()
 	{
 		$attributes=$this->attributes;
+
 		if(isset(self::$coreTypes[$this->type]))
 		{
 			$method=self::$coreTypes[$this->type];
