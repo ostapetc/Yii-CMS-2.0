@@ -8,12 +8,14 @@ a.btn:hover, a.btn:visited, a.btn:link{
     line-height: 25px
 }
 
-.small .add-on
-{
+.small .add-on{
     padding: 1px 3px;
 }
 
-
+.sortable_col .icon-sortable{
+    display: block;
+    margin:  0 auto;
+}
 .icon-sortable{
     width:               16px;
     height:              16px;
@@ -22,8 +24,6 @@ a.btn:hover, a.btn:visited, a.btn:link{
     background-repeat:   no-repeat;
     background-position: 0 0;
     cursor:              pointer;
-    display:             block;
-    margin:              0 auto;
 }
 
 .icon-loader{

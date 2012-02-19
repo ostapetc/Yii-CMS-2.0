@@ -70,11 +70,11 @@ class SortableColumn extends CDataColumn
                 'row' => $row,
                 'data'=> $data
             ));
-            $options['class'] .= 'pk ' . $class;
+            $options['class'] .= ' pk ' . $class;
         }
         else
         {
-            $options['class'] .= 'pk';
+            $options['class'] .= ' pk';
         }
 
         $options['id'] = 'pk_' . $pk;
