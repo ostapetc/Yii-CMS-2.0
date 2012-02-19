@@ -274,6 +274,7 @@ class AdminGridView extends BootGridView
             'current'    => $value,
             'items'      => array_combine(range(10, 500, 5), range(10, 500, 5)),
             'htmlOptions'=> array(
+                'style'=>'width:60px',
                 'class' => 'pager_select',
                 'model' => get_class($this->filter)
             )

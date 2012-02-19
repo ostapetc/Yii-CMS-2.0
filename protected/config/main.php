@@ -64,6 +64,7 @@ $modules['gii'] = array(
     )
 );
 
+
 return array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',

@@ -1,7 +1,7 @@
 // Chosen, a Select Box Enhancer for jQuery and Protoype
 // by Patrick Filler for Harvest, http://getharvest.com
 // 
-// Version 0.9.5
+// Version 0.9.6
 // Full source at https://github.com/harvesthq/chosen
 // Copyright (c) 2011 Harvest http://getharvest.com
 
@@ -95,7 +95,7 @@
       this.options = options != null ? options : {};
       this.set_default_values();
       this.is_multiple = this.form_field.multiple;
-      this.default_text_default = this.is_multiple ? "Выберете нужные варианты" : "Выберете нужный вариант";
+      this.default_text_default = this.is_multiple ? "Select Some Options" : "Select an Option";
       this.setup();
       this.set_up_html();
       this.register_observers();
@@ -113,7 +113,7 @@
       this.results_showing = false;
       this.result_highlighted = null;
       this.result_single_selected = null;
-      this.allow_single_deselect = (this.options.allow_single_deselect != null) ? this.options.allow_single_deselect : false;
+      this.allow_single_deselect = (this.options.allow_single_deselect != null) && (this.form_field.options[0] != null) && this.form_field.options[0].text === "" ? this.options.allow_single_deselect : false;
       this.disable_search_threshold = this.options.disable_search_threshold || 0;
       this.choices = 0;
       return this.results_none_found = this.options.no_results_text || "No results match";
@@ -199,9 +199,9 @@
           break;
         case 27:
           if (this.results_showing) {
-            return this.results_hide();
+            this.results_hide();
           }
-          break;
+          return true;
         case 9:
         case 38:
         case 40:
@@ -275,7 +275,7 @@
       this.container_id += "_chzn";
       this.f_width = this.form_field_jq.outerWidth();
       this.default_text = this.form_field_jq.data('placeholder') ? this.form_field_jq.data('placeholder') : this.default_text_default;
-        container_div = $("<div />", {
+      container_div = $("<div />", {
         id: this.container_id,
         "class": "chzn-container" + (this.is_rtl ? ' chzn-rtl' : ''),
         style: 'width: ' + this.f_width + 'px;'
@@ -356,6 +356,10 @@
         }, this));
         return this.search_field.focus(__bind(function(evt) {
           return this.input_focus(evt);
+        }, this));
+      } else {
+        return this.container.click(__bind(function(evt) {
+          return evt.preventDefault();
         }, this));
       }
     };
