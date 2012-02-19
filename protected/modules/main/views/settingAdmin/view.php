@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Просмотр настройки';
 
-$this->widget('AdminDetailView', array(
+$this->widget('BootDetailView', array(
 	'data' => $model,
 	'attributes' => array(
         'name',

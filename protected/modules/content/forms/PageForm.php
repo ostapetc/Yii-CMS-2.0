@@ -8,7 +8,7 @@ return array(
         'clientOptions'=>array('validateOnSubmit'=>true)
     ),
     'elements' => array(
-        'title'        => array('type' => 'textarea'),
+        'title'        => array('type' => 'text'),
         'url'          => array('type' => 'alias', 'source'=>'title'),
         'is_published' => array('type' => 'checkbox'),
         'text'         => array('type' => 'editor'),

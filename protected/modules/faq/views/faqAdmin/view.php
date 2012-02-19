@@ -1,7 +1,7 @@
 <?php
 $this->page_title = 'Просмотр вопроса';
 
-$this->widget('AdminDetailView', array(
+$this->widget('BootDetailView', array(
 	'data' => $model,
 	'attributes'=>array(
 		array('name' => 'lang', 'value' => $model->language->name),	
