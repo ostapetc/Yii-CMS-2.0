@@ -23,11 +23,19 @@
             var self = this;
             self._initSwitchPageSize();
             self._initFilters();
+            self._initPageSizer();
 
             if (self.options.mass_removal)
             {
                 self._initMassRemoval();
             }
+        },
+        _initPageSizer:function()
+        {
+            var self = this;
+            $('.pager_select', self.element).chosen({
+                'allow_single_deselect':false
+            });
         },
         _initMassRemoval:function()
         {
@@ -111,7 +119,8 @@
                 var html = $('<div>').css({width:'80px'});
                 if (self.options.filter_hint)
                 {
-                    var a = $("<a href='#' class='hint' style='float:left'>").click(function() {
+                    var a = $("<a href='#' class='hint' style='float:left'>").click(function()
+                    {
                         hint(self.options.filter_hint);
                         return false;
                     });
