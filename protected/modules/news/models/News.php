@@ -130,7 +130,7 @@ class News extends ActiveRecordModel
         $criteria->compare($alias . '.date_create', $this->date_create, true);
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
+            'criteria' => $criteria,'pagination'=>array('pageSize'=>1)
         ));
     }
 
