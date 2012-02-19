@@ -202,7 +202,6 @@ class BaseForm extends CForm
             $this->cancel_button_show && $this->side == 'admin'
         )
         {
-
             $this->buttons->add("back", array(
                 'type'  => 'link',
                 'label' => t('Отмена'),
@@ -212,7 +211,8 @@ class BaseForm extends CForm
         }
 
         $output = '';
-        foreach ($this->getButtons() as $button) {
+        foreach ($this->getButtons() as $button)
+        {
             $output .= $this->renderElement($button);
         }
         return $output !== '' ? "<dl class=\"buttons control-group\"><dd>" . $output . "<dd></dl>\n" : '';
@@ -225,6 +225,10 @@ class BaseForm extends CForm
         foreach ($this->buttons as $i => $button)
         {
             $button->attributes['class'] = 'btn';
+            if ($button->type == 'submit')
+            {
+                $button->attributes['class'] .= ' btn-primary';
+            }
             $this->buttons[$i] = $button;
         }
     }
@@ -248,7 +252,6 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
-
 
 
 }

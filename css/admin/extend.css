@@ -7,9 +7,6 @@ a.btn:hover, a.btn:visited, a.btn:link{
 .pagination a{
     line-height: 25px
 }
-.errorMessage{
-    color: #B94A48
-}
 
 .icon-sortable{
     width:               16px;
@@ -50,18 +47,4 @@ a.btn:hover, a.btn:visited, a.btn:link{
     background-repeat:   no-repeat;
     background-position: 0 0;
     cursor:              pointer;
-}
-
-/*file manager*/
-.fileupload-content button{
-    line-height: 14px;
-}
-
-.editable span{
-    border-bottom: 1px #AAF dashed;
-}
-
-.editable textarea, .editable input{
-    display:       block;
-    margin-bottom: 1px;
 }
