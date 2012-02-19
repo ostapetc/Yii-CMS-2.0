@@ -1,7 +1,7 @@
 <?php
 $this->page_title = t('Просмотр блока страницы');
 
-$this->widget('AdminDetailView', array(
+$this->widget('BootDetailView', array(
     'data'      => $model,
     'attributes'=> array(
         'title', array(

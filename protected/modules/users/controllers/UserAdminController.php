@@ -17,17 +17,21 @@ class UserAdminController extends AdminController
 
     public function actionLogin()
     {
+        $this->layout = '//layouts/admin/login';
+
         if (!Yii::app()->user->isGuest)
         {
             throw new CException(t('Вы уже авторизованы!'));
         }
 
-        $this->layout = "//layouts/adminLogin";
-
         $model = new User(User::SCENARIO_LOGIN);
 
-        $form         = new BaseForm('users.LoginForm', $model);
+        $form = new BaseForm('users.LoginForm', $model);
         $form->action = $this->createUrl('/users/userAdmin/login');
+        $form->cancel_button_show = false;
+
+        unset($form->activeForm['enableAjaxValidation']);
+        unset($form->activeForm['clientOptions']);
 
         $params = array(
             "model"      => $model,

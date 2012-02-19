@@ -6,7 +6,7 @@ $this->tabs = array(
     'список страниц' => $this->createUrl('manage')
 );
 
-$this->widget('AdminDetailView', array(
+$this->widget('BootDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
         'title',
