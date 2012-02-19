@@ -8,18 +8,18 @@ class Chosen extends InputWidget
     public $onchange = 'js:function() {}';
     public $empty = '';
 
+
     public function init()
     {
         parent::init();
         $options = CJavaScript::encode(array(
             'no_results_text'      => "Выберите один из вариантов",
             'allow_single_deselect'=> true,
-            'onChange' => $this->onchange
+            'onChange'             => $this->onchange
         ));
 
-        $assets = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.components.formElements.Chosen.assets'));
-        Yii::app()->clientScript->registerScriptFile($assets . '/chosen.jquery.js')->registerCssFile(
-            $assets . '/chosen.css')->registerScript(
+        Yii::app()->clientScript->registerScriptFile($this->assets . '/chosen.jquery.js')->registerCssFile(
+            $this->assets . '/chosen.css')->registerScript(
             $this->id . '_chosen', "$('#{$this->id}').chosen($options);");
     }
 

@@ -1,23 +1,26 @@
 <?php
 class ChosenWidget extends Widget
 {
-    public $items;
     public $name;
     public $current;
     public $htmlOptions;
-    public $type = 'dropdownlist';
+    public $onchange = 'js:function() {}';
+    public $empty = '';
+    public $items = array();
 
     public function init()
     {
         parent::init();
+        $assets = Yii::app()->assetManager->publish(Yii::getPathOfAlias('application.components.formElements.Chosen.assets'));
 
         Yii::app()->clientScript
-            ->registerScriptFile($this->assets . '/chosen.jquery.js')
-            ->registerCssFile($this->assets . '/chosen.css');
+            ->registerScriptFile($assets . '/chosen.jquery.js')
+            ->registerCssFile($assets . '/chosen.css');
     }
+
 
     public function run()
     {
-        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->input_element->items, $this->input_element->attributes);
+        echo CHtml::dropDownList($this->name, $this->current, $this->items, $this->htmlOptions);
     }
 }
