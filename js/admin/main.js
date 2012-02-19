@@ -3,7 +3,7 @@ $(function()
     $(".tablesorter").tablesorter();
 
     $(".tab_content").hide(); //Hide all content
-    $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+    //$("ul.tabs li:first").addClass("active").show(); //Activate first tab
     $(".tab_content:first").show(); //Show first tab content
 
     //On Click Event

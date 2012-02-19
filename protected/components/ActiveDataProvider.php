@@ -3,6 +3,7 @@ class ActiveDataProvider extends CActiveDataProvider
 {
     const PAGE_SIZE = 10;
 
+
     public function __construct($modelClass, $config = array())
     {
         if (!isset($config['pagination']['pageSize']))
@@ -29,18 +30,4 @@ class ActiveDataProvider extends CActiveDataProvider
 
         parent::__construct($modelClass, $config);
     }
-
-    public function getCriteria()
-    {
-        $criteria = parent::getCriteria();
-        $meta  = CActiveRecord::model($this->modelClass)->meta();
-
-        if (isset($meta['lang']))
-        {
-//            $criteria->addCondition("lang = '" . Yii::app()->language . "'");
-        }
-
-        return $criteria;
-    }
-
 }
