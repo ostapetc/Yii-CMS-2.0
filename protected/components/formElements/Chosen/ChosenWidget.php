@@ -2,7 +2,9 @@
 class ChosenWidget extends Widget
 {
     public $items;
-
+    public $name;
+    public $current;
+    public $htmlOptions;
     public $type = 'dropdownlist';
 
     public function init()

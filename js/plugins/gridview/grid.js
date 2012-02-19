@@ -109,7 +109,7 @@
             });
             $('.filters:first', self.element)[show_filters ? 'slideDown' : 'slideUp']();
 
-            $('th', self.element).each(function()
+            $('th:last', self.element).each(function()
             {
                 if ($(this).html() != '&nbsp;')
                 {

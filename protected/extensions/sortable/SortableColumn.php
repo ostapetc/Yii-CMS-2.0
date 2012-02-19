@@ -63,24 +63,18 @@ class SortableColumn extends CDataColumn
         $data    = $this->grid->dataProvider->data[$row];
         $options = $this->htmlOptions;
         $pk      = $this->grid->dataProvider->data[$row]->getPrimaryKey();
+        $options['class'] = 'sortable_col';
         if ($this->cssClassExpression !== null)
         {
             $class = $this->evaluateExpression($this->cssClassExpression, array(
                 'row' => $row,
                 'data'=> $data
             ));
-            if (isset($options['class']))
-            {
-                $options['class'] .= 'pk ' . $class;
-            }
-            else
-            {
-                $options['class'] = $class;
-            }
+            $options['class'] .= 'pk ' . $class;
         }
         else
         {
-            $options['class'] = 'pk';
+            $options['class'] .= 'pk';
         }
 
         $options['id'] = 'pk_' . $pk;
