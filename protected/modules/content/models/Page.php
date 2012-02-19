@@ -32,7 +32,7 @@ class Page extends ActiveRecordModel
             'class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'
         );
         $behaviors['Sortable'] = array(
-            'class' => 'ext.Sortable.SortableBehavior'
+            'class' => 'ext.sortable.SortableBehavior'
         );
         return $behaviors;
     }
