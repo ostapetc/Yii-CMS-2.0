@@ -11,6 +11,7 @@ class SortableBehavior extends CActiveRecordBehavior
         $c->execute();
     }
 
+
     public function setPositions($ids, $column, $start)
     {
         $model = $this->getOwner();
@@ -28,6 +29,7 @@ class SortableBehavior extends CActiveRecordBehavior
         $c->execute();
     }
 
+
     public function beforeSave()
     {
         $model = $this->getOwner();
@@ -40,4 +42,15 @@ class SortableBehavior extends CActiveRecordBehavior
         }
     }
 
+
+    public function beforeFind($event)
+    {
+        $criteria = $this->owner->getDbCriteria();
+        if (!$criteria->order)
+        {
+            $criteria->order = '`order`';
+        }
+        
+        parent::beforeFind($event);
+    }
 }
