@@ -1,7 +1,6 @@
 <?php
 class Chosen extends InputWidget
 {
-    public $elements = array();
     public $name;
     public $current;
     public $htmlOptions;
@@ -35,6 +34,6 @@ class Chosen extends InputWidget
             $this->htmlOptions['empty'] = $this->empty;
         }
 
-        echo CHtml::dropDownList($this->name, $this->current, $this->elements, $this->htmlOptions);
+        echo CHtml::dropDownList($this->name, $this->current, $this->input_element->items, $this->input_element->attributes);
     }
 }
