@@ -59,21 +59,10 @@ class BaseForm extends CForm
 
     public function __toString()
     {
-
-        $cs = Yii::app()->clientScript;
-
         if ($this->side == 'client') //only bootstrap
         {
-
             $this->activeForm['class']                = 'BootActiveForm';
             $this->activeForm['errorMessageCssClass'] = "help-block";
-            //            $this->activeForm['clientOptions']['afterValidate'] = 'js:function (form, data, hasError) {
-            //
-            //                var dd = $("#"+attribute.inputID).closest("dd");
-            //                var add = hasError ? "error" : "success";
-            //                var remove = hasError ? "success" : "error";
-            //                dd.addClass(add).removeClass(remove);
-            //            }';
         }
 
         if (!($this->parent instanceof self))
