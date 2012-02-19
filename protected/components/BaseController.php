@@ -46,7 +46,7 @@ abstract class BaseController extends CController
 
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         if (!RbacModule::isAllow($item_name))
-        {
+        {   echo $item_name;
             $this->forbidden();
         }
 

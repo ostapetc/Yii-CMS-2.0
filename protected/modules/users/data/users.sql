@@ -19,8 +19,8 @@ CREATE TABLE `users` (
   `password_recover_date` DATETIME DEFAULT NULL,
   `avatar` VARCHAR(50) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Аватар пользователя',
   `date_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Зарегистрирован',
-  PRIMARY KEY USING BTREE (`id`) COMMENT '',
-  UNIQUE INDEX `email` USING BTREE (`email`) COMMENT ''
+  PRIMARY KEY USING BTREE (`id`),
+  UNIQUE INDEX `email` USING BTREE (`email`)
 )ENGINE=InnoDB
 AUTO_INCREMENT=20 AVG_ROW_LENGTH=5461 CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
 COMMENT=''
