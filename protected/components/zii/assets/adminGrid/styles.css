@@ -19,10 +19,10 @@
     margin-bottom: 0;
 }
 .grid-view .filters input[type=text]{
-    height: 15px;
+    height: 16px;
 }
 .grid-view .filters select{
-    height: 21px;
+    height: 22px;
 }
 .grid-view th a{
     font-weight:     bold;

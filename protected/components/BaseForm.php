@@ -6,7 +6,7 @@ class BaseForm extends CForm
 
     public $side;
 
-    public $cancel_button_show = true;
+    public $back_button_show = true;
 
     public $inputElementClass = null;
 
@@ -59,21 +59,10 @@ class BaseForm extends CForm
 
     public function __toString()
     {
-
-        $cs = Yii::app()->clientScript;
-
         if ($this->side == 'client') //only bootstrap
         {
-
             $this->activeForm['class']                = 'BootActiveForm';
             $this->activeForm['errorMessageCssClass'] = "help-block";
-            //            $this->activeForm['clientOptions']['afterValidate'] = 'js:function (form, data, hasError) {
-            //
-            //                var dd = $("#"+attribute.inputID).closest("dd");
-            //                var add = hasError ? "error" : "success";
-            //                var remove = hasError ? "success" : "error";
-            //                dd.addClass(add).removeClass(remove);
-            //            }';
         }
 
         if (!($this->parent instanceof self))
@@ -198,11 +187,9 @@ class BaseForm extends CForm
 
     public function renderButtons()
     {
-        if (!($this->getParent() instanceof self) && !$this->buttons->itemAt('back') &&
-            $this->cancel_button_show && $this->side == 'admin'
-        )
+        $is_admin_form = !($this->getParent() instanceof self) && $this->side == 'admin';
+        if ($this->back_button_show && !$this->buttons->itemAt('back') && $is_admin_form)
         {
-
             $this->buttons->add("back", array(
                 'type'  => 'link',
                 'label' => t('Отмена'),
@@ -212,7 +199,8 @@ class BaseForm extends CForm
         }
 
         $output = '';
-        foreach ($this->getButtons() as $button) {
+        foreach ($this->getButtons() as $button)
+        {
             $output .= $this->renderElement($button);
         }
         return $output !== '' ? "<dl class=\"buttons control-group\"><dd>" . $output . "<dd></dl>\n" : '';
@@ -225,6 +213,10 @@ class BaseForm extends CForm
         foreach ($this->buttons as $i => $button)
         {
             $button->attributes['class'] = 'btn';
+            if ($button->type == 'submit')
+            {
+                $button->attributes['class'] .= ' btn-primary';
+            }
             $this->buttons[$i] = $button;
         }
     }
@@ -248,7 +240,6 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
-
 
 
 }

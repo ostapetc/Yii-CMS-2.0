@@ -1,11 +1,16 @@
 a.btn:hover, a.btn:visited, a.btn:link{
     color: #FFF;
 }
+.pagination{
+    margin: 0;
+}
 .pagination a{
     line-height: 25px
 }
-.errorMessage{
-    color: #B94A48
+
+.small .add-on
+{
+    padding: 1px 3px;
 }
 
 .icon-sortable{
@@ -47,18 +52,4 @@ a.btn:hover, a.btn:visited, a.btn:link{
     background-repeat:   no-repeat;
     background-position: 0 0;
     cursor:              pointer;
-}
-
-/*file manager*/
-.fileupload-content button{
-    line-height: 14px;
-}
-
-.editable span{
-    border-bottom: 1px #AAF dashed;
-}
-
-.editable textarea, .editable input{
-    display:       block;
-    margin-bottom: 1px;
 }

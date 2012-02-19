@@ -24,7 +24,7 @@ class AdminGridView extends BootGridView
     public $mass_removal = false;
     public $filter_hint = false;
 
-    public $template = '{pagerSelect}{summary}<br/>{pocket}{items}<br/>{pager}';
+    public $template = '{pagerSelect}{summary}<br/>{pocket}{items}{pager}';
 
 
     public function init()
@@ -274,6 +274,7 @@ class AdminGridView extends BootGridView
             'current'    => $value,
             'items'      => array_combine(range(10, 500, 5), range(10, 500, 5)),
             'htmlOptions'=> array(
+                'style'=>'width:60px',
                 'class' => 'pager_select',
                 'model' => get_class($this->filter)
             )

@@ -11,8 +11,13 @@ $this->widget('AdminGridView', array(
             'value' => '$data->user->name'
         ), array(
             'name'  => 'is_published',
-            'value' => '$data->is_published ? t("yes") : t("no")'
-        ), 'date', 'date_create', array(
+            'value' => '$data->is_published ? t("yes") : t("no")',
+            'filter'=>array(t("Нет"),t("Да"))
+        ),
+        array(
+            'class'=>'DateColumn',
+            'name'=>'date'
+        ), array(
             'name'  => 'lang',
             'value' => '$data->language->name'
         ), array(
