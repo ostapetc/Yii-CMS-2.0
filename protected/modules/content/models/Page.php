@@ -31,6 +31,9 @@ class Page extends ActiveRecordModel
         $behaviors['MetaTag'] = array(
             'class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'
         );
+        $behaviors['Sortable'] = array(
+            'class' => 'ext.Sortable.SortableBehavior'
+        );
         return $behaviors;
     }
 
@@ -79,7 +82,7 @@ class Page extends ActiveRecordModel
         return new ActiveDataProvider(get_class($this), array(
             'criteria' => $criteria,
             'pagination'=>array(
-                'pageSize'=>1
+                'pageSize'=>4
             )
         ));
     }

@@ -72,6 +72,7 @@ class AdminGridView extends BootGridView
     public function formatDateValues()
     {
         $data = $this->dataProvider->data;
+
         foreach ($data as $item)
         {
             foreach ($item as $attr => $value)

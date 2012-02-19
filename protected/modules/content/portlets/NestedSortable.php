@@ -4,6 +4,7 @@ class NestedSortable extends Portlet
     public $model;
     public $sortable = false;
     public $id;
+    public $root_id;
 
     private $defaultSoringSettings = array(
         'listType'            => 'ul',
@@ -57,8 +58,8 @@ class NestedSortable extends Portlet
 
     public function renderContent()
     {
-        $this->render('NestedTree', array(
-            'tree' => $this->model->htmlTree
+        $this->render('NestedSortable', array(
+            'tree' => $this->model->getHtmlTree($this->root_id)
         ));
     }
 

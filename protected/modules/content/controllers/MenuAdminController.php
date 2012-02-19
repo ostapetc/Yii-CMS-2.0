@@ -5,10 +5,10 @@ class MenuAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Create" => t("Добавление меню"),
-            "Update" => t("Редактирование меню"),
-            "Manage" => t("Управление меню"),
-            "Delete" => t("Удаление меню"),
+            "Create" => "Добавление меню",
+            "Update" => "Редактирование меню",
+            "Manage" => "Управление меню",
+            "Delete" => "Удаление меню",
         );
     }
 
@@ -18,14 +18,15 @@ class MenuAdminController extends AdminController
         $model = new Menu;
 
         $form = new BaseForm('content.MenuForm', $model);
-        $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array(
-                '/content/menuLinkAdmin/index',
-                'menu_id'=> $model->id
-            ));
+            $section          = new MenuSection();
+            $section->menu_id = $model->id;
+            $section->title   = $model->name . '::корень';
+            $section->saveNode();
+
+            $this->redirect('/content/MenuSectionAdmin/index/menu_id/' . $model->id);
         }
 
         $this->render('create', array('form' => $form));
@@ -37,13 +38,11 @@ class MenuAdminController extends AdminController
         $model = $this->loadModel($id);
 
         $form = new BaseForm('content.MenuForm', $model);
-        $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
         {
-            $this->redirect($this->createUrl('manage'));
+                $this->redirect($this->createUrl('manage'));
         }
-
 
         $this->render('update', array('form' => $form));
     }
@@ -59,7 +58,7 @@ class MenuAdminController extends AdminController
 
     public function actionDelete($id)
     {
-        $this->loadModel($id)->delete();
+        $model = $this->loadModel($id)->delete();
 
         $this->redirect($this->createUrl('manage'));
     }

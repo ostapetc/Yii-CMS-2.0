@@ -2,7 +2,7 @@
 
 class NewsModule extends WebModule
 {
-    public static $active = false;
+    public static $active = true;
 
 
     public static function name()
@@ -48,4 +48,12 @@ class NewsModule extends WebModule
             '/news'          => 'news/news/index',
         );
     }
+
+    public static function clientMenu()
+    {
+        return array(
+            'Новости' => '/news/news/index',
+        );
+    }
+
 }

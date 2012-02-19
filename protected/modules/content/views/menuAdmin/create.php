@@ -1,5 +1,9 @@
 <?php 
-$this->page_title = t('Добавление меню сайта');
+$this->page_title = 'Добавление меню сайта';
+
+$this->tabs = array(
+	'управление меню' => $this->createUrl('manage')
+);
 
 echo $form 
 ?>

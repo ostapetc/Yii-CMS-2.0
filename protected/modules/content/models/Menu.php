@@ -7,7 +7,7 @@ class Menu extends ActiveRecordModel
 
     public function name()
     {
-        return t('Меню');
+        return 'Меню';
     }
 
 
@@ -26,56 +26,33 @@ class Menu extends ActiveRecordModel
     public function rules()
     {
         return array(
-            array(
-                'name',
-                'required'
-            ),
-            array(
-                'is_visible',
-                'numerical',
+            array('name', 'required'), array(
+                'is_visible', 'numerical',
                 'integerOnly' => true
-            ),
-            array(
-                'id',
-                'length',
+            ), array(
+                'id', 'length',
                 'max' => 11
-            ),
-            array(
-                'name',
-                'length',
+            ), array(
+                'name', 'length',
                 'max' => 50
-            ),
-            array(
-                'name',
-                'unique',
+            ), array(
+                'name', 'unique',
                 'className'     => 'Menu',
                 'attributeName' => 'name'
-            ),
-            array(
-                'id, name, is_visible',
-                'safe',
+            ), array(
+                'id, name, is_visible', 'safe',
                 'on' => 'search'
             ),
         );
     }
 
 
-    public function scopes()
-    {
-        $alias = $this->getTableAlias();
-        return array(
-            'visible' => array('condition' => $alias.'.is_visible = 1')
-        );
-    }
-
     public function relations()
     {
         return array(
             'links' => array(
-                self::HAS_MANY,
-                'MenuLink',
-                'menu_id',
-                'condition' => "lang = '".Yii::app()->language."'"
+                self::HAS_MANY, 'MenuSection', 'menu_id',
+                'condition' => "lang = '" . Yii::app()->language . "'"
             ),
         );
     }
@@ -96,34 +73,57 @@ class Menu extends ActiveRecordModel
 
     public function getSections()
     {
-        $sections = array();
+        $root = MenuSection::model()->roots()->find('menu_id = ' . $this->id);
 
-        $role     = Yii::app()->user->role;
+        $sections = $root->children()->findAll();
 
-        foreach ($this->visible()->links as $link)
+        foreach ($sections as $i => $section)
         {
-            if ($link->parent_id)
+            if (!$section->is_visible)
             {
-                continue;
+                unset($sections[$i]);
             }
 
-            if ($link->user_role && ($link->user_role != $role))
+            if ($section->page && !$section->page->is_published)
             {
-                continue;
+                unset($sections[$i]);
             }
-            else if ($link->not_user_role && ($link->not_user_role == $role))
-            {
-                continue;
-            }
-
-            if ($link->page && !$link->page->is_published)
-            {
-                continue;
-            }
-
-            $sections[] = $link;
         }
 
         return $sections;
+    }
+
+
+    public function getCurrentSection()
+    {
+        foreach ($this->sections as $section)
+        {
+            if ($section->isActive())
+            {
+                return $section;
+            }
+
+            $childs = $section->children()->findAll();
+            if ($childs)
+            {
+                foreach ($childs as $child)
+                {
+                    if ($child->isActive())
+                    {
+                        return $child;
+                    }
+                }
+            }
+        }
+    }
+
+    public function getPagePath($page_id)
+    {
+        $link = MenuSection::model()->findByAttributes(array(
+            'page_id' => $page_id,
+            'menu_id' => $this->id
+        ));
+
+        return $link->getPath();
     }
 }
