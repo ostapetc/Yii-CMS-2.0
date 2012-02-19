@@ -1,6 +1,6 @@
 <?php
 
-class FeetbackModule extends WebModule
+class FeedbackModule extends WebModule
 {
     public static $active = false;
 
