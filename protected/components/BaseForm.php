@@ -6,7 +6,7 @@ class BaseForm extends CForm
 
     public $side;
 
-    public $cancel_button_show = true;
+    public $back_button_show = true;
 
     public $inputElementClass = null;
 
@@ -198,9 +198,8 @@ class BaseForm extends CForm
 
     public function renderButtons()
     {
-        if (!($this->getParent() instanceof self) && !$this->buttons->itemAt('back') &&
-            $this->cancel_button_show && $this->side == 'admin'
-        )
+        $is_admin_form = !($this->getParent() instanceof self) && $this->side == 'admin';
+        if ($this->back_button_show && !$this->buttons->itemAt('back') && $is_admin_form)
         {
             $this->buttons->add("back", array(
                 'type'  => 'link',
