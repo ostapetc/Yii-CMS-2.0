@@ -4,6 +4,7 @@ class DateColumn extends CDataColumn
     public $uiDateFormat = 'dd.mm.yy';
     public $attribute;
 
+
     public function renderFilterCellContent()
     {
         if ($this->filter === false)
@@ -13,13 +14,15 @@ class DateColumn extends CDataColumn
         $this->uiDateFormat = $this->uiDateFormat ? $this->uiDateFormat : "yy-mm-dd";
         $attr               = $this->attribute = $this->attribute ? $this->attribute : $this->name;
 
+        //variables
         $start        = '_' . $attr . '_start';
         $end          = '_' . $attr . '_end';
         $_GET[$start] = isset($_GET[$start]) ? $_GET[$start] : '';
         $_GET[$end]   = isset($_GET[$end]) ? $_GET[$end] : '';
 
-        $widget   = 'application.components.formElements.FJuiDatePicker.FJuiDatePicker';
-        $settings = array(
+        //settings
+        $widget         = 'application.components.formElements.FJuiDatePicker.FJuiDatePicker';
+        $settings       = array(
             'language'   => 'ru',
             'options'    => array(
                 'dateFormat'=> $this->uiDateFormat
@@ -29,10 +32,14 @@ class DateColumn extends CDataColumn
             ),
             'range'      => $attr . '_diapason'
         );
-        $label_styles = array('style'=> 'float:left; vertical-align: top;margin-right:3px');
-        $wrapper_styles = array('class'=>'small','style'=> 'min-width: 150px;');
+        $label_styles   = array('style'=> 'float:left; vertical-align: top;margin-right:3px');
+        $wrapper_styles = array(
+            'class'=> 'small',
+            'style'=> 'min-width: 150px;'
+        );
 
-        $res      = CHtml::tag('span', $label_styles, t('От:'));
+        //first input
+        $res = CHtml::tag('span', $label_styles, t('От:'));
         $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $start,
             'value'    => $_GET[$start],
@@ -40,6 +47,7 @@ class DateColumn extends CDataColumn
 
         echo CHtml::tag('div', $wrapper_styles, $res);
 
+        //second input
         $res = CHtml::tag('span', $label_styles, t('До:'));
         $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $end,
