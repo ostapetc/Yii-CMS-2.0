@@ -4,7 +4,7 @@ $(function()
 	{
 		if (confirm('Удалить ссылку?')) 
 		{
-			location.href = '/content/menuLinkAdmin/delete/id/' + $(this).attr('link_id');
+			location.href = '/content/MenuSectionAdmin/delete/id/' + $(this).attr('link_id');
 		}
 		
 		return false;

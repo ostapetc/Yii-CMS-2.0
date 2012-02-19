@@ -7,12 +7,12 @@ class SqlHelper
         {
             $alias .= '.';
         }
-        $case = "case {$alias}{$caseParam} ";
+        $case = "CASE {$alias}{$caseParam} ";
         foreach ($values as $key => $val)
         {
-            $case .= "when $key then " . $val . ' ';
+            $case .= "WHEN $key THEN " . $val . ' ';
         }
-        $case .= "end";
+        $case .= "END";
 
         return $case;
     }

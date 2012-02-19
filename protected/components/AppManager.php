@@ -266,10 +266,12 @@ class AppManager
     }
 
 
+
     public static function getModulesClientMenu()
     {
         if (!self::$_modules_client_menu)
         {
+            $modules_urls = array();
 
             $modules = self::getModulesData(true);
 
@@ -277,17 +279,13 @@ class AppManager
             {
                 if (method_exists($module['class'], 'clientMenu'))
                 {
-                    $client_menu = call_user_func(array($module['class'], 'clientMenu'));
-                    if (is_array($client_menu))
-                    {
-                        $modules_urls = array_merge($modules_urls, $client_menu);
-                    }
+                    $modules_urls[$module['dir']] = array_flip(call_user_func(array(
+                        $module['class'], 'clientMenu'
+                    )));
                 }
             }
-
-            self::$_modules_client_menu = array_flip($modules_urls);
+            self::$_modules_client_menu = $modules_urls;
         }
-
         return self::$_modules_client_menu;
     }
 

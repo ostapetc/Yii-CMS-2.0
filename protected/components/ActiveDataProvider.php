@@ -37,7 +37,7 @@ class ActiveDataProvider extends CActiveDataProvider
 
         if (isset($meta['lang']))
         {
-            $criteria->addCondition("lang = '" . Yii::app()->language . "'");
+//            $criteria->addCondition("lang = '" . Yii::app()->language . "'");
         }
 
         return $criteria;

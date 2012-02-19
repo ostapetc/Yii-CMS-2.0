@@ -19,9 +19,9 @@ abstract class ActiveRecordModel extends CActiveRecord
     public function behaviors()
     {
         return array(
-            'LangCondition'  => array(
-                'class' => 'application.components.activeRecordBehaviors.LangConditionBehavior'
-            ),
+//            'LangCondition'  => array(
+//                'class' => 'application.components.activeRecordBehaviors.LangConditionBehavior'
+//            ),
             'NullValue'      => array(
                 'class' => 'application.components.activeRecordBehaviors.NullValueBehavior'
             ),

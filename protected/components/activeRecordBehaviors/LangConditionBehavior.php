@@ -6,13 +6,13 @@ class LangConditionBehavior extends CActiveRecordBehavior
     {
         $model = $this->getOwner();
         $meta  = $model->meta();
+        $alias = $model->getTableAlias();
 
         if (!isset($meta['lang']))
         {
             return;
         }
-
-        $model->dbCriteria->addCondition("lang = '" . $this->defineLang() . "'");
+//        $model->dbCriteria->addCondition("{$alias} . lang = '" . $this->defineLang() . "'");
     }
 
 

@@ -21,6 +21,7 @@
 			listType: 'ol',
 			maxLevels: 0,
 			noJumpFix: 0,
+            allowRootModification: true,
 
             revert:true
 		},
@@ -116,7 +117,12 @@
 				}
 			}
 
-			var parentItem = (this.placeholder[0].parentNode.parentNode && $(this.placeholder[0].parentNode.parentNode).closest('.ui-sortable').length) ? $(this.placeholder[0].parentNode.parentNode) : null;
+            var parentItem = null;
+
+            if (this.placeholder[0] != null && this.placeholder[0].parentNode != null)
+            {
+                parentItem = (this.placeholder[0].parentNode.parentNode && $(this.placeholder[0].parentNode.parentNode).closest('.ui-sortable').length) ? $(this.placeholder[0].parentNode.parentNode) : null;
+            }
 			var level = this._getLevel(this.placeholder);
 			var childLevels = this._getChildLevels(this.helper);
 			var previousItem = this.placeholder[0].previousSibling ? $(this.placeholder[0].previousSibling) : null;
@@ -339,8 +345,6 @@
 		_isAllowed: function(parentItem, levels) {
 			var o = this.options
 			// Are we trying to nest under a no-nest or are we nesting too deep?
-            //если корневой элемент, то нельзя тащить во вложенные.
-            //если не корневой элемент, то нельзя делать корневым
 
             if (parentItem == null || !(parentItem.hasClass(o.disableNesting))) {
                 if (o.maxLevels < levels && o.maxLevels != 0) {
@@ -363,9 +367,15 @@
             var moveRoot = this.currentItem.hasClass('depth_2') && parentItem != null;
             var makeRoot = !this.currentItem.hasClass('depth_2') && parentItem == null;
             var disableNesting = parentItem != null && parentItem.hasClass(o.disableNesting);
-
-            if (moveRoot || makeRoot || disableNesting)
+            //если корневой элемент, то нельзя тащить во вложенные.
+            //если не корневой элемент, то нельзя делать корневым
+            if (!this.options.allowRootModification)
             {
+                disableNesting = moveRoot || makeRoot || disableNesting;
+            }
+            if (disableNesting)
+            {
+                allow = moveRoot || makeRoot || disableNesting;
                 this.placeholder.addClass(o.errorClass);
                 this.noMove = true;
             }
