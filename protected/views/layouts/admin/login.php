@@ -25,11 +25,12 @@
         .middle_div
         {
            position: absolute;
-           width: 400px;
+           width: 470px;
            left: 50%;
            top: 50%;
-           margin-left: -200px;
+           margin-left: -235px;
            margin-top: -200px;
+           border: 1px solid #C0C0C0 !important;
         }
     </style>
 </head>
@@ -42,7 +43,7 @@
         </hgroup>
     </header>
 
-    <article class="module middle_div" style="width:400px;border: 1px solid #C0C0C0 !important;">
+    <article class="module middle_div">
         <div style="padding: 10px!important;">
             <?php echo $content; ?>
         </div>
