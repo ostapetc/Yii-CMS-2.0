@@ -339,8 +339,7 @@ class MenuSection extends ActiveRecordModel
                 'id'   => 'items_' . $item->id,
                 'class'=> 'depth_' . $item->level
             ));
-            $res .= CHtml::tag('div', array(), CHtml::encode($item->title) .
-                '<img class="drag" src="/images/admin/hand.png" height="16" width="16" />');
+            $res .= CHtml::tag('div', array(), CHtml::encode($item->title) . '<a class="drag icon-sortable"></a>');
             $level = $item->level;
         }
 
