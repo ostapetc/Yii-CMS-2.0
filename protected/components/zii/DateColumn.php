@@ -25,24 +25,27 @@ class DateColumn extends CDataColumn
                 'dateFormat'=> $this->uiDateFormat
             ),
             'htmlOptions'=> array(
-                'style' => 'display:inline-block;width:100px;float:right'
+                'style' => 'width:100px;'
             ),
             'range'      => $attr . '_diapason'
         );
-        $res      = CHtml::tag('span', array('style'=> 'float:left'), 'От:');
+        $label_styles = array('style'=> 'float:left; vertical-align: top;margin-right:3px');
+        $wrapper_styles = array('class'=>'small','style'=> 'min-width: 150px;');
+
+        $res      = CHtml::tag('span', $label_styles, t('От:'));
         $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $start,
             'value'    => $_GET[$start],
         )), true);
 
-        echo CHtml::tag('div', array('style'=> 'min-width: 130px;'), $res);
+        echo CHtml::tag('div', $wrapper_styles, $res);
 
-        $res = CHtml::tag('span', array('style'=> 'float:left'), 'До:');
+        $res = CHtml::tag('span', $label_styles, t('До:'));
         $res .= Yii::app()->controller->widget($widget, CMap::mergeArray($settings, array(
             'name'     => $end,
             'value'    => $_GET[$end],
         )), true);
 
-        echo CHtml::tag('div', array('style'=> 'min-width: 130px;'), $res);
+        echo CHtml::tag('div', $wrapper_styles, $res);
     }
 }

@@ -8,6 +8,11 @@ a.btn:hover, a.btn:visited, a.btn:link{
     line-height: 25px
 }
 
+.small .add-on
+{
+    padding: 1px 3px;
+}
+
 .icon-sortable{
     width:               16px;
     height:              16px;
