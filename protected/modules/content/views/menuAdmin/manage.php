@@ -18,7 +18,11 @@ $this->widget('AdminGridView', array(
 	'template' => '{summary}<br/>{pager}<br/>{items}<br/>{pager}',
 	'columns'=>array(
 		'name',
-		array('name' => 'is_visible', 'value' => '$data->is_visible ? \'Да\' : \'Нет\''),
+		array(
+            'name'   => 'is_visible',
+            'value'  => '$data->is_visible ? "Да" : "Нет"',
+            'filter' => array(0 => 'Нет', 1 => 'Да')
+        ),
 		array(
 			'class'    => 'CButtonColumn',
             'template' => '{manage} {update}',

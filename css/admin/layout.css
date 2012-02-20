@@ -410,8 +410,8 @@ section#main {
 
 .module {
     border: 1px solid #9BA0AF;
-    width: 100%;
-    margin: 20px 3% 0 3%;
+    width: 97% !important;
+    margin-left: 20px;
     margin-top: 20px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

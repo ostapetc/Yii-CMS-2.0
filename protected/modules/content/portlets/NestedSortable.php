@@ -26,7 +26,9 @@ class NestedSortable extends Portlet
         'tabSize'             => 25,
         'tolerance'           => 'pointer',
     );
+
     public $sortingSettings = array();
+
 
     public function init()
     {
@@ -35,10 +37,12 @@ class NestedSortable extends Portlet
         $this->registerScripts();
     }
 
+
     public function initVars()
     {
         $this->sortingSettings = CMap::mergeArray($this->defaultSoringSettings, $this->sortingSettings);
     }
+
 
     public function registerScripts()
     {
@@ -48,13 +52,13 @@ class NestedSortable extends Portlet
         if ($this->sortable)
         {
             $settings = CJavaScript::encode($this->sortingSettings);
-            $cs
-                ->registerScriptFile($plugins.'nestedSortable/nestedSortable.js')
-                ->registerCssFile($plugins.'nestedSortable/nestedSortable.css')
-                ->registerScriptFile($plugins.'toJson/toJson.js')
-                ->registerScript($this->id.'NestedTreeSortable', "$('#{$this->id} > ul').nestedSortable({$settings})");
+            $cs->registerScriptFile($plugins.'nestedSortable/nestedSortable.js')
+               ->registerCssFile($plugins.'nestedSortable/nestedSortable.css')
+               ->registerScriptFile($plugins.'toJson/toJson.js')
+               ->registerScript($this->id.'NestedTreeSortable', "$('#{$this->id} > ul').nestedSortable({$settings})");
         }
     }
+
 
     public function renderContent()
     {
