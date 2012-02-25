@@ -68,7 +68,7 @@
         //default options for sortable
         defaultSortable:{
             axis:"y",
-            revert:true,
+//            revert:true,
             cursor:"pointer",
             items:'tr',
             delay:100,

@@ -54,3 +54,14 @@ a.btn:hover, a.btn:visited, a.btn:link{
     background-position: 0 0;
     cursor:              pointer;
 }
+ul{
+    list-style: none;
+    margin: 0;
+}
+ul ul{
+    margin: 0 0 9px 25px
+}
+
+.placeholder td, tr.placeholder:nth-child(odd), tr.placeholder:nth-child(odd) th{
+    background: url(/img/admin/placeholder.png);
+}

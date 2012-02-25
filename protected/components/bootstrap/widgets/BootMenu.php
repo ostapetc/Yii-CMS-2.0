@@ -122,7 +122,7 @@ class BootMenu extends BootWidget
 
 				$cssClass = '';
 
-				if ($item['active'])
+				if ($item['active'] || (isset($item['items']) && $this->isChildActive($item['items'])))
 					$cssClass .= ' active';
 
 				if (isset($item['items']))
@@ -241,12 +241,28 @@ class BootMenu extends BootWidget
 	}
 
 	/**
+	 * Returns whether a child item is activte.
+	 * @param array $items the items to check
+	 * @return boolean the result
+	 */
+	protected function isChildActive($items)
+	{
+		foreach ($items as $item)
+		{
+			if (isset($item['active']) && $item['active'] === true)
+				return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Checks whether a menu item is active.
 	 * @param array $item the menu item to be checked
 	 * @param string $route the route of the current request
-	 * @return boolean whether the menu item is active
+	 * @return boolean the result
 	 */
-	protected function isItemActive($item,$route)
+	protected function isItemActive($item, $route)
 	{
 		if (isset($item['url']) && is_array($item['url']) && !strcasecmp(trim($item['url'][0], '/'), $route))
 		{
