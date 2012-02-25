@@ -41,7 +41,7 @@ class MenuAdminController extends AdminController
 
         if ($form->submitted() && $model->save())
         {
-                $this->redirect($this->createUrl('manage'));
+            $this->redirect($this->createUrl('manage'));
         }
 
         $this->render('update', array('form' => $form));
@@ -50,7 +50,13 @@ class MenuAdminController extends AdminController
 
     public function actionManage()
     {
-        $model = new Menu();
+        $model = new Menu(ActiveRecordModel::SCENARIO_SEARCH);
+        $model->unsetAttributes();
+
+        if (isset($_GET['Menu']))
+        {
+            $model->attributes = $_GET['Menu'];
+        }
 
         $this->render('manage', array('model' => $model));
     }

@@ -32,6 +32,10 @@
         },
         _initPageSizer:function()
         {
+            if ($('.pager_select').length == 0) {
+                return;
+            }
+
             var self = this;
             $('.pager_select', self.element).chosen({
                 'allow_single_deselect':false
