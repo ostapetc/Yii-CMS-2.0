@@ -177,6 +177,7 @@ class CAssetManager extends CApplicationComponent
 	 */
 	public function publish($path,$hashByName=false,$level=-1,$forceCopy=false)
 	{
+        $forceCopy = YII_DEBUG;
 		if(isset($this->_published[$path]))
 			return $this->_published[$path];
 		else if(($src=realpath($path))!==false)

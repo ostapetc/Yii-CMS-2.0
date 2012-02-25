@@ -22,7 +22,6 @@ class MenuSectionAdminController extends AdminController
         if (isset($_POST['tree']))
         {
             $model = new MenuSection;
-
             $this->performAjaxValidation($model);
 
             //при сортировке дерева параметры корня измениться не могут,
@@ -32,14 +31,14 @@ class MenuSectionAdminController extends AdminController
 
             //получаем большие case для update
             $update               = array();
-            $nestedSortableFields = array(
+            $js_to_sql_mapping = array(
                 'depth'=> 'level',
                 'left' => 'left',
                 'right'=> 'right'
             );
-            foreach ($nestedSortableFields as $key => $field)
+            foreach ($js_to_sql_mapping as $js_field=> $field)
             {
-                $update_data = CHtml::listData($data, 'item_id', $key);
+                $update_data = CHtml::listData($data, 'item_id', $js_field);
                 $update[]    = "t.{$field} = " . SqlHelper::arrToCase('id', $update_data, 't');
             }
             $in = implode(', ', array_values(CHtml::listData($data, 'item_id', 'item_id')));

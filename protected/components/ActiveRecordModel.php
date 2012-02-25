@@ -15,7 +15,6 @@ abstract class ActiveRecordModel extends CActiveRecord
         return parent::model($className);
     }
 
-
     public function behaviors()
     {
         return array(

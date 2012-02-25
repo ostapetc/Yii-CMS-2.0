@@ -4,6 +4,25 @@ class AppManager
 {
     private static $_modules_client_menu;
 
+    private static $pathAliaces = array(
+        'gridColumns' => 'application.components.zii.gridColumns'
+    );
+
+    public static function initPathOfAliaces()
+    {
+        foreach (self::$pathAliaces as $short => $full)
+        {
+            Yii::setPathOfAlias($short, Yii::getPathOfAlias($full));
+        }
+    }
+
+    public static function init()
+    {
+        self::initPathOfAliaces();
+        Yii::app()->urlManager->collectRules();
+
+
+    }
 
     public static function getModulesData($active = null, $check_allowed_links = false)
     {

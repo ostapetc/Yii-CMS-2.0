@@ -11,7 +11,7 @@
         if ($section->visibleChilds)
         {
             $this->render('_TopMenuSubmenu', array(
-                'items' => $section->visible()->childs
+                'items' => $section->published()->childs
             ));
         } ?>
 

@@ -4,7 +4,8 @@ $modules_dirs     = scandir(MODULES_PATH);
 
 foreach ($modules_dirs as $module)
 {
-    if ($module[0] == ".") {
+    if ($module[0] == ".")
+    {
         continue;
     }
 
@@ -59,37 +60,32 @@ $modules['gii'] = array(
     'generatorPaths' => array('application.components.gii'),
     'password'       => 'giisecret',
     'ipFilters'      => array(
-        '127.0.0.1',
-        '::1'
+        '127.0.0.1', '::1'
     )
 );
 
 
 return array(
-    'language' => 'ru',
-    'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-    'name'     => '',
-    'preload'  => array('log'),
-    'import'   => array_merge($modules_includes, array(
-        'application.components.*',
-        'application.components.validators.*',
-        'application.components.zii.*',
-        'application.components.formElements.*',
-        'application.components.baseWidgets.*',
-        'application.components.bootstrap.widgets.*',
-        'application.libs.tools.*',
+    'language'       => 'ru',
+    'basePath'       => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+    'name'           => '',
+    'preload'        => array('log'),
+    'import'         => array_merge($modules_includes, array(
+        'application.components.*', 'application.components.validators.*', 'application.components.zii.*',
+        'application.components.formElements.*', 'application.components.baseWidgets.*',
+        'application.components.bootstrap.widgets.*', 'application.libs.tools.*',
         'ext.yiiext.filters.setReturnUrl.ESetReturnUrlFilter',
         'application.modules.srbac.controllers.SBaseController',
     )),
-    'modules'    => $modules,
-    'components' => array(
-        'messages' => array(
-            'class' => 'CDbMessageSource',
+    'modules'        => $modules,
+    'components'     => array(
+        'messages'     => array(
+            'class'                  => 'CDbMessageSource',
             'sourceMessageTable'     => 'languages_messages',
             'translatedMessageTable' => 'languages_translations'
         ),
-        'bootstrap'=>array(
-            'class'=>'application.components.bootstrap.components.Bootstrap'
+        'bootstrap'    => array(
+            'class'=> 'application.components.bootstrap.components.Bootstrap'
         ),
         'assetManager' => array(
             'class'       => 'CAssetManager',
@@ -151,14 +147,14 @@ return array(
 //                ),
 //        ),
 
-        'cache' => array(
-            'class'=>'system.caching.CFileCache',
+        'cache'        => array(
+            'class'=> 'system.caching.CFileCache',
         ),
     ),
 
-    'onBeginRequest' => array('UrlManager', 'collectRules'),
+    'onBeginRequest' => array('AppManager', 'init'),
 
-    'params'     => array(
+    'params'         => array(
         'save_site_actions' => false
     )
 );

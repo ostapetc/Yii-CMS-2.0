@@ -12,7 +12,7 @@ class MenuSectionController extends BaseController
 
     public function actionView($id)
     {
-        $model = $this->loadModel($id, array('visible'));
+        $model = $this->loadModel($id, array('published'));
         $model->checkAccess();
         $children = array();
         foreach ($model->children()->findAll() as $child)

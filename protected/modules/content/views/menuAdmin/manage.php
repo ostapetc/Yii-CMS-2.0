@@ -19,9 +19,8 @@ $this->widget('AdminGridView', array(
 	'columns'=>array(
 		'name',
 		array(
-            'name'   => 'is_visible',
-            'value'  => '$data->is_visible ? "Да" : "Нет"',
-            'filter' => array(0 => 'Нет', 1 => 'Да')
+            'class' => 'gridColumns.PublishedColumn',
+            'name'   => 'is_published',
         ),
 		array(
 			'class'    => 'CButtonColumn',

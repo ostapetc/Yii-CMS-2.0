@@ -27,7 +27,7 @@ class Menu extends ActiveRecordModel
     {
         return array(
             array('name', 'required'), array(
-                'is_visible', 'numerical',
+                'is_published', 'numerical',
                 'integerOnly' => true
             ), array(
                 'id', 'length',
@@ -40,7 +40,7 @@ class Menu extends ActiveRecordModel
                 'className'     => 'Menu',
                 'attributeName' => 'name'
             ), array(
-                'id, name, is_visible', 'safe',
+                'id, name, is_published', 'safe',
                 'on' => 'search'
             ),
         );
@@ -63,7 +63,7 @@ class Menu extends ActiveRecordModel
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
-        $criteria->compare('is_visible', $this->is_visible);
+        $criteria->compare('is_published', $this->is_published);
 
         return new ActiveDataProvider(get_class($this), array(
             'criteria' => $criteria
@@ -79,7 +79,7 @@ class Menu extends ActiveRecordModel
 
         foreach ($sections as $i => $section)
         {
-            if (!$section->is_visible)
+            if (!$section->is_published)
             {
                 unset($sections[$i]);
             }

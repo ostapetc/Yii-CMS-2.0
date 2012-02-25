@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `menu_sections` (
   `url` varchar(200) NOT NULL COMMENT 'Адрес',
   `module_url` varchar(300) DEFAULT NULL COMMENT 'Раздел модуля',
   `module_id` varchar(64) DEFAULT NULL,
-  `is_visible` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Отображать',
+  `is_published` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Отображать',
   PRIMARY KEY (`id`),
   KEY `page_id` (`page_id`),
   KEY `menu_id` (`menu_id`),
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `menu_sections` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE 'utf8_general_ci' AUTO_INCREMENT=1 COMMENT='';
 
 
-INSERT INTO `menu_sections` (`id`, `lang`, `page_id`, `menu_id`, `root`, `left`, `right`, `level`, `title`, `url`, `module_url`, `module_id`, `is_visible`, `is_new`) VALUES
+INSERT INTO `menu_sections` (`id`, `lang`, `page_id`, `menu_id`, `root`, `left`, `right`, `level`, `title`, `url`, `module_url`, `module_id`, `is_published`, `is_new`) VALUES
 (19, 'ru', NULL, 10, 19, 1, 136, 1, 'Верхнее меню::корень', '', NULL, NULL, 0, NULL),
 (32, 'ru', NULL, 10, 19, 2, 3, 2, 'Новости', '/', '/news/news/index', 'news', 1, NULL)
 ;

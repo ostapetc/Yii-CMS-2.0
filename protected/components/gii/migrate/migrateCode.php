@@ -40,7 +40,7 @@ class MigrateCode extends CCodeModel
 			? $this->_migrateName
 			: 'm' . date('ymd_His_') . $this->migrateName;
 
-		$path = Yii::getPathOfAlias('application.migrations.' . $this->_migrateName) . '.php';
+		$path = Yii::getPathOfAlias('application.components.migrations.' . $this->_migrateName) . '.php';
 		$code = $this->render($this->templatepath . '/migrate.php');
 		
 //		Y::dump($path);

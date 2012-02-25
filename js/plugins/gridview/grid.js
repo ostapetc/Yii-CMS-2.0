@@ -16,7 +16,7 @@
         {
             this.parent()._create.call(this);
         },
-        _initHandlers:function()
+        _initHandlers:function(e, data)
         {
             this.parent()._initHandlers.call(this);
 
@@ -32,7 +32,8 @@
         },
         _initPageSizer:function()
         {
-            if ($('.pager_select').length == 0) {
+            if ($('.pager_select').length == 0)
+            {
                 return;
             }
 

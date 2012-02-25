@@ -1,5 +1,4 @@
 <?php
-
 class MenuSection extends ActiveRecordModel
 {
     const PAGE_SIZE = 100;
@@ -43,7 +42,7 @@ class MenuSection extends ActiveRecordModel
     {
         return array(
             array('menu_id, title, lang', 'required'), array(
-                'is_visible', 'numerical'
+                'is_published', 'numerical'
             ), array(
                 'page_id, menu_id', 'length',
                 'max' => 11
@@ -64,7 +63,7 @@ class MenuSection extends ActiveRecordModel
                 'filter' => 'trim'
             ),
             array(
-                'id, page_id, menu_id, title, url, is_visible', 'safe',
+                'id, page_id, menu_id, title, url, is_published', 'safe',
                 'on' => 'search'
             ),
         );
@@ -76,7 +75,7 @@ class MenuSection extends ActiveRecordModel
         return array(
             'menu'     => array(self::BELONGS_TO, 'Menu', 'menu_id'),
             'page'     => array(self::BELONGS_TO, 'Page', 'page_id'),
-//            'language' => array(self::BELONGS_TO, 'Language', 'lang'),
+            'language' => array(self::BELONGS_TO, 'Language', 'lang'),
         );
     }
 
@@ -89,7 +88,7 @@ class MenuSection extends ActiveRecordModel
         $criteria->compare($alias . '.page_id', $this->page_id, true);
         $criteria->compare($alias . '.title', $this->title, true);
         $criteria->compare($alias . '.url', $this->url, true);
-        $criteria->compare($alias . '.is_visible', $this->is_visible);
+        $criteria->compare($alias . '.is_published', $this->is_published);
         $criteria->addCondition($alias . '.root = ' . $root);
         $criteria->addCondition($alias . '.id <> ' . $root);
         $criteria->order = "{$alias}.left";
@@ -129,16 +128,6 @@ class MenuSection extends ActiveRecordModel
 
             return true;
         }
-    }
-
-    public function scopes()
-    {
-        $alias = $this->getTableAlias();
-        return array(
-            'visible'=>array(
-                'condition'=>$alias.'.is_visible=1'
-            )
-        );
     }
 
 
@@ -245,7 +234,7 @@ class MenuSection extends ActiveRecordModel
 
     public function getNbspTitle()
     {
-        return str_repeat("&nbsp;", ($this->level - 1) * 4) . $this->title;
+        return str_repeat("&nbsp;", ($this->level - 2) * 5) . $this->title;
     }
 
 
