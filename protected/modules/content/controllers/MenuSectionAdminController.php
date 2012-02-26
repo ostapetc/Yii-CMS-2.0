@@ -80,10 +80,10 @@ class MenuSectionAdminController extends AdminController
 
         if ($form->submitted('submit'))
         {
+            $model->page_id = $model->module_id = $model->module_url = '';
             if ($model->url_info)
             {
                 $info = explode(':', $model->url_info);
-                $model->module_url = $model->module_id = $model->page_id = null;
                 if ($info[0] === 'page')
                 {
                     $model->page_id = $info[1];
@@ -93,10 +93,6 @@ class MenuSectionAdminController extends AdminController
                     $model->module_id  = $info[1];
                     $model->module_url = $info[2];
                 }
-            }
-            else
-            {
-                $model->page_id = $model->module_id = $model->module_url = '';
             }
 
             if ($model->save())
@@ -134,7 +130,7 @@ class MenuSectionAdminController extends AdminController
 
         if ($form->submitted('submit'))
         {
-            $model = $form->model;
+            $model->page_id = $model->module_id = $model->module_url = '';
             if ($model->url_info)
             {
                 $info = explode(':', $model->url_info);

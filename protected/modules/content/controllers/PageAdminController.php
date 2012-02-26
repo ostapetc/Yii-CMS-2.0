@@ -92,9 +92,4 @@ class PageAdminController extends AdminController
         }
     }
 
-
-    public function actionGetJsonData($id)
-    {
-        echo CJSON::encode($this->loadModel($id));
-    }
 }
