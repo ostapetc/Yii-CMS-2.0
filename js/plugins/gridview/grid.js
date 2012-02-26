@@ -38,9 +38,12 @@
             }
 
             var self = this;
-            $('.pager_select', self.element).chosen({
-                'allow_single_deselect':false
-            });
+            if ($.fn.chosen != undefined)
+            {
+                $('.pager_select', self.element).chosen({
+                    'allow_single_deselect':false
+                });
+            }
         },
         _initMassRemoval:function()
         {

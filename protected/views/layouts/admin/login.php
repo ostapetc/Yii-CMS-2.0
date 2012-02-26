@@ -22,14 +22,14 @@
     <![endif]-->
 
     <style type="text/css">
-        .middle_div
-        {
-           position: relative;
-           max-width: 470px;
-           margin: 0 auto;
-           top: 50%;
-           margin-top: -200px;
-           border: 1px solid #C0C0C0 !important;
+        .middle_div {
+            position: relative;
+            max-width: 470px;
+            margin: 0 auto;
+            top: 50%;
+            margin-top: -200px;
+            border: 1px solid #C0C0C0 !important;
+            /*box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.41);*/
         }
     </style>
 </head>

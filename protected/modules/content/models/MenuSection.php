@@ -95,7 +95,8 @@ class MenuSection extends ActiveRecordModel
         $criteria->with  = array('page', 'menu');
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria
+            'criteria' => $criteria,
+            'pagination' => false
         ));
     }
 
