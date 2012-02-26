@@ -24,11 +24,10 @@
     <style type="text/css">
         .middle_div
         {
-           position: absolute;
-           width: 470px;
-           left: 50%;
+           position: relative;
+           max-width: 470px;
+           margin: 0 auto;
            top: 50%;
-           margin-left: -235px;
            margin-top: -200px;
            border: 1px solid #C0C0C0 !important;
         }
@@ -39,7 +38,7 @@
 <body>
     <header id="header">
         <hgroup>
-            <h2 class="section_title" style="width: 100%"><?php echo t('Авторизация в админ панель'); ?></h2>
+            <h2 class="section_title" style="width: 100%; text-indent: 0; "><?php echo t('Авторизация в админ панель'); ?></h2>
         </hgroup>
     </header>
 
