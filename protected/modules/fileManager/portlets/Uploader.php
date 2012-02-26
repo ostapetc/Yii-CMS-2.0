@@ -132,6 +132,13 @@ class Uploader extends JuiInputWidget
         $this->renderDialog('uploader', array(
             'dialogOptions' => array(
                 'title' => $this->title,
+                'buttons'=> array(
+                    array(
+                        'text' => t('Сохранить'),
+                        'click'=> 'js:function() { $(this).dialog("close"); }',
+                        'create'=> 'js:function(event, ui) { $(this).addClass("btn btn-primary"); }'
+                    )
+                )
             ),
             'linkOptions'=>array(
                 'class'=> 'btn btn-info'

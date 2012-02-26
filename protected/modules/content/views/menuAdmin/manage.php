@@ -1,9 +1,3 @@
-<style type="text/css">
-    .button-column{
-        width: 100px !important;
-    }
-</style>
-
 <?php
 $this->page_title = 'Меню сайта';
 

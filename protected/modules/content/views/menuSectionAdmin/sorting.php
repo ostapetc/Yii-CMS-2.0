@@ -1,14 +1,3 @@
-<style type="text/css">
-    .icon-sortable {
-        margin-left: 5px;
-    }
-
-    .sortable-list li{
-        font-size: 15px;
-        line-height: 24px;
-    }
-</style>
-
 <?php
 $this->page_title = $this->t('admin', 'Сортировка пунктов меню');
 
