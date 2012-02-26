@@ -29,7 +29,7 @@ foreach (CHtml::listData(Page::model()->findAll(), 'id', 'title') as $id=> $titl
     $modules_urls['page:' . $id] = $title;
 }
 $elements = array(
-    'is_visible'     => array('type' => 'checkbox'),
+    'is_published'   => array('type' => 'checkbox'),
     'url_info'       => array(
         'type'       => 'chosen',
         'onchange'   => 'js:function(){alert($("#this").val());}',

@@ -1,29 +1,27 @@
 <style type="text/css">
-    .button-column {
+    .button-column{
         width: 100px !important;
     }
 </style>
 
 <?php
-$this->page_title = 'Меню сайта'; 
+$this->page_title = 'Меню сайта';
 
 $this->tabs = array(
-	'добавить меню' => $this->createUrl('create')
+    'добавить меню' => $this->createUrl('create')
 );
 
 $this->widget('AdminGridView', array(
-	'id' => 'menu-grid',
-	'dataProvider' => $model->search(),
-	'filter' => $model,
-	'template' => '{summary}<br/>{pager}<br/>{items}<br/>{pager}',
-	'columns'=>array(
-		'name',
-		array(
-            'class' => 'gridColumns.PublishedColumn',
+    'id'           => 'menu-grid',
+    'dataProvider' => $model->search(),
+    'filter'       => $model,
+    'template'     => '{summary}<br/>{pager}<br/>{items}<br/>{pager}',
+    'columns'      => array(
+        'name', array(
+            'class'  => 'gridColumns.PublishedColumn',
             'name'   => 'is_published',
-        ),
-		array(
-			'class'    => 'CButtonColumn',
+        ), array(
+            'class'    => 'CButtonColumn',
             'template' => '{manage} {update}',
             'buttons'  => array(
                 'manage' => array(
@@ -37,8 +35,8 @@ $this->widget('AdminGridView', array(
 //                    'url'      => 'Yii::app()->createUrl("content/MenuSectionAdmin/index", array("menu_id" => $data->id))'
 //                )
             ),
-		),
-	),
+        ),
+    ),
 ));
 ?>
 

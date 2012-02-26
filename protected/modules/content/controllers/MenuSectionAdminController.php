@@ -12,7 +12,6 @@ class MenuSectionAdminController extends AdminController
             "Sorting"          => "Сортировка",
             "Manage"           => "Управление ссылками меню",
             "UpdateTree"       => "Редактирование дерева",
-            "UpdateVisibility" => "Изменение видимости"
         );
     }
 
@@ -30,7 +29,7 @@ class MenuSectionAdminController extends AdminController
             array_shift($data);
 
             //получаем большие case для update
-            $update               = array();
+            $update            = array();
             $js_to_sql_mapping = array(
                 'depth'=> 'level',
                 'left' => 'left',
@@ -41,19 +40,22 @@ class MenuSectionAdminController extends AdminController
                 $update_data = CHtml::listData($data, 'item_id', $js_field);
                 $update[]    = "t.{$field} = " . SqlHelper::arrToCase('id', $update_data, 't');
             }
-            $in = implode(', ', array_values(CHtml::listData($data, 'item_id', 'item_id')));
-            //обновляем всю таблицу, кроме рута
+            $in        = implode(', ', array_values(CHtml::listData($data, 'item_id', 'item_id')));
             $condition = "t.level > 1";
             $command   = Yii::app()->db->commandBuilder->createSqlCommand(
-                "UPDATE `{$model->tableName()}` as t SET " . implode(', ', $update) . " WHERE {$condition} AND t.id IN ({$in})");
+                "UPDATE `{$model->tableName()}` as t SET " . implode(', ', $update) .
+                    " WHERE {$condition} AND t.id IN ({$in})");
             $command->execute();
             echo CJSON::encode(array(
                 'status'  => 'ok',
-                'redirect'=> $this->createUrl('manage', array('menu_id'=>$menu_id))
+                'redirect'=> $this->createUrl('manage', array('menu_id'=> $menu_id))
             ));
             Yii::app()->end();
         }
-        $this->render('sorting', array('root_id' => $root_id, 'menu_id' => $menu_id));
+        $this->render('sorting', array(
+            'root_id' => $root_id,
+            'menu_id' => $menu_id
+        ));
     }
 
 
@@ -75,13 +77,13 @@ class MenuSectionAdminController extends AdminController
 
         $form = new BaseForm('content.MenuSectionForm', $model);
         $this->performAjaxValidation($model);
+
         if ($form->submitted('submit'))
         {
-            $model = $form->model;
-
             if ($model->url_info)
             {
                 $info = explode(':', $model->url_info);
+                $model->module_url = $model->module_id = $model->page_id = null;
                 if ($info[0] === 'page')
                 {
                     $model->page_id = $info[1];
@@ -222,13 +224,5 @@ class MenuSectionAdminController extends AdminController
             'model' => $model,
             'root'  => $root
         ));
-    }
-
-    public function actionUpdateVisibility($id)
-    {
-        $model = $this->loadModel($id);
-        $model->detachBehavior('NestedSet');
-        $model->is_visible = $model->is_visible ? 0 : 1;
-        $model->save();
     }
 }

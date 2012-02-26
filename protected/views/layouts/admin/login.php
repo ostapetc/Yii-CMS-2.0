@@ -44,7 +44,7 @@
     </header>
 
     <article class="module middle_div">
-        <div style="padding: 10px!important;">
+        <div style="padding: 10px !important;">
             <?php echo $content; ?>
         </div>
         <?php if ($this->footer): ?>

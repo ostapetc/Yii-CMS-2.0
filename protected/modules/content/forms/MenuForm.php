@@ -5,11 +5,13 @@ return array(
         'id'    => 'menu-form',
         'class' => 'CActiveForm'
     ),
-    'elements' => array(
-        'name'       => array('type' => 'text'),
-        'is_visible' => array('type' => 'checkbox')
+    'elements'   => array(
+        'name'         => array('type' => 'text'),
+        'is_published' => array('type' => 'checkbox')
     ),
-    'buttons' => array(
-        'submit' => array('type' => 'submit', 'value' =>  $this->model->isNewRecord ? 'Далее' : 'Сохранить'),
+    'buttons'    => array(
+        'submit' => array('type'  => 'submit',
+                          'value' => $this->model->isNewRecord ? 'Далее' : 'Сохранить'
+        ),
     )
 );
