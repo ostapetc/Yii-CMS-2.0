@@ -1,25 +1,19 @@
-$(function()
+$(document).ready(function()
 {
-    var $MenuSection_url   = $('#MenuSection_url');
-    var $MenuSection_title = $('#MenuSection_title');
+    var urlField = $('#MenuSection_url'),
+        urlInfoField = $('#MenuSection_url_info');
 
-    $('#MenuSection_page_id').change(function()
+    var change = function()
     {
-        var page_id = $(this).val();
-
-        if (page_id)
+        if ($(this).val())
         {
-            $MenuSection_url.val('');
-            $MenuSection_url.attr('disabled', true);
-
-            $.getJSON('/content/PageAdmin/GetJsonData', {id : page_id}, function(page)
-            {
-                $MenuSection_title.val(page.title);
-            });
+            urlField.val('').attr('disabled', true);
         }
         else
         {
-            $MenuSection_url.attr('disabled', false);
+            urlField.attr('disabled', false);
         }
-    });
+    };
+    change.call(urlInfoField);
+    urlInfoField.change(change);
 });
