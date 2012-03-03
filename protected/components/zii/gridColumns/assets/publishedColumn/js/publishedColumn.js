@@ -2,10 +2,8 @@
 {
 
     var defaultOptions = {
-        icon_true: null,
-        icon_false: null,
-        title_false: null,
-        title_false: null,
+        html_true: null,
+        html_false: null,
         model: null,
         attribute: null
     };
@@ -22,10 +20,8 @@
                 'attribute': options.attribute,
                 'model': options.model
             });
-
             $(this).data('value', value);
-            $(this).find('img').attr('src', value ? options.icon_true : options.icon_false);
-            $(this).attr('title', value ? options.title_true : options.title_false);
+            $(this).html(value ? options.html_true : options.html_false);
             return false;
         });
     };
