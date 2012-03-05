@@ -2,13 +2,11 @@
 class PublishedColumn extends CDataColumn
 {
     public $assets = 'application.components.zii.gridColumns.assets';
-    public $icon_true;
-    public $icon_false;
-    public $title_true;
-    public $title_false;
+    public $html_true;
+    public $html_false;
 
     public $htmlOptions = array(
-        'style' => 'width:50px;'
+        'style' => 'width:50px;text-align:center;'
     );
 
 
@@ -29,22 +27,13 @@ class PublishedColumn extends CDataColumn
         {
             $this->filter = array(t("Нет"),t("Да"));
         }
-        if ($this->icon_true === null)
+        if ($this->html_true === null)
         {
-            $this->icon_true = $this->assets . '/img/eye.png';
+            $this->html_true = '<span class="label label-success">'.t('Да').'</span>';
         }
-
-        if ($this->icon_false === null)
+        if ($this->html_false === null)
         {
-            $this->icon_false = $this->assets . '/img/eye_na.png';
-        }
-        if ($this->title_true === null)
-        {
-            $this->title_true = t('Виден в меню');
-        }
-        if ($this->title_false === null)
-        {
-            $this->title_false = t('Не виден в меню');
+            $this->html_false = '<span class="label label-important">'.t('Нет').'</span>';
         }
     }
 
@@ -55,26 +44,20 @@ class PublishedColumn extends CDataColumn
     public function registerScript()
     {
         $options = CJavaScript::encode(array(
-            'icon_true'        => $this->icon_true,
-            'icon_false'       => $this->icon_false,
-            'title_false'      => $this->title_false,
-            'title_false'      => $this->title_false,
-            'model'            => $this->grid->dataProvider->modelClass,
-            'attribute'        => $this->name,
+            'html_true'       => $this->html_true,
+            'html_false'      => $this->html_false,
+            'model'           => $this->grid->dataProvider->modelClass,
+            'attribute'       => $this->name,
         ));
         Yii::app()->clientScript->registerScriptFile($this->assets . '/js/publishedColumn.js')
             ->registerScript(get_class($this), "$('#{$this->grid->id}').publishedColumn({$options});");
 
     }
 
-
     public function renderDataCellContent($row, $data)
     {
-        $img   = $data->{$this->name} ? $this->icon_true : $this->icon_false;
-        $title = $data->is_published ? $this->title_true : $this->title_false;
-        $img   = CHtml::image($img, $title);
-
-        echo CHtml::link($img, Yii::app()->controller->createUrl('/main/helpAdmin/saveAttribute'), array(
+        $html = $data->{$this->name} ? $this->html_true : $this->html_false;
+        echo CHtml::link($html, Yii::app()->controller->createUrl('/main/helpAdmin/saveAttribute'), array(
             'data-id'    => $data->getPrimaryKey(),
             'data-value' => $data->is_published,
             'class'      => 'published_icon'
