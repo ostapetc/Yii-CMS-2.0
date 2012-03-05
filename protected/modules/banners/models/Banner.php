@@ -140,7 +140,7 @@ class Banner extends ActiveRecordModel
             'alt'         => '',
             'title'       => $this->name,
             'data-content'=> $this->content
-        ));
+        ))->encode();
         if ($return)
         {
             return $thumb;
