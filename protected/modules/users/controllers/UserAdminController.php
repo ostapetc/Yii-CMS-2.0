@@ -39,7 +39,7 @@ class UserAdminController extends AdminController
             "form"       => $form
         );
 
-        if ($form->submited() && $model->validate())
+        if ($form->submitted() && $model->validate())
         {
             $remember_me =
                 isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
