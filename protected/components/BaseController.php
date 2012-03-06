@@ -44,20 +44,10 @@ abstract class BaseController extends CController
 
     public function filters()
     {
-        Yii::import('application.components.filters.*');
-        return array('https', 'metaTags');
-    }
-
-    public function filterHttps($filterChain)
-    {
-        $filter = new HttpsFilter();
-        $filter->filter($filterChain);
-    }
-
-    public function filterMetaTags($filterChain)
-    {
-        $filter = new MetaTagsFilter();
-        $filter->filter($filterChain);
+        return array(
+            array('application.components.filters.HttpsFilter'),
+            array('application.components.filters.MetaTagsFilter + view')
+        );
     }
 
     public function beforeAction($action)
