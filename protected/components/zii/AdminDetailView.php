@@ -8,6 +8,17 @@ class AdminDetailView extends CDetailView
         parent::init();
         foreach($this->attributes as $attribute)
         {
+            if(is_string($attribute))
+            {
+                if(!preg_match('/^([\w\.]+)(:(\w*))?(:(.*))?$/',$attribute,$matches))
+                    throw new CException(Yii::t('zii','The attribute must be specified in the format of "Name:Type:Label", where "Type" and "Label" are optional.'));
+                $attribute=array(
+                    'name'=>$matches[1],
+                    'type'=>isset($matches[3]) ? $matches[3] : 'text',
+                );
+                if(isset($matches[5]))
+                    $attribute['label']=$matches[5];
+            }
             if(!isset($attribute['name']))
             {
                 continue;

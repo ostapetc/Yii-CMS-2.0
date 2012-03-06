@@ -1,7 +1,7 @@
 <?php
 $this->page_title = "Просмотр Пользователя: {$model->name}";
 
-$this->widget('BootDetailView', array(
+$this->widget('AdminDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'last_name',
@@ -25,4 +25,4 @@ $this->widget('BootDetailView', array(
 		'date_create'
 	),
 ));
-?>
+

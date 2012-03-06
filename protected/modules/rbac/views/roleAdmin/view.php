@@ -2,7 +2,7 @@
 
 $this->page_title = 'Просмотр роли';
 
-$this->widget('BootDetailView', array(
+$this->widget('AdminDetailView', array(
     'data' => $model,
     'attributes' => array(
         'name',

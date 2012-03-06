@@ -1,5 +1,5 @@
 <?php
-$this->widget('BootDetailView', array(
+$this->widget('AdminDetailView', array(
 	'data' => $model,
 	'attributes' => array(
         'date_create',
