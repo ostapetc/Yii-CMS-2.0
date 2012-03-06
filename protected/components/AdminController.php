@@ -12,9 +12,9 @@ abstract class AdminController extends BaseController
 
     public function filters()
     {
-        return array(
+        return CMap::mergeArray(parent::filters(),array(
             'postOnly + delete'
-        );
+        ));
     }
 
     private function initAssets()
@@ -36,8 +36,7 @@ abstract class AdminController extends BaseController
 
             $asset_dir = Yii::app()->getAssetManager()->publish($dir) . '/';
 
-            $scripts = scandir($dir);
-            foreach ($scripts as $script)
+            foreach (scandir($dir) as $script)
             {
                 if ($script[0] == '.')
                 {
@@ -46,8 +45,6 @@ abstract class AdminController extends BaseController
 
                 if ($dir_name == 'js')
                 {
-                    echo $asset_dir . $script . "<br>";
-                    
                     Yii::app()->clientScript->registerScriptFile($asset_dir . $script);
                 }
                 else if ($dir_name == 'css')
@@ -68,6 +65,6 @@ abstract class AdminController extends BaseController
             $this->redirect(array('/admin/login'));
         }
 
-        return parent::beforeAction($action);;
+        return parent::beforeAction($action);
     }
 }
