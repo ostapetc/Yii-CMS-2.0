@@ -59,7 +59,7 @@ class UserIdentity extends CUserIdentity
         {
             WebUser::setRole($user->role);
 
-            if (!RbacModule::isAllow('Admin_Main'))
+            if (!Yii::app()->user->checkAccess('Admin_Main'))
             {
                 Yii::app()->user->logout();
                 $this->errorCode = self::ERROR_UNKNOWN;

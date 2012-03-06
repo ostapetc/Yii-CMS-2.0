@@ -33,10 +33,11 @@ abstract class BaseController extends CController
 
     public function beforeAction($action)
     {
+
         //check access
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
-        if (!RbacModule::isAllow($item_name))
-        {   echo $item_name;
+        if (!Yii::app()->user->checkAccess($item_name))
+        {
             $this->forbidden();
         }
 
@@ -65,7 +66,7 @@ abstract class BaseController extends CController
      */
     protected function pageNotFound()
     {
-        throw new CHttpException(404, 'Страница не найдена!');
+        throw new CHttpException(404, t('Страница не найдена!'));
     }
 
 
@@ -74,7 +75,7 @@ abstract class BaseController extends CController
      */
     protected function forbidden()
     {
-        throw new CHttpException(403, 'Запрещено!');
+        throw new CHttpException(403, t('Запрещено!'));
     }
 
 
@@ -98,7 +99,6 @@ abstract class BaseController extends CController
             Yii::app()->end();
         }
     }
-
 
     /**
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,
