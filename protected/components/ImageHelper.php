@@ -3,9 +3,7 @@ ini_set("memory_limit", -1); //GD - memory killer
 
 class ImageHolder //Класс Image занят под расширение
 {
-    const TRANSPARENT_PIXEL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41
-LjEwMPRyoQAAAA1JREFUGFdj+P//PwMACPwC/ohfBuAAAAAASUVORK5CYII=';
+    const TRANSPARENT_PIXEL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAA1JREFUGFdj+P//PwMACPwC/ohfBuAAAAAASUVORK5CYII=';
 
     private $_htmlOptions;
     private $_watermark;
@@ -46,7 +44,6 @@ LjEwMPRyoQAAAA1JREFUGFdj+P//PwMACPwC/ohfBuAAAAAASUVORK5CYII=';
             list($this->_htmlOptions['width'], $this->_htmlOptions['height']) = array($this->_size['width'], $this->_size['height']);
             $img = CHtml::image($this->getSrc(), '', $this->_htmlOptions);
             $space = CHtml::image(self::TRANSPARENT_PIXEL, '', $this->_htmlOptions);
-
             if (self::OPTIMIZE_ON && self::LAZY_LOAD_ON)
             {
                 $options = CJavaScript::encode(array(
