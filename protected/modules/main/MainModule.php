@@ -80,8 +80,8 @@ class MainModule extends WebModule
     public static function routes()
     {
         return array(
-            '/admin'     => 'main/mainAdmin',
-            '/search'    => 'main/main/search',
+            'admin'     => 'main/mainAdmin',
+            'search'    => 'main/main/search',
             'sitemap'    => 'main/help/sitemap',
             'sitemap.xml'=> 'main/help/sitemapxml'
         );

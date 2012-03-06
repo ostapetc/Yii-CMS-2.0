@@ -30,17 +30,14 @@ abstract class BaseController extends CController
         );
     }
 
-
     public function beforeAction($action)
     {
-
         //check access
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         if (!Yii::app()->user->checkAccess($item_name))
         {
             $this->forbidden();
         }
-
         //set default title
         $action_titles = $this->actionsTitles();
 

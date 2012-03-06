@@ -66,6 +66,7 @@ class UrlManager extends CUrlManager
         $routes['<language:(en|ru)>/<route:.*>'] = '<route>';
 
         Yii::app()->urlManager->addRules($routes);
+
     }
 }
 
