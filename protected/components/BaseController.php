@@ -14,9 +14,9 @@ abstract class BaseController extends CController
 
     public $crumbs = array();
 
+    public $isSslProtected = false;
 
     abstract public static function actionsTitles();
-
 
     public function init()
     {
@@ -42,9 +42,26 @@ abstract class BaseController extends CController
     }
 
 
+    public function filters()
+    {
+        Yii::import('application.components.filters.*');
+        return array('https', 'metaTags');
+    }
+
+    public function filterHttps($filterChain)
+    {
+        $filter = new HttpsFilter();
+        $filter->filter($filterChain);
+    }
+
+    public function filterMetaTags($filterChain)
+    {
+        $filter = new MetaTagsFilter();
+        $filter->filter($filterChain);
+    }
+
     public function beforeAction($action)
     {
-        $this->_redirectIfRequire();
 
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         if (!RbacModule::isAllow($item_name))
@@ -58,58 +75,12 @@ abstract class BaseController extends CController
         }
 
         $this->setTitle($action);
-        $this->_setMetaTags($action);
 
         return true;
     }
 
 
-    private function _redirectIfRequire()
-    {
-        if ($this->request->isPostRequest)
-        {
-            return;
-        }
-
-        $languages = Language::getCachedArray();
-
-        $url_parts = explode('/', $_SERVER['REQUEST_URI']);
-
-        if (!isset($languages[$url_parts[1]]))
-        {
-            $this->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
-        }
-    }
-
-
-    private function _setMetaTags($action)
-    {
-        if ($action->id != 'view' || $this instanceof AdminController)
-        {
-            return false;
-        }
-
-        $id = $this->request->getParam("id");
-        if ($id)
-        {
-            $class = $this->getModelClass();
-
-            $meta_tag = MetaTag::model()->findByAttributes(array(
-                'model_id'  => $class,
-                'object_id' => $id
-            ));
-
-            if ($meta_tag)
-            {
-                $this->meta_title       = $meta_tag->title;
-                $this->meta_keywords    = $meta_tag->keywords;
-                $this->meta_description = $meta_tag->description;
-            }
-        }
-    }
-
-
-    private function getModelClass()
+    public function getModelClass()
     {
         return ucfirst(str_replace('Admin', '', $this->id));
     }
@@ -209,28 +180,5 @@ abstract class BaseController extends CController
         }
 
         return $model;
-    }
-
-
-    /**
-     * Обертка для Yii::t, выполняет перевод по словарям текущего модуля.
-     * Так же перевод осуществляется по словорям с префиксом {modelId},
-     * где modelId - приведенная к нижнему регистру база имени контроллера
-     *
-     * Например: для контроллера ProductInfoAdminController, находящегося в модуле ProductsModule
-     * перевод будет осуществляться по словарю ProductsModule.product_info_{первый параметр метода}
-     *
-     * @param string $dictionary словарь
-     * @param string $alias      фраза для перевода
-     * @param array  $params
-     * @param string $language
-     *
-     * @return string переводa
-     */
-    public function t($dictionary, $alias, $params = array(), $source = null, $language = null)
-    {
-        $file_prefix = StringHelper::camelCaseToUnderscore($this->getModelClass());
-        return Yii::t(get_class($this->module) . '.' . $file_prefix . '_' .
-            $dictionary, $alias, $params, $source, $language);
     }
 }
