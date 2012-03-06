@@ -18,6 +18,7 @@ abstract class BaseController extends CController
 
     abstract public static function actionsTitles();
 
+
     public function filters()
     {
         return array(
@@ -29,26 +30,17 @@ abstract class BaseController extends CController
         );
     }
 
+
     public function beforeAction($action)
     {
+        //check access
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         if (!RbacModule::isAllow($item_name))
         {   echo $item_name;
             $this->forbidden();
         }
 
-        $this->setTitle($action);
-        return true;
-    }
-
-    public function getModelClass()
-    {
-        return ucfirst(str_replace('Admin', '', $this->id));
-    }
-
-
-    public function setTitle($action)
-    {
+        //set default title
         $action_titles = $this->actionsTitles();
 
         if (!isset($action_titles[ucfirst($action->id)]))
@@ -56,9 +48,15 @@ abstract class BaseController extends CController
             throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
-        $title = $action_titles[ucfirst($action->id)];
+        $this->page_title = $action_titles[ucfirst($action->id)];
 
-        $this->page_title = $title;
+        return true;
+    }
+
+
+    public function getModelClass()
+    {
+        return ucfirst(str_replace('Admin', '', $this->id));
     }
 
 
