@@ -21,9 +21,11 @@ abstract class BaseController extends CController
     public function filters()
     {
         return array(
-            array('application.components.filters.LanguageFilter'),
             array('application.components.filters.HttpsFilter'),
-            array('application.components.filters.MetaTagsFilter + view')
+            array('application.components.filters.YXssFilter'),
+            array('application.components.filters.LanguageFilter'),
+            array('application.components.filters.MetaTagsFilter + view'),
+            array('application.components.filters.StatisticFilter'),
         );
     }
 
@@ -35,13 +37,7 @@ abstract class BaseController extends CController
             $this->forbidden();
         }
 
-        if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
-        {
-            MainModule::saveSiteAction();
-        }
-
         $this->setTitle($action);
-
         return true;
     }
 
