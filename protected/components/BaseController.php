@@ -18,33 +18,10 @@ abstract class BaseController extends CController
 
     abstract public static function actionsTitles();
 
-    public function init()
-    {
-        parent::init();
-        $this->_initLanguage();
-    }
-
-
-    private function _initLanguage()
-    {
-        if (isset($_GET['language']))
-        {
-            Yii::app()->setLanguage($_GET['language']);
-            Yii::app()->session['language'] = $_GET['language'];
-        }
-
-        if (
-            !isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language
-        )
-        {
-            Yii::app()->session['language'] = Yii::app()->language;
-        }
-    }
-
-
     public function filters()
     {
         return array(
+            array('application.components.filters.LanguageFilter'),
             array('application.components.filters.HttpsFilter'),
             array('application.components.filters.MetaTagsFilter + view')
         );
@@ -52,7 +29,6 @@ abstract class BaseController extends CController
 
     public function beforeAction($action)
     {
-
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         if (!RbacModule::isAllow($item_name))
         {   echo $item_name;
@@ -69,7 +45,6 @@ abstract class BaseController extends CController
         return true;
     }
 
-
     public function getModelClass()
     {
         return ucfirst(str_replace('Admin', '', $this->id));
@@ -78,9 +53,7 @@ abstract class BaseController extends CController
 
     public function setTitle($action)
     {
-        $action_titles = call_user_func(array(
-            get_class($action->controller), 'actionsTitles'
-        ));
+        $action_titles = $this->actionsTitles();
 
         if (!isset($action_titles[ucfirst($action->id)]))
         {
