@@ -39,24 +39,20 @@ class UserAdminController extends AdminController
             "form"       => $form
         );
 
-        if (isset($_POST["User"]))
+        if ($form->submited() && $model->validate())
         {
-            $model->attributes = $_POST["User"];
-            if ($model->validate())
+            $remember_me =
+                isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
+
+            $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
+
+            if ($identity->authenticate(true))
             {
-                $remember_me =
-                    isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
-
-                $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
-
-                if ($identity->authenticate(true))
-                {
-                    $this->redirect($this->createUrl("/main/mainAdmin"));
-                }
-                else
-                {
-                    $params["error_code"] = $identity->errorCode;
-                }
+                $this->redirect($this->createUrl("/main/mainAdmin"));
+            }
+            else
+            {
+                $params["error_code"] = $identity->errorCode;
             }
         }
 
@@ -98,24 +94,20 @@ class UserAdminController extends AdminController
         unset($form->elements['captcha']);
 
         $this->performAjaxValidation($model);
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->validate())
         {
-            $model = $form->model;
-            if ($model->validate())
-            {
-                $model->password = md5($model->password);
-                $model->save(false);
+            $model->password = md5($model->password);
+            $model->save(false);
 
-                $assignment           = new AuthAssignment();
-                $assignment->itemname = $_POST['User']['role'];
-                $assignment->userid   = $model->id;
-                $assignment->save();
+            $assignment           = new AuthAssignment();
+            $assignment->itemname = $_POST['User']['role'];
+            $assignment->userid   = $model->id;
+            $assignment->save();
 
-                $this->redirect(array(
-                    'view',
-                    'id' => $model->id
-                ));
-            }
+            $this->redirect(array(
+                'view',
+                'id' => $model->id
+            ));
         }
 
         $this->render('create', array('form' => $form));
@@ -135,26 +127,22 @@ class UserAdminController extends AdminController
         unset($form->elements['captcha']);
 
         $this->performAjaxValidation($model);
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->validate())
         {
-            $model = $form->model;
-            if ($model->validate())
+            if ($_POST['User']['password'] != $old_password)
             {
-                if ($_POST['User']['password'] != $old_password)
-                {
-                    $model->password = md5($model->password);
-                }
-
-                $model->save(false);
-
-                AuthAssignment::updateUserRole($model->id, $_POST['User']['role']);
-
-                Implex::refreshXLS(get_class($model));
-
-                $this->redirect('view', array(
-                    'id'=> $model->id
-                ));
+                $model->password = md5($model->password);
             }
+
+            $model->save(false);
+
+            AuthAssignment::updateUserRole($model->id, $_POST['User']['role']);
+
+            Implex::refreshXLS(get_class($model));
+
+            $this->redirect('view', array(
+                'id'=> $model->id
+            ));
         }
 
         $this->render('update', array(
