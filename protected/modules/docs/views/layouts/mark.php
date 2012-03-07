@@ -324,25 +324,39 @@ for ($i->rewind(); $i->valid(); $i->next())
     {
         continue;
     }
-
+    $active_folder = false;
     $tmp = array();
     foreach ($i->getChildren() as $child)
     {
         list($file) = explode('.',$child->getFileName());
-
+        $active = isset($_GET['alias']) && ($_GET['alias'] == $file) ? true : false;
+        $active_folder = $active_folder || $active;
         $tmp[] = array(
             'label'       => $file,
             'itemOptions' => array(),
-            'active'      => isset($_GET['alias']) && ($_GET['alias'] == $file) ? true : false,
+            'active'      => $active,
             'url'         => Yii::app()->createUrl('/docs/documentation/index', array('alias'=>$file, 'folder'=>$item->getFileName()))
         );
     }
-    $items[] = array(
-        'label'       => $item->getFileName(),
-        'items' => $tmp,
-        'itemOptions' => array('class'=> 'nav-header'),
-    );
-
+    if ($active_folder)
+    {
+        $items[] = array(
+            'label'       => $item->getFileName(),
+            'itemOptions' => array('class'=> 'nav-header'),
+        );
+        foreach ($tmp as $item)
+        {
+            $items[] = $item;
+        }
+    }
+    else
+    {
+        $items[] = array(
+            'label'       => $item->getFileName(),
+            'items' => $tmp,
+            'itemOptions' => array('class'=> 'nav-header'),
+        );
+    }
 }
 
 //foreach (Documentation::model()->orderByLft()->findAll() as $doc)
