@@ -324,6 +324,7 @@ for ($i->rewind(); $i->valid(); $i->next())
     {
         continue;
     }
+    $folder_name = t($item->getFileName());
     $active_folder = false;
     $tmp = array();
     foreach ($i->getChildren() as $child)
@@ -332,7 +333,7 @@ for ($i->rewind(); $i->valid(); $i->next())
         $active = isset($_GET['alias']) && ($_GET['alias'] == $file) ? true : false;
         $active_folder = $active_folder || $active;
         $tmp[] = array(
-            'label'       => $file,
+            'label'       => t($file),
             'itemOptions' => array(),
             'active'      => $active,
             'url'         => Yii::app()->createUrl('/docs/documentation/index', array('alias'=>$file, 'folder'=>$item->getFileName()))
@@ -341,7 +342,7 @@ for ($i->rewind(); $i->valid(); $i->next())
     if ($active_folder)
     {
         $items[] = array(
-            'label'       => $item->getFileName(),
+            'label'       => $folder_name,
             'itemOptions' => array('class'=> 'nav-header'),
         );
         $items = array_merge($items, $tmp);
@@ -349,7 +350,7 @@ for ($i->rewind(); $i->valid(); $i->next())
     else
     {
         $items[] = array(
-            'label'       => $item->getFileName(),
+            'label'       => $folder_name,
             'items'       => $tmp,
             'itemOptions' => array('class'=> 'nav-header'),
         );
