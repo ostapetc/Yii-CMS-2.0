@@ -344,16 +344,13 @@ for ($i->rewind(); $i->valid(); $i->next())
             'label'       => $item->getFileName(),
             'itemOptions' => array('class'=> 'nav-header'),
         );
-        foreach ($tmp as $item)
-        {
-            $items[] = $item;
-        }
+        $items = array_merge($items, $tmp);
     }
     else
     {
         $items[] = array(
             'label'       => $item->getFileName(),
-            'items' => $tmp,
+            'items'       => $tmp,
             'itemOptions' => array('class'=> 'nav-header'),
         );
     }
