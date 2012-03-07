@@ -325,22 +325,26 @@ for ($i->rewind(); $i->valid(); $i->next())
         continue;
     }
 
-    $items[] = array(
-        'label'       => $item->getFileName(),
-        'itemOptions' => array('class'=> 'nav-header'),
-    );
-
+    $tmp = array();
     foreach ($i->getChildren() as $child)
     {
         list($file) = explode('.',$child->getFileName());
-        $items[] = array(
+
+        $tmp[] = array(
             'label'       => $file,
             'itemOptions' => array(),
             'active'      => isset($_GET['alias']) && ($_GET['alias'] == $file) ? true : false,
             'url'         => Yii::app()->createUrl('/docs/documentation/index', array('alias'=>$file, 'folder'=>$item->getFileName()))
         );
     }
+    $items[] = array(
+        'label'       => $item->getFileName(),
+        'items' => $tmp,
+        'itemOptions' => array('class'=> 'nav-header'),
+    );
+
 }
+
 //foreach (Documentation::model()->orderByLft()->findAll() as $doc)
 //{
 //    if ($doc->depth == 1)
@@ -386,10 +390,10 @@ for ($i->rewind(); $i->valid(); $i->next())
         <div class="span3">
             <div class="well sidebar-nav sidebar">
                 <?php
-                $this->widget('ClientMenu', array(
+                $this->widget('BootMenu', array(
                     'items'       => $items,
+                    'type' => BootMenu::TYPE_LIST,
                     'htmlOptions' => array(
-                        'class'=> 'nav nav-list',
                         'id'   => 'sidebar-docs-menu'
                     )
                 )) ?>
