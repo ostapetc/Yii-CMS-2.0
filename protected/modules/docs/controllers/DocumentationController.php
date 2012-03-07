@@ -4,7 +4,7 @@ class DocumentationController extends CController
     public $layout = '/layouts/mark';
 
     public $meta_title;
-    
+
     public static function actionsTitles()
     {
         return array(
@@ -12,15 +12,20 @@ class DocumentationController extends CController
         );
     }
 
-    public function actionIndex($alias, $folder = '')
+    public function actionIndex($alias = 'index', $folder = '')
     {
         $md = new CMarkdown;
         if ($folder)
         {
             $view = $folder.'/'.$alias;
         }
-        $model = Documentation::model()->findByAttributes(array('alias'=>$alias));
-        $str = $md->transform($model->content);
+        else
+        {
+            $view = $alias;
+        }
+//        $content = Documentation::model()->findByAttributes(array('alias'=>$alias))->content;
+        $content = $this->renderPartial($view, array(), true);
+        $str = $md->transform($content);
 
         $this->render('tmpl',array('content'=>
             $this->compileDocSyntax($str)

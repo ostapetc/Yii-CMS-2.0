@@ -26,6 +26,7 @@ class AppManager
     {
         $modules = array();
 
+
         foreach (scandir(MODULES_PATH) as $module_dir)
         {
             if ($module_dir[0] == '.')

@@ -38,8 +38,9 @@ class DocsModule extends WebModule
     public static function routes()
     {
         return array(
-            '/doc/<alias>'          => '/docs/documentation/index',
-            '/doc/<folder>/<alias>' => '/docs/documentation/index',
+            'doc'                 => '/docs/documentation/index',
+            'doc/<alias>'          => '/docs/documentation/index',
+            'doc/<folder>/<alias>' => '/docs/documentation/index',
         );
     }
 }

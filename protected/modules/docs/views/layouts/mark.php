@@ -314,24 +314,50 @@ code{
 </script>
 <?php
 $items = array();
-foreach (Documentation::model()->orderByLft()->findAll() as $doc)
+$i = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(Yii::getPathOfAlias('docs.views.documentation')));
+$i = new RecursiveDirectoryIterator(Yii::getPathOfAlias('docs.views.documentation'));
+
+for ($i->rewind(); $i->valid(); $i->next())
 {
-    if ($doc->depth == 1)
+    $item=$i->current();
+    if (!$i->hasChildren())
     {
         continue;
     }
-    $tmp = array(
-        'label'       => $doc->title,
-        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
-        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
 
+    $items[] = array(
+        'label'       => $item->getFileName(),
+        'itemOptions' => array('class'=> 'nav-header'),
     );
-    if ($doc->depth > 2)
+
+    foreach ($i->getChildren() as $child)
     {
-        $tmp['url'] = $doc->href;
+        list($file) = explode('.',$child->getFileName());
+        $items[] = array(
+            'label'       => $file,
+            'itemOptions' => array(),
+            'active'      => isset($_GET['alias']) && ($_GET['alias'] == $file) ? true : false,
+            'url'         => Yii::app()->createUrl('/docs/documentation/index', array('alias'=>$file, 'folder'=>$item->getFileName()))
+        );
     }
-    $items[] = $tmp;
 }
+//foreach (Documentation::model()->orderByLft()->findAll() as $doc)
+//{
+//    if ($doc->depth == 1)
+//    {
+//        continue;
+//    }
+//    $tmp = array(
+//        'label'       => $doc->title,
+//        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
+//        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
+//    );
+//    if ($doc->depth > 2)
+//    {
+//        $tmp['url'] = $doc->href;
+//    }
+//    $items[] = $tmp;
+//}
 
 ?>
 <div class="navbar navbar-fixed-top">
