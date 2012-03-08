@@ -1,7 +1,7 @@
 <?php
 ini_set("memory_limit", -1); //GD - memory killer
 
-class ImageHolder //Класс Image занять под расширение
+class ImageHolder //Класс Image занят под расширение
 {
     private $_htmlOptions;
     private $_watermark;
