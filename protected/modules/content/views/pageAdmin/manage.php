@@ -21,8 +21,6 @@ $this->widget('AdminGridView', array(
 		),
 	),
 ));
-?>
-
 
 
 
