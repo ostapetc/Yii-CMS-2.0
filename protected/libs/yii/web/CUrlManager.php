@@ -212,7 +212,7 @@ class CUrlManager extends CApplicationComponent
 	 */
 	protected function processRules()
 	{
-		if(empty($this->rules) || $this->getUrlFormat()===self::GET_FORMAT)
+        if(empty($this->rules) || $this->getUrlFormat()===self::GET_FORMAT)
 			return;
 		if($this->cacheID!==false && ($cache=Yii::app()->getComponent($this->cacheID))!==null)
 		{
@@ -223,6 +223,7 @@ class CUrlManager extends CApplicationComponent
 				return;
 			}
 		}
+
 		foreach($this->rules as $pattern=>$route)
 			$this->_rules[]=$this->createUrlRule($route,$pattern);
 		if(isset($cache))
@@ -356,18 +357,19 @@ class CUrlManager extends CApplicationComponent
 	 */
 	public function parseUrl($request)
 	{
-		if($this->getUrlFormat()===self::PATH_FORMAT)
+        if($this->getUrlFormat()===self::PATH_FORMAT)
 		{
-			$rawPathInfo=$request->getPathInfo();
+            $rawPathInfo=$request->getPathInfo();
 			$pathInfo=$this->removeUrlSuffix($rawPathInfo,$this->urlSuffix);
-			foreach($this->_rules as $i=>$rule)
+            foreach($this->_rules as $i=>$rule)
 			{
 				if(is_array($rule))
 					$this->_rules[$i]=$rule=Yii::createComponent($rule);
 				if(($r=$rule->parseUrl($this,$request,$pathInfo,$rawPathInfo))!==false)
 					return isset($_GET[$this->routeVar]) ? $_GET[$this->routeVar] : $r;
 			}
-			if($this->useStrictParsing)
+
+        	if($this->useStrictParsing)
 				throw new CHttpException(404,Yii::t('yii','Unable to resolve the request "{route}".',
 					array('{route}'=>$pathInfo)));
 			else

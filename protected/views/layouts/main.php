@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
+    <title><?php echo $this->meta_title ?></title>
+    <meta name="description" content="<?php echo $this->meta_description ?>">
+    <meta name="keywords" content="<?php echo $this->meta_keywords ?>">
     <meta name="author" content="">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->

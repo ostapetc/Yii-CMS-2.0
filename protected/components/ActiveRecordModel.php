@@ -45,15 +45,11 @@ abstract class ActiveRecordModel extends CActiveRecord
 
     public function attributeLabels()
     {
-        $meta = $this->meta();
-
         $labels = array();
-
-        foreach ($meta as $field_data)
+        foreach ($this->meta() as $field_data)
         {
             $labels[$field_data["Field"]] = t($field_data["Comment"]);
         }
-
         return $labels;
     }
 

@@ -6,7 +6,7 @@ $this->tabs = array(
     'список страниц' => $this->createUrl('manage')
 );
 
-$this->widget('BootDetailView', array(
+$this->widget('AdminDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
         'title',
@@ -18,7 +18,7 @@ $this->widget('BootDetailView', array(
         ),
 		'date_create',
         array(
-            'name'  => t('Мета-теги'),
+            'heared'  => t('Мета-теги'),
             'value' => MetaTag::model()->html($model->id, get_class($model)),
             'type'  => 'raw'
         ),

@@ -221,7 +221,6 @@ class BaseForm extends CForm
         }
     }
 
-
     function formatDateAttributes()
     {
         if (!$this->model)

@@ -111,7 +111,7 @@ class PageBlock extends ActiveRecordModel
         {
             $text = $block["text"];
 
-        	if (RbacModule::isAllow('PageBlockAdmin_Update'))
+        	if (Yii::app()->user->checkAccess('PageBlockAdmin_Update'))
         	{   
 				$text.= "&nbsp; <a href='/content/pageBlockAdmin/update/id/{$block['id']}' class='admin_link'>t(Редактировать</a>";
         	}

@@ -155,7 +155,8 @@ return array(
     'onBeginRequest' => array('AppManager', 'init'),
 
     'params'         => array(
-        'save_site_actions' => false
+        'save_site_actions' => false,
+        'multilanguage_site' => true
     )
 );
 

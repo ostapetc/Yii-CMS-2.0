@@ -3,6 +3,8 @@ ini_set("memory_limit", -1); //GD - memory killer
 
 class ImageHolder //Класс Image занят под расширение
 {
+    const TRANSPARENT_PIXEL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAA1JREFUGFdj+P//PwMACPwC/ohfBuAAAAAASUVORK5CYII=';
+
     private $_htmlOptions;
     private $_watermark;
 
@@ -11,9 +13,18 @@ class ImageHolder //Класс Image занят под расширение
     private $_size;
     private $_crop;
 
+    private $_src;
+
+    const OPTIMIZE_ON = true;       //if true switch on some algorithms to speed up load page in browser.
+    const LAZY_LOAD_ON = false;      //you can start load images after load page. optimize_on require
+    const NO_LOAD_IF_NO_SEE = false;  //images start load when they appear on the screen. lazy_load_on require
+    const ENCODE_ON = true;         //enable base64 encode. optimize_on require
+
 
     public function __construct($dir, $file, array $size, $crop = false)
     {
+        //internal variables
+
         $this->_dir  = $dir;
         $this->_file = $file;
         $this->_size = $size;
@@ -21,22 +32,72 @@ class ImageHolder //Класс Image занят под расширение
         return $this;
     }
 
-
+    /**
+     *
+     *
+     * @return string
+     */
     public function __toString()
     {
         try
         {
-            return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
+            list($this->_htmlOptions['width'], $this->_htmlOptions['height']) = array($this->_size['width'], $this->_size['height']);
+            $img = CHtml::image($this->getSrc(), '', $this->_htmlOptions);
+            $space = CHtml::image(self::TRANSPARENT_PIXEL, '', $this->_htmlOptions);
+            if (self::OPTIMIZE_ON && self::LAZY_LOAD_ON)
+            {
+                $options = CJavaScript::encode(array(
+                    'threshold' => 30,
+                    'effect' => 'fadeIn',
+
+                ));
+                Yii::app()->clientScript
+                    ->registerScriptFile('/js/plugins/lazyLoad.js')
+                    ->registerScript('lazy_load', "$('div.lazy-load').show().lazyload({$options})");
+
+                $this->_htmlOptions['data-original'] = $this->getSrc();
+                if (!$this->_htmlOptions['data-original'])
+                {
+                    return $space;
+                }
+                $res = $space;
+//                $res .= CHtml::tag('noscript', array(), $img); //old image view!!!
+
+                $class = 'lazy-load';
+                if (isset($this->_htmlOptions['class']))
+                {
+                    $class = $this->_htmlOptions['class'] . ' ' . $class;
+                }
+                $this->_htmlOptions['class'] = $class;
+
+                return CHtml::tag('div', $this->_htmlOptions, $res);
+            }
+            else
+            {
+                return $img;
+            }
         } catch (Exception $e)
         {
-//            Yii::app()->handleException($e);
+            if (YII_DEBUG)
+            {
+                Yii::app()->handleException($e);
+            }
+            else
+            {
+                //какой-нибудь лог
+            }
+            return $space;
         }
     }
 
 
     public function getSrc()
     {
-        return ImageHelper::process($this->_dir, $this->_file, $this->_size, $this->_crop);
+        if ($this->_src == null)
+        {
+            list($this->_src, $this->_size['width'], $this->_size['height']) = ImageHelper::process($this->_dir, $this->_file, $this->_size, $this->_crop);
+        }
+        return $this->_src;
     }
 
 
@@ -51,6 +112,22 @@ class ImageHolder //Класс Image занят под расширение
     {
         $this->_watermark = true;
         return $this;
+    }
+
+    /**
+     * @return string base64 encode image
+     */
+    public function encode()
+    {
+        $file = Yii::app()->getBasePath().'/../'.$this->getSrc();
+
+        if (self::OPTIMIZE_ON && self::ENCODE_ON) //TODO: add some cache
+        {
+            $base64 = base64_encode(file_get_contents($file));
+            $mime = CFileHelper::getMimeType($file);
+            $res = 'data:'.$mime.';base64,'.$base64;
+        }
+        return CHtml::image($res,'', $this->_htmlOptions);
     }
 }
 
@@ -139,7 +216,7 @@ class ImageHelper
         $thumb_path = str_replace($_SERVER["DOCUMENT_ROOT"], "", $thumb_path);
         $thumb_path = '/' . ltrim($thumb_path, '/');
 
-        return $thumb_path;
+        return array($thumb_path, $width, $height);
     }
 
 }

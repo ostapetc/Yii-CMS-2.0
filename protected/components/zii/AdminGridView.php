@@ -183,29 +183,6 @@ class AdminGridView extends BootGridView
         parent::initColumns();
     }
 
-
-    public function renderItems()
-    {
-        if ($this->dataProvider->getItemCount() > 0 || $this->showTableOnEmpty)
-        {
-            echo "<table class='{$this->itemsCssClass}' cellpadding='0' cellspacing='0' width='100%'>\n";
-            $this->renderTableHeader();
-            $this->renderTableBody();
-            $this->renderTableFooter();
-            echo "</table>";
-
-            if ($this->mass_removal)
-            {
-                echo "<input type='submit' class='submit tiny red' value='удалить' id='mass_remove_button'>";
-            }
-        }
-        else
-        {
-            $this->renderEmptyText();
-        }
-    }
-
-
     public function renderPocket()
     {
         if ($this->many_many_sortable)

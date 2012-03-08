@@ -134,7 +134,6 @@ class BootMenu extends BootWidget
 					$htmlOptions['class'] = $cssClass;
 
 				echo CHtml::openTag('li', $htmlOptions);
-
 				$menu = $this->renderItem($item);
 
 				if (isset($this->itemTemplate) || isset($item['template']))
@@ -172,6 +171,7 @@ class BootMenu extends BootWidget
 	 */
 	protected function renderItem($item)
 	{
+
 		if (isset($item['icon'])) {
 			if (strpos($item['icon'], 'icon') === false)
                 $item['icon'] = 'icon-'.implode(' icon-', explode(' ', $item['icon']));
@@ -192,6 +192,7 @@ class BootMenu extends BootWidget
 			$item['label'] .= ' <b class="caret"></b>';
 			$item['linkOptions']['data-toggle'] = 'dropdown';
 		}
+
 
 		if (isset($item['url']))
 			return CHtml::link($item['label'], $item['url'], isset($item['linkOptions']) ? $item['linkOptions'] : array());

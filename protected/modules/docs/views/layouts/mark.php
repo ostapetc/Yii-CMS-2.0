@@ -314,24 +314,66 @@ code{
 </script>
 <?php
 $items = array();
-foreach (Documentation::model()->orderByLft()->findAll() as $doc)
+$i = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(Yii::getPathOfAlias('docs.views.documentation')));
+$i = new RecursiveDirectoryIterator(Yii::getPathOfAlias('docs.views.documentation'));
+
+for ($i->rewind(); $i->valid(); $i->next())
 {
-    if ($doc->depth == 1)
+    $item=$i->current();
+    if (!$i->hasChildren())
     {
         continue;
     }
-    $tmp = array(
-        'label'       => $doc->title,
-        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
-        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
-
-    );
-    if ($doc->depth > 2)
+    $folder_name = t($item->getFileName());
+    $active_folder = false;
+    $tmp = array();
+    foreach ($i->getChildren() as $child)
     {
-        $tmp['url'] = $doc->href;
+        list($file) = explode('.',$child->getFileName());
+        $active = isset($_GET['alias']) && ($_GET['alias'] == $file) ? true : false;
+        $active_folder = $active_folder || $active;
+        $tmp[] = array(
+            'label'       => t($file),
+            'itemOptions' => array(),
+            'active'      => $active,
+            'url'         => Yii::app()->createUrl('/docs/documentation/index', array('alias'=>$file, 'folder'=>$item->getFileName()))
+        );
     }
-    $items[] = $tmp;
+    if ($active_folder)
+    {
+        $items[] = array(
+            'label'       => $folder_name,
+            'itemOptions' => array('class'=> 'nav-header'),
+        );
+        $items = array_merge($items, $tmp);
+    }
+    else
+    {
+        $items[] = array(
+            'label'       => $folder_name,
+            'items'       => $tmp,
+            'itemOptions' => array('class'=> 'nav-header'),
+        );
+    }
 }
+
+//foreach (Documentation::model()->orderByLft()->findAll() as $doc)
+//{
+//    if ($doc->depth == 1)
+//    {
+//        continue;
+//    }
+//    $tmp = array(
+//        'label'       => $doc->title,
+//        'itemOptions' => $doc->depth > 2 ? array() : array('class'=> 'nav-header'),
+//        'active'      => isset($_GET['alias']) && ($_GET['alias'] == $doc->alias) ? true : false,
+//    );
+//    if ($doc->depth > 2)
+//    {
+//        $tmp['url'] = $doc->href;
+//    }
+//    $items[] = $tmp;
+//}
 
 ?>
 <div class="navbar navbar-fixed-top">
@@ -360,10 +402,10 @@ foreach (Documentation::model()->orderByLft()->findAll() as $doc)
         <div class="span3">
             <div class="well sidebar-nav sidebar">
                 <?php
-                $this->widget('ClientMenu', array(
+                $this->widget('BootMenu', array(
                     'items'       => $items,
+                    'type' => BootMenu::TYPE_LIST,
                     'htmlOptions' => array(
-                        'class'=> 'nav nav-list',
                         'id'   => 'sidebar-docs-menu'
                     )
                 )) ?>
