@@ -1,0 +1,16 @@
+EFlowPlayer
+===========
+###ROADMAP
+- Support for IDataProvider.
+- flowplayer() configuration.  
+###CHANGELOG 
+####Version 0.3
+- Flv support array.
+####Version 0.2
+- Flv url as string.
+- Support for different tags as video container.  
+- Support for htmlOptions.
+- Support for external swf file.  
+####Version 0.1
+- Initial release
+- Registering js code.  

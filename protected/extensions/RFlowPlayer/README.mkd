@@ -1,0 +1,95 @@
+EFlowPlayer
+===========
+Yii extension for the flowplayer plugin.
+###Description 
+This is an alpha version of the extension. 
+It supports only the basic configuration.
+###Use
+Here are some examples on how to use this extension.
+####Minimal
+The most minimal code to get a video.Example:
+<code>
+    $this->widget('ext.EFlowPlayer.EFlowPlayer', array(
+        'flv'=>"http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-700.flv",
+     ));
+</code>
+####With style and id
+If we want to set some html options to the video container.Example:
+<code>
+    $this->widget('ext.EFlowPlayer.EFlowPlayer', array(
+         'flv'=>"http://pseudo01.hddn.com/vod/demo.flowplayervod/flowplayer-700.flv",
+         'htmlOptions'=>array(
+             'id'=>'testingplayer',
+             'style'=>'width: 320px; height: 160px;',
+         ),
+     ));
+</code>
+####I need more videos
+#####Asceding style
+If we want to set some html options to the video container.Example:
+<code>
+    $this->widget('ext.EFlowPlayer.EFlowPlayer', array(
+         'flv'=>array(
+             'http://ringtales.s3.amazonaws.com/d182.flv',
+             'http://ringtales.s3.amazonaws.com/d181.flv',
+             'http://ringtales.s3.amazonaws.com/d180.flv',
+          ),
+         'htmlOptions'=>array(
+             'id'=>'video-',
+             'style'=>'width: 320px; height: 160px;',
+         ),
+     ));
+</code>
+Result of this code will be 3 containers with id <code>video-</code> + key of the video url position in the array, like:
+- container with id <code>'video-0'</code> points to <code>d182.flv</code>
+- container with id <code>'video-1'</code> points to <code>d181.flv</code>
+- container with id <code>'video-2'</code> points to <code>d180.flv</code>
+
+#####Associative array
+If we want to set some html options to the video container.Example:
+<code>
+    $this->widget('ext.EFlowPlayer.EFlowPlayer', array(
+         'flv'=>array(
+             'd180'=>'http://ringtales.s3.amazonaws.com/d180.flv',
+             'd181'=>'http://ringtales.s3.amazonaws.com/d181.flv',
+             'd182'=>'http://ringtales.s3.amazonaws.com/d182.flv',
+         ),
+         'htmlOptions'=>array(
+             'id'=>'testingplayer',
+             'style'=>'width: 320px; height: 160px;',
+         ),
+     ));
+</code>
+#####Mixed
+This is a way to use associative array and asceding style.
+Although i think of something dangarous and akwark there still a 
+posibility. Example:
+<code>
+    $this->widget('ext.EFlowPlayer.EFlowPlayer', array(
+         'flv'=>array(
+             'http://ringtales.s3.amazonaws.com/d180.flv',
+             'http://ringtales.s3.amazonaws.com/d181.flv',
+             'd180'=>'http://ringtales.s3.amazonaws.com/d180.flv',
+             'd181'=>'http://ringtales.s3.amazonaws.com/d181.flv',
+         ),
+         'htmlOptions'=>array(
+             'id'=>'testingplayer',
+             'style'=>'width: 320px; height: 160px;',
+         ),
+     ));
+</code>
+###Details
+- Version 0.3 alpha
+- Dimitrios Mengidis
+
+###Support
+- Yii 1.1.x
+- flowplayer 3.2.6
+
+###Resources
+- [Yii extension site](http://www.yiiframework.com/extension/eflowplayer/)
+- [flowplayer](http://www.flowplayer.org)
+- [Repository](http://www.github.com/dmtrs/EFlowPlayer)
+- [while(true)](http://dmtrs.devio.us/blog)
+
+__(This base code was generated with the [gii-extension-generator](http://www.yiiframework.com/extension/gii-extension-generator/))__
