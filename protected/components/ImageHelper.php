@@ -16,10 +16,8 @@ class ImageHolder //Класс Image занят под расширение
     private $_src;
 
     const OPTIMIZE_ON = true;       //if true switch on some algorithms to speed up load page in browser.
-    const LAZY_LOAD_ON = false;      //you can start load images after load page. optimize_on require
-    const NO_LOAD_IF_NO_SEE = false;  //images start load when they appear on the screen. lazy_load_on require
+    const LAZY_LOAD_ON = true;      //you can start load images after load page. optimize_on require
     const ENCODE_ON = true;         //enable base64 encode. optimize_on require
-
 
     public function __construct($dir, $file, array $size, $crop = false)
     {
@@ -41,9 +39,9 @@ class ImageHolder //Класс Image занят под расширение
     {
         try
         {
-            list($this->_htmlOptions['width'], $this->_htmlOptions['height']) = array($this->_size['width'], $this->_size['height']);
             $img = CHtml::image($this->getSrc(), '', $this->_htmlOptions);
             $space = CHtml::image(self::TRANSPARENT_PIXEL, '', $this->_htmlOptions);
+
             if (self::OPTIMIZE_ON && self::LAZY_LOAD_ON)
             {
                 $options = CJavaScript::encode(array(
@@ -95,8 +93,15 @@ class ImageHolder //Класс Image занят под расширение
     {
         if ($this->_src == null)
         {
-            list($this->_src, $this->_size['width'], $this->_size['height']) = ImageHelper::process($this->_dir, $this->_file, $this->_size, $this->_crop);
+            $this->_src = ImageHelper::process($this->_dir, $this->_file, $this->_size, $this->_crop);
         }
+        $file = $_SERVER['DOCUMENT_ROOT'].'/'.$this->_src;
+        if (is_file($file))
+        {
+            list($this->_size['width'], $this->_size['height']) = getimagesize($file);
+            list($this->_htmlOptions['width'], $this->_htmlOptions['height']) = array($this->_size['width'], $this->_size['height']);
+        }
+
         return $this->_src;
     }
 
@@ -216,7 +221,7 @@ class ImageHelper
         $thumb_path = str_replace($_SERVER["DOCUMENT_ROOT"], "", $thumb_path);
         $thumb_path = '/' . ltrim($thumb_path, '/');
 
-        return array($thumb_path, $width, $height);
+        return $thumb_path;
     }
 
 }
