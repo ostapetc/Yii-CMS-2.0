@@ -7,9 +7,6 @@ $(document).ready(function () {
     var showText = $("#T").data('show');
     var hideText = $("#T").data('hide');
 
-// initialise the visibility check
-    var is_visible = false;
-
 // append show/hide links to the element directly preceding the element with a class of "toggle"
     $('.toggle').prev().append(' <a href="#" class="toggleLink">' + hideText + '</a>');
 
@@ -18,9 +15,6 @@ $(document).ready(function () {
 
 // capture clicks on the toggle links
     $('a.toggleLink').click(function () {
-
-// switch visibility
-        is_visible = !is_visible;
 
 // change the link text depending on whether the element is shown or hidden
         if ($(this).text() == showText) {

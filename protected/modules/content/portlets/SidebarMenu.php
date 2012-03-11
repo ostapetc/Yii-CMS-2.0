@@ -31,7 +31,7 @@ class SidebarMenu extends ClientMenu
                 'url'   => array('/'),
             ), array(
                 'label' => t('Документация'),
-                'url'   => array('/doc/naming'),
+                'url'   => array('/doc/conventions/naming'),
             ),
         );
 
