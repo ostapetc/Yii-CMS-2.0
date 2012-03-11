@@ -52,16 +52,6 @@ class FileManager extends ActiveRecordModel
         );
     }
 
-
-    public function behaviors()
-    {
-        return array( //            'sortable' => array(
-//                'class' => 'application.components.activeRecordBehaviors.SortableBehavior'
-//            )
-        );
-    }
-
-
     public function parent($model_id, $id)
     {
         $alias = $this->getTableAlias();
@@ -85,16 +75,8 @@ class FileManager extends ActiveRecordModel
 
     public function getDeleteUrl()
     {
-        return Yii::app()->controller->createUrl('fileManagerAdmin/delete', array('id' => $this->id));
+        return Yii::app()->controller->createUrl('/fileManager/fileManagerAdmin/delete', array('id' => $this->id));
     }
-
-
-    public function setExt($val)
-    {
-        $this->extension = $val;
-        $this->mimeType  = $this->mimeByExt($val);
-    }
-
 
     public function getIsImage()
     {
@@ -145,33 +127,29 @@ class FileManager extends ActiveRecordModel
     public function getIcon()
     {
         $folder = Yii::app()->getModule('fileManager')->assetsUrl() . '/img/fileIcons/';
-        if ($this->isImage)
+        switch (true)
         {
-            $name = 'image';
-        }
-//        elseif ($this->isSound)
-//        {
-//            $name = 'sound';
-//        }
-        elseif ($this->isExcel)
-        {
-            $name = 'excel';
-        }
-        elseif ($this->isWord)
-        {
-            $name = 'word';
-        }
-        elseif ($this->isArchive)
-        {
-            $name = 'rar';
-        }
-        elseif (is_file('.' . $folder . $this->extension . '.jpg'))
-        {
-            $name = $this->extension;
-        }
-        else
-        {
-            $name = 'any';
+            case $this->isImage:
+                $name = 'image';
+                break;
+            case $this->isSound:
+                $name = 'sound';
+                break;
+            case $this->isExcel:
+                $name = 'excel';
+                break;
+            case $this->isWord:
+                $name = 'word';
+                break;
+            case $this->isArchive:
+                $name = 'rar';
+                break;
+            case is_file('.' . $folder . $this->extension . '.jpg'):
+                $name = $this->extension;
+                break;
+            default:
+                $name = 'any';
+                break;
         }
         return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
     }
@@ -194,17 +172,6 @@ class FileManager extends ActiveRecordModel
         }
         return true;
     }
-
-
-    public static function str2url($str)
-    {
-        $str = self::rus2translit($str); // переводим в транслит
-        $str = mb_strtolower($str); // в нижний регистр
-        $str = preg_replace('~[^-a-z0-9_\s]+~u', '-', $str); // заменям все ненужное нам на "-"
-        $str = trim($str, "-"); // удаляем начальные и конечные '-'
-        return $str;
-    }
-
 
     public function setExtraProperties($field, &$handler, $options)
     {
@@ -302,18 +269,14 @@ class FileManager extends ActiveRecordModel
         {
             if ($this->isNewRecord)
             {
-                $model = FileManager::model()->parent($this->model_id, $this->object_id)->limit(1)
-                    ->find();
+                $model = FileManager::model()->parent($this->model_id, $this->object_id)->find();
                 $this->order = $model ? $model->order + 1 : 1;
                 $this->title;
             }
 
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
 

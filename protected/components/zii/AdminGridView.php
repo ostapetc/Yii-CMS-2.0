@@ -180,6 +180,18 @@ class AdminGridView extends BootGridView
                 )
             ));
         }
+
+        if (Yii::app()->params['multilanguage_support'] === false)
+        {
+            foreach ($this->columns as $key=>$col)
+            {
+                if ($col['name'] == 'lang')
+                {
+                    unset($this->columns[$key]);
+                    break;
+                }
+            }
+        }
         parent::initColumns();
     }
 

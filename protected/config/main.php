@@ -156,7 +156,7 @@ return array(
 
     'params'         => array(
         'save_site_actions' => false,
-        'multilanguage_site' => true
+        'multilanguage_support' => false
     )
 );
 
