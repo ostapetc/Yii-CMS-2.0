@@ -273,10 +273,6 @@ aside#sidebar {
     margin: 1px 0 !important;
 }
 
-#sidebar form {
-    margin-bottom: 5px !important;
-}
-
 #sidebar .toggleLink:hover {
     color: #77BACE;
     text-decoration: none;
