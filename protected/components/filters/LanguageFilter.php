@@ -7,6 +7,7 @@ class LanguageFilter extends CFilter
         {
             return true;
         }
+
         //set from get params
         if ($lang = Yii::app()->request->getParam('language'))
         {
