@@ -4,8 +4,8 @@ class UrlManager extends CUrlManager
 {
     public function collectRules()
     {
-        $multilanguage_site = Yii::app()->params['multilanguage_site'];
-        if ($multilanguage_site)
+        $multilanguage_support = Yii::app()->params['multilanguage_support'];
+        if ($multilanguage_support)
         {
             $languages = Language::getCachedArray();
             $languages = implode('|', array_keys($languages));
@@ -33,7 +33,7 @@ class UrlManager extends CUrlManager
             unset($routes[$pattern]);
             $pattern = '/' . trim($pattern, '/');
 
-            if ($multilanguage_site)
+            if ($multilanguage_support)
             {
                 $pattern = '/' . $language_pattern . $pattern;
             }

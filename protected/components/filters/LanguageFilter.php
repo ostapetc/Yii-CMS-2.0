@@ -3,6 +3,10 @@ class LanguageFilter extends CFilter
 {
     protected function preFilter ($filterChain)
     {
+        if (Yii::app()->params['multilanguage_support'] == false)
+        {
+            return true;
+        }
         //set from get params
         if ($lang = Yii::app()->request->getParam('language'))
         {

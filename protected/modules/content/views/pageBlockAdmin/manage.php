@@ -10,6 +10,7 @@ $this->widget('AdminGridView', array(
         'name',
         array(
             'name' => 'text',
+            'value' => 'Yii::app()->text->cut($data->text,300)',
             'type' => 'raw'
         ),
         array(
