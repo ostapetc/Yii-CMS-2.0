@@ -21,13 +21,12 @@ class FileManagerAdminController extends AdminController
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
 
-
         $existFiles = FileManager::model()->parent($model_id, $object_id)->tag($tag)->findAll();
         $this->sendFilesAsJson($existFiles);
     }
 
 
-    public function actionUpload($model_id, $object_id, $data_type, $tag)
+    public function actionUpload($model_id, $object_id, $tag)
     {
         if ($object_id == 0)
         {
@@ -39,18 +38,9 @@ class FileManagerAdminController extends AdminController
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        $options = isset($_GET['options']) ? $_GET['options'] : array();
-
-        if ($model->saveFile())
+        if ($model->saveFile() && $model->save())
         {
-            if ($model->save())
-            {
-                $this->sendFilesAsJson(array($model));
-            }
-            else
-            {
-                echo $model->error;
-            }
+            $this->sendFilesAsJson(array($model));
         }
         else
         {
@@ -68,8 +58,7 @@ class FileManagerAdminController extends AdminController
         {
             $res[] = array(
                 'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
-                'descr'           => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
-//                'descr2'           => $file['descr2'] ? $file['descr2'] : 'Кликните для редактирования',
+                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
                 'size'           => $file['size'],
                 'url'            => $file['href'],
                 'thumbnail_url'  => $file['icon'],
@@ -81,16 +70,6 @@ class FileManagerAdminController extends AdminController
                 'id'             => 'File_' . $file->id,
             );
         }
-
-        //        header('Vary: Accept');
-        //        if (isset($_SERVER['HTTP_ACCEPT']) && (strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false))
-        //        {
-        //            header('Content-type: application/json');
-        //        }
-        //        else
-        //        {
-        //            header('Content-type: text/plain');
-        //        }
 
         echo CJSON::encode($res);
     }
@@ -104,7 +83,7 @@ class FileManagerAdminController extends AdminController
 
         $case = SqlHelper::arrToCase('id', array_flip($ids), 't');
         $arr  = implode(',', $ids);
-        $c    = Yii::app()->db->getCommandBuilder()
+        Yii::app()->db->getCommandBuilder()
             ->createSqlCommand("UPDATE {$files->tableName()} AS t SET t.order = {$case} WHERE t.id IN ({$arr})")
             ->execute();
     }
