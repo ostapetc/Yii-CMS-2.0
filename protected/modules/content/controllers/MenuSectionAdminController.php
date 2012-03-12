@@ -5,6 +5,7 @@ class MenuSectionAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
+            "Roots"            => "Меню сайта",
             "Update"           => "Редактирование ссылки меню",
             "Create"           => "Добавление ссылки меню",
             "View"             => "Просмотр ссылки меню",
@@ -15,6 +16,18 @@ class MenuSectionAdminController extends AdminController
         );
     }
 
+    public function actionRoots()
+    {
+        $model = new MenuSection(ActiveRecordModel::SCENARIO_SEARCH);
+        $model->unsetAttributes();
+
+        if (isset($_GET['MenuSections']))
+        {
+            $model->attributes = $_GET['MenuSections'];
+        }
+
+        $this->render('manage', array('root' => null,'model'=>$model));
+    }
 
     public function actionSorting($root_id, $menu_id)
     {
@@ -190,22 +203,9 @@ class MenuSectionAdminController extends AdminController
     }
 
 
-    public function actionManage($menu_id)
+    public function actionManage($root_id)
     {
-        $menu = Menu::model()->findByPk($menu_id);
-        if (!$menu)
-        {
-            $this->pageNotFound();
-        }
-
-        $root = MenuSection::model()->roots()->find('menu_id = ' . $menu_id);
-        if (!$root)
-        {
-            $root          = new MenuSection();
-            $root->menu_id = $menu->id;
-            $root->title   = $menu->name . '::корень';
-            $root->saveNode();
-        }
+        $root = MenuSection::model()->roots()->findByPk($root_id);
 
         $model = new MenuSection('search');
         $model->unsetAttributes();
@@ -216,7 +216,6 @@ class MenuSectionAdminController extends AdminController
         }
 
         $this->render('manage', array(
-            'menu'  => $menu,
             'model' => $model,
             'root'  => $root
         ));

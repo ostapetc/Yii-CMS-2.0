@@ -80,17 +80,25 @@ class MenuSection extends ActiveRecordModel
     }
 
 
-    public function search($root)
+    public function search($root_id = null)
     {
         $alias = $this->getTableAlias();
 
         $criteria = new CDbCriteria;
+        if ($root_id === null)
+        {
+            $criteria->addCondition($alias . '.level = 1');
+        }
+        else
+        {
+            $criteria->addCondition($alias . '.root = ' . $root_id);
+            $criteria->addCondition($alias . '.id <> ' . $root_id);
+        }
         $criteria->compare($alias . '.page_id', $this->page_id, true);
         $criteria->compare($alias . '.title', $this->title, true);
         $criteria->compare($alias . '.url', $this->url, true);
         $criteria->compare($alias . '.is_published', $this->is_published);
-        $criteria->addCondition($alias . '.root = ' . $root);
-        $criteria->addCondition($alias . '.id <> ' . $root);
+
         $criteria->order = "{$alias}.left";
         $criteria->with  = array('page', 'menu');
 
@@ -235,13 +243,13 @@ class MenuSection extends ActiveRecordModel
 
     public function getNbspTitle()
     {
-        return str_repeat("&nbsp;", ($this->level - 2) * 5) . $this->title;
+        return str_repeat("&nbsp;", ($this->level - 1) * 5) . $this->title;
     }
 
 
     public function getSpaceTitle()
     {
-        return str_repeat(' ', ($this->level - 1) * 4) . $this->title;
+        return str_repeat(' ', ($this->level - 1) * 5) . $this->title;
     }
 
 
