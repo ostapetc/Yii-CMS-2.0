@@ -54,8 +54,13 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
     {
         this.element.delegate('.editable', 'click', function()
         {
-            var self = $(this),
-                action = self.data('save-url'),
+            var self = $(this);
+            if (self.data('editable'))
+            {
+                return false;
+            }
+            self.data('editable', true);
+            var action = self.data('save-url'),
                 options = {
                     submitdata:{'attr':self.data('attr')},
                     name:self.data('attr'),
