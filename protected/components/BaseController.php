@@ -135,4 +135,27 @@ abstract class BaseController extends CController
 
         return $model;
     }
+
+
+
+    /**
+     * Обертка для Yii::t, выполняет перевод по словарям текущего модуля.
+     * Так же перевод осуществляется по словорям с префиксом {modelId},
+     * где modelId - приведенная к нижнему регистру база имени контроллера
+     *
+     * Например: для контроллера ProductInfoAdminController, находящегося в модуле ProductsModule
+     * перевод будет осуществляться по словарю ProductsModule.product_info_{первый параметр метода}
+     *
+     * @param string $dictionary словарь
+     * @param string $alias      фраза для перевода
+     * @param array  $params
+     * @param string $language
+     *
+     * @return string переводa
+     */
+    public function t($dictionary, $alias, $params = array(), $source = null, $language = null)
+    {
+        $file_prefix = StringHelper::camelCaseToUnderscore($this->getModelClass());
+        return Yii::t(get_class($this->module).'.'.$file_prefix.'_'.$dictionary, $alias, $params, $source, $language);
+    }
 }

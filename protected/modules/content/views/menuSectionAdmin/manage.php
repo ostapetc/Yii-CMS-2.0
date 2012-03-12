@@ -1,21 +1,26 @@
 <?php
 $this->page_title = 'Разделы меню';
-
-$this->tabs = array(
-    "добавить раздел" => $this->createUrl('create', array(
-        'menu_id' => $menu->id,
-        'parent_id' => $root->id,
-        'back' => 'manage'
-    )),
-    "сортировка" => $this->createUrl('sorting', array(
-        'root_id' => $root->id,
-        'menu_id' => $menu->id
-    )),
-);
-
+if ($root)
+{
+    $this->tabs = array(
+        "добавить раздел" => $this->createUrl('create', array(
+            'parent_id' => $root->id,
+            'back' => 'manage'
+        )),
+        "сортировка" => $this->createUrl('sorting', array(
+            'root_id' => $root->id,
+        )),
+    );
+}
+else
+{
+    $this->tabs = array(
+        'добавить меню' => $this->createUrl('create')
+    );
+}
 $this->widget('AdminGridView', array(
     'id' => 'menu-section-grid',
-    'dataProvider' => $model->search($root->id),
+    'dataProvider' => $model->search($root ? $root->id : null),
     'filter' => $model,
     'template' => '{summary}<br/>{pager}<br/>{items}<br/>{pager}',
     'columns' => array(
@@ -74,8 +79,14 @@ $this->widget('AdminGridView', array(
             'name' => 'is_published'
         ), array(
             'class' => 'CButtonColumn',
-            'template' => '{create} {update} {delete}',
+            'template' => '{manage} {create} {update} {delete}',
             'buttons' => array(
+                'manage' => array(
+                    'label'    => 'управление разделами',
+                    'imageUrl' => $this->module->assetsUrl() . '/img/manage.png',
+                    'visible' => '$data->level == 1',
+                    'url'      => 'Yii::app()->createUrl("content/MenuSectionAdmin/manage", array("root_id" => $data->root))'
+                ),
                 'create' => array(
                     'label' => 'добавить дочерний раздел',
                     'imageUrl' => '/img/admin/child.png',

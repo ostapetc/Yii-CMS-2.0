@@ -185,7 +185,8 @@ class AdminGridView extends BootGridView
         {
             foreach ($this->columns as $key=>$col)
             {
-                if ($col['name'] == 'lang')
+                $isLangAttribute = isset($col['name']) && $col['name'] == 'lang';
+                if ($col === 'lang' || $isLangAttribute)
                 {
                     unset($this->columns[$key]);
                     break;

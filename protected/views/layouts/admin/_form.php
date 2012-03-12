@@ -1,9 +1,11 @@
 <?php
 $active_form        = $form->getActiveFormWidget();
-$only_on_new_record = array('alias');
-if (!$form->model->isNewRecord && in_array($element->type, $only_on_new_record))
+if (Yii::app()->params['multilanguage_support'] == false)
 {
-    return '';
+    if ($element->name == 'lang')
+    {
+        return '';
+    }
 }
 
 $no_label = array('meta_tags', 'file_manager');
