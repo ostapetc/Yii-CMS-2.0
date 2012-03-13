@@ -50,7 +50,7 @@ class ImageHolder //Класс Image занят под расширение
 
                 ));
                 Yii::app()->clientScript
-                    ->registerScriptFile('/js/plugins/lazyLoad.js')
+                    ->registerScriptFile('/js/plugins/clientOptimization/lazyLoad.js')
                     ->registerScript('lazy_load', "$('div.lazy-load').show().lazyload({$options})");
 
                 $this->_htmlOptions['data-original'] = $this->getSrc();
