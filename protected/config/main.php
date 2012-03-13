@@ -115,6 +115,16 @@ return array(
         'text'         => array(
             'class' => 'application.components.TextComponent'
         ),
+        'request' => array(
+            'class' => 'HttpRequest',
+            'enableCsrfValidation' => false,
+            'noCsrfValidationRoutes' => array(
+                '^services/wsdl.*$',
+                '^services/jsonRpc.*$',
+                '^services/xmlRpc.*$'
+            ),
+            'csrfTokenName' => 'token',
+        ),
         'urlManager'   => array(
             'urlFormat'      => 'path',
             'showScriptName' => false,
