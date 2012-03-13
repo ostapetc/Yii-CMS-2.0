@@ -57,7 +57,7 @@ class JsonRpcController extends Controller
 
     private function failIfNotAJsonRpcRequest()
     {
-        if (Yii::app()->request->requestType != 'GET'
+        if (Yii::app()->request->requestType != 'POST'
             || empty($_SERVER['CONTENT_TYPE'])
             || $_SERVER['CONTENT_TYPE'] != "application/json-rpc"
         ) throw new CHttpException(404, "Page not found");

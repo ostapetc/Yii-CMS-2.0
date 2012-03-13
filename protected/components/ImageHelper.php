@@ -16,9 +16,9 @@ class ImageHolder //Класс Image занят под расширение
     private $_src;
 
 
+    /* Method Markers */
     private static $_round_init = false;
     private $_round = false;
-
     private $_encode = false;
 
     const OPTIMIZE_ON = true;       //if true switch on some algorithms to speed up load page in browser.
