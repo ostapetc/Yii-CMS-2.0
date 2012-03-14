@@ -119,9 +119,8 @@ return array(
             'class' => 'HttpRequest',
             'enableCsrfValidation' => false,
             'noCsrfValidationRoutes' => array(
-                '^services/wsdl.*$',
+                '^services/soap.*$',
                 '^services/jsonRpc.*$',
-                '^services/xmlRpc.*$'
             ),
             'csrfTokenName' => 'token',
         ),

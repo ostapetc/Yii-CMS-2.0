@@ -39,6 +39,9 @@ abstract class ActiveRecordModel extends CActiveRecord
             'MaxMin'         => array(
                 'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
             ),
+            'RawFind'         => array(
+                'class' => 'application.components.activeRecordBehaviors.RawFindBehavior'
+            ),
         );
     }
 
@@ -232,4 +235,7 @@ abstract class ActiveRecordModel extends CActiveRecord
         $criteria->addInCondition('id', $object_ids);
         return $this;
     }
+
+
+
 }

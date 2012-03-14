@@ -1,13 +1,6 @@
 <?php
-
-/**
- * @author sergey.yusupov
- * @date: 14.02.12 10:16
- */
-class JsonRpcController extends Controller
+class JsonRpcAction extends CAction
 {
-    public $layout = false;
-
     public function actionIndex()
     {
         $this->failIfNotAJsonRpcRequest();
@@ -17,7 +10,7 @@ class JsonRpcController extends Controller
             $request = json_decode(file_get_contents('php://input'), true);
             $this->failIfRequestIsInvalid($request);
             try {
-                $class = new ReflectionClass($this);
+                $class = new ReflectionClass($this->controller);
 
                 if (!$class->hasMethod($request['method']))
                     throw new JsonRpcException("Method not found", -32601);
@@ -27,7 +20,7 @@ class JsonRpcController extends Controller
                 ob_start();
 
                 Yii::beginProfile('service.request.action');
-                $result = $method->invokeArgs($this, isset($request['params'])? $request['params'] : null);
+                $result = $method->invokeArgs($this->controller, isset($request['params'])? $request['params'] : null);
                 Yii::endProfile('service.request.action');
 
                 $output = ob_get_clean();
