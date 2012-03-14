@@ -1,5 +1,4 @@
-
-**WebModule**
+#WebModule
 
 - `public function assetsUrl()` - возвращает путь до опубликованной директории assets текущего модуля.
 - `public static function getShortId()` - возвращает короткий id модуля,

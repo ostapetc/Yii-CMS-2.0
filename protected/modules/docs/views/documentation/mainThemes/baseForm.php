@@ -1,4 +1,4 @@
-**BaseForm**
+#BaseForm
 
 - Конструктор `public function __construct($config, $model = null, $parent = null)`
 может принимать сокращенный алиас конфигурационного файла в виде '{module_class}.{form_name}'

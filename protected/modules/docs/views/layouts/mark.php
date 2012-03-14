@@ -63,22 +63,22 @@ h2{
 }
 
 h3{
-    font-size: 1.4em;
+    font-size: 1.2em;
     margin:    1.14em 0 .57em;
 }
 
 h4{
-    font-size: 1.3em;
+    font-size: 1.1em;
     margin:    1.23em 0 .615em;
 }
 
 h5{
-    font-size: 1.2em;
+    font-size: 1.0em;
     margin:    1.33em 0 .67em;
 }
 
 h6{
-    font-size: 1.1em;
+    font-size: 1.0em;
     margin:    1.6em 0 .8em;
 }
 

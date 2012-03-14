@@ -30,6 +30,7 @@ class ImageHolder //Класс Image занят под расширение
      * @param strnig $file
      * @param array $size
      * @param bool $crop
+     * @return ImageHolder
      */
     public function __construct($dir, $file, array $size, $crop = false)
     {

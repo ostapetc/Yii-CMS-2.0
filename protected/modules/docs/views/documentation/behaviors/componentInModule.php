@@ -1,4 +1,4 @@
-**ComponentInModuleBehavior**
+#ComponentInModuleBehavior
 
 По умолчанию это поведение имеют классы InputWidget, JuiInputWidget, Portlet, JuiWidget
 
