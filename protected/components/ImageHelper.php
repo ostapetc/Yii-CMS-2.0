@@ -15,7 +15,6 @@ class ImageHolder //Класс Image занят под расширение
 
     private $_src;
 
-
     /* Method Markers */
     private static $_round_init = false;
     private $_round = false;
@@ -26,6 +25,12 @@ class ImageHolder //Класс Image занят под расширение
     const ENCODE_ON = true;         //enable base64 encode. optimize_on require
     const ROUND_ON = true;          //enable imgr js plugin. no working with LAZY_LOAD_ON yet
 
+    /**
+     * @param strnig $dir
+     * @param strnig $file
+     * @param array $size
+     * @param bool $crop
+     */
     public function __construct($dir, $file, array $size, $crop = false)
     {
         //internal variables
@@ -78,19 +83,28 @@ class ImageHolder //Класс Image занят под расширение
     }
 
 
+    /**
+     * @param $htmlOptions
+     * @return ImageHolder
+     */
     public function htmlOptions($htmlOptions)
     {
         $this->_htmlOptions = $htmlOptions;
         return $this;
     }
 
-
+    /**
+     * @return ImageHolder
+     */
     public function watermark()
     {
         $this->_watermark = true;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getSrc()
     {
         if ($this->_src == null)
@@ -100,12 +114,22 @@ class ImageHolder //Класс Image занят под расширение
         return $this->_src;
     }
 
+    /**
+     * @return ImageHolder
+     */
     public function encode()
     {
         $this->_encode = true;
         return $this;
     }
 
+    /**
+     * @param int $radius
+     * @param int $size
+     * @param string $color
+     * @param string $style
+     * @return ImageHolder
+     */
     public function round($radius, $size = 0, $color = '#000', $style = 'solid')
     {
         if (!self::$_round_init)
