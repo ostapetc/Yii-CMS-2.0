@@ -26,7 +26,7 @@ abstract class JsonRpcClient {
 
         $ctx = stream_context_create(array(
             'http' => array(
-                'method'  => 'GET', //no POST because all POST requests has CSRF filter
+                'method'  => 'POST',
                 'header'  => "Content-Type: application/json-rpc\r\n",
                 'content' => $jsonRequest
             )

@@ -1,3 +1,3 @@
-**MetaTagBehavior**
+#MetaTagBehavior
 
 Сохарняет метатеги и предоставляет к ним доступ

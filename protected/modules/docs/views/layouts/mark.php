@@ -63,22 +63,22 @@ h2{
 }
 
 h3{
-    font-size: 1.4em;
+    font-size: 1.2em;
     margin:    1.14em 0 .57em;
 }
 
 h4{
-    font-size: 1.3em;
+    font-size: 1.1em;
     margin:    1.23em 0 .615em;
 }
 
 h5{
-    font-size: 1.2em;
+    font-size: 1.0em;
     margin:    1.33em 0 .67em;
 }
 
 h6{
-    font-size: 1.1em;
+    font-size: 1.0em;
     margin:    1.6em 0 .8em;
 }
 
@@ -157,34 +157,34 @@ div.image > p{
     display:     block;
 }
 
-#content ul{
+.content ul{
     list-style: disc inside;
 }
 
-#content ol{
+.content ol{
     list-style: decimal inside;
 }
 
-#content li{
+.content li{
     line-height: 160%;
     text-align:  left;
 }
 
-#content ul li ul{
+.content ul li ul{
     list-style-type: none;
     margin:          0 0 0 20px;
 }
 
-#content ul, #content ol{
+.content ul, .content ol{
     margin:  0 0 1em 2em;
     padding: 0;
 }
 
-#content ul p, #content ol p{
+.content ul p, .content ol p{
     display: inline;
 }
 
-#content p{
+.content p{
     line-height:   170%;
     margin-bottom: 1em;
 }
@@ -303,18 +303,8 @@ code{
 
 </head>
 <body>
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        $('#toogle-menu a').click(function()
-        {
-            $('#header').slideToggle(400);
-        });
-    });
-</script>
 <?php
 $items = array();
-$i = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(Yii::getPathOfAlias('docs.views.documentation')));
 $i = new RecursiveDirectoryIterator(Yii::getPathOfAlias('docs.views.documentation'));
 
 for ($i->rewind(); $i->valid(); $i->next())
@@ -380,11 +370,6 @@ for ($i->rewind(); $i->valid(); $i->next())
     <div class="navbar-inner">
         <div class="container-fluid">
 
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
             <a class="brand" href="/">Yii-CMS 2.0</a>
 
             <div class="nav-collapse">
@@ -411,7 +396,7 @@ for ($i->rewind(); $i->valid(); $i->next())
                 )) ?>
             </div>
         </div>
-        <div class="span9 center">
+        <div class="span9 center content">
             <?php echo $content ?>
         </div>
     </div>

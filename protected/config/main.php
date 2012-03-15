@@ -88,7 +88,24 @@ return array(
             'class'=> 'application.components.bootstrap.components.Bootstrap'
         ),
         'assetManager' => array(
-            'class'       => 'CAssetManager',
+            'class' => 'ext.phamlp.PBMAssetManager',
+            'parsers' => array(
+                'sass' => array( // key == the type of file to parse
+                    'class' => 'ext.phamlp.Sass', // path alias to the parser
+                    'output' => 'css', // the file type it is parsed to
+                    'options' => array(
+                        'syntax' => 'sass'
+                    )
+                ),
+                'scss' => array( // key == the type of file to parse
+                    'class' => 'ext.phamlp.Sass', // path alias to the parser
+                    'output' => 'css', // the file type it is parsed to
+                    'options' => array(
+                        'syntax' => 'scss',
+                        'style' => 'compressed'
+                    )
+                ),
+            ),
             'newDirMode'  => 0755,
             'newFileMode' => 0644
         ),
@@ -114,6 +131,15 @@ return array(
         ),
         'text'         => array(
             'class' => 'application.components.TextComponent'
+        ),
+        'request' => array(
+            'class' => 'HttpRequest',
+            'enableCsrfValidation' => false,
+            'noCsrfValidationRoutes' => array(
+                '^services/soap.*$',
+                '^services/jsonRpc.*$',
+            ),
+            'csrfTokenName' => 'token',
         ),
         'urlManager'   => array(
             'urlFormat'      => 'path',
