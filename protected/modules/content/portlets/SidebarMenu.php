@@ -9,7 +9,7 @@ class SidebarMenu extends ClientMenu
 
     public function init()
     {
-        $a = Yii::app()->assetManager->publish(Yii::getPathOfAlias('content.assets.tmp').'.less');
+        $a = Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.admin.extend').'.less');
         Yii::app()->clientScript->registerScriptFile($a);
 
         $this->items             = array(

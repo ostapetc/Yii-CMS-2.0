@@ -106,12 +106,9 @@ return array(
                     )
                 ),
                 'less' => array( // key == the type of file to parse
-                    'class' => 'ext.assetManager.Sass', // path alias to the parser
+                    'class' => 'ext.assetManager.Less', // path alias to the parser
                     'output' => 'css', // the file type it is parsed to
-                    'options' => array(
-                        'syntax' => 'scss',
-                        'style' => 'compressed'
-                    )
+                    'options' => array()
                 ),
             ),
             'newDirMode'  => 0755,

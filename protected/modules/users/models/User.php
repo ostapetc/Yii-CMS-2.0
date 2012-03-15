@@ -100,8 +100,9 @@ class User extends ActiveRecordModel
         return array(
             array(
                 'captcha',
-                'application.extensions.recaptcha.EReCaptchaValidator',
-                'privateKey' => '6LcsjsMSAAAAAHGMdF84g3szTZZe0VVwMof5bD7Y',
+                'CCaptchaValidator',
+                'captchaAction'=>'/main/help/captcha',
+//                'privateKey' => '6LcsjsMSAAAAAHGMdF84g3szTZZe0VVwMof5bD7Y',
                 'on'         => array(
                     self::SCENARIO_REGISTRATION,
                     self::SCENARIO_ACTIVATE_REQUEST,

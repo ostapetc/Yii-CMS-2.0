@@ -1,9 +1,8 @@
 <?php
-require_once(Yii::getPathOfAlias('ext.assetManager.vendors.less').DIRECTORY_SEPARATOR.'LessParser.php');
+Yii::import('ext.assetManager.vendors.less.*');
 
 /**
- * Sass class
- * @package			PHamlP
+ * Less class
  * @subpackage	Yii
  */
 class Less {
@@ -11,19 +10,15 @@ class Less {
 	 * @var SassParser
 	 */
 	private $less;
-
+    private $options;
 	/**
 	 * Constructor
-	 * @param array Sass options
-	 * @return Sass
+	 * @param array Less options
+	 * @return Less
 	 */
 	public function __construct($options)
     {
-	    $this->less = new LessParser();
-        foreach ($options as $key => $val)
-        {
-            $this->less->{$key} = $val;
-        }
+        $this->options = $options;
 	}
 
 	/**
@@ -33,6 +28,7 @@ class Less {
 	 */
 	public function parse($file)
     {
-	    return $this->less->parse($file);
+        $lessc = new lessc($file, $this->options);
+        return $lessc->parse();
 	}
 }
