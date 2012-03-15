@@ -6,7 +6,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-
 <!--стили сайта-->
 <?php
 Yii::app()->bootstrap->init();
@@ -242,7 +241,7 @@ code{
 
     /* php-code */
 .php-hl-inlinetags{
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .php-hl-comment{
@@ -260,6 +259,11 @@ code{
 
 .php-hl-reserved{
     color: #00e;
+    font-weight: normal;
+}
+.php-hl-identifier
+{
+    color: #6D3206;
 }
 
     /* css-code */

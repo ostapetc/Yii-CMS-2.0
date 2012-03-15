@@ -88,17 +88,25 @@ return array(
             'class'=> 'application.components.bootstrap.components.Bootstrap'
         ),
         'assetManager' => array(
-            'class' => 'ext.phamlp.PBMAssetManager',
+            'class' => 'AssetManager',
             'parsers' => array(
                 'sass' => array( // key == the type of file to parse
-                    'class' => 'ext.phamlp.Sass', // path alias to the parser
+                    'class' => 'ext.assetManager.Sass', // path alias to the parser
                     'output' => 'css', // the file type it is parsed to
                     'options' => array(
                         'syntax' => 'sass'
                     )
                 ),
                 'scss' => array( // key == the type of file to parse
-                    'class' => 'ext.phamlp.Sass', // path alias to the parser
+                    'class' => 'ext.assetManager.Sass', // path alias to the parser
+                    'output' => 'css', // the file type it is parsed to
+                    'options' => array(
+                        'syntax' => 'scss',
+                        'style' => 'compressed'
+                    )
+                ),
+                'less' => array( // key == the type of file to parse
+                    'class' => 'ext.assetManager.Sass', // path alias to the parser
                     'output' => 'css', // the file type it is parsed to
                     'options' => array(
                         'syntax' => 'scss',

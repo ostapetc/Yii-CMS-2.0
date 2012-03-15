@@ -31,23 +31,24 @@
 
 ###Ниже представлен пример файлов структуры ПО «Документы»:   {#module}
 
-- `/documents/controllers` — контроллеры модуля;
-- - `/documents/controllers/DocumentAdminController` — контроллер модуля, в котором описаны действия для ПУ;
-- - `/documents/controllers/DocumentController` — контроллеры модуля,  в котором описаны действия для публичной части сайта;
-- `/documents/components` – компоненты
-- `/documents/forms` — формы модуля;
-- `/documents/messages` — содержит переводы если ПО поддерживает несколько языков;
-- `/documents/data` – содержит документацию и дамп нужной части базы;
-- `/documents/models` — модели модуля;
-- `/documents/portlets` – содержит портлеты(виджеты) модуля
-- `/documents/views` — скрипты видов модуля;
-- - `/documents/views/document` — скрипты видов для клиентской части ПО;
-- - `/documents/views/documentAdmin` - скрипты видов для ПУ;
-- - `/documents/views/documentAdmin/create.php` — добавление документа;
-- - `/documents/views/documentAdmin/manage.php` — управление документами;
-- - `/documents/views/documentAdmin/update.php` — редактирование документа;
-- - `/documents/views/documentAdmin/view.php` — просмотр документа;
-- - `/documents/views/document/index.php` — список документов на сайте;
-- - `/documents/views/document/view.php` — просмотр документа на сайте;
-- `/documents/DocumentsModule.php` — основной класс модуля;
+вся структура находится в директории `documents`:
+
+- `controllers` — контроллеры модуля;
+- - `controllers/DocumentAdminController` — контроллер модуля, в котором описаны действия для ПУ;
+- - `controllers/DocumentController` — контроллеры модуля,  в котором описаны действия для публичной части сайта;
+- `components` – компоненты
+- `forms` — формы модуля;
+- `data` – содержит документацию и дамп нужной части базы;
+- `models` — модели модуля;
+- `portlets` – содержит портлеты(виджеты) модуля
+- `views` — скрипты видов модуля;
+- - `views/document` — скрипты видов для клиентской части ПО;
+- - `views/documentAdmin` - скрипты видов для ПУ;
+- - `views/documentAdmin/create.php` — добавление документа;
+- - `views/documentAdmin/manage.php` — управление документами;
+- - `views/documentAdmin/update.php` — редактирование документа;
+- - `views/documentAdmin/view.php` — просмотр документа;
+- - `views/document/index.php` — список документов на сайте;
+- - `views/document/view.php` — просмотр документа на сайте;
+- `DocumentsModule.php` — основной класс модуля;
 
