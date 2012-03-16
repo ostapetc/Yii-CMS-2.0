@@ -70,8 +70,7 @@ class BaseForm extends CForm
             $cs = Yii::app()->clientScript;
             if ($this->side == 'client')
             {
-                $cs->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
-                    ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
+                $cs->registerScriptFile('/js/plugins/clientForm/clientForm.js')
                     ->registerCssFile('/css/site/form.css');
             }
             elseif ($this->side == 'admin')
