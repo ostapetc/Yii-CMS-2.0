@@ -18,7 +18,7 @@
 
     $cs = Yii::app()->clientScript;
 
-    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.main').'.less'));
+    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles').'.less'));
 
     if (YII_DEBUG)
     {
