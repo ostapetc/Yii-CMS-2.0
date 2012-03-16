@@ -1,3 +1,6 @@
+@import "../less/variables.less";
+@import "../less/mixins.less";
+
 @blue: #3bbfce;
 @margin: 16px;
 
@@ -11,3 +14,17 @@
     margin:       @margin / 2;
     border-color: @blue;
 }
+
+.content{
+    .rotate(10deg);
+    .box-shadow(0 2px 4px rgba(0,0,0,.45));
+    .transition();
+
+}
+
+
+
+
+
+
+@import "extend.less";
