@@ -97,6 +97,40 @@ abstract class BaseController extends CController
         }
     }
 
+    public function widget($className,$properties=array(),$captureOutput=false)
+    {
+        $res = false;
+
+        $widget=$this->createWidget($className,$properties);
+
+        if (isset($widget->cache_id) && $widget->cache_id)
+        {
+            $res = Yii::app()->cache->get($widget->cache_id);
+        }
+
+        if ($res === false)
+        {
+            ob_start();
+            ob_implicit_flush(false);
+            $widget->run();
+            $res = ob_get_clean();
+        }
+
+        if (isset($widget->cache_id) && $widget->cache_id)
+        {
+            Yii::app()->cache->set($widget->cache_id, $res, 60);
+        }
+
+        if($captureOutput)
+        {
+            return $res;
+        }
+        else
+        {
+            echo $res;
+        }
+    }
+
     /**
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,
      * или выбрасывает 404

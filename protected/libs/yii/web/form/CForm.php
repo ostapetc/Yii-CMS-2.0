@@ -473,6 +473,8 @@ class CForm extends CFormElement implements ArrayAccess
 	public function renderElements()
 	{
 		$output='';
+        $this->getElements() ;
+
 		foreach($this->getElements() as $element)
 			$output.=$this->renderElement($element);
 		return $output;
