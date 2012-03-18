@@ -1,7 +1,13 @@
 <?php
 class LoginPanel extends Widget
 {
-    const CACHE_ID = 'LoginPanel';
+    public $cache_id;
+
+    public function init()
+    {
+        parent::init();
+        $this->cache_id = Yii::app()->user->isGuest ? get_class($this) : null;
+    }
 
     public function run()
     {
@@ -14,19 +20,12 @@ class LoginPanel extends Widget
 
             $title = 'Вход';
 
-            if ($res = Yii::app()->cache->get(self::CACHE_ID))
-            {
-                return $res;
-            }
-
-            $res = $this->render('LoginPanel', array(
+            $this->render('LoginPanel', array(
                 'title'          => $title,
                 'login_form'     => $login_form,
                 'register_form'  => $register_form,
                 'forgot_form'    => $forgot_form,
-            ), true);
-            Yii::app()->cache->set(self::CACHE_ID, $res, 60);
-            echo $res;
+            ));
         }
         else
         {

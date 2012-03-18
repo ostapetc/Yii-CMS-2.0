@@ -175,13 +175,13 @@ return array(
 //                        'logTableName' => 'log',
 //                        'enabled'      => true
 //                    )
-                    array(
+//                    array(
                            /*направляем результаты профайлинга в ProfileLogRoute (отображается
                            внизу страницы)*/
-                          'class'=>'CProfileLogRoute',
-                          'levels'=>'profile',
-                          'enabled'=>true,
-                    ),
+//                          'class'=>'CProfileLogRoute',
+//                          'levels'=>'profile',
+//                          'enabled'=>true,
+//                    ),
                 ),
         ),
 
