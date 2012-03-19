@@ -21,7 +21,7 @@ $session->open();
 
 $config = $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? 'development' : 'production';
 $config = PROTECTED_PATH . '/config/' . $config . '.php';
-
+//fc
 Yii::createWebApplication($config)->run();
 
 
