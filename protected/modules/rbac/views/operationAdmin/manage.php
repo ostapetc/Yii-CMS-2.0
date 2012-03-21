@@ -1,5 +1,6 @@
 <?php 
 $this->page_title = 'Операции';
+
 $this->widget('AdminGridView', array(
 	'id' => 'operations-grid',
 	'dataProvider' => $model->search(AuthItem::TYPE_OPERATION),

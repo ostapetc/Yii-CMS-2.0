@@ -1,24 +1,25 @@
-<?php $this->page_title = 'Управление сообщениями'; ?>
-
 <?php
-$this->widget('AdminGrid', array(
-	'id'=>'feedback-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'first_name',
-        'last_name',
-        'patronymic',
-        'company',
-        'position',
-        'phone',
-		'email',
-		'comment',
-		'date_create',
+
+$this->widget('AdminGridView', array(
+	'id' => 'feedback-grid',
+	'dataProvider' => $model->search(),
+	'filter' => $model,
+	'columns' => array(
+		array('name' => 'name'),
+		array('name' => 'email'),
+		array(
+            'name'  => 'text',
+            'value' => 'TextHelper::cut($data->text, 80)'
+        ),
+        array(
+            'name'  => 'topic_id',
+            'value' => '$data->topic->name'
+        ),
 		array(
 			'class'    => 'CButtonColumn',
-			'template' => '{delete}' 
+            'template' => '{view} {delete}'
 		),
 	),
-)); 
+));
 ?>
+

@@ -2,9 +2,13 @@
 
 class Page extends ActiveRecordModel
 {
-    const PAGE_SIZE = 10;
+    const PAGE_SIZE = 20;
 
-    public $god;
+
+    public static $widgets = array(
+        'FeedbackPortlet' => 'Форма обратной связи',
+        'OrderPortlet'    => 'Форма заказа'
+    );
 
 
     public function name()
@@ -32,8 +36,9 @@ class Page extends ActiveRecordModel
             'class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'
         );
         $behaviors['Sortable'] = array(
-            'class' => 'ext.sortable.SortableBehavior'
+            'class' => 'application.extensions.sortable.SortableBehavior'
         );
+
         return $behaviors;
     }
 
@@ -41,22 +46,31 @@ class Page extends ActiveRecordModel
     public function rules()
     {
         return array(
-            array('title, lang', 'required'), array(
-                'is_published', 'numerical',
+            array('title, language', 'required'),
+            array(
+                'is_published, on_main, left_menu_id',
+                'numerical',
                 'integerOnly' => true
-            ), array(
+            ),
+            array(
                 'url', 'length',
                 'max' => 250
-            ), array(
+            ),
+            array(
                 'title', 'length',
                 'max'=> 200
-            ), array('text', 'safe'), array('meta_tags, god', 'safe'), array(
+            ),
+            array('text, short_text', 'safe'),
+            array('meta_tags, god', 'safe'),
+            array(
                 'title, url', 'filter',
                 'filter' => 'strip_tags'
-            ), array(
+            ),
+            array(
                 'id, title, url, text, is_published, date_create', 'safe',
                 'on'=> 'search'
             ),
+            array('widget', 'in', 'range' => array_keys(self::$widgets))
         );
     }
 
@@ -64,7 +78,8 @@ class Page extends ActiveRecordModel
     public function relations()
     {
         return array(
-            'language' => array(self::BELONGS_TO, 'Language', 'lang')
+            'language_model' => array(self::BELONGS_TO, 'Language', 'language'),
+            'left_menu'      => array(self::BELONGS_TO, 'Menu', 'left_menu_id')
         );
     }
 
@@ -80,9 +95,9 @@ class Page extends ActiveRecordModel
         $criteria->compare('date_create', $this->date_create, true);
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
-            'pagination'=>array(
-                'pageSize'=>4
+            'criteria'   => $criteria,
+            'pagination' =>array(
+                'pageSize' => self::PAGE_SIZE
             )
         ));
     }
@@ -124,12 +139,12 @@ class Page extends ActiveRecordModel
     {
         $content = $this->text;
 
-        if (Yii::app()->user->checkAccess('PageAdmin_Update'))
+        if (RbacModule::isAllow('PageAdmin_Update'))
         {
             $content .= "<br/>" .CHtml::link(t('Редактировать'), array(
                 '/content/pageAdmin/update/',
                 'id'=> $this->id
-            ), array('class'=> 'admin_link'));
+            ), array('class'=> 'btn btn-danger'));
         }
 
         return $content;

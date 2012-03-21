@@ -19,10 +19,9 @@ require_once(LIBRARY_PATH.'functions.php');
 $session = new CHttpSession;
 $session->open();
 
-$config = $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? 'development' : 'production';
+$config = YII_DEBUG ? 'development' : 'production';
 $config = PROTECTED_PATH . '/config/' . $config . '.php';
-//fc
-Yii::createWebApplication($config)->run();
 
+Yii::createWebApplication($config)->run();
 
 

@@ -70,9 +70,7 @@ class BaseForm extends CForm
             $cs = Yii::app()->clientScript;
             if ($this->side == 'client')
             {
-                $cs->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
-                    ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
-                    ->registerCssFile('/css/site/form.css');
+                $cs->registerCssFile('/css/site/form.css');
             }
             elseif ($this->side == 'admin')
             {
@@ -201,6 +199,11 @@ class BaseForm extends CForm
         $output = '';
         foreach ($this->getButtons() as $button)
         {
+            if (isset($button->attributes['value']))
+            {
+                $button->attributes['value'] = t($button->attributes['value']);
+            }
+
             $output .= $this->renderElement($button);
         }
         return $output !== '' ? "<dl class=\"buttons control-group\"><dd>" . $output . "<dd></dl>\n" : '';
@@ -220,6 +223,7 @@ class BaseForm extends CForm
             $this->buttons[$i] = $button;
         }
     }
+
 
     function formatDateAttributes()
     {
@@ -241,4 +245,29 @@ class BaseForm extends CForm
     }
 
 
+    public function getElements()
+    {
+        $elements = parent::getElements();
+        foreach ($elements as $element)
+        {
+            if (isset($element->attributes['prompt']))
+            {
+                $element->attributes['prompt'] = t($element->attributes['prompt']);
+            }
+        }
+
+        $meta = $this->model->meta();
+
+        $languages = Language::getCachedArray();
+
+        if (isset($meta['language']) && count($languages) > 1)
+        {
+            $elements['language'] = array(
+                'type'  => 'dropdownlist',
+                'items' => $languages
+            );
+        }
+
+        return $elements;
+    }
 }

@@ -7,7 +7,7 @@
  * @package bootstrap.widgets
  */
 
-Yii::import('bootstrap.widgets.BootWidget');
+Yii::import('application.components.bootstrap.widgets.BootWidget');
 
 /**
  * Bootstrap menu widget.
@@ -122,7 +122,7 @@ class BootMenu extends BootWidget
 
 				$cssClass = '';
 
-				if ($item['active'] || (isset($item['items']) && $this->isChildActive($item['items'])))
+				if ($item['active'])
 					$cssClass .= ' active';
 
 				if (isset($item['items']))
@@ -134,6 +134,7 @@ class BootMenu extends BootWidget
 					$htmlOptions['class'] = $cssClass;
 
 				echo CHtml::openTag('li', $htmlOptions);
+
 				$menu = $this->renderItem($item);
 
 				if (isset($this->itemTemplate) || isset($item['template']))
@@ -171,7 +172,6 @@ class BootMenu extends BootWidget
 	 */
 	protected function renderItem($item)
 	{
-
 		if (isset($item['icon'])) {
 			if (strpos($item['icon'], 'icon') === false)
                 $item['icon'] = 'icon-'.implode(' icon-', explode(' ', $item['icon']));
@@ -192,7 +192,6 @@ class BootMenu extends BootWidget
 			$item['label'] .= ' <b class="caret"></b>';
 			$item['linkOptions']['data-toggle'] = 'dropdown';
 		}
-
 
 		if (isset($item['url']))
 			return CHtml::link($item['label'], $item['url'], isset($item['linkOptions']) ? $item['linkOptions'] : array());
@@ -242,28 +241,12 @@ class BootMenu extends BootWidget
 	}
 
 	/**
-	 * Returns whether a child item is activte.
-	 * @param array $items the items to check
-	 * @return boolean the result
-	 */
-	protected function isChildActive($items)
-	{
-		foreach ($items as $item)
-		{
-			if (isset($item['active']) && $item['active'] === true)
-				return true;
-		}
-
-		return false;
-	}
-
-	/**
 	 * Checks whether a menu item is active.
 	 * @param array $item the menu item to be checked
 	 * @param string $route the route of the current request
-	 * @return boolean the result
+	 * @return boolean whether the menu item is active
 	 */
-	protected function isItemActive($item, $route)
+	protected function isItemActive($item,$route)
 	{
 		if (isset($item['url']) && is_array($item['url']) && !strcasecmp(trim($item['url'][0], '/'), $route))
 		{

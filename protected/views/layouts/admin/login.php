@@ -22,14 +22,14 @@
     <![endif]-->
 
     <style type="text/css">
-        .middle_div {
-            position: relative;
-            max-width: 470px;
-            margin: 0 auto;
-            top: 50%;
-            margin-top: -200px;
-            border: 1px solid #C0C0C0 !important;
-            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.41);
+        .middle_div
+        {
+           position: absolute;
+           width: 470px !important;
+           left: 50%;
+           top: 50%;
+           margin-left: -235px;
+           margin-top: -200px;
         }
     </style>
 </head>
@@ -38,12 +38,12 @@
 <body>
     <header id="header">
         <hgroup>
-            <h2 class="section_title" style="width: 100%; text-indent: 0; "><?php echo t('Авторизация в админ панель'); ?></h2>
+            <h2 class="section_title" style="width: 100%;text-align: center"><?php echo t('Панель управления : Авторизация'); ?></h2>
         </hgroup>
     </header>
 
     <article class="module middle_div">
-        <div style="padding: 10px !important;">
+        <div style="padding: 10px!important;">
             <?php echo $content; ?>
         </div>
         <?php if ($this->footer): ?>

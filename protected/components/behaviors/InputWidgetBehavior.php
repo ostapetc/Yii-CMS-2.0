@@ -3,6 +3,7 @@ class InputWidgetBehavior extends CBehavior
 {
     private $_assets;
 
+
     /**
      * Возвращает URL до директории assets, модуля, которому принадлежит виджет
      *
@@ -15,7 +16,8 @@ class InputWidgetBehavior extends CBehavior
             $class = get_class($this->getOwner());
             $base  = 'application.components.formElements.';
 
-            if ($path = Yii::getPathOfAlias($base . $class . '.assets'))
+            $path = Yii::getPathOfAlias($base . $class . '.assets');
+            if ($path)
             {
                 $this->_assets = Yii::app()->getAssetManager()->publish($path);
             }

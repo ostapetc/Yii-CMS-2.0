@@ -17,6 +17,12 @@ class LanguageMessageAdminController extends AdminController
     public function actionManage()
     {
         $model = new LanguageMessage(ActiveRecordModel::SCENARIO_SEARCH);
+        $model->unsetAttributes();
+
+        if (isset($_GET['LanguageMessage']))
+        {
+            $model->attributes = $_GET['LanguageMessage'];
+        }
 
         $this->render('manage', array(
             'model'     => $model,

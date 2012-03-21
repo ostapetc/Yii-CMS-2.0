@@ -42,7 +42,6 @@
                 }
                 self.element = $('#' + id); //because yiiGridView make replaceWith on our element
                 self._initHandlers();
-                self.element.trigger('onAfterUpdate');
             };
             self._initHandlers();
         },
@@ -69,7 +68,7 @@
         //default options for sortable
         defaultSortable:{
             axis:"y",
-//            revert:true,
+            revert:true,
             cursor:"pointer",
             items:'tr',
             delay:100,

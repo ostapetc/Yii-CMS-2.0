@@ -26,11 +26,9 @@ class PageBlock extends ActiveRecordModel
 	public function rules()
 	{
 		return array(
-			array('title, text, name, lang', 'required'),
-			array('name', 'match', 'pattern' => '|^[a-z_]+$|', 'message' => t('только латиница и знак подчеркивания "_"')),
+			array('title, text, constant, language', 'required'),
+			array('constant', 'match', 'pattern' => '|^[A-Z_]+$|', 'message' => 'заглавными, латиница и знак подчеркивания "_"'),
 			array('title', 'length', 'max'=>250),
-			array('title', 'groupUnique', 'group' => array('lang')),
-            array('name', 'groupUnique', 'group' => array('lang')),
 			array('id, title, text, date_create', 'safe', 'on' => 'search'),
 		);
 	}
@@ -38,46 +36,15 @@ class PageBlock extends ActiveRecordModel
 
     public function groupUnique($main_attr, $params)
     {
-        if (!isset($params['group']))
-        {
-            throw new CException(t('Забыли указать параметр group в валидаторе groupUnique'));
-        }
+        $exist = self::model()->findByAttributes(array(
+            $main_attr       => $this->$main_attr,
+            $params['group'] => $this->$params['group']
+        ));
 
-        if (!is_array($params['group']) || !$params['group'])
-        {
-            throw new CException(t('Параметр group валидатора groupUnique должен являться непустым массивом'));
-        }
-
-        $params['group'][] = $main_attr;
-
-        $attrs = array();
-
-        foreach ($params['group'] as $group_attr)
-        {
-            $attrs[$group_attr] = $this->$group_attr;
-        }
-
-        $exist = $this->findByAttributes($attrs);
         if ($exist)
         {
-            if (isset($params['message']))
-            {
-                $message = $params['message'];
-            }
-            else
-            {
-                $all_labels = $this->attributeLabels();
-
-                $labels = array();
-                foreach (array_keys($attrs) as $attr)
-                {
-                    $labels[] = $all_labels[$attr];
-                }
-
-                $message = "t(Поля: " . implode(', ', $labels) . ' t(в сочетании должны быть уникальны!';
-            }
-    
-            $this->addError($main_attr, t($message));
+            $labels = $this->attributeLabels();
+            $this->addError($main_attr, 'Поле ' . $labels[$main_attr] . ' должно быть уникальным для одного языка!');
         }
     }
 
@@ -85,7 +52,7 @@ class PageBlock extends ActiveRecordModel
 	public function relations()
 	{
 		return array(
-		    'language' => array(self::BELONGS_TO, 'Language', 'lang')
+		    'language_model' => array(self::BELONGS_TO, 'Language', 'language')
 		);
 	}
 
@@ -104,18 +71,26 @@ class PageBlock extends ActiveRecordModel
 	}
 
 
-    public function getText($name)
+    public static function getText($constant)
     {
-        $block = $this->findByAttributes(array("name" => $name));
+        return self::getContent($constant);
+    }
+
+
+    public static function getContent($constant)
+    {
+        $attrs = array();
+
+        $block = PageBlock::model()->language()->findByAttributes(array("constant" => $constant));
         if ($block)
         {
             $text = $block["text"];
 
-        	if (Yii::app()->user->checkAccess('PageBlockAdmin_Update'))
-        	{   
-				$text.= "&nbsp; <a href='/content/pageBlockAdmin/update/id/{$block['id']}' class='admin_link'>t(Редактировать</a>";
+        	if (RbacModule::isAllow('PageBlockAdmin_Update'))
+        	{
+				$text.= "&nbsp; <a href='/content/pageBlockAdmin/update/id/{$block['id']}' class='btn btn-danger'>Редактировать</a>";
         	}
-        
+
         	return $text;
         }
     }

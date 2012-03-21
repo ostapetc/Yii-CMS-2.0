@@ -5,9 +5,11 @@ class SettingAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'   => 'Просмотр настройки',
-            'Update' => 'Редактирование настройки',
-            'Manage' => 'Управление настройками',
+            'View'   => 'Просмотр параметра',
+            'Create' => 'Добавление параметра',
+            'Update' => 'Редактирование параметра',
+            'Manage' => 'Управление параметрами',
+            'Delete' => 'Удаление параметра'
         );
     }
 
@@ -20,23 +22,35 @@ class SettingAdminController extends AdminController
     }
 
 
+    public function actionCreate()
+    {
+        $model = new Setting(ActiveRecordModel::SCENARIO_CREATE);
+
+        $this->performAjaxValidation($model);
+
+        $form = new BaseForm('main.SettingForm', $model);
+        if ($form->submitted('submit') && $model->save())
+        {
+            $this->redirect(array('view', 'id' => $model->id));
+        }
+
+        $this->render('create', array(
+            'form' => $form
+        ));
+    }
+
+
     public function actionUpdate($id)
     {
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model);
+
         $form = new BaseForm('main.SettingForm', $model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted() && $model->save())
         {
-            $model = $form->model;
-            if ($model->save())
-            {
-                $this->redirect(array(
-                    'view',
-                    'id'=> $model->id
-                ));
-            }
+            $this->redirect(array('view', 'id' => $model->id));
         }
 
         $this->render('update', array(
@@ -66,6 +80,14 @@ class SettingAdminController extends AdminController
         }
 
         $this->render('manage', $params);
+    }
+
+
+    public function actionDelete($id)
+    {   die;
+        $this->render('view', array(
+            'model' => $this->loadModel($id),
+        ));
     }
 
 }

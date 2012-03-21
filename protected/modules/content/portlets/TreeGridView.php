@@ -2,8 +2,7 @@
 class TreeGridView extends AdminGridView
 {
     public $baseTreeTableUrl;
-    public $enablePagination = false;
-    
+
     public function init()
     {
         $this->afterAjaxUpdate          = 'function(id, data) {$("#"+id+" .items").treeTable();}';
@@ -18,7 +17,7 @@ class TreeGridView extends AdminGridView
         //Calc parent id from nesteD set
         if (count($this->dataProvider->data))
         {
-            $level         = $this->dataProvider->data[0]->NestedSet->levelAttribute;
+            $level         = $this->dataProvider->data[0]->tree->levelAttribute;
             $stack         = array();
             $currentLevel  = 0;
             $previousModel = null;

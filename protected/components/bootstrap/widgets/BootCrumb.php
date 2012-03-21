@@ -31,7 +31,7 @@ class BootCrumb extends CBreadcrumbs
 		$links = array();
 
 		if ($this->homeLink === null || !(isset($this->homeLink['label']) && isset($this->homeLink['url'])))
-			$this->homeLink = array('label'=>Yii::t('bootstrap', 'Home'),'url'=>Yii::app()->homeUrl);
+			$this->homeLink = array('label'=> t('Главная'),'url'=>Yii::app()->homeUrl);
 
 		if (!empty($this->links))
 		{

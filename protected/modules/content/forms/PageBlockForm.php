@@ -6,10 +6,10 @@ return array(
         'class'                => 'CActiveForm',
         'enableAjaxValidation' => true,
     ),
-    'elements'   => array(
-        'title' => array('type' => 'text'),
-        'name'  => array('type' => 'text'),
-        'text'  => array('type' => 'editor')
+    'elements' => array(
+        'title'    => array('type' => 'text'),
+        'constant' => array('type' => 'text'),
+        'text'     => array('type' => 'editor')
     ),
     'buttons'    => array(
         'submit' => array(

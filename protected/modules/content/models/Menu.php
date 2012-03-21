@@ -26,21 +26,36 @@ class Menu extends ActiveRecordModel
     public function rules()
     {
         return array(
-            array('name', 'required'), array(
-                'is_published', 'numerical',
+            array('name', 'required'),
+            array(
+                'is_published',
+                'numerical',
                 'integerOnly' => true
-            ), array(
-                'id', 'length',
+            ),
+            array(
+                'language',
+                'length',
+                'max' => 2
+            ),
+            array(
+                'id',
+                'length',
                 'max' => 11
-            ), array(
-                'name', 'length',
+            ),
+            array(
+                'name, code',
+                'length',
                 'max' => 50
-            ), array(
-                'name', 'unique',
-                'className'     => 'Menu',
-                'attributeName' => 'name'
-            ), array(
-                'id, name, is_published', 'safe',
+            ),
+            array(
+                'code',
+                'match',
+                'pattern' => '|^[A-Z_]+$|',
+                'message' => 'заглавными, латиница и знак подчеркивания "_"'
+            ),
+            array(
+                'id, name, is_published',
+                'safe',
                 'on' => 'search'
             ),
         );
@@ -74,8 +89,18 @@ class Menu extends ActiveRecordModel
     public function getSections()
     {
         $root = MenuSection::model()->roots()->find('menu_id = ' . $this->id);
+        if (!$root)
+        {
+            return;
+        }
 
-        $sections = $root->children()->findAll();
+        $children = $root->children();
+        if (!$children)
+        {
+            return;
+        }
+
+        $sections = $children->findAll();
 
         foreach ($sections as $i => $section)
         {
@@ -96,6 +121,11 @@ class Menu extends ActiveRecordModel
 
     public function getCurrentSection()
     {
+        if (!$this->sections)
+        {
+            return;
+        }
+
         foreach ($this->sections as $section)
         {
             if ($section->isActive())
@@ -119,11 +149,11 @@ class Menu extends ActiveRecordModel
 
     public function getPagePath($page_id)
     {
-        $link = MenuSection::model()->findByAttributes(array(
+        $section = MenuSection::model()->findByAttributes(array(
             'page_id' => $page_id,
             'menu_id' => $this->id
         ));
 
-        return $link->getPath();
+        return $section->getPath();
     }
 }

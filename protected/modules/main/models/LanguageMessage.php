@@ -1,4 +1,5 @@
 <?php
+
 class LanguageMessage extends ActiveRecordModel
 {
     const PAGE_SIZE = 10;

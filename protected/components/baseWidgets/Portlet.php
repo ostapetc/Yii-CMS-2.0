@@ -1,6 +1,7 @@
 <?php
 Yii::import('zii.widgets.CPortlet');
 
+
 abstract class Portlet extends CPortlet
 {
     public function init()
@@ -8,6 +9,7 @@ abstract class Portlet extends CPortlet
         $this->attachBehaviors($this->behaviors());
         parent::init();
     }
+
 
     public function behaviors()
     {
@@ -17,5 +19,4 @@ abstract class Portlet extends CPortlet
             )
         );
     }
-
 }

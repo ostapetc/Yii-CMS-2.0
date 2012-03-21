@@ -5,8 +5,9 @@ class PageController extends BaseController
     public static function actionsTitles()
     {
         return array(
-            "View" => t("Просмотр страницы"),
-            "Main" => t("Главная страница")
+            "View"   => "Просмотр страницы",
+            "Main"   => "Главная страница",
+            "Search" => "Поиск"
         );
     }
 
@@ -25,12 +26,28 @@ class PageController extends BaseController
         else
         {
             $url  = $this->request->getParam("url");
-            $page = Page::model()->published()->findByAttributes(array("url" => $url));
+            $page = Page::model()->language()->published()->findByAttributes(array("url" => $url));
             if (!$page)
             {
                 $this->pageNotFound();
             }
         }
+
+        $top_menu = Menu::model()->language()->find("code = '" . TopMenu::CODE . "'");
+        if ($top_menu)
+        {
+            $menu_setion = MenuSection::model()->findByAttributes(array(
+                'menu_id' => $top_menu->id,
+                'page_id' => $page->id
+            ));
+        }
+
+        $this->crumbs       = array($page->title);
+        $this->left_menu_id = $page->left_menu_id;
+
+        $this->_setMetaTags($page);
+
+
 
         $this->render("view", array("page" => $page));
     }
@@ -38,7 +55,45 @@ class PageController extends BaseController
 
     public function actionMain()
     {
-        $page = $this->loadModel('/', array('published'), 'url');
-        $this->render('main', array('page' => $page));
+        $page = Page::model()->published()->language()->findByAttributes(array("url" => "/"));
+        if ($page)
+        {
+            $this->_setMetaTags($page);
+        }
+
+        $this->render('main', array(
+            'pages' => Page::model()->published()->findAll('on_main = 1', array('order' => '`order`')),
+            'page'  => $page
+        ));
+    }
+
+
+
+    private function _setMetaTags(Page $page)
+    {
+        $meta_tags = $page->metaTags();
+
+        $this->meta_title       = $meta_tags['title'];
+        $this->meta_keywords    = $meta_tags['keywords'];
+        $this->meta_description = $meta_tags['description'];
+    }
+
+
+    public function actionSearch($query)
+    {
+        $query = trim(strip_tags($query));
+        if (mb_strlen($query, 'utf-8') >= 3)
+        {
+            $criteria = new CDbCriteria();
+            $criteria->addSearchCondition('title', $query, true, 'OR');
+            $criteria->addSearchCondition('short_text', $query, true, 'OR');
+            $criteria->addSearchCondition('text', $query, true, 'OR');
+
+            $pages = Page::model()->findAll($criteria);
+        }
+
+        $this->render('search', array(
+            'pages' => isset($pages) ? $pages : null
+        ));
     }
 }

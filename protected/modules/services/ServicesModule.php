@@ -1,18 +1,19 @@
 <?php
 
 class ServicesModule extends WebModule
-{
-    public static $active = false;
+{	
+	public static $active = true;
+
 
     public static function name()
     {
-        return 'Вебсервисы';
+        return 'Услуги';
     }
 
 
     public static function description()
     {
-        return 'Вебсервисы сайта';
+        return 'Услуги, товары, заказы';
     }
 
 
@@ -30,13 +31,25 @@ class ServicesModule extends WebModule
 		));
 	}
 
+	public function beforeControllerAction($controller, $action)
+	{
+		if(parent::beforeControllerAction($controller, $action))
+		{
+			return true;
+		}
+		else
+        {
+            return false;
+        }
+	}
+
 
     public static function adminMenu()
     {
         return array(
-			'JsonRpcApi' => '/services/api/json',
-			'SoapApi'    => '/services/api/soap'
+            'Управление продуктами' => Yii::app()->createUrl('services/productAdmin/manage'),
+            'Добавить продукт'      => Yii::app()->createUrl('services/productAdmin/create'),
+            'Управление заказами'   => Yii::app()->createUrl('services/orderAdmin/manage'),
         );
     }
-
 }

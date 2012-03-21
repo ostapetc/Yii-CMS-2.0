@@ -47,7 +47,7 @@ class UsersModule extends WebModule
     public static function routes()
     {
         return array(
-            '/admin/login'                          => 'users/userAdmin/login',
+            '/admin/login/*'                        => 'users/userAdmin/login',
             '/login'                                => 'users/user/login',
             '/logout'                               => 'users/user/logout',
             '/logout'                               => 'users/user/logout',

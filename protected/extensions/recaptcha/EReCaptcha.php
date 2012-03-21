@@ -2,12 +2,12 @@
 /**
  * EReCaptcha class file.
  *
- * @author MetaYii
+ * @author Rodolfo González <metayii.framework@gmail.com>
  * @link http://www.yiiframework.com/
- * @copyright Copyright &copy; 2008 MetaYii
+ * @copyright Copyright &copy; 2008-2011 Rodolfo González
  * @license
  *
- * Copyright © 2008 by MetaYii
+ * Copyright © 2008-2011 by Rodolfo González
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -38,7 +38,7 @@
 /**
  * Include the reCAPTCHA PHP wrapper.
  */
-require_once(Yii::getPathOfAlias('application.extensions.recaptcha').DIRECTORY_SEPARATOR.'reCAPTCHA'.DIRECTORY_SEPARATOR.'recaptchalib.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'reCAPTCHA'.DIRECTORY_SEPARATOR.'recaptchalib.php');
 
 /**
  * EReCaptcha generates a CAPTCHA using the service provided by reCAPTCHA {@link http://recaptcha.net/}.
@@ -48,50 +48,71 @@ require_once(Yii::getPathOfAlias('application.extensions.recaptcha').DIRECTORY_S
  *
  * @author MetaYii
  * @package application.extensions.recaptcha
- * @since 1.1
+ * @since 1.3
  */
 class EReCaptcha extends CInputWidget
 {
+   //***************************************************************************
+   // Configuration.
+   //***************************************************************************
+
 	/**
 	 * reCAPTCHA public key
 	 *
 	 * @var string
 	 */
-	private $publicKey = '';
+	protected $publicKey = '';
+
    /**
     * The theme name for the widget. Valid themes are 'red', 'white', 'blackglass', 'clean', 'custom'
     *
     * @var string the theme name for the widget
     */
-   private $theme = 'red';
+   protected $theme = 'red';
+
    /**
     * The language for the widget. Valid languages are 'en', 'nl', 'fr', 'de', 'pt', 'ru', 'es', 'tr'
     *
     * @var string the language suffix
     */
-   private $language = 'en';
+   protected $language = 'en';
+
    /**
     * @var string the tab index for the HTML tag
     */
    public $tabIndex = 0;
+
    /**
     * @var string the id for the HTML containing the custom theme
     */
    public $customThemeWidget = '';
 
    /**
+    * @var boolean whether to use SSL for connections. If false, autodetection will be used.
+    */
+   public $useSsl = false;
+
+   //***************************************************************************
+   // Internal properties.
+   //***************************************************************************
+
+   /**
     * Valid languages
     *
     * @var array
     */
-   private $validLanguages = array('en','nl','fr','de','pt','ru','es','tr');
+   protected $validLanguages = array('en','nl','fr','de','pt','ru','es','tr');
 
    /**
     * Valid themes
     *
     * @var array
     */
-   private $validThemes = array('red','white','blackglass','clean','custom');
+   protected $validThemes = array('red','white','blackglass','clean','custom');
+
+   //***************************************************************************
+   // Setters and getters.
+   //***************************************************************************
 
    /**
     * Sets the public key.
@@ -106,7 +127,7 @@ class EReCaptcha extends CInputWidget
    }
 
    /**
-    * Returns the reCAPTCHA private key
+    * Returns the reCAPTCHA protected key
     *
     * @return string
     */
@@ -157,11 +178,12 @@ class EReCaptcha extends CInputWidget
 	   return $this->theme;
 	}
 
-	/**
-	 * Renders the widget.
-	 */
-	public function run()
-	{
+   //***************************************************************************
+   // Run Lola Run
+   //***************************************************************************
+
+   public function init()
+   {
       $customthemewidget = (($w = $this->customThemeWidget) != '') ? "'{$w}'" : 'null';
       $cs = Yii::app()->getClientScript();
 
@@ -176,10 +198,19 @@ var RecaptchaOptions = {
 EOP;
          $cs->registerScript(get_class($this).'_options', $script, CClientScript::POS_HEAD);
       }
+   }
 
+	/**
+	 * Renders the widget.
+	 */
+	public function run()
+	{
       $body = '';
-      if ($this->hasModel())
+      if ($this->hasModel()) {
          $body = CHtml::activeHiddenField($this->model, $this->attribute) . "\n";
-      echo $body . recaptcha_get_html($this->publicKey);
+      }
+      echo $body . recaptcha_get_html($this->publicKey,
+                                      null,
+                                      ($this->useSsl ? true : Yii::app()->request->isSecureConnection));
 	}
 }

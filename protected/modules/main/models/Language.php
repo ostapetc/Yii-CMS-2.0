@@ -71,14 +71,12 @@ class Language extends ActiveRecordModel
 
     public function afterSave()
     {
-        parent::afterSave();
         Yii::app()->cache->flush('languages');
     }
 
 
     public function afterDelete()
     {
-        parent::afterDelete();
         Yii::app()->cache->flush('languages');
     }
 }

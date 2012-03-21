@@ -5,7 +5,6 @@ class MenuSectionAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Roots"            => "Меню сайта",
             "Update"           => "Редактирование ссылки меню",
             "Create"           => "Добавление ссылки меню",
             "View"             => "Просмотр ссылки меню",
@@ -16,18 +15,6 @@ class MenuSectionAdminController extends AdminController
         );
     }
 
-    public function actionRoots()
-    {
-        $model = new MenuSection(ActiveRecordModel::SCENARIO_SEARCH);
-        $model->unsetAttributes();
-
-        if (isset($_GET['MenuSections']))
-        {
-            $model->attributes = $_GET['MenuSections'];
-        }
-
-        $this->render('manage', array('root' => null,'model'=>$model));
-    }
 
     public function actionSorting($root_id, $menu_id)
     {
@@ -91,27 +78,9 @@ class MenuSectionAdminController extends AdminController
         $form = new BaseForm('content.MenuSectionForm', $model);
         $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted('submit') && $model->save())
         {
-            $model->page_id = $model->module_id = $model->module_url = '';
-            if ($model->url_info)
-            {
-                $info = explode(':', $model->url_info);
-                if ($info[0] === 'page')
-                {
-                    $model->page_id = $info[1];
-                }
-                else if ($info[0] === 'module')
-                {
-                    $model->module_id  = $info[1];
-                    $model->module_url = $info[2];
-                }
-            }
-
-            if ($model->save())
-            {
-                $this->redirect($this->createUrl($back, array('menu_id' => $model->menu_id)));
-            }
+            $this->redirect($this->createUrl($back, array('menu_id' => $model->menu_id)));
         }
 
         $this->render('update', array(
@@ -135,39 +104,21 @@ class MenuSectionAdminController extends AdminController
         $criteria = new CDbCriteria();
         $criteria->compare('menu_id', $menu->id);
 
-        $model          = new MenuSection();
+        $model = new MenuSection();
         $model->menu_id = $menu->id;
 
         $form = new BaseForm('content.MenuSectionForm', $model);
         $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit'))
+        if ($form->submitted('submit') && $model->validate())
         {
-            $model->page_id = $model->module_id = $model->module_url = '';
-            if ($model->url_info)
-            {
-                $info = explode(':', $model->url_info);
-                if ($info[0] === 'page')
-                {
-                    $model->page_id = $info[1];
-                }
-                else if ($info[0] === 'module')
-                {
-                    $model->module_id  = $info[1];
-                    $model->module_url = $info[2];
-                }
-            }
-
-
-            if ($model->validate())
-            {
-                $model->appendTo($parent);
-                $this->redirect(array(
-                    $back,
-                    'menu_id' => $menu_id
-                ));
-            }
+            $model->appendTo($parent);
+            $this->redirect(array(
+                $back,
+                'menu_id' => $menu_id
+            ));
         }
+
         $this->render('create', array(
             'model' => $model,
             'menu'  => $menu,
@@ -203,9 +154,22 @@ class MenuSectionAdminController extends AdminController
     }
 
 
-    public function actionManage($root_id)
+    public function actionManage($menu_id)
     {
-        $root = MenuSection::model()->roots()->findByPk($root_id);
+        $menu = Menu::model()->findByPk($menu_id);
+        if (!$menu)
+        {
+            $this->pageNotFound();
+        }
+
+        $root = MenuSection::model()->roots()->find('menu_id = ' . $menu_id);
+        if (!$root)
+        {
+            $root          = new MenuSection();
+            $root->menu_id = $menu->id;
+            $root->title   = $menu->name . '::корень';
+            $root->saveNode();
+        }
 
         $model = new MenuSection('search');
         $model->unsetAttributes();
@@ -216,6 +180,7 @@ class MenuSectionAdminController extends AdminController
         }
 
         $this->render('manage', array(
+            'menu'  => $menu,
             'model' => $model,
             'root'  => $root
         ));

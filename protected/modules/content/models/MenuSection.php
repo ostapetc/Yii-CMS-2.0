@@ -4,7 +4,11 @@ class MenuSection extends ActiveRecordModel
     const PAGE_SIZE = 100;
 
     public $max_order;
+
     public $url_info;
+
+    public static $descendants;
+
 
     public function name()
     {
@@ -41,24 +45,30 @@ class MenuSection extends ActiveRecordModel
     public function rules()
     {
         return array(
-            array('menu_id, title, lang', 'required'), array(
+            array('menu_id, title', 'required'), array(
                 'is_published', 'numerical'
-            ), array(
+            ),
+            array(
                 'page_id, menu_id', 'length',
                 'max' => 11
-            ), array(
+            ),
+            array(
                 'title', 'length',
                 'max' => 200
-            ), array(
+            ),
+            array(
                 'url_info, module_url', 'length',
                 'max' => 300
-            ), array(
+            ),
+            array(
                 'module_id', 'length',
                 'max' => 64
-            ), array(
+            ),
+            array(
                 'url', 'length',
                 'max' => 200
-            ), array(
+            ),
+            array(
                 'title, url', 'filter',
                 'filter' => 'trim'
             ),
@@ -73,38 +83,28 @@ class MenuSection extends ActiveRecordModel
     public function relations()
     {
         return array(
-            'menu'     => array(self::BELONGS_TO, 'Menu', 'menu_id'),
-            'page'     => array(self::BELONGS_TO, 'Page', 'page_id'),
-            'language' => array(self::BELONGS_TO, 'Language', 'lang'),
+            'menu' => array(self::BELONGS_TO, 'Menu', 'menu_id'),
+            'page' => array(self::BELONGS_TO, 'Page', 'page_id'),
         );
     }
 
 
-    public function search($root_id = null)
+    public function search($root)
     {
         $alias = $this->getTableAlias();
 
         $criteria = new CDbCriteria;
-        if ($root_id === null)
-        {
-            $criteria->addCondition($alias . '.level = 1');
-        }
-        else
-        {
-            $criteria->addCondition($alias . '.root = ' . $root_id);
-            $criteria->addCondition($alias . '.id <> ' . $root_id);
-        }
         $criteria->compare($alias . '.page_id', $this->page_id, true);
         $criteria->compare($alias . '.title', $this->title, true);
         $criteria->compare($alias . '.url', $this->url, true);
         $criteria->compare($alias . '.is_published', $this->is_published);
-
+        $criteria->addCondition($alias . '.root = ' . $root);
+        $criteria->addCondition($alias . '.id <> ' . $root);
         $criteria->order = "{$alias}.left";
         $criteria->with  = array('page', 'menu');
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
-            'pagination' => false
+            'criteria' => $criteria
         ));
     }
 
@@ -151,13 +151,9 @@ class MenuSection extends ActiveRecordModel
         {
             $url = Yii::app()->controller->createUrl($this->module_url, array('section_id'=>$this->id));
         }
-        else if($this->url)
-        {
-            $url = $this->url;
-        }
         else
         {
-            $url = Yii::app()->controller->createUrl('/content/menuSection/view', array('id'=>$this->id));
+            $url = $this->url;
         }
 
         if (!empty($url) && mb_substr($url, 0, 1, 'utf-8') != '/')
@@ -165,6 +161,11 @@ class MenuSection extends ActiveRecordModel
             $url = '/' . $url;
         }
 
+        if (count(Language::getCachedArray()) > 1)
+        {
+            $url = '/' . Yii::app()->language . $url;
+        }
+        //echo $url . "<br/>";
         return $url;
     }
 
@@ -193,7 +194,6 @@ class MenuSection extends ActiveRecordModel
         //        return $result;
     }
 
-    public static $descendants;
 
     public function isActive()
     {
@@ -204,6 +204,7 @@ class MenuSection extends ActiveRecordModel
             {
                 self::$descendants[$this->id] = $this->descendants()->findAll();
             }
+
             foreach (self::$descendants[$this->id] as $item)
             {
                 if ($_SERVER['REQUEST_URI'] == $item->href)
@@ -243,13 +244,13 @@ class MenuSection extends ActiveRecordModel
 
     public function getNbspTitle()
     {
-        return str_repeat("&nbsp;", ($this->level - 1) * 5) . $this->title;
+        return str_repeat("&nbsp;", ($this->level - 2) * 5) . $this->title;
     }
 
 
     public function getSpaceTitle()
     {
-        return str_repeat(' ', ($this->level - 1) * 5) . $this->title;
+        return str_repeat(' ', ($this->level - 1) * 4) . $this->title;
     }
 
 

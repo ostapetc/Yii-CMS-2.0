@@ -41,8 +41,8 @@ class UploadFileBehavior extends CActiveRecordBehavior
                         {
                             $object = $model->findByPk($model->id);
                             if ($object->$param)
-                            {
-                                FileSystem::deleteFileWithSimilarNames($file_dir, $object->$param);
+                            {   
+                                FileSystemHelper::deleteFileWithSimilarNames($file_dir, $object->$param);
                             }
                         }
 
@@ -87,7 +87,7 @@ class UploadFileBehavior extends CActiveRecordBehavior
 					$dir.= '/';
 				}
 
-				FileSystem::deleteFileWithSimilarNames($dir, $model->$param);
+				FileSystemHelper::deleteFileWithSimilarNames($dir, $model->$param);
     		}
     	}
     }

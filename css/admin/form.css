@@ -14,9 +14,6 @@
 input, textarea, select, .uneditable-input{
     width: 420px;
 }
-.chosen select{
-    width: 429px
-}
 
 textarea {
     min-height: 180px;

@@ -2,18 +2,44 @@
 
 class UrlManager extends CUrlManager
 {
-    public function collectRules()
+    public function createUrl($route, $params = array())
     {
-        $multilanguage_support = Yii::app()->params['multilanguage_support'];
-        if ($multilanguage_support)
-        {
-            $languages = Language::getCachedArray();
-            $languages = implode('|', array_keys($languages));
+        $url = parent::createUrl($route, $params);
+        return $url;
+    }
 
-            $language_pattern = "<language:({$languages})>";
+
+    public static  function collectRules()
+    {
+        if (YII_DEBUG)
+        {
+            $rules = self::_getRules();
+        }
+        else
+        {
+            $rules = Yii::app()->cache->get('url_rules');
+            if (!$rules)
+            {
+                $rules = self::_getRules();
+                Yii::app()->cache->set('url_rules', $rules);
+            }
         }
 
-        $routes = array(
+        Yii::app()->urlManager->addRules($rules);
+    }
+
+
+    private static function _getRules()
+    {
+        $multi_language_site = true;
+
+        $languages = Language::getCachedArray();
+        $languages = array_keys($languages);
+        $languages = implode('|', $languages);
+
+        $language_pattern = "<language:({$languages})>";
+
+        $rules = array(
             '/<controller:\w+>/<id:\d+>'              => '<controller>/view',
             '/<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
             '/<controller:\w+>/<action:\w+>'          => '<controller>/<action>',
@@ -24,27 +50,31 @@ class UrlManager extends CUrlManager
         {
             if (method_exists($class, 'routes'))
             {
-                $routes = array_merge($routes, call_user_func(array($class, 'routes')));
+                $rules = array_merge($rules, call_user_func(array($class, 'routes')));
             }
         }
 
-        foreach ($routes as $pattern => $route)
+        foreach ($rules as $pattern => $route)
         {
-            unset($routes[$pattern]);
-            $pattern = '/' . trim($pattern, '/');
+            unset($rules[$pattern]);
 
-            if ($multilanguage_support)
+            if ($pattern[0] != '/')
+            {
+                $pattern = '/' . $pattern;
+            }
+
+            if ($multi_language_site && $language_pattern)
             {
                 $pattern = '/' . $language_pattern . $pattern;
             }
 
-            $routes[$pattern] = $route;
+            $rules[$pattern] = $route;
         }
 
-        $routes                                  = array_reverse($routes);
-        $routes['<language:(en|ru)>/<route:.*>'] = '<route>';
+        $rules = array_reverse($rules);
+        $rules['<language:(en|ru)>/<route:.*>'] = '<route>';
 
-        Yii::app()->urlManager->addRules($routes);
+        return $rules;
     }
 }
 

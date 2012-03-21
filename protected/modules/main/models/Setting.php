@@ -7,7 +7,9 @@ class Setting extends ActiveRecordModel
     const ELEMENT_TEXTAREA = 'textarea';
     const ELEMENT_EDITOR   = 'editor';
     const ELEMENT_TEXT     = 'text';
-   
+
+    const FILES_DIR = '/upload/settings/';
+
 
     public static $elements = array(
         self::ELEMENT_TEXT     => "Строка",
@@ -37,7 +39,7 @@ class Setting extends ActiveRecordModel
 	public function rules()
 	{
 		return array(
-			array('code, name, value, element','required'),
+			array('code, name, element','required'),
 			array('code', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),
 			array('element', 'length', 'max'=>8),
@@ -70,14 +72,17 @@ class Setting extends ActiveRecordModel
 
     public function findCodesValues($module_id = null)
     {
-    	if (!$module_id) 
-    	{
-    		$module_id = Yii::app()->controller->module->id;
-    	}
-    	
-        $result = array();
+        if ($module_id)
+        {
+            $settings = $this->findAll("module_id = '{$module_id}'");
+        }
+        else
+        {
+            $settings = $this->findAll();
+        }
 
-        $settings = $this->findAll("module_id = '{$module_id}'");
+        $result   = array();
+
         foreach ($settings as $setting)
         {
             $result[$setting->code] = $setting->value;
@@ -92,6 +97,11 @@ class Setting extends ActiveRecordModel
         $setting = self::model()->findByAttributes(array('code' => $code));
         if ($setting)
         {
+            if ($setting->element == 'file')
+            {
+                return $setting->getFilePath();
+            }
+
             return $setting->value;
         }
     }
@@ -108,5 +118,55 @@ class Setting extends ActiveRecordModel
                 throw new Exception('Не найдена обязательная настройка: ' . $code);
             }
         }
+    }
+
+
+    public function getFormatedValue()
+    {
+        switch ($this->element)
+        {
+            case 'checkbox':
+                return $this->value ? "Да" :"Нет";
+                break;
+
+            case 'file':
+                if ($path = $this->getFilePath())
+                {
+                    return CHtml::image($path, '', array('height' => 20));
+                }
+                break;
+        }
+
+        return $this->value;
+    }
+
+
+    public function getFilePath()
+    {
+        if ($this->value && file_exists($_SERVER['DOCUMENT_ROOT'] . self::FILES_DIR . $this->value))
+        {
+            return self::FILES_DIR . $this->value;
+        }
+    }
+
+
+    public function uploadFiles()
+    {
+        if ($this->element == 'file')
+        {
+            if (!is_dir($_SERVER['DOCUMENT_ROOT'] . self::FILES_DIR))
+            {
+                mkdir($_SERVER['DOCUMENT_ROOT'] . self::FILES_DIR, 0777, true);
+                chmod($_SERVER['DOCUMENT_ROOT'] . self::FILES_DIR, 0777);
+            }
+
+            return array(
+                'value' => array(
+                    'dir' => self::FILES_DIR
+                )
+            );
+        }
+
+        return array();
     }
 }

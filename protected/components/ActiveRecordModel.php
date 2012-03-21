@@ -6,6 +6,8 @@ abstract class ActiveRecordModel extends CActiveRecord
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_SEARCH = 'search';
 
+    public $captcha;
+
 
     abstract public function name();
 
@@ -15,11 +17,12 @@ abstract class ActiveRecordModel extends CActiveRecord
         return parent::model($className);
     }
 
+
     public function behaviors()
     {
         return array(
-            'LangCondition'  => array(
-                'class' => 'application.components.activeRecordBehaviors.LangConditionBehavior'
+            'Languages'  => array(
+                'class' => 'application.components.activeRecordBehaviors.LanguagesBehavior'
             ),
             'NullValue'      => array(
                 'class' => 'application.components.activeRecordBehaviors.NullValueBehavior'
@@ -39,20 +42,29 @@ abstract class ActiveRecordModel extends CActiveRecord
             'MaxMin'         => array(
                 'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
             ),
-            'RawFind'         => array(
-                'class' => 'application.components.activeRecordBehaviors.RawFindBehavior'
-            ),
         );
     }
 
 
     public function attributeLabels()
     {
+        $meta = $this->meta();
+
         $labels = array();
-        foreach ($this->meta() as $field_data)
+
+        foreach ($meta as $field_data)
         {
             $labels[$field_data["Field"]] = t($field_data["Comment"]);
         }
+
+        $languages = Language::getCachedArray();
+        if (count($languages) > 1)
+        {
+            $labels['language'] = 'Язык';
+        }
+
+        $labels['captcha'] = 'Введите код с картинки';
+
         return $labels;
     }
 
@@ -127,8 +139,8 @@ abstract class ActiveRecordModel extends CActiveRecord
         return array(
             'published' => array('condition' => $alias . '.is_published = 1'),
             'sitemap'   => array('condition' => $alias . '.is_published = 1'),
-            'ordered'   => array('order'     => $alias . '.`order` DESC'),
-            'last'      => array('order'     => $alias . '.date_create DESC'),
+            'ordered'   => array('order' => $alias . '.`order` DESC'),
+            'last'      => array('order' => $alias . '.date_create DESC'),
         );
     }
 
@@ -180,20 +192,34 @@ abstract class ActiveRecordModel extends CActiveRecord
 
     public function meta()
     {
-        $cache_var = 'Meta_' . $this->tableName();
-
-        $meta = Yii::app()->cache->get($cache_var);
-        if ($meta === false)
+        if (YII_DEBUG)
         {
-            $meta = Yii::app()->db->createCommand("SHOW FUll columns FROM " . $this->tableName())->queryAll();
+            return $this->_meta();
+        }
+        else
+        {
+            $cache_var = 'Meta_' . $this->tableName();
 
-            foreach ($meta as $ind => $field_data)
+            $meta = Yii::app()->cache->get($cache_var);
+            if ($meta === false)
             {
-                $meta[$field_data["Field"]] = $field_data;
-                unset($meta[$ind]);
+                $meta = $this->_meta();
+                Yii::app()->cache->set($cache_var, $meta, 3600);
             }
 
-            Yii::app()->cache->set($cache_var, $meta, 3600);
+            return $meta;
+        }
+    }
+
+
+    private function _meta()
+    {
+        $meta = Yii::app()->db->createCommand("SHOW FUll columns FROM " . $this->tableName())->queryAll();
+
+        foreach ($meta as $ind => $field_data)
+        {
+            $meta[$field_data["Field"]] = $field_data;
+            unset($meta[$ind]);
         }
 
         return $meta;
@@ -235,7 +261,4 @@ abstract class ActiveRecordModel extends CActiveRecord
         $criteria->addInCondition('id', $object_ids);
         return $this;
     }
-
-
-
 }

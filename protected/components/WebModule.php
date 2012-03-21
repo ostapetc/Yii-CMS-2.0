@@ -18,6 +18,7 @@ abstract class WebModule extends CWebModule
 
     public function assetsUrl()
     {
+
         if ($this->_assetsUrl === null)
         {
             $class = str_replace('Module', '', get_class($this));
