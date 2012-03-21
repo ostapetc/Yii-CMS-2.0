@@ -25,6 +25,7 @@ abstract class BaseController extends CController
     abstract public static function actionsTitles();
 
 
+
     public function filters()
     {
         return array(
