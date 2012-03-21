@@ -1,6 +1,14 @@
 <?php
 class LoginPanel extends Widget
 {
+    public $cache_id;
+
+    public function init()
+    {
+        parent::init();
+        $this->cache_id = Yii::app()->user->isGuest ? get_class($this) : null;
+    }
+
     public function run()
     {
         if (Yii::app()->user->isGuest)
@@ -9,7 +17,9 @@ class LoginPanel extends Widget
             $register_form = new BaseForm('users.RegistrationForm', new User(User::SCENARIO_REGISTRATION));
             $forgot_form   = new BaseForm('users.PasswordRecoverRequestForm', new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST));
 
+
             $title = 'Вход';
+
             $this->render('LoginPanel', array(
                 'title'          => $title,
                 'login_form'     => $login_form,

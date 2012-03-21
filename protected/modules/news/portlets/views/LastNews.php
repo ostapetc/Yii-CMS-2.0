@@ -11,7 +11,7 @@ foreach ($news_list as $news)
 
 <div class="span4">
     <h3><?php echo $news->title ?></h3>
-    <?php
+    <?
     if ($news->photo)
     {
         $thumb = ImageHelper::thumb(News::PHOTOS_DIR, $news->photo, News::$photo_small_size, true);

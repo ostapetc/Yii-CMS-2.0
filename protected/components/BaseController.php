@@ -58,9 +58,7 @@ abstract class BaseController extends CController
             Yii::app()->session['language'] = $_GET['language'];
         }
 
-        if (
-            !isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language
-        )
+        if (!isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language)
         {
             Yii::app()->session['language'] = Yii::app()->language;
         }

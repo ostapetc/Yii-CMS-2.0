@@ -1,10 +1,11 @@
 <?php
 class LastNews extends Portlet
 {
-	public function renderContent() 
-	{	
+	public function renderContent()
+	{
+
 	    $news = News::model()->last()->published()->limit(3)->findAll();
-	    if (!$news) 
+	    if (!$news)
 	    {
 	        return;
 	    }    

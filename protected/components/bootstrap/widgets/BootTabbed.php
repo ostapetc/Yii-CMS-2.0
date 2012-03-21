@@ -49,22 +49,21 @@ class BootTabbed extends BootWidget
      */
     public function run()
     {
-	    $panes = array();
-	    $items = $this->normalizeTabs($this->tabs, $panes);
+        $panes = array();
+        $items = $this->normalizeTabs($this->tabs, $panes);
+        echo CHtml::openTag('div', $this->htmlOptions);
 
-	    echo CHtml::openTag('div', $this->htmlOptions);
-
-	    $this->controller->widget('bootstrap.widgets.BootMenu', array(
+        $this->controller->widget('bootstrap.widgets.BootMenu', array(
 			'type'=>$this->type,
 			'encodeLabel'=>$this->encodeLabel,
 		    'items'=>$items,
-	    ));
+        ));
 
 	    echo '<div class="tab-content">';
 		echo implode('', $panes);
 	    echo '</div></div>';
 
-	    Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id, "jQuery('{$this->id}').tab('show');");
+        Yii::app()->clientScript->registerScript(__CLASS__.'#'.$this->id, "jQuery('{$this->id}').tab('show');");
 
 	    /*
         // Register the "show" event-handler.
@@ -94,8 +93,9 @@ class BootTabbed extends BootWidget
 	 */
 	protected function normalizeTabs($tabs, &$panes, &$i = 0)
 	{
-		$id = $this->getId();
-		$transitions = Yii::app()->bootstrap->isPluginRegistered(Bootstrap::PLUGIN_TRANSITION);
+
+        $id = $this->getId();
+        $transitions = Yii::app()->bootstrap->isPluginRegistered(Bootstrap::PLUGIN_TRANSITION);
 
 		$items = array();
 
@@ -124,7 +124,6 @@ class BootTabbed extends BootWidget
 					$item['id'] = $id.'_tab_'.++$i;
 
 				$item['url'] = '#'.$item['id'];
-
 				if (!isset($item['content']))
 					$item['content'] = '';
 
