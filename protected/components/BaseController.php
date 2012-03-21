@@ -65,8 +65,6 @@ abstract class BaseController extends CController
             Yii::app()->end();
         }
 
-        $this->_redirectIfRequire();
-
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
 
         if (in_array($action->id, $this->system_actions))
@@ -85,54 +83,8 @@ abstract class BaseController extends CController
         }
 
         $this->setTitle($action);
-        $this->_setMetaTags($action);
 
         return true;
-    }
-
-    private function _redirectIfRequire()
-    {
-        $languages = Language::getCachedArray();
-
-
-        if ($this->request->isPostRequest)
-        {
-            return;
-        }
-
-        $url_parts = explode('/', $_SERVER['REQUEST_URI']);
-
-        if (!isset($languages[$url_parts[1]]))
-        {
-            $this->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
-        }
-    }
-
-
-    private function _setMetaTags($action)
-    {
-        if ($action->id != 'view' || $this instanceof AdminController)
-        {
-            return false;
-        }
-
-        $id = $this->request->getParam("id");
-        if ($id)
-        {
-            $class = $this->getModelClass();
-
-            $meta_tag = MetaTag::model()->findByAttributes(array(
-                'model_id'  => $class,
-                'object_id' => $id
-            ));
-
-            if ($meta_tag)
-            {
-                $this->meta_title       = $meta_tag->title;
-                $this->meta_keywords    = $meta_tag->keywords;
-                $this->meta_description = $meta_tag->description;
-            }
-        }
     }
 
 
