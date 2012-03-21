@@ -12,9 +12,9 @@ abstract class AdminController extends BaseController
 
     public function filters()
     {
-        return array(
+        return CMap::mergeArray(parent::filters(),array(
             'postOnly + delete'
-        );
+        ));
     }
 
     private function initAssets()
@@ -61,6 +61,8 @@ abstract class AdminController extends BaseController
 
     public function beforeAction($action)
     {
+        Yii::app()->bootstrap->init();
+
         if (Yii::app()->user->isGuest && ($action->id != 'login'))
         {
             $this->redirect(array('/admin/login', 'redirect' => base64_encode($_SERVER['REQUEST_URI'])));

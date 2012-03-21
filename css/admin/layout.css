@@ -22,7 +22,7 @@ html, body {
 }
 
 a:link, a:visited {
-    color: #08c;
+    color: #77BACE;
     text-decoration: none;
 }
 
@@ -43,7 +43,7 @@ header#header h1.site_title, header#header h2.section_title {
     margin: 0;
     font-size: 22px;
     display: block;
-    /*width: 23%;*/
+    width: 23%;
     height: 55px;
     font-weight: normal;
     text-align: left;

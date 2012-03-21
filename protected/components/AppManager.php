@@ -4,13 +4,30 @@ class AppManager
 {
     private static $_modules_client_menu;
 
+    private static $pathAliaces = array(
+        'gridColumns' => 'application.components.zii.gridColumns'
+    );
+
+    public static function initPathOfAliaces()
+    {
+        foreach (self::$pathAliaces as $short => $full)
+        {
+            Yii::setPathOfAlias($short, Yii::getPathOfAlias($full));
+        }
+    }
+
+    public static function init()
+    {
+        self::initPathOfAliaces();
+        Yii::app()->urlManager->collectRules();
+    }
 
     public static function getModulesData($active = null, $check_allowed_links = false)
     {
         $modules = array();
 
-        $modules_dirs = scandir(MODULES_PATH);
-        foreach ($modules_dirs as $ind => $module_dir)
+
+        foreach (scandir(MODULES_PATH) as $module_dir)
         {
             if ($module_dir[0] == '.')
             {
@@ -57,7 +74,7 @@ class AppManager
                 $settins_count = Setting::model()->count("module_id = '{$module_dir}'");
                 if ($settins_count)
                 {
-                    $module['admin_menu']['Настройки'] = '/main/SettingAdmin/manage/module_id/' . $module_dir;
+                    $module['admin_menu'][t('Настройки')] = Yii::app()->createUrl('/main/SettingAdmin/manage/',array('module_id' => $module_dir));
                 }
 
                 if ($check_allowed_links)
@@ -75,7 +92,7 @@ class AppManager
 
                         $auth_item = ucfirst($controller) . '_' . $action;
 
-                        if (!RbacModule::isAllow($auth_item))
+                        if (!Yii::app()->user->checkAccess($auth_item))
                         {
                             unset($module['admin_menu'][$title]);
                         }
@@ -264,6 +281,7 @@ class AppManager
 
         return $result;
     }
+
 
 
     public static function getModulesClientMenu()

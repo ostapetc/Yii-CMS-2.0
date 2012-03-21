@@ -3,7 +3,7 @@ class ActiveDataProvider extends CActiveDataProvider
 {
     const PAGE_SIZE = 10;
 
-    
+
     public function __construct($modelClass, $config = array())
     {
         if (!isset($config['pagination']['pageSize']))
