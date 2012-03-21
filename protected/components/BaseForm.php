@@ -70,8 +70,7 @@ class BaseForm extends CForm
             $cs = Yii::app()->clientScript;
             if ($this->side == 'client')
             {
-                $cs->registerScriptFile('/js/plugins/clientForm/inFieldLabel/jquery.infieldlabel.js')
-                    ->registerScriptFile('/js/plugins/clientForm/clientForm.js')
+                $cs->registerScriptFile('/js/plugins/clientForm/clientForm.js')
                     ->registerCssFile('/css/site/form.css');
             }
             elseif ($this->side == 'admin')
@@ -111,7 +110,6 @@ class BaseForm extends CForm
             $this->attributes['class'] = 'admin_form';
             return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
         }
-
         return $output;
     }
 
@@ -138,7 +136,20 @@ class BaseForm extends CForm
             }
             else
             {
-                return $this->_renderElement($element);
+                if ($element instanceof self)
+                {
+                    $this->_addClassesAdmin($element);
+                    return $element->render();
+                }
+                $class = $element->type;
+
+                $res = "<dl class='{$class} control-group'><dd>";
+                $res .= $element->renderLabel();
+                $res .= $element->renderInput();
+                $res .= $element->renderError();
+                $res .= '</dd></dl>';
+
+                return $res;
             }
         }
         else if ($element instanceof CFormButtonElement)
@@ -150,34 +161,6 @@ class BaseForm extends CForm
             return $element->render();
         }
     }
-
-
-    private function _renderElement($element)
-    {
-        if ($element instanceof self)
-        {
-            $this->_addClassesAdmin($element);
-            return $element->render();
-        }
-
-        $class = $element->type;
-
-        $tpl = '_form';
-        if ($this->side == 'admin')
-        {
-            $tpl = 'admin.' . $tpl;
-        }
-
-        $res = "<dl class='{$class} control-group'><dd>";
-        $res .= Yii::app()->controller->renderPartial('application.views.layouts.' . $tpl, array(
-            'element' => $element,
-            'form'    => $element->parent
-        ), true);
-        $res .= '</dd></dl>';
-
-        return $res;
-    }
-
 
     public function clear()
     {

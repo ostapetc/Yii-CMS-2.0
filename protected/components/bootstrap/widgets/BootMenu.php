@@ -193,7 +193,6 @@ class BootMenu extends BootWidget
 			$item['linkOptions']['data-toggle'] = 'dropdown';
 		}
 
-
 		if (isset($item['url']))
 			return CHtml::link($item['label'], $item['url'], isset($item['linkOptions']) ? $item['linkOptions'] : array());
 		else

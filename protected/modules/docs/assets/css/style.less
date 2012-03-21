@@ -1,10 +1,10 @@
 body{
     padding-top:    60px;
     padding-bottom: 40px;
-    font:       normal 10pt Arial, Helvetica, sans-serif;
-    background: #fff;
-    color:      #555;
-    text-align: left;
+    font:           normal 10pt Arial, Helvetica, sans-serif;
+    background:     #fff;
+    color:          #555;
+    text-align:     left;
 }
 .sidebar-nav{
     padding: 9px 0;
@@ -93,14 +93,7 @@ hr{
     border:           none;
 }
 
-#content{
-    width:      980px;
-    margin:     0 auto;
-    text-align: left;
-    background: #fff;
-}
-
-    /* guide content */
+/* guide content */
 div.image{
     -moz-border-radius:    7px;
     -webkit-border-radius: 7px;
@@ -118,36 +111,38 @@ div.image > p{
     display:     block;
 }
 
-.content ul{
-    list-style: disc inside;
-}
+.content{
+    ul{
+        list-style: disc inside;
+    }
 
-.content ol{
-    list-style: decimal inside;
-}
+    ol{
+        list-style: decimal inside;
+    }
 
-.content li{
-    line-height: 160%;
-    text-align:  left;
-}
+    li{
+        line-height: 160%;
+        text-align:  left;
+    }
 
-.content ul li ul{
-    list-style-type: none;
-    margin:          0 0 0 20px;
-}
+    ul, ol{
+        margin:  0 0 1em 2em;
+        padding: 0;
 
-.content ul, .content ol{
-    margin:  0 0 1em 2em;
-    padding: 0;
-}
+        li ul{
+            list-style-type: none;
+            margin:          0 0 0 20px;
+        }
 
-.content ul p, .content ol p{
-    display: inline;
-}
+        p{
+            display: inline;
+        }
+    }
 
-.content p{
-    line-height:   170%;
-    margin-bottom: 1em;
+    p{
+        line-height:   170%;
+        margin-bottom: 1em;
+    }
 }
 
 span.type{
@@ -157,7 +152,7 @@ span.type{
     font-weight:   bold;
 }
 
-    /* code */
+/* code */
 pre{
     display:       block;
     padding:       1em;
@@ -183,78 +178,82 @@ code{
     line-height:           130%;
 }
 
-    /* --- code highlighting --- */
+/* --- code highlighting --- */
 
-    /* html-code */
-.html-hl-brackets,
-.html-hl-reserved{
-    color: #0000e6;
+/* html-code */
+.html-hl{
+    &-brackets, &-reserved{
+        color: #0000e6;
+    }
+
+    &-var, &-quotes, &-string{
+        color: #009933;
+    }
+
+    &-code{
+        color: #000020;
+    }
 }
 
-.html-hl-var,
-.html-hl-quotes,
-.html-hl-string{
-    color: #009933;
-}
-
-.html-hl-code{
-    color: #000020;
-}
-
-    /* php-code */
-.php-hl-inlinetags{
+/* php-code */
+.php-hl{
+    &-inlinetags{
     /*font-weight: bold;*/
+    }
+
+    &-comment{
+        color: #777;
+    }
+
+    &-quotes, &-string{
+        color: #009933;
+    }
+
+    &-var{
+        color: #6d3206;
+    }
+
+    &-reserved{
+        color:       #00e;
+        font-weight: normal;
+    }
+
+    &-identifier{
+        color: #6D3206;
+    }
 }
 
-.php-hl-comment{
-    color: #777;
+/* css-code */
+.css-hl{
+    &-identifier{
+        color: #007c00;
+    }
+
+    &-reserved{
+        color: #0000e6;
+    }
 }
 
-.php-hl-quotes,
-.php-hl-string{
-    color: #009933;
+/* css-sql */
+.sql-hl{
+    &-reserved{
+        color: #0000e6;
+    }
+
+    &-identifier{
+        color: #007c00;
+    }
+
+    &-var{
+        color: #0000e6;
+    }
+
+    &-quotes, &-string{
+        color: #007c00;
+    }
 }
 
-.php-hl-var{
-    color: #6d3206;
-}
-
-.php-hl-reserved{
-    color: #00e;
-    font-weight: normal;
-}
-.php-hl-identifier
-{
-    color: #6D3206;
-}
-
-    /* css-code */
-.css-hl-identifier{
-    color: #007c00;
-}
-
-.css-hl-reserved{
-    color: #0000e6;
-}
-
-    /* css-sql */
-.sql-hl-reserved{
-    color: #0000e6;
-}
-
-.sql-hl-identifier{
-    color: #007c00;
-}
-
-.sql-hl-var{
-    color: #0000e6;
-}
-
-.sql-hl-quotes, .sql-hl-string{
-    color: #007c00;
-}
-
-    /*menu*/
+/*menu*/
 .sidebar{
     position: fixed;
     width:    200px;

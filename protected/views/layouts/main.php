@@ -18,8 +18,6 @@
 
     $cs = Yii::app()->clientScript;
 
-    $cs->registerCssFile('/css/site/extend.css');
-
     if (YII_DEBUG)
     {
         $cs->registerScriptFile('/js/plugins/debug.js');
@@ -70,7 +68,7 @@
             <a class="brand" href="/">Yii-CMS 2.0</a>
 
             <div class="nav-collapse">
-                <?php $this->widget('TopMenu') ?>
+                <?php $this->widget('TopMenu');?>
 
                 <p class="navbar-text pull-right">
                     <?php $this->widget('main.portlets.LanguageSwitcher') ?>
@@ -79,7 +77,7 @@
                 <p class="navbar-text pull-right divider-vertical"></p>
 
                 <ul class="nav pull-right">
-                    <?php $this->widget('users.portlets.LoginPanel') ?>
+                    <?php $this->widget('users.portlets.LoginPanel'); ?>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -91,7 +89,7 @@
     <div class="row-fluid">
         <div class="span3">
             <div class="well sidebar-nav">
-                <?php $this->widget('SidebarMenu') ?>
+                <?php $this->widget('SidebarMenu'); ?>
             </div>
             <?php $this->widget('SidebarBanners') ?>
         </div>

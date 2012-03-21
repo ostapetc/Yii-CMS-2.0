@@ -3,4 +3,7 @@
 
     <p><?php echo $page->content ?></p>
 </div>
-<?php $this->widget('news.portlets.LastNews') ?>
+<?php
+$this->widget('news.portlets.LastNews');
+?>
+
