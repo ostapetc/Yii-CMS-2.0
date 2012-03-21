@@ -130,22 +130,25 @@ return array(
             'itemChildTable'  => 'auth_items_childs',
             'defaultRoles'    => array('guest')
         ),
-//
-//        'log'=>array(
-//            'class'=>'CLogRouter',
-//              'routes'=>array(
-//                array(
-//                  'class'=>'CFileLogRoute',
-//                  'levels'=>'error, warning, trace',
-//                ),
-//                array( // configuration for the toolbar
-//                  'class'=>'XWebDebugRouter',
-//                  'config'=>'alignLeft, opaque, runInDebug, fixedPos, collapsed, yamlStyle',
-//                  'levels'=>'error, warning, trace, profile, info',
-//                  //'allowedIPs'=>array('127.0.0.1','::1','192.168.1.54','192\.168\.1[0-5]\.[0-9]{3}'),
-//                ),
-//              ),
-//          ),
+        'log'=>array(
+                'class'=>'CLogRouter',
+                'routes'=>array(
+//                    array(
+//                        'class'        => 'DbLogRoute',
+//                        'levels'       => 'error, warning, info',
+//                        'connectionID' => 'db',
+//                        'logTableName' => 'log',
+//                        'enabled'      => true
+//                    )
+//                    array(
+                           /*направляем результаты профайлинга в ProfileLogRoute (отображается
+                           внизу страницы)*/
+//                          'class'=>'CProfileLogRoute',
+//                          'levels'=>'profile',
+//                          'enabled'=>true,
+//                    ),
+                ),
+        ),
 
         'cache' => array(
             'class'=>'system.caching.CFileCache',

@@ -5,6 +5,7 @@
     </div>
 <?php endif ?>
 
+<<<<<<< HEAD
 <?php
 $pages_collections  = array_chunk($pages, 3);
 ?>
@@ -22,3 +23,11 @@ $pages_collections  = array_chunk($pages, 3);
         <?php endforeach ?>
     </div>
 <?php endforeach ?>
+=======
+    <p><?php echo $page->content ?></p>
+</div>
+<?php
+$this->widget('news.portlets.LastNews');
+?>
+
+>>>>>>> master

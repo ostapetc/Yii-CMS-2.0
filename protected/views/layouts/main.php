@@ -19,7 +19,11 @@
 <!--    <script type="text/javascript" src="/js/site/jquery-1.7.1.min.js"></script>-->
     <script type="text/javascript" src="/js/site/bootstrap-dropdown.js"></script>
 
-
+    if (YII_DEBUG)
+    {
+        $cs->registerScriptFile('/js/plugins/debug.js');
+    }
+    ?>
     <style type="text/css">
         body {
             padding-top: 60px;
@@ -117,11 +121,25 @@
             </a>
 
             <div class="nav-collapse">
+<<<<<<< HEAD
                 <?php $this->widget('TopMenu'); ?>
                 <? $languages = Language::getCachedArray(); ?>
                 <? foreach ($languages as $id => $name): ?>
                     <a class="brand" style="float: right;padding-right: 0 !important;padding-left: 30px !important;" href="/<?= $id ?>" title="<?= t($name) ?>"><img src="/img/icons/<?= $id; ?>.png" /></a>
                 <? endforeach ?>
+=======
+                <?php $this->widget('TopMenu');?>
+
+                <p class="navbar-text pull-right">
+                    <?php $this->widget('main.portlets.LanguageSwitcher') ?>
+                </p>
+
+                <p class="navbar-text pull-right divider-vertical"></p>
+
+                <ul class="nav pull-right">
+                    <?php $this->widget('users.portlets.LoginPanel'); ?>
+                </ul>
+>>>>>>> master
             </div>
         </div>
     </div>
@@ -129,12 +147,18 @@
 
 <div class="<?php echo $c_class; ?>">
     <div class="row-fluid">
+<<<<<<< HEAD
 
         <?php if (is_numeric($this->left_menu_id)): ?>
             <div class="span3">
                 <?php $this->widget('LeftMenu', array('left_menu_id' => $this->left_menu_id)); ?>
 
                 <?php $this->widget('Sidebars'); ?>
+=======
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <?php $this->widget('SidebarMenu'); ?>
+>>>>>>> master
             </div>
         <?php endif ?>
 

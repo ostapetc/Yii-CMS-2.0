@@ -14,6 +14,7 @@ abstract class BaseController extends CController
 
     public $crumbs = array();
 
+    public $isSslProtected = false;
     public $left_menu_id;
 
     public $system_actions = array(
@@ -24,13 +25,16 @@ abstract class BaseController extends CController
     abstract public static function actionsTitles();
 
 
-    public function init()
+    public function filters()
     {
-        parent::init();
-        Yii::app()->bootstrap->init();
-        $this->_initLanguage();
+        return array(
+            array('application.components.filters.HttpsFilter'),
+            array('application.components.filters.YXssFilter'),
+            array('application.components.filters.LanguageFilter'),
+            array('application.components.filters.MetaTagsFilter + view'),
+            array('application.components.filters.StatisticFilter'),
+        );
     }
-
 
     public function actions()
     {
@@ -48,24 +52,6 @@ abstract class BaseController extends CController
             )
         );
     }
-
-
-    private function _initLanguage()
-    {
-        if (isset($_GET['language']))
-        {
-            Yii::app()->setLanguage($_GET['language']);
-            Yii::app()->session['language'] = $_GET['language'];
-        }
-
-        if (
-            !isset(Yii::app()->session['language']) || Yii::app()->session['language'] != Yii::app()->language
-        )
-        {
-            Yii::app()->session['language'] = Yii::app()->language;
-        }
-    }
-
 
     public function beforeAction($action)
     {
@@ -88,9 +74,9 @@ abstract class BaseController extends CController
             return true;
         }
 
-        if (!RbacModule::isAllow($item_name))
+        if (!isset($action_titles[ucfirst($action->id)]))
         {
-            $this->forbidden($item_name);
+            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
         if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
@@ -101,11 +87,8 @@ abstract class BaseController extends CController
         $this->setTitle($action);
         $this->_setMetaTags($action);
 
-
-
         return true;
     }
-
 
     private function _redirectIfRequire()
     {
@@ -159,6 +142,7 @@ abstract class BaseController extends CController
     }
 
 
+
     public function setTitle($action)
     {
         $action_titles = call_user_func(array(
@@ -184,7 +168,7 @@ abstract class BaseController extends CController
      */
     protected function pageNotFound()
     {
-        throw new CHttpException(404, 'Страница не найдена!');
+        throw new CHttpException(404, t('Страница не найдена!'));
     }
 
 
@@ -193,12 +177,12 @@ abstract class BaseController extends CController
      */
     protected function forbidden($auth_item = null)
     {
-        $msg = 'Запрещено!';
+        $msg = t('Запрещено!');
         if (YII_DEBUG && $auth_item)
         {
             $msg.= ' AuthItem : ' .$auth_item;
         }
-
+    
         throw new CHttpException(403, $msg);
     }
 
@@ -224,6 +208,39 @@ abstract class BaseController extends CController
         }
     }
 
+    public function widget($className,$properties=array(),$captureOutput=false)
+    {
+        $res = false;
+
+        $widget=$this->createWidget($className,$properties);
+
+        if (isset($widget->cache_id) && $widget->cache_id)
+        {
+            $res = Yii::app()->cache->get($widget->cache_id);
+        }
+
+        if ($res === false)
+        {
+            ob_start();
+            ob_implicit_flush(false);
+            $widget->run();
+            $res = ob_get_clean();
+        }
+
+        if (isset($widget->cache_id) && $widget->cache_id)
+        {
+            Yii::app()->cache->set($widget->cache_id, $res, 60);
+        }
+
+        if($captureOutput)
+        {
+            return $res;
+        }
+        else
+        {
+            echo $res;
+        }
+    }
 
     /**
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,

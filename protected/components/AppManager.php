@@ -25,8 +25,6 @@ class AppManager
     public static function getModulesData($active = null, $check_allowed_links = false)
     {
         $modules = array();
-
-
         foreach (scandir(MODULES_PATH) as $module_dir)
         {
             if ($module_dir[0] == '.')
@@ -41,7 +39,6 @@ class AppManager
             {
                 continue;
             }
-
             require_once $module_path;
 
             $vars = get_class_vars($module_class);
