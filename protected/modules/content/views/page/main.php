@@ -5,7 +5,9 @@
     </div>
 <?php endif ?>
 
-<<<<<<< HEAD
+<<<<<<< Temporary merge branch 1
+    <p><?php echo $page->content ?></p>
+</div>
 <?php
 $pages_collections  = array_chunk($pages, 3);
 ?>

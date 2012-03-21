@@ -39,6 +39,7 @@ class AppManager
             {
                 continue;
             }
+
             require_once $module_path;
 
             $vars = get_class_vars($module_class);
