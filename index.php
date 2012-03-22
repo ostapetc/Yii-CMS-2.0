@@ -24,4 +24,4 @@ $config = PROTECTED_PATH . '/config/' . $config . '.php';
 
 Yii::createWebApplication($config)->run();
 
-
+#eeee
