@@ -75,7 +75,7 @@ abstract class BaseController extends CController
 
         if (!isset($action_titles[ucfirst($action->id)]))
         {
-            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
+            //throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
         if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
