@@ -1,26 +1,32 @@
 <?php
 
-class Setting extends ActiveRecordModel
+class Param extends ActiveRecordModel
 {
     const PAGE_SIZE = 10;
+
+    const FILES_DIR = '/upload/params/';
+
+    const SCENARIO_VALUE_UPDATE = 'value_update';
 
     const ELEMENT_TEXTAREA = 'textarea';
     const ELEMENT_EDITOR   = 'editor';
     const ELEMENT_TEXT     = 'text';
-
-    const FILES_DIR = '/upload/settings/';
+    const ELEMENT_CHECKBOX = 'checkbox';
+    const ELEMENT_FILE     = 'file';
 
 
     public static $elements = array(
         self::ELEMENT_TEXT     => "Строка",
         self::ELEMENT_TEXTAREA => "Текст",
-        self::ELEMENT_EDITOR   => "Редактор"
+        self::ELEMENT_EDITOR   => "Редактор",
+        self::ELEMENT_CHECKBOX => "Галочка",
+        self::ELEMENT_FILE     => "Файл"
     );
 
 
     public function name()
     {
-        return 'Настройки';
+        return 'Параметры';
     }
 
 
@@ -32,20 +38,19 @@ class Setting extends ActiveRecordModel
 
 	public function tableName()
 	{
-		return 'settings';
+		return 'params';
 	}
 
 
 	public function rules()
 	{
 		return array(
-			array('code, name, element','required'),
+			array('code, name','required'),
 			array('code', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),
 			array('element', 'length', 'max'=>8),
-			array('hidden', 'numerical', 'integerOnly' => true),
-            array('value', 'safe'), 
-			array('id, code, name, element', 'safe', 'on'=>'search')
+            array('value', 'safe'),
+            array('element', 'safe', 'on' => array(self::SCENARIO_CREATE, self::SCENARIO_UPDATE))
 		);
 	}
 

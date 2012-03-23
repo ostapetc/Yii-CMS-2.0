@@ -629,8 +629,9 @@ html ul.tabs li:last-child, html ul.tabs li:last-child a {
 }
 
 #main .module header h3.tabs_involved {
+    width: auto !important;
     display: block;
-    width: 60%;
+    /*width: 60%;*/
     float: left;
 }
 

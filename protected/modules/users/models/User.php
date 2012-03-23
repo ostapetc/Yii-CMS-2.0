@@ -329,10 +329,10 @@ class User extends ActiveRecordModel
     {
         $mailler_letter = MailerLetter::model();
 
-        $subject = Setting::model()->getValue(self::SETTING_REGISTRATION_MAIL_SUBJECT);
+        $subject = Param::model()->getValue(self::SETTING_REGISTRATION_MAIL_SUBJECT);
         $subject = $mailler_letter->compileText($subject);
 
-        $body = Setting::model()->getValue(self::SETTING_REGISTRATION_MAIL_BODY);
+        $body = Param::model()->getValue(self::SETTING_REGISTRATION_MAIL_BODY);
         $body = $mailler_letter->compileText($body, array('user' => $this));
 
         MailerModule::sendMail($this->email, $subject, $body);

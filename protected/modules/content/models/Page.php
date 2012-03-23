@@ -4,16 +4,9 @@ class Page extends ActiveRecordModel
 {
     const PAGE_SIZE = 20;
 
-
-    public static $widgets = array(
-        'FeedbackPortlet' => 'Форма обратной связи',
-        'OrderPortlet'    => 'Форма заказа'
-    );
-
-
     public function name()
     {
-        return t('Страницы');
+        return 'Страницы';
     }
 
 
@@ -47,8 +40,9 @@ class Page extends ActiveRecordModel
     {
         return array(
             array('title, language', 'required'),
+            array('language', 'safe'),
             array(
-                'is_published, on_main, left_menu_id',
+                'is_published',
                 'numerical',
                 'integerOnly' => true
             ),
@@ -70,7 +64,6 @@ class Page extends ActiveRecordModel
                 'id, title, url, text, is_published, date_create', 'safe',
                 'on'=> 'search'
             ),
-            array('widget', 'in', 'range' => array_keys(self::$widgets))
         );
     }
 
@@ -79,7 +72,6 @@ class Page extends ActiveRecordModel
     {
         return array(
             'language_model' => array(self::BELONGS_TO, 'Language', 'language'),
-            'left_menu'      => array(self::BELONGS_TO, 'Menu', 'left_menu_id')
         );
     }
 
@@ -93,6 +85,7 @@ class Page extends ActiveRecordModel
         $criteria->compare('text', $this->text, true);
         $criteria->compare('is_published', $this->is_published);
         $criteria->compare('date_create', $this->date_create, true);
+        $criteria->compare('language', $this->language, true);
 
         return new ActiveDataProvider(get_class($this), array(
             'criteria'   => $criteria,

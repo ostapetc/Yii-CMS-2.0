@@ -14,8 +14,8 @@ abstract class BaseController extends CController
 
     public $crumbs = array();
 
-    public $isSslProtected = false;
-    public $left_menu_id;
+    public $is_ssl_protected = false;
+
 
     public $system_actions = array(
         'captcha'
@@ -28,6 +28,8 @@ abstract class BaseController extends CController
     public function filters()
     {
         return array(
+            array('application.components.filters.LanguageFilter'),
+            array('application.components.filters.SiteEnableFilter'),
             array('application.components.filters.HttpsFilter'),
             array('application.components.filters.YXssFilter'),
             array('application.components.filters.LanguageFilter'),
@@ -55,16 +57,6 @@ abstract class BaseController extends CController
 
     public function beforeAction($action)
     {
-        Setting::checkRequired(array('SITE_ENABLED'));
-
-        $actions = array('error', 'login');
-
-        if (!Setting::getValue('SITE_ENABLED') && Yii::app()->user->role != AuthItem::ROLE_ADMIN && !in_array($action->id, $actions))
-        {
-            echo PageBlock::getContent('SITE_OFF');
-            Yii::app()->end();
-        }
-
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
 
         if (in_array($action->id, $this->system_actions))
@@ -88,11 +80,10 @@ abstract class BaseController extends CController
     }
 
 
-    private function getModelClass()
+    public function getModelClass()
     {
         return ucfirst(str_replace('Admin', '', $this->id));
     }
-
 
 
     public function setTitle($action)
@@ -232,30 +223,6 @@ abstract class BaseController extends CController
 
         return $model;
     }
-
-
-    /**
-     * Обертка для Yii::t, выполняет перевод по словарям текущего модуля.
-     * Так же перевод осуществляется по словорям с префиксом {modelId},
-     * где modelId - приведенная к нижнему регистру база имени контроллера
-     *
-     * Например: для контроллера ProductInfoAdminController, находящегося в модуле ProductsModule
-     * перевод будет осуществляться по словарю ProductsModule.product_info_{первый параметр метода}
-     *
-     * @param string $dictionary словарь
-     * @param string $alias      фраза для перевода
-     * @param array  $params
-     * @param string $language
-     *
-     * @return string переводa
-     */
-    public function t($dictionary, $alias, $params = array(), $source = null, $language = null)
-    {
-        $file_prefix = StringHelper::camelCaseToUnderscore($this->getModelClass());
-        return Yii::t(get_class($this->module) . '.' . $file_prefix . '_' .
-            $dictionary, $alias, $params, $source, $language);
-    }
-
 
 
     public function isRootUrl($url = null)

@@ -44,7 +44,7 @@ class MainModule extends WebModule
             'Языки (переводы)'                => '/main/LanguageMessageAdmin/manage',
             'Языки (добавить перевод)'        => '/main/LanguageMessageAdmin/create',
             //'Языки (Неиспользуемые переводы)' => '/main/LanguageMessageAdmin/notUsableList',
-            'Настройки'                       => '/main/SettingAdmin/manage',
+            'Параметры'                       => '/main/ParamAdmin/manage',
         );
     }
 

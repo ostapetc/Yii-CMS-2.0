@@ -1,6 +1,6 @@
 <?php
 
-class SettingAdminController extends AdminController
+class ParamAdminController extends AdminController
 {
     public static function actionsTitles()
     {
@@ -24,11 +24,12 @@ class SettingAdminController extends AdminController
 
     public function actionCreate()
     {
-        $model = new Setting(ActiveRecordModel::SCENARIO_CREATE);
+        $model = new Param(ActiveRecordModel::SCENARIO_CREATE);
 
         $this->performAjaxValidation($model);
 
-        $form = new BaseForm('main.SettingForm', $model);
+        $form = new BaseForm('main.ParamForm', $model);
+
         if ($form->submitted('submit') && $model->save())
         {
             $this->redirect(array('view', 'id' => $model->id));
@@ -40,13 +41,14 @@ class SettingAdminController extends AdminController
     }
 
 
-    public function actionUpdate($id)
+    public function actionUpdate($id, $scenario = 'update')
     {
         $model = $this->loadModel($id);
+        $model->scenario = $scenario;
 
         $this->performAjaxValidation($model);
 
-        $form = new BaseForm('main.SettingForm', $model);
+        $form = new BaseForm('main.ParamForm', $model);
 
         if ($form->submitted() && $model->save())
         {
@@ -61,12 +63,12 @@ class SettingAdminController extends AdminController
 
     public function actionManage($module_id = null)
     {
-        $model = new Setting('search');
+        $model = new Param('search');
         $model->unsetAttributes();
 
-        if (isset($_GET['Setting']))
+        if (isset($_GET['Param']))
         {
-            $model->attributes = $_GET['Setting'];
+            $model->attributes = $_GET['Param'];
         }
 
         $params = array(
@@ -84,7 +86,7 @@ class SettingAdminController extends AdminController
 
 
     public function actionDelete($id)
-    {   die;
+    {
         $this->render('view', array(
             'model' => $this->loadModel($id),
         ));

@@ -22,12 +22,6 @@ $this->widget('AdminGridView', array(
 			'filter' => array(t("Нет"),t("Да"))
 		),
         array(
-            'name'   => 'on_main',
-            'header' => 'На главной',
-            'value'  => '$data->on_main ? t("Да") : t("Нет")',
-            'filter' => array(t("Нет"),t("Да"))
-        ),
-        array(
             'name'  => 'language',
             'value' => function ($data) {
                 $languages = Language::getCachedArray();

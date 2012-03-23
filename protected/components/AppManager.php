@@ -69,10 +69,10 @@ class AppManager
             {
                 $module['admin_menu'] = call_user_func(array($module_class, 'adminMenu'));
 
-                $settins_count = Setting::model()->count("module_id = '{$module_dir}'");
+                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
                 if ($settins_count)
                 {
-                    $module['admin_menu'][t('Настройки')] = Yii::app()->createUrl('/main/SettingAdmin/manage/',array('module_id' => $module_dir));
+                    $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));
                 }
 
                 if ($check_allowed_links)
@@ -90,7 +90,7 @@ class AppManager
 
                         $auth_item = ucfirst($controller) . '_' . $action;
 
-                        if (!Yii::app()->user->checkAccess($auth_item))
+                        if (!RbacModule::isAllow($auth_item))
                         {
                             unset($module['admin_menu'][$title]);
                         }

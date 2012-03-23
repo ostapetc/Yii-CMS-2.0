@@ -42,12 +42,8 @@ class PageController extends BaseController
             ));
         }
 
-        $this->crumbs       = array($page->title);
-        $this->left_menu_id = $page->left_menu_id;
-
+        $this->crumbs = array($page->title);
         $this->_setMetaTags($page);
-
-
 
         $this->render("view", array("page" => $page));
     }
@@ -62,8 +58,7 @@ class PageController extends BaseController
         }
 
         $this->render('main', array(
-            'pages' => Page::model()->published()->findAll('on_main = 1', array('order' => '`order`')),
-            'page'  => $page
+            'page' => $page
         ));
     }
 

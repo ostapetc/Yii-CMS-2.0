@@ -119,7 +119,7 @@ class OutboxEmail extends ActiveRecordModel
     {
         require_once LIBRARY_PATH . 'PHPMailer_v5.1/class.phpmailer.php';
 
-        $settings = Setting::model()->findCodesValues('mailer');
+        $settings = Param::model()->findCodesValues('mailer');
 
         $encoding    = "utf-8";
         $hidden_copy = true;

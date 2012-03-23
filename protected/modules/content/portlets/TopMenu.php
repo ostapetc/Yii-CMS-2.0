@@ -13,11 +13,6 @@ class TopMenu extends Portlet
             return;
         }
 
-        if ($menu->current_section && !Yii::app()->controller->left_menu_id)
-        {
-            Yii::app()->controller->left_menu_id = $menu->current_section->left_menu_id;
-        }
-
         $this->render('TopMenu', array(
             'sections' => $menu->getSections()
         ));

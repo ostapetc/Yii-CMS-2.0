@@ -28,7 +28,7 @@
         <hgroup>
             <h1 class="site_title" style="width: 19% !important;"><a href="/admin" style="margin-left: 20px">Yii CMS</a></h1>
 
-            <h2 class="section_title" style="padding-left: 24px;"><?php echo t($this->page_title); ?></h2>
+            <h2 class="section_title" style="padding-left: 24px;"><?php echo t($this->module->name()); ?></h2>
 
             <div class="btn_view_site"><a href="/"><?php echo t('На сайт'); ?></a></div>
 

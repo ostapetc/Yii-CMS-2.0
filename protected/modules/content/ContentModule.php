@@ -34,13 +34,7 @@ class ContentModule extends WebModule
     {
         return array(
             'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
-            'Добавить страницу' => '/content/pageAdmin/create',
-            'Контентные блоки'  => '/content/pageBlockAdmin/manage',
-            'Добавить блок'     => '/content/pageBlockAdmin/create',
-            'Управление меню'   => '/content/menuAdmin/manage',
-            'Добавить меню'     => '/content/menuAdmin/create',
-            'Сайдбары'          => '/content/sidebarAdmin/manage',
-            'Добавить сайдбар'  => '/content/sidebarAdmin/create',
+            'Добавить страницу' => '/content/pageAdmin/create'
         );
     }
 

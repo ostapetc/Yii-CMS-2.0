@@ -129,7 +129,7 @@ class MailerLetter extends ActiveRecordModel
     {
         $first_sending = false;
 		
-        $settings = Setting::model()->findCodesValues();
+        $settings = Param::model()->findCodesValues();
       
         if (!isset($settings[MailerModule::SETTING_DISPATCH_TIME]))
         {
@@ -211,7 +211,7 @@ class MailerLetter extends ActiveRecordModel
 
                 if ($letters_sent_count >= $settings[MailerModule::SETTING_LETTERS_PART_COUNT])
                 {
-                    $dispatch_time = Setting::model()->findByAttributes(array('code' => MailerModule::SETTING_DISPATCH_TIME));
+                    $dispatch_time = Param::model()->findByAttributes(array('code' => MailerModule::SETTING_DISPATCH_TIME));
                     $dispatch_time->value = new CDbExpression('NOW()');
                     $dispatch_time->save();
 

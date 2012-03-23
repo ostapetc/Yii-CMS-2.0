@@ -22,6 +22,15 @@ class LanguagesBehavior extends CActiveRecordBehavior
             $language_id = $this->defineLanguage();;
         }
 
+        $meta = $this->owner->meta();
+        if (!isset($meta['language']))
+        {
+            $msg = "У таблицы '" . $this->owner->tableName() . "' отсутствует поле 'language' <br/>";
+
+            $msg.= "<a href='" . Yii::app()->createUrl('main/languageAdmin/createTableField', array('model' => get_class($this->owner))) . "'>создать данное поле в таблице</a>";
+            throw new CHttpException($msg);
+        }
+
         $criteria = $this->owner->getDbCriteria();
         $criteria->addCondition("language = '" . $language_id . "'");
         return $this->owner;

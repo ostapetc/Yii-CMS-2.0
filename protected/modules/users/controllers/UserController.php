@@ -94,7 +94,7 @@ class UserController extends BaseController
 
     public function actionRegistration()
     {
-        Setting::model()->checkRequired(array(
+        Param::model()->checkRequired(array(
             User::SETTING_REGISTRATION_MAIL_BODY, User::SETTING_REGISTRATION_MAIL_SUBJECT,
             User::SETTING_REGISTRATION_DONE_MESSAGE
         ));
@@ -119,7 +119,7 @@ class UserController extends BaseController
 
                 $user->sendActivationMail();
 
-                Yii::app()->user->setFlash('done', Setting::model()
+                Yii::app()->user->setFlash('done', Param::model()
                     ->getValue(User::SETTING_REGISTRATION_DONE_MESSAGE));
 
                 $this->redirect($_SERVER['REQUEST_URI']);
@@ -216,7 +216,7 @@ class UserController extends BaseController
 
     public function actionChangePasswordRequest()
     {
-        Setting::model()->checkRequired(array(
+        Param::model()->checkRequired(array(
             User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_SUBJECT,
             User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_BODY
         ));
@@ -242,7 +242,7 @@ class UserController extends BaseController
 
                         $mailer_letter = MailerLetter::model();
 
-                        $settings = Setting::model()->findCodesValues();
+                        $settings = Param::model()->findCodesValues();
 
                         $subject = $mailer_letter->compileText($settings[User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_SUBJECT], array('user' => $user));
 

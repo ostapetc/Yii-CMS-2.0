@@ -190,7 +190,6 @@ class BaseForm extends CForm
     }
 
 
-    /***** Функции оформления формы *******/
     function addAttributesToButtons()
     {
         foreach ($this->buttons as $i => $button)
@@ -222,6 +221,4 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
-
-
 }

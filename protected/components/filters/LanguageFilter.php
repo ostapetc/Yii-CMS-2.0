@@ -3,12 +3,8 @@ class LanguageFilter extends CFilter
 {
     protected function preFilter ($filterChain)
     {
-        if (Yii::app()->params['multilanguage_support'] == false)
-        {
-            return true;
-        }
+        $request = Yii::app()->request;
 
-        //set from get params
         if ($lang = Yii::app()->request->getParam('language'))
         {
             Yii::app()->language = $lang;
@@ -23,11 +19,11 @@ class LanguageFilter extends CFilter
 
         $languages = Language::getCachedArray();
 
-        $url_parts = array_shift(explode('/', Yii::app()->request->getPathInfo()));
+        $url_parts = explode('/', $_SERVER['REQUEST_URI']);
 
-        if (!isset($languages[$url_parts ]))
+        if (!isset($languages[$url_parts[1]]))
         {
-            $filterChain->controller->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
+            $request->redirect('/' . Yii::app()->session['language'] . $_SERVER['REQUEST_URI']);
         }
 
         return true;
