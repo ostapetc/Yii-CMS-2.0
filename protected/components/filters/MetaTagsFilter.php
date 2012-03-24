@@ -1,7 +1,7 @@
 <?php
 class MetaTagsFilter extends CFilter
 {
-    protected function preFilter ($filterChain)
+    protected function preFilter($filterChain)
     {
         $controller = $filterChain->controller;
         if ($this instanceof AdminController)

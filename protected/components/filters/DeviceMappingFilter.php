@@ -8,30 +8,34 @@ class DeviceMappingFilter extends CFilter
 
     /**
      * Android devices like G1, Nexus etc
+     *
      * @var string
      */
     public static $ANDROID = 'android';
 
     /**
      * Apple iPhone
+     *
      * @var string
      */
     public static $IPHONE = 'iphone';
 
     /**
      * Apple ipad
+     *
      * @var string
      */
     public static $IPAD = 'ipad';
 
     /**
      * Existing Profiles for devices
+     *
      * @var array
      */
     public static $profiles = array(
         'mobile' => array(
             //change the layout
-            'layout' => '//layouts/main',
+            'layout'  => '//layouts/main',
             //redirect controller to other controller
             'forward' => array('index' => 'mobile/default/index'),
         )
@@ -39,17 +43,20 @@ class DeviceMappingFilter extends CFilter
 
     /**
      * Map devices to profiles
+     *
      * @var array
      */
     public static $maps = array(
         'android' => 'mobile',
-        'iphone' => 'mobile',
-        'ipad' => 'mobile'
+        'iphone'  => 'mobile',
+        'ipad'    => 'mobile'
     );
+
 
     protected function preFilter($filterChain)
     {
-        if (isset($_SERVER['HTTP_USER_AGENT']) || $device = Yii::app()->request->getParam('core_device')) {
+        if (isset($_SERVER['HTTP_USER_AGENT']) || $device = Yii::app()->request->getParam('core_device'))
+        {
             $this->detectBrowser($_SERVER['HTTP_USER_AGENT']);
 
             /** @var CController $controller */
@@ -61,14 +68,14 @@ class DeviceMappingFilter extends CFilter
             }
             elseif ($this->browserName && isset(self::$maps[$controller->browserName]))
             {
-                $this->profile = self::$profiles[self::$maps[$this->browserName.$this->browserVersion]];
+                $this->profile = self::$profiles[self::$maps[$this->browserName . $this->browserVersion]];
             }
 
             if ($this->profile)
             {
                 if (isset($this->profile['forward']))
                 {
-                    $myKey = $controller->module->id.'/'.$controller->id.'/'.$controller->action->id;
+                    $myKey = $controller->module->id . '/' . $controller->id . '/' . $controller->action->id;
 
                     foreach ($this->profile['forward'] as $key => $val)
                     {
@@ -88,6 +95,7 @@ class DeviceMappingFilter extends CFilter
         return true;
     }
 
+
     /**
      * Detect the current browser
      * Attention: only supports some browsers
@@ -101,23 +109,23 @@ class DeviceMappingFilter extends CFilter
         {
             case strstr($agent, 'msie 6.'):
                 $this->browserVersion = 6;
-                $this->browserName = 'MSIE';
+                $this->browserName    = 'MSIE';
                 break;
             case strstr($agent, 'msie 7.'):
                 $this->browserVersion = 7;
-                $this->browserName = 'MSIE';
+                $this->browserName    = 'MSIE';
                 break;
             case strstr($agent, 'msie 8.'):
                 $this->browserVersion = 8;
-                $this->browserName = 'MSIE';
+                $this->browserName    = 'MSIE';
                 break;
             case strstr($agent, 'firefox/4.'):
                 $this->browserVersion = 4;
-                $this->browserName = 'Firefox';
+                $this->browserName    = 'Firefox';
                 break;
             case strstr($agent, 'firefox/3.'):
                 $this->browserVersion = 3;
-                $this->browserName = 'Firefox';
+                $this->browserName    = 'Firefox';
                 break;
             case strstr($agent, 'mobile safari'):
                 $this->browserName = 'Mobile Safari';
@@ -146,12 +154,14 @@ class DeviceMappingFilter extends CFilter
      */
     protected function isMinorBrowser()
     {
-        if ($this->browserName == 'MSIE'
-            && ($this->browserVersion == 6 || $this->browserVersion == 7 || $this->browserVersion == 8)
-        ) {
+        if ($this->browserName == 'MSIE' &&
+            ($this->browserVersion == 6 || $this->browserVersion == 7 || $this->browserVersion == 8)
+        )
+        {
             return true;
         }
     }
+
 
     /**
      * Checks if current device is mobile

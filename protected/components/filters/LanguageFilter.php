@@ -1,7 +1,7 @@
 <?php
 class LanguageFilter extends CFilter
 {
-    protected function preFilter ($filterChain)
+    protected function preFilter($filterChain)
     {
         $request = Yii::app()->request;
 
