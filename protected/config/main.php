@@ -141,8 +141,8 @@ return array(
             'class' => 'HttpRequest',
             'enableCsrfValidation' => false,
             'noCsrfValidationRoutes' => array(
-                '^services/soap.*$',
-                '^services/jsonRpc.*$',
+                '^services/api/soap.*$',
+                '^services/api/json.*$',
             ),
             'csrfTokenName' => 'token',
         ),
@@ -194,7 +194,8 @@ return array(
 
     'params'         => array(
         'save_site_actions' => false,
-        'multilanguage_support' => true
+        'multilanguage_support' => true,
+        'collect_routes_form_modules' => true
     )
 );
 
