@@ -4,6 +4,24 @@ class UrlManager extends CUrlManager
 {
     public function collectRules()
     {
+        $routes = array(
+            '/<controller:\w+>/<id:\d+>'              => '<controller>/view',
+            '/<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+            '/<controller:\w+>/<action:\w+>'          => '<controller>/<action>',
+        );
+
+        if (Yii::app()->params['collect_routes_form_modules'])
+        {
+            $modules = AppManager::getModulesData(true);
+            foreach ($modules as $class => $data)
+            {
+                if (method_exists($class, 'routes'))
+                {
+                    $routes = array_merge($routes, call_user_func(array($class, 'routes')));
+                }
+            }
+        }
+
         $multilanguage_support = Yii::app()->params['multilanguage_support'];
         if ($multilanguage_support)
         {
@@ -11,21 +29,6 @@ class UrlManager extends CUrlManager
             $languages = implode('|', array_keys($languages));
 
             $language_pattern = "<language:({$languages})>";
-        }
-
-        $routes = array(
-            '/<controller:\w+>/<id:\d+>'              => '<controller>/view',
-            '/<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-            '/<controller:\w+>/<action:\w+>'          => '<controller>/<action>',
-        );
-
-        $modules = AppManager::getModulesData(true);
-        foreach ($modules as $class => $data)
-        {
-            if (method_exists($class, 'routes'))
-            {
-                $routes = array_merge($routes, call_user_func(array($class, 'routes')));
-            }
         }
 
         foreach ($routes as $pattern => $route)
