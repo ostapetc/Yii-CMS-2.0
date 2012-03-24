@@ -22,7 +22,6 @@ class SaveAttributeAction extends CAction
         }
     }
 
-
     private function _save($options)
     {
         $model = ActiveRecordModel::model($options['model'])->findByPk($options['id']);
@@ -34,12 +33,8 @@ class SaveAttributeAction extends CAction
 
         $attribute         = $options['attribute'];
         $model->$attribute = $options['value'];
-        if ($model->asa('NestedSet'))
-        {
-            $model->detachBehavior('NestedSet');
-        }
 
-        if ($model->update(true, array($attribute)))
+        if ($model->save(true, array($attribute)))
         {
             echo $model->$attribute;
         }

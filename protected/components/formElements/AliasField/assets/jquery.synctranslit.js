@@ -38,7 +38,7 @@
             	}
             	var regExp = new RegExp('[' + o.urlSeparator + ']{2,}', 'g');
             	result = result.replace(regExp, o.urlSeparator);
-                result = result.slice(0, 45);
+                result = result.slice(0, 35);
             	$destination.val(result);
                 $destination.trigger('change');
             })

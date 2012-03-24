@@ -10,7 +10,7 @@ $cs->registerCssFile('/css/admin/language_switcher.css');
     <form action="/main/main/ChangeLanguage" id="select-lang-form">
         <select id="country-options" name="set_language">
             <?php foreach ($langs as $lang): ?>
-                <?php $selected = $_GET['language'] == $lang->id ? 'selected' : ''; ?>
+                <?php $selected = Yii::app()->language == $lang->id ? 'selected' : ''; ?>
                 <option value="<?php echo $lang->id; ?>" <?php echo $selected; ?>><?php echo $lang->name; ?></option>
             <?php endforeach ?>
         </select>

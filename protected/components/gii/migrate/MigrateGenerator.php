@@ -7,6 +7,6 @@
  */
 class MigrateGenerator extends CCodeGenerator
 {
-	public $codeModel='application.components.gii.Migrate.MigrateCode';
+	public $codeModel='application.gii.Migrate.MigrateCode';
 }
 

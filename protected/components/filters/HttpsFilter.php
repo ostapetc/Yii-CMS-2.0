@@ -3,7 +3,7 @@ class HttpsFilter extends CFilter
 {
     protected function preFilter ($filterChain)
     {
-        if ($filterChain->controller->isSslProtected && HTTPS_FILTER_ENABLED) {
+        if ($filterChain->controller->is_ssl_protected && HTTPS_FILTER_ENABLED) {
             $shouldBeSecureConnection = true;
             $protocoll = 'https://';
         } else {

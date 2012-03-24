@@ -47,10 +47,13 @@ header#header h1.site_title, header#header h2.section_title {
     height: 55px;
     font-weight: normal;
     text-align: left;
-    text-indent: 1.8%;
+    /*text-indent: 1.8%;*/
     line-height: 55px;
     color: #fff;
     text-shadow: 0 -1px 0 #000;
+
+    /*margin-left:auto;*/
+    /*margin-right:auto;*/
 }
 
 header#header h1.site_title a {
@@ -59,15 +62,16 @@ header#header h1.site_title a {
 }
 
 header#header h2.section_title {
-    text-align: center;
-    text-indent: 4.5%;
-    width: 58%;
+    /*text-align: center;*/
+    /*text-indent: 4.5%;*/
+    /*width: 58%;*/
     background: url(/img/admin/header_shadow.png) no-repeat left top;
 }
 
 .btn_view_site {
-    float: left;
-    width: 9%;
+    float: right;
+    /*width: 9%;*/
+    margin-right: 37px;
 }
 
 .btn_view_site a {
@@ -97,7 +101,7 @@ section#secondary_bar {
 
 section#secondary_bar .user {
     float: left;
-    width: 23%;
+    width: 19%;
     height: 38px;
 }
 
@@ -163,6 +167,9 @@ article.breadcrumbs {
     float: left;
     height: 24px;
     line-height: 23px;
+    color:#9E9E9E;
+    /*text-decoration:;*/
+
 }
 
 .breadcrumbs a.current, .breadcrumbs a.current:hover {
@@ -195,7 +202,7 @@ article.breadcrumbs {
 /* Sidebar */
 
 aside#sidebar {
-    width: 23%;
+    width: 19%;
     background: #E0E0E3 url(/img/admin/sidebar.png) repeat;
     float: left;
     min-height: 500px;
@@ -271,6 +278,10 @@ aside#sidebar {
 
 #sidebar hr {
     margin: 1px 0 !important;
+}
+
+#sidebar form {
+    margin-bottom: 5px !important;
 }
 
 #sidebar .toggleLink:hover {
@@ -386,7 +397,7 @@ aside#sidebar {
 /* Main Content */
 
 section#main {
-    width: 77%;
+    width: 81%;
     min-height: 500px;
     background: url(/img/admin/sidebar_shadow.png) repeat-y left top;
     float: left;
@@ -407,7 +418,7 @@ section#main {
 .module {
     border: 1px solid #9BA0AF;
     width: 97% !important;
-    margin-left: 20px;
+    margin: 20px 25px;
     margin-top: 20px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -558,15 +569,15 @@ ul.tabs {
     float: right;
     list-style: none;
     height: 24px; /*--Set height of tabs--*/
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 0 #fff;
-    -moz-box-shadow: 0 1px 0 #fff;
-    box-shadow: 0 1px 0 #fff;
-    border: 1px solid #ccc;
+    /*-webkit-border-radius: 5px;*/
+    /*-moz-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+    /*-webkit-box-shadow: 0 1px 0 #fff;*/
+    /*-moz-box-shadow: 0 1px 0 #fff;*/
+    /*box-shadow: 0 1px 0 #fff;*/
+    /*border: 1px solid #ccc;*/
     font-weight: bold;
-    text-shadow: 0 1px 0 #fff;
+    /*text-shadow: 0 1px 0 #fff;*/
 }
 
 ul.tabs li {
@@ -584,19 +595,19 @@ ul.tabs li a {
     height: 24px;
 }
 
-ul.tabs li a:hover {
-    color: #44474F;
+ul.tabs li a:hover, ul.tabs li.active a {
+    color: yellow;
 }
 
-html ul.tabs li.active a {
-    color: #44474F;
-}
+/*html ul.tabs li.active a {*/
+    /*color: #44474F;*/
+/*}*/
 
 html ul.tabs li.active, html ul.tabs li.active a:hover {
-    background: #F1F2F4;
-    -webkit-box-shadow: inset 0 2px 3px #818181;
-    -moz-box-shadow: inset 0 2px 3px #818181;
-    box-shadow: inset 0 2px 3px #818181;
+    /*background: #F1F2F4;*/
+    /*-webkit-box-shadow: inset 0 2px 3px #818181;*/
+    /*-moz-box-shadow: inset 0 2px 3px #818181;*/
+    /*box-shadow: inset 0 2px 3px #818181;*/
 }
 
 html ul.tabs li:first-child, html ul.tabs li:first-child a {
@@ -618,8 +629,9 @@ html ul.tabs li:last-child, html ul.tabs li:last-child a {
 }
 
 #main .module header h3.tabs_involved {
+    width: auto !important;
     display: block;
-    width: auto;
+    /*width: 60%;*/
     float: left;
 }
 
@@ -937,4 +949,18 @@ fieldset textarea:focus {
 
 .float_right {
     float: right !important;
+}
+
+.btn.btn-success.tabs {
+    height: 23px;
+    line-height: 21px;
+    margin-left: 15px !important;
+}
+
+.breadcrumbs span {
+    line-height: 24px;
+}
+
+.null {
+    color: #8a1f11;
 }

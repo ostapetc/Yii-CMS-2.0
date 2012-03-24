@@ -47,7 +47,7 @@ return array(
     'buttons' => array(
         'submit' => array(
             'type'  => 'submit',
-            'value' => $this->model->isNewRecord ? 'Создать' : 'Сохранить',
+            'value' => $this->model->isNewRecord ? 'создать' : 'сохранить',
             'id'    => 'meta_tag_submit'
         )
     )

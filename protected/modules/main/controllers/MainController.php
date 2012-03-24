@@ -86,4 +86,10 @@ class MainController extends BaseController
 
         $this->redirect($back_url);
     }
+
+
+    public function actionOff()
+    {
+        echo "site off";
+    }
 }

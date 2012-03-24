@@ -1,12 +1,5 @@
 <?php
-$active_form        = $form->getActiveFormWidget();
-if (Yii::app()->params['multilanguage_support'] == false)
-{
-    if ($element->name == 'lang')
-    {
-        return '';
-    }
-}
+$active_form = $form->getActiveFormWidget();
 
 $no_label = array('meta_tags', 'file_manager');
 if (!in_array($element->type, $no_label))

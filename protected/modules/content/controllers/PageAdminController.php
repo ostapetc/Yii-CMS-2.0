@@ -10,13 +10,14 @@ class PageAdminController extends AdminController
             "View"        => t("Просмотр страницы"),
             "Update"      => t("Редактирование страницы"),
             "Delete"      => t("Удаление страницы"),
+            "GetJsonData" => t("Получение данных страницы (JSON)")
         );
     }
 
 
     public function actionManage()
     {
-        $model = new Page(ActiveRecordModel::SCENARIO_SEARCH);
+        $model = new Page('search');
         $model->unsetAttributes();
 
         if (isset($_GET['Page']))
@@ -72,12 +73,9 @@ class PageAdminController extends AdminController
 
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array(
-                'view',
-                'id'=> $model->id
-            ));
+            $this->redirect(array('view', 'id'=> $model->id));
         }
-        $this->render('update', array('form' => $form));
+        $this->render('update', array('form' => $form,));
     }
 
 
@@ -91,4 +89,9 @@ class PageAdminController extends AdminController
         }
     }
 
+
+    public function actionGetJsonData($id)
+    {
+        echo CJSON::encode($this->loadModel($id));
+    }
 }

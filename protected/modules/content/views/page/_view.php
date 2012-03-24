@@ -1,6 +1,6 @@
 <?php
 $url  = $this->createUrl($data->href);
-$text = Yii::app()->text->cut($data->text, 250, " ", "...");
+$text = TextHelper::cut($data->text, 250, " ", "...");
 ?>
 <div class="search_list">
     <h2><a href="<?php echo $url ?>" class="search_title"><?php echo $data->title; ?></a></h2>

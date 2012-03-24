@@ -5,10 +5,10 @@ return CMap::mergeArray(
         array(
         'components' => array(
             'db' => array(
-		        'connectionString' => 'mysql:host=localhost;dbname=yii_cms;',
+		        'connectionString' => 'mysql:host=openserver;dbname=yiicms;',
 		        'emulatePrepare'   => true,
 		        'username'         => 'root',
-		        'password'         => '1',
+		        'password'         => '7alla9icea',
 		        'charset'          => 'utf8',
                 'schemaCachingDuration' => 86400,
 		        //'enableProfiling'  => true, 

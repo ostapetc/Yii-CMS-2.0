@@ -1,32 +1,20 @@
 <?php
-class TopMenu extends ClientMenu
+
+class TopMenu extends Portlet
 {
-    const MENU_NAME = 'Верхнее меню';
-
-    public $htmlOptions = array('class'=> 'nav');
+    const CODE = "TOP_MENU";
 
 
-    public function init()
+    public function renderContent()
     {
-        parent::init();
-        $sections = Menu::model()->findByAttributes(array('name' => self::MENU_NAME))->getSections();
-        $i        = 0;
-        foreach ($sections as $item)
+        $menu = Menu::model()->language()->published()->find("code = '" . self::CODE . "'");
+        if (!$menu)
         {
-            $this->items[] = array(
-                'label' => $item->title,
-                'url'   => $item->url,
-                'active'=> $item->isActive()
-            );
-            if (++$i % 3 == 0)
-            {
-                $this->items[] = array(
-                    'label'       => '',
-                    'itemOptions' => array('class'=> 'divider-vertical'),
-                    'active'      => false
-                );
-
-            }
+            return;
         }
+
+        $this->render('TopMenu', array(
+            'sections' => $menu->getSections()
+        ));
     }
 }

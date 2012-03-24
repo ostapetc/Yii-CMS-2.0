@@ -26,7 +26,7 @@ class MenuAdminController extends AdminController
             $section->title   = $model->name . '::корень';
             $section->saveNode();
 
-            $this->redirect('/content/MenuSectionAdmin/index/menu_id/' . $model->id);
+            $this->redirect('/content/MenuAdmin/manage/');
         }
 
         $this->render('create', array('form' => $form));

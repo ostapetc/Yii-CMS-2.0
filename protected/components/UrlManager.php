@@ -4,6 +4,15 @@ class UrlManager extends CUrlManager
 {
     public function collectRules()
     {
+        $multilanguage_support = Yii::app()->params['multilanguage_support'];
+        if ($multilanguage_support)
+        {
+            $languages = Language::getCachedArray();
+            $languages = implode('|', array_keys($languages));
+
+            $language_pattern = "<language:({$languages})>";
+        }
+
         $routes = array(
             '/<controller:\w+>/<id:\d+>'              => '<controller>/view',
             '/<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

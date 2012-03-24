@@ -27,7 +27,7 @@ class UserAdminController extends AdminController
         $model = new User(User::SCENARIO_LOGIN);
 
         $form = new BaseForm('users.LoginForm', $model);
-        $form->action = $this->createUrl('/users/userAdmin/login');
+        $form->action = '';
         $form->cancel_button_show = false;
 
         unset($form->activeForm['enableAjaxValidation']);
@@ -39,20 +39,24 @@ class UserAdminController extends AdminController
             "form"       => $form
         );
 
-        if ($form->submitted() && $model->validate())
+        if (isset($_POST["User"]))
         {
-            $remember_me =
-                isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
-
-            $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
-
-            if ($identity->authenticate(true))
+            $model->attributes = $_POST["User"];
+            if ($model->validate())
             {
-                $this->redirect($this->createUrl("/main/mainAdmin"));
-            }
-            else
-            {
-                $params["error_code"] = $identity->errorCode;
+                $remember_me =
+                    isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
+
+                $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
+
+                if ($identity->authenticate(true))
+                {
+                    $this->redirect(isset($_GET['redirect']) ? base64_decode($_GET['redirect']) : "/content/pageAdmin/manage");
+                }
+                else
+                {
+                    $params["error_code"] = $identity->errorCode;
+                }
             }
         }
 
@@ -94,20 +98,24 @@ class UserAdminController extends AdminController
         unset($form->elements['captcha']);
 
         $this->performAjaxValidation($model);
-        if ($form->submitted() && $model->validate())
+        if ($form->submitted('submit'))
         {
-            $model->password = md5($model->password);
-            $model->save(false);
+            $model = $form->model;
+            if ($model->validate())
+            {
+                $model->password = md5($model->password);
+                $model->save(false);
 
-            $assignment           = new AuthAssignment();
-            $assignment->itemname = $_POST['User']['role'];
-            $assignment->userid   = $model->id;
-            $assignment->save();
+                $assignment           = new AuthAssignment();
+                $assignment->itemname = $_POST['User']['role'];
+                $assignment->userid   = $model->id;
+                $assignment->save();
 
-            $this->redirect(array(
-                'view',
-                'id' => $model->id
-            ));
+                $this->redirect(array(
+                    'view',
+                    'id' => $model->id
+                ));
+            }
         }
 
         $this->render('create', array('form' => $form));
@@ -127,22 +135,26 @@ class UserAdminController extends AdminController
         unset($form->elements['captcha']);
 
         $this->performAjaxValidation($model);
-        if ($form->submitted() && $model->validate())
+        if ($form->submitted('submit'))
         {
-            if ($_POST['User']['password'] != $old_password)
+            $model = $form->model;
+            if ($model->validate())
             {
-                $model->password = md5($model->password);
+                if ($_POST['User']['password'] != $old_password)
+                {
+                    $model->password = md5($model->password);
+                }
+
+                $model->save(false);
+
+                AuthAssignment::updateUserRole($model->id, $_POST['User']['role']);
+
+                Implex::refreshXLS(get_class($model));
+
+                $this->redirect('view', array(
+                    'id'=> $model->id
+                ));
             }
-
-            $model->save(false);
-
-            AuthAssignment::updateUserRole($model->id, $_POST['User']['role']);
-
-            Implex::refreshXLS(get_class($model));
-
-            $this->redirect('view', array(
-                'id'=> $model->id
-            ));
         }
 
         $this->render('update', array(

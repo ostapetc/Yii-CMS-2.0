@@ -30,8 +30,6 @@ class User extends ActiveRecordModel
 
     public $password_c;
 
-    public $captcha;
-
     public $remember_me = false;
 
     public $activate_error;
@@ -100,14 +98,12 @@ class User extends ActiveRecordModel
         return array(
             array(
                 'captcha',
-                'CCaptchaValidator',
-                'captchaAction'=>'/main/help/captcha',
-//                'privateKey' => '6LcsjsMSAAAAAHGMdF84g3szTZZe0VVwMof5bD7Y',
-                'on'         => array(
+                'captcha',
+                'on' => array(
                     self::SCENARIO_REGISTRATION,
                     self::SCENARIO_ACTIVATE_REQUEST,
-                    self::SCENARIO_CHANGE_PASSWORD_REQUEST
-                )
+                    self::SCENARIO_CHANGE_PASSWORD_REQUEST,
+                ),
             ),
             array(
                 'email',
@@ -333,10 +329,10 @@ class User extends ActiveRecordModel
     {
         $mailler_letter = MailerLetter::model();
 
-        $subject = Setting::model()->getValue(self::SETTING_REGISTRATION_MAIL_SUBJECT);
+        $subject = Param::model()->getValue(self::SETTING_REGISTRATION_MAIL_SUBJECT);
         $subject = $mailler_letter->compileText($subject);
 
-        $body = Setting::model()->getValue(self::SETTING_REGISTRATION_MAIL_BODY);
+        $body = Param::model()->getValue(self::SETTING_REGISTRATION_MAIL_BODY);
         $body = $mailler_letter->compileText($body, array('user' => $this));
 
         MailerModule::sendMail($this->email, $subject, $body);

@@ -1,9 +1,7 @@
-<div class="content">
-    <h2><?php echo $page->title ?></h2>
+<div>
+    <div class="hero-unit">
+        <?php echo $page->text; ?>
+    </div>
 
     <p><?php echo $page->content ?></p>
 </div>
-<?php
-$this->widget('news.portlets.LastNews');
-?>
-

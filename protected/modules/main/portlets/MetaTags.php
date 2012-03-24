@@ -36,16 +36,9 @@ class MetaTags extends JuiInputWidget
         $this->renderDialog('MetaTags', array(
             'model'         => $model,
             'dialogOptions' => array(
-                'title'  => 'Мета-Теги',
-                'buttons'=> array(
-                    array(
-                        'text' => t('Сохранить'),
-                        'click'=> 'js:function() { $(this).dialog("close"); }',
-                        'create'=> 'js:function(event, ui) { $(this).addClass("btn btn-primary"); }'
-                    )
-                )
+                'title' => 'Мета-Теги',
             ),
-            'linkOptions'   => array(
+            'linkOptions'=>array(
                 'class'=> 'btn btn-info'
             )
         ));

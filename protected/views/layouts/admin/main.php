@@ -26,13 +26,13 @@
 <body>
     <header id="header">
         <hgroup>
-            <h1 class="site_title"><a href="/admin">Yii CMS</a></h1>
+            <h1 class="site_title" style="width: 19% !important;"><a href="/admin" style="margin-left: 20px">Yii CMS</a></h1>
 
-            <h2 class="section_title"><?php echo t('Админ панель'); ?></h2>
+            <h2 class="section_title" style="padding-left: 24px;"><?php echo t($this->module->name()); ?></h2>
 
             <div class="btn_view_site"><a href="/"><?php echo t('На сайт'); ?></a></div>
 
-            <div style="float: left"><?php $this->widget('LanguageSwitcherAdmin'); ?></div>
+            <div style="float: right;margin-right:20px"><?php $this->widget('LanguageSwitcherAdmin'); ?></div>
 
         </hgroup>
     </header>
@@ -50,18 +50,19 @@
                 'CBreadcrumbs',
                 '$(".breadcrumbs a").last().addClass("current")'
             );
+
             $this->widget('zii.widgets.CBreadcrumbs', array(
                 'links'     => $this->crumbs,
                 'separator' => '<div class="breadcrumb_divider"></div>',
                 'tagName'   => 'article',
-                'homeLink'  => '<a href="/admin">' . t("Админ панель") . '</a>'
+                'homeLink'  => '<a href="/content/pageAdmin/manage">' . t("Панель управления") . '</a>'
             ));
             ?>
         </div>
     </section>
 
     <aside id="sidebar" class="column">
-        <?php $this->renderPartial('main.views.mainAdmin._search'); ?>
+        <?php $this->renderPartial('application.modules.main.views.mainAdmin._search'); ?>
         <hr/>
         <?php $this->widget('AdminMenu'); ?>
 
@@ -82,7 +83,7 @@
                         <ul class="tabs">
                             <?php foreach ($this->tabs as $title => $url): ?>
                                 <li>
-                                    <a href="<?php echo $url; ?>"><?php echo $title; ?></a>
+                                    <a href="<?php echo $url; ?>" class="btn btn-success tabs"><?php echo $title; ?></a>
                                 </li>
                             <?php endforeach ?>
                         </ul>

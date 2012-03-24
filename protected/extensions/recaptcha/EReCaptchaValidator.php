@@ -2,12 +2,12 @@
 /**
  * EReCaptchaValidator class file.
  *
- * @author MetaYii
+ * @author Rodolfo González <metayii.framework@gmail.com>
  * @link http://www.yiiframework.com/
- * @copyright Copyright &copy; 2008 MetaYii
+ * @copyright Copyright &copy; 2008-2011 Rodolfo González
  * @license
  *
- * Copyright © 2008 by MetaYii
+ * Copyright © 2008-2011 by Rodolfo González
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -38,7 +38,7 @@
 /**
  * Include the reCAPTCHA PHP wrapper.
  */
-require_once(Yii::getPathOfAlias('application.extensions.recaptcha').DIRECTORY_SEPARATOR.'reCAPTCHA'.DIRECTORY_SEPARATOR.'recaptchalib.php');
+require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'reCAPTCHA'.DIRECTORY_SEPARATOR.'recaptchalib.php');
 
 /**
  * EReCaptchaValidator validates that the attribute value is the same as the verification code displayed in the CAPTCHA.
@@ -48,7 +48,7 @@ require_once(Yii::getPathOfAlias('application.extensions.recaptcha').DIRECTORY_S
  *
  * @author MetaYii
  * @package application.extensions.recaptcha
- * @since 1.1
+ * @since 1.3
  */
 class EReCaptchaValidator extends CValidator
 {
@@ -94,8 +94,8 @@ class EReCaptchaValidator extends CValidator
 	                                  $_POST['recaptcha_challenge_field'],
 	                                  $_POST['recaptcha_response_field']);
 		if (!$resp->is_valid) {
-			$message=$this->message!==null?$this->message:Yii::t('yii','The verification code is incorrect.');
-			$this->addError($object,$attribute,$message);
+			$message = $this->message !== null ? $this->message : Yii::t('yii','The verification code is incorrect.');
+			$this->addError($object, $attribute, $message);
 		}
 	}
 }

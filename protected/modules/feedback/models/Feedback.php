@@ -5,12 +5,6 @@ class Feedback extends ActiveRecordModel
     const PAGE_SIZE = 10;
 
 
-    public function name()
-    {
-        return 'Сообщения обратной связи';
-    }
-
-
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -23,22 +17,22 @@ class Feedback extends ActiveRecordModel
 	}
 
 
+    public function name()
+    {
+        return 'Модель Feedback';
+    }
+
+
 	public function rules()
 	{
 		return array(
-			array('first_name, last_name, patronymic, email, position, company, phone, comment', 'required'),
-            array('first_name, last_name, patronymic, position','length', 'max' => 40),
-            array('first_name, last_name, patronymic','RuLatAlphaValidator'),
-            array('company, position', 'RuLatAlphaSpacesValidator'),
-            array('company', 'length', 'max' => 80),
-			array('email', 'length', 'max' => 80),
-            array('phone', 'length', 'max' => 50),
-            array('phone','PhoneValidator'),
-			array('email', 'email'),
-            array('comment', 'length', 'max' => 1000),
-            array('first_name, last_name, patronymic, position, company, comment', 'filter', 'filter' => 'trim'),
-			array('first_name, last_name, patronymic, position, company, comment', 'filter', 'filter' => 'strip_tags'),
-            array('first_name, last_name, patronymic, position, company, email, date_create', 'safe', 'on' => 'search'),
+			array('topic_id, name, email, text, captcha', 'required'),
+            array('captcha', 'CaptchaValidator', 'captchaAction' => '/main/help/captcha'),
+			array('topic_id', 'length', 'max' => 11),
+			array('name, email', 'length', 'max' => 200),
+            array('email', 'email'),
+            array('topic_id, name, email, text', 'filter', 'filter' => 'strip_tags'),
+			array('id, topic_id, name, email, text', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -46,24 +40,19 @@ class Feedback extends ActiveRecordModel
 	public function relations()
 	{
 		return array(
+			'topic' => array(self::BELONGS_TO, 'FeedbackTopic', 'topic_id'),
 		);
 	}
 
 
 	public function search()
 	{
-        $alias = $this->getTableAlias();
-		$criteria=new CDbCriteria;
-		$criteria->compare($alias.'.first_name',$this->first_name,true);
-        $criteria->compare($alias.'.last_name',$this->last_name,true);
-        $criteria->compare($alias.'.patronymic',$this->patronymic,true);
-        $criteria->compare($alias.'.company',$this->company,true);
-        $criteria->compare($alias.'.phone',$this->phone,true);
-        $criteria->compare($alias.'.position',$this->position,true);
-		$criteria->compare($alias.'.email',$this->email,true);
-		$criteria->compare($alias.'.date_create',$this->date_create,true);
-
-        $criteria->order = $alias.'.date_create DESC';
+		$criteria = new CDbCriteria;
+		$criteria->compare('id', $this->id, true);
+		$criteria->compare('topic_id', $this->topic_id, true);
+		$criteria->compare('name', $this->name, true);
+		$criteria->compare('email', $this->email, true);
+		$criteria->compare('text', $this->text, true);
 
 		return new ActiveDataProvider(get_class($this), array(
 			'criteria' => $criteria

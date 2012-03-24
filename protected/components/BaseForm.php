@@ -70,8 +70,7 @@ class BaseForm extends CForm
             $cs = Yii::app()->clientScript;
             if ($this->side == 'client')
             {
-                $cs->registerScriptFile('/js/plugins/clientForm/clientForm.js')
-                    ->registerCssFile('/css/site/form.css');
+                $cs->registerCssFile('/css/site/form.css');
             }
             elseif ($this->side == 'admin')
             {
@@ -110,6 +109,7 @@ class BaseForm extends CForm
             $this->attributes['class'] = 'admin_form';
             return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
         }
+
         return $output;
     }
 
@@ -190,7 +190,6 @@ class BaseForm extends CForm
     }
 
 
-    /***** Функции оформления формы *******/
     function addAttributesToButtons()
     {
         foreach ($this->buttons as $i => $button)
@@ -222,6 +221,4 @@ class BaseForm extends CForm
 
         $this->model = $model;
     }
-
-
 }

@@ -43,11 +43,8 @@ class AliasField extends InputWidget
             'id'=> $this->id . '_hidden'
         )); //beckause disabled elements no serialize
         echo CHtml::activeTextField($this->model, $this->attribute, array(
-            'class'   => 'text',
-            'disabled'=> 'disabled'
+            'class' => 'text'
         ));
-        echo CHtml::link('','#', array('class'=> 'icon-pencil change_alias'));
-        echo CHtml::link('Сохранить', '#', array('class'=> 'save_alias'));
         echo '<div class="alias_preloader" ></div>';
     }
 }

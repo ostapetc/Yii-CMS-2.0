@@ -1,8 +1,8 @@
 <?php
 
 class FeedbackModule extends WebModule
-{
-    public static $active = false;
+{	
+	public static $active = true;
 
 
     public static function name()
@@ -23,21 +23,33 @@ class FeedbackModule extends WebModule
     }
 
 
-    public function init()
-    {
-        $this->setImport(array(
-            'feedback.models.*', 'feedback.components.*',
-        ));
-    }
+	public function init()
+	{
+		$this->setImport(array(
+			'feedback.models.*',
+			'feedback.components.*',
+		));
+	}
+
+	public function beforeControllerAction($controller, $action)
+	{
+		if(parent::beforeControllerAction($controller, $action))
+		{
+			return true;
+		}
+		else
+        {
+            return false;
+        }
+	}
 
 
     public static function adminMenu()
     {
         return array(
-            'Все письма'      => '/feedback/feedbackAdmin/manage',
-            'Добавить письмо' => '/feedback/feedbackAdmin/create',
-            'Список разделов' => '/feedback/feedbackSectionAdmin/manage',
-            'Добавить раздел' => '/feedback/feedbackSectionAdmin/create'
+            'Полученные сообщения' => '/feedback/feedbackAdmin/manage',
+            'Список тем'           => '/feedback/feedbackTopicAdmin/manage',
+            'Добавить тему'        => '/feedback/feedbackTopicAdmin/create',
         );
     }
 }

@@ -21,14 +21,14 @@ class HelpController extends BaseController
         return array(
             'captcha'   => array(
                 'class'     => 'CCaptchaAction',
-                'testLimit' => 6,
+                'testLimit' => 0,
                 'minLength' => 4,
                 'maxLength' => 5,
                 'offset'    => 1,
                 'width'     => 68,
-                'height'    => 30,
-                'backColor' => 0xBBBBBB,
-                'foreColor' => 0x222222
+                'height'    => 40,
+//                'backColor' => 0xBBBBBB,
+//                'foreColor' => 0x222222
             ),
             'sitemap'   => array(
                 'class'           => 'ext.sitemap.ESitemapAction',

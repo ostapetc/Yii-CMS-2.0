@@ -17,11 +17,9 @@ class Chosen extends InputWidget
             'onChange'             => $this->onchange
         ));
 
-        $cs = Yii::app()->clientScript;
-        $cs
-            ->registerScriptFile($this->assets . '/chosen.jquery.js')
-            ->registerCssFile($this->assets . '/chosen.css')
-            ->registerScript($this->id . '_chosen', "$('#{$this->id}').chosen($options);");
+        Yii::app()->clientScript->registerScriptFile($this->assets . '/chosen.jquery.js')->registerCssFile(
+            $this->assets . '/chosen.css')->registerScript(
+            $this->id . '_chosen', "$('#{$this->id}').chosen($options);");
     }
 
 
@@ -36,6 +34,6 @@ class Chosen extends InputWidget
             $this->htmlOptions['empty'] = $this->empty;
         }
 
-        echo CHtml::dropDownList($this->name, $this->model->{$this->attribute}, $this->input_element->items, $this->input_element->attributes);
+        echo CHtml::dropDownList($this->name, $this->current, $this->input_element->items, $this->input_element->attributes);
     }
 }

@@ -24,7 +24,7 @@ class MailerLetterAdminController extends AdminController
 
     public function actionCreate($template_id = null)
     {
-        Setting::model()->checkRequired(array(
+        Param::model()->checkRequired(array(
             MailerModule::SETTING_LETTERS_PART_COUNT, MailerModule::SETTING_REPLY_ADDRESS,
             MailerModule::SETTING_DISPATCH_TIME, MailerModule::SETTING_FROM_EMAIL,
             MailerModule::SETTING_SIGNATURE, MailerModule::SETTING_FROM_NAME, MailerModule::SETTING_ENCODING,

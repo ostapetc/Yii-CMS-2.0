@@ -14,7 +14,13 @@ abstract class BaseController extends CController
 
     public $crumbs = array();
 
-    public $isSslProtected = false;
+    public $is_ssl_protected = false;
+
+
+    public $system_actions = array(
+        'captcha'
+    );
+
 
     abstract public static function actionsTitles();
 
@@ -22,6 +28,8 @@ abstract class BaseController extends CController
     public function filters()
     {
         return array(
+            array('application.components.filters.LanguageFilter'),
+            array('application.components.filters.SiteEnableFilter'),
             array('application.components.filters.HttpsFilter'),
             array('application.components.filters.YXssFilter'),
             array('application.components.filters.LanguageFilter'),
@@ -30,23 +38,43 @@ abstract class BaseController extends CController
         );
     }
 
+    public function actions()
+    {
+        return array(
+            'captcha' => array(
+                'class'     => 'CCaptchaAction',
+                'testLimit' => 6,
+                'minLength' => 4,
+                'maxLength' => 5,
+                'offset'    => 1,
+                'width'     => 68,
+                'height'    => 30,
+                'backColor' => 0xBBBBBB,
+                'foreColor' => 0x222222
+            )
+        );
+    }
+
     public function beforeAction($action)
     {
-        //check access
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
-        if (!Yii::app()->user->checkAccess($item_name))
+
+        if (in_array($action->id, $this->system_actions))
         {
-            $this->forbidden();
+            return true;
         }
-        //set default title
-        $action_titles = $this->actionsTitles();
 
         if (!isset($action_titles[ucfirst($action->id)]))
         {
-            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
+            //throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
-        $this->page_title = $action_titles[ucfirst($action->id)];
+        if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
+        {
+            MainModule::saveSiteAction();
+        }
+
+        $this->setTitle($action);
 
         return true;
     }
@@ -55,6 +83,26 @@ abstract class BaseController extends CController
     public function getModelClass()
     {
         return ucfirst(str_replace('Admin', '', $this->id));
+    }
+
+
+    public function setTitle($action)
+    {
+        $action_titles = call_user_func(array(
+            get_class($action->controller), 'actionsTitles'
+        ));
+
+        if (in_array($action->id, $this->system_actions))
+        {
+            return;
+        }
+
+        if (!isset($action_titles[ucfirst($action->id)]))
+        {
+            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
+        }
+
+        $this->page_title = $action_titles[ucfirst($action->id)];
     }
 
 
@@ -70,9 +118,15 @@ abstract class BaseController extends CController
     /**
      * @throws CHttpException
      */
-    protected function forbidden()
+    protected function forbidden($auth_item = null)
     {
-        throw new CHttpException(403, t('Запрещено!'));
+        $msg = t('Запрещено!');
+        if (YII_DEBUG && $auth_item)
+        {
+            $msg.= ' AuthItem : ' .$auth_item;
+        }
+    
+        throw new CHttpException(403, $msg);
     }
 
 
@@ -171,25 +225,14 @@ abstract class BaseController extends CController
     }
 
 
-
-    /**
-     * Обертка для Yii::t, выполняет перевод по словарям текущего модуля.
-     * Так же перевод осуществляется по словорям с префиксом {modelId},
-     * где modelId - приведенная к нижнему регистру база имени контроллера
-     *
-     * Например: для контроллера ProductInfoAdminController, находящегося в модуле ProductsModule
-     * перевод будет осуществляться по словарю ProductsModule.product_info_{первый параметр метода}
-     *
-     * @param string $dictionary словарь
-     * @param string $alias      фраза для перевода
-     * @param array  $params
-     * @param string $language
-     *
-     * @return string переводa
-     */
-    public function t($dictionary, $alias, $params = array(), $source = null, $language = null)
+    public function isRootUrl($url = null)
     {
-        $file_prefix = StringHelper::camelCaseToUnderscore($this->getModelClass());
-        return Yii::t(get_class($this->module).'.'.$file_prefix.'_'.$dictionary, $alias, $params, $source, $language);
+        if (!$url)
+        {
+            $url = $_SERVER["REQUEST_URI"];
+        }
+
+        $languages = Language::getCachedArray();
+        return isset($languages[trim($url, "/")]);
     }
 }
