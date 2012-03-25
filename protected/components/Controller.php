@@ -105,18 +105,12 @@ abstract class Controller extends CController
     }
 
 
-    /**
-     * @throws CHttpException
-     */
     protected function pageNotFound()
     {
         throw new CHttpException(404, t('Страница не найдена!'));
     }
 
 
-    /**
-     * @throws CHttpException
-     */
     protected function forbidden($auth_item = null)
     {
         $msg = t('Запрещено!');

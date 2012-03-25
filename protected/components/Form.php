@@ -203,6 +203,7 @@ class Form extends CForm
         }
     }
 
+
     function formatDateAttributes()
     {
         if (!$this->model)
@@ -220,5 +221,32 @@ class Form extends CForm
         }
 
         $this->model = $model;
+    }
+
+
+    public function getElements()
+    {
+        $elements = parent::getElements();
+        foreach ($elements as $element)
+        {
+            if (isset($element->attributes['prompt']))
+            {
+                $element->attributes['prompt'] = t($element->attributes['prompt']);
+            }
+        }
+
+        $meta = $this->model->meta();
+
+        $languages = Language::getCachedArray();
+
+        if (isset($meta['language']) && count($languages) > 1)
+        {
+            $elements['language'] = array(
+                'type'  => 'dropdownlist',
+                'items' => $languages
+            );
+        }
+
+        return $elements;
     }
 }

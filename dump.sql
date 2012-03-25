@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.9
+-- version 3.4.10.1
 -- http://www.phpmyadmin.net
 --
--- Хост: openserver:3306
--- Время создания: Мар 23 2012 г., 19:07
--- Версия сервера: 5.1.61
--- Версия PHP: 5.3.9
+-- Host: localhost
+-- Generation Time: Mar 25, 2012 at 11:03 PM
+-- Server version: 5.1.58
+-- PHP Version: 5.3.6-13ubuntu3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- База данных: `yiicms_2.0`
+-- Database: `yiicms_2.0`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `actions`
+-- Table structure for table `actions`
 --
 
 CREATE TABLE IF NOT EXISTS `actions` (
@@ -42,75 +42,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `actions_files`
---
-
-CREATE TABLE IF NOT EXISTS `actions_files` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `action_id` int(11) unsigned NOT NULL COMMENT 'Событие',
-  `file` varchar(500) NOT NULL COMMENT 'Файл',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Добавлен',
-  PRIMARY KEY (`id`),
-  KEY `action_id` (`action_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `articles`
---
-
-CREATE TABLE IF NOT EXISTS `articles` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `language` char(2) DEFAULT 'ru' COMMENT 'Язык',
-  `section_id` int(11) unsigned NOT NULL COMMENT 'Раздел',
-  `title` varchar(400) NOT NULL COMMENT 'Заголовок',
-  `text` longtext NOT NULL COMMENT 'Текст',
-  `date` date NOT NULL COMMENT 'Дата',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Создано',
-  `da` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `section_id` (`section_id`),
-  KEY `language` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Дамп данных таблицы `articles`
---
-
-INSERT INTO `articles` (`id`, `language`, `section_id`, `title`, `text`, `date`, `date_create`, `da`) VALUES
-(2, 'ru', 1, 'aaaad', '<p>ddddd</p>', '2011-10-07', '2011-10-07 14:50:33', 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `articles_sections`
---
-
-CREATE TABLE IF NOT EXISTS `articles_sections` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
-  `parent_id` int(11) unsigned DEFAULT NULL COMMENT 'Родитель',
-  `name` varchar(100) NOT NULL COMMENT 'Название',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создан',
-  `in_sidebar` int(1) NOT NULL DEFAULT '0' COMMENT 'разместить на главной странице',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  KEY `parent_id` (`parent_id`),
-  KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `articles_sections`
---
-
-INSERT INTO `articles_sections` (`id`, `lang`, `parent_id`, `name`, `date_create`, `in_sidebar`) VALUES
-(1, 'ru', NULL, 'www', '2011-09-14 16:08:20', 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `auth_assignments`
+-- Table structure for table `auth_assignments`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_assignments` (
@@ -123,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `auth_assignments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `auth_assignments`
+-- Dumping data for table `auth_assignments`
 --
 
 INSERT INTO `auth_assignments` (`itemname`, `userid`, `bizrule`, `data`) VALUES
@@ -135,7 +67,7 @@ INSERT INTO `auth_assignments` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `auth_items`
+-- Table structure for table `auth_items`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_items` (
@@ -149,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `auth_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `auth_items`
+-- Dumping data for table `auth_items`
 --
 
 INSERT INTO `auth_items` (`name`, `type`, `description`, `bizrule`, `data`, `allow_for_all`) VALUES
@@ -378,7 +310,7 @@ INSERT INTO `auth_items` (`name`, `type`, `description`, `bizrule`, `data`, `all
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `auth_items_childs`
+-- Table structure for table `auth_items_childs`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_items_childs` (
@@ -389,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `auth_items_childs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `auth_items_childs`
+-- Dumping data for table `auth_items_childs`
 --
 
 INSERT INTO `auth_items_childs` (`parent`, `child`) VALUES
@@ -522,7 +454,7 @@ INSERT INTO `auth_items_childs` (`parent`, `child`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `auth_objects`
+-- Table structure for table `auth_objects`
 --
 
 CREATE TABLE IF NOT EXISTS `auth_objects` (
@@ -537,530 +469,7 @@ CREATE TABLE IF NOT EXISTS `auth_objects` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `banners`
---
-
-CREATE TABLE IF NOT EXISTS `banners` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `page_id` int(11) unsigned DEFAULT NULL COMMENT 'Раздел сайта',
-  `name` varchar(50) NOT NULL COMMENT 'Название',
-  `content` text,
-  `image` varchar(37) NOT NULL COMMENT 'Изображение',
-  `url` varchar(500) DEFAULT NULL COMMENT 'URL-адрес',
-  `is_published` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Активен',
-  `order` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Сортировка',
-  `date_start` date DEFAULT NULL COMMENT 'Дата начала показа',
-  `date_end` date DEFAULT NULL COMMENT 'Дата окончания показа',
-  PRIMARY KEY (`id`),
-  KEY `page_id` (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `banners`
---
-
-INSERT INTO `banners` (`id`, `page_id`, `name`, `content`, `image`, `url`, `is_published`, `order`, `date_start`, `date_end`) VALUES
-(1, NULL, 'Yii-CMS на GitHub', 'Разработка ведется на GitHub.com', 'GitHub.png', 'https://github.com/ostapetc/Yii-CMS-2.0', 1, 0, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `banners_roles`
---
-
-CREATE TABLE IF NOT EXISTS `banners_roles` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `banner_id` int(11) unsigned NOT NULL,
-  `role` varchar(64) NOT NULL COMMENT 'Роль',
-  PRIMARY KEY (`id`),
-  KEY `banner_id` (`banner_id`),
-  KEY `role` (`role`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Дамп данных таблицы `banners_roles`
---
-
-INSERT INTO `banners_roles` (`id`, `banner_id`, `role`) VALUES
-(1, 1, 'guest'),
-(2, 1, 'admin');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `certificates_groups`
---
-
-CREATE TABLE IF NOT EXISTS `certificates_groups` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'Название',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Добавлена',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
-
---
--- Дамп данных таблицы `certificates_groups`
---
-
-INSERT INTO `certificates_groups` (`id`, `name`, `date_create`) VALUES
-(5, 'Низкое напряжение', '2011-09-20 22:45:52'),
-(6, 'Автоматизация зданий', '2011-09-20 22:45:52'),
-(7, 'Электрооборудование для промышленных установок', '2011-09-20 22:45:52'),
-(8, 'Электроустановочные изделия', '2011-09-20 22:45:52'),
-(9, 'Кабеленесущие системы', '2011-09-20 22:45:52'),
-(10, 'Приводная техника', '2011-09-20 22:45:52'),
-(11, 'Сетевые фильтры и ИБП однофазные', '2011-09-20 22:45:52'),
-(12, 'Промышленная автоматизация', '2011-09-20 22:45:52'),
-(13, 'ИБП трехфазные и  инженерная инфраструктура', '2011-09-20 22:45:52');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `certificates_types`
---
-
-CREATE TABLE IF NOT EXISTS `certificates_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '' COMMENT 'Тип',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Добавлен',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
-
---
--- Дамп данных таблицы `certificates_types`
---
-
-INSERT INTO `certificates_types` (`id`, `name`, `date_create`) VALUES
-(1, 'ГОСТ', '2011-09-20 22:45:58'),
-(2, 'ПожБ', '2011-09-20 22:45:58'),
-(3, 'Метр', '2011-09-20 22:45:58'),
-(4, 'РТН', '2011-09-20 22:45:58'),
-(5, 'АЭС', '2011-09-20 22:45:58'),
-(6, 'РМРС', '2011-09-20 22:45:58'),
-(7, 'РРР', '2011-09-20 22:45:58'),
-(8, 'СЭЗ', '2011-09-20 22:45:58'),
-(9, 'Минсвязь', '2011-09-20 22:45:58');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `cities`
---
-
-CREATE TABLE IF NOT EXISTS `cities` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL COMMENT 'Название',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
-
---
--- Дамп данных таблицы `cities`
---
-
-INSERT INTO `cities` (`id`, `name`) VALUES
-(13, 'Волгоград'),
-(6, 'Екатеринбург'),
-(20, 'Майями'),
-(3, 'Москва'),
-(7, 'Нижний Новгород'),
-(5, 'Новосибирск'),
-(9, 'Омск'),
-(12, 'Ростов-на-Дону'),
-(8, 'Самара'),
-(4, 'Санкт-Петербург'),
-(21, 'Симферополь'),
-(11, 'Челябинск'),
-(17, 'Ялта');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `countries`
---
-
-CREATE TABLE IF NOT EXISTS `countries` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Название',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=352 ;
-
---
--- Дамп данных таблицы `countries`
---
-
-INSERT INTO `countries` (`id`, `name`) VALUES
-(3, 'Абхазия'),
-(4, 'Австралия'),
-(5, 'Австрия'),
-(6, 'Азербайджан'),
-(7, 'Албания'),
-(8, 'Алжир'),
-(220, 'Англия'),
-(9, 'Ангола'),
-(10, 'Ангуилья'),
-(11, 'Андорра'),
-(12, 'Антигуа и Барбуда'),
-(13, 'Антильские о-ва'),
-(14, 'Аргентина'),
-(349, 'Арль-Авиньон'),
-(15, 'Армения'),
-(16, 'Арулько'),
-(17, 'Афганистан'),
-(342, 'Аяччо'),
-(18, 'Багамские о-ва'),
-(19, 'Бангладеш'),
-(20, 'Барбадос'),
-(346, 'Бастия'),
-(21, 'Бахрейн'),
-(23, 'Белиз'),
-(22, 'Белоруссия'),
-(24, 'Бельгия'),
-(25, 'Бенин'),
-(26, 'Бермуды'),
-(27, 'Болгария'),
-(28, 'Боливия'),
-(334, 'Бордо'),
-(258, 'Босния и Герцеговина'),
-(29, 'Босния/Герцеговина'),
-(30, 'Ботсвана'),
-(31, 'Бразилия'),
-(350, 'Брест'),
-(32, 'Британские Виргинские о-ва'),
-(33, 'Бруней'),
-(340, 'Булонь'),
-(34, 'Буркина Фасо'),
-(302, 'Буркина-Фасо'),
-(35, 'Бурунди'),
-(36, 'Бутан'),
-(336, 'Валансьен'),
-(37, 'Валлис и Футуна о-ва'),
-(38, 'Вануату'),
-(39, 'Великобритания'),
-(40, 'Венгрия'),
-(41, 'Венесуэла'),
-(42, 'Восточный Тимор'),
-(43, 'Вьетнам'),
-(44, 'Габон'),
-(337, 'Гавр'),
-(45, 'Гаити'),
-(46, 'Гайана'),
-(47, 'Гамбия'),
-(48, 'Гана'),
-(49, 'Гваделупа'),
-(50, 'Гватемала'),
-(51, 'Гвинея'),
-(52, 'Гвинея-Бисау'),
-(348, 'Генгам'),
-(53, 'Германия'),
-(54, 'Гернси о-в'),
-(55, 'Гибралтар'),
-(133, 'Голландия'),
-(56, 'Гондурас'),
-(57, 'Гонконг'),
-(58, 'Гренада'),
-(59, 'Гренландия'),
-(339, 'Гренобль'),
-(60, 'Греция'),
-(61, 'Грузия'),
-(62, 'Дания'),
-(63, 'Джерси о-в'),
-(64, 'Джибути'),
-(65, 'Доминиканская республика'),
-(307, 'ДР Конго'),
-(66, 'Египет'),
-(67, 'Замбия'),
-(68, 'Западная Сахара'),
-(69, 'Зимбабве'),
-(70, 'Израиль'),
-(71, 'Индия'),
-(72, 'Индонезия'),
-(73, 'Иордания'),
-(74, 'Ирак'),
-(75, 'Иран'),
-(76, 'Ирландия'),
-(77, 'Исландия'),
-(78, 'Испания'),
-(347, 'Истр'),
-(79, 'Италия'),
-(80, 'Йемен'),
-(81, 'Кабо-Верде'),
-(82, 'Казахстан'),
-(83, 'Камбоджа'),
-(84, 'Камерун'),
-(321, 'Кан'),
-(85, 'Канада'),
-(86, 'Катар'),
-(87, 'Кения'),
-(88, 'Кипр'),
-(310, 'Киргизия'),
-(89, 'Кирибати'),
-(90, 'Китай'),
-(303, 'КНДР'),
-(91, 'Колумбия'),
-(92, 'Коморские о-ва'),
-(315, 'Коморы'),
-(312, 'Конго'),
-(93, 'Конго (Brazzaville)'),
-(94, 'Конго (Kinshasa)'),
-(299, 'Корея'),
-(95, 'Коста-Рика'),
-(300, 'Кот д-Ивуар'),
-(96, 'Кот-д''Ивуар'),
-(97, 'Куба'),
-(98, 'Кувейт'),
-(99, 'Кука о-ва'),
-(100, 'Кыргызстан'),
-(327, 'Ланс'),
-(101, 'Лаос'),
-(102, 'Латвия'),
-(332, 'Ле Ман'),
-(103, 'Лесото'),
-(104, 'Либерия'),
-(105, 'Ливан'),
-(106, 'Ливия'),
-(333, 'Лилль'),
-(320, 'Лион'),
-(107, 'Литва'),
-(108, 'Лихтенштейн'),
-(329, 'Лорьян'),
-(109, 'Люксембург'),
-(110, 'Маврикий'),
-(111, 'Мавритания'),
-(112, 'Мадагаскар'),
-(113, 'Македония'),
-(114, 'Малави'),
-(115, 'Малайзия'),
-(116, 'Мали'),
-(117, 'Мальдивские о-ва'),
-(118, 'Мальта'),
-(125, 'Марокко'),
-(326, 'Марсель'),
-(316, 'Мартиника'),
-(119, 'Мартиника о-в'),
-(120, 'Мексика'),
-(330, 'Мец'),
-(121, 'Мозамбик'),
-(295, 'Молдавия'),
-(122, 'Молдова'),
-(123, 'Монако'),
-(124, 'Монголия'),
-(341, 'Монпелье'),
-(351, 'Москва'),
-(309, 'Мьянма'),
-(126, 'Мьянма (Бирма)'),
-(127, 'Мэн о-в'),
-(128, 'Намибия'),
-(319, 'Нанси'),
-(338, 'Нант'),
-(129, 'Науру'),
-(130, 'Непал'),
-(131, 'Нигер'),
-(132, 'Нигерия'),
-(313, 'Нидерландские Антилы'),
-(134, 'Никарагуа'),
-(325, 'Ницца'),
-(135, 'Новая Зеландия'),
-(306, 'Новая Каледония'),
-(136, 'Новая Каледония о-в'),
-(137, 'Норвегия'),
-(138, 'Норфолк о-в'),
-(139, 'О.А.Э.'),
-(301, 'ОАЭ'),
-(140, 'Оман'),
-(328, 'Осер'),
-(141, 'Пакистан'),
-(142, 'Панама'),
-(143, 'Папуа Новая Гвинея'),
-(144, 'Парагвай'),
-(335, 'Пари Сен-Жермен'),
-(145, 'Перу'),
-(146, 'Питкэрн о-в'),
-(147, 'Польша'),
-(148, 'Португалия'),
-(149, 'Пуэрто Рико'),
-(322, 'Ренн'),
-(150, 'Реюньон'),
-(1, 'Россия'),
-(151, 'Руанда'),
-(152, 'Румыния'),
-(154, 'Сальвадор'),
-(155, 'Самоа'),
-(156, 'Сан-Марино'),
-(157, 'Сан-Томе и Принсипи'),
-(158, 'Саудовская Аравия'),
-(159, 'Свазиленд'),
-(160, 'Святая Люсия'),
-(161, 'Святой Елены о-в'),
-(296, 'Северная Ирландия'),
-(162, 'Северная Корея'),
-(344, 'Седан'),
-(163, 'Сейшеллы'),
-(317, 'Сейшелы'),
-(164, 'Сен-Пьер и Микелон'),
-(165, 'Сенегал'),
-(166, 'Сент Китс и Невис'),
-(167, 'Сент-Винсент и Гренадины'),
-(318, 'Сент-Этьен'),
-(168, 'Сербия'),
-(305, 'Сербия и Черногория'),
-(169, 'Сингапур'),
-(170, 'Сирия'),
-(171, 'Словакия'),
-(172, 'Словения'),
-(173, 'Соломоновы о-ва'),
-(174, 'Сомали'),
-(331, 'Сошо'),
-(323, 'Страсбур'),
-(175, 'Судан'),
-(176, 'Суринам'),
-(153, 'США'),
-(177, 'Сьерра-Леоне'),
-(178, 'Таджикистан'),
-(180, 'Таиланд'),
-(179, 'Тайвань'),
-(181, 'Танзания'),
-(182, 'Того'),
-(183, 'Токелау о-ва'),
-(184, 'Тонга'),
-(185, 'Тринидад и Тобаго'),
-(343, 'Труа'),
-(186, 'Тувалу'),
-(324, 'Тулуза'),
-(187, 'Тунис'),
-(345, 'Тур'),
-(188, 'Туркменистан'),
-(308, 'Туркмения'),
-(189, 'Туркс и Кейкос'),
-(190, 'Турция'),
-(191, 'Уганда'),
-(192, 'Узбекистан'),
-(2, 'Украина'),
-(193, 'Уругвай'),
-(298, 'Уэльс'),
-(194, 'Фарерские о-ва'),
-(294, 'Фарерские острова'),
-(195, 'Фиджи'),
-(196, 'Филиппины'),
-(197, 'Финляндия'),
-(198, 'Франция'),
-(199, 'Французская Гвинея'),
-(200, 'Французская Полинезия'),
-(201, 'Хорватия'),
-(314, 'Центрально-Африканская Республика'),
-(202, 'Чад'),
-(203, 'Черногория'),
-(204, 'Чехия'),
-(304, 'Чехословакия'),
-(205, 'Чили'),
-(206, 'Швейцария'),
-(207, 'Швеция'),
-(297, 'Шотландия'),
-(208, 'Шри-Ланка'),
-(209, 'Эквадор'),
-(210, 'Экваториальная Гвинея'),
-(211, 'Эритрея'),
-(212, 'Эстония'),
-(213, 'Эфиопия'),
-(214, 'ЮАР'),
-(311, 'Югославия'),
-(215, 'Южная Корея'),
-(216, 'Южная Осетия'),
-(217, 'Ямайка'),
-(218, 'Япония');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `documentation`
---
-
-CREATE TABLE IF NOT EXISTS `documentation` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(250) DEFAULT '' COMMENT 'Название',
-  `alias` varchar(250) DEFAULT NULL COMMENT 'Алиас',
-  `lft` int(11) DEFAULT NULL,
-  `rgt` int(11) DEFAULT NULL,
-  `depth` int(11) DEFAULT NULL,
-  `is_published` tinyint(1) unsigned DEFAULT '1' COMMENT 'Опубликован',
-  `content` text COMMENT 'Контент',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Категории документации' AUTO_INCREMENT=27 ;
-
---
--- Дамп данных таблицы `documentation`
---
-
-INSERT INTO `documentation` (`id`, `title`, `alias`, `lft`, `rgt`, `depth`, `is_published`, `content`) VALUES
-(1, 'root', 'root', 1, 18, 1, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(2, 'Компоненты', 'applicationComponents', 2, 7, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(3, 'Поведения', 'behaviors', 8, 13, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(4, 'Соглашения', 'conventions', 14, 23, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(5, 'Хэлперы', 'helpers', 24, 25, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(6, 'Введение', 'introductions', 26, 27, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(7, 'О главном', 'main', 28, 37, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(8, 'Специальные темы', 'special', 38, 41, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(9, 'Модули', 'modules', 42, 49, 2, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(10, 'Контент', 'content', 43, 44, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(11, 'Файловый менеджер', 'fileManager', 45, 46, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(12, 'Глоссарий', 'glossary', 47, 48, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(13, 'Система', 'main', 23, 24, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(14, 'dater', 'dater', 3, 4, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(15, 'text', 'text', 5, 6, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(16, 'componentInModule', 'componentInModule', 9, 10, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(17, 'metaTags', 'metaTags', 11, 12, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(18, 'naming', 'naming', 15, 16, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n');
-INSERT INTO `documentation` (`id`, `title`, `alias`, `lft`, `rgt`, `depth`, `is_published`, `content`) VALUES
-(19, 'directoryStructure', 'directoryStructure', 17, 18, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(20, 'mvc', 'mvc', 19, 20, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(21, 'cooperation', 'cooperation', 21, 22, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(22, 'activeRecordModel', 'activeRecordModel', 29, 30, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(23, 'baseForm', 'baseForm', 31, 32, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(24, 'gridView', 'gridView', 33, 34, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(25, 'webModule', 'webModule', 35, 36, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n'),
-(26, 'formWidgets', 'formWidgets', 39, 40, 3, 1, '#ActiveRecordModel\r\n\r\n##Labels для атрибутов\r\n\r\n`Labels` для атрибутов берутся из комментариев к полям в БД\r\n\r\n\r\n##Scopes\r\n\r\nПо умолчанию доступны следующие `scopes`:\r\n\r\n~~~\r\n[php]\r\npublic function limit($num)\r\npublic function offset($num)\r\npublic function in($row, $values, $operator = ''AND'')\r\npublic function notIn($row, $values, $operator = ''AND'')\r\npublic function notEqual($param, $value)\r\npublic function last()\r\npublic function published()\r\npublic function ordered()\r\n~~~\r\n\r\n##Подключаемые поведения\r\n\r\nПо умолчанию всегда подключены следующие поведения:\r\n\r\n- `NullValueBehavior` - записывает `null` в пустые поля для которых есть `allowNull`\r\n- `UserForeignKeyBehavior` - `если имеется не заданный атрибу `user_id`, то он устанавливается в Yii::app()->user->id\r\n- `UploadFileBehavior` - автоматически загружает файлы\r\n- `DateFormatBehavior` - автоматически форматирует даты нужным образом\r\n- `TimestampBehavior` - автоматически выставляет значения `date_create` и `date_update`\r\n- `MaxMinBehavior` - содержит функции поиска максимума/минимума по заданному атрибуту\r\n\r\n\r\n##Дополнительные функции добавляемые поведениями\r\n\r\n**MaxMinBehavior**\r\n\r\n- `public function min($attr)` - находит минимум в БД для заданного атрибута модели\r\n- `public function max($attr)` - находит максимум в БД для заданного атрибута модели\r\n\r\n**UploadFileBehavior**\r\n\r\nПозволяет использовать следующий синтаксис в моделях для автоматической загрузки файлов\r\n\r\n~~~\r\n[php]\r\npublic function uploadFiles()\r\n{\r\n    return array(\r\n        ''photo'' => array(''dir'' => self::PHOTOS_DIR)\r\n    );\r\n}\r\n~~~\r\n\r\n\r\n##Возможность использования "негорбатого" стиля\r\n\r\nДобавлена поддержка "негорбатого" написания полей класса,\r\nт.е. для геттера вида `getUserInfo` вы можете писать `$model->user_info`,\r\nи геттер отработает.\r\nДля сеттеров ситуация аналогичная.\r\n');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `documents`
---
-
-CREATE TABLE IF NOT EXISTS `documents` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
-  `name` varchar(500) NOT NULL COMMENT 'Наименование',
-  `desc` text NOT NULL COMMENT 'Описание',
-  `is_published` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Опубликовано',
-  `date_publish` date NOT NULL COMMENT 'Дата публикации',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата создания',
-  PRIMARY KEY (`id`),
-  KEY `lang` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `documents_files`
---
-
-CREATE TABLE IF NOT EXISTS `documents_files` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `document_id` int(11) unsigned NOT NULL COMMENT 'Документ',
-  `title` varchar(250) NOT NULL COMMENT 'Заголовок',
-  `file` varchar(50) NOT NULL COMMENT 'Файл',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Добавлен',
-  PRIMARY KEY (`id`),
-  KEY `document_id` (`document_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `faq`
+-- Table structure for table `faq`
 --
 
 CREATE TABLE IF NOT EXISTS `faq` (
@@ -1087,7 +496,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `faq_sections`
+-- Table structure for table `faq_sections`
 --
 
 CREATE TABLE IF NOT EXISTS `faq_sections` (
@@ -1103,49 +512,7 @@ CREATE TABLE IF NOT EXISTS `faq_sections` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `feedback`
---
-
-CREATE TABLE IF NOT EXISTS `feedback` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(40) NOT NULL COMMENT 'Имя',
-  `last_name` varchar(40) DEFAULT NULL COMMENT 'Фамилия',
-  `patronymic` varchar(40) DEFAULT NULL COMMENT 'Отчество',
-  `company` varchar(80) DEFAULT NULL COMMENT 'Компания',
-  `position` varchar(40) DEFAULT NULL COMMENT 'Должность',
-  `phone` varchar(50) DEFAULT NULL COMMENT 'Телефон',
-  `email` varchar(80) NOT NULL COMMENT 'Email',
-  `comment` varchar(1000) NOT NULL COMMENT 'Комментарий',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создано',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
-
---
--- Дамп данных таблицы `feedback`
---
-
-INSERT INTO `feedback` (`id`, `first_name`, `last_name`, `patronymic`, `company`, `position`, `phone`, `email`, `comment`, `date_create`) VALUES
-(1, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:13:31'),
-(2, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:15:47'),
-(3, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:15:55'),
-(4, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:16:39'),
-(5, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:17:02'),
-(6, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:21:32'),
-(7, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:22:39'),
-(8, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:23:13'),
-(9, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:23:34'),
-(10, 'dawdawd', 'dawda', 'awdaw', 'dawdawd', 'awdawd', '+7-903-5492969', 'dwad@mail.ru', 'awd', '2011-09-11 20:25:31'),
-(11, 'вфцв', 'вфцв', 'фцвфцв', 'фцвфцв', 'фцвфцвф', '+7-903-5492969', 'ada@mail.ru', 'dadaw', '2011-09-12 22:06:53'),
-(12, 'wadaw', 'dawd', 'dwad', 'awdawd', 'dawddawdaw', '+7-903-5492969', 'dadwa@mail.ru', 'dawd', '2011-09-16 11:24:02'),
-(13, 'dawdwa', 'dwad', 'dwad', 'dwad', 'dwadawd', '+7-903-5492969', 'dawd@mail.ru', 'dawda', '2011-09-16 11:41:54'),
-(14, 'awdaw', 'dawd', 'dwd', 'dwad', 'dwadaw', '+7-903-5492969', 'dawdw@mail.ru', 'dawd', '2011-09-16 12:04:23'),
-(15, 'adwa', 'dawdw', 'dwad', 'awdaw', 'dawd', '+7-903-5492969', 'awda@mail.ru', 'dawddawd', '2011-09-16 12:05:06'),
-(16, 'awdwad', 'wwd', 'fawddawdaw', 'dawd', 'awdawd', '+7-903-5492969', 'awdawd@mail.ru', 'dwadaw', '2011-09-16 12:05:47');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `file_manager`
+-- Table structure for table `file_manager`
 --
 
 CREATE TABLE IF NOT EXISTS `file_manager` (
@@ -1162,7 +529,7 @@ CREATE TABLE IF NOT EXISTS `file_manager` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
--- Дамп данных таблицы `file_manager`
+-- Dumping data for table `file_manager`
 --
 
 INSERT INTO `file_manager` (`id`, `object_id`, `model_id`, `name`, `tag`, `title`, `descr`, `order`, `path`) VALUES
@@ -1202,7 +569,7 @@ INSERT INTO `file_manager` (`id`, `object_id`, `model_id`, `name`, `tag`, `title
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `languages`
+-- Table structure for table `languages`
 --
 
 CREATE TABLE IF NOT EXISTS `languages` (
@@ -1213,7 +580,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `languages`
+-- Dumping data for table `languages`
 --
 
 INSERT INTO `languages` (`id`, `name`) VALUES
@@ -1223,7 +590,7 @@ INSERT INTO `languages` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `languages_messages`
+-- Table structure for table `languages_messages`
 --
 
 CREATE TABLE IF NOT EXISTS `languages_messages` (
@@ -1234,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `languages_messages` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=211 ;
 
 --
--- Дамп данных таблицы `languages_messages`
+-- Dumping data for table `languages_messages`
 --
 
 INSERT INTO `languages_messages` (`id`, `category`, `message`) VALUES
@@ -1298,7 +665,7 @@ INSERT INTO `languages_messages` (`id`, `category`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `languages_translations`
+-- Table structure for table `languages_translations`
 --
 
 CREATE TABLE IF NOT EXISTS `languages_translations` (
@@ -1310,7 +677,7 @@ CREATE TABLE IF NOT EXISTS `languages_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `languages_translations`
+-- Dumping data for table `languages_translations`
 --
 
 INSERT INTO `languages_translations` (`id`, `language`, `translation`) VALUES
@@ -1336,7 +703,7 @@ INSERT INTO `languages_translations` (`id`, `language`, `translation`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `log`
+-- Table structure for table `log`
 --
 
 CREATE TABLE IF NOT EXISTS `log` (
@@ -1351,120 +718,7 @@ CREATE TABLE IF NOT EXISTS `log` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `mailer_fields`
---
-
-CREATE TABLE IF NOT EXISTS `mailer_fields` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) NOT NULL COMMENT 'Код ',
-  `name` varchar(200) NOT NULL COMMENT 'Наименование',
-  `value` varchar(250) NOT NULL COMMENT 'Значение',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `value` (`value`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Дамп данных таблицы `mailer_fields`
---
-
-INSERT INTO `mailer_fields` (`id`, `code`, `name`, `value`) VALUES
-(1, '{FIRST_NAME}', 'Имя', '$user->first_name'),
-(2, '{LAST_NAME}', 'Фамилия', '$user->last_name'),
-(3, '{PATRONYMIC}', 'Отчество', '$user->patronymic'),
-(5, '{DATE}', 'Текущая дата', 'date(''d.m.Y'')'),
-(6, '{ROLE}', 'Наименование группы к которой принадлежит пользователь', '$user->role->description'),
-(7, '{APPEAL}', 'Обращение к пользователю', '$user->gender == User::GENDER_MAN ? ''Уважаемый'' : ''Уважаемая'''),
-(9, '{SITE_NAME}', 'Название сайта', 'yii_cms'),
-(10, '{ACTIVATE_ACCOUNT_URL}', 'URL ссылки активации аккаунта', '$user->activateAccountUrl();');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `mailer_letters`
---
-
-CREATE TABLE IF NOT EXISTS `mailer_letters` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `template_id` int(11) unsigned DEFAULT NULL COMMENT 'Шаблон',
-  `subject` varchar(150) NOT NULL COMMENT 'Тема письма',
-  `text` text NOT NULL COMMENT 'Текст письма',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата отправки',
-  PRIMARY KEY (`id`),
-  KEY `template_id` (`template_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
-
---
--- Дамп данных таблицы `mailer_letters`
---
-
-INSERT INTO `mailer_letters` (`id`, `template_id`, `subject`, `text`, `date_create`) VALUES
-(5, NULL, 'Письмо с тегами {SITE_NAME}', '{SITE_NAME}  !<br /><br />{APPEAL}  {FIRST_NAME}&nbsp;  {LAST_NAME}  &nbsp;{PATRONYMIC}  .<br /><br />{DATE}&nbsp;  - {ROLE}  <br />Yo  ', '2011-09-30 16:18:22');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `mailer_recipients`
---
-
-CREATE TABLE IF NOT EXISTS `mailer_recipients` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `letter_id` int(11) unsigned NOT NULL COMMENT 'Рассылка',
-  `user_id` int(11) unsigned NOT NULL COMMENT 'Пользователь',
-  `status` enum('accepted','fail','waiting','sent') DEFAULT 'waiting' COMMENT 'Статус',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата отправки',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `letter_id_2` (`letter_id`,`user_id`),
-  KEY `letter_id` (`letter_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Дамп данных таблицы `mailer_recipients`
---
-
-INSERT INTO `mailer_recipients` (`id`, `letter_id`, `user_id`, `status`, `date_create`) VALUES
-(9, 5, 17, 'sent', '2011-09-30 16:18:22'),
-(10, 5, 18, 'sent', '2011-09-30 16:18:22');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `mailer_templates`
---
-
-CREATE TABLE IF NOT EXISTS `mailer_templates` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL COMMENT 'Название',
-  `subject` varchar(150) NOT NULL COMMENT 'Тема письма',
-  `text` text NOT NULL COMMENT 'Текст письма',
-  `is_basic` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Основной',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создан',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `mailer_templates_recipients`
---
-
-CREATE TABLE IF NOT EXISTS `mailer_templates_recipients` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `template_id` int(11) unsigned NOT NULL,
-  `user_id` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `template_id_2` (`template_id`,`user_id`),
-  KEY `template_id` (`template_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `menu`
+-- Table structure for table `menu`
 --
 
 CREATE TABLE IF NOT EXISTS `menu` (
@@ -1476,7 +730,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Дамп данных таблицы `menu`
+-- Dumping data for table `menu`
 --
 
 INSERT INTO `menu` (`id`, `name`, `is_published`, `lang`) VALUES
@@ -1485,7 +739,7 @@ INSERT INTO `menu` (`id`, `name`, `is_published`, `lang`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `menu_sections`
+-- Table structure for table `menu_sections`
 --
 
 CREATE TABLE IF NOT EXISTS `menu_sections` (
@@ -1509,7 +763,7 @@ CREATE TABLE IF NOT EXISTS `menu_sections` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
--- Дамп данных таблицы `menu_sections`
+-- Dumping data for table `menu_sections`
 --
 
 INSERT INTO `menu_sections` (`id`, `lang`, `page_id`, `menu_id`, `root`, `left`, `right`, `level`, `title`, `url`, `module_url`, `module_id`, `is_published`) VALUES
@@ -1521,7 +775,7 @@ INSERT INTO `menu_sections` (`id`, `lang`, `page_id`, `menu_id`, `root`, `left`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `meta_tags`
+-- Table structure for table `meta_tags`
 --
 
 CREATE TABLE IF NOT EXISTS `meta_tags` (
@@ -1535,26 +789,21 @@ CREATE TABLE IF NOT EXISTS `meta_tags` (
   `date_update` datetime DEFAULT NULL COMMENT 'Отредактирован',
   PRIMARY KEY (`id`),
   UNIQUE KEY `object_id` (`object_id`,`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
--- Дамп данных таблицы `meta_tags`
+-- Dumping data for table `meta_tags`
 --
 
 INSERT INTO `meta_tags` (`id`, `object_id`, `model_id`, `title`, `keywords`, `description`, `date_create`, `date_update`) VALUES
-(5, 2, 'Page', '6', '3333', '222', '2011-10-19 14:25:04', '2012-01-27 07:19:39'),
-(6, 17, 'Page', '45', '567', '67', '2011-10-19 14:25:17', NULL),
 (7, 1, 'Page', 'www', 'rtyrtyry', 'trfyhr', '2011-10-19 14:25:29', '2012-02-19 22:17:38'),
 (8, 3, 'News', 'zzzz', 'keyww', 'oppp', '2011-10-20 10:10:13', '2011-10-20 13:12:40'),
-(9, 18, 'Page', NULL, NULL, NULL, '2012-02-10 23:21:20', NULL),
-(10, 19, 'Page', NULL, NULL, NULL, '2012-02-16 21:54:51', '2012-02-26 14:06:46'),
-(11, 20, 'Page', NULL, NULL, NULL, '2012-02-19 19:16:39', NULL),
-(12, 21, 'Page', NULL, NULL, NULL, '2012-03-22 14:11:52', NULL);
+(13, 3, 'Page', NULL, NULL, NULL, '2012-03-25 18:28:06', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
@@ -1573,7 +822,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
--- Дамп данных таблицы `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `lang`, `user_id`, `title`, `text`, `photo`, `is_published`, `date`, `date_create`) VALUES
@@ -1603,7 +852,7 @@ INSERT INTO `news` (`id`, `lang`, `user_id`, `title`, `text`, `photo`, `is_publi
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `pages`
+-- Table structure for table `pages`
 --
 
 CREATE TABLE IF NOT EXISTS `pages` (
@@ -1620,24 +869,17 @@ CREATE TABLE IF NOT EXISTS `pages` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
--- Дамп данных таблицы `pages`
+-- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `language`, `title`, `url`, `text`, `is_published`, `date_create`, `order`) VALUES
 (1, 'ru', 'Главная страница', '/', '<p>Yii &mdash; это высокоэффективный основанный на компонентной структуре PHP-фреймворк для     разработки масштабных веб-приложений. Он позволяет максимально применить концепцию повторного     использования кода и может существенно ускорить процесс веб-разработки. Название Yii     (произносится как Yee или [ji:]) означает простой (easy), эффективный (efficient) и расширяемый     (extensible).</p>', 1, '2011-06-25 13:23:15', 19),
-(2, 'ru', 'О нас', '', '<p>История Yii началась 1 января 2008 года, как проект по исправлению некоторых изъянов в фреймворке PRADO (победителя &laquo;<a title="Zend Technologies" href="http://ru.wikipedia.org/wiki/Zend_Technologies">Zend</a> PHP 5 coding contest&raquo;<sup><a href="http://ru.wikipedia.org/wiki/Yii#cite_note-1">[2]</a></sup>). Например, PRADO медленно обрабатывал сложные страницы, имел крутую кривую обучения и был довольно труден в настройке.<sup><a href="http://ru.wikipedia.org/wiki/Yii#cite_note-2">[3]</a></sup> В октябре 2008 года, после более 10 месяцев закрытой разработки, вышла первая <a title="Альфа-версия" href="http://ru.wikipedia.org/wiki/%D0%90%D0%BB%D1%8C%D1%84%D0%B0-%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F">альфа-версия</a>. 3 декабря 2008 был выпущен Yii 1.0<sup><a href="http://ru.wikipedia.org/wiki/Yii#cite_note-about-yii-0">[1]</a></sup></p>', 1, '2011-09-10 14:11:25', 17),
-(3, 'ru', 'Main page', '/', '<p><strong>Yii</strong> is pronounced as Yee or [ji:], and is an acroynym for "<strong>Yes It Is!</strong>". This is often the accurate, and most concise response to inquires from those new to Yii: <br />Is it fast? ... Is it secure? ... Is it professional? ... Is it right for my next project? ... <strong>Yes, it is!</strong></p>\r\n  <p>Yii is a free, open-source Web application development framework written in PHP5 that promotes clean, <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself" rel="nofollow">DRY</a>\r\n design and encourages rapid development. It works to streamline your \r\napplication development and helps to ensure an extremely efficient, \r\nextensible, and maintainable end product.</p>\r\n  <p>Being extremely performance optimized, Yii is a perfect choice for \r\nany sized project. However, it has been built with sophisticated, \r\nenterprise applications in mind. You have full control over the \r\nconfiguration from head-to-toe (presentation-to-persistence) to conform \r\nto your enterprise development guidelines. It comes packaged with tools \r\nto help test and debug your application, and has clear and comprehensive\r\n documentation.</p>\r\n  <p>To learn more about what Yii brings to the table, check out the <a href="http://www.yiiframework.com/features/">features section</a>.</p>  ', 1, '2011-09-10 21:00:53', 20),
-(4, 'ru', 'About us', '', '<p>Yii is the brainchild of its founder, Qiang Xue, who started the Yii project on January 1, 2008. Qiang previously developed and\r\n  maintained the <a href="http://www.pradosoft.com/" rel="nofollow">Prado</a>\r\n framework. The years of experience gained and developer feedback \r\ngathered from that project solidified the need for an extremely fast, \r\nsecure and professional framework that is tailor-made to meet the \r\nexpectations of Web 2.0 application development. On December 3, 2008, \r\nafter nearly one year''s\r\n  development, Yii 1.0 was formally released to the public.</p>\r\n  <p>Its extremely impressive performance metrics when compared to other \r\nPHP-based frameworks immediately drew very positive attention and its \r\npopularity and adoption continues to grow at an ever increasing rate.</p>    ', 1, '2011-09-10 21:33:10', 20),
-(17, 'ru', 'ццц', '', '', 0, '2011-10-19 13:39:21', 20),
-(18, 'ru', '''', 'sdf', '', 0, '2012-02-10 23:21:20', 20),
-(19, 'ru', 'lkkjlksjdf', 'lkkjlksjdf', '', 0, '2012-02-16 21:54:50', 18),
-(20, 'ru', 'd', 'd', '', 0, '2012-02-19 19:16:39', 20),
-(21, 'ru', 'dawda', 'dawda', '<p>dwdwa</p>', 0, '2012-03-22 14:11:52', 21);
+(3, 'en', 'Main page', '/', '<p><strong>Yii</strong> is pronounced as Yee or [ji:], and is an acroynym for "<strong>Yes It Is!</strong>". This is often the accurate, and most concise response to inquires from those new to Yii: <br />Is it fast? ... Is it secure? ... Is it professional? ... Is it right for my next project? ... <strong>Yes, it is!</strong></p>\r\n<p>Yii is a free, open-source Web application development framework written in PHP5 that promotes clean, <a rel="nofollow" href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> design and encourages rapid development. It works to streamline your  application development and helps to ensure an extremely efficient,  extensible, and maintainable end product.</p>\r\n<p>Being extremely performance optimized, Yii is a perfect choice for  any sized project. However, it has been built with sophisticated,  enterprise applications in mind. You have full control over the  configuration from head-to-toe (presentation-to-persistence) to conform  to your enterprise development guidelines. It comes packaged with tools  to help test and debug your application, and has clear and comprehensive  documentation.</p>\r\n<p>To learn more about what Yii brings to the table, check out the <a href="http://www.yiiframework.com/features/">features section</a>.</p>', 1, '2011-09-10 21:00:53', 20);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `params`
+-- Table structure for table `params`
 --
 
 CREATE TABLE IF NOT EXISTS `params` (
@@ -1650,10 +892,10 @@ CREATE TABLE IF NOT EXISTS `params` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `const` (`code`),
   UNIQUE KEY `title` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
--- Дамп данных таблицы `params`
+-- Dumping data for table `params`
 --
 
 INSERT INTO `params` (`id`, `module_id`, `code`, `name`, `value`, `element`) VALUES
@@ -1676,12 +918,13 @@ INSERT INTO `params` (`id`, `module_id`, `code`, `name`, `value`, `element`) VAL
 (23, 'mailer', 'password', 'Пароль', 'EPdEUoTn', 'text'),
 (24, 'mailer', 'from_email', 'От кого(Email)', 'test@ya.ru', 'text'),
 (25, 'main', 'SITE_ENABLED', 'Сайт доступен', '1', 'checkbox'),
-(26, '', 'sefse', 'fsef', '', 'file');
+(26, '', 'sefse', 'fsef', '', 'file'),
+(27, '', 'LOGO', 'Логотип', 'Colony_0046_by_Artush.png', 'file');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `site_actions`
+-- Table structure for table `site_actions`
 --
 
 CREATE TABLE IF NOT EXISTS `site_actions` (
@@ -1699,7 +942,7 @@ CREATE TABLE IF NOT EXISTS `site_actions` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `tbl_migration`
+-- Table structure for table `tbl_migration`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_migration` (
@@ -1709,7 +952,7 @@ CREATE TABLE IF NOT EXISTS `tbl_migration` (
 ) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
 
 --
--- Дамп данных таблицы `tbl_migration`
+-- Dumping data for table `tbl_migration`
 --
 
 INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
@@ -1730,7 +973,7 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -1754,7 +997,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- Дамп данных таблицы `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `patronymic`, `email`, `phone`, `password`, `birthdate`, `gender`, `status`, `activate_code`, `activate_date`, `password_recover_code`, `password_recover_date`, `date_create`) VALUES
@@ -1763,435 +1006,74 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `patronymic`, `email`, `ph
 (18, 'os', 'art', 'igr', 'artemostapetc@gmail.com', NULL, '813107300f254c3a072c17066c15a22a', NULL, 'man', 'new', NULL, NULL, NULL, NULL, '2011-09-30 12:23:57'),
 (19, 'Алексей', 'Шаров', NULL, 'www.pismeco@gmail.com', '', '827ccb0eea8a706c4c34a16891f84e7b', '0000-00-00', '', 'active', '827ccb0eea8a706c4c34a16891f84e7b', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '2011-11-11 14:17:20');
 
--- --------------------------------------------------------
-
 --
--- Структура таблицы `wiki_link`
---
-
-CREATE TABLE IF NOT EXISTS `wiki_link` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `page_from_id` int(11) NOT NULL,
-  `page_to_id` int(11) DEFAULT NULL,
-  `wiki_uid` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `wiki_fk_link_page_from` (`page_from_id`),
-  KEY `wiki_fk_link_page_to` (`page_to_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `wiki_migration`
---
-
-CREATE TABLE IF NOT EXISTS `wiki_migration` (
-  `version` varchar(255) NOT NULL,
-  `apply_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
-
---
--- Дамп данных таблицы `wiki_migration`
---
-
-INSERT INTO `wiki_migration` (`version`, `apply_time`) VALUES
-('m000000_000000_base', 1330272773),
-('m120213_183419_init', 1330272773);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `wiki_page`
---
-
-CREATE TABLE IF NOT EXISTS `wiki_page` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `is_redirect` tinyint(1) DEFAULT '0',
-  `page_uid` varchar(255) DEFAULT NULL,
-  `namespace` varchar(255) DEFAULT NULL,
-  `content` text,
-  `revision_id` int(11) DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  `created_at` int(11) DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `wiki_idx_page_page_uid` (`page_uid`),
-  UNIQUE KEY `wiki_idx_page_revision_id` (`revision_id`),
-  KEY `wiki_idx_page_namespace` (`namespace`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `wiki_page`
---
-
-INSERT INTO `wiki_page` (`id`, `is_redirect`, `page_uid`, `namespace`, `content`, `revision_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(2, 0, 'index', NULL, '##fsdlkajfl\r\n\r\n\r\n\r\n~~~\r\n[php]\r\n$this->widget(''content.portlets.Truncate'', array(\r\n    ''id'' => ''index_text'',\r\n    ''content'' => $content\r\n    ''options'' => array(\r\n        ''length'' => 1200\r\n    )\r\n))\r\n~~~\r\n', 4, '19', 1330273703, 1330274477),
-(3, 0, 'go', NULL, 'sajdlkjdsf', 3, NULL, 1330273760, 1330273760);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `wiki_page_revision`
---
-
-CREATE TABLE IF NOT EXISTS `wiki_page_revision` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `page_id` int(11) NOT NULL,
-  `comment` varchar(255) DEFAULT NULL,
-  `is_minor` tinyint(1) DEFAULT NULL,
-  `content` text,
-  `user_id` varchar(255) DEFAULT NULL,
-  `created_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `wiki_fk_page_revision_page` (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=5 ;
-
---
--- Дамп данных таблицы `wiki_page_revision`
---
-
-INSERT INTO `wiki_page_revision` (`id`, `page_id`, `comment`, `is_minor`, `content`, `user_id`, `created_at`) VALUES
-(2, 2, 'Created new page', NULL, '##fsdlkajfl', NULL, 1330273703),
-(3, 3, 'Created new page', NULL, 'sajdlkjdsf', NULL, 1330273760),
-(4, 2, '', NULL, '##fsdlkajfl\r\n\r\n\r\n\r\n~~~\r\n[php]\r\n$this->widget(''content.portlets.Truncate'', array(\r\n    ''id'' => ''index_text'',\r\n    ''content'' => $content\r\n    ''options'' => array(\r\n        ''length'' => 1200\r\n    )\r\n))\r\n~~~\r\n', '19', 1330274477);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ymarket_brands`
---
-
-CREATE TABLE IF NOT EXISTS `ymarket_brands` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL DEFAULT '' COMMENT 'Название',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=138 ;
-
---
--- Дамп данных таблицы `ymarket_brands`
---
-
-INSERT INTO `ymarket_brands` (`id`, `name`) VALUES
-(31, '3Q'),
-(2, 'Acer'),
-(83, 'AIGO'),
-(32, 'AirOn'),
-(33, 'Alcatel'),
-(85, 'Ambiance Technology'),
-(34, 'AnyDATA'),
-(3, 'Apple'),
-(4, 'Aquarius'),
-(86, 'Archos'),
-(1, 'ASUS'),
-(84, 'ATOMY'),
-(35, 'BB-mobile'),
-(5, 'BenQ'),
-(36, 'BenQ-Siemens'),
-(37, 'BlackBerry'),
-(87, 'Bliss'),
-(88, 'Bmorn'),
-(89, 'COBY'),
-(6, 'Compaq'),
-(91, 'Creative'),
-(90, 'CTL'),
-(38, 'Daewoo'),
-(7, 'DELL'),
-(8, 'DEPO'),
-(92, 'DigiLife'),
-(93, 'Digma'),
-(9, 'DNS'),
-(94, 'E-Horse'),
-(100, 'effire'),
-(95, 'EKEN'),
-(11, 'eMachines'),
-(96, 'Enot'),
-(39, 'Eten'),
-(10, 'Eurocom'),
-(97, 'Evromedia'),
-(98, 'Excimer'),
-(99, 'ExoPC'),
-(40, 'Explay'),
-(41, 'Fly'),
-(12, 'Fujitsu'),
-(13, 'Fujitsu-Siemens'),
-(42, 'Garmin-Asus'),
-(15, 'Getac'),
-(14, 'GIGABYTE'),
-(102, 'Globex'),
-(101, 'GOCLEVER'),
-(43, 'Google'),
-(103, 'Gpad'),
-(44, 'Gresso'),
-(104, 'HaiPad'),
-(46, 'Handheld'),
-(47, 'Handyuhr'),
-(48, 'Highscreen'),
-(49, 'Hisense'),
-(16, 'HP'),
-(45, 'HTC'),
-(50, 'Huawei'),
-(106, 'IconBit'),
-(110, 'iiView'),
-(107, 'Impression'),
-(108, 'iRobot'),
-(109, 'iRos'),
-(17, 'iRu'),
-(51, 'iTravel'),
-(105, 'IVIO'),
-(52, 'JOA Telecom'),
-(111, 'joinTech'),
-(53, 'Just5'),
-(54, 'Kyocera'),
-(19, 'Lenovo'),
-(18, 'LG'),
-(55, 'Magic'),
-(113, 'Maylong'),
-(114, 'Mebol'),
-(115, 'Miotex'),
-(112, 'MIReader'),
-(56, 'Mitac'),
-(57, 'Mobiado'),
-(116, 'Moonse'),
-(58, 'Motorola'),
-(117, 'MoveO!'),
-(20, 'MSI'),
-(118, 'Netbook Navigator'),
-(21, 'Nokia'),
-(119, 'Notion Ink'),
-(122, 'Odeon'),
-(120, 'OLT'),
-(59, 'ONEXT'),
-(121, 'OODO'),
-(123, 'Open Star'),
-(124, 'Oysters'),
-(22, 'Packard Bell'),
-(60, 'Palm'),
-(23, 'Panasonic'),
-(61, 'Pantech-Curitel'),
-(126, 'Pegatron'),
-(127, 'Perfeo'),
-(62, 'Philips'),
-(24, 'Point of View'),
-(63, 'Porsche'),
-(125, 'POSH-PAD'),
-(128, 'Prestige'),
-(129, 'Prestigio'),
-(131, 'qBox'),
-(64, 'Qtek'),
-(130, 'Qumo'),
-(65, 'Rover PC'),
-(25, 'Roverbook'),
-(132, 'RoverPad'),
-(26, 'Samsung'),
-(66, 'Seals'),
-(67, 'Siemens'),
-(68, 'Sitronics'),
-(133, 'Smart Devices'),
-(69, 'Sonim'),
-(27, 'Sony'),
-(70, 'Sony Ericsson'),
-(134, 'Starway'),
-(71, 'Tag Heuer'),
-(72, 'TeXet'),
-(28, 'Toshiba'),
-(73, 'Ubiquam'),
-(74, 'VEON'),
-(75, 'Versace'),
-(76, 'Vertu'),
-(29, 'Viewsonic'),
-(30, 'viliv'),
-(77, 'Voxtel'),
-(78, 'Watchtech'),
-(135, 'YIFANG Digital'),
-(79, 'Zakang'),
-(137, 'Zenithink'),
-(136, 'ZTE'),
-(80, 'Билайн'),
-(82, 'МегаФон'),
-(81, 'МТС');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ymarket_sections`
---
-
-CREATE TABLE IF NOT EXISTS `ymarket_sections` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL COMMENT 'Название',
-  `yandex_name` varchar(100) DEFAULT NULL COMMENT 'Название(Яндекс)',
-  `url` varchar(250) NOT NULL COMMENT 'URL',
-  `all_models_url` varchar(250) DEFAULT NULL COMMENT 'URL на все модели',
-  `brands_url` varchar(250) DEFAULT NULL COMMENT 'URL на производителей',
-  `breadcrumbs` text COMMENT 'Путь',
-  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Добавлено',
-  `date_update` datetime DEFAULT NULL COMMENT 'Дата обновления',
-  `date_brand_update` datetime DEFAULT NULL COMMENT 'Дата обновления брендов',
-  `date_pages_parse` datetime DEFAULT NULL COMMENT 'Дата парсинга страниц',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `url` (`url`),
-  UNIQUE KEY `yandex_name` (`yandex_name`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Дамп данных таблицы `ymarket_sections`
---
-
-INSERT INTO `ymarket_sections` (`id`, `name`, `yandex_name`, `url`, `all_models_url`, `brands_url`, `breadcrumbs`, `date_create`, `date_update`, `date_brand_update`, `date_pages_parse`) VALUES
-(1, 'Ноутбуки', 'Ноутбуки', 'http://market.yandex.ru/catalogmodels.xml?CAT_ID=432460&hid=91013', '/guru.xml?CMD=-RR=9,0,0,0-VIS=160-CAT_ID=432460-EXC=1-PG=10&hid=91013', '/vendors.xml?CAT_ID=432460&hid=91013', '<a class="b-breadcrumbs__link" href="/catalog.xml?hid=91009">Компьютеры</a>', '2011-09-13 17:10:16', '2011-09-21 15:56:08', '2011-09-21 15:57:01', '2011-09-21 15:59:15'),
-(2, NULL, 'Сотовые телефоны', 'http://market.yandex.ru/catalogmodels.xml?CAT_ID=160043&hid=91491', '/guru.xml?CMD=-RR=9,0,0,0-VIS=160-CAT_ID=160043-EXC=1-PG=10&hid=91491', '/vendors.xml?CAT_ID=160043&hid=91491', '<a class="b-breadcrumbs__link" href="/catalog.xml?hid=91461">Телефоны</a>', '2011-09-13 17:11:04', '2011-09-21 15:56:10', '2011-09-21 15:57:09', '2011-09-21 17:37:32'),
-(3, NULL, 'Планшеты', 'http://market.yandex.ru/catalogmodels.xml?CAT_ID=6427101&hid=6427100', '/guru.xml?CMD=-RR=0,0,0,0-VIS=160-CAT_ID=6427101-EXC=1-PG=10&hid=6427100', '/vendors.xml?CAT_ID=6427101&hid=6427100', '<a class="b-breadcrumbs__link" href="/catalog.xml?hid=91009">Компьютеры</a>', '2011-09-20 17:18:16', '2011-09-21 15:56:11', '2011-09-21 15:57:18', '2011-09-21 15:59:45');
-
---
--- Ограничения внешнего ключа сохраненных таблиц
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения внешнего ключа таблицы `actions`
+-- Constraints for table `actions`
 --
 ALTER TABLE `actions`
   ADD CONSTRAINT `actions_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `actions_files`
---
-ALTER TABLE `actions_files`
-  ADD CONSTRAINT `actions_files_ibfk_1` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `articles`
---
-ALTER TABLE `articles`
-  ADD CONSTRAINT `articles_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `articles_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `articles_ibfk_3` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `articles_sections`
---
-ALTER TABLE `articles_sections`
-  ADD CONSTRAINT `articles_sections_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `articles_sections` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `articles_sections_ibfk_2` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `auth_assignments`
+-- Constraints for table `auth_assignments`
 --
 ALTER TABLE `auth_assignments`
   ADD CONSTRAINT `auth_assignments_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_assignments_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `auth_items_childs`
+-- Constraints for table `auth_items_childs`
 --
 ALTER TABLE `auth_items_childs`
   ADD CONSTRAINT `auth_items_childs_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_items_childs_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `auth_objects`
+-- Constraints for table `auth_objects`
 --
 ALTER TABLE `auth_objects`
   ADD CONSTRAINT `auth_objects_ibfk_1` FOREIGN KEY (`role`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `banners`
---
-ALTER TABLE `banners`
-  ADD CONSTRAINT `banners_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `banners_roles`
---
-ALTER TABLE `banners_roles`
-  ADD CONSTRAINT `banners_roles_ibfk_1` FOREIGN KEY (`banner_id`) REFERENCES `banners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `banners_roles_ibfk_2` FOREIGN KEY (`role`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `documents`
---
-ALTER TABLE `documents`
-  ADD CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `documents_files`
---
-ALTER TABLE `documents_files`
-  ADD CONSTRAINT `documents_files_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `faq`
+-- Constraints for table `faq`
 --
 ALTER TABLE `faq`
   ADD CONSTRAINT `faq_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `faq_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `faq_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `faq_sections`
+-- Constraints for table `faq_sections`
 --
 ALTER TABLE `faq_sections`
   ADD CONSTRAINT `faq_sections_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `languages_translations`
+-- Constraints for table `languages_translations`
 --
 ALTER TABLE `languages_translations`
   ADD CONSTRAINT `languages_translations_ibfk_1` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id`) REFERENCES `languages_messages` (`id`) ON DELETE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `mailer_letters`
---
-ALTER TABLE `mailer_letters`
-  ADD CONSTRAINT `mailer_letters_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `mailer_templates` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `mailer_recipients`
---
-ALTER TABLE `mailer_recipients`
-  ADD CONSTRAINT `mailer_recipients_ibfk_1` FOREIGN KEY (`letter_id`) REFERENCES `mailer_letters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mailer_recipients_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `mailer_templates_recipients`
---
-ALTER TABLE `mailer_templates_recipients`
-  ADD CONSTRAINT `mailer_templates_recipients_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `mailer_templates` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mailer_templates_recipients_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `news`
+-- Constraints for table `news`
 --
 ALTER TABLE `news`
   ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `news_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `pages`
+-- Constraints for table `pages`
 --
 ALTER TABLE `pages`
   ADD CONSTRAINT `pages_language_fk` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ограничения внешнего ключа таблицы `site_actions`
+-- Constraints for table `site_actions`
 --
 ALTER TABLE `site_actions`
   ADD CONSTRAINT `site_actions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `wiki_link`
---
-ALTER TABLE `wiki_link`
-  ADD CONSTRAINT `wiki_fk_link_page_from` FOREIGN KEY (`page_from_id`) REFERENCES `wiki_page` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `wiki_fk_link_page_to` FOREIGN KEY (`page_to_id`) REFERENCES `wiki_page` (`id`) ON DELETE SET NULL;
-
---
--- Ограничения внешнего ключа таблицы `wiki_page_revision`
---
-ALTER TABLE `wiki_page_revision`
-  ADD CONSTRAINT `wiki_fk_page_revision_page` FOREIGN KEY (`page_id`) REFERENCES `wiki_page` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

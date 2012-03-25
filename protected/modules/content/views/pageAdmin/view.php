@@ -22,15 +22,6 @@ $this->widget('BootDetailView', array(
             'value' => date('d.m.Y h:i', strtotime($model->date_create))
         ),
         array(
-            'name'  => 'left_menu_id',
-            'label' => 'Меню слева',
-            'value' => $model->left_menu_id ? $model->left_menu->name : 'не выводится'
-        ),
-        array(
-            'name'  => 'widget',
-            'value' => $model->widget ? Page::$widgets[$model->widget] : null
-        ),
-        array(
             'name'  => t('Мета-теги'),
             'value' => MetaTag::model()->html($model->id, get_class($model)),
             'type'  => 'raw'
@@ -38,10 +29,6 @@ $this->widget('BootDetailView', array(
         array(
             'name'  => 'language',
             'value' => $languages[$model->language]
-        ),
-        array(
-            'name'  => 'short_text',
-            'type'  => 'raw',
         ),
 		array(
             'name'  => 'text',
