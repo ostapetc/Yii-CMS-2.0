@@ -5,5 +5,4 @@ $this->tabs = array(
 	'управление меню' => $this->createUrl('manage')
 );
 
-echo $form 
-?>
+echo $form;

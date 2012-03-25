@@ -30,7 +30,7 @@ abstract class Controller extends CController
             array('application.components.filters.LanguageFilter'),
             array('application.components.filters.SiteEnableFilter'),
             array('application.components.filters.HttpsFilter'),
-            array('application.components.filters.YXssFilter'),
+            array('application.components.filters.XssFilter'),
             array('application.components.filters.MetaTagsFilter + view'),
             array('application.components.filters.StatisticFilter'),
             array('application.components.filters.ThemeFilter'),

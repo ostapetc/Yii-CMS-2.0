@@ -169,7 +169,8 @@ return array(
     'params'         => array(
         'save_site_actions' => false,
         'multilanguage_support' => true,
-        'collect_routes_form_modules' => true
+        'collect_routes_form_modules' => true,
+        'themes_enabled' => false
     )
 );
 

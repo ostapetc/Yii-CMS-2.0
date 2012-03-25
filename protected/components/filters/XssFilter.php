@@ -38,7 +38,7 @@
  *   'actions' => 'admin,manage' - фильтровать только экшены admin и manage
  */
 
-class YXssFilter extends CFilter
+class XssFilter extends CFilter
 {
 
     public $clean = '*';
