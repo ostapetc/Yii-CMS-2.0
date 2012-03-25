@@ -26,7 +26,7 @@ class SidebarAdminController extends AdminController
 	{
 		$model = new Sidebar;
 		
-		$form = new BaseForm('content.SidebarForm', $model);
+		$form = new Form('content.SidebarForm', $model);
 		
 		// $this->performAjaxValidation($model);
 
@@ -49,7 +49,7 @@ class SidebarAdminController extends AdminController
 	{
 		$model = $this->loadModel($id);
 
-		$form = new BaseForm('content.SidebarForm', $model);
+		$form = new Form('content.SidebarForm', $model);
 
 		// $this->performAjaxValidation($model);
 

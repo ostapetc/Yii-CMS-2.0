@@ -24,7 +24,7 @@ class SaveAttributeAction extends CAction
 
     private function _save($options)
     {
-        $model = ActiveRecordModel::model($options['model'])->findByPk($options['id']);
+        $model = ActiveRecord::model($options['model'])->findByPk($options['id']);
         //may be you will be need set some attributes before update
         if (isset($options['attributes']))
         {

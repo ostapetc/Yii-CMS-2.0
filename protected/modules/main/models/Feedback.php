@@ -1,6 +1,6 @@
 <?php
 
-class Feedback extends ActiveRecordModel
+class Feedback extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

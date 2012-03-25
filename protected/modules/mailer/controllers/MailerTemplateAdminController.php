@@ -27,7 +27,7 @@ class MailerTemplateAdminController extends AdminController
         $model = new MailerTemplate;
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('mailer.MailerTemplateForm', $model);
+        $form = new Form('mailer.MailerTemplateForm', $model);
 
         if ($form->submitted('submit'))
         {
@@ -57,7 +57,7 @@ class MailerTemplateAdminController extends AdminController
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('mailer.MailerTemplateForm', $model);
+        $form = new Form('mailer.MailerTemplateForm', $model);
 
         if ($form->submitted('submit'))
         {

@@ -19,7 +19,7 @@ class LanguageAdminController extends AdminController
         $model = new Language;
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('main.LanguageForm', $model);
+        $form = new Form('main.LanguageForm', $model);
 
         if ($form->submitted('submit'))
         {
@@ -41,7 +41,7 @@ class LanguageAdminController extends AdminController
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('main.LanguageForm', $model);
+        $form = new Form('main.LanguageForm', $model);
 
         if ($form->submitted('submit'))
         {
@@ -86,7 +86,7 @@ class LanguageAdminController extends AdminController
 
     public function actionCreateTableField($model)
     {
-        $model = ActiveRecordModel::model($model);
+        $model = ActiveRecord::model($model);
         $table = $model->tableName();
         $meta  = $model->meta();
 

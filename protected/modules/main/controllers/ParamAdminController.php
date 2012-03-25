@@ -24,11 +24,11 @@ class ParamAdminController extends AdminController
 
     public function actionCreate()
     {
-        $model = new Param(ActiveRecordModel::SCENARIO_CREATE);
+        $model = new Param(ActiveRecord::SCENARIO_CREATE);
 
         $this->performAjaxValidation($model);
 
-        $form = new BaseForm('main.ParamForm', $model);
+        $form = new Form('main.ParamForm', $model);
 
         if ($form->submitted('submit') && $model->save())
         {
@@ -48,7 +48,7 @@ class ParamAdminController extends AdminController
 
         $this->performAjaxValidation($model);
 
-        $form = new BaseForm('main.ParamForm', $model);
+        $form = new Form('main.ParamForm', $model);
 
         if ($form->submitted() && $model->save())
         {

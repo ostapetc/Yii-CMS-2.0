@@ -13,7 +13,7 @@ class AttachmentBehavior extends CActiveRecordBehavior
     {
         $model     = $this->getOwner();
         $object_id = $model->isNewRecord ? $this->_tmpPrefix() : $model->id;
-        return ActiveRecordModel::model($this->attached_model)->findAllByAttributes(array(
+        return ActiveRecord::model($this->attached_model)->findAllByAttributes(array(
             'object_id' => $object_id,
             'model_id'  => get_class($model)
         ));

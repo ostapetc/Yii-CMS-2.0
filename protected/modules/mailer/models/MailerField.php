@@ -1,6 +1,6 @@
 <?php
 
-class MailerField extends ActiveRecordModel
+class MailerField extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

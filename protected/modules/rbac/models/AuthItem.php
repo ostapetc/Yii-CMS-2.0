@@ -1,6 +1,6 @@
 <?php
 
-class AuthItem extends ActiveRecordModel
+class AuthItem extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

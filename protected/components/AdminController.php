@@ -1,6 +1,6 @@
 <?php
  
-abstract class AdminController extends BaseController
+abstract class AdminController extends Controller
 {
     public $layout='//layouts/admin/main';
 

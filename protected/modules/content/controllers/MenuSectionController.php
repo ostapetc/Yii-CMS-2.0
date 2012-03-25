@@ -1,6 +1,6 @@
 <?php
 
-class MenuSectionController extends BaseController
+class MenuSectionController extends Controller
 {
     public static function actionsTitles()
     {

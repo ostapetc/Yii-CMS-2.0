@@ -1,6 +1,6 @@
 <?php
 
-class Menu extends ActiveRecordModel
+class Menu extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

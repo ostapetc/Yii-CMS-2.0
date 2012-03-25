@@ -26,7 +26,7 @@ class OutboxEmailAdminController extends AdminController
 	{
 		$model = new OutboxEmail;
 		
-		$form = new BaseForm('mailer.OutboxEmailForm', $model);
+		$form = new Form('mailer.OutboxEmailForm', $model);
 		
 		// $this->performAjaxValidation($model);
 
@@ -49,7 +49,7 @@ class OutboxEmailAdminController extends AdminController
 	{
 		$model = $this->loadModel($id);
 
-		$form = new BaseForm('mailer.OutboxEmailForm', $model);
+		$form = new Form('mailer.OutboxEmailForm', $model);
 
 		// $this->performAjaxValidation($model);
 

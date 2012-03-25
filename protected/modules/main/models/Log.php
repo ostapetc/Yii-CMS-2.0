@@ -1,6 +1,6 @@
 <?php
 
-class Log extends ActiveRecordModel
+class Log extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

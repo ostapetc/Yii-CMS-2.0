@@ -19,7 +19,7 @@ class RoleAdminController extends AdminController
 	{	
 		$model = new AuthItem();
 
-		$form = new BaseForm('rbac.RoleForm', $model);
+		$form = new Form('rbac.RoleForm', $model);
 
 		if (isset($_POST['AuthItem']))
 		{
@@ -58,7 +58,7 @@ class RoleAdminController extends AdminController
             $this->pageNotFound();
         }
         
-		$form = new BaseForm('rbac.RoleForm', $model);
+		$form = new Form('rbac.RoleForm', $model);
 
 		if (isset($_POST['AuthItem']))
 		{

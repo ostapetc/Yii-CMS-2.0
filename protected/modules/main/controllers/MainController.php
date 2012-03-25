@@ -1,6 +1,6 @@
 <?php
 
-class MainController extends BaseController
+class MainController extends Controller
 {   
     public static function actionsTitles() 
     {

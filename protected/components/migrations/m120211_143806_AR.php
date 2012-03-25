@@ -4,7 +4,7 @@ class m120211_143806_AR extends CDbMigration
 	public function up()
 	{
     $a = <<<HEAD
-    UPDATE `yii_base`.`documentation` SET `content` = '#ActiveRecordModel
+    UPDATE `yii_base`.`documentation` SET `content` = '#ActiveRecord
 
 ##Labels для атрибутов
 

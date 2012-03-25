@@ -1,6 +1,6 @@
 <?php
 
-abstract class ActiveRecordModel extends CActiveRecord
+abstract class ActiveRecord extends CActiveRecord
 {
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';

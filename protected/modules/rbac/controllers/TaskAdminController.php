@@ -66,7 +66,7 @@ class TaskAdminController extends AdminController
     {   
         $model = new AuthItem;
 
-        $form = new BaseForm('rbac.TaskForm', $model);
+        $form = new Form('rbac.TaskForm', $model);
         
         if (isset($_POST['AuthItem']))
         {
@@ -100,7 +100,7 @@ class TaskAdminController extends AdminController
     {
         $model = $this->loadModel($id);
         
-        $form = new BaseForm('rbac.TaskForm', $model);
+        $form = new Form('rbac.TaskForm', $model);
         
         if (isset($_POST['AuthItem']))
         {

@@ -1,6 +1,6 @@
 <?php
 
-abstract class BaseController extends CController
+abstract class Controller extends CController
 {
     public $layout = '//layouts/main';
 

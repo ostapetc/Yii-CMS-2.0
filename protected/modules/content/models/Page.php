@@ -1,6 +1,6 @@
 <?php
 
-class Page extends ActiveRecordModel
+class Page extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 

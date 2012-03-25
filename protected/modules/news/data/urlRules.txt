@@ -1,2 +1,0 @@
-'<lang:[a-z]{2}>/news/<id:\d+>' => 'news/news/view',
-'<lang:[a-z]{2}>/news'          => 'news/news/index',

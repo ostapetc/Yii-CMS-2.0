@@ -7,7 +7,7 @@ function getObjectUpdateUrl($object_id, $model)
         return;
     }
 
-    $object = ActiveRecordModel::model($model)->findByPk($object_id);
+    $object = ActiveRecord::model($model)->findByPk($object_id);
     if (!$object)
     {
         return;

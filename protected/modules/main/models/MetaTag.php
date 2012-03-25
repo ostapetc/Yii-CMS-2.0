@@ -1,6 +1,6 @@
 <?php
 
-class MetaTag extends ActiveRecordModel
+class MetaTag extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 
@@ -94,7 +94,7 @@ class MetaTag extends ActiveRecordModel
             return;
         }
 
-        $object = ActiveRecordModel::model($this->model_id)->findByPk($this->object_id);
+        $object = ActiveRecord::model($this->model_id)->findByPk($this->object_id);
         if ($object)
         {
             return $object;

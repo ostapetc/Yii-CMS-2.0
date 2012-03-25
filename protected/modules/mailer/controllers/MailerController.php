@@ -1,6 +1,6 @@
 <?php
  
-class MailerController extends BaseController
+class MailerController extends Controller
 {
     public static function actionsTitles()
     {

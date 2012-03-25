@@ -1,5 +1,5 @@
 <?php
-class FileManagerController extends BaseController
+class FileManagerController extends Controller
 {
     public static function actionsTitles()
     {

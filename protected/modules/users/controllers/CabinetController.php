@@ -1,5 +1,5 @@
 <?php
-class CabinetController extends BaseController
+class CabinetController extends Controller
 {
     public static function actionsTitles()
     {
@@ -16,7 +16,7 @@ class CabinetController extends BaseController
 
         $model           = User::model()->findByPk(Yii::app()->user->id);
         $model->scenario = User::SCENARIO_CABINET;
-        $form            = new BaseForm('users.CabinetForm', $model);
+        $form            = new Form('users.CabinetForm', $model);
 
         $this->performAjaxValidation($model);
         if ($form->submitted('submit'))

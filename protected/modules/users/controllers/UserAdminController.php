@@ -26,7 +26,7 @@ class UserAdminController extends AdminController
 
         $model = new User(User::SCENARIO_LOGIN);
 
-        $form = new BaseForm('users.LoginForm', $model);
+        $form = new Form('users.LoginForm', $model);
         $form->action = '';
         $form->cancel_button_show = false;
 
@@ -93,7 +93,7 @@ class UserAdminController extends AdminController
         $model           = new User;
         $model->scenario = 'Create';
 
-        $form = new BaseForm('users.UserForm', $model);
+        $form = new Form('users.UserForm', $model);
 
         unset($form->elements['captcha']);
 
@@ -130,7 +130,7 @@ class UserAdminController extends AdminController
 
         $old_password = $model->password;
 
-        $form = new BaseForm('users.UserForm', $model);
+        $form = new Form('users.UserForm', $model);
 
         unset($form->elements['captcha']);
 

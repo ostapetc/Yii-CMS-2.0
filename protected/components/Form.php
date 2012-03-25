@@ -1,6 +1,6 @@
 <?php
 
-class BaseForm extends CForm
+class Form extends CForm
 {
     private $_clear = false;
 
@@ -176,7 +176,7 @@ class BaseForm extends CForm
             $this->buttons->add("back", array(
                 'type'  => 'link',
                 'label' => t('Отмена'),
-                'url'   => Yii::app()->controller->createUrl('manage'),
+                'href'  => Yii::app()->controller->createUrl('manage'),
                 'class' => 'back_button btn btn-danger'
             ));
         }

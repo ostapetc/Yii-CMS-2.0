@@ -13,9 +13,9 @@ class LoginPanel extends Widget
     {
         if (Yii::app()->user->isGuest)
         {
-            $login_form    = new BaseForm('users.LoginForm', new User(User::SCENARIO_LOGIN));
-            $register_form = new BaseForm('users.RegistrationForm', new User(User::SCENARIO_REGISTRATION));
-            $forgot_form   = new BaseForm('users.PasswordRecoverRequestForm', new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST));
+            $login_form    = new Form('users.LoginForm', new User(User::SCENARIO_LOGIN));
+            $register_form = new Form('users.RegistrationForm', new User(User::SCENARIO_REGISTRATION));
+            $forgot_form   = new Form('users.PasswordRecoverRequestForm', new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST));
 
 
             $title = 'Вход';

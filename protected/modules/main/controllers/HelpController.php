@@ -4,7 +4,7 @@
  * Контроллер для всяких вспомогательных функций,
  * экшены можно добавить в него один раз, вместо того, что бы добавлять их во все контроллеры
  */
-class HelpController extends BaseController
+class HelpController extends Controller
 {
     public static function actionsTitles()
     {

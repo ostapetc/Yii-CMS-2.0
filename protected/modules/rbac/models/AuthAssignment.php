@@ -1,6 +1,6 @@
 <?php
 
-class AuthAssignment extends ActiveRecordModel
+class AuthAssignment extends ActiveRecord
 {
 	const PHOTOS_DIR = 'upload/news';
 

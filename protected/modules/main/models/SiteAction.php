@@ -1,6 +1,6 @@
 <?php
 
-class SiteAction extends ActiveRecordModel
+class SiteAction extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

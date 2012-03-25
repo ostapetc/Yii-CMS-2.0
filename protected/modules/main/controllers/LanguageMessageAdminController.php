@@ -16,7 +16,7 @@ class LanguageMessageAdminController extends AdminController
 
     public function actionManage()
     {
-        $model = new LanguageMessage(ActiveRecordModel::SCENARIO_SEARCH);
+        $model = new LanguageMessage(ActiveRecord::SCENARIO_SEARCH);
         $model->unsetAttributes();
 
         if (isset($_GET['LanguageMessage']))
@@ -35,7 +35,7 @@ class LanguageMessageAdminController extends AdminController
     {
         $language_message = new LanguageMessage();
 
-        $form = new BaseForm('main.LanguageTranslationForm', $language_message);
+        $form = new Form('main.LanguageTranslationForm', $language_message);
 
         if (isset($_POST['LanguageMessage']))
         {
@@ -57,7 +57,7 @@ class LanguageMessageAdminController extends AdminController
     {
         $language_message = $this->loadModel($id);
 
-        $form = new BaseForm('main.LanguageTranslationForm', $language_message);
+        $form = new Form('main.LanguageTranslationForm', $language_message);
 
         if (isset($_POST['LanguageMessage']))
         {

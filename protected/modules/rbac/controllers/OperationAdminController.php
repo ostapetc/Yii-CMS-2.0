@@ -56,7 +56,7 @@ class OperationAdminController extends AdminController
 	{
 		$model = new AuthItem();
 
-		$form = new BaseForm('rbac.OperationForm', $model);
+		$form = new Form('rbac.OperationForm', $model);
 
 		if (isset($_POST['AuthItem']))
 		{
@@ -93,7 +93,7 @@ class OperationAdminController extends AdminController
             $this->pageNotFound();
         }
 
-		$form = new BaseForm('rbac.OperationForm', $model);
+		$form = new Form('rbac.OperationForm', $model);
 
 		if (isset($_POST['AuthItem']))
 		{

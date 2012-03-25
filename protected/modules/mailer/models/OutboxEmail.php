@@ -1,6 +1,6 @@
 <?php
 
-class OutboxEmail extends ActiveRecordModel
+class OutboxEmail extends ActiveRecord
 {
     const STATUS_SENT    = 'sent';
     const STATUS_QUEUE   = 'queue';

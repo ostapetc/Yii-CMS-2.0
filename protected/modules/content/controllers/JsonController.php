@@ -1,5 +1,5 @@
 <?php
-class JsonController extends BaseController
+class JsonController extends Controller
 {
     public static function actionsTitles()
     {
@@ -16,7 +16,7 @@ class JsonController extends BaseController
         $methods = get_class_methods(__CLASS__);
         $methods = array_combine($methods, $methods);
         unset($methods[__FUNCTION__]);
-        foreach (get_class_methods('BaseController') as $method)
+        foreach (get_class_methods('Controller') as $method)
         {
             unset($methods[$method]);
         }

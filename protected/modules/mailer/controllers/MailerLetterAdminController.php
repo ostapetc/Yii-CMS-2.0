@@ -42,7 +42,7 @@ class MailerLetterAdminController extends AdminController
         $model              = new MailerLetter($scenario);
         $model->template_id = $template_id;
 
-        $form = new BaseForm('mailer.MailerLetterForm', $model);
+        $form = new Form('mailer.MailerLetterForm', $model);
 
         $this->performAjaxValidation($model);
         if ($form->submitted('submit'))
@@ -78,7 +78,7 @@ class MailerLetterAdminController extends AdminController
             $model->scenario    = 'without_template';
         }
 
-        $form = new BaseForm('mailer.MailerLetterForm', $model);
+        $form = new Form('mailer.MailerLetterForm', $model);
 
         $this->performAjaxValidation($model);
         if ($form->submitted('submit'))

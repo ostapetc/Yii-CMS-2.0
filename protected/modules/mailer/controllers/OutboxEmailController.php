@@ -1,6 +1,6 @@
 <?php
 
-class OutboxEmailController extends BaseController
+class OutboxEmailController extends Controller
 {
     public static function actionsTitles()
     {

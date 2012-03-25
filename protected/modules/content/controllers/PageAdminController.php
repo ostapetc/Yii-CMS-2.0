@@ -33,8 +33,8 @@ class PageAdminController extends AdminController
 
     public function actionCreate()
     {
-        $model = new Page(ActiveRecordModel::SCENARIO_CREATE);
-        $form  = new BaseForm('content.PageForm', $model);
+        $model = new Page(ActiveRecord::SCENARIO_CREATE);
+        $form  = new Form('content.PageForm', $model);
         $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
@@ -68,7 +68,7 @@ class PageAdminController extends AdminController
     {
         $model = $this->loadModel($id);
 
-        $form = new BaseForm('content.PageForm', $model);
+        $form = new Form('content.PageForm', $model);
         $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())

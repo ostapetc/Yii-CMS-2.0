@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends BaseController
+class UserController extends Controller
 {
     const ERROR_PASSWORD_RECOVER_AUTH = 'Вы не можете восстановить пароль будучи авторизованным!';
 
@@ -46,7 +46,7 @@ class UserController extends BaseController
 
         $this->performAjaxValidation($model);
 
-        $form = new BaseForm('users.LoginForm', $model);
+        $form = new Form('users.LoginForm', $model);
 
         if (isset($_POST['User']['email']) && isset($_POST['User']["password"]))
         {
@@ -100,7 +100,7 @@ class UserController extends BaseController
         ));
 
         $user = new User(User::SCENARIO_REGISTRATION);
-        $form = new BaseForm('users.RegistrationForm', $user);
+        $form = new Form('users.RegistrationForm', $user);
         $this->performAjaxValidation($user);
 
         if (isset($_POST['User']))
@@ -167,7 +167,7 @@ class UserController extends BaseController
     {
         $model = new User(User::SCENARIO_ACTIVATE_REQUEST);
 
-        $form = new BaseForm('users.ActivateRequestForm', $model);
+        $form = new Form('users.ActivateRequestForm', $model);
         $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
@@ -222,7 +222,7 @@ class UserController extends BaseController
         ));
 
         $model = new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST);
-        $form  = new BaseForm('users.ChangePasswordRequestForm', $model);
+        $form  = new Form('users.ChangePasswordRequestForm', $model);
         $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
@@ -281,7 +281,7 @@ class UserController extends BaseController
     public function actionChangePassword($code, $email)
     {
         $model = new User(User::SCENARIO_CHANGE_PASSWORD);
-        $form  = new BaseForm('users.ChangePasswordForm', $model);
+        $form  = new Form('users.ChangePasswordForm', $model);
         $this->performAjaxValidation($model);
 
         $user = User::model()->findByAttributes(array('password_change_code' => $code));

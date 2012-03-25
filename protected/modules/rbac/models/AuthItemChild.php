@@ -1,6 +1,6 @@
 <?php
 
-class AuthItemChild extends ActiveRecordModel
+class AuthItemChild extends ActiveRecord
 {
 	const PHOTOS_DIR = 'upload/news';
 

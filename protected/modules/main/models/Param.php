@@ -1,6 +1,6 @@
 <?php
 
-class Param extends ActiveRecordModel
+class Param extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

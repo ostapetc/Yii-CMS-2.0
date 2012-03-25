@@ -17,7 +17,7 @@ class MenuAdminController extends AdminController
     {
         $model = new Menu;
 
-        $form = new BaseForm('content.MenuForm', $model);
+        $form = new Form('content.MenuForm', $model);
 
         if ($form->submitted() && $model->save())
         {
@@ -37,7 +37,7 @@ class MenuAdminController extends AdminController
     {
         $model = $this->loadModel($id);
 
-        $form = new BaseForm('content.MenuForm', $model);
+        $form = new Form('content.MenuForm', $model);
 
         if ($form->submitted() && $model->save())
         {
@@ -50,7 +50,7 @@ class MenuAdminController extends AdminController
 
     public function actionManage()
     {
-        $model = new Menu(ActiveRecordModel::SCENARIO_SEARCH);
+        $model = new Menu(ActiveRecord::SCENARIO_SEARCH);
         $model->unsetAttributes();
 
         if (isset($_GET['Menu']))

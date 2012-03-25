@@ -253,9 +253,9 @@ class AppManager
 
                 $model_class = str_replace('.php', null, $model_file);
                 $class       = new ReflectionClass($model_class);
-                if ($class->isSubclassOf('ActiveRecordModel'))
+                if ($class->isSubclassOf('ActiveRecord'))
                 {
-                    $model = ActiveRecordModel::model($model_class);
+                    $model = ActiveRecord::model($model_class);
                 }
                 else
                 {

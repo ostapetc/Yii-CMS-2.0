@@ -29,7 +29,7 @@ class MetaTagAdminController extends AdminController
         $model = new MetaTag;
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('main.MetaTagForm', $model);
+        $form = new Form('main.MetaTagForm', $model);
 
         if ($form->submitted('submit'))
         {
@@ -63,7 +63,7 @@ class MetaTagAdminController extends AdminController
         $model = $this->loadModel($id);
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('main.MetaTagForm', $model);
+        $form = new Form('main.MetaTagForm', $model);
 
         if ($form->submitted('submit'))
         {

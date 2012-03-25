@@ -1,6 +1,6 @@
 <?php
 
-class PageController extends BaseController
+class PageController extends Controller
 {
     public static function actionsTitles()
     {
@@ -33,15 +33,6 @@ class PageController extends BaseController
             }
         }
 
-        $top_menu = Menu::model()->language()->find("code = '" . TopMenu::CODE . "'");
-        if ($top_menu)
-        {
-            $menu_setion = MenuSection::model()->findByAttributes(array(
-                'menu_id' => $top_menu->id,
-                'page_id' => $page->id
-            ));
-        }
-
         $this->crumbs = array($page->title);
         $this->_setMetaTags($page);
 
@@ -52,10 +43,12 @@ class PageController extends BaseController
     public function actionMain()
     {
         $page = Page::model()->published()->language()->findByAttributes(array("url" => "/"));
-        if ($page)
+        if (!$page)
         {
-            $this->_setMetaTags($page);
+            $this->pageNotFound();
         }
+
+        $this->_setMetaTags($page);
 
         $this->render('main', array(
             'page' => $page

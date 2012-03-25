@@ -1,6 +1,6 @@
 <?php
 
-class Sidebar extends ActiveRecordModel
+class Sidebar extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 

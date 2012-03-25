@@ -75,7 +75,7 @@ class MenuSectionAdminController extends AdminController
         $model = $this->loadModel($id);
         $model->detachBehavior('NestedSet');
 
-        $form = new BaseForm('content.MenuSectionForm', $model);
+        $form = new Form('content.MenuSectionForm', $model);
         $this->performAjaxValidation($model);
 
         if ($form->submitted('submit') && $model->save())
@@ -107,7 +107,7 @@ class MenuSectionAdminController extends AdminController
         $model = new MenuSection();
         $model->menu_id = $menu->id;
 
-        $form = new BaseForm('content.MenuSectionForm', $model);
+        $form = new Form('content.MenuSectionForm', $model);
         $this->performAjaxValidation($model);
 
         if ($form->submitted('submit') && $model->validate())
