@@ -2,6 +2,11 @@
 
 class UploadFileBehavior extends CActiveRecordBehavior
 {
+    private $_params = array(
+        'hash_store' => true
+    );
+
+
     public function beforeSave($event)
     {
         $model = $this->getOwner();
@@ -10,15 +15,25 @@ class UploadFileBehavior extends CActiveRecordBehavior
         {
             $upload_files = $model->uploadFiles();
 
-            foreach ($upload_files as $param => $data)
+            foreach ($upload_files as $attr => $params)
             {
-                $model->$param = CUploadedFile::getInstance($model, $param);
-                if ($model->$param)
-                {
-                    $extension = pathinfo($model->$param->name, PATHINFO_EXTENSION);
-                    $file_name = md5(rand(1, 200) . $model->$param->name . time()) . "." . strtolower($extension);
+                $params = array_merge($this->_params, $params);
 
-                    $file_dir = $_SERVER["DOCUMENT_ROOT"] . $data["dir"];
+                $model->$attr = CUploadedFile::getInstance($model, $attr);
+                if ($model->$attr)
+                {
+                    $extension = pathinfo($model->$attr->name, PATHINFO_EXTENSION);
+
+                    if ($params['hash_store'])
+                    {
+                        $file_name = md5(rand(1, 200) . $model->$attr->name . time()) . "." . strtolower($extension);
+                    }
+                    else
+                    {
+                        $file_name = $model->$attr->name;
+                    }
+
+                    $file_dir = $_SERVER["DOCUMENT_ROOT"] . $params["dir"];
                     if (substr($file_dir, -1) !== '/')
                     {
                     	$file_dir.= '/';
@@ -31,7 +46,7 @@ class UploadFileBehavior extends CActiveRecordBehavior
                     }
 
                     $file_path  = $file_dir . $file_name;
-                    $file_saved = $model->$param->saveAs($file_path);
+                    $file_saved = $model->$attr->saveAs($file_path);
 
                     if ($file_saved)
                     {
@@ -40,20 +55,20 @@ class UploadFileBehavior extends CActiveRecordBehavior
                         if ($file_saved && $model->id)
                         {
                             $object = $model->findByPk($model->id);
-                            if ($object->$param)
+                            if ($object->$attr)
                             {   
-                                FileSystemHelper::deleteFileWithSimilarNames($file_dir, $object->$param);
+                                FileSystemHelper::deleteFileWithSimilarNames($file_dir, $object->$attr);
                             }
                         }
 
-                        $model->$param = $file_name;
+                        $model->$attr = $file_name;
                     }
                 }
                 else
                 {
                 	if (!$model->isNewRecord)
                 	{	
-                		$model->$param = $model->model()->findByPk($model->primaryKey)->$param;
+                		$model->$attr = $model->model()->findByPk($model->primaryKey)->$attr;
                 	}
                 }
             }
@@ -68,14 +83,14 @@ class UploadFileBehavior extends CActiveRecordBehavior
     	if (method_exists($model, "uploadFiles"))
     	{
     		$files = $model->uploadFiles();
-    		foreach ($files as $param => $data)
+    		foreach ($files as $attr => $params)
     		{
-    			if (!$model->$param)
+    			if (!$model->$attr)
     			{
     				continue;
     			}
 
-    			$dir = $data["dir"];
+    			$dir = $params["dir"];
 
 	    		if (substr($dir, 0, strlen($_SERVER['DOCUMENT_ROOT'])) != $_SERVER['DOCUMENT_ROOT'])
 				{
@@ -87,7 +102,7 @@ class UploadFileBehavior extends CActiveRecordBehavior
 					$dir.= '/';
 				}
 
-				FileSystemHelper::deleteFileWithSimilarNames($dir, $model->$param);
+				FileSystemHelper::deleteFileWithSimilarNames($dir, $model->$attr);
     		}
     	}
     }

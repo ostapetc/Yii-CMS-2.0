@@ -46,6 +46,7 @@ class Param extends ActiveRecordModel
 	{
 		return array(
 			array('code, name','required'),
+            array('module_id', 'required', 'on' => array(self::SCENARIO_CREATE, self::SCENARIO_UPDATE)),
 			array('code', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),
 			array('element', 'length', 'max'=>8),
@@ -137,7 +138,7 @@ class Param extends ActiveRecordModel
             case 'file':
                 if ($path = $this->getFilePath())
                 {
-                    return CHtml::image($path, '', array('height' => 20));
+                    return CHtml::link($this->value, $path, array('target' => '_blank'));
                 }
                 break;
         }
@@ -167,7 +168,8 @@ class Param extends ActiveRecordModel
 
             return array(
                 'value' => array(
-                    'dir' => self::FILES_DIR
+                    'dir'        => self::FILES_DIR,
+                    'hash_store' => false
                 )
             );
         }

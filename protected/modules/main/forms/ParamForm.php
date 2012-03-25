@@ -13,8 +13,16 @@ if ($this->model->scenario == Param::SCENARIO_VALUE_UPDATE)
 else
 {
     $elements = array(
-        'name' => array('type' => 'text'),
-        'code' => array('type' => 'text'),
+        'module_id' => array(
+            'type'  => 'dropdownlist',
+            'items' => CHtml::listData(AppManager::getModulesData(), 'dir', 'name'),
+        ),
+        'name' => array(
+            'type' => 'text'
+        ),
+        'code' => array(
+            'type' => 'text'
+        ),
         'element' => array(
             'type'  => 'dropdownlist',
             'items' => Param::$elements
