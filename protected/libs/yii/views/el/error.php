@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Σφάλμα <?php echo $data['code']; ?></title>
+<title>Σφάλμα <? echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>Σφάλμα <?php echo $data['code']; ?></h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>Σφάλμα <? echo $data['code']; ?></h1>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Υπήρξε το παραπάνω σφάλμα κατά την επεξεργασία της αίτησής σας από το διακομιστή.
 </p>
 <p>
-Αν πιστεύετε ότι αυτό είναι λάθος του διακομιστή, παρακαλούμε επικοινωνήστε με <?php echo $data['admin']; ?>.
+Αν πιστεύετε ότι αυτό είναι λάθος του διακομιστή, παρακαλούμε επικοινωνήστε με <? echo $data['admin']; ?>.
 </p>
 <p>
 Ευχαριστούμε.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

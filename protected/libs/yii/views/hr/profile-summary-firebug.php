@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Profiliranje - Sažetak izvješća");
 	console.log(" izbrojati   ukupno   prosjek    min      max   ");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

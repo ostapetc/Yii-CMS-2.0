@@ -1,4 +1,4 @@
-<?php
+<?
  
 class UserForeignKeyBehavior extends  CActiveRecordBehavior
 {

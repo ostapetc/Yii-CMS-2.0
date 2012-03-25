@@ -1,4 +1,4 @@
-<?php
+<?
 class SortableColumn extends CDataColumn
 {
     public $cssClass = null;

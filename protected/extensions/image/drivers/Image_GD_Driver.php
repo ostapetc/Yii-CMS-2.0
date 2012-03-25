@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * GD Image Driver.

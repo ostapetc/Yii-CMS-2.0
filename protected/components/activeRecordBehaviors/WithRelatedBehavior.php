@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * WithRelatedBehavior class file.
  *

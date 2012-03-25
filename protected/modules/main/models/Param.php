@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Param extends ActiveRecord
 {

@@ -1,29 +1,29 @@
-<?php 
+<?
 $this->page_title = 'Добавление всех операций из модулей';
 ?>
 
-<?php if ($actions): ?>
+<? if ($actions): ?>
  
     <form method="post">
         <table class="no_borders_table">
-            <?php $t = array(); ?>
-            <?php foreach ($actions as $name => $title): ?>
+            <? $t = array(); ?>
+            <? foreach ($actions as $name => $title): ?>
             
-                <?php $t[]=$name; ?>
+                <? $t[]=$name; ?>
         
                 <tr>
                     <td>
-                        <?php echo $name; ?>
-                        <input type="hidden" name="actions[]" value="<?php echo $name; ?>">
+                        <? echo $name; ?>
+                        <input type="hidden" name="actions[]" value="<? echo $name; ?>">
                     </td>
                     <td>
                         &nbsp;
                         <b>Описание:</b> &nbsp;
-                        <input type="text" name="description[]"  value="<?php echo $title; ?>" class="text">
+                        <input type="text" name="description[]"  value="<? echo $title; ?>" class="text">
                     </td>
                 </tr>
             
-            <?php endforeach ?>
+            <? endforeach ?>
             
             <tr>
                 <td>
@@ -34,8 +34,8 @@ $this->page_title = 'Добавление всех операций из мод�
         </table>
     </form>  
     
-<?php else: ?>
+<? else: ?>
 
-    <?php echo $this->msg("Все задачи уже добавлены!", "info"); ?>
+    <? echo $this->msg("Все задачи уже добавлены!", "info"); ?>
     
-<?php endif ?>
+<? endif ?>

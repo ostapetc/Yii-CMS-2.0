@@ -1,7 +1,7 @@
 <div>
     <div class="hero-unit">
-        <?php echo $page->text; ?>
+        <? echo $page->text; ?>
     </div>
 
-    <p><?php echo $page->content ?></p>
+    <p><? echo $page->content ?></p>
 </div>

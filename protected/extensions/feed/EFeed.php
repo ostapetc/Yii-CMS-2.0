@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * EFeed Class file
  * @author Antonio Ramirez 

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CQueueIterator class file.
  *

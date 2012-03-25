@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Nie znaleziono</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Żądany adres URL nie został znaleziony na tym serwerze.
 Jeśli wprowadziłeś adres URL ręcznie, sprawdź pisownię i spróbuj ponownie.
 </p>
 <p>
-Jeśli myślisz, że jest to błąd serwera proszę skontaktuj się z <?php echo $data['admin']; ?>.
+Jeśli myślisz, że jest to błąd serwera proszę skontaktuj się z <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='DejaVuSerifCondensed-Bold';
 $desc=array('Ascent'=>939,'Descent'=>-236,'CapHeight'=>4,'Flags'=>32,'FontBBox'=>'[-752 -389 1616 1235]','ItalicAngle'=>0,'StemV'=>120,'MissingWidth'=>540);

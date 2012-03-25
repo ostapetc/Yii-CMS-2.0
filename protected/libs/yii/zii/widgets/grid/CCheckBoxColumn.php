@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CCheckBoxColumn class file.
  *

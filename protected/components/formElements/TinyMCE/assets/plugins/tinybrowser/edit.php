@@ -1,4 +1,4 @@
-<?php
+<?
 require_once("config_tinybrowser.php");
 // Set language
 if(isset($tinybrowser['language']) && file_exists('langs/'.$tinybrowser['language'].'.php'))
@@ -31,7 +31,7 @@ if(!$tinybrowser['allowedit'] && !$tinybrowser['allowdelete'])
 $typenow = (isset($_GET['type']) ? $_GET['type'] : 'image');
 $passfeid = (isset($_GET['feid']) && $_GET['feid']!='' ? '&feid='.$_GET['feid'] : '');
 
-$pathnow = (isset($_REQUEST['path']) ? $_REQUEST['path'] : ''); //текущий путь
+$pathnow = (isset($_REQUEST['path']) ? $_REQUEST['path'] : ''); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
 // Assign edit and thumbnail path
 $editpath = $tinybrowser['path'][$typenow].$pathnow.'/';
@@ -283,46 +283,46 @@ else
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>TinyBrowser :: <?php echo TB_EDIT; ?></title>
+<title>TinyBrowser :: <? echo TB_EDIT; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<?php
+<?
 if($passfeid == '' && $tinybrowser['integration']=='tinymce')
 	{
-	?><link rel="stylesheet" type="text/css" media="all" href="<?php echo $tinybrowser['tinymcecss']; ?>" /><?php 
+	?><link rel="stylesheet" type="text/css" media="all" href="<? echo $tinybrowser['tinymcecss']; ?>" /><?
 	}
 else
 	{
-	?><link rel="stylesheet" type="text/css" media="all" href="css/stylefull_tinybrowser.css" /><?php 
+	?><link rel="stylesheet" type="text/css" media="all" href="css/stylefull_tinybrowser.css" /><?
 	}
 ?>
 <link rel="stylesheet" type="text/css" media="all" href="css/style_tinybrowser.css.php" />
 <script language="javascript" type="text/javascript" src="js/tinybrowser.js.php"></script>
 </head>
 <body onload="rowHighlight();">
-<?php
+<?
 if(count($notify['type'])>0) alert($notify);
 ?>
 <div class="tabs">
 <ul>
-<li id="browse_tab"><span><a href="tinybrowser.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_BROWSE; ?></a></span></li>
-<?php
+<li id="browse_tab"><span><a href="tinybrowser.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_BROWSE; ?></a></span></li>
+<?
 if($tinybrowser['allowupload']) 
 	{
-	?><li id="upload_tab"><span><a href="upload.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_UPLOAD; ?></a></span></li>
-	<?php 
+	?><li id="upload_tab"><span><a href="upload.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_UPLOAD; ?></a></span></li>
+	<?
 	} ?>
-<li id="edit_tab" class="current"><span><a href="edit.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_EDIT; ?></a></span></li>
+<li id="edit_tab" class="current"><span><a href="edit.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_EDIT; ?></a></span></li>
 </ul>
 </div>
 <div class="panel_wrapper">
 <div id="general_panel" class="panel currentmod">
 <fieldset>
-<legend><?php echo TB_EDITFILES; ?></legend>
-<?php
+<legend><? echo TB_EDITFILES; ?></legend>
+<?
 form_open('edit','custom',basename($_SERVER["SCRIPT_NAME"]),'?type='.$typenow.$passfeid.'&path='.$pathnow);
 ?>
 <div class="pushleft">
-<?php
+<?
 
 // Assign edit actions based on file type and permissions
 $select = array();
@@ -346,13 +346,13 @@ if($tinybrowser['pagination']>0)
 		}
 	if($i>2) form_select($page,'showpage',SHOW,$showpagenow,true);
 	}
-?></div><div class="pushright"><?php
+?></div><div class="pushright"><?
 
 form_hidden_input('sortby',$sortbynow);
 form_hidden_input('sorttype',$sorttypenow);
 form_text_input('find',false,$findnow,25,50);
 form_submit_button('search',TB_SEARCH,'');
-?></div><?php
+?></div><?
 
 form_open('actionform','custom',basename($_SERVER["SCRIPT_NAME"]),'?type='.$typenow.$passfeid.'&path='.$pathnow);
 
@@ -382,11 +382,11 @@ switch($actionnow)
 		// do nothing
 	}
 ?><div class="tabularwrapper"><table class="browse"><tr>
-<th><a href="?type=<?php echo $typenow.$passfeid.$sortbyget['name']; ?>"<?php echo $thclass['name']; ?>><?php echo TB_FILENAME; ?></a></th>
-<th><a href="?type=<?php echo $typenow.$passfeid.$sortbyget['size']; ?>"<?php echo $thclass['size']; ?>><?php echo TB_SIZE; ?></a></th>
-<th><a href="?type=<?php echo $typenow.$passfeid.$sortbyget['type']; ?>"<?php echo $thclass['type']; ?>><?php echo TB_TYPE; ?></th>
-<th class="nohover"><?php echo $actionhead; ?></th></tr>
-<?php
+<th><a href="?type=<? echo $typenow.$passfeid.$sortbyget['name']; ?>"<? echo $thclass['name']; ?>><? echo TB_FILENAME; ?></a></th>
+<th><a href="?type=<? echo $typenow.$passfeid.$sortbyget['size']; ?>"<? echo $thclass['size']; ?>><? echo TB_SIZE; ?></a></th>
+<th><a href="?type=<? echo $typenow.$passfeid.$sortbyget['type']; ?>"<? echo $thclass['type']; ?>><? echo TB_TYPE; ?></th>
+<th class="nohover"><? echo $actionhead; ?></th></tr>
+<?
 
 for($i=$showpagestart;$i<$showpageend;$i++)
 	{

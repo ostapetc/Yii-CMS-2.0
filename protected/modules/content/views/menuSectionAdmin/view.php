@@ -1,26 +1,26 @@
 <link rel="stylesheet" type="text/css" href="/css/admin/view_table.css"/>
 
-<?php if ($links): ?>
+<? if ($links): ?>
 
 	<table class='view_table'>
 		<tr class='odd'>
-	    	<th><?php echo $meta['title']['Comment'] ?></th>
-	    	<th><?php echo $meta['url']['Comment'] ?></th>
-	    	<th><?php echo $meta['parent_id']['Comment'] ?></th>
-	    	<th><?php echo $meta['page_id']['Comment'] ?></th>
-	    	<th><?php echo $meta['is_published']['Comment'] ?></th>
+	    	<th><? echo $meta['title']['Comment'] ?></th>
+	    	<th><? echo $meta['url']['Comment'] ?></th>
+	    	<th><? echo $meta['parent_id']['Comment'] ?></th>
+	    	<th><? echo $meta['page_id']['Comment'] ?></th>
+	    	<th><? echo $meta['is_published']['Comment'] ?></th>
 	  	</tr>
-	  	<?php foreach ($links as $link): ?>
+	  	<? foreach ($links as $link): ?>
 	  		<tr>
-	  			<td><?php echo $link->title ?></td>
-	  			<td><?php echo $link->url ?></td>
-	  			<td><?php echo $link->parent_id ?></td>
-	  			<td><?php echo $link->page_id ?></td>
-	  			<td align="center"><?php echo $link->is_published ? 'Да' : 'Нет' ?></td>
+	  			<td><? echo $link->title ?></td>
+	  			<td><? echo $link->url ?></td>
+	  			<td><? echo $link->parent_id ?></td>
+	  			<td><? echo $link->page_id ?></td>
+	  			<td align="center"><? echo $link->is_published ? 'Да' : 'Нет' ?></td>
 	  		</tr>
-	  	<?php endforeach ?>
+	  	<? endforeach ?>
 	</table>
 	
-<?php else: ?>
+<? else: ?>
 	<div class='warning_box'>У данного отсутствуют разделы.</div>
-<?php endif ?>
+<? endif ?>

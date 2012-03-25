@@ -1,4 +1,4 @@
-<?php
+<?
 
 class ControllerGenerator extends CCodeGenerator
 {

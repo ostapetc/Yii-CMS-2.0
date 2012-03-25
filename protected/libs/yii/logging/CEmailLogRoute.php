@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CEmailLogRoute class file.
  *

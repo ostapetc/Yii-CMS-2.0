@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CPagination class file.
  *
@@ -40,12 +40,12 @@
  *
  * View:
  * <pre>
- * <?php foreach($models as $model): ?>
+ * <? foreach($models as $model): ?>
  *     // display a model
- * <?php endforeach; ?>
+ * <? endforeach; ?>
  *
  * // display pagination
- * <?php $this->widget('CLinkPager', array(
+ * <? $this->widget('CLinkPager', array(
  *     'pages' => $pages,
  * )) ?>
  * </pre>

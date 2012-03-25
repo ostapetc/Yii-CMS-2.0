@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbColumnSchema class file.
  *

@@ -25,7 +25,7 @@ Serveren er utilgjengelig for øyeblikket grunnet vedlikehold. Vennligst prøv s
 Takk!
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

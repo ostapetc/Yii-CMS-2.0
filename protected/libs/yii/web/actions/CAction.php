@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CAction class file.
  *

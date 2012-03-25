@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = 'Роли';
 
 function tasksLink($role)

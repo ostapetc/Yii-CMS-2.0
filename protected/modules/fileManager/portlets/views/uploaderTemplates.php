@@ -5,10 +5,10 @@
         <td class="descr">${text}</td>
         {{if error}}
         <td class="error" colspan="2">Error:
-            {{if error === 'maxFileSize'}}<?php echo Yii::t('FileManagerModule.interface', 'Файл слишком велик') ?>
-            {{else error === 'minFileSize'}}<?php echo Yii::t('FileManagerModule.interface', 'Файл слишком мал') ?>
-            {{else error === 'acceptFileTypes'}}<?php echo Yii::t('FileManagerModule.interface', 'Запрещенный тип файла') ?>
-            {{else error === 'maxNumberOfFiles'}}<?php echo Yii::t('FileManagerModule.interface', 'Превышено колличество файлов') ?>
+            {{if error === 'maxFileSize'}}<? echo Yii::t('FileManagerModule.interface', 'Файл слишком велик') ?>
+            {{else error === 'minFileSize'}}<? echo Yii::t('FileManagerModule.interface', 'Файл слишком мал') ?>
+            {{else error === 'acceptFileTypes'}}<? echo Yii::t('FileManagerModule.interface', 'Запрещенный тип файла') ?>
+            {{else error === 'maxNumberOfFiles'}}<? echo Yii::t('FileManagerModule.interface', 'Превышено колличество файлов') ?>
             {{else}}${error}
             {{/if}}
         </td>
@@ -35,19 +35,19 @@
         <td class="{title}">${title}</td>
         <td class="size">${size}</td>
         <td class="error" colspan="2">Error:
-            {{if error === 1}}  <?php echo Yii::t('FileManagerModule.interface', 'Файл превышает размер допустимый сервером (php.ini директива)') ?>
-            {{else error === 2}}<?php echo Yii::t('FileManagerModule.interface', 'файл слишком велик (HTML директива)') ?>
-            {{else error === 3}}<?php echo Yii::t('FileManagerModule.interface', 'Только часть файла была загружена') ?>
-            {{else error === 4}}<?php echo Yii::t('FileManagerModule.interface', 'Файл не был загружен') ?>
-            {{else error === 5}}<?php echo Yii::t('FileManagerModule.interface', 'Пропущена временная директория') ?>
-            {{else error === 6}}<?php echo Yii::t('FileManagerModule.interface', 'Ошибка при записи файла на диск') ?>
-            {{else error === 7}}<?php echo Yii::t('FileManagerModule.interface', 'Неверное расширение файла') ?>
-            {{else error === 'maxFileSize'}}<?php echo Yii::t('FileManagerModule.interface', 'Файл слишком велик') ?>
-            {{else error === 'minFileSize'}}<?php echo Yii::t('FileManagerModule.interface', 'Файл слишком мал') ?>
-            {{else error === 'acceptFileTypes'}}<?php echo Yii::t('FileManagerModule.interface', 'Запрещенный тип файла') ?>
-            {{else error === 'maxNumberOfFiles'}}<?php echo Yii::t('FileManagerModule.interface', 'Превышено колличество файлов') ?>
-            {{else error === 'uploadedBytes'}}<?php echo Yii::t('FileManagerModule.interface', 'Загружаемый файлы превысил допустимые размеры') ?>
-            {{else error === 'emptyResult'}}<?php echo Yii::t('FileManagerModule.interface', 'Файл пуст') ?>
+            {{if error === 1}}  <? echo Yii::t('FileManagerModule.interface', 'Файл превышает размер допустимый сервером (php.ini директива)') ?>
+            {{else error === 2}}<? echo Yii::t('FileManagerModule.interface', 'файл слишком велик (HTML директива)') ?>
+            {{else error === 3}}<? echo Yii::t('FileManagerModule.interface', 'Только часть файла была загружена') ?>
+            {{else error === 4}}<? echo Yii::t('FileManagerModule.interface', 'Файл не был загружен') ?>
+            {{else error === 5}}<? echo Yii::t('FileManagerModule.interface', 'Пропущена временная директория') ?>
+            {{else error === 6}}<? echo Yii::t('FileManagerModule.interface', 'Ошибка при записи файла на диск') ?>
+            {{else error === 7}}<? echo Yii::t('FileManagerModule.interface', 'Неверное расширение файла') ?>
+            {{else error === 'maxFileSize'}}<? echo Yii::t('FileManagerModule.interface', 'Файл слишком велик') ?>
+            {{else error === 'minFileSize'}}<? echo Yii::t('FileManagerModule.interface', 'Файл слишком мал') ?>
+            {{else error === 'acceptFileTypes'}}<? echo Yii::t('FileManagerModule.interface', 'Запрещенный тип файла') ?>
+            {{else error === 'maxNumberOfFiles'}}<? echo Yii::t('FileManagerModule.interface', 'Превышено колличество файлов') ?>
+            {{else error === 'uploadedBytes'}}<? echo Yii::t('FileManagerModule.interface', 'Загружаемый файлы превысил допустимые размеры') ?>
+            {{else error === 'emptyResult'}}<? echo Yii::t('FileManagerModule.interface', 'Файл пуст') ?>
             {{else}}${error}
             {{/if}}
         </td>
@@ -57,14 +57,14 @@
             {{html thumbnail_url}}
             {{/if}}
         </td>
-        <?php foreach ($this->fields as $field=> $sett): ?>
-        <td style="width: <?php echo $sett['size'];?>px;">
-            <div class="<?php echo $field ?> editable" data-attr="<?php echo $field;?>" data-editable-type="<?php echo $sett['type'];?>"
+        <? foreach ($this->fields as $field=> $sett): ?>
+        <td style="width: <? echo $sett['size'];?>px;">
+            <div class="<? echo $field ?> editable" data-attr="<? echo $field;?>" data-editable-type="<? echo $sett['type'];?>"
                  data-save-url="${edit_url}">
-                <span>${<?php echo $field;?>}</span>
+                <span>${<? echo $field;?>}</span>
             </div>
         </td>
-        <?php endforeach; ?>
+        <? endforeach; ?>
         <td class="dnd-handler">
             <i class="icon-sortable"></i>
         </td>

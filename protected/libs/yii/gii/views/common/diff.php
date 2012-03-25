@@ -1,9 +1,9 @@
-<?php if($diff===false): ?>
+<? if($diff===false): ?>
 	<div class="error">Diff is not supported for this file type.</div>
-<?php elseif(empty($diff)): ?>
+<? elseif(empty($diff)): ?>
 	<div class="error">No changes.</div>
-<?php else: ?>
+<? else: ?>
 	<div class="content">
-		<pre class="diff"><?php echo $diff; ?></pre>
+		<pre class="diff"><? echo $diff; ?></pre>
 	</div>
-<?php endif; ?>
+<? endif; ?>

@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title.= " :: {$role->description}";
 
 $cs = Yii::app()->clientScript;
@@ -6,29 +6,29 @@ $cs->registerScriptFile($this->module->assetsUrl() . '/js/rolesTasks.js');
 $cs->registerCssFile($this->module->assetsUrl() . '/css/rolesTasks.css');
 ?>
 
-<?php if ($tasks): ?>
+<? if ($tasks): ?>
     <table width="100%" cellspacing="0">
-        <?php foreach ($tasks as $task): ?>
-            <?php
+        <? foreach ($tasks as $task): ?>
+            <?
             $allow = in_array($task->name, $allowed_tasks);
             ?>
 
-            <tr task='<?php echo $task->name; ?>' class="<?php echo $allow ? 'allow_tr' : 'deny_tr'; ?>">
+            <tr task='<? echo $task->name; ?>' class="<? echo $allow ? 'allow_tr' : 'deny_tr'; ?>">
                 <td style="padding-top: 14px;">
-                    <h4><?php echo $task->description; ?></h4>
+                    <h4><? echo $task->description; ?></h4>
                 </td>
                 <td class="links_td">
-                    <?php if ($allow): ?>
+                    <? if ($allow): ?>
                         <a href="#" class="deny_link">Запретить</a>
-                    <?php else: ?>
+                    <? else: ?>
                         <a href="#" class="allow_link">Разрешить</a>
-                    <?php endif ?>
+                    <? endif ?>
                 </td>
             </tr>
-        <?php endforeach ?>
+        <? endforeach ?>
     </table>
-<?php else: ?>
-    <?php echo $this->msg("Для начала нужно добавить задачи!", "warning"); ?>
-<?php endif ?>
+<? else: ?>
+    <? echo $this->msg("Для начала нужно добавить задачи!", "warning"); ?>
+<? endif ?>
 
-<input type="hidden" id="curr_role" value="<?php echo $role->name; ?>">
+<input type="hidden" id="curr_role" value="<? echo $role->name; ?>">

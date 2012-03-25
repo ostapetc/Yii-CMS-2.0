@@ -1,4 +1,4 @@
-<?php
+<?
 
 // private class for unit testing
 

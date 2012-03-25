@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::import('zii.widgets.CDetailView');
 class AdminDetailView extends CDetailView
 {

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CJuiInputWidget class file.
  *

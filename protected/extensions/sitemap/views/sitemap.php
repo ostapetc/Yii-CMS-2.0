@@ -1,4 +1,4 @@
-<?php
+<?
 
 foreach( $list as $row ):
 

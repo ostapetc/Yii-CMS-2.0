@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='DejaVuSansCondensed-BoldOblique';
 $desc=array('Ascent'=>928,'Descent'=>-236,'CapHeight'=>-46,'Flags'=>96,'FontBBox'=>'[-960 -385 1804 1121]','ItalicAngle'=>-11,'StemV'=>120,'MissingWidth'=>540);

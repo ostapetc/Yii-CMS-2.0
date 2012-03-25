@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMenu class file.
  *

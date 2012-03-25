@@ -1,4 +1,4 @@
-<?php
+<?
 
 $roles = AuthItem::model()->findAllByAttributes(array('type' => AuthItem::TYPE_ROLE));
 

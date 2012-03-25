@@ -1,4 +1,4 @@
-<?php
+<?
 
 class PageAdminController extends AdminController
 {

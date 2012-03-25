@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CNumberValidator class file.
  *

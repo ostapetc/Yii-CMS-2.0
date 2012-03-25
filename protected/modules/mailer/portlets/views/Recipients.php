@@ -22,10 +22,10 @@
 <br><br>    
 
 <div id='recipients_div'>
-    <?php foreach ($grouped_users as $role_desc => $user_names):?>
-        <b><?php echo $role_desc; ?></b><br/>
-        <?php echo implode(', ', $user_names); ?>
+    <? foreach ($grouped_users as $role_desc => $user_names):?>
+        <b><? echo $role_desc; ?></b><br/>
+        <? echo implode(', ', $user_names); ?>
         <br/>
         <br>
-    <?php endforeach ?>
+    <? endforeach ?>
 </div>

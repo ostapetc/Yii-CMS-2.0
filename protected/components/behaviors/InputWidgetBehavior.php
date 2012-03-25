@@ -1,4 +1,4 @@
-<?php
+<?
 class InputWidgetBehavior extends CBehavior
 {
     private $_assets;

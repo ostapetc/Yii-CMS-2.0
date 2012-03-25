@@ -18,15 +18,15 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>잘못된 요청</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 문법 오류로 요청을 처리하지 못했습니다. 수정 후 다시 요청하기 바랍니다.
 </p>
 <p>
-서버 에러로 의심되면 <?php echo $data['admin']; ?>에게 문의 바랍니다.
+서버 에러로 의심되면 <? echo $data['admin']; ?>에게 문의 바랍니다.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

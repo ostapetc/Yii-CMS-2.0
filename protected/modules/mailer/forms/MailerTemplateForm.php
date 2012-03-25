@@ -1,4 +1,4 @@
-<?php
+<?
 
 $elements = array(
     'name'      => array('type' => 'text'),

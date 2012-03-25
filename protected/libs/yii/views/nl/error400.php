@@ -16,9 +16,9 @@
     </head>
     <body>
         <h1>Ongeldige aanvraag</h1>
-        <h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+        <h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
         <p>Uw browser (of proxy) stuurde een aanvraag die deze server niet kon begrijpen door een slechte syntax. Herhaal deze aanvraag niet zonder correcties aub.</p>
-        <p>Als u van mening bent dat dit een server fout is, neem dan a.u.b. contact op met de <?php echo $data['admin']; ?> </p>
-        <div class="version"><?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?></div>
+        <p>Als u van mening bent dat dit een server fout is, neem dan a.u.b. contact op met de <? echo $data['admin']; ?> </p>
+        <div class="version"><? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?></div>
     </body>
 </html>

@@ -1,4 +1,4 @@
-<?php
+<?
 function getRecipientsList($model)
 {
     if (!$model->users)

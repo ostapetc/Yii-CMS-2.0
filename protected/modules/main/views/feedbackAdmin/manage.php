@@ -1,6 +1,6 @@
-<?php $this->page_title = 'Управление сообщениями'; ?>
+<? $this->page_title = 'Управление сообщениями'; ?>
 
-<?php
+<?
 $this->widget('AdminGridView', array(
 	'id'=>'feedback-grid',
 	'dataProvider'=>$model->search(),

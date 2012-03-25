@@ -1,4 +1,4 @@
-<?php
+<?
 
 // Levenberg-Marquardt in PHP
 

@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Sidebars extends Portlet
 {

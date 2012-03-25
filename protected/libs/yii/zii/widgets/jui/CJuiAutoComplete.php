@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CJuiAutoComplete class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MenuSectionController extends Controller
 {

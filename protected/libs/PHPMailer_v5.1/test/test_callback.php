@@ -4,7 +4,7 @@
 </head>
 <body>
 
-<?php
+<?
 /* This is a sample callback function for PHPMailer Lite.
  * This callback function will echo the results of PHPMailer processing.
  */

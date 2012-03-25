@@ -1,4 +1,4 @@
-<?php
+<?
 class JsonRpcAction extends CAction
 {
     public function actionIndex()

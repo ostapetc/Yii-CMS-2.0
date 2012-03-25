@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::setPathOfAlias('webshell', dirname(__FILE__));
 
 /**

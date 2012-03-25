@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMssqlSchema class file.
  *

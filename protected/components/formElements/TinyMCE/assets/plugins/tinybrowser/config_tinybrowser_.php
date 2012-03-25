@@ -1,4 +1,4 @@
-<?php
+<?
 /*
 TinyBrowser 1.33- A TinyMCE file browser (C) 2008  Bryn Jones
 (author website - http://www.lunarvis.com)

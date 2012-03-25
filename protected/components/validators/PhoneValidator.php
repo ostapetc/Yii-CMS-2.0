@@ -1,4 +1,4 @@
-<?php
+<?
 
 class PhoneValidator extends CValidator
 {

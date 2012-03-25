@@ -1,4 +1,4 @@
-<?php
+<?
 class MetaTagsFilter extends CFilter
 {
     protected function preFilter($filterChain)

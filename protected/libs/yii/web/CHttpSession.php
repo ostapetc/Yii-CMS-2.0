@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CHttpSession class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 
 class AdminPanel extends CTestCase
 {

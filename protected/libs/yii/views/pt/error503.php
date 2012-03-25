@@ -25,7 +25,7 @@ Atualmente, nosso sistema encontra-se em manuntenção. Por favor, tente mais ta
 Obrigado.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

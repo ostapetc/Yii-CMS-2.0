@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='DejaVuSans';
 $desc=array('Ascent'=>928,'Descent'=>-236,'CapHeight'=>30,'Flags'=>96,'FontBBox'=>'[-1021 -350 1681 1167]','ItalicAngle'=>20.8,'StemV'=>70,'MissingWidth'=>600);

@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Cerere gresita</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Cererea nu este inteleasa de catre server datorita unei sintaxe necorespunzatoare.
 Va rugam sa faceti modificarile necesare inainte de retrimiterea cererii.
 </p>
 <p>
-In cazul in care credeti ca eroarea este de partea serverului, va rugam contactati <?php echo $data['admin']; ?>.
+In cazul in care credeti ca eroarea este de partea serverului, va rugam contactati <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

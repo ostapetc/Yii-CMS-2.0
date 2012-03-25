@@ -1,4 +1,4 @@
-<?php
+<?
 class HttpsFilter extends CFilter
 {
     protected function preFilter($filterChain)

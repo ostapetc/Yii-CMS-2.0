@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CClipWidget class file.
  *

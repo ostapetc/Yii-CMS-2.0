@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CSort class file.
  *

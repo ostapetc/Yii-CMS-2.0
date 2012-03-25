@@ -1,4 +1,4 @@
-<?php
+<?
 class MenuSection extends ActiveRecord
 {
     const PAGE_SIZE = 100;

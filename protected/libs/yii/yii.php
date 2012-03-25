@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Yii bootstrap file.
  *

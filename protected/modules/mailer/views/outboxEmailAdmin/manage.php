@@ -1,4 +1,4 @@
-<?php
+<?
 //$this->tabs = array(
 //    'добавить исходящее письмо' => $this->createUrl('create')
 //);

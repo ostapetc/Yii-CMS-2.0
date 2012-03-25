@@ -1,4 +1,4 @@
-<?php
+<?
 class StatisticFilter extends CFilter
 {
     protected function preFilter($filterChain)

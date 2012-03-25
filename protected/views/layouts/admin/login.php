@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title>Yii CMS Admin Panel</title>
 
-    <?php
+    <?
     $cs = Yii::app()->clientScript;
     $cs->registerCoreScript('jquery.ui');
     $cs->registerCssFile('/css/admin/layout.css');
@@ -38,17 +38,17 @@
 <body>
     <header id="header">
         <hgroup>
-            <h2 class="section_title" style="width: 100%;text-align: center"><?php echo t('Панель управления : Авторизация'); ?></h2>
+            <h2 class="section_title" style="width: 100%;text-align: center"><? echo t('Панель управления : Авторизация'); ?></h2>
         </hgroup>
     </header>
 
     <article class="module middle_div">
         <div style="padding: 10px!important;">
-            <?php echo $content; ?>
+            <? echo $content; ?>
         </div>
-        <?php if ($this->footer): ?>
-            <footer><?php echo $this->footer; ?></footer>
-        <?php endif ?>
+        <? if ($this->footer): ?>
+            <footer><? echo $this->footer; ?></footer>
+        <? endif ?>
     </article>
 </body>
 

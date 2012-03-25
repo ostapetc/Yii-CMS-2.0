@@ -1,4 +1,4 @@
-<?php
+<?
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('rbac')->assetsUrl() . '/js/rbac.js');
 

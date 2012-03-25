@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>페이지 없음</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 서버에서 요청한 URL을 찾을 수 없습니다.
 직접 URL을 입력했다면 스펠링을 확인 후 다시 시도하기 바랍니다.
 </p>
 <p>
-서버 에러로 의심되면 <?php echo $data['admin']; ?>에게 문의 바랍니다.
+서버 에러로 의심되면 <? echo $data['admin']; ?>에게 문의 바랍니다.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

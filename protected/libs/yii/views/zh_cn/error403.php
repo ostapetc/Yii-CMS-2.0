@@ -18,15 +18,15 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>未被授权</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 你没有访问此页面的授权.
 </p>
 <p>
-如果您认为此错误是服务器造成的,请与管理员联系 <?php echo $data[ 'admin']; ?>.
+如果您认为此错误是服务器造成的,请与管理员联系 <? echo $data[ 'admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

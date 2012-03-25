@@ -1,4 +1,4 @@
-<?php
+<?
 class JsonController extends Controller
 {
     public static function actionsTitles()

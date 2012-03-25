@@ -1,4 +1,4 @@
-<?php
+<?
 
 class HTMLPurifier_Printer_CSSDefinition extends HTMLPurifier_Printer
 {

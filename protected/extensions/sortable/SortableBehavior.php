@@ -1,4 +1,4 @@
-<?php
+<?
 class SortableBehavior extends CActiveRecordBehavior
 {
     //заполняем айдишниками

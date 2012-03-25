@@ -1,4 +1,4 @@
-<?php
+<?
 
 class NullValueBehavior extends CActiveRecordBehavior
 {

@@ -1,11 +1,11 @@
-<div id="<?php echo $this->id ?>" class="uploader portlet-content" style="display: none">
+<div id="<? echo $this->id ?>" class="uploader portlet-content" style="display: none">
     <div class="fileupload-buttonbar">
         <label class="fileinput-button">
             <span>Добавить файлы...</span>
             <input type="file" name="file" multiple>
         </label>
     </div>
-    <div id="<?php echo $this->id ?>-drop-zone" class="drop-zone">
+    <div id="<? echo $this->id ?>-drop-zone" class="drop-zone">
         Перетащите сюда файлы
     </div>
     <div class="fileupload-content">
@@ -13,9 +13,9 @@
             <thead>
                 <tr>
                     <th style="width: 60px"></th>
-                    <?php foreach ($this->fields as $header): ?>
-						<th style="width: 150px"><?php echo $header['header'];?></th>
-					<?php endforeach; ?>
+                    <? foreach ($this->fields as $header): ?>
+						<th style="width: 150px"><? echo $header['header'];?></th>
+					<? endforeach; ?>
                     <th style="width: 50px"></th>
                     <th style="width: 50px">Размер</th>
                     <th style="width: 50px"></th>

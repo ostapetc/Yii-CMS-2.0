@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CWebServiceAction class file.
  *

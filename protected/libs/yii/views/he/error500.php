@@ -21,16 +21,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>שגיאת שרת פנימית</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 התרחשה שגיאת שרת פנימית בזמן ביצוע הבקשה.
-אנא צור קשר עם <?php echo $data['admin']; ?> כדי לדווח על תקלה זו.
+אנא צור קשר עם <? echo $data['admin']; ?> כדי לדווח על תקלה זו.
 </p>
 <p>
 תודה.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

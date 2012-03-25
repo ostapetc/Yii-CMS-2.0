@@ -1,4 +1,4 @@
-<?php
+<?
 /**
 * EGoogleAnalyticsWidget class file
 * 

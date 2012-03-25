@@ -1,4 +1,4 @@
-<?php
+<?
 class SidebarMenu extends ClientMenu
 {
     public $htmlOptions = array(

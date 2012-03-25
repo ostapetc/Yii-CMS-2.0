@@ -1,16 +1,16 @@
-<?php $this->page_title = 'Восстановление пароля'; ?>
+<? $this->page_title = 'Восстановление пароля'; ?>
 
-<?php if (Yii::app()->user->hasFlash('done')): ?>
+<? if (Yii::app()->user->hasFlash('done')): ?>
 
-	<?php echo Yii::t('UsersModule.main', $this->msg(Yii::app()->user->getFlash('done'), 'ok')); ?>
+	<? echo Yii::t('UsersModule.main', $this->msg(Yii::app()->user->getFlash('done'), 'ok')); ?>
 
-<?php else: ?>
+<? else: ?>
 
-	<?php if (isset($error)): ?>
-	    <?php echo $this->msg($error, 'error'); ?>
-	<?php endif ?>
+	<? if (isset($error)): ?>
+	    <? echo $this->msg($error, 'error'); ?>
+	<? endif ?>
 	
-	<?php echo $form; ?>
+	<? echo $form; ?>
 
-<?php endif ?>
+<? endif ?>
 

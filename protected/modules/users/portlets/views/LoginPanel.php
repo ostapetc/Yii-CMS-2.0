@@ -1,9 +1,9 @@
 <li>
-    <?php
+    <?
     echo CHtml::link('Login', '#login', array('data-toggle'=> "modal"));
     ?>
 </li>
-<?php
+<?
 $this->beginWidget('BootModal', array(
     'htmlOptions'=> array(
         'id'=> 'login'
@@ -13,11 +13,11 @@ $this->beginWidget('BootModal', array(
 <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
 
-    <h3><?php echo $title ?></h3>
+    <h3><? echo $title ?></h3>
 </div>
 
 <div class="modal-body">
-    <?php
+    <?
     $this->widget('BootTabbed', array(
         'tabs' => array(
             array(
@@ -38,4 +38,4 @@ $this->beginWidget('BootModal', array(
 </div>
 <div class="modal-footer">
 </div>
-<?php $this->endWidget() ?>
+<? $this->endWidget() ?>

@@ -1,4 +1,4 @@
-<?php
+<?
 $mainpage = (strpos(basename($_SERVER['HTTP_REFERER']),'tinybrowser.php') === 0 ? true : false);
 require_once("../config_tinybrowser.php");
 ?>
@@ -14,7 +14,7 @@ require_once("../config_tinybrowser.php");
 	document.location.href=location;
 	}
 	/*Added by torwald.ru*/
-<?php
+<?
 if(!isset($_GET['feid']) && $tinybrowser['integration'] == 'tinymce')
 	{?>
 	function selectURL(url)
@@ -46,7 +46,7 @@ if(!isset($_GET['feid']) && $tinybrowser['integration'] == 'tinymce')
 	    }
 	}
 	tinyMCEPopup.onInit.add(FileBrowserDialogue.init, FileBrowserDialogue);
-	<?php
+	<?
 	}
 elseif(!isset($_GET['feid']) && $tinybrowser['integration'] == 'fckeditor')
 	{?>
@@ -55,20 +55,20 @@ elseif(!isset($_GET['feid']) && $tinybrowser['integration'] == 'fckeditor')
 	window.opener.SetUrl( url ) ;
 	window.close() ;
 	}
-	<?php
+	<?
 	}
 elseif($_GET['feid'] != '')
 	{?>
 	function selectURL(url) {
-	opener.document.getElementById("<?php echo $_GET['feid']; ?>").value = url;
+	opener.document.getElementById("<? echo $_GET['feid']; ?>").value = url;
 	// Set img source of element id, if img id exists (format is elementid + "img")
-	if(typeof(opener.document.getElementById("<?php echo $_GET['feid']; ?>img")) != "undefined" && opener.document.getElementById("<?php echo $_GET['feid']; ?>img").src.length != 0)
+	if(typeof(opener.document.getElementById("<? echo $_GET['feid']; ?>img")) != "undefined" && opener.document.getElementById("<? echo $_GET['feid']; ?>img").src.length != 0)
 	   {
-		opener.document.getElementById("<?php echo $_GET['feid']; ?>img").src = url;
+		opener.document.getElementById("<? echo $_GET['feid']; ?>img").src = url;
 		}
 	self.close();
 	}
-	<?php
+	<?
 	}
 ?>
 

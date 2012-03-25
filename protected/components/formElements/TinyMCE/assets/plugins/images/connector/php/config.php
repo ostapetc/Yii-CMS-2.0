@@ -1,4 +1,4 @@
-<?php
+<?
 
 //Корневая директория сайта
 define('DIR_ROOT',		$_SERVER['DOCUMENT_ROOT']);

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Created by JetBrains PhpStorm.
  * User: os

@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::import('ext.assetManager.vendors.less.*');
 
 /**

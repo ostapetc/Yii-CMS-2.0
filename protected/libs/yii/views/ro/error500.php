@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Eroare interna server</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 A aparut o eroare interna in timp ce serverul Web procesa cererea dvs.
-Va rugam contactati <?php echo $data['admin']; ?> pentru a raporta aceasta problema.
+Va rugam contactati <? echo $data['admin']; ?> pentru a raporta aceasta problema.
 </p>
 <p>
 Va multumim.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

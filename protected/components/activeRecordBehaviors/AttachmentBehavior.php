@@ -1,4 +1,4 @@
-<?php
+<?
 
 class AttachmentBehavior extends CActiveRecordBehavior
 {

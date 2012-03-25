@@ -3,7 +3,7 @@
 if(typeof(console)=='object') {
     console.group("Profiling Summary Report");
     console.log(" count   total   gem.    min      max   ");
-<?php
+<?
 foreach($data as $index=>$entry) {
     $proc=CJavaScript::quote($entry[0]);
     $count=sprintf('%5d',$entry[1]);

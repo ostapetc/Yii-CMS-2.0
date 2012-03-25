@@ -1,4 +1,4 @@
-<?php
+<?
 class Chosen extends InputWidget
 {
     public $name;

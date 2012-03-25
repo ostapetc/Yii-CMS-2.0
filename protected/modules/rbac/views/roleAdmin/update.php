@@ -1,3 +1,3 @@
-<?php $this->page_title = 'Редактирование роли'; ?>
+<? $this->page_title = 'Редактирование роли'; ?>
 
-<?php echo $form; ?>
+<? echo $form; ?>

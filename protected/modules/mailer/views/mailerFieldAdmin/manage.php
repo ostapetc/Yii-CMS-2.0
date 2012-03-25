@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = 'Управление генерируемыми полями';
 
 $this->widget('AdminGridView', array(

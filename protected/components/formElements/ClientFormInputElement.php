@@ -1,4 +1,4 @@
-<?php
+<?
 class ClientFormInputElement extends BaseFormInputElement
 {
     public $widgets = array(

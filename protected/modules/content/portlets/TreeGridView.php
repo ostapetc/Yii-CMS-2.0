@@ -1,4 +1,4 @@
-<?php
+<?
 class TreeGridView extends AdminGridView
 {
     public $baseTreeTableUrl;

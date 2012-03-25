@@ -1,4 +1,4 @@
-<?php
+<?
 
 class ManyManySortableColumn extends CDataColumn
 {

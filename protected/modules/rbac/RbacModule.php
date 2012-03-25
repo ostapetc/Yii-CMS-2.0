@@ -1,4 +1,4 @@
-<?php
+<?
 
 class RbacModule extends WebModule
 {	

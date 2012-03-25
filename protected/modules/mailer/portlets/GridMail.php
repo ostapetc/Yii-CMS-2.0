@@ -1,4 +1,4 @@
-<?php
+<?
 
 Yii::import('zii.widgets.grid.CGridView');
 Yii::import('ext.GridMail.CGridMailColumn');

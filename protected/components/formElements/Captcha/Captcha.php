@@ -1,4 +1,4 @@
-<?php
+<?
 class Captcha extends InputWidget
 {
 

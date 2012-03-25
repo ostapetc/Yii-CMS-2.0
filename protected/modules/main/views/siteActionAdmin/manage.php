@@ -1,4 +1,4 @@
-<?php
+<?
 
 $this->widget('AdminGridView', array(
 	'id' => 'site-action-grid',

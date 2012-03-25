@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CTextHighlighter class file.
  *

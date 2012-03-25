@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMarkdownParser class file.
  *

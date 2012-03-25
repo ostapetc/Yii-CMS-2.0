@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Yii test script file.
  *

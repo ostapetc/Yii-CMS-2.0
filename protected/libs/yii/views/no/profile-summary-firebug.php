@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Resultat av profilering");
 	console.log(" antall   totalt   gjennomsnitt    min      maks   ");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

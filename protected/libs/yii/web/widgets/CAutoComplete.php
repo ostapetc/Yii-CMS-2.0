@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CAutoComplete class file.
  *

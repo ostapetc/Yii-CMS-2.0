@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = t('Рекдирование страницы');
 
 $this->tabs = array(
@@ -7,4 +7,3 @@ $this->tabs = array(
 );
 
 echo $form;
-?>

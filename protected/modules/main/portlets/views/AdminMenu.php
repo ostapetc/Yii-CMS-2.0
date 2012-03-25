@@ -1,15 +1,15 @@
-<?php foreach ($modules as $module): ?>
-    <?php
+<? foreach ($modules as $module): ?>
+    <?
     if (!isset($module['admin_menu']) || !$module['admin_menu'])
     {
     	continue;
     }
     ?>
 
-    <h3><?php echo t($module['name']); ?></h3>
+    <h3><? echo t($module['name']); ?></h3>
     <ul class="toggle">
-        <?php foreach ($module['admin_menu'] as $title => $url): ?>
-            <?php
+        <? foreach ($module['admin_menu'] as $title => $url): ?>
+            <?
             $icon_url  = '';
             $url_parts = explode('/', $url);
 
@@ -53,10 +53,10 @@
                 $icon_url = '/img/admin/actions_icons/action.png';
             }
             ?>
-            <li class="action_icon" icon_url="<?php echo $icon_url; ?>">
-                <a href="<?php echo $url; ?>" style="background: url(<?php echo $icon_url; ?>) no-repeat center left;"><?php echo t($title); ?></a>
+            <li class="action_icon" icon_url="<? echo $icon_url; ?>">
+                <a href="<? echo $url; ?>" style="background: url(<? echo $icon_url; ?>) no-repeat center left;"><? echo t($title); ?></a>
             </li>
-        <?php endforeach ?>
+        <? endforeach ?>
     </ul>
-<?php endforeach ?>
+<? endforeach ?>
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CTreeView class file.
  *

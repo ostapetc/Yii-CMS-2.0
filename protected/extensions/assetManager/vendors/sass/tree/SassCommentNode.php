@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassCommentNode.php 49 2010-04-04 10:51:24Z chris.l.yates $ */
 /**
  * SassCommentNode class file.

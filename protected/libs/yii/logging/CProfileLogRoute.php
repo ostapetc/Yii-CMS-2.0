@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CProfileLogRoute class file.
  *

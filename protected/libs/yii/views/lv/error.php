@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="lv" lang="lv">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Kļūda <?php echo $data['code']; ?></title>
+<title>Kļūda <? echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>Kļūda <?php echo $data['code']; ?></h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>Kļūda <? echo $data['code']; ?></h1>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Augstāk minētā kļūda notika izpildot Jūsu pieprasījumu.
 </p>
 <p>
-Ja Jūs uzskatāt, ka šī ir servera kļūda, lūdzu sazinieties ar <?php echo $data['admin']; ?>.
+Ja Jūs uzskatāt, ka šī ir servera kļūda, lūdzu sazinieties ar <? echo $data['admin']; ?>.
 </p>
 <p>
 Paldies!
 </p>
 <div class="version">
-<?php echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

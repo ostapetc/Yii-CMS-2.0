@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = "Просмотр Пользователя: {$model->name}";
 
 $this->widget('BootDetailView', array(

@@ -1,4 +1,4 @@
-<?php
+<?
 if (isset($section) && $section)
 {
     $crumbs = array();
@@ -17,15 +17,13 @@ else
 $this->crumbs     = $crumbs;
 $this->page_title = $section->title;
 
-?>
 
-<?php
 if (count($children) > 1)
 {
     ?>
 <div class="news">
     <ul>
-        <?php
+        <?
         foreach ($children as $child)
         {
             echo CHtml::tag('li', array(), CHtml::link($child->title, $child->href));
@@ -33,7 +31,7 @@ if (count($children) > 1)
         ?>
     </ul>
 </div>
-<?php
+<?
 }
 elseif (count($children) == 1)
 {
@@ -43,5 +41,5 @@ else
 {
     echo CHtml::tag('div', array(), 'Данная категория пуста');
 }
-?>
+
 

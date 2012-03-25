@@ -1,4 +1,4 @@
-<?php
+<?
 $tbpath = pathinfo($_SERVER['SCRIPT_NAME']);
 $tbmain = $tbpath['dirname'].'/tinybrowser.php';
 ?>
@@ -9,7 +9,7 @@ $tbmain = $tbpath['dirname'].'/tinybrowser.php';
        the session name and session ID in the request string (can look like this: "?PHPSESSID=88p0n70s9dsknra96qhuk6etm5").
        These lines of code extract the necessary parameters and add them back to the filebrowser URL again. */
 
-    var cmsURL = "<?php echo $tbmain; ?>";    // script URL - use an absolute path!
+    var cmsURL = "<? echo $tbmain; ?>";    // script URL - use an absolute path!
     if (cmsURL.indexOf("?") < 0) {
         //add the type as the only query parameter
         cmsURL = cmsURL + "?type=" + type;

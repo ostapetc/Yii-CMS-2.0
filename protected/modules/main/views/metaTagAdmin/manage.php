@@ -1,4 +1,4 @@
-<?php
+<?
 $this->widget('AdminGridView', array(
 	'id' => 'meta-tag-grid',
 	'dataProvider' => $model->search(),

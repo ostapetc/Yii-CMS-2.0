@@ -1,4 +1,4 @@
-<?php
+<?
 require_once "../Matrix.php";
 /*
 * @package JAMA

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * COciColumnSchema class file.
  *

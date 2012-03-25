@@ -1,4 +1,4 @@
-<?php 
+<?
 $this->page_title = 'Операции';
 
 $this->widget('AdminGridView', array(

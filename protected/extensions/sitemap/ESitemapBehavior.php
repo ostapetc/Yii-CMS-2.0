@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * ESitemapBehavior.php File
  *

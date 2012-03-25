@@ -194,7 +194,7 @@ Class generation
 Creating XML description of highlighting rules is the most complicated part of
 the process. To generate the class, you need just few lines of code:
 
-    <?php
+    <?
     require_once 'Text/Highlighter/Generator.php';
     $generator =& new Text_Highlighter_Generator('php.xml');
     $generator->generate();

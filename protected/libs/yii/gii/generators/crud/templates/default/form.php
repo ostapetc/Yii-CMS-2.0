@@ -1,4 +1,4 @@
-<?php
+<?
 
 $elements = "";
 
@@ -35,7 +35,7 @@ foreach($this->tableSchema->columns as $column)
     $elements.= "        '" . $column->name . "' => array('type' => '" . $type . "'),\n";
 }
 
-echo '<?php
+echo '<?
 
 return array(
     \'activeForm\' => array(

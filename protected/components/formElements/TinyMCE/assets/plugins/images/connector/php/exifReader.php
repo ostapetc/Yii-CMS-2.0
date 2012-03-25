@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * PHP Class to read EXIF information
  * that most of the digital camera produce

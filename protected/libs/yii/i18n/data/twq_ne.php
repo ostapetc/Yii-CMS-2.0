@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'twq_NE'.
  *

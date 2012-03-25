@@ -1,4 +1,4 @@
-<?php
+<?
 class LanguageSwitcher extends CWidget
 {
     public function run()

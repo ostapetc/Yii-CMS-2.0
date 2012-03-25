@@ -1,4 +1,4 @@
-<?php
+<?
 require_once("../config_tinybrowser.php");
 
 header ("Content-type: text/css");
@@ -119,12 +119,12 @@ border: 1px solid #e2e2e2;
 float: left;
 clear: none;
 text-align: center;
-height: <?php echo $tinybrowser['thumbsize']+40; ?>px;
-width: <?php echo $tinybrowser['thumbsize']+25; ?>px;
-font-size: <?php echo $tinybrowser['thumbsize']; ?>px;
+height: <? echo $tinybrowser['thumbsize']+40; ?>px;
+width: <? echo $tinybrowser['thumbsize']+25; ?>px;
+font-size: <? echo $tinybrowser['thumbsize']; ?>px;
 }
-*+html .img-browser { width: <?php echo $tinybrowser['thumbsize']+28; ?>px; } /*IE7+ */
-* html .img-browser { width: <?php echo $tinybrowser['thumbsize']+28; ?>px; } /*IE6- */
+*+html .img-browser { width: <? echo $tinybrowser['thumbsize']+28; ?>px; } /*IE7+ */
+* html .img-browser { width: <? echo $tinybrowser['thumbsize']+28; ?>px; } /*IE6- */
 .img-browser img {
 border: 0;
 vertical-align: middle;
@@ -147,7 +147,7 @@ clear:both;
 font-size: 11px;
 line-height: 13px;
 overflow: hidden;
-width: <?php echo $tinybrowser['thumbsize']+20; ?>px;
+width: <? echo $tinybrowser['thumbsize']+20; ?>px;
 height: 28px;
 margin-top: -6px;
 padding-left: 3px;

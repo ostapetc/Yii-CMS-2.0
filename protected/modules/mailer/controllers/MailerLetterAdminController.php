@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MailerLetterAdminController extends AdminController
 {

@@ -1,8 +1,8 @@
-<?php if (isset($error_code)): ?>
-    <?php echo $this->msg($error_code, 'error'); ?>
-<?php endif ?>
+<? if (isset($error_code)): ?>
+    <? echo $this->msg($error_code, 'error'); ?>
+<? endif ?>
 
-<?php echo $form; ?>
+<? echo $form; ?>
 
 
 

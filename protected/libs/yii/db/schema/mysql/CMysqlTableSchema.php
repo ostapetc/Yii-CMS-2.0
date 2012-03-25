@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMysqlTableSchema class file.
  *

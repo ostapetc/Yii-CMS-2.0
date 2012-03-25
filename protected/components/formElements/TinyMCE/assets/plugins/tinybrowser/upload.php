@@ -1,4 +1,4 @@
-<?php
+<?
 require_once("config_tinybrowser.php");
 // Set language
 if(isset($tinybrowser['language']) && file_exists('langs/'.$tinybrowser['language'].'.php'))
@@ -80,16 +80,16 @@ if(isset($_GET['permerror']))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>TinyBrowser :: <?php echo TB_UPLOAD; ?></title>
+<title>TinyBrowser :: <? echo TB_UPLOAD; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<?php
+<?
 if($passfeid == '' && $tinybrowser['integration']=='tinymce')
 	{
-	?><link rel="stylesheet" type="text/css" media="all" href="<?php echo $tinybrowser['tinymcecss']; ?>" /><?php 
+	?><link rel="stylesheet" type="text/css" media="all" href="<? echo $tinybrowser['tinymcecss']; ?>" /><?
 	}
 else
 	{
-	?><link rel="stylesheet" type="text/css" media="all" href="css/stylefull_tinybrowser.css" /><?php 
+	?><link rel="stylesheet" type="text/css" media="all" href="css/stylefull_tinybrowser.css" /><?
 	}
 	if($_GET['path']!='')$browsepath=$tinybrowser['path'][$typenow].$_GET['path'].'/';
 	else $browsepath=$tinybrowser['path'][$typenow];
@@ -104,45 +104,45 @@ document.location = url;
 </head>
 <body onload='
       var so = new SWFObject("flexupload.swf", "mymovie", "600", "340", "9", "#ffffff");
-      so.addVariable("folder", "<?php echo urlencode($browsepath); ?>");
-      so.addVariable("uptype", "<?php echo $typenow; ?>");
-      so.addVariable("destid", "<?php echo $passfeid; ?>");
-      so.addVariable("maxsize", "<?php echo $tinybrowser['maxsize'][$_GET['type']]; ?>");
-      so.addVariable("sessid", "<?php echo session_id(); ?>");
-      so.addVariable("obfus", "<?php echo md5($_SERVER['DOCUMENT_ROOT'].$tinybrowser['obfuscate']); ?>");
-      so.addVariable("filenames", "<?php echo $filelist; ?>");
-      so.addVariable("extensions", "<?php echo $fileexts; ?>");
-      so.addVariable("filenamelbl", "<?php echo TB_FILENAME; ?>");
-      so.addVariable("sizelbl", "<?php echo TB_SIZE; ?>");
-      so.addVariable("typelbl", "<?php echo TB_TYPE; ?>");
-      so.addVariable("progresslbl", "<?php echo TB_PROGRESS; ?>");
-      so.addVariable("browselbl", "<?php echo TB_BROWSE; ?>");
-      so.addVariable("removelbl", "<?php echo TB_REMOVE; ?>");
-      so.addVariable("uploadlbl", "<?php echo TB_UPLOAD; ?>");
-      so.addVariable("uplimitmsg", "<?php echo TB_MSGMAXSIZE; ?>");
-      so.addVariable("uplimitlbl", "<?php echo TB_TTLMAXSIZE; ?>");
-      so.addVariable("uplimitbyte", "<?php echo TB_BYTES; ?>");
+      so.addVariable("folder", "<? echo urlencode($browsepath); ?>");
+      so.addVariable("uptype", "<? echo $typenow; ?>");
+      so.addVariable("destid", "<? echo $passfeid; ?>");
+      so.addVariable("maxsize", "<? echo $tinybrowser['maxsize'][$_GET['type']]; ?>");
+      so.addVariable("sessid", "<? echo session_id(); ?>");
+      so.addVariable("obfus", "<? echo md5($_SERVER['DOCUMENT_ROOT'].$tinybrowser['obfuscate']); ?>");
+      so.addVariable("filenames", "<? echo $filelist; ?>");
+      so.addVariable("extensions", "<? echo $fileexts; ?>");
+      so.addVariable("filenamelbl", "<? echo TB_FILENAME; ?>");
+      so.addVariable("sizelbl", "<? echo TB_SIZE; ?>");
+      so.addVariable("typelbl", "<? echo TB_TYPE; ?>");
+      so.addVariable("progresslbl", "<? echo TB_PROGRESS; ?>");
+      so.addVariable("browselbl", "<? echo TB_BROWSE; ?>");
+      so.addVariable("removelbl", "<? echo TB_REMOVE; ?>");
+      so.addVariable("uploadlbl", "<? echo TB_UPLOAD; ?>");
+      so.addVariable("uplimitmsg", "<? echo TB_MSGMAXSIZE; ?>");
+      so.addVariable("uplimitlbl", "<? echo TB_TTLMAXSIZE; ?>");
+      so.addVariable("uplimitbyte", "<? echo TB_BYTES; ?>");
       so.addParam("allowScriptAccess", "always");
       so.addParam("type", "application/x-shockwave-flash");
       so.write("flashcontent");'>
-<?php
+<?
 if(count($notify['type'])>0) alert($notify);
 ?>
 <div class="tabs">
 <ul>
-<li id="browse_tab"><span><a href="tinybrowser.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_BROWSE; ?></a></span></li>
-<li id="upload_tab" class="current"><span><a href="upload.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_UPLOAD; ?></a></span></li>
-<?php
+<li id="browse_tab"><span><a href="tinybrowser.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_BROWSE; ?></a></span></li>
+<li id="upload_tab" class="current"><span><a href="upload.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_UPLOAD; ?></a></span></li>
+<?
 if($tinybrowser['allowedit'] || $tinybrowser['allowdelete'])
 	{
-	?><li id="edit_tab"><span><a href="edit.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_EDIT; ?></a></span></li>
-	<?php } ?>
+	?><li id="edit_tab"><span><a href="edit.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_EDIT; ?></a></span></li>
+	<? } ?>
 </ul>
 </div>
 <div class="panel_wrapper">
 <div id="general_panel" class="panel currentmod">
 <fieldset>
-<legend><?php echo TB_UPLOADFILES; ?></legend>
+<legend><? echo TB_UPLOADFILES; ?></legend>
     <div id="flashcontent"></div>
 </fieldset></div></div>
 </body>

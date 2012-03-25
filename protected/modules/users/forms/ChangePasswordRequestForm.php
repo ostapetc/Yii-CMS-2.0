@@ -1,4 +1,4 @@
-<?php
+<?
 
 $form = include "UserForm.php";
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CModelEvent class file.
  *

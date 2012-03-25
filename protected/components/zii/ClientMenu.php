@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::import('zii.widgets.CMenu');
 class ClientMenu extends CMenu
 {

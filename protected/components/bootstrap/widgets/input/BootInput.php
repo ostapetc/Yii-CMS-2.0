@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * BootInput class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>

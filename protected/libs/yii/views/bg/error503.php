@@ -24,7 +24,7 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 Благодарим ви.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

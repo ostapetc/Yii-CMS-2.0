@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='FreeSerifBold';
 $desc=array('Ascent'=>900,'Descent'=>-300,'CapHeight'=>16,'Flags'=>32,'FontBBox'=>'[-796 -306 1860 932]','ItalicAngle'=>0,'StemV'=>120,'MissingWidth'=>600);

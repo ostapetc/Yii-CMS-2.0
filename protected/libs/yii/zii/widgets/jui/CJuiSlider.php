@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CJuiSlider class file.
  *

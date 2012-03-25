@@ -1,5 +1,5 @@
-<?php $this->page_title = 'Активация аккаунта'; ?>
+<? $this->page_title = 'Активация аккаунта'; ?>
 
-<?php if (isset($activate_error)): ?>
-	<?php echo $this->msg(Yii::t('UsersModule.main', $activate_error), 'error'); ?>
-<?php endif ?>
+<? if (isset($activate_error)): ?>
+	<? echo $this->msg(Yii::t('UsersModule.main', $activate_error), 'error'); ?>
+<? endif ?>

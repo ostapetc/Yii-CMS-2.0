@@ -1,6 +1,6 @@
 <h1>Список заказанных товаров</h1>
 <div style='width:500px; margin:30px;'>
-    <?php
+    <?
     $this->widget('mailer.portlets.GridMail', array(
         'id'          => 'order-product-grid',
         'dataProvider'=> $dataProvider,

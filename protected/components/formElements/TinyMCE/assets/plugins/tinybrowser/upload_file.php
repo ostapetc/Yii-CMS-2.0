@@ -1,4 +1,4 @@
-<?php
+<?
 require_once("config_tinybrowser.php");
 require_once("fns_tinybrowser.php");
 
@@ -34,7 +34,7 @@ if ($_FILES['Filedata']['tmp_name'] && $_FILES['Filedata']['name'])
 	if($success)
 		{
 		header('HTTP/1.1 200 OK'); //  if this doesn't work for you, try header('HTTP/1.1 201 Created');
-		?><html><head><title>File Upload Success</title></head><body>File Upload Success</body></html><?php
+		?><html><head><title>File Upload Success</title></head><body>File Upload Success</body></html><?
 		}
 	}		
 ?>

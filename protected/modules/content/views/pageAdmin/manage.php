@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = t('Страницы сайта');
 
 $this->tabs = array(

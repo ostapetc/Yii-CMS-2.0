@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * PBMAssetManager class file.
  * @author Chris Yates <chris.l.yates@gmail.com>

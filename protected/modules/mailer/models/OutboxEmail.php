@@ -1,4 +1,4 @@
-<?php
+<?
 
 class OutboxEmail extends ActiveRecord
 {

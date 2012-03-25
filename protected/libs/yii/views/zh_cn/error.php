@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>错误 <?php echo $data['code']; ?></title>
+<title>错误 <? echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>错误 <?php echo $data['code']; ?></h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>错误 <? echo $data['code']; ?></h1>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 当网页服务器处理您的请求时, 发生以上错误.
 </p>
 <p>
-如果您认为此错误是服务器造成的,请与管理员联系 <?php echo $data[ 'admin']; ?>.
+如果您认为此错误是服务器造成的,请与管理员联系 <? echo $data[ 'admin']; ?>.
 </p>
 <p>
 谢谢.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

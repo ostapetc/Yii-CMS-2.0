@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMultiFileUpload class file.
  *
@@ -17,7 +17,7 @@
  *
  * Example:
  * <pre>
- * <?php
+ * <?
  *   $this->widget('CMultiFileUpload', array(
  *      'model'=>$model,
  *      'attribute'=>'files',

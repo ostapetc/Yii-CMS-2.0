@@ -1,4 +1,4 @@
-<?php
+<?
 
 $roles = Yii::app()->authManager->getRoles();
 

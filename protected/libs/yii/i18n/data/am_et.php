@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'am_ET'.
  *

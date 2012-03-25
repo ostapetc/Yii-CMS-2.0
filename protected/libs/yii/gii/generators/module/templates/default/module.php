@@ -1,19 +1,19 @@
-<?php echo "<?php\n"; ?>
+<? echo "<?\n"; ?>
 
-class <?php echo $this->moduleClass; ?> extends WebModule
+class <? echo $this->moduleClass; ?> extends WebModule
 {	
 	public static $active = false;
 
 
     public static function name()
     {
-        return '<?php echo $this->name; ?>';
+        return '<? echo $this->name; ?>';
     }
 
 
     public static function description()
     {
-        return '<?php echo $this->description; ?>';
+        return '<? echo $this->description; ?>';
     }
 
 
@@ -26,8 +26,8 @@ class <?php echo $this->moduleClass; ?> extends WebModule
 	public function init()
 	{
 		$this->setImport(array(
-			'<?php echo $this->moduleID; ?>.models.*',
-			'<?php echo $this->moduleID; ?>.components.*',
+			'<? echo $this->moduleID; ?>.models.*',
+			'<? echo $this->moduleID; ?>.components.*',
 		));
 	}
 

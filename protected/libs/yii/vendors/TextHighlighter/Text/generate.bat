@@ -29,7 +29,7 @@ GOTO doshift
 @php_bin@ -q -d output_buffering=1 -d include_path="@php_dir@" @bin_dir@/Text/Highlighter/generate.bat %MHL_PARAMS%
 
 GOTO finish
-<?php
+<?
 ob_end_clean();
 
 if (!defined('STDOUT')) {

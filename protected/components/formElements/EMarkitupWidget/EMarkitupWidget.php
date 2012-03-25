@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * EMarkitupWidget adds {@link http://markitup.jaysalvat.com/ markitup} as a form field widget.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CController class file.
  *

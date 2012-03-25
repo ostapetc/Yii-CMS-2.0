@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * ESitemapModel.php File
  *

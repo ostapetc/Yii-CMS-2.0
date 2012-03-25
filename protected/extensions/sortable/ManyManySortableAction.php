@@ -1,4 +1,4 @@
-<?php
+<?
 
 class ManyManySortableAction extends CAction
 {

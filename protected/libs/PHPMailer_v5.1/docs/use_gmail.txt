@@ -1,4 +1,4 @@
-<?php
+<?
 
 // example on using PHPMailer with GMAIL
 

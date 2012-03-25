@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassContext.php 118 2010-09-21 09:45:11Z chris.l.yates@gmail.com $ */
 /**
  * SassContext class file.

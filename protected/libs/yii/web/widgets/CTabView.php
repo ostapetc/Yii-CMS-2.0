@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CTabView class file.
  *

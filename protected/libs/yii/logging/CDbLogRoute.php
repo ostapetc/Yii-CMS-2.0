@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbLogRoute class file.
  *

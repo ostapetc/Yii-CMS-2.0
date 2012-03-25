@@ -1,4 +1,4 @@
-<?php
+<?
 
 if ($this->model->scenario == Param::SCENARIO_VALUE_UPDATE)
 {

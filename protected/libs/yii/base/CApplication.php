@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CApplication class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDummyCache class file.
  *

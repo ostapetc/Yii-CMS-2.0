@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * EReCaptcha class file.
  *

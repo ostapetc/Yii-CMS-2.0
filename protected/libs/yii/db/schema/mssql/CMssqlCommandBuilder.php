@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMsCommandBuilder class file.
  *

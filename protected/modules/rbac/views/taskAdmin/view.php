@@ -1,4 +1,4 @@
-<?php
+<?
 $operations = array();
 
 if ($model->operations) 

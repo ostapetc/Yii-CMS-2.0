@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Вътрешна грешка на сървъра</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Вътрешна грешка, възникна на сървъра, докато се опитваше да изпълни вашата заявка.
-Моля свържете се с <?php echo $data['admin']; ?>, за да докладвате проблема.
+Моля свържете се с <? echo $data['admin']; ?>, за да докладвате проблема.
 </p>
 <p>
 Благодарим ви.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

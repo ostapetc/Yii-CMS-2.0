@@ -1,4 +1,4 @@
-<?php
+<?
 class PublishedColumn extends CDataColumn
 {
     public $assets = 'application.components.zii.gridColumns.assets';

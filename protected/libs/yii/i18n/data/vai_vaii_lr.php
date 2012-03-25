@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'vai_Vaii_LR'.
  *

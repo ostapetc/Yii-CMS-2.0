@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CBaseUserIdentity class file
  *

@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("程序概要分析 - 堆栈调用报告");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	list($proc,$time,$level)=$entry;

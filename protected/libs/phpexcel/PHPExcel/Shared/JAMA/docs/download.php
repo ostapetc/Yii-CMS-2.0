@@ -1,4 +1,4 @@
-<?php
+<?
 /**
 * Script to create REGRESS package for download
 *
@@ -58,8 +58,8 @@ include_once "includes/navbar.php";
 Download current version: 
 </p>
 <ul>
- <li><a href='<?php echo $_SERVER['PHP_SELF']."?op=download"; ?>'><?php echo $tarName ?></a></li>
+ <li><a href='<? echo $_SERVER['PHP_SELF']."?op=download"; ?>'><? echo $tarName ?></a></li>
 </ul>
-<?php
+<?
 include_once "includes/footer.php";
 ?>

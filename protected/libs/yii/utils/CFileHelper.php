@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CFileHelper class file.
  *

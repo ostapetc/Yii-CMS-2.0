@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Lapa nav atrasta</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Jūsu pieprasītā lapa netika atrasta uz servera.
 Ja Jūs ievadījāt URL adresi manuāli, lūdzu, pārbaudiet to un mēģiniet vēlreiz.
 </p>
 <p>
-Ja Jūs uzskatāt, ka šī ir servera kļūda, lūdzu sazinieties ar <?php echo $data['admin']; ?>.
+Ja Jūs uzskatāt, ka šī ir servera kļūda, lūdzu sazinieties ar <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

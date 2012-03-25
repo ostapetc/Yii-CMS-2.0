@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassScriptParser.php 118 2010-09-21 09:45:11Z chris.l.yates@gmail.com $ */
 /**
  * SassScriptParser class file.

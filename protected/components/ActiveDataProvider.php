@@ -1,4 +1,4 @@
-<?php
+<?
 class ActiveDataProvider extends CActiveDataProvider
 {
     const PAGE_SIZE = 10;

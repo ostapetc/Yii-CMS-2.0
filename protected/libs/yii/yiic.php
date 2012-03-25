@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Yii command line script file.
  *

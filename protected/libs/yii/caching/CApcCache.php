@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CApcCache class file
  *

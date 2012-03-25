@@ -1,4 +1,4 @@
-<?php
+<?
 class ReturnUrlFilter extends CFilter
 {
     protected function preFilter($filterChain)

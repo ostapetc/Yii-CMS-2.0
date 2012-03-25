@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * This file contains the foundation classes for component-based and event-driven programming.
  *

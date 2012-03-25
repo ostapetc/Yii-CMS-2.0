@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * This file contains the CTestCase class.
  *

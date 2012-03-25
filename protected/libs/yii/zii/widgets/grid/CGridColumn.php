@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CGridColumn class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 include_once "includes/header.php";
 include_once "includes/navbar.php";
 ?>
@@ -22,7 +22,7 @@ unit tests are currently implemented.  The source of the <code>TestMatrix.php</c
 is provided below.  It is worth studying carefully for an example of how to do matrix algebra
 programming with Jama.
 </p>
-<?php
+<?
 highlight_file("../test/TestMatrix.php");
 include_once "includes/footer.php";	
 ?>

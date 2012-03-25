@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Log extends ActiveRecord
 {

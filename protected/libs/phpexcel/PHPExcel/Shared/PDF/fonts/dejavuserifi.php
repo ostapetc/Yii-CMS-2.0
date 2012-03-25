@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='DejaVuSerif-Italic';
 $desc=array('Ascent'=>928,'Descent'=>-236,'CapHeight'=>-65,'Flags'=>96,'FontBBox'=>'[-839 -347 1650 1227]','ItalicAngle'=>-11,'StemV'=>70,'MissingWidth'=>600);

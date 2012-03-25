@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassColour.php 118 2010-09-21 09:45:11Z chris.l.yates@gmail.com $ */
 /**
  * SassColour class file.

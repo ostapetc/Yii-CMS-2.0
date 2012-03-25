@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CFilterValidator class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 class FileList extends ListView
 {
     public $model;

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * This is the template for generating the model class of a specified table.
  * - $this: the ModelCode object
@@ -10,9 +10,9 @@
  * - $relations: list of relations (name=>relation declaration)
  */
 ?>
-<?php echo "<?php\n"; ?>
+<? echo "<?\n"; ?>
 
-class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
+class <? echo $modelClass; ?> extends <? echo $this->baseClass."\n"; ?>
 {
     const PAGE_SIZE = 10;
 
@@ -25,24 +25,24 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 
 	public function tableName()
 	{
-		return '<?php echo $tableName; ?>';
+		return '<? echo $tableName; ?>';
 	}
 
 
     public function name()
     {
-        return 'Модель <?php echo $modelClass; ?>';
+        return 'Модель <? echo $modelClass; ?>';
     }
 
 
 	public function rules()
 	{
 		return array(
-<?php foreach($rules as $rule): ?>
-			<?php echo $rule.",\n"; ?>
-<?php endforeach; ?>
+<? foreach($rules as $rule): ?>
+			<? echo $rule.",\n"; ?>
+<? endforeach; ?>
 
-			array('<?php echo implode(', ', array_keys($columns)); ?>', 'safe', 'on' => 'search'),
+			array('<? echo implode(', ', array_keys($columns)); ?>', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -50,9 +50,9 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 	public function relations()
 	{
 		return array(
-<?php foreach($relations as $name => $relation): ?>
-			<?php echo "'$name' => $relation,\n"; ?>
-<?php endforeach; ?>
+<? foreach($relations as $name => $relation): ?>
+			<? echo "'$name' => $relation,\n"; ?>
+<? endforeach; ?>
 		);
 	}
 
@@ -60,7 +60,7 @@ class <?php echo $modelClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 	public function search()
 	{
 		$criteria = new CDbCriteria;
-<?php
+<?
 foreach($columns as $name => $column)
 {
 	if($column->type==='string')

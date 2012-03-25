@@ -1,4 +1,4 @@
-<?php
+<?
 
 class TopMenu extends Portlet
 {

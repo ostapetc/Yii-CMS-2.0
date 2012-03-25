@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDirectoryCacheDependency class file.
  *

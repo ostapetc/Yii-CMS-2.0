@@ -1,42 +1,42 @@
 <div class="row template sticky">
-	<?php echo $this->labelEx($model,'template'); ?>
-	<?php echo $this->dropDownList($model,'template',$templates); ?>
+	<? echo $this->labelEx($model,'template'); ?>
+	<? echo $this->dropDownList($model,'template',$templates); ?>
 	<div class="tooltip">
 		Please select which set of the templates should be used to generated the code.
 	</div>
-	<?php echo $this->error($model,'template'); ?>
+	<? echo $this->error($model,'template'); ?>
 </div>
 
 <div class="buttons">
-	<?php echo CHtml::submitButton('Preview',array('name'=>'preview')); ?>
+	<? echo CHtml::submitButton('Preview',array('name'=>'preview')); ?>
 
-	<?php if($model->status===CCodeModel::STATUS_PREVIEW && !$model->hasErrors()): ?>
-		<?php echo CHtml::submitButton('Generate',array('name'=>'generate')); ?>
-	<?php endif; ?>
+	<? if($model->status===CCodeModel::STATUS_PREVIEW && !$model->hasErrors()): ?>
+		<? echo CHtml::submitButton('Generate',array('name'=>'generate')); ?>
+	<? endif; ?>
 </div>
 
-<?php if(!$model->hasErrors()): ?>
+<? if(!$model->hasErrors()): ?>
 	<div class="feedback">
-	<?php if($model->status===CCodeModel::STATUS_SUCCESS): ?>
+	<? if($model->status===CCodeModel::STATUS_SUCCESS): ?>
 		<div class="success">
-			<?php echo $model->successMessage(); ?>
+			<? echo $model->successMessage(); ?>
 		</div>
-	<?php elseif($model->status===CCodeModel::STATUS_ERROR): ?>
+	<? elseif($model->status===CCodeModel::STATUS_ERROR): ?>
 		<div class="error">
-			<?php echo $model->errorMessage(); ?>
+			<? echo $model->errorMessage(); ?>
 		</div>
-	<?php endif; ?>
+	<? endif; ?>
 
-	<?php if(isset($_POST['generate'])): ?>
-		<pre class="results"><?php echo $model->renderResults(); ?></pre>
-	<?php elseif(isset($_POST['preview'])): ?>
-		<?php echo CHtml::hiddenField("answers"); ?>
+	<? if(isset($_POST['generate'])): ?>
+		<pre class="results"><? echo $model->renderResults(); ?></pre>
+	<? elseif(isset($_POST['preview'])): ?>
+		<? echo CHtml::hiddenField("answers"); ?>
 		<table class="preview">
 			<tr>
 				<th class="file">Code File</th>
 				<th class="confirm">
 					<label for="check-all">Generate</label>
-					<?php
+					<?
 						$count=0;
 						foreach($model->files as $file)
 						{
@@ -48,16 +48,16 @@
 					?>
 				</th>
 			</tr>
-			<?php foreach($model->files as $i=>$file): ?>
-			<tr class="<?php echo $file->operation; ?>">
+			<? foreach($model->files as $i=>$file): ?>
+			<tr class="<? echo $file->operation; ?>">
 				<td class="file">
-					<?php echo CHtml::link(CHtml::encode($file->relativePath), array('code','id'=>$i), array('class'=>'view-code','rel'=>$file->path)); ?>
-					<?php if($file->operation===CCodeFile::OP_OVERWRITE): ?>
-						(<?php echo CHtml::link('diff', array('diff','id'=>$i), array('class'=>'view-code','rel'=>$file->path)); ?>)
-					<?php endif; ?>
+					<? echo CHtml::link(CHtml::encode($file->relativePath), array('code','id'=>$i), array('class'=>'view-code','rel'=>$file->path)); ?>
+					<? if($file->operation===CCodeFile::OP_OVERWRITE): ?>
+						(<? echo CHtml::link('diff', array('diff','id'=>$i), array('class'=>'view-code','rel'=>$file->path)); ?>)
+					<? endif; ?>
 				</td>
 				<td class="confirm">
-					<?php
+					<?
 					if($file->operation===CCodeFile::OP_SKIP)
 						echo 'unchanged';
 					else
@@ -69,8 +69,8 @@
 					?>
 				</td>
 			</tr>
-			<?php endforeach; ?>
+			<? endforeach; ?>
 		</table>
-	<?php endif; ?>
+	<? endif; ?>
 	</div>
-<?php endif; ?>
+<? endif; ?>

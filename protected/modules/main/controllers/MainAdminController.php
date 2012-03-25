@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MainAdminController extends AdminController
 {   

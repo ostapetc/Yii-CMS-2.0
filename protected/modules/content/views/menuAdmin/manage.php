@@ -4,7 +4,7 @@
     }
 </style>
 
-<?php
+<?
 $this->page_title = 'Меню сайта'; 
 
 $this->tabs = array(
@@ -50,5 +50,4 @@ $this->widget('AdminGridView', array(
 		),
 	),
 ));
-?>
 

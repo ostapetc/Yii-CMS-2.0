@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("Ergebnis der Performance-Analyse anhand des Aufrufstapels");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	list($proc,$time,$level)=$entry;

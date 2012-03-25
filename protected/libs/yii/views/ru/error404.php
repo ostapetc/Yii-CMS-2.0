@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Страница не найдена</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Запрошенная страница не найдена на сервере.
 Если вы ввели адрес страницы вручную, проверьте правильность его написания и повторите попытку.
 </p>
 <p>
-Если вы считаете, что это ошибка настройки сервера, обратитесь по адресу  <?php echo $data['admin']; ?>.
+Если вы считаете, что это ошибка настройки сервера, обратитесь по адресу  <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

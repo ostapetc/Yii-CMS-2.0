@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'az_Cyrl_AZ'.
  *

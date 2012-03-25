@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = 'Управление ролями пользователей';
 
 $this->widget('AdminGridView', array(

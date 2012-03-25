@@ -1,4 +1,4 @@
-<?php
+<?
 $active_form = $form->getActiveFormWidget();
 
 $no_label = array('meta_tags', 'file_manager');

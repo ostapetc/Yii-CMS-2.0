@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = t('Просмотр страницы');
 
 $this->tabs = array(
@@ -37,4 +37,3 @@ $this->widget('BootDetailView', array(
         ),
 	),
 ));
-?>

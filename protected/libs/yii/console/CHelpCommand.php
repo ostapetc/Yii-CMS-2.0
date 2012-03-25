@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CHelpCommand class file.
  *

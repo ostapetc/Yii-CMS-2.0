@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CContentDecorator class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CStackIterator class file.
  *

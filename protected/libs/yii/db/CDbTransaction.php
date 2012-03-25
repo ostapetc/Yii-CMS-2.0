@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbTransaction class file
  *

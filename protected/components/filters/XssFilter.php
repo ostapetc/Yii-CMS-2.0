@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @author  Opeykin A. <http://andrey.opeykin.ru> <developer@allframeworks.ru>
  * @version 0.0.2

@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Example: get XHTML from a given Textile-markup string ($string)

@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Ergebnis der Performance-Analyse");
 	console.log(" Anzahl Gesamt   Durschn.   Min      Max   ");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

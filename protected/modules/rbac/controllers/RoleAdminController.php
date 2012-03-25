@@ -1,4 +1,4 @@
-<?php
+<?
 
 class RoleAdminController extends AdminController 
 {   

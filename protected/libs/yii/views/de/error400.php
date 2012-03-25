@@ -18,17 +18,17 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Fehlerhafte Anfrage</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Der Request wurde vom Server aufgrund einer ungültigen Syntax nicht verstanden.
 Bitte wiederholen Sie die Anfrage nicht unverändert.
 </p>
 <p>
 Wenn Sie der Meinung sind, dass es sich um einen Serverfehler handelt, kontaktieren Sie bitte
-<?php echo $data['admin']; ?>.
+<? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

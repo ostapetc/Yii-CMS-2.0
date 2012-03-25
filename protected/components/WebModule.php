@@ -1,4 +1,4 @@
-<?php
+<?
 
 
 abstract class WebModule extends CWebModule

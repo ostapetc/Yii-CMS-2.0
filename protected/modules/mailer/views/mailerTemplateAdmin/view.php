@@ -1,4 +1,4 @@
-<?php
+<?
 $this->widget('AdminDetailView', array(
 	'data' => $model,
 	'attributes' => array(

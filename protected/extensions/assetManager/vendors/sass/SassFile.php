@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassFile.php 118 2010-09-21 09:45:11Z chris.l.yates@gmail.com $ */
 /**
  * SassFile class file.

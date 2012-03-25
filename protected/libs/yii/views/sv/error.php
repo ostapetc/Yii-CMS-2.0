@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Fel <?php echo $data['code']; ?></title>
+<title>Fel <? echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>Fel <?php echo $data['code']; ?></h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>Fel <? echo $data['code']; ?></h1>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Ovanstående fel uppstod när servern behandlade Er förfrågan.
 </p>
 <p>
-Vid misstanke om serverfel, kontakta <?php echo $data['admin']; ?>.
+Vid misstanke om serverfel, kontakta <? echo $data['admin']; ?>.
 </p>
 <p>
 Tack.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

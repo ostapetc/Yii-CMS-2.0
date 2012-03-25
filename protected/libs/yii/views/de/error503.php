@@ -25,7 +25,7 @@ Unser System wird derzeit gewartet. Bitte versuchen Sie es später noch einmal.
 Vielen Dank.
 </p>
 <div class="version">
-<?php echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

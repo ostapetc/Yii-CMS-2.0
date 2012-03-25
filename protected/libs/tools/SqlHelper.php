@@ -1,4 +1,4 @@
-<?php
+<?
 class SqlHelper
 {
     public static function arrToCase($caseParam, $values, $alias = '')

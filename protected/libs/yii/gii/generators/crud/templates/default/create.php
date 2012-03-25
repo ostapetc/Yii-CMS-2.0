@@ -1,1 +1,1 @@
-<?php echo '<?php echo $form; ?>'; ?>
+<? echo '<? echo $form; ?>'; ?>

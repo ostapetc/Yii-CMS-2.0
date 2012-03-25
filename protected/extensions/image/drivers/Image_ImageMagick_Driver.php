@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * ImageMagick Image Driver.

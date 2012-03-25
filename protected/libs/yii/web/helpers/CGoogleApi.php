@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CGoogleApi class file.
  *

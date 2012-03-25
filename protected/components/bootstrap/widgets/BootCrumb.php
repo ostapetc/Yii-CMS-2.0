@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * BootCrumb class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>

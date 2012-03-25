@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("プロファイリングコールスタックレポート");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	list($proc,$time,$level)=$entry;

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CCodeModel class file.
  *
@@ -302,7 +302,7 @@ abstract class CCodeModel extends CFormModel
 	{
 		$path=$this->getStickyFile();
 		@mkdir(dirname($path),0755,true);
-		file_put_contents($path,"<?php\nreturn ".var_export($this->_stickyAttributes,true).";\n");
+		file_put_contents($path,"<?\nreturn ".var_export($this->_stickyAttributes,true).";\n");
 	}
 
 	/**

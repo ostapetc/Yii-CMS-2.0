@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Add disabled field to form, automatic filling from $source field, but filing by tranliteration text.
  * Spaces change on $divider. Other trash will deleting

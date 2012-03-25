@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Erro Interno Do Servidor</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Ocorreu um erro interno enquanto o servidor Web processava sua requisição.
-Por favor entre contate <?php echo $data['admin'];?> para relatar esse problema.
+Por favor entre contate <? echo $data['admin'];?> para relatar esse problema.
 </p>
 <p>
 Obrigado.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

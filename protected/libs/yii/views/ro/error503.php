@@ -25,7 +25,7 @@ Sistemul nostru este deocamdata intr-o perioada de mentenanta. Va rugam sa reven
 Va multumim.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

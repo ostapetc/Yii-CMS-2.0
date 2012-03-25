@@ -1,4 +1,4 @@
-<?php
+<?
 
 $this->tabs = array(
     'исходящие письма' => $this->createUrl('manage'),

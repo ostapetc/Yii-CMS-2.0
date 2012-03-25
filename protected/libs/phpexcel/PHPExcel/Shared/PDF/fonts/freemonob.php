@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='FreeMonoBold';
 $desc=array('Ascent'=>800,'Descent'=>-200,'CapHeight'=>10,'Flags'=>32,'FontBBox'=>'[-604 -200 754 800]','ItalicAngle'=>0,'StemV'=>120,'MissingWidth'=>600);

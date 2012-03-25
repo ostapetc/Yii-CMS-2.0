@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = $this->t('admin', 'Сортировка пунктов меню');
 
 $this->tabs = array(
@@ -8,7 +8,7 @@ $this->tabs = array(
 ?>
 
 <div class="sortable-list">
-    <?php
+    <?
     $this->widget('content.portlets.NestedSortable', array(
         'model'    => MenuSection::model(),
         'sortable' => true,

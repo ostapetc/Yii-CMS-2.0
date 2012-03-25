@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'en_MP'.
  *

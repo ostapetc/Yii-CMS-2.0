@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Laporan Ringkasan Profil");
 	console.log(" jumlah   total   rata-rata    min      maks   ");
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

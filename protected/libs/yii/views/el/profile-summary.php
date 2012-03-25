@@ -3,8 +3,8 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="6">
 			Αναφορά Περίληψης Προφίλ
-			(Χρόνος: <?php echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>s,
-			Μνήμη: <?php echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
+			(Χρόνος: <? echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>s,
+			Μνήμη: <? echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
 		</th>
 	</tr>
 	<tr style="background-color: #ccc;">
@@ -15,7 +15,7 @@
 		<th>Ελάχ. (δευτ.)</th>
 		<th>Μέγ. (δευτ.)</th>
 	</tr>
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#EBF8FE';

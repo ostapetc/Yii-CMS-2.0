@@ -1,4 +1,4 @@
-<?php
+<?
 class ListView extends BootListView
 {
     public $pager = array(

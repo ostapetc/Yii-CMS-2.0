@@ -1,4 +1,4 @@
-<?php
+<?
 class m120211_170148_news extends CDbMigration
 {
 	public function up()

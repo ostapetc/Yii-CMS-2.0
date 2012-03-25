@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CUrlManager class file
  *

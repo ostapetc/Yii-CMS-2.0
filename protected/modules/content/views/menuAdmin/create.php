@@ -1,4 +1,4 @@
-<?php 
+<?
 $this->page_title = 'Добавление меню сайта';
 
 $this->tabs = array(

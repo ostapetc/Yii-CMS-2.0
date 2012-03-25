@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MetaTag extends ActiveRecord
 {

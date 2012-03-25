@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Página Não Encontrada</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 A URL solicitada não foi encontrada neste servidor.
 Se você digitou a URL manualmente verifique a ortografia e tente novamente.
 </p>
 <p>
-Se você acha que isso é um erro no servidor, por favor contate <?php echo $data['admin']; ?>.
+Se você acha que isso é um erro no servidor, por favor contate <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

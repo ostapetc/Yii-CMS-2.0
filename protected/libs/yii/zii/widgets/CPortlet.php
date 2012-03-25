@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CPortlet class file.
  *
@@ -19,9 +19,9 @@
  * and {@link CController::endWidget} calls. For example,
  *
  * <pre>
- * <?php $this->beginWidget('zii.widgets.CPortlet'); ?>
+ * <? $this->beginWidget('zii.widgets.CPortlet'); ?>
  *     ...insert content here...
- * <?php $this->endWidget(); ?>
+ * <? $this->endWidget(); ?>
  * </pre>
  *
  * A portlet also has an optional {@link title}. One may also override {@link renderDecoration}

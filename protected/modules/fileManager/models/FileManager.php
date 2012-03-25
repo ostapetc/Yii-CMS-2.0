@@ -1,4 +1,4 @@
-<?php
+<?
 
 class FileManager extends ActiveRecord
 {

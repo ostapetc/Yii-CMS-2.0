@@ -1,4 +1,4 @@
-<?php
+<?
 
 class TextComponent extends CApplicationComponent
 {

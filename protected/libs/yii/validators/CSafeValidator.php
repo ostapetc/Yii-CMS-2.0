@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CSafeValidator class file.
  *

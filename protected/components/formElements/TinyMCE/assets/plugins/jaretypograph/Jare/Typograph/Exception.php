@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @see Jare_Exception
  */

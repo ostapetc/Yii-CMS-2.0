@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MetaTagAdminController extends AdminController
 {

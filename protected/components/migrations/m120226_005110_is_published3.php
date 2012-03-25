@@ -1,4 +1,4 @@
-<?php
+<?
 class m120226_005110_is_published3 extends CDbMigration
 {
 	public function up()

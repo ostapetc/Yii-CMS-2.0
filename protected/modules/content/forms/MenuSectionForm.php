@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('content')->assetsUrl() . '/js/MenuSectionForm.js');
 
 $menu = Menu::model()->findByPk($this->model->menu_id);

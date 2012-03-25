@@ -24,7 +24,7 @@
     });
 </script>
 
-<?php
+<?
 $query = "";
 if (isset($_GET['query']))
 {
@@ -34,32 +34,32 @@ if (isset($_GET['query']))
 
 <ul class="nav">
     <? if ($sections): ?>
-        <?php foreach ($sections as $section): ?>
-            <?php
+        <? foreach ($sections as $section): ?>
+            <?
             $class  = $section->isActive() ? 'active' : '';
             $childs = $section->children()->findAll();
             ?>
 
-            <?php if ($childs): ?>
+            <? if ($childs): ?>
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $section->title; ?><b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><? echo $section->title; ?><b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <?php foreach ($childs as $child): ?>
-                        <li><a href="<?php echo $child->href; ?>"><?php echo $child->title; ?></a></li>
-                    <?php endforeach ?>
+                    <? foreach ($childs as $child): ?>
+                        <li><a href="<? echo $child->href; ?>"><? echo $child->title; ?></a></li>
+                    <? endforeach ?>
                 </ul>
-            <?php else: ?>
-                <li class="<?php echo $class; ?>"><a href="<?php echo $section->href; ?>"><?php echo $section->title; ?></a></li>
-            <?php endif ?>
+            <? else: ?>
+                <li class="<? echo $class; ?>"><a href="<? echo $section->href; ?>"><? echo $section->title; ?></a></li>
+            <? endif ?>
 
 
-        <?php endforeach ?>
+        <? endforeach ?>
     <? endif ?>
 
     <li class="divider-vertical"></li>
     <li>
-        <form class="navbar-search pull-left" action="<?php echo Yii::app()->createUrl('/search'); ?>">
-            <input type="text" class="search-query" placeholder="<?=t('Поиск') ?>"  name="query" value="<?php echo $query; ?>">
+        <form class="navbar-search pull-left" action="<? echo Yii::app()->createUrl('/search'); ?>">
+            <input type="text" class="search-query" placeholder="<?=t('Поиск') ?>"  name="query" value="<? echo $query; ?>">
         </form>
     </li>
     <li class="divider-vertical"></li>

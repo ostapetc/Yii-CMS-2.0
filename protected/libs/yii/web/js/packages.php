@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Built-in client script packages.
  *

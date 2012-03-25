@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CGridView class file.
  *

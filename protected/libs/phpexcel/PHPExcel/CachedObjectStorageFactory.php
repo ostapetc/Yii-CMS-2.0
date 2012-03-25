@@ -1,4 +1,4 @@
-<?php
+<?
 
 class PHPExcel_CachedObjectStorageFactory {
 	const cache_in_memory				= 'Memory';

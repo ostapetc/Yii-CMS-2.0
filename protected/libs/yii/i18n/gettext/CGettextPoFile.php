@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CGettextPoFile class file.
  *

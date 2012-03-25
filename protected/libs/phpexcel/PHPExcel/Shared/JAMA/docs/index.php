@@ -1,4 +1,4 @@
-<?php
+<?
 include_once "includes/header.php";
 include_once "includes/navbar.php";
 ?>
@@ -24,7 +24,7 @@ The development team below has successfully ported the JAMA API to PHP.  You can
 this site to learn more about this project and it's current development status.
 </p>
 
-<?php
+<?
 include_once "includes/credits.php";
 include_once "includes/footer.php";	
 ?>

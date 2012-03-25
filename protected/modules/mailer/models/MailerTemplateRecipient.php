@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MailerTemplateRecipient extends ActiveRecord
 {

@@ -1,4 +1,4 @@
-<?php
+<?
 class MultiAutocomplete extends InputWidget
 {
     private $defaultOptions = array();

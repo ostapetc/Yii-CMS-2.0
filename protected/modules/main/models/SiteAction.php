@@ -1,4 +1,4 @@
-<?php
+<?
 
 class SiteAction extends ActiveRecord
 {

@@ -1,4 +1,4 @@
-<?php
+<?
 
 $this->tabs = array(
     'добавить сайдбар' => $this->createUrl('create')

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Image_Toolbox.class.php -- PHP image manipulation class
  *

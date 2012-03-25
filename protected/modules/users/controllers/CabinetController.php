@@ -1,4 +1,4 @@
-<?php
+<?
 class CabinetController extends Controller
 {
     public static function actionsTitles()

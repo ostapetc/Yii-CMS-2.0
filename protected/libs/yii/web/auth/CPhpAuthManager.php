@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CPhpAuthManager class file.
  *
@@ -499,6 +499,6 @@ class CPhpAuthManager extends CAuthManager
 	 */
 	protected function saveToFile($data,$file)
 	{
-		file_put_contents($file,"<?php\nreturn ".var_export($data,true).";\n");
+		file_put_contents($file,"<?\nreturn ".var_export($data,true).";\n");
 	}
 }

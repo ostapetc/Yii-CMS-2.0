@@ -1,4 +1,4 @@
-<?php
+<?
 
 $assets_url = Yii::app()->controller->module->assetsUrl();
 

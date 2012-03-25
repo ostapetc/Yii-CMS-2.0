@@ -1,4 +1,4 @@
-<?php
+<?
 class AdminFormInputElement extends BaseFormInputElement
 {
     public $widgets = array(

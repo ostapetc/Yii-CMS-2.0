@@ -1,5 +1,5 @@
-<?php
-echo '<?php
+<?
+echo '<?
 
 $this->tabs = array(
     \'управление\' => $this->createUrl(\'manage\')

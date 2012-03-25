@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * init version
  * PBMAssetManager class file.

@@ -1,4 +1,4 @@
-<?php
+<?
 class m120211_165455_sitempa extends CDbMigration
 {
 	public function up()

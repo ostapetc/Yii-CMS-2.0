@@ -1,4 +1,4 @@
-<?php
+<?
 class AllInOneInput extends JuiInputWidget
 {
     public function init()

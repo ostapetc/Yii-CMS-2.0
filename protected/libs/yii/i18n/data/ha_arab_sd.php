@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'ha_Arab_SD'.
  *

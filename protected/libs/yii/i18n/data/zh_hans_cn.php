@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'zh_Hans_CN'.
  *

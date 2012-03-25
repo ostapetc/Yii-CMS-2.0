@@ -15,7 +15,7 @@
     });
 </script>
 
-<?php
+<?
 
 $this->widget('AdminGridView', array(
 	'id' => 'mailer-recipient-grid',

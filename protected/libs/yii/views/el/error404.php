@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Δε βρέθηκε η σελίδα</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Η διεύθυνση URL που αιτήθηκε δεν ήταν δυνατό να βρεθεί στο διακομιστή.
 Αν εισάγατε τη διεύθυνση με το χέρι, παρακαλούμε ελέγξτε την ορθογραφία της και δοκιμάστε πάλι.
 </p>
 <p>
-Αν πιστεύετε ότι αυτό είναι λάθος του διακομιστή, παρακαλούμε επικοινωνήστε με <?php echo $data['admin']; ?>.
+Αν πιστεύετε ότι αυτό είναι λάθος του διακομιστή, παρακαλούμε επικοινωνήστε με <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

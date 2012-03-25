@@ -1,9 +1,9 @@
-<?php 
+<?
 $this->page_title = 'Добавление операции';
 ?>
 
-<?php if ($modules): ?>
-    <?php echo $form; ?>
-<?php else: ?>
-    <?php echo $this->msg("Все задачи уже добавлены!", "info"); ?>
-<?php endif ?>
+<? if ($modules): ?>
+    <? echo $form; ?>
+<? else: ?>
+    <? echo $this->msg("Все задачи уже добавлены!", "info"); ?>
+<? endif ?>

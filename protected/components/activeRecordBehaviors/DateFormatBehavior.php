@@ -1,4 +1,4 @@
-<?php
+<?
 
 class DateFormatBehavior extends CActiveRecordBehavior
 {

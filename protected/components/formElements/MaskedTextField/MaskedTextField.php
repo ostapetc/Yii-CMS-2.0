@@ -1,4 +1,4 @@
-<?php
+<?
 class MaskedTextField extends CMaskedTextField
 {
     public $type;

@@ -1,4 +1,4 @@
-<?php
+<?
 class LoginPanel extends Widget
 {
     public $cache_id;

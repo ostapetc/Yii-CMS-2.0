@@ -1,4 +1,4 @@
-<?php
+<?
 
 if (!$_SERVER['DOCUMENT_ROOT']) //for console application
 {

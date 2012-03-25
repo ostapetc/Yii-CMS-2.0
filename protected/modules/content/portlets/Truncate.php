@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Обрезает $content используя плагин jTruncate: http://www.jeremymartin.name/projects.php?project=jTruncate
  */

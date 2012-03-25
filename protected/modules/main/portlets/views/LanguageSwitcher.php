@@ -1,4 +1,4 @@
-<?php
+<?
 $max_index = count($langs) - 1;
 foreach ($langs as $i => $lang)
 {

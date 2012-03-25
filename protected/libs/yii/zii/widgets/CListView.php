@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CListView class file.
  *

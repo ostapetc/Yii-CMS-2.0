@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CGlobalStateCacheDependency class file.
  *

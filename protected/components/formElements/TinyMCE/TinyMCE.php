@@ -1,4 +1,4 @@
-<?php
+<?
 class TinyMCE extends InputWidget
 {
 	public $editorOptions = array();

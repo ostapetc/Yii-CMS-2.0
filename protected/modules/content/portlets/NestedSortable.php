@@ -1,4 +1,4 @@
-<?php
+<?
 class NestedSortable extends Portlet
 {
     public $model;

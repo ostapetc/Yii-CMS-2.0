@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CFormElement class file.
  *

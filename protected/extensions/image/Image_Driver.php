@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Image API driver.
  *

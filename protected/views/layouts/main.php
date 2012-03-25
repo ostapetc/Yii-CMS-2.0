@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $this->meta_title ?></title>
-    <meta name="description" content="<?php echo $this->meta_description ?>">
-    <meta name="keywords" content="<?php echo $this->meta_keywords ?>">
+    <title><? echo $this->meta_title ?></title>
+    <meta name="description" content="<? echo $this->meta_description ?>">
+    <meta name="keywords" content="<? echo $this->meta_keywords ?>">
     <meta name="author" content="">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -13,7 +13,7 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <?php
+    <?
     Yii::app()->bootstrap->init();
 
     $cs = Yii::app()->clientScript;
@@ -70,16 +70,16 @@
             <a class="brand" href="/">Yii-CMS 2.0</a>
 
             <div class="nav-collapse">
-                <?php //$this->widget('TopMenu');?>
+                <? //$this->widget('TopMenu');?>
 
                 <p class="navbar-text pull-right">
-                    <?php $this->widget('main.portlets.LanguageSwitcher') ?>
+                    <? $this->widget('main.portlets.LanguageSwitcher') ?>
                 </p>
 
                 <p class="navbar-text pull-right divider-vertical"></p>
 
                 <ul class="nav pull-right">
-                    <?php $this->widget('users.portlets.LoginPanel'); ?>
+                    <? $this->widget('users.portlets.LoginPanel'); ?>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -91,12 +91,12 @@
     <div class="row-fluid">
         <div class="span3">
             <div class="well sidebar-nav">
-                <?php $this->widget('SidebarMenu'); ?>
+                <? $this->widget('SidebarMenu'); ?>
             </div>
-            <?php //$this->widget('SidebarBanners') ?>
+            <? //$this->widget('SidebarBanners') ?>
         </div>
         <div class="span9">
-            <?php echo $content ?>
+            <? echo $content ?>
         </div>
     </div>
     <hr>

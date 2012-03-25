@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Interná chyba servera</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Počas zpracovávania vašej požiadavky sa vyskytla interná chyba.
-Kontaktujte prosím <?php echo $data['admin']; ?> za účelom jej nahlásenia.
+Kontaktujte prosím <? echo $data['admin']; ?> za účelom jej nahlásenia.
 </p>
 <p>
 Ďakujeme.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

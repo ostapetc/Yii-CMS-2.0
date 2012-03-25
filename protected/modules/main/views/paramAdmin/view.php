@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = 'Просмотр параметра';
 
 $this->tabs = array(

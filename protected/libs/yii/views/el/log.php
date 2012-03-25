@@ -11,7 +11,7 @@
 		<th>Κατηγορία</th>
 		<th>Μήνυμα</th>
 	</tr>
-<?php
+<?
 $colors=array(
   CLogger::LEVEL_PROFILE=>'#DFFFE0',
   CLogger::LEVEL_INFO=>'#FFFFDF',

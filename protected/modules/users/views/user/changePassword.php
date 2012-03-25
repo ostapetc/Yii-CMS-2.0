@@ -1,8 +1,8 @@
-<?php $this->page_title = "Изменение пароля"; ?>
+<? $this->page_title = "Изменение пароля"; ?>
 
-<?php if (isset($error)): ?>
-	<?php echo Yii::t('UsersModule.main', $this->msg($error, 'error')); ?>
-<?php else: ?>
-	<?php echo $form; ?>		
-<?php endif ?>
+<? if (isset($error)): ?>
+	<? echo Yii::t('UsersModule.main', $this->msg($error, 'error')); ?>
+<? else: ?>
+	<? echo $form; ?>
+<? endif ?>
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CNumberFormatter class file.
  *

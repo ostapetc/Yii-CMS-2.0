@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Change the following URL based on your server configuration

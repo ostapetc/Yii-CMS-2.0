@@ -1,17 +1,17 @@
-<?php
+<?
 $assets_url = $this->module->assetsUrl();
 ?>
 
-<script type="text/javascript" src="<?php echo $assets_url . "/js/UsersCheckboxes.js"; ?>"></script>
+<script type="text/javascript" src="<? echo $assets_url . "/js/UsersCheckboxes.js"; ?>"></script>
 
-<link rel="stylesheet" type="text/css" href="<?php echo $assets_url . "/css/UsersCheckboxes.css"; ?>" />
+<link rel="stylesheet" type="text/css" href="<? echo $assets_url . "/css/UsersCheckboxes.css"; ?>" />
 
 <table id="rch_tpl" cellpadding="0" cellspacing="0">
     <tr>
         <td colspan="2"><b>Получатели:</b></td>
     </tr>
-    <?php foreach ($roles as $role): ?>
-        <?php
+    <? foreach ($roles as $role): ?>
+        <?
         $users = $role->users;
         if (!$users)
         {
@@ -23,11 +23,11 @@ $assets_url = $this->module->assetsUrl();
                 <input type="checkbox" class="role_checkbox">
             </td>
             <td>
-                <a href="" class="role_link">+ <?php echo $role->description; ?></a>
+                <a href="" class="role_link">+ <? echo $role->description; ?></a>
                 
                 <table cellpadding="0" cellspacing="0" class="uch_tbl">
-                    <?php foreach ($users as $user): ?>
-                    	<?php
+                    <? foreach ($users as $user): ?>
+                    	<?
 						$checked = '';
 						
 						if (isset($_POST['users_ids'])) 
@@ -47,15 +47,15 @@ $assets_url = $this->module->assetsUrl();
                     	?>
                         <tr>
                             <td class="checkbox_td">
-                                <input type="checkbox" name="users_ids[]" class="user_checkbox" value='<?php echo $user->id; ?>' <?php echo $checked; ?>>
+                                <input type="checkbox" name="users_ids[]" class="user_checkbox" value='<? echo $user->id; ?>' <? echo $checked; ?>>
                             </td>
                             <td>
-                                <?php echo $user->name; ?>
+                                <? echo $user->name; ?>
                             </td>
                         </tr>
-                    <?php endforeach ?>
+                    <? endforeach ?>
                 </table>
             </td>
         </tr>
-    <?php endforeach ?>
+    <? endforeach ?>
 </table>

@@ -1,4 +1,4 @@
-<?php
+<?
 
 $type = $this->model->element;
 

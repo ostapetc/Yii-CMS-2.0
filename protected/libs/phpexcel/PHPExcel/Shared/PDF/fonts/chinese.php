@@ -1,4 +1,4 @@
-<?php
+<?
 // CHINESE TRADITIONAL
 $type='cidfont0';
 $dw=1000;

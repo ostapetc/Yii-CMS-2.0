@@ -1,4 +1,4 @@
-<?php
+<?
 $model_id = $model->model_id;
 
 $this->widget('BootDetailView', array(

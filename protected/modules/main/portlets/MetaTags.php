@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MetaTags extends JuiInputWidget
 {

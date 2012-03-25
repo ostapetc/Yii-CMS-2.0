@@ -1,4 +1,4 @@
-<?php
+<?
 class IphoneCheckbox extends InputWidget
 {
     public $type = 'iphone_checkbox';

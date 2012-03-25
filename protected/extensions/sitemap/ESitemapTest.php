@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::import('ext.sitemap.*');
 
 class ESitemapTest extends CDbTestCase

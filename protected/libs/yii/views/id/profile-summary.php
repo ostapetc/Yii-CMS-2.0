@@ -3,8 +3,8 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="6">
 			Laporan Ringkasan Profil
-			(Waktu: <?php echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>s,
-			Memori: <?php echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
+			(Waktu: <? echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>s,
+			Memori: <? echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
 		</th>
 	</tr>
 	<tr style="background-color: #ccc;">
@@ -15,7 +15,7 @@
 		<th>Min.</th>
 		<th>Maks.</th>
 	</tr>
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

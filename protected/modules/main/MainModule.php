@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MainModule extends WebModule
 {

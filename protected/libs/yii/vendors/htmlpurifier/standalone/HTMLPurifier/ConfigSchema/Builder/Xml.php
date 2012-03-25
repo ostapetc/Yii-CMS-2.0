@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Converts HTMLPurifier_ConfigSchema_Interchange to an XML format,

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * ESitemapXMLAction.php File
  *

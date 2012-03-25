@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDefaultValueValidator class file.
  *

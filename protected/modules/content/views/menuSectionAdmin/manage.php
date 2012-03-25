@@ -1,4 +1,4 @@
-<?php
+<?
 $this->page_title = 'Разделы меню :: ' . $menu->name;
 
 $this->tabs = array(
@@ -94,7 +94,6 @@ $this->widget('AdminGridView', array(
     ),
 
 ));
-?>
 
 
 

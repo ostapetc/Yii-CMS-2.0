@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CAuthItem class file.
  *

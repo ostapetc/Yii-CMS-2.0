@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CJuiResizable class file.
  *

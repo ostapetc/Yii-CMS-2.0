@@ -1,4 +1,4 @@
-<?php
+<?
 
 Yii::import('gii.components.UserIdentity');
 

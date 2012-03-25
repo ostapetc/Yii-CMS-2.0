@@ -1,4 +1,4 @@
-<?php      
+<?
 
 /* $Id$ */      
 
@@ -47,7 +47,7 @@ $url    = sprintf('http://%s%s%s/', $_SERVER['SERVER_NAME'], $folder, 'php');
 <script type="text/javascript" charset="utf-8">
 // <![CDATA[
 $(document).ready(function() {
-  $(".charcounter").editable("<?php print $url ?>save.php", { 
+  $(".charcounter").editable("<? print $url ?>save.php", {
       indicator : "<img src='img/indicator.gif'>",
       type      : "charcounter",
       submit    : 'OK',
@@ -57,7 +57,7 @@ $(document).ready(function() {
          characters : 60
       }
   });
-    $(".autogrow").editable("<?php print $url ?>save.php", { 
+    $(".autogrow").editable("<? print $url ?>save.php", {
         indicator : "<img src='img/indicator.gif'>",
         type      : "autogrow",
         submit    : 'OK',
@@ -69,31 +69,31 @@ $(document).ready(function() {
            minHeight  : 32
         }
     });
-    $(".masked").editable("<?php print $url ?>save.php", { 
+    $(".masked").editable("<? print $url ?>save.php", {
         indicator : "<img src='img/indicator.gif'>",
         type      : "masked",
         mask      : "99/99/9999",
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
-    $(".datepicker").editable("<?php print $url ?>save.php", { 
+    $(".datepicker").editable("<? print $url ?>save.php", {
         indicator : "<img src='img/indicator.gif'>",
         type      : 'datepicker',
         tooltip   : "Click to edit..."
     });
-    $(".timepicker").editable("<?php print $url ?>save.php", { 
+    $(".timepicker").editable("<? print $url ?>save.php", {
         indicator : "<img src='img/indicator.gif'>",
         type      : 'timepicker',
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
-    $(".time").editable("<?php print $url ?>save.php", { 
+    $(".time").editable("<? print $url ?>save.php", {
         indicator : "<img src='img/indicator.gif'>",
         type      : 'time',
         submit    : 'OK',
         tooltip   : "Click to edit..."
     });
-    $(".ajaxupload").editable("<?php print $url ?>upload.php", { 
+    $(".ajaxupload").editable("<? print $url ?>upload.php", {
         indicator : "<img src='img/indicator.gif'>",
         type      : 'ajaxupload',
         submit    : 'Upload',
@@ -158,7 +158,7 @@ div.entry {
       
       <div class="entry">
         <h2>Ajax File Upload</h2>
-        <p class="ajaxupload" id="custom_6"><?php print file_get_contents($url . 'load.php?id=custom_6') ?></p>
+        <p class="ajaxupload" id="custom_6"><? print file_get_contents($url . 'load.php?id=custom_6') ?></p>
         <p>
           Fileupload which uses <a href="http://www.phpletter.com/Our-Projects/AjaxFileUpload/">Ajax File Upload</a> plugin.  
           For security reasons after uploading this demo only display file size and name.
@@ -172,7 +172,7 @@ div.entry {
       <div class="entry">
 
       <h2>Masked Input</h2>
-      <p class="masked" id="custom_1"><?php print file_get_contents($url . 'load.php?id=custom_1') ?></p>
+      <p class="masked" id="custom_1"><? print file_get_contents($url . 'load.php?id=custom_1') ?></p>
       <p>Depends on
         <a href="http://digitalbush.com/projects/masked-input-plugin">Masked Input</a> by Josh Bush.
       </p>
@@ -181,7 +181,7 @@ div.entry {
     <div class="entry">
     
       <h2>Time Picker</h2>
-      <p class="timepicker" id="custom_4"><?php print file_get_contents($url . 'load.php?id=custom_4') ?></p>
+      <p class="timepicker" id="custom_4"><? print file_get_contents($url . 'load.php?id=custom_4') ?></p>
       <p>
         Depends on <a href="http://jquery.com/plugins/project/timepicker">Timepicker</a> 
         by Jason Huck.
@@ -191,7 +191,7 @@ div.entry {
     <div class="entry">
 
       <h2>Time Picker 2</h2>
-      <p class="time" id="custom_5"><?php print file_get_contents($url . 'load.php?id=custom_5') ?></p>
+      <p class="time" id="custom_5"><? print file_get_contents($url . 'load.php?id=custom_5') ?></p>
       <p>
         Similar as previous but without dependenices. See <a href="http://www.appelsiini.net/2008/2/creating-inline-timepicker-with-javascript">how to create inputs tutorial</a>.
       </p>
@@ -201,7 +201,7 @@ div.entry {
     <div class="entry">
 
       <h2>Character counter</h2>
-      <p class="charcounter" id="custom_5"><?php print file_get_contents($url . 'load.php?id=custom_6') ?></p>
+      <p class="charcounter" id="custom_5"><? print file_get_contents($url . 'load.php?id=custom_6') ?></p>
       <p>
         Using character counter.
       </p>
@@ -212,7 +212,7 @@ div.entry {
     <div class="entry">
 
       <h2>Date Picker</h2>
-      <p class="datepicker" id="custom_4"><?php print file_get_contents($url . 'load.php?id=custom_4') ?></p>
+      <p class="datepicker" id="custom_4"><? print file_get_contents($url . 'load.php?id=custom_4') ?></p>
       <p>
         Custom input which uses <a href="http://kelvinluck.com/assets/jquery/datePicker/v2/demo/">Datepicker 
         Plugin</a> by Kelvin Luck. This input still has some bugs.

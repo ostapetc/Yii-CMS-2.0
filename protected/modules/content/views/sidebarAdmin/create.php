@@ -1,4 +1,4 @@
-<?php
+<?
 
 $this->tabs = array(
     'управление сайдбарами' => $this->createUrl('manage')

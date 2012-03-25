@@ -1,4 +1,4 @@
-<?php
+<?
 class FileManagerController extends Controller
 {
     public static function actionsTitles()

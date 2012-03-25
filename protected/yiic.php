@@ -1,4 +1,4 @@
-<?php
+<?
 
 // change the following paths if necessary
 $yiic=dirname(__FILE__).'/libs/yii/yiic.php';

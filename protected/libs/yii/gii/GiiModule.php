@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * GiiModule class file.
  *

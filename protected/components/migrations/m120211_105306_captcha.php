@@ -1,4 +1,4 @@
-<?php
+<?
 class m120211_105306_captcha extends CDbMigration
 {
 	public function up()

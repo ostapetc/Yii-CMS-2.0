@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='FreeSerif';
 $desc=array('Ascent'=>900,'Descent'=>-300,'CapHeight'=>10,'Flags'=>96,'FontBBox'=>'[-879 -1201 1767 2606]','ItalicAngle'=>-33.2,'StemV'=>70,'MissingWidth'=>600);

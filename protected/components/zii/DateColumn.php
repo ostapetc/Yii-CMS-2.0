@@ -1,4 +1,4 @@
-<?php
+<?
 class DateColumn extends CDataColumn
 {
     public $uiDateFormat = 'dd.mm.yy';

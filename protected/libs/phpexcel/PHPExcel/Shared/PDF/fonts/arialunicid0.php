@@ -1,4 +1,4 @@
-<?php
+<?
 $type='cidfont0';
 $name='ArialUnicodeMS';
 $desc=array('Ascent'=>1069,'Descent'=>-271,'CapHeight'=>1069,'Flags'=>32,'FontBBox'=>'[-1011 -330 2260 1078]','ItalicAngle'=>0,'StemV'=>70,'MissingWidth'=>600);

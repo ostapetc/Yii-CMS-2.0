@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="<?php echo Yii::app()->charset?>">
-    <title><?php echo $this->pageTitle?></title>
+    <meta charset="<? echo Yii::app()->charset?>">
+    <title><? echo $this->pageTitle?></title>
 </head>
 <body>
-<?php echo $content?>
+<? echo $content?>
 </body>
 </html>

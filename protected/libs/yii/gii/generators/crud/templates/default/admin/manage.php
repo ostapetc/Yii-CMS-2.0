@@ -1,17 +1,17 @@
-<?php
-echo '<?php
+<?
+echo '<?
 
 $this->tabs = array(
     \'добавить\' => $this->createUrl(\'create\')
 );';
 ?>
 
-<?php echo "\n"; ?>$this->widget('GridView', array(
-	'id' => '<?php echo $this->class2id($this->modelClass); ?>-grid',
+<? echo "\n"; ?>$this->widget('GridView', array(
+	'id' => '<? echo $this->class2id($this->modelClass); ?>-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,
 	'columns' => array(
-<?php
+<?
 $count=0;
 foreach($this->tableSchema->columns as $column)
 {

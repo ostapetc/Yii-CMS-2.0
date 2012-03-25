@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CHtml class file.
  *

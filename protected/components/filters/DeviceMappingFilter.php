@@ -1,4 +1,4 @@
-<?php
+<?
 class DeviceMappingFilter extends CFilter
 {
     public $browserName;

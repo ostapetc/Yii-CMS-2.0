@@ -1,4 +1,4 @@
-<?php
+<?
 
 class AuthAssignment extends ActiveRecord
 {

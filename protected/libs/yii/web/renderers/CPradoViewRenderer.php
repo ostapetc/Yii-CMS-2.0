@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CPradoViewRenderer class file.
  *
@@ -28,32 +28,32 @@
  * <pre>
  * // PHP tags:
  * <%= expression %>
- * // <?php echo expression ?>
+ * // <? echo expression ?>
  * <% statement %>
- * // <?php statement ?></li>
+ * // <? statement ?></li>
  *
  * // component tags:
  * <com:WigetClass name1="value1" name2='value2' name3={value3} >
- * // <?php $this->beginWidget('WigetClass',
+ * // <? $this->beginWidget('WigetClass',
  * // array('name1'=>"value1", 'name2'=>'value2', 'name3'=>value3)); ?>
  * </com:WigetClass >
- * // <?php $this->endWidget('WigetClass'); ?>
+ * // <? $this->endWidget('WigetClass'); ?>
  * <com:WigetClass name1="value1" name2='value2' name3={value3} />
- * // <?php $this->widget('WigetClass',
+ * // <? $this->widget('WigetClass',
  * // array('name1'=>"value1", 'name2'=>'value2', 'name3'=>value3)); ?>
  *
  * // cache tags:
  * <cache:fragmentID name1="value1" name2='value2' name3={value3} >
- * // <?php if($this->beginCache('fragmentID',
+ * // <? if($this->beginCache('fragmentID',
  * // array('name1'=>"value1", 'name2'=>'value2', 'name3'=>value3))): ?>
  * </cache:fragmentID >
- * // <?php $this->endCache('fragmentID'); endif; ?>
+ * // <? $this->endCache('fragmentID'); endif; ?>
  *
  * // clip tags:
  * <clip:clipID >
- * // <?php $this->beginClip('clipID'); ?>
+ * // <? $this->beginClip('clipID'); ?>
  * </clip:clipID >
- * // <?php $this->endClip('clipID'); ?>
+ * // <? $this->endClip('clipID'); ?>
  *
  * // comment tags:
  * <!--- comments --->
@@ -89,7 +89,7 @@ class CPradoViewRenderer extends CViewRenderer
 		$this->_input=file_get_contents($sourceFile);
 		$n=preg_match_all('/'.implode('|',$regexRules).'/msS',$this->_input,$matches,PREG_SET_ORDER|PREG_OFFSET_CAPTURE);
 		$textStart=0;
-        $this->_output="<?php /* source file: $sourceFile */ ?>\n";
+        $this->_output="<? /* source file: $sourceFile */ ?>\n";
 		for($i=0;$i<$n;++$i)
 		{
 			$match=&$matches[$i];
@@ -271,7 +271,7 @@ class CPradoViewRenderer extends CViewRenderer
 	{
 		$line=$this->getLineNumber($offset);
 		$code=str_replace('__FILE__',var_export($this->_sourceFile,true),$code);
-		return "<?php /* line $line */ $code ?>";
+		return "<? /* line $line */ $code ?>";
 	}
 
 	/*

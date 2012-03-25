@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * BootInputHorizontal class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>

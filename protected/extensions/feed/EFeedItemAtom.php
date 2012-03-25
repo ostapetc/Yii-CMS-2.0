@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * EFeedItemAtom Class file
  * @author Antonio Ramirez 

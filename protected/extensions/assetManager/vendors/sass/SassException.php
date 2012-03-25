@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassException.php 61 2010-04-16 10:19:59Z chris.l.yates $ */
 /**
  * Sass exception.

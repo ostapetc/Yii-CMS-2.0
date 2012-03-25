@@ -1,4 +1,4 @@
-<?php
+<?
 
 class LanguagesBehavior extends CActiveRecordBehavior
 {

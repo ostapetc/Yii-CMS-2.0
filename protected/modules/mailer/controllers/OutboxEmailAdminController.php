@@ -1,4 +1,4 @@
-<?php
+<?
 
 class OutboxEmailAdminController extends AdminController
 {

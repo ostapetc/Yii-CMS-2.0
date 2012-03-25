@@ -18,15 +18,15 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>未認証</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 あなたはこのページをアクセスする許可を受けていません。
 </p>
 <p>
-もしこれがサーバのエラーとお考えの場合は担当(<?php echo $data['admin']; ?>)に連絡してください。
+もしこれがサーバのエラーとお考えの場合は担当(<? echo $data['admin']; ?>)に連絡してください。
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

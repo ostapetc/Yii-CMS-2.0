@@ -1,4 +1,4 @@
-<?php
+<?
 abstract class BaseFormInputElement extends CFormInputElement
 {
     public $widgets = array();

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Array helper class.
  *

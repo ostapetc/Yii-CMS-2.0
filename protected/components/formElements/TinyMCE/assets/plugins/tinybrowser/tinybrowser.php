@@ -1,4 +1,4 @@
-<?php
+<?
 /*
  * В файл изменены правки для работы с папками - torwald.ru 
  */
@@ -213,47 +213,47 @@ else
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>TinyBrowser :: <?php echo TB_BROWSE; ?></title>
+<title>TinyBrowser :: <? echo TB_BROWSE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<?php
+<?
 if(!$standalone && $tinybrowser['integration']=='tinymce')
 	{
-	?><script language="javascript" type="text/javascript" src="../../tiny_mce_popup.js"></script><?php 
+	?><script language="javascript" type="text/javascript" src="../../tiny_mce_popup.js"></script><?
 	}
 else
 	{
-	?><link rel="stylesheet" type="text/css" media="all" href="css/stylefull_tinybrowser.css" /><?php 
+	?><link rel="stylesheet" type="text/css" media="all" href="css/stylefull_tinybrowser.css" /><?
 	}
 ?>
 <link rel="stylesheet" type="text/css" media="all" href="css/style_tinybrowser.css.php" />
-<script language="javascript" type="text/javascript" src="js/tinybrowser.js.php?<?php echo substr($passfeid,1); ?>"></script>
+<script language="javascript" type="text/javascript" src="js/tinybrowser.js.php?<? echo substr($passfeid,1); ?>"></script>
 </head>
-<body<?php echo $rowhlightinit; ?>>
-<?php
+<body<? echo $rowhlightinit; ?>>
+<?
 if(count($notify['type'])>0) alert($notify);
 ?>
 <div class="tabs">
 <ul>
-<li id="browse_tab" class="current"><span><a href="tinybrowser.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_BROWSE; ?></a></span></li><?php
+<li id="browse_tab" class="current"><span><a href="tinybrowser.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_BROWSE; ?></a></span></li><?
 if($tinybrowser['allowupload']) 
 	{
-	?><li id="upload_tab"><span><a href="upload.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_UPLOAD; ?></a></span></li><?php
+	?><li id="upload_tab"><span><a href="upload.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_UPLOAD; ?></a></span></li><?
 	}
 if($tinybrowser['allowedit'] || $tinybrowser['allowdelete'])
 	{
-	?><li id="edit_tab"><span><a href="edit.php?type=<?php echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><?php echo TB_EDIT; ?></a></span></li><?php
+	?><li id="edit_tab"><span><a href="edit.php?type=<? echo $typenow.$passfeid ; ?>&path=<? echo $pathnow; ?>"><? echo TB_EDIT; ?></a></span></li><?
 	} ?>
 </ul>
 </div>
 <div class="panel_wrapper">
 <div id="general_panel" class="panel currentmod">
 <fieldset>
-<legend><?php echo TB_BROWSEFILES; ?></legend>
-<?php
+<legend><? echo TB_BROWSEFILES; ?></legend>
+<?
 form_open('browse','custom',basename($_SERVER["SCRIPT_NAME"]),'?type='.$typenow.$passfeid.'&path='.$pathnow);
 ?>
 <div class="pushleft">
-<?php
+<?
 // Offer view type if file type is image
 if($typenow=='image')
 	{
@@ -278,7 +278,7 @@ if($tinybrowser['pagination']>0)
 		}
 	if($i>2) form_select($page,'showpage',TB_SHOW,$showpagenow,true);
 	}
-?></div><div class="pushright"><?php
+?></div><div class="pushright"><?
 
 form_hidden_input('sortby',$sortbynow);
 form_hidden_input('sorttype',$sorttypenow);
@@ -286,7 +286,7 @@ form_text_input('find',false,$findnow,25,50);
 form_submit_button('search',TB_SEARCH,'');
 
 ?></div>
-<?php
+<?
 // if image show dimensions header
 if($typenow=='image')
 	{

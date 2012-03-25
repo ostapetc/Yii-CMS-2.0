@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CModel class file.
  *

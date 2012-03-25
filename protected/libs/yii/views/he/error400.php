@@ -19,16 +19,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>בקשה שגויה</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 הבקשה לא עובדה על ידי השרת בצורה נכונה כתוצאה מתחביר לא תקין.
 במידה וישנן טעויות תחביר בבקשה יש לתקן אותן לפני טעינת עמוד זה מחדש.
 </p>
 <p>
-אם הינך חושב שזוהי שגיאת שרת אנא צור קשר עם, <?php echo $data['admin']; ?>.
+אם הינך חושב שזוהי שגיאת שרת אנא צור קשר עם, <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

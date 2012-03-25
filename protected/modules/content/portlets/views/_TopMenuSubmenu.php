@@ -1,5 +1,5 @@
 <ul class="sub_menu">
-     <?php
+     <?
      for ($i = 0, $count = count($items); $i < $count; $i++)
      {
          $item = $items[$i];
@@ -14,8 +14,8 @@
          }
          ?>
 
-         <li class="<?php echo $class ?>">
-             <a href="<?php echo $item->href ?>"><?php echo $item->title; ?></a>
+         <li class="<? echo $class ?>">
+             <a href="<? echo $item->href ?>"><? echo $item->title; ?></a>
          </li>
-     <?php } ?>
+     <? } ?>
 </ul>

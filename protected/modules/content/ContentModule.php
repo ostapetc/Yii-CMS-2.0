@@ -1,5 +1,4 @@
-<?php
-
+<?
 class ContentModule extends WebModule
 {
     public static function name()

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * SassScript functions class file.
  * 

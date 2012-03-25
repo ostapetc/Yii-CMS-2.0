@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CVarDumper class file.
  *
@@ -60,7 +60,7 @@ class CVarDumper
 		self::dumpInternal($var,0);
 		if($highlight)
 		{
-			$result=highlight_string("<?php\n".self::$_output,true);
+			$result=highlight_string("<?\n".self::$_output,true);
 			self::$_output=preg_replace('/&lt;\\?php<br \\/>/','',$result,1);
 		}
 		return self::$_output;

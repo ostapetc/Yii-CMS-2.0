@@ -1,4 +1,4 @@
-<?php
+<?
 
 class LanguageAdminController extends AdminController
 {

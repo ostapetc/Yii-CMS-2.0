@@ -1,4 +1,4 @@
-<?php
+<?
  
 class UsersCheckboxes extends InputWidget
 {	

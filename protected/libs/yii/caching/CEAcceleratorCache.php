@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CEAcceleratorCache class file
  *

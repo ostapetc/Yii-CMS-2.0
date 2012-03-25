@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CMemCache class file
  *

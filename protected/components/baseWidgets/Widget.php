@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::import('zii.widgets.CWidget');
 
 abstract class Widget extends CWidget

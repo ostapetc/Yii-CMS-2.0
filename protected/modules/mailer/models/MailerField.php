@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MailerField extends ActiveRecord
 {

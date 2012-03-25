@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl() . '/js/menuTreeView.js');
 
 $this->page_title = $this->page_title . ' :: ' . $menu->name;
@@ -12,4 +12,3 @@ $this->widget('application.components.TreeView',array(
     'url' => '/content/MenuSectionAdmin/AjaxFillTree?menu_id=' . $menu->id,
     'collapsed' => true
 ));
-?>

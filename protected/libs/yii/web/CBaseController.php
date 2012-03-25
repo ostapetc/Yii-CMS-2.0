@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CBaseController class file.
  *

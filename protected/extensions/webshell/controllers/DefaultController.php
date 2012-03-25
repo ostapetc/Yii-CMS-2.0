@@ -1,4 +1,4 @@
-<?php
+<?
 class DefaultController extends CController {
     public $layout='webshell';
     public $pageTitle = 'Yii web shell';

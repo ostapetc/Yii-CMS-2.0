@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * save one attribute of one model
  * if $_POST['bulk_update'] == true then make bulk update for many models, but only one attribute of one model

@@ -1,4 +1,4 @@
-<?php
+<?
 class SortableAction extends CAction
 {
     public function run()

@@ -10,7 +10,7 @@
 	}
 
 2.
-<?php $this->widget('GridView', array(
+<? $this->widget('GridView', array(
 	'id'=>'test-product-grid',
 	'dataProvider'=>$model->search($cat_id),
 	'many_many_sortable'=>true,

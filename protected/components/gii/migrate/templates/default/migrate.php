@@ -1,29 +1,29 @@
-<?php echo '<?php'; ?>
+<? echo '<?'; ?>
 
-class <?php echo $this->_migrateName; ?> extends CDbMigration
+class <? echo $this->_migrateName; ?> extends CDbMigration
 {
 	public function up()
 	{
     $a = <<<HEAD
-    <?php echo strtr($this->code, array('$' => '\$')); ?>
+    <? echo strtr($this->code, array('$' => '\$')); ?>
 
 HEAD;
 		$this->execute($a);
 		
-<?php if($this->clearCache):?>
+<? if($this->clearCache):?>
 		if(Yii::app()->hasComponent('cache'))
 		{
 			Yii::app()->getComponent('cache')->flush();
 			echo "Cache flused\n";
 		}
-<?php endif;?>
+<? endif;?>
 		
-<?php if($this->clearAssets): ?>
+<? if($this->clearAssets): ?>
 		$this->clearAssets();
-<?php endif; ?>
+<? endif; ?>
 	}
 	
-<?php if($this->clearAssets): ?>
+<? if($this->clearAssets): ?>
 	private function clearAssets()
 	{
 		$path = Yii::app()->getComponent('assetManager')->getBasePath();
@@ -52,11 +52,11 @@ HEAD;
 		else
 			unlink($folder);
 	}
-<?php endif; ?>
+<? endif; ?>
 
 	public function down()
 	{
-		echo "<?php echo $this->_migrateName; ?> does not support migration down.\n";
+		echo "<? echo $this->_migrateName; ?> does not support migration down.\n";
 		return false;
 		
 		$this->execute("");

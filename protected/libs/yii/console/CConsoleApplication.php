@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CConsoleApplication class file.
  *

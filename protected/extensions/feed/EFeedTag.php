@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * 
  * @author Antonio Ramirez Cobos <ramirez.cobos@gmail.com>

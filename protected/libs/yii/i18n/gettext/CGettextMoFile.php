@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CGettextMoFile class file.
  *

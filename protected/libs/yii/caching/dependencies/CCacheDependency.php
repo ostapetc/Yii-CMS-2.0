@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CCacheDependency class file.
  *

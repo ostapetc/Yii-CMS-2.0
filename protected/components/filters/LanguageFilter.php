@@ -1,4 +1,4 @@
-<?php
+<?
 class LanguageFilter extends CFilter
 {
     protected function preFilter($filterChain)

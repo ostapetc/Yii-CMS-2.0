@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbConnection class file
  *

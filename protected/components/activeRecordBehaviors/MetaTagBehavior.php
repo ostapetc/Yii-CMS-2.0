@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MetaTagBehavior extends CActiveRecordBehavior
 {

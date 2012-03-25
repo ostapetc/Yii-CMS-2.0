@@ -1,4 +1,4 @@
-<?php
+<?
 
 class RuLatAlphaValidator extends CValidator
 {

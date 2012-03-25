@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CInlineValidator class file.
  *
@@ -56,7 +56,7 @@ class CInlineValidator extends CValidator
 	 * If {@link clientValidate} is set to "clientValidate123", clientValidate123() is the name of
 	 * the method that returns the client validation code and can look like:
 	 * <pre>
-	 * <?php
+	 * <?
 	 *   public function clientValidate123($attribute)
 	 *   {
 	 *      $js = "if(value != '123') { messages.push('Value should be 123'); }";

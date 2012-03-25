@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CRangeValidator class file.
  *

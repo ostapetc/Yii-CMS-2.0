@@ -1,6 +1,6 @@
-<?php $this->page_title = 'Просмотр логов'; ?>
+<? $this->page_title = 'Просмотр логов'; ?>
 
-<?php
+<?
 $this->widget('AdminGridView', array(
 	'id' => 'grid',
 	'dataProvider' => $model->search(),

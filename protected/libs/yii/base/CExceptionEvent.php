@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CExceptionEvent class file.
  *

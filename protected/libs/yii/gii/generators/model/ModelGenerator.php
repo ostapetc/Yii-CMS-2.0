@@ -1,4 +1,4 @@
-<?php
+<?
 
 class ModelGenerator extends CCodeGenerator
 {

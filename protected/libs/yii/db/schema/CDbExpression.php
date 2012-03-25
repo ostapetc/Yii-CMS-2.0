@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbExpression class file.
  *

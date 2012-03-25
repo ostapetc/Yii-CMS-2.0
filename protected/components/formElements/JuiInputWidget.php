@@ -1,4 +1,4 @@
-<?php
+<?
 Yii::import('zii.widgets.jui.CJuiInputWidget');
 abstract class JuiInputWidget extends CJuiInputWidget
 {

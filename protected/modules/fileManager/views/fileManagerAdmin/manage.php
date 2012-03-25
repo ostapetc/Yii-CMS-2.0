@@ -1,4 +1,4 @@
-<?php
+<?
 
 function getObjectUpdateUrl($object_id, $model)
 {

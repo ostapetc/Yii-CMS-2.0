@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * EReCaptchaValidator class file.
  *

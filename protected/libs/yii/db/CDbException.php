@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbException class file.
  *

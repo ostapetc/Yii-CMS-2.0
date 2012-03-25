@@ -1,4 +1,4 @@
-<?php
+<?
 class m120210_213443_banners extends CDbMigration
 {
 	public function up()

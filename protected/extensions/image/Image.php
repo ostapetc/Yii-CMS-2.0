@@ -1,4 +1,4 @@
-<?php
+<?
 
 Yii::import('application.extensions.image.Image_Driver');
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'yav_CM'.
  *

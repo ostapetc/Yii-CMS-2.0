@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CTheme class file.
  *

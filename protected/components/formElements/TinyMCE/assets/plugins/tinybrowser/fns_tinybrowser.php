@@ -1,4 +1,4 @@
-<?php
+<?
 // *************************CREATE FOLDER**********************************
 function createfolder($dir,$perm) {
 if(mkdir($dir, $perm))
@@ -22,7 +22,7 @@ function alert(&$notify){
 $alert_num = count($notify['type']);
 for($i=0;$i<$alert_num;$i++)
 	{
-	?><div class="alert<?php echo $notify['type'][$i]; ?>"><?php echo $notify['message'][$i]; ?></div><br /><?php
+	?><div class="alert<? echo $notify['type'][$i]; ?>"><? echo $notify['message'][$i]; ?></div><br /><?
 	}
 }
 
@@ -123,41 +123,41 @@ return $cim1;
 
 // **************************GENERATE FORM OPEN*****************************
 function form_open($name,$class,$url,$parameters){
-?><form name="<?php echo $name; ?>" class="<?php echo $class; ?>" method="post" action="<?php echo $url.$parameters; ?>">
-<?php
+?><form name="<? echo $name; ?>" class="<? echo $class; ?>" method="post" action="<? echo $url.$parameters; ?>">
+<?
 }
 
 // **************************GENERATE FORM SELECT ELEMENT*****************************
 function form_select($options,$name,$label,$current,$auto){
-if ($label) {?><label for="<?php echo $name; ?>"><?php echo $label; ?></label><?php } 
-?><select name="<?php echo $name; ?>" <?php if ($auto) {?>onchange="this.form.submit();"<?php }?>>
-<?php
+if ($label) {?><label for="<? echo $name; ?>"><? echo $label; ?></label><? }
+?><select name="<? echo $name; ?>" <? if ($auto) {?>onchange="this.form.submit();"<? }?>>
+<?
 $loopnum = count($options); 
 for($i=0;$i<$loopnum;$i++)
 	{
 	$selected = ($options[$i][0] == $current ? ' selected' : ''); 
 	echo '<option value="'.$options[$i][0].'"'.$selected.'>'.$options[$i][1].'</option>';
 	}
-?></select><?php
+?></select><?
 }
 
 // **************************GENERATE FORM HIDDEN ELEMENT*****************************
 function form_hidden_input($name,$value) {
-?><input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
-<?php
+?><input type="hidden" name="<? echo $name; ?>" value="<? echo $value; ?>" />
+<?
 }
 
 // **************************GENERATE FORM TEXT ELEMENT*****************************
 function form_text_input($name,$label,$value,$size,$maxlength) {
-if ($label) {?><label for="<?php echo $name; ?>"><?php echo $label; ?></label><?php } ?>
-<input type="text" name="<?php echo $name; ?>" size="<?php echo $size; ?>" maxlength="<?php echo $maxlength; ?>" value="<?php echo $value; ?>" /><?php
+if ($label) {?><label for="<? echo $name; ?>"><? echo $label; ?></label><? } ?>
+<input type="text" name="<? echo $name; ?>" size="<? echo $size; ?>" maxlength="<? echo $maxlength; ?>" value="<? echo $value; ?>" /><?
 }
 
 // **************************GENERATE FORM SUBMIT BUTTON*****************************
 function form_submit_button($name,$label,$class) {
-?><button <?php if ($class) {?>class="<?php echo $class; ?>"<?php } ?>type="submit" name="<?php echo $name; ?>"><?php echo $label; ?></button>
+?><button <? if ($class) {?>class="<? echo $class; ?>"<? } ?>type="submit" name="<? echo $name; ?>"><? echo $label; ?></button>
 </form>
-<?php
+<?
 }
 
 //********************************Returns True if Number is Odd**************************************

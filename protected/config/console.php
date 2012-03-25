@@ -1,4 +1,4 @@
-<?php
+<?
 
 define('PROTECTED_PATH', realpath(dirname(__FILE__) . '/../') . DIRECTORY_SEPARATOR);
 define('MODULES_PATH', PROTECTED_PATH . 'modules' . DIRECTORY_SEPARATOR);

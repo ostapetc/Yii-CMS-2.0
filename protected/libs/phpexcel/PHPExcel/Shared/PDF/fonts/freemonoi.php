@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='FreeMonoOblique';
 $desc=array('Ascent'=>800,'Descent'=>-200,'CapHeight'=>44,'Flags'=>96,'FontBBox'=>'[-644 -200 816 800]','ItalicAngle'=>-12,'StemV'=>70,'MissingWidth'=>600);

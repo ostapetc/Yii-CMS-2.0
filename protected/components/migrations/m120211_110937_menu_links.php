@@ -1,4 +1,4 @@
-<?php
+<?
 class m120211_110937_menu_links extends CDbMigration
 {
 	public function up()

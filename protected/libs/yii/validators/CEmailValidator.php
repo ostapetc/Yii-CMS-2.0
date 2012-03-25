@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CEmailValidator class file.
  *

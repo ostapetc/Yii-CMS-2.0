@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CFileCache class file
  *

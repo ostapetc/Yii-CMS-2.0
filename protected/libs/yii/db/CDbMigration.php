@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbMigration class file.
  *

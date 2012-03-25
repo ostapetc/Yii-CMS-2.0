@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CSqlDataProvider implements a data provider based on a plain SQL statement.
  *

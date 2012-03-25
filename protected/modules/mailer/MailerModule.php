@@ -1,4 +1,4 @@
-<?php
+<?
 
 class MailerModule extends WebModule
 {	

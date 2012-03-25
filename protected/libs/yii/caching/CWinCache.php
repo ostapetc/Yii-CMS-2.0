@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CWinCache class file
  *

@@ -1,22 +1,22 @@
 <style type="text/css">
 	#yiiWebDebugToolbar {
-		<?php if ($fixedPos): ?>
+		<? if ($fixedPos): ?>
 		position: fixed;
-		<?php else: ?>
+		<? else: ?>
 		position: absolute;
-		<?php endif ?>
+		<? endif ?>
 		
-		<?php if ($alignLeft): ?>
+		<? if ($alignLeft): ?>
 		float: left;
 		left: 0;
 		border-right: solid 1px #000;
 		border-bottom: solid 1px #000;
-		<?php else: ?>
+		<? else: ?>
 		float: right;
 		right: 0;
 		border-left: solid 1px #000;
 		border-bottom: solid 1px #000;
-		<?php endif ?>
+		<? endif ?>
 		
 		top: 0;
 		height: 16px;
@@ -67,11 +67,11 @@
 	}
 	
 	ul#yiiWebDebugToolbarItems {
-		<?php if ($alignLeft): ?>
+		<? if ($alignLeft): ?>
 		margin-right: 5px;
-		<?php else: ?>
+		<? else: ?>
 		margin-left: 5px;
-		<?php endif ?>
+		<? endif ?>
 	}
 	
 	ul#yiiWebDebugToolbarItems li {
@@ -192,54 +192,54 @@
 </style>
 
 <div id="yiiWebDebugToolbar" onmouseover="yiiDebugMouse(true);" onmouseout="yiiDebugMouse(false);">
-	<?php if (!$alignLeft): ?>
+	<? if (!$alignLeft): ?>
 	<ul>
 		<li><a href="#" class="yiiLink" onclick="return yiiWebDebugToggle('yiiWebDebugToolbarItems');">Yii</a></li>
 	</ul>
-	<?php endif ?>
+	<? endif ?>
 	
 	<ul id="yiiWebDebugToolbarItems">
-		<?php $index = 0; foreach ($items as $item): ?>
+		<? $index = 0; foreach ($items as $item): ?>
 		<li>[&nbsp;
-			<?php echo (isset($item['content']) && !is_null($item['content'])) ? '<a href="#" class="yiiLinkItem" onclick="return yiiWebDebugToggle(\'__yiiWDP'.$index.'\');">'.$item['title'].'</a>' : $item['title'] ?>
+			<? echo (isset($item['content']) && !is_null($item['content'])) ? '<a href="#" class="yiiLinkItem" onclick="return yiiWebDebugToggle(\'__yiiWDP'.$index.'\');">'.$item['title'].'</a>' : $item['title'] ?>
 			&nbsp;]
 		</li>
-		<?php if (isset($item['content']) && !is_null($item['content'])) $index++; endforeach ?>
+		<? if (isset($item['content']) && !is_null($item['content'])) $index++; endforeach ?>
 	</ul>
 	
-	<?php if ($alignLeft): ?>
+	<? if ($alignLeft): ?>
 	<ul>
 		<li><a href="#" class="yiiLink" onclick="return yiiWebDebugToggle('yiiWebDebugToolbarItems');">Yii</a></li>
 	</ul>
-	<?php endif ?>
+	<? endif ?>
 </div>
 
 <div id="yiiWebDebugPanel">
-	<?php
+	<?
 	$index = 0;
 	foreach ($items as $item): if (!isset($item['content']) || is_null($item['content'])) continue; ?>
 	
-	<div id="__yiiWDP<?php echo $index ?>" style="display: none">
+	<div id="__yiiWDP<? echo $index ?>" style="display: none">
 		<div class="panelHeadInfo">
-			<?php if ($alignLeft) echo "<br/>" ?> <?php echo (isset($item['headinfo']) && !is_null($item['headinfo'])) ? $item['headinfo'] : '<br/><br/>' ?>
+			<? if ($alignLeft) echo "<br/>" ?> <? echo (isset($item['headinfo']) && !is_null($item['headinfo'])) ? $item['headinfo'] : '<br/><br/>' ?>
 		</div>
 		
 		<center>
 			<div class="gridContainer">
 				<div class="panelTitle">
-					<?php if (isset($item['panelTitle']) && !is_null($item['panelTitle'])) echo $item['panelTitle'] ?>
+					<? if (isset($item['panelTitle']) && !is_null($item['panelTitle'])) echo $item['panelTitle'] ?>
 				</div>
 				
-				<div class="panelGrid" id="panelGridH__yiiWDP<?php echo $index ?>">
-					<div id="panelGH__yiiWDP<?php echo $index ?>">
-						<?php echo $item['content'] ?>
+				<div class="panelGrid" id="panelGridH__yiiWDP<? echo $index ?>">
+					<div id="panelGH__yiiWDP<? echo $index ?>">
+						<? echo $item['content'] ?>
 					</div>
 				</div>
 			</div>
 		</center>
 	</div>
 	
-	<?php
+	<?
 		$index++;
 		endforeach;
 	?>
@@ -260,9 +260,9 @@
 		if (element == 'yiiWebDebugToolbarItems')
 		{
 			if (_curPanel != '' && disp == 'none') _$(_curPanel).style.display = 'none';
-			<?php if ($opaque): ?>
+			<? if ($opaque): ?>
 			_$('yiiWebDebugToolbar').className = (disp == 'none') ? 'yiiWebDebugOpacity' : '';
-			<?php endif ?>
+			<? endif ?>
 		}
 		else
 		{
@@ -277,14 +277,14 @@
 	
 	function yiiDebugMouse(over)
 	{
-		<?php if ($opaque): ?>
+		<? if ($opaque): ?>
 		_$('yiiWebDebugToolbar').className = (!over && _$('yiiWebDebugToolbarItems').style.display == 'none') ? 'yiiWebDebugOpacity' : '';
-		<?php endif ?>
+		<? endif ?>
 		
 		return false;
 	}
 	
-	<?php if ($collapsed): ?>
+	<? if ($collapsed): ?>
 	yiiWebDebugToggle('yiiWebDebugToolbarItems');
-	<?php endif ?>
+	<? endif ?>
 </script>

@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Description of MigrateGenerator

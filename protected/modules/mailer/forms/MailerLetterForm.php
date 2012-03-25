@@ -1,4 +1,4 @@
-<?php
+<?
 $elements = array(
     'template_id' => array(
         'type'  => 'dropdownlist',

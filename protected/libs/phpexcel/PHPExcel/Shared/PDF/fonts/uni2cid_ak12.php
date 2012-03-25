@@ -1,4 +1,4 @@
-<?php
+<?
 // unicode to cid conversion table is from
 // ftp://ftp.oreilly.com/pub/examples/nutshell/cjkv/adobe/
 // cid2code.txt in ak12.tar.Z

@@ -1,5 +1,5 @@
-<div id="<?php echo $this->id ?>" class="<?php echo $this->sortable ? 'nestedSortable' : 'tree' ?>">
-    <?php echo $tree ?>
+<div id="<? echo $this->id ?>" class="<? echo $this->sortable ? 'nestedSortable' : 'tree' ?>">
+    <? echo $tree ?>
 </div>
 
 <br/>
@@ -8,7 +8,7 @@
 
 <script>
     $(document).ready(function () {
-        var id = '<?php echo $this->id ?>';
+        var id = '<? echo $this->id ?>';
         var tree = $('#' + id + ' > ul');
         $('#sortable_tree_submit').click(function () {
             var data = tree.nestedSortable('toArray');

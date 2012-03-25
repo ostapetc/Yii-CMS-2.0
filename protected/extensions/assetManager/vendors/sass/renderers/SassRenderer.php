@@ -1,4 +1,4 @@
-<?php
+<?
 /* SVN FILE: $Id: SassRenderer.php 68 2010-04-18 13:24:41Z chris.l.yates $ */
 /**
  * SassRenderer class file.

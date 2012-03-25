@@ -1,4 +1,4 @@
-<?php
+<?
 $type='TrueTypeUnicode';
 $name='AlMohanad';
 $desc=array('Ascent'=>1093,'Descent'=>-509,'CapHeight'=>1093,'Flags'=>32,'FontBBox'=>'[-278 -507 1124 1093]','ItalicAngle'=>0,'StemV'=>70,'MissingWidth'=>600);

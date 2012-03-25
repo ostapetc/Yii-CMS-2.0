@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CListPager class file.
  *

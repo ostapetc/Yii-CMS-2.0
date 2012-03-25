@@ -24,7 +24,7 @@
     });
 </script>
 
-<?php
+<?
 $def_value = t('Поиск по сайту');
 if (isset($_GET['query']))
 {
@@ -36,9 +36,9 @@ else
 }
 ?>
 <div class="searchform">
-    <form id="formsearch" name="formsearch" method="get" action="<?php echo $this->createUrl('/search'); ?>">
+    <form id="formsearch" name="formsearch" method="get" action="<? echo $this->createUrl('/search'); ?>">
         <span>
-            <input name="query" class="editbox_search" id="editbox_search" maxlength="80" value="<?php echo $search_value; ?>" def_val="<?php echo $def_value; ?>" type="text"/>
+            <input name="query" class="editbox_search" id="editbox_search" maxlength="80" value="<? echo $search_value; ?>" def_val="<? echo $def_value; ?>" type="text"/>
         </span>
         <input name="button_search" src="/img/site/search_btn.gif" class="button_search" type="image"/>
     </form>

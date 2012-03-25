@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CArrayDataProvider class file.
  *

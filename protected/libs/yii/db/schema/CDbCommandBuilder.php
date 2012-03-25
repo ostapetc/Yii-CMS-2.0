@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CDbCommandBuilder class file.
  *

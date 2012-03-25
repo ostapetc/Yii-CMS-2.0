@@ -1,4 +1,4 @@
-<?php
+<?
 
 class LanguageSwitcherAdmin extends  Portlet
 {

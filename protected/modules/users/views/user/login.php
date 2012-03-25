@@ -1,20 +1,20 @@
-<?php $this->page_title = 'Авторизация'; ?>
+<? $this->page_title = 'Авторизация'; ?>
 
-<?php if (Yii::app()->user->hasFlash('acrivate_done')): ?>
+<? if (Yii::app()->user->hasFlash('acrivate_done')): ?>
 
-	<?php echo $this->msg(Yii::app()->user->getFlash('acrivate_done'), 'ok'); ?>
+	<? echo $this->msg(Yii::app()->user->getFlash('acrivate_done'), 'ok'); ?>
 	
-<?php elseif (Yii::app()->user->hasFlash('change_password_done')): ?>	
+<? elseif (Yii::app()->user->hasFlash('change_password_done')): ?>
 
-	<?php echo $this->msg(Yii::app()->user->getFlash('change_password_done'), 'ok'); ?>
+	<? echo $this->msg(Yii::app()->user->getFlash('change_password_done'), 'ok'); ?>
 	
-<?php endif ?>
+<? endif ?>
 
 
 
-<?php if (isset($auth_error)): ?>
-    <?php echo $this->msg($auth_error, 'error'); ?>
-<?php endif ?>
+<? if (isset($auth_error)): ?>
+    <? echo $this->msg($auth_error, 'error'); ?>
+<? endif ?>
 
-<?php echo $form; ?>
+<? echo $form; ?>
 

@@ -1,4 +1,4 @@
-<?php
+<?
 class FileManagerModule extends WebModule
 {
     public static $active = false;

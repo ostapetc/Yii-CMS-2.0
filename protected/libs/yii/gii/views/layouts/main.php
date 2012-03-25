@@ -1,4 +1,4 @@
-<?php
+<?
 $cs=Yii::app()->clientScript;
 $cs->scriptMap=array();
 $baseUrl=$this->module->assetsUrl;
@@ -14,17 +14,17 @@ $cs->registerCssFile($baseUrl.'/js/fancybox/jquery.fancybox-1.3.1.css');
 	<meta name="language" content="en" />
 
 	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/css/print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="<? echo $this->module->assetsUrl; ?>/css/screen.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<? echo $this->module->assetsUrl; ?>/css/print.css" media="print" />
 	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/css/ie.css" media="screen, projection" />
+	<link rel="stylesheet" type="text/css" href="<? echo $this->module->assetsUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->module->assetsUrl; ?>/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="<? echo $this->module->assetsUrl; ?>/css/main.css" />
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+	<title><? echo CHtml::encode($this->pageTitle); ?></title>
 
-	<script type="text/javascript" src="<?php echo $this->module->assetsUrl; ?>/js/main.js"></script>
+	<script type="text/javascript" src="<? echo $this->module->assetsUrl; ?>/js/main.js"></script>
 
 </head>
 
@@ -33,22 +33,22 @@ $cs->registerCssFile($baseUrl.'/js/fancybox/jquery.fancybox-1.3.1.css');
 <div class="container" id="page">
 	<div id="header">
 		<div class="top-menus">
-		<?php echo CHtml::link('help','http://www.yiiframework.com/doc/guide/topics.gii'); ?> |
-		<?php echo CHtml::link('webapp',Yii::app()->homeUrl); ?> |
+		<? echo CHtml::link('help','http://www.yiiframework.com/doc/guide/topics.gii'); ?> |
+		<? echo CHtml::link('webapp',Yii::app()->homeUrl); ?> |
 		<a href="http://www.yiiframework.com">yii</a>
-		<?php if(!Yii::app()->user->isGuest): ?>
-			| <?php echo CHtml::link('logout',array('/gii/default/logout')); ?>
-		<?php endif; ?>
+		<? if(!Yii::app()->user->isGuest): ?>
+			| <? echo CHtml::link('logout',array('/gii/default/logout')); ?>
+		<? endif; ?>
 		</div>
-		<div id="logo"><?php echo CHtml::link(CHtml::image($this->module->assetsUrl.'/images/logo.png'),array('/gii')); ?></div>
+		<div id="logo"><? echo CHtml::link(CHtml::image($this->module->assetsUrl.'/images/logo.png'),array('/gii')); ?></div>
 	</div><!-- header -->
 
-	<?php echo $content; ?>
+	<? echo $content; ?>
 
 </div><!-- page -->
 
 <div id="footer">
-	<?php echo Yii::powered(); ?>
+	<? echo Yii::powered(); ?>
 	<br/>A product of <a href="http://www.yiisoft.com">Yii Software LLC</a>.
 </div><!-- footer -->
 

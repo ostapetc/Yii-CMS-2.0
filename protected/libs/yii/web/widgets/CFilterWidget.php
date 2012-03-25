@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CFilterWidget class file.
  *

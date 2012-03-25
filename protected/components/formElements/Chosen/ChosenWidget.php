@@ -1,4 +1,4 @@
-<?php
+<?
 class ChosenWidget extends Widget
 {
     public $name;

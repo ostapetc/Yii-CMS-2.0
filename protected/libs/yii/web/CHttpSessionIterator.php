@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CHttpSessionIterator class file.
  *

@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * CActiveRecord class file.
  *

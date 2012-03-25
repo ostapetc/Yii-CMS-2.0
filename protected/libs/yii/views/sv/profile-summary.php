@@ -3,8 +3,8 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="6">
 			Profileringsrapport - Sammanställning
-			(Tid: <?php echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>s,
-			Minne: <?php echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
+			(Tid: <? echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>s,
+			Minne: <? echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
 		</th>
 	</tr>
 	<tr style="background-color: #ccc;">
@@ -15,7 +15,7 @@
 		<th>Min. (s)</th>
 		<th>Max. (s)</th>
 	</tr>
-<?php
+<?
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

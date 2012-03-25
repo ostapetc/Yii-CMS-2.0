@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * NestedSetBehavior class file.
  *

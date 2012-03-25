@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * @author sergey.yusupov
  * @date   : 14.02.12 10:16

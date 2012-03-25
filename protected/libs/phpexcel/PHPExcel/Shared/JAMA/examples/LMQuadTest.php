@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * quadratic (p-o)'S'S(p-o)
  * solve for o, S

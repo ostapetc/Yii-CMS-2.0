@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Locale data for 'dz_BT'.
  *

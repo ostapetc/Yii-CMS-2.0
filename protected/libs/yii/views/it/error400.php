@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Richiesta Errata</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 La richiesta non &egrave; stata gestita dal server a causa di una sintassi non corretta.
 Cortesemente non ripetere la richiesta senza modifiche.
 </p>
 <p>
-Se pensi che &egrave; un errore del server, contatta cortesemente <?php echo $data['admin']; ?>.
+Se pensi che &egrave; un errore del server, contatta cortesemente <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

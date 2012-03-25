@@ -1,9 +1,9 @@
-<?php $this->page_title = $page->title; ?>
+<? $this->page_title = $page->title; ?>
 <br/>
 
-<?php if (Yii::app()->user->hasFlash('success')): ?>
-    <?php echo $this->msg(t(Yii::app()->user->getFlash('success')), 'success'); ?>
-<?php endif ?>
+<? if (Yii::app()->user->hasFlash('success')): ?>
+    <? echo $this->msg(t(Yii::app()->user->getFlash('success')), 'success'); ?>
+<? endif ?>
 
-<?php echo $page->content; ?>
+<? echo $page->content; ?>
 

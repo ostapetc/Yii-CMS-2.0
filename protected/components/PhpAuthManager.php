@@ -1,4 +1,4 @@
-<?php
+<?
 
 class PhpAuthManager extends CPhpAuthManager
 {

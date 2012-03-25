@@ -1,4 +1,4 @@
-<?php
+<?
  
 class TimestampBehavior extends CActiveRecordBehavior
 {

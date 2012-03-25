@@ -1,4 +1,4 @@
-<?php
+<?
 
 $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__) . '/../../') . '/';
 

@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Λανθασμένη Αίτηση</h1>
-<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Ήταν αδύνατη η αναγνώριση της αίτησης από το διακομιστή λόγω λανθασμένης σύνταξης.
 Μην επαναλάβετε την αίτηση χωρίς πρώτα να την τροποποιήσετε.
 </p>
 <p>
-Αν πιστεύετε ότι αυτό είναι λάθος του διακομιστή, παρακαλούμε επικοινωνήστε με <?php echo $data['admin']; ?>.
+Αν πιστεύετε ότι αυτό είναι λάθος του διακομιστή, παρακαλούμε επικοινωνήστε με <? echo $data['admin']; ?>.
 </p>
 <div class="version">
-<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>
