@@ -1,8 +1,8 @@
 <?
 
 
-abstract class WebModule extends CWebModule
-{
+abstract class WebModule extends CWebModule {
+
     public static $active = true;
 
     public static $base_module = false;
@@ -18,18 +18,8 @@ abstract class WebModule extends CWebModule
 
     public function assetsUrl()
     {
-
-        if ($this->_assetsUrl === null)
-        {
-            $class = str_replace('Module', '', get_class($this));
-            $class = lcfirst($class);
-
-            $path = Yii::getPathOfAlias($class . '.assets');
-
-            if ($path)
-            {
-                $this->_assetsUrl = Yii::app()->getAssetManager()->publish($path);
-            }
+        if ($this->_assetsUrl === null) {
+            $this->_assetsUrl = Yii::app()->getAssetManager()->publish($this->basePath . '/assets');
         }
 
         return $this->_assetsUrl;
