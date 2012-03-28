@@ -235,16 +235,19 @@ class Form extends CForm
             }
         }
 
-        $meta = $this->model->meta();
-
-        $languages = Language::getCachedArray();
-
-        if (isset($meta['language']) && count($languages) > 1)
+        if (method_exists($this->model, 'meta'))
         {
-            $elements['language'] = array(
-                'type'  => 'dropdownlist',
-                'items' => $languages
-            );
+            $meta = $this->model->meta();
+
+            $languages = Language::getCachedArray();
+
+            if (isset($meta['language']) && count($languages) > 1)
+            {
+                $elements['language'] = array(
+                    'type'  => 'dropdownlist',
+                    'items' => $languages
+                );
+            }
         }
 
         return $elements;
