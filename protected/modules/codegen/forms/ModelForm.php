@@ -3,12 +3,16 @@
 Yii::app()->clientScript->registerScript(
     'model->form',
     '
-    $("input[name=preview]").click(function() {
+    $("#model-form input[name=preview]").click(function() {
+        updateCode();
+    });
+
+    function updateCode() {
         var data = $("#model-form").serialize();
         $.post("/codegen/modelAdmin/codePreview", data, function(html) {
-            alert(html);
+            $("#code_place").html(html);
         });
-    });
+    }
     ',
     CClientScript::POS_READY
 );

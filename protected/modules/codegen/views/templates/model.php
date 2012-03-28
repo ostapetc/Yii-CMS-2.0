@@ -4,6 +4,17 @@ class <?= $class ?> extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
+<? foreach ($constants as $constants_part): ?>
+<? foreach ($constants_part as $constant): ?>
+    const <?= $constant ?>;
+<? endforeach ?>
+
+<? endforeach ?>
+<? foreach ($constants as $field => $constants_part): ?>
+    public static $<?= $field ?>_options = array();
+<? endforeach ?>
+
+
     public function name()
     {
         return '<?= $name ?>';
@@ -26,18 +37,6 @@ class <?= $class ?> extends ActiveRecord
     {
         $behaviors = parent::behaviors();
 
-        <? if ($sortable): ?>
-        $behaviors['Sortable'] = array(
-            'class' => 'application.extensions.sortable.SortableBehavior'
-        );
-        <? endif ?>
-
-        <? if ($meta_tags): ?>
-        $behaviors['MetaTag'] = array(
-            'class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'
-        );
-        <? endif ?>
-
         return $behaviors;
     }
 
@@ -45,11 +44,7 @@ class <?= $class ?> extends ActiveRecord
     public function rules()
     {
         return array(
-            array('title, language', 'required'),
-            array(
-                'id, title, url, text, is_published, date_create', 'safe',
-                'on'=> 'search'
-            ),
+            <?= $rules ?>
         );
     }
 
@@ -57,7 +52,6 @@ class <?= $class ?> extends ActiveRecord
     public function relations()
     {
         return array(
-            'language_model' => array(self::BELONGS_TO, 'Language', 'language'),
         );
     }
 
@@ -66,7 +60,6 @@ class <?= $class ?> extends ActiveRecord
     {
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
-
 
         return new ActiveDataProvider(get_class($this), array(
             'criteria'   => $criteria,
@@ -79,48 +72,6 @@ class <?= $class ?> extends ActiveRecord
 
     public function getHref()
     {
-        $url = trim($this->url);
-        if ($url)
-        {
-            if ($url[0] != "/") {
-                $url = "/page/{$url}";
-            }
-
-            return $url;
-        }
-        else
-        {
-            return "/page/" . $this->id;
-        }
-    }
-
-
-    public function beforeSave()
-    {
-        if (parent::beforeSave())
-        {
-            if ($this->url != '/')
-            {
-                $this->url = trim($this->url, "/");
-            }
-
-            return true;
-        }
-    }
-
-
-    public function getContent()
-    {
-        $content = $this->text;
-
-        if (RbacModule::isAllow('PageAdmin_Update'))
-        {
-            $content .= "<br/>" .CHtml::link(t('Редактировать'), array(
-                '/content/pageAdmin/update/',
-                'id'=> $this->id
-            ), array('class'=> 'btn btn-danger'));
-        }
-
-        return $content;
+        return Yii::app()->createUrl('view', array('id' => $this->id));
     }
 }
