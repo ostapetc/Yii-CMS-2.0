@@ -63,9 +63,11 @@ abstract class Controller extends CController
             return true;
         }
 
+        $action_titles = $action->controller->actionsTitles();
+
         if (!isset($action_titles[ucfirst($action->id)]))
         {
-            //throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
+            throw new CException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
         if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)

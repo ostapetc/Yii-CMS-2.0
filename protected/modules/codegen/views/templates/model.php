@@ -13,7 +13,7 @@ class <?= $class ?> extends ActiveRecord
 <? foreach ($constants as $field => $constants_part): ?>
     public static $<?= $field ?>_options = array(
     <? foreach ($constants_part as $constant): ?>
-    self::<?= $constant ?>,
+    self::<?= str_replace('=', '=>', $constant) ?>,
     <? endforeach ?>
 );
 
@@ -36,14 +36,21 @@ class <?= $class ?> extends ActiveRecord
         return '<?= $table ?>';
     }
 
+<? if (isset($behaviors) && $behaviors): ?>
 
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-
-        return $behaviors;
+        return array_merge(
+            parent::behaviors(),
+            array(
+<? foreach ($behaviors as $behavior): ?>
+                '<?= array_pop(explode('.', $behavior)) ?>' => '<?= $behavior ?>',
+<? endforeach ?>
+            )
+        );
     }
 
+<? endif  ?>
 
     public function rules()
     {

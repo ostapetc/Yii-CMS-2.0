@@ -25,13 +25,13 @@ return array(
         'clientOptions'=>array('validateOnSubmit'=>true)
     ),
     'elements' => array(
-        'name' => array(
-            'type' => 'text'
-        ),
         'table' => array(
             'type' => 'text'
         ),
         'class' => array(
+            'type' => 'text'
+        ),
+        'name' => array(
             'type' => 'text'
         ),
         'behaviors' => array(

@@ -35,7 +35,9 @@ class CodegenModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Добавить модель' => Yii::app()->createUrl('/codegen/modelAdmin/create'),
+            'Создать модуль' => Yii::app()->createUrl('/codegen/moduleAdmin/create'),
+            'Создать модель' => Yii::app()->createUrl('/codegen/modelAdmin/create'),
+            'Создать CRUD'   => Yii::app()->createUrl('/codegen/crudAdmin/create'),
         );
     }
 }

@@ -63,8 +63,11 @@ class ModelAdminController extends AdminController
                 $params['rules'].= $this->addLengthRules($meta);
                 $params['rules'].= $this->addInRangeRules($meta);
                 $params['rules'].= $this->addUniqueRules($meta);
+                $params['rules'].= $this->addCoreValidatorRules($meta);
 
                 $code = $this->renderPartial('application.modules.codegen.views.templates.model', $params, true);
+
+                file_put_contents($_SERVER['DOCUMENT_ROOT'] . 'model.php', $code);
 
                 $highlighter = new CTextHighlighter();
                 $highlighter->language = 'php';
@@ -91,7 +94,29 @@ class ModelAdminController extends AdminController
             }
         }
 
-        return "array('" . implode(', ', $rules) . "', 'unique'),\n";
+        return "            array(
+                '" . implode(', ', $rules) . "',
+                'unique'
+            ),\n";
+    }
+
+
+    public function addCoreValidatorRules($meta)
+    {
+        $rules = "";
+
+        foreach ($meta as $data)
+        {
+            if (in_array($data['Field'], array('phone', 'fax')))
+            {
+                $rules.= "            array(
+                '{$data['Field']}',
+                'PhoneValidator'
+            ),\n";
+            }
+        }
+
+        return $rules;
     }
 
 
@@ -103,7 +128,11 @@ class ModelAdminController extends AdminController
         {
             if (preg_match("|enum\((.*)\)|", $data['Type']))
             {
-                $rules[] = "array('{$data['Field']}', 'in', 'range' => self::" . '$' . "{$data['Field']}_options),";
+                $rules[] = "            array(
+                '{$data['Field']}',
+                'in',
+                'range' => self::" . '$' . "{$data['Field']}_options
+            ),";
             }
         }
 
@@ -125,7 +154,10 @@ class ModelAdminController extends AdminController
 
         $required = implode(', ', $required);
 
-        return  "array('{$required}', 'required'),\n";
+        return  "array(
+                '{$required}',
+                'required'
+            ),\n";
     }
 
 
@@ -140,7 +172,7 @@ class ModelAdminController extends AdminController
         {
             foreach ($meta as $data)
             {
-                if (preg_match("|{$type}\((.*)\)|", $data['Type'], $max_length))
+                if (preg_match("|^{$type}\((.*)\)$|", $data['Type'], $max_length))
                 {
                     $max_length = $max_length[1];
                     if (!isset($length[$max_length]))
@@ -156,7 +188,11 @@ class ModelAdminController extends AdminController
         foreach ($length as $length => $attributes)
         {
             $rules.= str_repeat(' ', 12);
-            $rules.= "array(" . "'" . implode(", ", $attributes) . "'" . ", 'length', 'max' => {$length}),\n";
+            $rules.= "array(
+                " . "'" . implode(", ", $attributes) . "'" . ",
+                'length',
+                'max' => {$length}
+             ),\n";
         }
 
         return $rules;
