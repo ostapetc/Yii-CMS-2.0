@@ -33,9 +33,12 @@ class ModelAdminController extends AdminController
                 $params = array_merge($_POST['Model'], array(
                     'rules'     => "",
                     "constants" => array(),
+
                 ));
 
                 $meta = Yii::app()->db->createCommand("SHOW FUll columns FROM " . $params['table'])->queryAll();
+
+                $params['meta'] = $meta;
 
                 $length = array();
 
@@ -56,8 +59,10 @@ class ModelAdminController extends AdminController
                     }
                 }
 
-                $params['rules'].=  $this->_addRequiredRules($meta);
-                $params['rules'].=  $this->_addLengthRules($meta);
+                $params['rules'].= $this->addRequiredRules($meta);
+                $params['rules'].= $this->addLengthRules($meta);
+                $params['rules'].= $this->addInRangeRules($meta);
+                $params['rules'].= $this->addUniqueRules($meta);
 
                 $code = $this->renderPartial('application.modules.codegen.views.templates.model', $params, true);
 
@@ -74,7 +79,39 @@ class ModelAdminController extends AdminController
     }
 
 
-    public function _addRequiredRules($meta)
+    public function addUniqueRules($meta)
+    {
+        $rules = array();
+
+        foreach ($meta as $data)
+        {
+            if ($data['Key'] == 'UNI')
+            {
+                $rules[] = $data['Field'];
+            }
+        }
+
+        return "array('" . implode(', ', $rules) . "', 'unique'),\n";
+    }
+
+
+    public function addInRangeRules($meta)
+    {
+        $rules = array();
+
+        foreach ($meta as $data)
+        {
+            if (preg_match("|enum\((.*)\)|", $data['Type']))
+            {
+                $rules[] = "array('{$data['Field']}', 'in', 'range' => self::" . '$' . "{$data['Field']}_options),";
+            }
+        }
+
+        return  implode("\n", $rules) . "\n";
+    }
+
+
+    public function addRequiredRules($meta)
     {
         $required = array();
 
@@ -92,7 +129,7 @@ class ModelAdminController extends AdminController
     }
 
 
-    private function _addLengthRules($meta)
+    private function addLengthRules($meta)
     {
         $types = array('char', 'varchar');
         $rules = "";

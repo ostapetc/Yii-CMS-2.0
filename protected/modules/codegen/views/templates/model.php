@@ -11,9 +11,13 @@ class <?= $class ?> extends ActiveRecord
 
 <? endforeach ?>
 <? foreach ($constants as $field => $constants_part): ?>
-    public static $<?= $field ?>_options = array();
-<? endforeach ?>
+    public static $<?= $field ?>_options = array(
+    <? foreach ($constants_part as $constant): ?>
+    self::<?= $constant ?>,
+    <? endforeach ?>
+);
 
+<? endforeach ?>
 
     public function name()
     {
@@ -59,7 +63,9 @@ class <?= $class ?> extends ActiveRecord
     public function search()
     {
         $criteria = new CDbCriteria;
-        $criteria->compare('id', $this->id, true);
+<? foreach ($meta as $data): ?>
+        $criteria->compare('<?= $data['Field'] ?>', $this-><?= $data['Field'] ?>, true);
+<? endforeach ?>
 
         return new ActiveDataProvider(get_class($this), array(
             'criteria'   => $criteria,
@@ -73,5 +79,19 @@ class <?= $class ?> extends ActiveRecord
     public function getHref()
     {
         return Yii::app()->createUrl('view', array('id' => $this->id));
+    }
+
+
+    public function uploadFiles()
+    {
+        return array(
+<? foreach ($meta as $data): ?>
+<? if (in_array($data['Field'], array('image', 'photo'))): ?>
+            '<?= $data['Field'] ?>' => array(
+                'dir'
+            )
+<? endif ?>
+<? endforeach ?>
+        );
     }
 }
