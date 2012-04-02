@@ -35,7 +35,7 @@ class ModuleAdminController extends AdminController
 
         $paths = array();
         $dir   =  MODULES_PATH . DIRECTORY_SEPARATOR . $id;
-        $files = scandir(Yii::getPathOfAlias('application.modules.codegen.views.templates.module'));
+        $files = scandir(Yii::getPathOfAlias('codegen.views.templates.module'));
 
         foreach ($files as $file)
         {
