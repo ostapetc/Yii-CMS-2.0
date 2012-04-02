@@ -61,8 +61,17 @@ class Form extends CForm
     {
         if ($this->side == 'client') //only bootstrap
         {
-            $this->activeForm['class']                = 'BootActiveForm';
-            $this->activeForm['errorMessageCssClass'] = "help-block";
+            $this->activeForm['class']        = 'BootActiveForm';
+            $this->activeForm['inlineErrors'] = false;
+            if (isset($this->activeForm['clientOptions']['enableAjaxValidation']) && $this->activeForm['clientOptions']['enableAjaxValidation'])
+            {
+                $this->activeForm['clientOptions']['validateOnType'] = true;
+                $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
+                    var cg = $("#"+attribute.inputID).closest(".control-group");
+                    hasError ? cg.addClass("error") : cg.removeClass("error");
+                    hasError ? cg.removeClass("success") : cg.addClass("success");
+                }';
+            }
         }
 
         if (!($this->parent instanceof self))
