@@ -2,6 +2,11 @@
 
 abstract class Controller extends CController
 {
+    const MSG_SUCCESS = 'success';
+    const MSG_DANGER  = 'danger';
+    const MSG_ERROR   = 'error';
+    const MSG_INFO    = 'info';
+
     public $layout = '//layouts/main';
 
     public $page_title;

@@ -8,6 +8,7 @@ class AppManager
         'gridColumns' => 'application.components.zii.gridColumns'
     );
 
+
     public static function initPathOfAliaces()
     {
         foreach (self::$pathAliaces as $short => $full)
@@ -16,11 +17,13 @@ class AppManager
         }
     }
 
+
     public static function init()
     {
         self::initPathOfAliaces();
         Yii::app()->urlManager->collectRules();
     }
+
 
     public static function getModulesData($active = null, $check_allowed_links = false)
     {
@@ -43,6 +46,10 @@ class AppManager
             require_once $module_path;
 
             $vars = get_class_vars($module_class);
+            if (!$vars)
+            {
+                continue;
+            }
 
             if ($active !== null)
             {

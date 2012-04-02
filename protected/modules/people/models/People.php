@@ -1,6 +1,6 @@
 <?
 
-class User extends ActiveRecord
+class People extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
@@ -25,7 +25,7 @@ class User extends ActiveRecord
 
     public function name()
     {
-        return 'Пользователи';
+        return 'People name';
     }
 
 
@@ -38,18 +38,6 @@ class User extends ActiveRecord
     public function tableName()
     {
         return 'users';
-    }
-
-
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            array(
-                'SortableBehavior' => 'application.extensions.sortable.SortableBehavior',
-                'MetaTagBehavior' => 'application.components.activeRecordBehaviors.MetaTagBehavior',
-            )
-        );
     }
 
 
@@ -139,7 +127,7 @@ class User extends ActiveRecord
 
     public function getHref()
     {
-        return Yii::app()->createUrl('/mailer/user/view', array('id' => $this->id));
+        return Yii::app()->createUrl('/people/people/view', array('id' => $this->id));
     }
 
 

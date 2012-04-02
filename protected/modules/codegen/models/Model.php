@@ -8,6 +8,8 @@ class Model extends CFormModel
 
     public $class;
 
+    public $module;
+
     public $behaviors;
 
 
@@ -20,8 +22,46 @@ class Model extends CFormModel
     public function rules()
     {
         return array(
-            array('name, class, table', 'required')
+            array('name, class, table, module', 'required'),
+            array('class', 'fileNotExists')
         );
     }
+
+
+    public function fileNotExists($attr)
+    {
+        if (file_exists($this->path))
+        {
+            $this->addError($attr, "Файл '{$this->path}' уже существует");
+        }
+    }
+
+
+    public function getPath()
+    {
+        return MODULES_PATH . $this->module . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . $this->class . '.php';
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

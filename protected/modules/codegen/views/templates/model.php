@@ -85,7 +85,7 @@ class <?= $class ?> extends ActiveRecord
 
     public function getHref()
     {
-        return Yii::app()->createUrl('view', array('id' => $this->id));
+        return Yii::app()->createUrl('/<?= $module ?>/<?= strtolower($class) ?>/view', array('id' => $this->id));
     }
 
 
