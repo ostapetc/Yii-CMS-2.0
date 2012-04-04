@@ -98,7 +98,7 @@ class Param extends ActiveRecord
     }
 
 
-    public static function getValue($code)
+    public static function get($code)
     {
         $setting = self::model()->findByAttributes(array('code' => $code));
         if ($setting)
@@ -110,6 +110,12 @@ class Param extends ActiveRecord
 
             return $setting->value;
         }
+    }
+
+
+    public static function getValue($code)
+    {
+        return self::get($code);
     }
 
 

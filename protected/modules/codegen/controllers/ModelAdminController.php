@@ -5,8 +5,8 @@ class ModelAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Create'      => 'Генерация модели',
-            'CodePreview' => 'Превью кода'
+            'Create'  => 'Генерация модели',
+            'GetCode' => 'Получить код'
         );
     }
 
@@ -18,66 +18,84 @@ class ModelAdminController extends AdminController
 
         $this->performAjaxValidation($model);
 
+        if ($form->submitted() && $model->validate())
+        {
+            file_put_contents($model->path, $this->actionGetCode($model->attributes, false));
+            chmod($model->path, 0777);
+
+            Yii::app()->user->setFlash(Controller::MSG_SUCCESS, 'Модель создана!');
+            $this->redirect($_SERVER['REQUEST_URI']);
+        }
+
         $this->render('create', array(
             'form' => $form
         ));
     }
 
 
-    public function actionCodePreview()
+    public function actionGetCode($attributes = array(), $preview = true)
     {
-        if (isset($_POST['Model']))
+        if (!$attributes)
         {
-            try
+            $attributes = $_POST['Model'];
+        }
+
+        try
+        {
+            $params = array_merge($attributes, array(
+                'rules'     => "",
+                "constants" => array(),
+
+            ));
+
+            $meta = Yii::app()->db->createCommand("SHOW FUll columns FROM " . $params['table'])->queryAll();
+
+            $params['meta'] = $meta;
+
+            $length = array();
+
+            foreach ($meta as $data)
             {
-                $params = array_merge($_POST['Model'], array(
-                    'rules'     => "",
-                    "constants" => array(),
-
-                ));
-
-                $meta = Yii::app()->db->createCommand("SHOW FUll columns FROM " . $params['table'])->queryAll();
-
-                $params['meta'] = $meta;
-
-                $length = array();
-
-                foreach ($meta as $data)
+                if (preg_match("|enum\((.*)\)|", $data['Type'], $values))
                 {
-                    if (preg_match("|enum\((.*)\)|", $data['Type'], $values))
+                    $constants = array();
+
+                    $values = explode(',', $values[1]);
+                    foreach ($values as $value)
                     {
-                        $constants = array();
-
-                        $values = explode(',', $values[1]);
-                        foreach ($values as $value)
-                        {
-                            $value = trim($value, "'");
-                            $constants[] = strtoupper($data['Field']) . '_' . strtoupper($value)  . " = '{$value}'";
-                        }
-
-                        $params['constants'][$data['Field']] = $constants;
+                        $value = trim($value, "'");
+                        $constants[] = strtoupper($data['Field']) . '_' . strtoupper($value)  . " = '{$value}'";
                     }
+
+                    $params['constants'][$data['Field']] = $constants;
                 }
+            }
 
-                $params['rules'].= $this->addRequiredRules($meta);
-                $params['rules'].= $this->addLengthRules($meta);
-                $params['rules'].= $this->addInRangeRules($meta);
-                $params['rules'].= $this->addUniqueRules($meta);
-                $params['rules'].= $this->addCoreValidatorRules($meta);
+            $params['rules'].= $this->addRequiredRules($meta);
+            $params['rules'].= $this->addLengthRules($meta);
+            $params['rules'].= $this->addInRangeRules($meta);
+            $params['rules'].= $this->addUniqueRules($meta);
+            $params['rules'].= $this->addCoreValidatorRules($meta);
 
-                $code = $this->renderPartial('application.modules.codegen.views.templates.model', $params, true);
+            $code = $this->renderPartial('application.modules.codegen.views.templates.model', $params, true);
 
-                file_put_contents($_SERVER['DOCUMENT_ROOT'] . 'model.php', $code);
+            //file_put_contents($_SERVER['DOCUMENT_ROOT'] . 'model.php', $code);
 
+            if ($preview)
+            {
                 $highlighter = new CTextHighlighter();
                 $highlighter->language = 'php';
 
                 echo $highlighter->highlight($code);
             }
-            catch (CException $e)
+            else
             {
-                echo $e->getMessage();
+                return $code;
             }
+        }
+        catch (CException $e)
+        {
+            echo $e->getMessage();
         }
     }
 

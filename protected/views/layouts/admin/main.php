@@ -26,7 +26,7 @@
 <body>
     <header id="header">
         <hgroup>
-            <h1 class="site_title" style="width: 19% !important;"><a href="/admin" style="margin-left: 20px">Yii CMS</a></h1>
+            <h1 class="site_title" ><a href="/admin" style="margin-left: 20px"><?= Param::get('project_name'); ?></a></h1>
 
             <h2 class="section_title" style="padding-left: 24px;"><? echo t($this->module->name()); ?></h2>
 
@@ -91,6 +91,10 @@
                 </header>
 
                 <div style="padding: 10px!important;">
+                    <? foreach (Yii::app()->user->getFlashes() as $type => $message): ?>
+                        <?= $this->msg($message, $type); ?>
+                    <? endforeach ?>
+
                     <? echo $content; ?>
                 </div>
 
