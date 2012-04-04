@@ -34,8 +34,16 @@ class SaveAttributeAction extends CAction
         $attribute         = $options['attribute'];
         $model->$attribute = $options['value'];
 
-        if ($model->save(true, array($attribute)))
+        if ($model->saveAttributes(array($attribute)))  //not save! we needn't call onBeforSave and other callbacks
         {
+            if (isset($options['unlink_file']))         //if it was file, delete all semilar files
+            {
+                $file = Yii::getPathOfAlias('webroot').'/'.$options['unlink_file'];
+                if (is_file($file) && FileSystemHelper::isAllowForUnlink($file))
+                {
+                    FileSystemHelper::deleteFileWithSimilarNames(pathinfo($file, PATHINFO_DIRNAME), pathinfo($file, PATHINFO_BASENAME));
+                }
+            }
             echo $model->$attribute;
         }
         else

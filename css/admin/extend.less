@@ -6,18 +6,18 @@
 
 
 
-.icon(@url: ''){
+.icon(@url: '', @cursor: normal){
     width: 16px;
     height: 16px;
     line-height: 16px;
     background-image: url("/img/icons/@{url}");
     background-repeat: no-repeat;
     background-position: 0 0;
+    cursor: @cursor;
 }
 
 .icon-sortable {
-    .icon('sort.png');
-    cursor: pointer;
+    .icon('sort.png', pointer);
 }
 
 .icon-loader {
@@ -25,13 +25,11 @@
 }
 
 .icon-ok-btn {
-    .icon('ok_16.png');
-    cursor: pointer;
+    .icon('ok_16.png', pointer);
 }
 
 .icon-cancel-btn {
-    .icon('cancel_16.png');
-    cursor: pointer;
+    .icon('cancel_16.png', pointer);
 }
 
 a.btn{
@@ -65,8 +63,10 @@ ul {
     }
 }
 
-.placeholder td, tr.placeholder:nth-child(odd), tr.placeholder:nth-child(odd) th {
-    background: url(/img/admin/placeholder.png);
+tr.placeholder {
+    td, &:nth-child(odd), &:nth-child(odd) th {
+        background: url(/img/admin/placeholder.png);
+    }
 }
 
 .form-search {
@@ -78,4 +78,5 @@ ul {
     box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
     background-position: 10px 6px;
     padding-left: 30px;
- }
+}
+

@@ -125,6 +125,7 @@ class Page extends ActiveRecord
 
             return true;
         }
+        return false;
     }
 
 

@@ -2,6 +2,20 @@
 
 class FileSystemHelper
 {
+    public static function isAllowForUnlink($file)
+    {
+        $allow_extensions = array(
+            'jpg', 'jpeg', 'png', 'gif'
+        );
+        $info = pathinfo($file);
+        if (in_array($info['extension'], $allow_extensions))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public static function getUniqFileName($file, $dir)
     {
         $dir = trim('/', $dir);
@@ -84,6 +98,7 @@ class FileSystemHelper
 
     public static function deleteFileWithSimilarNames($dir, $file)
     {
+        $dir = trim($dir, '/');
         $files = array_merge(array($file), self::findSimilarFiles($dir, $file));
 
         self::unlinkFiles($dir, $files);
@@ -94,7 +109,7 @@ class FileSystemHelper
     {
         foreach ($files as $file)
         {
-            $file_path = $dir . $file;
+            $file_path = $dir . '/' . $file;
 
             if (file_exists($file_path))
             {
