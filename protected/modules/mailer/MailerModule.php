@@ -47,7 +47,9 @@ class MailerModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Исходящие письма' => Yii::app()->createUrl('/mailer/outboxEmailAdmin/manage')
+            'Исходящие письма' => Yii::app()->createUrl('/mailer/outboxEmailAdmin/manage'),
+            'Шаблоны'          => Yii::app()->createUrl('/mailer/emailTemplateAdmin/manage'),
+            'Добавить шаблон'  => Yii::app()->createUrl('/mailer/emailTemplateAdmin/create'),
         );
     }
 }

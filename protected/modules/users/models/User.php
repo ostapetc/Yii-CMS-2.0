@@ -55,14 +55,14 @@ class User extends ActiveRecord
     }
 
 
-    public static $status_list = array(
+    public static $status_options = array(
         self::STATUS_ACTIVE  => "Активный",
         self::STATUS_NEW     => "Новый",
         self::STATUS_BLOCKED => "Заблокирован"
     );
 
 
-    public static $gender_list = array(
+    public static $gender_options = array(
         self::GENDER_MAN   => "Мужской",
         self::GENDER_WOMAN => "Женский"
     );
