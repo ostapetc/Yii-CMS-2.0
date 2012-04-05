@@ -24,6 +24,5 @@ require(dirname(__FILE__).'/YiiBase.php');
  * @package system
  * @since 1.0
  */
-class Yii extends YiiBase
 {
 }

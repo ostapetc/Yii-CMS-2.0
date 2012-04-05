@@ -23,7 +23,8 @@ class Model extends CFormModel
     {
         return array(
             array('name, class, table, module', 'required'),
-            array('class', 'fileNotExists')
+            array('class', 'fileNotExists'),
+            array('table', 'TableExists')
         );
     }
 

@@ -11,7 +11,7 @@ class PhoneValidator extends CValidator
         {
             if (!preg_match(self::PATTERN, $object->$attribute))
             {
-                $this->addError($object, $attribute, Yii::t('main', 'Неверный формат! Пример: +7-903-5492969'));
+                $this->addError($object, $attribute, 'Неверный формат! Пример: +7-903-5492969');
             }
         }
     }

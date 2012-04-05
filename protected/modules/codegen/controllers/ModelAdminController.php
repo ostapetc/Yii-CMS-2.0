@@ -23,6 +23,7 @@ class ModelAdminController extends AdminController
             file_put_contents($model->path, $this->actionGetCode($model->attributes, false));
             chmod($model->path, 0777);
 
+            die;
             Yii::app()->user->setFlash(Controller::MSG_SUCCESS, 'Модель создана!');
             $this->redirect($_SERVER['REQUEST_URI']);
         }

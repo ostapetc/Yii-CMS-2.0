@@ -68,7 +68,7 @@ class ModuleAdminController extends AdminController
 
         $paths = array();
         $dir   =  MODULES_PATH . $id;
-        $files = glob(Yii::getPathOfAlias('codegen.views.templates.module') . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . '*');
+        $files = glob(Yii::getPathOfAlias('codegen.views.templates.module') . DIRECTORY_SEPARATOR . '*');
 
         foreach ($files as $file)
         {
@@ -78,13 +78,12 @@ class ModuleAdminController extends AdminController
             {
                 $file = str_replace($base_name, null, $file);
             }
+            else if ($base_name == 'Module.php')
+            {
+                $file = str_replace('Module.php', ucfirst($id) . 'Module.php', $file);
+            }
 
             $file = rtrim($file, DIRECTORY_SEPARATOR);
-
-            if ($file == 'Module.php')
-            {
-                $file = ucfirst($id) . $file;
-            }
 
             $paths[] = str_replace('codegen' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'module', $id, $file);
         }
