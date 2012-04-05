@@ -264,4 +264,10 @@ abstract class ActiveRecord extends CActiveRecord
         $criteria->addInCondition('id', $object_ids);
         return $this;
     }
+
+
+    public function uploadFiles()
+    {
+        return array();
+    }
 }

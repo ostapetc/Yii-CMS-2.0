@@ -61,6 +61,8 @@ abstract class Controller extends CController
 
     public function beforeAction($action)
     {
+        Yii::import('application.modules.codegen.models.Model');
+
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
 
         if (in_array($action->id, $this->system_actions))

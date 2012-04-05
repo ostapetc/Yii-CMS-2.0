@@ -20,20 +20,15 @@ class ModuleAdminController extends AdminController
 
         if ($form->submitted() && $model->validate())
         {
-            $module_dir = MODULES_PATH . lcfirst($model->id);
-            if (!is_dir($module_dir))
-            {
-                mkdir($module_dir);
-                chmod($module_dir, 0777);
-            }
-
             $files = $this->actionGetFiles($model->id, true);
+
             foreach ($files as $file)
             {
                 $path_info = pathinfo($file);
 
                 if (isset($path_info['extension']))
                 {
+                    mkdir($path_info['dirname'], 0777, true);
                     file_put_contents($file, $this->getCode($model));
                     chmod($file, 0777);
                 }
@@ -41,7 +36,7 @@ class ModuleAdminController extends AdminController
                 {
                     if (!is_dir($file))
                     {
-                        mkdir($file);
+                        mkdir($file, 0777, true);
                         chmod($file, 0777);
                     }
                 }
@@ -72,22 +67,26 @@ class ModuleAdminController extends AdminController
         $id = lcfirst($id);
 
         $paths = array();
-        $dir   =  MODULES_PATH . DIRECTORY_SEPARATOR . $id;
-        $files = scandir(Yii::getPathOfAlias('codegen.views.templates.module'));
+        $dir   =  MODULES_PATH . $id;
+        $files = glob(Yii::getPathOfAlias('codegen.views.templates.module') . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . '*');
 
         foreach ($files as $file)
         {
-            if ($file[0] == '.')
+            $base_name = pathinfo($file, PATHINFO_BASENAME);
+
+            if ($base_name == '_')
             {
-                continue;
+                $file = str_replace($base_name, null, $file);
             }
+
+            $file = rtrim($file, DIRECTORY_SEPARATOR);
 
             if ($file == 'Module.php')
             {
                 $file = ucfirst($id) . $file;
             }
 
-            $paths[] = $dir . DIRECTORY_SEPARATOR . $file;
+            $paths[] = str_replace('codegen' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'module', $id, $file);
         }
 
         if ($return)
@@ -96,6 +95,10 @@ class ModuleAdminController extends AdminController
         }
         else
         {
+            $paths = array_map(function($path) {
+                return str_replace($_SERVER['DOCUMENT_ROOT'], '', $path);
+            }, $paths);
+
             $this->render('getFiles', array(
                 'paths' => $paths
             ));

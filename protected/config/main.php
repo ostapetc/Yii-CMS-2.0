@@ -20,7 +20,6 @@ foreach ($modules_dirs as $module)
     $modules_includes[] = "application.components.zii.gridColumns.*";
 }
 
-
 $modules['webshell'] = array(
     'class'        => 'ext.webshell.WebShellModule',
     'exitUrl'      => '/',
@@ -198,4 +197,5 @@ return array(
         'themes_enabled' => false
     )
 );
+
 
