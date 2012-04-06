@@ -37,9 +37,8 @@ return array(
             'empty' => 'не выбран'
         ),
         'behaviors' => array(
-            'type'     => 'dropdownlist',
+            'type'     => 'multi_select',
             'items'    => array_flip(Model::$extra_behaviors),
-            'multiple' => true
         )
     ),
     'buttons' => array(

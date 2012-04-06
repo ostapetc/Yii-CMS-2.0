@@ -78,7 +78,7 @@ class CrudAdminController extends AdminController
             {
                 $elements[$attr] = array(
                     'type'  => 'dropdownlist',
-                    'items' => $model_class . '::$' . $attr .'_oprions',
+                    'items' => $model_class . '::$' . $attr .'_options',
                     'empty' => 'не выбрано'
                 );
             }
@@ -86,7 +86,7 @@ class CrudAdminController extends AdminController
 
         $params['elements'] = $elements;
 
-        $code = $this->renderPartial('application.modules.codegen.views.templates.crud.forms.Form', $params, true);
+        $code = $this->renderPartial('codegen.views.templates.crud.forms.Form', $params, true);
         file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/form.php', $code);
     }
 
