@@ -5,7 +5,6 @@ $roles = AuthItem::model()->findAllByAttributes(array('type' => AuthItem::TYPE_R
 return array(
     'activeForm'     => array(
         'id'                   => 'user-form',
-        'class'                => 'CActiveForm',
         'enableAjaxValidation' => true,
         'clientOptions' => array('validateOnSubmit' => true)
     ),
@@ -18,11 +17,11 @@ return array(
         'birthdate'  => array('type' => 'date'),
         'gender'     => array(
             'type'  => 'dropdownlist',
-            'items' => User::$gender_list
+            'items' => User::$gender_options
         ),
         'status'     => array(
             'type'  => 'dropdownlist',
-            'items' => User::$status_list
+            'items' => User::$status_options
         ),
         'role'       => array(
             'type'  => 'dropdownlist',

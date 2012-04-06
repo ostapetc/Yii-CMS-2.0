@@ -5,13 +5,12 @@ return CMap::mergeArray(
         array(
         'components' => array(
             'db' => array(
-		        'connectionString'      => 'mysql:host=openserver;dbname=yiicms_2.0;',
+		        'connectionString'      => 'mysql:host=localhost;dbname=yii_base;',
 		        'emulatePrepare'        => true,
-		        'username'              => 'mysql',
-		        'password'              => 'mysql',
+		        'username'              => 'root',
+		        'password'              => '',
 		        'charset'               => 'utf8',
-                'schemaCachingDuration' => 86400,
-		        //'enableProfiling'  => true, 
+		        //'enableProfiling'  => true,
 	        )
 	    ) 
     )

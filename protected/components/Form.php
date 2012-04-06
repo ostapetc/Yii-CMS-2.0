@@ -77,14 +77,6 @@ class Form extends CForm
         if (!($this->parent instanceof self))
         {
             $cs = Yii::app()->clientScript;
-            if ($this->side == 'client')
-            {
-                $cs->registerCssFile('/css/site/form.css');
-            }
-            elseif ($this->side == 'admin')
-            {
-                $cs->registerCssFile('/css/admin/form.css');
-            }
 
             if ($this->_clear)
             {

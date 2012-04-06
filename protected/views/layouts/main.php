@@ -14,10 +14,10 @@
 
     <!-- Le styles -->
     <?
-    Yii::app()->bootstrap->init();
-
     $cs = Yii::app()->clientScript;
-
+    $cs->registerCoreScript('jquery');
+    Yii::app()->bootstrap->registerScripts();
+    $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles').'.less'));
 
     if (YII_DEBUG)

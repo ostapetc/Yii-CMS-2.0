@@ -3,6 +3,7 @@ class AdminFormInputElement extends BaseFormInputElement
 {
     public $widgets = array(
         'alias'             => 'AliasField',
+        'file'              => 'FileWidget',
         'captcha'           => 'Captcha',
         'chosen'            => 'Chosen',
         'all_in_one_input'  => 'AllInOneInput',

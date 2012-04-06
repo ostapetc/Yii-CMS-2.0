@@ -7,8 +7,11 @@
 
     <?
     $cs = Yii::app()->clientScript;
+    $cs->registerCoreScript('jquery');
     $cs->registerCoreScript('jquery.ui');
+    Yii::app()->bootstrap->registerScripts();
     $cs->registerCssFile('/css/admin/layout.css');
+    $cs->registerCssFile('/css/admin/form.css');
     $cs->registerCssFile('/css/admin/extend.css');
     $cs->registerScriptFile('/js/admin/hideshow.js');
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
@@ -62,7 +65,7 @@
     </section>
 
     <aside id="sidebar" class="column">
-        <? $this->renderPartial('application.modules.main.views.mainAdmin._search'); ?>
+        <? $this->renderPartial('main.views.mainAdmin._search'); ?>
         <hr/>
         <? $this->widget('AdminMenu'); ?>
 

@@ -1,13 +1,12 @@
 <?
 return array(
-    'activeForm'=> array(
+    'activeForm'           => array(
         'id'                   => 'page-form',
-        'class'                => 'CActiveForm',
         'enableAjaxValidation' => true,
         'clientOptions'        => array('validateOnSubmit'=> true),
     ),
     'enctype'              => 'multipart/form-data',
-    'elements'  => array(
+    'elements'             => array(
         'title'        => array(
             'type' => 'text'
         ),
@@ -18,15 +17,14 @@ return array(
         'is_published' => array(
             'type' => 'checkbox'
         ),
-//        'text'         => array(
-//            'type' => 'editor'
-//        ),
-        'text'         => array('type' => 'file'),
+        'text'         => array(
+            'type' => 'editor'
+        ),
         'meta_tags'    => array(
             'type' => 'meta_tags'
         )
     ),
-    'buttons'   => array(
+    'buttons'              => array(
         'submit' => array(
             'type'  => 'submit',
             'value' => t('сохранить')

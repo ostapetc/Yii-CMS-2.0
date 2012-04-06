@@ -212,12 +212,12 @@ class User extends ActiveRecord
             array(
                 'gender',
                 'in',
-                'range' => array_keys(self::$gender_list)
+                'range' => array_keys(self::$gender_options)
             ),
             array(
                 'status',
                 'in',
-                'range' => array_keys(self::$status_list)
+                'range' => array_keys(self::$status_options)
             ),
             array(
                 'birthdate,activate_code',
