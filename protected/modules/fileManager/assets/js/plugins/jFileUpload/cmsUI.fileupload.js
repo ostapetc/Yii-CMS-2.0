@@ -43,6 +43,12 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         var widget = this;
         this.element.find('.files tbody').sortable({
             handle:'.dnd-handler',
+            placeholder:'placeholder',
+            start:function(event, ui)
+            {
+                ui.placeholder.html("<td colspan='100%'>&nbsp;</td>");
+                ui.placeholder.css('height', ui.item.height());
+            },
             update:function(event, ui)
             {
                 $.post(widget.options.sortableSaveUrl, $(this).sortable('serialize'));

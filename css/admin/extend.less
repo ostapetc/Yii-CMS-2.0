@@ -5,7 +5,6 @@
 @import "../less/mixins.less";
 
 
-
 .icon(@url: '', @cursor: normal){
     width: 16px;
     height: 16px;
@@ -16,20 +15,19 @@
     cursor: @cursor;
 }
 
-.icon-sortable {
-    .icon('sort.png', pointer);
-}
-
-.icon-loader {
-    .icon('ajax-loader.gif');
-}
-
-.icon-ok-btn {
-    .icon('ok_16.png', pointer);
-}
-
-.icon-cancel-btn {
-    .icon('cancel_16.png', pointer);
+.icon {
+    &-sortable{
+        .icon('sort.png', pointer);
+    }
+    &-loader {
+        .icon('ajax-loader.gif');
+    }
+    &-ok-btn {
+        .icon('ok_16.png', pointer);
+    }
+    &-cancel-btn {
+        .icon('cancel_16.png', pointer);
+    }
 }
 
 a.btn{
@@ -40,21 +38,23 @@ a.btn{
 
 .pagination {
     margin: 0;
+    a {
+        line-height: 25px
+    }
 }
 
-.pagination a {
-    line-height: 25px
+.small{
+    .add-on {
+        padding: 1px 3px;
+    }
 }
 
-.small .add-on {
-    padding: 1px 3px;
+.sortable_col {
+    .icon-sortable {
+        display: block;
+        margin: 0 auto;
+    }
 }
-
-.sortable_col .icon-sortable {
-    display: block;
-    margin: 0 auto;
-}
-
 ul {
     list-style: none;
     margin: 0;
@@ -62,6 +62,7 @@ ul {
         margin: 0 0 9px 25px;
     }
 }
+
 
 tr.placeholder {
     td, &:nth-child(odd), &:nth-child(odd) th {
@@ -83,8 +84,4 @@ tr.placeholder {
 #select-lang-form dd{
     padding: 0;
     margin-left: 0;
-}
-
-.uploader{
-    overflow: hidden;
 }
