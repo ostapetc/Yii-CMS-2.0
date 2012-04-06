@@ -63,6 +63,7 @@ return array(
     'preload'  => array('log'),
     'import'   => array_merge($modules_includes, array(
         'application.components.*',
+        'application.components.Form',
         'application.components.validators.*',
         'application.components.zii.*',
         'application.components.formElements.*',
