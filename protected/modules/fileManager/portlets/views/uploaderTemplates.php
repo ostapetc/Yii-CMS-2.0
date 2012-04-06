@@ -13,7 +13,7 @@
             {{/if}}
         </td>
         {{else}}
-        <td class="progress">
+        <td class="progress-holder">
             <div></div>
         </td>
         <td class="size">${sizef}</td>
