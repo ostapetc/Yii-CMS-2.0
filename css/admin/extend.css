@@ -78,3 +78,9 @@ ul ul{
     padding: 0;
     margin-left: 0;
 }
+
+
+.uploader{
+    overflow: hidden !important;
+    width: 750px !important;
+}

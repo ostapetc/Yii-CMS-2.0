@@ -22,6 +22,11 @@ return array(
         ),
         'meta_tags'    => array(
             'type' => 'meta_tags'
+        ),
+        'file_manager' => array(
+            'type'=>'file_manager',
+            'tag'=>'a',
+            'data_type' => 'image'
         )
     ),
     'buttons'              => array(

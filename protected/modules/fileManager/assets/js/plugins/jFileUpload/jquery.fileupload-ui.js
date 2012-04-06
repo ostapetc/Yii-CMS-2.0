@@ -192,7 +192,7 @@
                 var that = $(this).data('fileupload');
 
                 if (data.url) {
-                    $.get(data.url, {}, function() {
+                    $[data.type](data.url, {}, function() {
                         that._adjustMaxNumberOfFiles(1);
                         $(data.context).fadeOut(500, function () {
                             $(this).remove();

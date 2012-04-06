@@ -194,11 +194,11 @@ class FileManager extends ActiveRecord
     public function saveFile()
     {
         $file      = CUploadedFile::getInstanceByName('file');
-        $file_name = FileSystem::vaultResolveCollision(self::UPLOAD_PATH, $file->name);
+        $file_name = FileSystemHelper::vaultResolveCollision(self::UPLOAD_PATH, $file->name);
         $new_file  = self::UPLOAD_PATH . '/' . $file_name;
         if ($file->saveAs('./' . $new_file))
         {
-            list($this->path, $this->name) = FileSystem::moveToVault($new_file, self::UPLOAD_PATH, true);
+            list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH, true);
             $this->title = $this->name;
             $this->fill();
             return true;
@@ -286,8 +286,8 @@ class FileManager extends ActiveRecord
         {
             if (is_file(self::UPLOAD_PATH . $this->name))
             {
-                FileSystem::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/crop', $this->name);
-                FileSystem::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/watermark', $this->name);
+                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/crop', $this->name);
+                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/watermark', $this->name);
                 @unlink('./' . self::UPLOAD_PATH . $this->name);
             }
 
