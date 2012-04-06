@@ -1,5 +1,5 @@
-<?
-echo '<?
+<?php
+echo '<?php
 
 $this->tabs = array(
     \'управление\'    => $this->createUrl(\'manage\'),
@@ -7,10 +7,10 @@ $this->tabs = array(
 );';
 ?>
 
-<? echo "\n"; ?>$this->widget('DetailView', array(
+<?php echo "\n"; ?>$this->widget('DetailView', array(
 	'data' => $model,
 	'attributes' => array(
-<?
+<?php
 foreach($this->tableSchema->columns as $column)
 {
     if ($column->name == 'id')

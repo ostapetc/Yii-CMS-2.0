@@ -1,4 +1,4 @@
-<?
+<?php
 if($file->type==='php')
 {
 	echo '<div class="content">';

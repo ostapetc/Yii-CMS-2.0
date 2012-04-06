@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * @todo Rewrite to use Interchange objects

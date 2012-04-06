@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CRequiredValidator class file.
  *

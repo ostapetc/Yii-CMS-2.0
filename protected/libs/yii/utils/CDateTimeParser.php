@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDateTimeParser class file
  *

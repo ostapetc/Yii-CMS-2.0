@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Vidinė serverio klaida</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Apdorojant Jūsų užklausą įvyko vidinė serverio klaida.
-Prašytume susisiekti <? echo $data['admin']; ?> ir pranešti apie šią klaidą.
+Prašytume susisiekti <?php echo $data['admin']; ?> ir pranešti apie šią klaidą.
 </p>
 <p>
 Ačiū.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

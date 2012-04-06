@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * The following variables are available in this template:
  * - $this: the CrudCode object
@@ -6,27 +6,27 @@
 ?>
 <div class="wide form">
 
-<? echo "<? \$form=\$this->beginWidget('CActiveForm', array(
+<?php echo "<?php \$form=\$this->beginWidget('CActiveForm', array(
 	'action'=>Yii::app()->createUrl(\$this->route),
 	'method'=>'get',
 )); ?>\n"; ?>
 
-<? foreach($this->tableSchema->columns as $column): ?>
-<?
+<?php foreach($this->tableSchema->columns as $column): ?>
+<?php
 	$field=$this->generateInputField($this->modelClass,$column);
 	if(strpos($field,'password')!==false)
 		continue;
 ?>
 	<div class="row">
-		<? echo "<? echo \$form->label(\$model,'{$column->name}'); ?>\n"; ?>
-		<? echo "<? echo ".$this->generateActiveField($this->modelClass,$column)."; ?>\n"; ?>
+		<?php echo "<?php echo \$form->label(\$model,'{$column->name}'); ?>\n"; ?>
+		<?php echo "<?php echo ".$this->generateActiveField($this->modelClass,$column)."; ?>\n"; ?>
 	</div>
 
-<? endforeach; ?>
+<?php endforeach; ?>
 	<div class="row buttons">
-		<? echo "<? echo CHtml::submitButton('Search'); ?>\n"; ?>
+		<?php echo "<?php echo CHtml::submitButton('Search'); ?>\n"; ?>
 	</div>
 
-<? echo "<? \$this->endWidget(); ?>\n"; ?>
+<?php echo "<?php \$this->endWidget(); ?>\n"; ?>
 
 </div><!-- search-form -->

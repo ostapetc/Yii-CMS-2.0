@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CCaptcha class file.
  *

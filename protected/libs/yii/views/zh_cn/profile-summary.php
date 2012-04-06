@@ -3,8 +3,8 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="6">
 			程序概要分析 - 报告概述
-			(时间: <? echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?> 秒,
-			内存: <? echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
+			(时间: <?php echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?> 秒,
+			内存: <?php echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>KB)
 		</th>
 	</tr>
 	<tr style="background-color: #ccc;">
@@ -15,7 +15,7 @@
 		<th>最小 (秒)</th>
 		<th>最大 (秒)</th>
 	</tr>
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

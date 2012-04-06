@@ -12,6 +12,8 @@ class Model extends CFormModel
 
     public $behaviors;
 
+    public static $file_attributes = array('photo', 'image', 'file');
+
 
     public static $extra_behaviors = array(
         'Сортировка' => 'application.extensions.sortable.SortableBehavior',
@@ -24,7 +26,7 @@ class Model extends CFormModel
         return array(
             array('name, class, table, module', 'required'),
             array('class', 'fileNotExists'),
-            array('table', 'TableExists')
+            array('table', 'TableExistsValidator')
         );
     }
 

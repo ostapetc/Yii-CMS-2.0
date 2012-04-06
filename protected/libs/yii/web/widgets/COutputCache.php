@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * COutputCache class file.
  *

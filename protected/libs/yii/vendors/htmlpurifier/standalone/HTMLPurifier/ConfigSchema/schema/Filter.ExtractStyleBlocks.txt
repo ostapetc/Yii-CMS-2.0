@@ -15,7 +15,7 @@ EXTERNAL: CSSTidy
   Sample usage:
 </p>
 <pre><![CDATA[
-<?
+<?php
     header('Content-type: text/html; charset=utf-8');
     echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -24,7 +24,7 @@ EXTERNAL: CSSTidy
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
   <title>Filter.ExtractStyleBlocks</title>
-<?
+<?php
     require_once '/path/to/library/HTMLPurifier.auto.php';
     require_once '/path/to/csstidy.class.php';
 
@@ -52,7 +52,7 @@ EXTERNAL: CSSTidy
 </head>
 <body>
   <div>
-    <? echo $html; ?>
+    <?php echo $html; ?>
   </div>
 </b]]><![CDATA[ody>
 </html>

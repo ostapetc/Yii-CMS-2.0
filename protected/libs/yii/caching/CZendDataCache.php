@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CZendDataCache class file
  *

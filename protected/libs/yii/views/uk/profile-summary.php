@@ -3,8 +3,8 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="6">
 			Підсумковий звіт профілювання
-			(Час: <? echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>с,
-			Пам'ять: <? echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>Кб)
+			(Час: <?php echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>с,
+			Пам'ять: <?php echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?>Кб)
 		</th>
 	</tr>
 	<tr style="background-color: #ccc;">
@@ -15,7 +15,7 @@
 		<th>Мін. (с)</th>
 		<th>Макс. (с)</th>
 	</tr>
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

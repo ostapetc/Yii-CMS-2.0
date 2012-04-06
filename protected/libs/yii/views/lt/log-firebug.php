@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("Programos žurnalas");
-<?
+<?php
 foreach($data as $index=>$log)
 {
 	$time=date('H:i:s.',$log[3]).sprintf('%03d',(int)(($log[3]-(int)$log[3])*1000));

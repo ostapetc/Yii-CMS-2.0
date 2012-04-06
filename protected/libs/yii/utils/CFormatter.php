@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CFormatter class file.
  *

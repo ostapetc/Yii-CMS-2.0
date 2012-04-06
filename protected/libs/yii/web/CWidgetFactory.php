@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CWidgetFactory class file.
  *

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * "Context" diff renderer.
  *

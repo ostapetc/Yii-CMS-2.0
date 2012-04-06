@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CUniqueValidator class file.
  *

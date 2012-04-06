@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'kpe_GN'.
  *

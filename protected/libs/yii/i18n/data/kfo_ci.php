@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'kfo_CI'.
  *

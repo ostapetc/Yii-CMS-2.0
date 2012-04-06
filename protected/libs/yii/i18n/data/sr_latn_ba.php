@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'sr_Latn_BA'.
  *

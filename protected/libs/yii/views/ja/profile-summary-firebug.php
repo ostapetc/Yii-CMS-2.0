@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("プロファイリング概要レポート");
 	console.log(" count   total   average    min      max   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

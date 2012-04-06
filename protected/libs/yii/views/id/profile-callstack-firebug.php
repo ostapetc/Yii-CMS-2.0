@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("Laporan Profil Callstack");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	list($proc,$time,$level)=$entry;

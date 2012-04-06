@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'shi_Latn_MA'.
  *

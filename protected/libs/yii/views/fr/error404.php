@@ -18,17 +18,17 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Page Non trouvée</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 L'URL demandée n'existe pas sur ce serveur.
 If you entered the URL manually please check your spelling and try again.
 Si vous avez saisi l'URL manuellement, vérifiez la, et réessayez.
 </p>
 <p>
-Si vous pensez qu'il s'agit d'une erreur du serveur, veuillez contacter <? echo $data['admin']; ?>.
+Si vous pensez qu'il s'agit d'une erreur du serveur, veuillez contacter <?php echo $data['admin']; ?>.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

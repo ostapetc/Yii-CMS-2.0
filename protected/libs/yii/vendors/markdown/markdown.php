@@ -1,4 +1,4 @@
-<?
+<?php
 #
 # Markdown Extra  -  A text-to-HTML conversion tool for web writers
 #

@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Общий отчет");
 	console.log(" номер   всего   среднее    мин      макс  ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

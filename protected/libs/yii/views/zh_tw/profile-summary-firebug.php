@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Profiling 摘要報告");
 	console.log("  計數    總計     平均    最小     最大   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

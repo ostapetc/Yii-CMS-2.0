@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CBreadcrumbs class file.
  *

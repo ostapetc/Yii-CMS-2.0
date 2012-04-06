@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Error <? echo $data['code']; ?></title>
+<title>Error <?php echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>Error <? echo $data['code']; ?></h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>Error <?php echo $data['code']; ?></h1>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 El error mencionado ocurrió cuando el Servidor Web estaba procesando su solicitud.
 </p>
 <p>
-Si piensa que este es un error del servidor, por favor contacte a <? echo $data['admin']; ?>.
+Si piensa que este es un error del servidor, por favor contacte a <?php echo $data['admin']; ?>.
 </p>
 <p>
 Gracias.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

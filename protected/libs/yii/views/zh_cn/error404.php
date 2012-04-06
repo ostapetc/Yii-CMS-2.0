@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>无法找到网页</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 服务器无法找到请求的 URL 所对应的网页.
 如果您是手动输入URL, 请检查是否拼写无误后重试.
 </p>
 <p>
-如果您认为此错误是服务器造成的,请与管理员联系 <? echo $data[ 'admin']; ?>.
+如果您认为此错误是服务器造成的,请与管理员联系 <?php echo $data[ 'admin']; ?>.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

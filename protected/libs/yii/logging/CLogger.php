@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CLogger class file
  *

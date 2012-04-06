@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Грешка <? echo $data['code']; ?></title>
+<title>Грешка <?php echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>Грешка <? echo $data['code']; ?></h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>Грешка <?php echo $data['code']; ?></h1>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Горната греша възникна, когато уеб сървърът се опита да обработи вашата заявка.
 </p>
 <p>
-Ако мислите, че това е грешка в сървъра, моля свържете се с администратора <? echo $data['admin']; ?>.
+Ако мислите, че това е грешка в сървъра, моля свържете се с администратора <?php echo $data['admin']; ?>.
 </p>
 <p>
 Благодарим ви.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

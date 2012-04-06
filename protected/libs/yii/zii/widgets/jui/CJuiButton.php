@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CJuiButton class file.
  *

@@ -1,5 +1,5 @@
-<?
-echo '<?
+<?php
+echo '<?php
 
 $this->tabs = array(
     \'управление\' => $this->createUrl(\'manage\'),
@@ -7,4 +7,4 @@ $this->tabs = array(
 );';
 ?>
 
-<? echo "\n" . 'echo $form;'; ?>
+<?php echo "\n" . 'echo $form;'; ?>

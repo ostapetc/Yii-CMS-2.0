@@ -18,15 +18,15 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Ошибка авторизации</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 У вас недостаточно прав для доступа к запрошенной странице.
 </p>
 <p>
-Если вы считаете, что это ошибка настройки сервера, обратитесь по адресу <? echo $data['admin']; ?>.
+Если вы считаете, что это ошибка настройки сервера, обратитесь по адресу <?php echo $data['admin']; ?>.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

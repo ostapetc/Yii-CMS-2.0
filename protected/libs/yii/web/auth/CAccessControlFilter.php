@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CAccessControlFilter class file.
  *

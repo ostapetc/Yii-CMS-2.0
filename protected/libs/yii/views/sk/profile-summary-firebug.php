@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Zhrnutie profilovej zprávy");
 	console.log(" počet   celkom   priemer    min      max   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CLogRoute class file.
  *

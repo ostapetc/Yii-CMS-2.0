@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'nl_BE'.
  *

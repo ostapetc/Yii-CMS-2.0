@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * A class for computing three way diffs.
  *

@@ -11,7 +11,7 @@
 		<th>Категория</th>
 		<th>Съобщение</th>
 	</tr>
-<?
+<?php
 foreach($data as $index=>$log)
 {
 	$color=($index%2)?'#F5F5F5':'#EBF8FE';

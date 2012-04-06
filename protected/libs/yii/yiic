@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?
+<?php
 /**
  * Yii command line script for Unix/Linux.
  *

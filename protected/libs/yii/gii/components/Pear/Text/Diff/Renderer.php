@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * A class to render Diffs in different formats.
  *

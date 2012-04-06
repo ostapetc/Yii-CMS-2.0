@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDbCriteria class file.
  *

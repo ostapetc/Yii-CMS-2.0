@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CCodeFile class file.
  *

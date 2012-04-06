@@ -1,4 +1,4 @@
-<?
+<?php
 
 class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
 {

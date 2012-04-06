@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * "Unified" diff renderer.
  *

@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Relatorio Resumido de Profiling ");
 	console.log(" contagem   total   média    min      max   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

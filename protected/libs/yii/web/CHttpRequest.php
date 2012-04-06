@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CHttpRequest and CCookieCollection class file.
  *
@@ -810,7 +810,7 @@ class CHttpRequest extends CApplicationComponent
 	 *
 	 * <b>Example</b>:
 	 * <pre>
-	 * <?
+	 * <?php
 	 *    Yii::app()->request->xSendFile('/home/user/Pictures/picture1.jpg',array(
 	 *        'saveName'=>'image1.jpg',
 	 *        'mimeType'=>'image/jpeg',

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CCaptchaValidator class file.
  *

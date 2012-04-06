@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>خطأ داخلي بالخادم</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 حدث خطأ داخلي بالخادم أثناء محاولة معالجة طلبك.
-الرجاء الإتصال <? echo $data['admin']; ?> للإبلاغ عن هذه المشكلة.
+الرجاء الإتصال <?php echo $data['admin']; ?> للإبلاغ عن هذه المشكلة.
 </p>
 <p>
 شكرا لك.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

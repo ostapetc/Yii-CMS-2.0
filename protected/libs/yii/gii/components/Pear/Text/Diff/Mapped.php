@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * $Horde: framework/Text_Diff/Diff/Mapped.php,v 1.3.2.3 2008/01/04 10:37:27 jan Exp $
  *

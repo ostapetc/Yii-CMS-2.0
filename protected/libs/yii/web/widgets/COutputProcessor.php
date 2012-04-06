@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * COutputProcessor class file.
  *

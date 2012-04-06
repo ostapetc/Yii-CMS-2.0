@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("ملخص تقرير التنميط");
 	console.log(" عدد   مجموع   معدل    أدنى      أعلى   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

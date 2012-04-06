@@ -18,15 +18,15 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>未被授權</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 您沒有存取此頁面的適當憑據.
 </p>
 <p>
-如果您認為是伺服器錯誤所造成, 請聯絡<? echo $data[ 'admin']; ?>.
+如果您認為是伺服器錯誤所造成, 請聯絡<?php echo $data[ 'admin']; ?>.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

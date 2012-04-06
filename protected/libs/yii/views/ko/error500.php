@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>내부 서버 에러</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 웹 서버가 요청을 처리하는 동안 내부 서버 에러가 발생했습니다.
-<? echo $data['admin']; ?>으로 문제점 보고를 부탁드립니다.
+<?php echo $data['admin']; ?>으로 문제점 보고를 부탁드립니다.
 </p>
 <p>
 고맙습니다.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

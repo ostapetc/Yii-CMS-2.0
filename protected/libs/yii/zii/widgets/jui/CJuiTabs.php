@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CJuiTabs class file.
  *

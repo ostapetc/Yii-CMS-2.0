@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Auto-generated class. VBSCRIPT syntax highlighting
  *
