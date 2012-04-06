@@ -3,7 +3,6 @@
 return array(
     'activeForm' => array(
         'id'    => 'menu-form',
-        'class' => 'CActiveForm'
     ),
     'elements' => array(
         'name'         => array('type' => 'text'),

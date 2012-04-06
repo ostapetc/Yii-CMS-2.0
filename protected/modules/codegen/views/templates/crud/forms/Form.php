@@ -6,7 +6,6 @@ return array(
 <? endif ?>
     'activeForm' => array(
         'id'                   => '<?= lcfirst($class) ?>-form',
-        'class'                => 'CActiveForm',
         'enableAjaxValidation' => true,
         'clientOptions'        => array(
             'validateOnSubmit'=> true
