@@ -73,4 +73,14 @@ class AdminFormInputElement extends BaseFormInputElement
                 );
         }
     }
+
+    public function renderLabel()
+    {
+        if (in_array($this->type, array('meta_tags', 'file_manager')))
+        {
+            return '';
+        }
+
+        return parent::renderLabel();
+    }
 }
