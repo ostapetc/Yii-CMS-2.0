@@ -65,7 +65,7 @@
     </section>
 
     <aside id="sidebar" class="column">
-        <? $this->renderPartial('application.modules.main.views.mainAdmin._search'); ?>
+        <? $this->renderPartial('main.views.mainAdmin._search'); ?>
         <hr/>
         <? $this->widget('AdminMenu'); ?>
 

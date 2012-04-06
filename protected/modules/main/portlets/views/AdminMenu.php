@@ -1,3 +1,4 @@
+<div id="admin_menu">
 <? foreach ($modules as $module): ?>
     <?
     if (!isset($module['admin_menu']) || !$module['admin_menu'])
@@ -59,4 +60,4 @@
         <? endforeach ?>
     </ul>
 <? endforeach ?>
-
+</div>
