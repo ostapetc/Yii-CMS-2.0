@@ -5,7 +5,6 @@ $roles = Yii::app()->authManager->getRoles();
 return array(
     'activeForm' => array(
         'id'                   => 'rbac-role-form',
-        'enableAjaxValidation' => true,
     ),
     'elements'   => array(
         'name'        => array('type' => 'text'),

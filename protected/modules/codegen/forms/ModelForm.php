@@ -20,8 +20,6 @@
 return array(
     'activeForm'=>array(
         'id' => 'model-form',
-        'enableAjaxValidation' => true,
-        'clientOptions'=>array('validateOnSubmit'=>true)
     ),
     'elements' => array(
         'table' => array(

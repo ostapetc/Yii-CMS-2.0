@@ -3,11 +3,6 @@
 return array(
     'activeForm' => array(
         'id' => 'sidebar-form',
-		//'enableAjaxValidation' => true,
-		//'clientOptions' => array(
-		//	'validateOnSubmit' => true,
-		//	'validateOnChange' => true
-		//)
     ),
     'elements' => array(
         'title'        => array('type' => 'text'),

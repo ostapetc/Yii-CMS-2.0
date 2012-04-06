@@ -33,7 +33,6 @@ if (!$this->model->isNewRecord)
 return array(
     'activeForm' => array(
         'id'                   => 'language-form',
-        'enableAjaxValidation' => true,
     ),
     'elements'   => array(
         'id'   => array(

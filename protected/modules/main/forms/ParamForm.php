@@ -34,7 +34,6 @@ return array(
     'enctype'    => 'multipart/form-data',
     'activeForm' => array(
         'id'                   => 'setting-form',
-        'enableAjaxValidation' => true,
     ),
     'elements' => $elements,
     'buttons'    => array(

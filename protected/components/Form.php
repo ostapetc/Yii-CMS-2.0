@@ -10,6 +10,12 @@ class Form extends CForm
 
     public $inputElementClass = null;
 
+    public $defaultActiveFormSettings = array(
+        'enableAjaxValidation'=>true,
+        'clientOptions' => array(
+            'validateOnType' => true,
+            'validateOnSubmit' => true,
+    ));
 
     public function __construct($config, $model = null, $parent = null)
     {
@@ -59,11 +65,14 @@ class Form extends CForm
 
     public function __toString()
     {
+        $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
+
         if ($this->side == 'client') //only bootstrap
         {
             $this->activeForm['class']        = 'BootActiveForm';
             $this->activeForm['inlineErrors'] = false;
-            if (isset($this->activeForm['clientOptions']['enableAjaxValidation']) && $this->activeForm['clientOptions']['enableAjaxValidation'])
+
+            if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
             {
                 $this->activeForm['clientOptions']['validateOnType'] = true;
                 $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){

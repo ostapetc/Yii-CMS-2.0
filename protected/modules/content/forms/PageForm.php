@@ -2,7 +2,6 @@
 return array(
     'activeForm'           => array(
         'id'                   => 'page-form',
-        'enableAjaxValidation' => true,
         'clientOptions'        => array('validateOnSubmit'=> true),
     ),
     'enctype'              => 'multipart/form-data',
