@@ -17,7 +17,7 @@ class LanguageFilter extends CFilter
             return true;
         }
 
-        $languages = Language::getCachedArray();
+        $languages = Language::getList();
 
         $url_parts = explode('/', $_SERVER['REQUEST_URI']);
 

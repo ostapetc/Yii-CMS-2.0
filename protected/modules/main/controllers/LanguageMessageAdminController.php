@@ -26,7 +26,7 @@ class LanguageMessageAdminController extends AdminController
 
         $this->render('manage', array(
             'model'     => $model,
-            'languages' => Language::getCachedArray()
+            'languages' => Language::getList()
         ));
     }
 

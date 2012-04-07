@@ -236,7 +236,7 @@ class Form extends CForm
         {
             $meta = $this->model->meta();
 
-            $languages = Language::getCachedArray();
+            $languages = Language::getList();
 
             if (isset($meta['language']) && count($languages) > 1)
             {

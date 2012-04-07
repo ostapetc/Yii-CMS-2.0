@@ -199,7 +199,7 @@ abstract class Controller extends CController
             $url = $_SERVER["REQUEST_URI"];
         }
 
-        $languages = Language::getCachedArray();
+        $languages = Language::getList();
         return isset($languages[trim($url, "/")]);
     }
 

@@ -17,7 +17,7 @@ $this->widget('AdminGridView', array(
         ),
         array(
             'name'   => 'language',
-            'filter' => Language::getCachedArray(),
+            'filter' => Language::getList(),
             'value'  => '$data->getLanguageName()'
         ),
 		array(

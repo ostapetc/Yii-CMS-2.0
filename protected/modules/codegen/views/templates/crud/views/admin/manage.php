@@ -22,7 +22,7 @@ $this->widget('AdminGridView', array(
         array(
             'name'  => 'language',
             'value' => function ($data) {
-                $languages = Language::getCachedArray();
+                $languages = Language::getList();
                 return $languages[$data->language];
             }
         ),

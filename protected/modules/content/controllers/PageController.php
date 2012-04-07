@@ -42,7 +42,7 @@ class PageController extends Controller
 
     public function actionMain()
     {
-        $page = Page::model()->published()->language()->findByAttributes(array("url" => "/"));
+        $page = Page::model()->published()->findByAttributes(array("url" => "/"));
         if (!$page)
         {
             $this->pageNotFound();
@@ -54,8 +54,6 @@ class PageController extends Controller
             'page' => $page
         ));
     }
-
-
 
     private function _setMetaTags(Page $page)
     {
