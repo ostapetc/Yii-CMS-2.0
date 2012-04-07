@@ -7,6 +7,7 @@ return array(
     'enctype'              => 'multipart/form-data',
     'elements'             => array(
         'title'        => array(
+            'hint' => 'Это пример подсказки к элементу формы. Достаточно симпотично и удобно',
             'type' => 'text'
         ),
         'url'          => array(
@@ -23,8 +24,8 @@ return array(
             'type' => 'meta_tags'
         ),
         'file_manager' => array(
-            'type'=>'file_manager',
-            'tag'=>'a',
+            'type'      => 'file_manager',
+            'tag'       => 'a',
             'data_type' => 'image'
         )
     ),
