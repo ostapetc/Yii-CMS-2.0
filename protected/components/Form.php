@@ -1,9 +1,6 @@
 <?
-
 class Form extends CForm
 {
-    private $_clear = false;
-
     public $side;
 
     public $back_button_show = true;
@@ -65,50 +62,40 @@ class Form extends CForm
 
     public function __toString()
     {
-        $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
-
-        if ($this->side == 'client') //only bootstrap
-        {
-            $this->activeForm['class']        = 'BootActiveForm';
-            $this->activeForm['inlineErrors'] = false;
-
-            if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
-            {
-                $this->activeForm['clientOptions']['validateOnType'] = true;
-                $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
-                    var cg = $("#"+attribute.inputID).closest(".control-group");
-                    hasError ? cg.addClass("error") : cg.removeClass("error");
-                    hasError ? cg.removeClass("success") : cg.addClass("success");
-                }';
-            }
-        }
-
         if (!($this->parent instanceof self))
         {
-            $cs = Yii::app()->clientScript;
+            $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
 
-            if ($this->_clear)
+            if ($this->side == 'client') //only bootstrap
             {
-                $cs->registerScript('clearForm', '$(function()
+                $this->activeForm['class']        = 'BootActiveForm';
+                $this->activeForm['inlineErrors'] = false;
+
+                if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
                 {
-                    $(":input","#' . $this->activeForm['id'] . '")
-                        .not(":button, :submit, :reset, :hidden")
-                        .val("")
-                        .removeAttr("checked")
-                        .removeAttr("selected");
-                })');
+                    $this->activeForm['clientOptions']['validateOnType'] = true;
+                    $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
+                        var cg = $("#"+attribute.inputID).closest(".control-group");
+                        hasError ? cg.addClass("error") : cg.removeClass("error");
+                        hasError ? cg.removeClass("success") : cg.addClass("success");
+                    }';
+                }
             }
 
             try
             {
-                return parent::__toString();
+                $profile_id = 'Form::'.$this->activeForm['id'];
+                //profile form
+                Yii::beginProfile($profile_id);
+                $res = parent::__toString();
+                Yii::endProfile($profile_id);
+                return $res;
             } catch (Exception $e)
             {
                 Yii::app()->handleException($e);
             }
         }
     }
-
 
     public function renderBody()
     {
