@@ -66,20 +66,17 @@ class Form extends CForm
         {
             $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
 
-            if ($this->side == 'client') //only bootstrap
-            {
-                $this->activeForm['class']        = 'BootActiveForm';
-                $this->activeForm['inlineErrors'] = false;
+            $this->activeForm['class']        = 'BootActiveForm';
+            $this->activeForm['inlineErrors'] = false;
 
-                if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
-                {
-                    $this->activeForm['clientOptions']['validateOnType'] = true;
-                    $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
-                        var cg = $("#"+attribute.inputID).closest(".control-group");
-                        hasError ? cg.addClass("error") : cg.removeClass("error");
-                        hasError ? cg.removeClass("success") : cg.addClass("success");
-                    }';
-                }
+            if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
+            {
+                $this->activeForm['clientOptions']['validateOnType'] = true;
+                $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
+                    var cg = $("#"+attribute.inputID).closest(".control-group");
+                    hasError ? cg.addClass("error") : cg.removeClass("error");
+                    hasError ? cg.removeClass("success") : cg.addClass("success");
+                }';
             }
 
             try
