@@ -6,9 +6,29 @@ if ($this->model->scenario == Param::SCENARIO_VALUE_UPDATE)
         'name'  => array(
             'type'     => 'text',
             'disabled' => true
-        ),
-        'value' => array('type' => $this->model->element)
+        )
     );
+
+    if ($this->model->element == Param::ELEMENT_SELECT)
+    {
+        $items = array();
+        foreach (explode("\n", $this->model->options) as $option)
+        {
+            list($name, $value) = explode(Param::OPTION_NAME_VALUE_SEPARATOR, $option);
+            $items[trim($name)] = trim($value);
+        }
+
+        $elements['value']  = array(
+            'type'  => 'dropdownlist',
+            'items' => $items
+        );
+    }
+    else
+    {
+        $elements['value']  = array(
+            'type' => $this->model->element
+        );
+    }
 }
 else
 {
@@ -25,7 +45,11 @@ else
         ),
         'element' => array(
             'type'  => 'dropdownlist',
-            'items' => Param::$elements
+            'items' => Param::$elements,
+        ),
+        'options' => array(
+            'type'  => 'textarea',
+            'label' => 'Список значений (Каждое название' . Param::OPTION_NAME_VALUE_SEPARATOR . 'значение на новой строке)'
         )
     );
 }
