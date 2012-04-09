@@ -26,7 +26,6 @@ else if (!$this->model->isNewRecord)
 return array(
     'activeForm' => array(
         'id'                   => 'rbac-task-form',
-        'enableAjaxValidation' => true,
     ),
     'elements'   => array(
         'name'          => array('type' => 'text'),

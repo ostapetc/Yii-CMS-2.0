@@ -24,15 +24,14 @@ class Page extends ActiveRecord
 
     public function behaviors()
     {
-        $behaviors = parent::behaviors();
-        $behaviors['MetaTag'] = array(
-            'class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'
+        return array_merge(
+            parent::behaviors(),
+            array(
+                 'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
+                 'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
+                 'FileManager' => array('class'=>'application.components.activeRecordBehaviors.AttachmentBehavior'),
+            )
         );
-        $behaviors['Sortable'] = array(
-            'class' => 'application.extensions.sortable.SortableBehavior'
-        );
-
-        return $behaviors;
     }
 
 
@@ -88,19 +87,18 @@ class Page extends ActiveRecord
         $criteria->compare('language', $this->language, true);
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria'   => $criteria,
-            'pagination' =>array(
-                'pageSize' => self::PAGE_SIZE
-            )
-        ));
+                                                             'criteria'   => $criteria,
+                                                             'pagination' => array(
+                                                                 'pageSize' => self::PAGE_SIZE
+                                                             )
+                                                        ));
     }
 
 
     public function getHref()
     {
         $url = trim($this->url);
-        if ($url)
-        {
+        if ($url) {
             if ($url[0] != "/") {
                 $url = "/page/{$url}";
             }
@@ -116,15 +114,14 @@ class Page extends ActiveRecord
 
     public function beforeSave()
     {
-        if (parent::beforeSave())
-        {
-            if ($this->url != '/')
-            {
+        if (parent::beforeSave()) {
+            if ($this->url != '/') {
                 $this->url = trim($this->url, "/");
             }
 
             return true;
         }
+        return false;
     }
 
 
@@ -132,12 +129,13 @@ class Page extends ActiveRecord
     {
         $content = $this->text;
 
-        if (RbacModule::isAllow('PageAdmin_Update'))
-        {
-            $content .= "<br/>" .CHtml::link(t('Редактировать'), array(
-                '/content/pageAdmin/update/',
-                'id'=> $this->id
-            ), array('class'=> 'btn btn-danger'));
+        if (RbacModule::isAllow('PageAdmin_Update')) {
+            $content .= "<br/>" . CHtml::link(
+                t('Редактировать'), array(
+                                         '/content/pageAdmin/update/',
+                                         'id'=> $this->id
+                                    ), array('class'=> 'btn btn-danger')
+            );
         }
 
         return $content;

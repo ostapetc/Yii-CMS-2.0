@@ -12,7 +12,7 @@ $elements = array(
 
 $config = AppManager::getConfig();
 
-$languages = Language::getCachedArray();
+$languages = Language::getList();
 foreach ($languages as $id => $language)
 {
     if ($config['language'] == $id)

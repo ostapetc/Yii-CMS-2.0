@@ -26,6 +26,7 @@
 
 .dropdown dd {
     position: relative;
+    margin-left: 0;
 }
 
 .dropdown a {
@@ -119,3 +120,9 @@
 .dropdown dd ul li a:hover em {
     color: #fff;
 }
+
+#select-lang-form dd{
+    padding: 0;
+    margin-left: 0;
+}
+

@@ -1,12 +1,16 @@
 <?
-if (substr($_SERVER['DOCUMENT_ROOT'], -1) != '/')
+define('DS', DIRECTORY_SEPARATOR);
+
+$_SERVER['DOCUMENT_ROOT'] = str_replace(array('\\', '/'), DS, $_SERVER['DOCUMENT_ROOT']);
+
+if (substr($_SERVER['DOCUMENT_ROOT'], -1) != DS)
 {
-    $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'].'/';
+    $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . DS;
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . 'protected/config/constants.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'constants.php';
 
-$yii = LIBRARY_PATH . 'yii/yii.php';
+$yii = LIBRARY_PATH . 'yii' . DS . 'yii.php';
 
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
@@ -20,8 +24,6 @@ $session = new CHttpSession;
 $session->open();
 
 $config = YII_DEBUG ? 'development' : 'production';
-$config = PROTECTED_PATH . '/config/' . $config . '.php';
+$config = PROTECTED_PATH . DS . 'config' . DS . $config . '.php';
 
 Yii::createWebApplication($config)->run();
-
-#eeee

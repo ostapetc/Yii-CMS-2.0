@@ -161,7 +161,7 @@ class MenuSection extends ActiveRecord
             $url = '/' . $url;
         }
 
-        if (count(Language::getCachedArray()) > 1)
+        if (count(Language::getList()) > 1)
         {
             $url = '/' . Yii::app()->language . $url;
         }

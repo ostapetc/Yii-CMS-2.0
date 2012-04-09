@@ -19,7 +19,6 @@ else
 return array(
     'activeForm' => array(
         'id' => 'meta-tag-form',
-		'enableAjaxValidation' => true,
     ),
     'elements' => array(
         'model_id' => array(

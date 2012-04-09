@@ -58,8 +58,6 @@ return array(
     'enctype'    => 'multipart/form-data',
     'activeForm' => array(
         'id'                   => 'setting-form',
-        'class'                => 'CActiveForm',
-        'enableAjaxValidation' => true,
     ),
     'elements' => $elements,
     'buttons'    => array(

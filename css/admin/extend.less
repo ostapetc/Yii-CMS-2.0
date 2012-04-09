@@ -5,33 +5,29 @@
 @import "../less/mixins.less";
 
 
-
-.icon(@url: ''){
+.icon(@url: '', @cursor: normal){
     width: 16px;
     height: 16px;
     line-height: 16px;
     background-image: url("/img/icons/@{url}");
     background-repeat: no-repeat;
     background-position: 0 0;
+    cursor: @cursor;
 }
 
-.icon-sortable {
-    .icon('sort.png');
-    cursor: pointer;
-}
-
-.icon-loader {
-    .icon('ajax-loader.gif');
-}
-
-.icon-ok-btn {
-    .icon('ok_16.png');
-    cursor: pointer;
-}
-
-.icon-cancel-btn {
-    .icon('cancel_16.png');
-    cursor: pointer;
+.icon {
+    &-sortable{
+        .icon('sort.png', pointer);
+    }
+    &-loader {
+        .icon('ajax-loader.gif');
+    }
+    &-ok-btn {
+        .icon('ok_16.png', pointer);
+    }
+    &-cancel-btn {
+        .icon('cancel_16.png', pointer);
+    }
 }
 
 a.btn{
@@ -42,21 +38,23 @@ a.btn{
 
 .pagination {
     margin: 0;
+    a {
+        line-height: 25px
+    }
 }
 
-.pagination a {
-    line-height: 25px
+.small{
+    .add-on {
+        padding: 1px 3px;
+    }
 }
 
-.small .add-on {
-    padding: 1px 3px;
+.sortable_col {
+    .icon-sortable {
+        display: block;
+        margin: 0 auto;
+    }
 }
-
-.sortable_col .icon-sortable {
-    display: block;
-    margin: 0 auto;
-}
-
 ul {
     list-style: none;
     margin: 0;
@@ -65,8 +63,11 @@ ul {
     }
 }
 
-.placeholder td, tr.placeholder:nth-child(odd), tr.placeholder:nth-child(odd) th {
-    background: url(/img/admin/placeholder.png);
+
+tr.placeholder {
+    td, &:nth-child(odd), &:nth-child(odd) th {
+        background: url(/img/admin/placeholder.png);
+    }
 }
 
 .form-search {
@@ -78,4 +79,9 @@ ul {
     box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
     background-position: 10px 6px;
     padding-left: 30px;
- }
+}
+
+#select-lang-form dd{
+    padding: 0;
+    margin-left: 0;
+}

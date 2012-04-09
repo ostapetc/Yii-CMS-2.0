@@ -52,10 +52,10 @@ class LanguageMessage extends ActiveRecord
 	}
 
 
-    public static function getCachedArray()
+    public static function getList()
     {
         $messages = Yii::app()->cache->get('languages_messages');
-        if (!$messages)
+        if ($messages === false)
         {
             $sql = "SELECT message FROM " . self::tableName();
             $res = Yii::app()->db->createCommand($sql)->queryAll();

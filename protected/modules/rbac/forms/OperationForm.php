@@ -15,7 +15,6 @@ if (!$this->model->isNewRecord)
 $form = array(
     'activeForm' => array(
         'id'                   => 'rbac-operation-form',
-        'enableAjaxValidation' => true,
     ),
     'elements'   => array(
         'module'        => array(

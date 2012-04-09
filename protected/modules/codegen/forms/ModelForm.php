@@ -20,9 +20,6 @@
 return array(
     'activeForm'=>array(
         'id' => 'model-form',
-        'class' => 'CActiveForm',
-        'enableAjaxValidation' => true,
-        'clientOptions'=>array('validateOnSubmit'=>true)
     ),
     'elements' => array(
         'table' => array(
@@ -40,9 +37,8 @@ return array(
             'empty' => 'не выбран'
         ),
         'behaviors' => array(
-            'type'     => 'dropdownlist',
+            'type'     => 'multi_select',
             'items'    => array_flip(Model::$extra_behaviors),
-            'multiple' => true
         )
     ),
     'buttons' => array(

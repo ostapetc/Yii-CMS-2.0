@@ -3,11 +3,6 @@
 return array(
     'activeForm' => array(
         'id' => 'outbox-email-form',
-		//'enableAjaxValidation' => true,
-		//'clientOptions' => array(
-		//	'validateOnSubmit' => true,
-		//	'validateOnChange' => true
-		//)
     ),
     'elements' => array(
         'email' => array('type' => 'textarea'),

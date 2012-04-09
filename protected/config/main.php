@@ -20,7 +20,6 @@ foreach ($modules_dirs as $module)
     $modules_includes[] = "application.components.zii.gridColumns.*";
 }
 
-
 $modules['webshell'] = array(
     'class'        => 'ext.webshell.WebShellModule',
     'exitUrl'      => '/',
@@ -64,6 +63,7 @@ return array(
     'preload'  => array('log'),
     'import'   => array_merge($modules_includes, array(
         'application.components.*',
+        'application.components.Form',
         'application.components.validators.*',
         'application.components.zii.*',
         'application.components.formElements.*',
@@ -85,7 +85,32 @@ return array(
             'class'=>'application.components.bootstrap.components.Bootstrap'
         ),
         'assetManager' => array(
-            'class'       => 'CAssetManager',
+            'class' => 'AssetManager',
+            'parsers' => array(
+                'sass' => array( // key == the type of file to parse
+                    'class' => 'ext.assetManager.Sass', // path alias to the parser
+                    'output' => 'css', // the file type it is parsed to
+                    'options' => array(
+                        'syntax' => 'sass'
+                    )
+                ),
+                'scss' => array( // key == the type of file to parse
+                    'class' => 'ext.assetManager.Sass', // path alias to the parser
+                    'output' => 'css', // the file type it is parsed to
+                    'options' => array(
+                        'syntax' => 'scss',
+                        'style' => 'compressed'
+                    )
+                ),
+                'less' => array( // key == the type of file to parse
+                    'class' => 'ext.assetManager.Less', // path alias to the parser
+                    'output' => 'css', // the file type it is parsed to
+                    'options' => array(
+                        'syntax' => 'scss',
+                        'style' => 'compressed'
+                    )
+                ),
+            ),
             'newDirMode'  => 0755,
             'newFileMode' => 0644
         ),
@@ -173,4 +198,5 @@ return array(
         'themes_enabled' => false
     )
 );
+
 

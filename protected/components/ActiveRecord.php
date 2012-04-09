@@ -8,6 +8,7 @@ abstract class ActiveRecord extends CActiveRecord
 
     public $captcha;
 
+    private $_meta; //full metadata of model
 
     abstract public function name();
 
@@ -51,21 +52,18 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function attributeLabels()
     {
-        $meta = $this->meta();
-
         $labels = array();
 
-        foreach ($meta as $field_data)
+        foreach ($this->meta() as $field_data)
         {
             $labels[$field_data["Field"]] = t($field_data["Comment"]);
         }
 
-        $languages = Language::getCachedArray();
+        $languages = Language::getList();
         if (count($languages) > 1)
         {
             $labels['language'] = 'Язык';
         }
-
         $labels['captcha'] = 'Введите код с картинки';
 
         return $labels;
@@ -195,39 +193,12 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function meta()
     {
-        if (YII_DEBUG)
+        if ($this->_meta == null);
         {
-            return $this->_meta();
+            $this->_meta = Yii::app()->db->cache(YII_DEBUG ? 0 : 3600)->createCommand("SHOW FUll columns FROM " . $this->tableName())->queryAll();
         }
-        else
-        {
-            $cache_var = 'Meta_' . $this->tableName();
-
-            $meta = Yii::app()->cache->get($cache_var);
-            if ($meta === false)
-            {
-                $meta = $this->_meta();
-                Yii::app()->cache->set($cache_var, $meta, 3600);
-            }
-
-            return $meta;
-        }
+        return $this->_meta;
     }
-
-
-    private function _meta()
-    {
-        $meta = Yii::app()->db->createCommand("SHOW FUll columns FROM " . $this->tableName())->queryAll();
-
-        foreach ($meta as $ind => $field_data)
-        {
-            $meta[$field_data["Field"]] = $field_data;
-            unset($meta[$ind]);
-        }
-
-        return $meta;
-    }
-
 
     public function optionsTree($name = 'name', $id = null, $result = array(), $value = 'id', $spaces = 0, $parent_id = null)
     {
@@ -264,4 +235,5 @@ abstract class ActiveRecord extends CActiveRecord
         $criteria->addInCondition('id', $object_ids);
         return $this;
     }
+
 }

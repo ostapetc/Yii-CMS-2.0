@@ -1,5 +1,4 @@
 <?
-
 abstract class Controller extends CController
 {
     const MSG_SUCCESS = 'success';
@@ -61,6 +60,8 @@ abstract class Controller extends CController
 
     public function beforeAction($action)
     {
+        Yii::import('codegen.models.Model');
+
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
 
         if (in_array($action->id, $this->system_actions))
@@ -151,40 +152,6 @@ abstract class Controller extends CController
         }
     }
 
-    public function widget($className,$properties=array(),$captureOutput=false)
-    {
-        $res = false;
-
-        $widget=$this->createWidget($className,$properties);
-
-        if (isset($widget->cache_id) && $widget->cache_id)
-        {
-            $res = Yii::app()->cache->get($widget->cache_id);
-        }
-
-        if ($res === false)
-        {
-            ob_start();
-            ob_implicit_flush(false);
-            $widget->run();
-            $res = ob_get_clean();
-        }
-
-        if (isset($widget->cache_id) && $widget->cache_id)
-        {
-            Yii::app()->cache->set($widget->cache_id, $res, 60);
-        }
-
-        if($captureOutput)
-        {
-            return $res;
-        }
-        else
-        {
-            echo $res;
-        }
-    }
-
     /**
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,
      * или выбрасывает 404
@@ -232,7 +199,34 @@ abstract class Controller extends CController
             $url = $_SERVER["REQUEST_URI"];
         }
 
-        $languages = Language::getCachedArray();
+        $languages = Language::getList();
         return isset($languages[trim($url, "/")]);
     }
+
+    /**
+     * add profile information to std widget call
+     *
+     * @param string $className
+     * @param array $properties
+     * @param bool $captureOutput
+     * @return mixed
+     */
+    public function widget($className,$properties=array(),$captureOutput=false)
+    {
+        $profile_id = 'Widget::'.$className;
+        //profile widget
+        Yii::beginProfile($profile_id);
+        $res = parent::widget($className,$properties,true);
+        Yii::endProfile($profile_id);
+
+        if ($captureOutput)
+        {
+            return $res;
+        }
+        else
+        {
+            echo $res;
+        }
+    }
+
 }

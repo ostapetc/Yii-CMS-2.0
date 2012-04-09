@@ -1,21 +1,3 @@
-a.btn:hover, a.btn:visited, a.btn:link{
-    color: #FFF;
-}
-.pagination{
-    margin: 0;
-}
-.pagination a{
-    line-height: 25px
-}
-
-.small .add-on{
-    padding: 1px 3px;
-}
-
-.sortable_col .icon-sortable{
-    display: block;
-    margin:  0 auto;
-}
 .icon-sortable{
     width:               16px;
     height:              16px;
@@ -54,6 +36,25 @@ a.btn:hover, a.btn:visited, a.btn:link{
     background-position: 0 0;
     cursor:              pointer;
 }
+a.btn:hover, a.btn:visited, a.btn:link{
+    color: #FFF;
+}
+.pagination{
+    margin: 0;
+}
+.pagination a{
+    line-height: 25px
+}
+
+.small .add-on{
+    padding: 1px 3px;
+}
+
+.sortable_col .icon-sortable{
+    display: block;
+    margin:  0 auto;
+}
+
 ul{
     list-style: none;
     margin: 0;
@@ -74,3 +75,8 @@ ul ul{
     background-position:  10px 6px;
     padding-left: 30px;
 }
+#select-lang-form dd{
+    padding: 0;
+    margin-left: 0;
+}
+

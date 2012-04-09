@@ -192,7 +192,7 @@
                 var that = $(this).data('fileupload');
 
                 if (data.url) {
-                    $.get(data.url, {}, function() {
+                    $[data.type](data.url, {}, function() {
                         that._adjustMaxNumberOfFiles(1);
                         $(data.context).fadeOut(500, function () {
                             $(this).remove();
@@ -402,7 +402,7 @@
             tmpl.css('display', 'none');
             // .slice(1).remove().end().first() removes all but the first
             // element and selects only the first for the jQuery collection:
-            tmpl.find('.progress div').slice(
+            tmpl.find('.progress-holder div').slice(
                 isValidated ? 1 : 0
             ).remove().end().first()
                 .progressbar();
