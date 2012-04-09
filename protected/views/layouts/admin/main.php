@@ -43,7 +43,15 @@
     <section id="secondary_bar">
         <div class="user">
             <p>
-                <? echo Yii::app()->user->model->full_name; ?>
+                <?
+                $user_name = Yii::app()->user->model->full_name;
+                if (mb_strlen($user_name, 'utf-8') > 13)
+                {
+                    $user_name = mb_substr($user_name, 0, 13, 'utf-8') . '...';
+                }
+                ?>
+
+                <?= $user_name ?>
                 <a href="<? echo $this->createUrl('/users/user/logout'); ?>" class="underline float_right"><? echo t('Выйти'); ?></a>
             </p>
         </div>
