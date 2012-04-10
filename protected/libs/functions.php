@@ -44,7 +44,7 @@ function t($message)
         return $translated_message;
     }
 
-    $messages = LanguageMessage::getCachedArray();
+    $messages = LanguageMessage::getList();
     if (!in_array($message, $messages))
     {
         $language_message = new LanguageMessage();

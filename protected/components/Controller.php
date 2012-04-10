@@ -1,5 +1,4 @@
 <?
-
 abstract class Controller extends CController
 {
     const MSG_SUCCESS = 'success';
@@ -61,7 +60,7 @@ abstract class Controller extends CController
 
     public function beforeAction($action)
     {
-        Yii::import('application.modules.codegen.models.Model');
+        Yii::import('codegen.models.Model');
 
         $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
 
@@ -200,7 +199,34 @@ abstract class Controller extends CController
             $url = $_SERVER["REQUEST_URI"];
         }
 
-        $languages = Language::getCachedArray();
+        $languages = Language::getList();
         return isset($languages[trim($url, "/")]);
     }
+
+    /**
+     * add profile information to std widget call
+     *
+     * @param string $className
+     * @param array $properties
+     * @param bool $captureOutput
+     * @return mixed
+     */
+    public function widget($className,$properties=array(),$captureOutput=false)
+    {
+        $profile_id = 'Widget::'.$className;
+        //profile widget
+        Yii::beginProfile($profile_id);
+        $res = parent::widget($className,$properties,true);
+        Yii::endProfile($profile_id);
+
+        if ($captureOutput)
+        {
+            return $res;
+        }
+        else
+        {
+            echo $res;
+        }
+    }
+
 }

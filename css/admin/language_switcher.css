@@ -26,6 +26,7 @@
 
 .dropdown dd {
     position: relative;
+    margin-left: 0;
 }
 
 .dropdown a {
@@ -124,3 +125,4 @@
     padding: 0;
     margin-left: 0;
 }
+

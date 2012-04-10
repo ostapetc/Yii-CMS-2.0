@@ -6,7 +6,7 @@ $this->tabs = array(
     'список страниц' => $this->createUrl('manage')
 );
 
-$languages = Language::getCachedArray();
+$languages = Language::getList();
 
 $this->widget('BootDetailView', array(
 	'data'=>$model,

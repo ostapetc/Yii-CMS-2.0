@@ -6,7 +6,6 @@ return array(
     'enctype'    => 'multipart/form-data',
     'activeForm' => array(
         'id'                   => 'setting-form',
-        'enableAjaxValidation' => true,
     ),
     'elements'   => array(
         'name'  => array('type' => 'text'),

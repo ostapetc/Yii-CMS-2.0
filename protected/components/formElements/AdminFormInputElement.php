@@ -1,6 +1,8 @@
 <?
 class AdminFormInputElement extends BaseFormInputElement
 {
+    public $layout="{hint}\n{label}\n{input}\n{error}";
+
     public $widgets = array(
         'alias'             => 'AliasField',
         'file'              => 'FileWidget',
@@ -72,5 +74,15 @@ class AdminFormInputElement extends BaseFormInputElement
                     'class' => $this->type
                 );
         }
+    }
+
+    public function renderLabel()
+    {
+        if (in_array($this->type, array('meta_tags', 'file_manager')))
+        {
+            return '';
+        }
+
+        return parent::renderLabel();
     }
 }

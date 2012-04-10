@@ -3,7 +3,6 @@ return array(
     'action'     => '',
     'activeForm' => array(
         'id'                   => 'feedback-form',
-        'enableAjaxValidation' => true,
     ),
     'elements'   => array(
         'last_name'  => array('type' => 'text'),

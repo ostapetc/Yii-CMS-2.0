@@ -39,7 +39,7 @@ class LanguagesBehavior extends CActiveRecordBehavior
 
     public function getLanguageName()
     {
-        $languages = Language::getCachedArray();
+        $languages = Language::getList();
         if (isset($languages[$this->owner->language]))
         {
             return $languages[$this->owner->language];

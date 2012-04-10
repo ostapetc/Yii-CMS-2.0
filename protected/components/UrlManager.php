@@ -7,7 +7,7 @@ class UrlManager extends CUrlManager
         $multilanguage_support = Yii::app()->params['multilanguage_support'];
         if ($multilanguage_support)
         {
-            $languages = Language::getCachedArray();
+            $languages = Language::getList();
             $languages = implode('|', array_keys($languages));
 
             $language_pattern = "<language:({$languages})>";
@@ -34,7 +34,7 @@ class UrlManager extends CUrlManager
         $multilanguage_support = Yii::app()->params['multilanguage_support'];
         if ($multilanguage_support)
         {
-            $languages = Language::getCachedArray();
+            $languages = Language::getList();
             $languages = implode('|', array_keys($languages));
 
             $language_pattern = "<language:({$languages})>";

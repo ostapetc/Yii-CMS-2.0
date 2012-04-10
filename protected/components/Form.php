@@ -1,15 +1,18 @@
 <?
-
 class Form extends CForm
 {
-    private $_clear = false;
-
     public $side;
 
     public $back_button_show = true;
 
     public $inputElementClass = null;
 
+    public $defaultActiveFormSettings = array(
+        'enableAjaxValidation'=>true,
+        'clientOptions' => array(
+            'validateOnType' => true,
+            'validateOnSubmit' => true,
+    ));
 
     public function __construct($config, $model = null, $parent = null)
     {
@@ -59,11 +62,14 @@ class Form extends CForm
 
     public function __toString()
     {
-        if ($this->side == 'client') //only bootstrap
+        if (!($this->parent instanceof self))
         {
+            $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
+
             $this->activeForm['class']        = 'BootActiveForm';
             $this->activeForm['inlineErrors'] = false;
-            if (isset($this->activeForm['clientOptions']['enableAjaxValidation']) && $this->activeForm['clientOptions']['enableAjaxValidation'])
+
+            if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
             {
                 $this->activeForm['clientOptions']['validateOnType'] = true;
                 $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
@@ -72,34 +78,21 @@ class Form extends CForm
                     hasError ? cg.removeClass("success") : cg.addClass("success");
                 }';
             }
-        }
-
-        if (!($this->parent instanceof self))
-        {
-            $cs = Yii::app()->clientScript;
-
-            if ($this->_clear)
-            {
-                $cs->registerScript('clearForm', '$(function()
-                {
-                    $(":input","#' . $this->activeForm['id'] . '")
-                        .not(":button, :submit, :reset, :hidden")
-                        .val("")
-                        .removeAttr("checked")
-                        .removeAttr("selected");
-                })');
-            }
 
             try
             {
-                return parent::__toString();
+                $profile_id = 'Form::'.$this->activeForm['id'];
+                //profile form
+                Yii::beginProfile($profile_id);
+                $res = parent::__toString();
+                Yii::endProfile($profile_id);
+                return $res;
             } catch (Exception $e)
             {
                 Yii::app()->handleException($e);
             }
         }
     }
-
 
     public function renderBody()
     {
@@ -131,27 +124,10 @@ class Form extends CForm
 
         if ($element instanceof CFormInputElement)
         {
-            if ($element->type === 'hidden')
-            {
-                return "<div style=\"visibility:hidden\">\n" . $element->render() . "</div>\n";
-            }
+            if($element->type==='hidden')
+                return "<div style=\"visibility:hidden\">\n".$element->render()."</div>\n";
             else
-            {
-                if ($element instanceof self)
-                {
-                    $this->_addClassesAdmin($element);
-                    return $element->render();
-                }
-                $class = $element->type;
-
-                $res = "<dl class='{$class} control-group'><dd>";
-                $res .= $element->renderLabel();
-                $res .= $element->renderInput();
-                $res .= $element->renderError();
-                $res .= '</dd></dl>';
-
-                return $res;
-            }
+                return "<dl class='{$element->type} control-group'><dd>\n".$element->render()."</dd></dl>\n";
         }
         else if ($element instanceof CFormButtonElement)
         {
@@ -162,12 +138,6 @@ class Form extends CForm
             return $element->render();
         }
     }
-
-    public function clear()
-    {
-        $this->_clear = true;
-    }
-
 
     public function renderButtons()
     {
@@ -240,7 +210,7 @@ class Form extends CForm
         {
             $meta = $this->model->meta();
 
-            $languages = Language::getCachedArray();
+            $languages = Language::getList();
 
             if (isset($meta['language']) && count($languages) > 1)
             {

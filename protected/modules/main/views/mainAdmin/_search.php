@@ -5,7 +5,7 @@
     $(document).ready(function () {
         $('#form-search input').keyup(function(){
             var duration = 300,
-                val = $(this).val(),
+                val = $(this).val().toLowerCase(),
                 menu = $('#admin_menu'),
                 header_hendler = function (){
                     var parent = $(this).closest('ul');
@@ -21,7 +21,7 @@
                     return true;
                 }
 
-                self.text().search(val) > -1 ? self.show(duration, header_hendler) : self.hide(duration, header_hendler);
+                self.text().toLowerCase().search(val) > -1 ? self.show(duration, header_hendler) : self.hide(duration, header_hendler);
             });
 
         });

@@ -48,7 +48,7 @@ class ContentModule extends WebModule
             '/search'        => 'content/page/search'
         );
 
-        foreach (array_keys(Language::getCachedArray()) as $language)
+        foreach (array_keys(Language::getList()) as $language)
         {
             $routes["/"] = 'content/page/main';
         }

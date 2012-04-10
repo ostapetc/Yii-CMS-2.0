@@ -15,8 +15,6 @@ Yii::app()->clientScript->registerScript(
 return array(
     'activeForm'=>array(
         'id' => 'module-form',
-        'enableAjaxValidation' => true,
-        'clientOptions'=>array('validateOnSubmit'=>true)
     ),
     'elements' => array(
         'id' => array(
