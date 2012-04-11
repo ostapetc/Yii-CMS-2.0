@@ -1,12 +1,10 @@
 <?
+/**
+ * Single file-upload and remove widget
+ * TODO:no preview non-image files
+ */
 class FileWidget extends InputWidget
 {
-
-    public function init()
-    {
-        parent::init();
-    }
-
 
     public function run()
     {
