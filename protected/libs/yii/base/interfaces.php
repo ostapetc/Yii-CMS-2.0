@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * This file contains core interfaces for Yii framework.
  *

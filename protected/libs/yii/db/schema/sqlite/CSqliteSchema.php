@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CSqliteSchema class file.
  *

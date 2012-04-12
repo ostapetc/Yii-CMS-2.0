@@ -320,6 +320,19 @@ class AppManager
     {
         return include PROTECTED_PATH . 'config/main.php';
     }
+
+
+    public static function getModelModule($model_class)
+    {
+        $file = $model_class . '.php';
+        foreach (glob(MODULES_PATH . '*') as $module_dir)
+        {
+            if (file_exists($module_dir . DS . 'models' . DS . $file))
+            {
+                return pathinfo($module_dir, PATHINFO_BASENAME);
+            }
+        }
+    }
 }
 
 

@@ -3,8 +3,8 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="6">
 			תקציר דוח פרופילים
-			(זמן: <? echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>,
-			זכרון: <? echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?> קילובייט)
+			(זמן: <?php echo sprintf('%0.5f',Yii::getLogger()->getExecutionTime()); ?>,
+			זכרון: <?php echo number_format(Yii::getLogger()->getMemoryUsage()/1024); ?> קילובייט)
 		</th>
 	</tr>
 	<tr style="background-color: #ccc;">
@@ -15,7 +15,7 @@
 		<th>מינימום</th>
 		<th>מקסימום</th>
 	</tr>
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CActiveRecordBehavior class file.
  *

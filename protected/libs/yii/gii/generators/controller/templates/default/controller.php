@@ -1,21 +1,21 @@
-<?
+<?php
 /**
  * This is the template for generating a controller class file.
  * The following variables are available in this template:
  * - $this: the ControllerCode object
  */
 ?>
-<? echo "<?\n"; ?>
+<?php echo "<?php\n"; ?>
 
-class <? echo $this->controllerClass; ?> extends <? echo $this->baseClass."\n"; ?>
+class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseClass."\n"; ?>
 {
-<? foreach($this->getActionIDs() as $action): ?>
-	public function action<? echo ucfirst($action); ?>()
+<?php foreach($this->getActionIDs() as $action): ?>
+	public function action<?php echo ucfirst($action); ?>()
 	{
-		$this->render('<? echo $action; ?>');
+		$this->render('<?php echo $action; ?>');
 	}
 
-<? endforeach; ?>
+<?php endforeach; ?>
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()

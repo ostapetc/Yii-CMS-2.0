@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CLogFilter class file
  *

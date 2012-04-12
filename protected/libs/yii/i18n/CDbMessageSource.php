@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDbMessageSource class file.
  *

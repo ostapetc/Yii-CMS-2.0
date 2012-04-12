@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>에러 <? echo $data['code']; ?></title>
+<title>에러 <?php echo $data['code']; ?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -19,19 +19,19 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 
 <body>
-<h1>에러 <? echo $data['code']; ?></h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h1>에러 <?php echo $data['code']; ?></h1>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 웹 서버가 요청을 처리하는 동안 에러가 발생했습니다.
 </p>
 <p>
-서버 에러로 의심되면 <? echo $data['admin']; ?>에게 문의 바랍니다.
+서버 에러로 의심되면 <?php echo $data['admin']; ?>에게 문의 바랍니다.
 </p>
 <p>
 고맙습니다.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

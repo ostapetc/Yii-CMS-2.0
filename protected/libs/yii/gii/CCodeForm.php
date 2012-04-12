@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CCodeForm class file.
  *

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title><? echo CHtml::encode($data['type'])?></title>
+<title><?php echo CHtml::encode($data['type'])?></title>
 
 <style type="text/css">
 /*<![CDATA[*/
@@ -158,23 +158,23 @@ pre span.error-ln {
 
 <body>
 <div class="container">
-	<h1><? echo $data['type']?></h1>
+	<h1><?php echo $data['type']?></h1>
 
 	<p class="message">
-		<? echo nl2br(CHtml::encode($data['message']))?>
+		<?php echo nl2br(CHtml::encode($data['message']))?>
 	</p>
 
 	<div class="source">
-		<p class="file"><? echo CHtml::encode($data['file'])."({$data['line']})"?></p>
-		<? echo $this->renderSourceCode($data['file'],$data['line'],$this->maxSourceLines); ?>
+		<p class="file"><?php echo CHtml::encode($data['file'])."({$data['line']})"?></p>
+		<?php echo $this->renderSourceCode($data['file'],$data['line'],$this->maxSourceLines); ?>
 	</div>
 
 	<div class="traces">
 		<h2>Stackspårning</h2>
-		<? $count=0; ?>
+		<?php $count=0; ?>
 		<table style="width:100%;">
-		<? foreach($data['traces'] as $n => $trace): ?>
-		<?
+		<?php foreach($data['traces'] as $n => $trace): ?>
+		<?php
 			if($this->isCoreCode($trace))
 				$cssClass='core collapsed';
 			else if(++$count>3)
@@ -183,17 +183,17 @@ pre span.error-ln {
 				$cssClass='app expanded';
 			$hasCode=$trace['file']!=='unknown' && is_file($trace['file']);
 		?>
-		<tr class="trace <? echo $cssClass; ?>">
+		<tr class="trace <?php echo $cssClass; ?>">
 			<td class="number">
-				#<? echo $n; ?>
+				#<?php echo $n; ?>
 			</td>
 			<td class="content">
 				<div class="trace-file">
-					<? if($hasCode): ?>
+					<?php if($hasCode): ?>
 						<div class="plus">+</div>
 						<div class="minus">–</div>
-					<? endif; ?>
-					<?
+					<?php endif; ?>
+					<?php
 						echo '&nbsp;';
 						echo CHtml::encode($trace['file'])."(".$trace['line'].")";
 						echo ': ';
@@ -206,15 +206,15 @@ pre span.error-ln {
 					?>
 				</div>
 
-				<? if($hasCode) echo $this->renderSourceCode($trace['file'],$trace['line'],$this->maxTraceSourceLines); ?>
+				<?php if($hasCode) echo $this->renderSourceCode($trace['file'],$trace['line'],$this->maxTraceSourceLines); ?>
 			</td>
 		</tr>
-		<? endforeach; ?>
+		<?php endforeach; ?>
 		</table>
 	</div>
 
 	<div class="version">
-		<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+		<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 	</div>
 </div>
 

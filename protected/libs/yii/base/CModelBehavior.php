@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CModelBehavior class file.
  *

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDbAuthManager class file.
  *

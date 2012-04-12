@@ -9,7 +9,7 @@
 	    <th>程序</th>
 		<th>時間 (秒)</th>
 	</tr>
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

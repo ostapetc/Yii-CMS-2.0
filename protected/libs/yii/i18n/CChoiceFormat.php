@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * YiiBase class file.
  *

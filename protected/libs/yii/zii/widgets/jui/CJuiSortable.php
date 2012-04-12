@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CJuiSortable class file.
  *

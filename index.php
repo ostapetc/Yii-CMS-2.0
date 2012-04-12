@@ -1,4 +1,4 @@
-<?
+<? 
 define('DS', DIRECTORY_SEPARATOR);
 
 $_SERVER['DOCUMENT_ROOT'] = str_replace(array('\\', '/'), DS, $_SERVER['DOCUMENT_ROOT']);
@@ -24,6 +24,6 @@ $session = new CHttpSession;
 $session->open();
 
 $config = YII_DEBUG ? 'development' : 'production';
-$config = PROTECTED_PATH . DS . 'config' . DS . $config . '.php';
+$config = PROTECTED_PATH . 'config' . DS . $config . '.php';
 
 Yii::createWebApplication($config)->run();

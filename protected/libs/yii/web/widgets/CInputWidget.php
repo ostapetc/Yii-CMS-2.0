@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CInputWidget class file.
  *

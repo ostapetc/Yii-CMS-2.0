@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CCompareValidator class file.
  *

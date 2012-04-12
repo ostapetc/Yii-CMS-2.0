@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * "Inline" diff renderer.
  *

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CTimestampBehavior class file.
  *

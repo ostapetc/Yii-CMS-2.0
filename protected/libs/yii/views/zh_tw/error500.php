@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>內部的伺服器錯誤</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 當網頁伺服器正在處理您的請求時, 發生了一個內部錯誤.
-請回報此一問題給 <? echo $data['admin']; ?>.
+請回報此一問題給 <?php echo $data['admin']; ?>.
 </p>
 <p>
 謝謝.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

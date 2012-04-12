@@ -26,7 +26,7 @@ Naš sustav je trenutno u procesu održavanja. Molimo vas da navratite kasnije.
 Zahvaljujemo.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

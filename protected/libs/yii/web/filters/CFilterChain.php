@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CFilterChain class file.
  *

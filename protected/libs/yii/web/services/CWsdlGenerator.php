@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CWsdlGenerator class file.
  *

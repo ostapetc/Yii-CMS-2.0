@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Stránka nebola nájdená</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Požadovaná URL stránka nebola nájdená na tomto serveri.
 Ak ste zadali URL manuálne, zkontrolujte prosím jej správnosť a zkúste znovu.
 </p>
 <p>
-Ak sa domnievate, že príčinou chyby je webový server, kontaktujte prosím <? echo $data['admin']; ?>.
+Ak sa domnievate, že príčinou chyby je webový server, kontaktujte prosím <?php echo $data['admin']; ?>.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

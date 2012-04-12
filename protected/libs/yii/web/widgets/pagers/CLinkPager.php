@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CLinkPager class file.
  *

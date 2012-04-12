@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CExpressionDependency class file.
  *

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'saq_KE'.
  *

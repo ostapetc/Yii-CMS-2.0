@@ -1,25 +1,25 @@
-<? $this->beginContent('gii.views.layouts.main'); ?>
+<?php $this->beginContent('gii.views.layouts.main'); ?>
 <div class="container">
 	<div class="span-4">
 		<div id="sidebar">
-		<? $this->beginWidget('zii.widgets.CPortlet', array(
+		<?php $this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'Generators',
 		)); ?>
 			<ul>
-				<? foreach($this->module->controllerMap as $name=>$config): ?>
-				<li><? echo CHtml::link(ucwords(CHtml::encode($name).' generator'),array('/gii/'.$name));?></li>
-				<? endforeach; ?>
+				<?php foreach($this->module->controllerMap as $name=>$config): ?>
+				<li><?php echo CHtml::link(ucwords(CHtml::encode($name).' generator'),array('/gii/'.$name));?></li>
+				<?php endforeach; ?>
 			</ul>
-		<? $this->endWidget(); ?>
+		<?php $this->endWidget(); ?>
 		</div><!-- sidebar -->
 	</div>
 	<div class="span-16">
 		<div id="content">
-			<? echo $content; ?>
+			<?php echo $content; ?>
 		</div><!-- content -->
 	</div>
 	<div class="span-4 last">
 		&nbsp;
 	</div>
 </div>
-<? $this->endContent(); ?>
+<?php $this->endContent(); ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CUserIdentity class file
  *

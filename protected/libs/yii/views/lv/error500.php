@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Servera iekšēja kļūda</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Izpildot Jūsu pieprasījumu, serverim radās iekšēja kļūda.
-Lūdzu, sazinieties ar <? echo $data['admin']; ?> un ziņojiet par šo problēmu.
+Lūdzu, sazinieties ar <?php echo $data['admin']; ?> un ziņojiet par šo problēmu.
 </p>
 <p>
 Paldies!
 </p>
 <div class="version">
-<? echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

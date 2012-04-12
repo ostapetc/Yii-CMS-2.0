@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("Profileringsrapport");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	list($proc,$time,$level)=$entry;

@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Wewnętrzny błąd serwera</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Wystąpił wewnętrzny błąd serwera podczas przetwarzania Twojego żądania.
-Proszę skontaktuj się z <? echo $data['admin']; ?> aby zgłosić problem.
+Proszę skontaktuj się z <?php echo $data['admin']; ?> aby zgłosić problem.
 </p>
 <p>
 Dziękujemy.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 class ModuleCode extends CCodeModel
 {
@@ -37,7 +37,7 @@ class ModuleCode extends CCodeModel
 <p>To access the module, you need to modify the application configuration as follows:</p>
 EOD;
 		$code=<<<EOD
-<?
+<?php
 return array(
     'modules'=>array(
         '{$this->moduleID}',

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CPhpMessageSource class file.
  *

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CExtController class file.
  *

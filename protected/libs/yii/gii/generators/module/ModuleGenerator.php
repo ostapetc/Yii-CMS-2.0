@@ -1,4 +1,4 @@
-<?
+<?php
 
 class ModuleGenerator extends CCodeGenerator
 {

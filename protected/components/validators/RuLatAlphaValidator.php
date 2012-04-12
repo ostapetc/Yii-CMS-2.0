@@ -11,7 +11,7 @@ class RuLatAlphaValidator extends CValidator
         {
             if (!preg_match(self::PATTERN, $object->$attribute))
             {
-                $this->addError($object, $attribute, Yii::t('main', 'Только русский или латинский алфавит'));
+                $this->addError($object, $attribute, 'Только русский или латинский алфавит');
             }
         }
     }

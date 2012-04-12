@@ -9,7 +9,7 @@
 	    <th>Procedimiento</th>
 		<th>Tiempo (s)</th>
 	</tr>
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$color=($index%2)?'#F5F5F5':'#FFFFFF';

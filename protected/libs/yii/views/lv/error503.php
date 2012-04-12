@@ -25,7 +25,7 @@ Serverim tiek veikti uzturēšanas darbi. Mēģiniet vēlāk vēlreiz.
 Atvainojamies par sagādātajām neērtībām.
 </p>
 <div class="version">
-<? echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('d.m.Y H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

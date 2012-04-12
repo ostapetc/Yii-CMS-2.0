@@ -2,7 +2,7 @@
 /*<![CDATA[*/
 if(typeof(console)=='object') {
     console.group("Profiling Callstack Rapport");
-<?
+<?php
 foreach($data as $index=>$entry) {
     list($proc,$time,$level)=$entry;
     $proc=CJavaScript::quote($proc);

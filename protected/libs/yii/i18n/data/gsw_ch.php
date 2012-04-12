@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'gsw_CH'.
  *

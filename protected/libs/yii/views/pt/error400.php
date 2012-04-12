@@ -18,16 +18,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 </head>
 <body>
 <h1>Requisição Inválida</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 A requisição não pôde ser entendida pelo servidor devido a um erro de sintaxe.
 Por favor, não repita a solicitação, sem modificações.
 </p>
 <p>
-Se você acha que isso é um erro no servidor, por favor contate <? echo $data['admin']; ?>.
+Se você acha que isso é um erro no servidor, por favor contate <?php echo $data['admin']; ?>.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

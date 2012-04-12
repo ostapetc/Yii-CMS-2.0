@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * COutputEvent class file.
  *

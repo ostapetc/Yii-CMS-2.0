@@ -1,8 +1,11 @@
 <?
 
-class People extends ActiveRecord
+class ExampleModel extends ActiveRecord
 {
     const PAGE_SIZE = 20;
+
+    const PHOTO_DIR = '/upload/photo/';
+    const FILE_DIR = '/upload/file/';
 
     const GENDER_MAN = 'man';
     const GENDER_WOMAN = 'woman';
@@ -25,7 +28,7 @@ class People extends ActiveRecord
 
     public function name()
     {
-        return 'People name';
+        return 'ExampleModel';
     }
 
 
@@ -37,7 +40,7 @@ class People extends ActiveRecord
 
     public function tableName()
     {
-        return 'users';
+        return 'example_models';
     }
 
 
@@ -49,9 +52,14 @@ class People extends ActiveRecord
                 'required'
             ),
             array(
-                'first_name, last_name, patronymic',
+                'first_name, last_name',
                 'length',
                 'max' => 40
+             ),
+            array(
+                'patronymic, phone',
+                'length',
+                'max' => 50
              ),
             array(
                 'email',
@@ -59,14 +67,14 @@ class People extends ActiveRecord
                 'max' => 200
              ),
             array(
-                'phone',
-                'length',
-                'max' => 50
-             ),
-            array(
                 'password, activate_code, password_recover_code',
                 'length',
                 'max' => 32
+             ),
+            array(
+                'photo, file',
+                'length',
+                'max' => 36
              ),
             array(
                 'gender',
@@ -108,6 +116,10 @@ class People extends ActiveRecord
         $criteria->compare('phone', $this->phone, true);
         $criteria->compare('password', $this->password, true);
         $criteria->compare('birthdate', $this->birthdate, true);
+        $criteria->compare('photo', $this->photo, true);
+        $criteria->compare('file', $this->file, true);
+        $criteria->compare('is_published', $this->is_published, true);
+        $criteria->compare('is_active', $this->is_active, true);
         $criteria->compare('gender', $this->gender, true);
         $criteria->compare('status', $this->status, true);
         $criteria->compare('activate_code', $this->activate_code, true);
@@ -127,13 +139,19 @@ class People extends ActiveRecord
 
     public function getHref()
     {
-        return Yii::app()->createUrl('/people/people/view', array('id' => $this->id));
+        return Yii::app()->createUrl('/test/examplemodel/view', array('id' => $this->id));
     }
 
 
     public function uploadFiles()
     {
         return array(
+            'photo' => array(
+                'dir' => self::PHOTO_DIR
+            ),
+            'file' => array(
+                'dir' => self::FILE_DIR
+            ),
         );
     }
 }

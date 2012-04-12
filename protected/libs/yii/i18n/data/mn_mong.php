@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'mn_Mong'.
  *

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CActiveDataProvider class file.
  *

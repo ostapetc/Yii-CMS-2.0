@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CJavaScript helper class file.
  *

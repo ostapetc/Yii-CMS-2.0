@@ -11,7 +11,7 @@
 		<th>类别</th>
 		<th>信息</th>
 	</tr>
-<?
+<?php
 $colors=array(
 	CLogger::LEVEL_PROFILE=>'#DFFFE0',
 	CLogger::LEVEL_INFO=>'#FFFFDF',

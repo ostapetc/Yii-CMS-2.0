@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Class used internally by Text_Diff to actually compute the diffs.
  *

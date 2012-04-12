@@ -4,6 +4,12 @@ class <?= $class ?> extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
+<? foreach ($meta as $data): ?>
+<? if (in_array($data['Field'], Model::$file_attributes)): ?>
+    const <?= strtoupper($data['Field']) . '_DIR' ?> = '/upload/<?= $data['Field'] ?>/';
+<? endif ?>
+<? endforeach ?>
+
 <? foreach ($constants as $constants_part): ?>
 <? foreach ($constants_part as $constant): ?>
     const <?= $constant ?>;
@@ -93,10 +99,11 @@ class <?= $class ?> extends ActiveRecord
     {
         return array(
 <? foreach ($meta as $data): ?>
-<? if (in_array($data['Field'], array('image', 'photo'))): ?>
+<? if (in_array($data['Field'], Model::$file_attributes)): ?>
             '<?= $data['Field'] ?>' => array(
-                'dir'
-            )
+                'dir' => self::<?= strtoupper($data['Field']) . '_DIR' ?>
+
+            ),
 <? endif ?>
 <? endforeach ?>
         );
