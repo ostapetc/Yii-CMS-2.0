@@ -94,6 +94,7 @@ class Form extends CForm
         }
     }
 
+
     public function renderBody()
     {
         $output = parent::renderBody();
@@ -138,6 +139,7 @@ class Form extends CForm
             return $element->render();
         }
     }
+
 
     public function renderButtons()
     {
@@ -219,6 +221,15 @@ class Form extends CForm
                     'items' => $languages
                 );
             }
+        }
+
+        $behaviors = $this->model->behaviors();
+
+        if (isset($behaviors['Tag']))
+        {
+            $elements['tags'] = array(
+                'type' => 'TagsInput'
+            );
         }
 
         return $elements;

@@ -1,13 +1,13 @@
 <?
 return array(
-    'activeForm'           => array(
-        'id'                   => 'page-form',
-        'clientOptions'        => array('validateOnSubmit'=> true),
+    'enctype'    => 'multipart/form-data',
+    'activeForm' => array(
+        'id'            => 'page-form',
+        'clientOptions' => array('validateOnSubmit' => true),
     ),
-    'enctype'              => 'multipart/form-data',
-    'elements'             => array(
-        'title'        => array(
-            'hint' => 'Это пример подсказки к элементу формы. Достаточно симпотично и удобно',
+    'elements' => array(
+        'title'    => array(
+            'hint' => 'Это пример подсказки к элементу формы. Симпотично, удобно, ахуенно',
             'type' => 'text'
         ),
         'url'          => array(

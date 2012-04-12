@@ -37,6 +37,17 @@ class Language extends ActiveRecord
 	}
 
 
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            array(
+                 'Tag'    => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
+            )
+        );
+    }
+
+
 	public function relations()
 	{
 		return array(

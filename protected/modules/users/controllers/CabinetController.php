@@ -1,4 +1,5 @@
 <?
+
 class CabinetController extends Controller
 {
     public static function actionsTitles()
@@ -7,6 +8,8 @@ class CabinetController extends Controller
             "Index" => "Личный кабинет",
         );
     }
+
+
     public function actionIndex()
     {
         if (Yii::app()->user->isGuest)

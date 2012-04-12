@@ -27,9 +27,10 @@ class Page extends ActiveRecord
         return array_merge(
             parent::behaviors(),
             array(
-                 'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
-                 'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
-                 'FileManager' => array('class'=>'application.components.activeRecordBehaviors.AttachmentBehavior'),
+                 'MetaTag'    => array('class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'),
+                 'Sortable'   => array('class' => 'ext.sortable.SortableBehavior'),
+                 'Attachment' => array('class' => 'application.components.activeRecordBehaviors.AttachmentBehavior'),
+                 'Tag'        => array('class' => 'application.components.activeRecordBehaviors.TagBehavior')
             )
         );
     }

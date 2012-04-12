@@ -44,8 +44,7 @@ class UserAdminController extends AdminController
             $model->attributes = $_POST["User"];
             if ($model->validate())
             {
-                $remember_me =
-                    isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
+                $remember_me = isset($_POST["User"]["remember_me"]) && $_POST["User"]["remember_me"] ? true : false;
 
                 $identity = new UserIdentity($_POST["User"]["email"], $_POST["User"]["password"], $remember_me);
 
