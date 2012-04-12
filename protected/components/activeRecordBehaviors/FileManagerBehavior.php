@@ -1,6 +1,6 @@
 <?
 
-class AttachmentBehavior extends CActiveRecordBehavior
+class FileManagerBehavior extends ActiveRecordBehavior
 {
     public $attached_model;
 
@@ -43,5 +43,16 @@ class AttachmentBehavior extends CActiveRecordBehavior
         }
 
         return parent::beforeDelete($event);
+    }
+
+    public function beforeFormRender($event)
+    {
+        $elements = $event->sender->getElements();
+        $elements['file_manager'] = array( //TODO: add real data
+            'type'      => 'file_manager',
+            'tag'       => 'a',
+            'data_type' => 'image'
+        );
+        $event->sender->setElements($elements);
     }
 }

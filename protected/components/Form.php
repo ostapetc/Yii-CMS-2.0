@@ -64,6 +64,15 @@ class Form extends CForm
     {
         if (!($this->parent instanceof self))
         {
+            try
+            {
+                $this->model->onBeforeFormRender(new CEvent($this));
+            }
+            catch(Exception $e)
+            {
+                YII_DEBUG ? Yii::app()->handleException($e) : Yii::app()->log($e);
+            }
+
             $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
 
             $this->activeForm['class']        = 'BootActiveForm';
@@ -203,21 +212,6 @@ class Form extends CForm
             if (isset($element->attributes['prompt']))
             {
                 $element->attributes['prompt'] = t($element->attributes['prompt']);
-            }
-        }
-
-        if (method_exists($this->model, 'meta'))
-        {
-            $meta = $this->model->meta();
-
-            $languages = Language::getList();
-
-            if (isset($meta['language']) && count($languages) > 1)
-            {
-                $elements['language'] = array(
-                    'type'  => 'dropdownlist',
-                    'items' => $languages
-                );
             }
         }
 

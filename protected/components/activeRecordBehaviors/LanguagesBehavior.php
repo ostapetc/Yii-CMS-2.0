@@ -1,6 +1,6 @@
 <?
 
-class LanguagesBehavior extends CActiveRecordBehavior
+class LanguagesBehavior extends ActiveRecordBehavior
 {
     private function defineLanguage()
     {
@@ -45,4 +45,27 @@ class LanguagesBehavior extends CActiveRecordBehavior
             return $languages[$this->owner->language];
         }
     }
+
+
+    public function beforeFormRender($event)
+    {
+        $elements = $event->sender->getElements();
+        if (method_exists($this->owner, 'meta'))
+        {
+            $meta = $this->owner->meta();
+            $languages = Language::getList();
+
+            if (isset($meta['language']) && count($languages) > 1)
+            {
+                $elements['language'] = array(
+                    'type'  => 'dropdownlist',
+                    'items' => $languages
+                );
+            }
+        }
+
+        $event->sender->setElements($elements);
+
+    }
+
 }

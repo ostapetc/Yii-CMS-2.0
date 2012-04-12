@@ -29,7 +29,7 @@ class Page extends ActiveRecord
             array(
                  'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
                  'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
-                 'FileManager' => array('class'=>'application.components.activeRecordBehaviors.AttachmentBehavior'),
+                 'FileManager' => array('class'=>'application.components.activeRecordBehaviors.FileManagerBehavior'),
             )
         );
     }

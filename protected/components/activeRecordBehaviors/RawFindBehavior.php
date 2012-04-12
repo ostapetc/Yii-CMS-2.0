@@ -3,7 +3,7 @@
  * Клас предоставляет функции выбора "сырых" данных в виде массивов, используя синтаксис AR
  * ГОВНОКОД
  */
-class RawFindBehavior extends CActiveRecordBehavior
+class RawFindBehavior extends ActiveRecordBehavior
 {
     public function findAllRaw($condition='',$params=array())
     {

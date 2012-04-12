@@ -69,6 +69,7 @@ return array(
         'application.components.formElements.*',
         'application.components.baseWidgets.*',
         'application.components.bootstrap.widgets.*',
+        'application.components.activeRecordBehaviors.*',
         'application.libs.helpers.*',
         'ext.yiiext.filters.setReturnUrl.ESetReturnUrlFilter',
         'application.modules.srbac.controllers.SBaseController',

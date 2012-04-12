@@ -13,7 +13,7 @@
  * @version 0.61
  * @package yiiext.behaviors.model.wr
  */
-class WithRelatedBehavior extends CActiveRecordBehavior
+class WithRelatedBehavior extends ActiveRecordBehavior
 {
     /**
      * Validate main model and all it's related models recursively.
