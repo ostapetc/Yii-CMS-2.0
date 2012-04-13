@@ -377,5 +377,6 @@ class User extends ActiveRecord
             return $this->email;
         }
     }
+
 }
 

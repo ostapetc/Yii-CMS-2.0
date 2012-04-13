@@ -1,8 +1,14 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: artem.ostapetc
- * Date: 11.04.12
- * Time: 21:01
- * To change this template use File | Settings | File Templates.
- */
+<?
+$model  = ActiveRecord::model($class);
+$meta   = $model->meta();
+$labels = $model->attributeLabels();
+?>
+
+<? foreach ($meta as $data): ?>
+<?='<?= $data->' . $data['Field'] . '_label?>: <?= $data->' . $data['Field'] . '?>' . "\n"?> <br/>
+<? endforeach ?>
+
+<br/>
+<a href="<?='<?= $data->href ?>'?>">просмотр</a>
+
+<br/><hr/>

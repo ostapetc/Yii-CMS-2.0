@@ -12,8 +12,9 @@ class Model extends CFormModel
 
     public $behaviors;
 
-    public static $file_attributes = array('photo', 'image', 'file');
+    public static $file_attributes = array('photo', 'image', 'file', 'icon');
 
+    public static $not_required_attributes = array('id', 'date_create', 'date_update');
 
     public static $extra_behaviors = array(
         'Сортировка' => 'application.extensions.sortable.SortableBehavior',

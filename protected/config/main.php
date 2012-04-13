@@ -164,25 +164,25 @@ return array(
             'itemChildTable'  => 'auth_items_childs',
             'defaultRoles'    => array('guest')
         ),
-        'log'=>array(
-                'class'=>'CLogRouter',
-                'routes'=>array(
+       // 'log'=>array(
+//                'class'=>'CLogRouter',
+//                'routes'=>array(
 //                    array(
 //                        'class'        => 'DbLogRoute',
 //                        'levels'       => 'error, warning, info',
 //                        'connectionID' => 'db',
 //                        'logTableName' => 'log',
 //                        'enabled'      => true
-//                    )
+//                    ),
 //                    array(
-                           /*направляем результаты профайлинга в ProfileLogRoute (отображается
-                           внизу страницы)*/
+//                           /*направляем результаты профайлинга в ProfileLogRoute (отображается
+//                           внизу страницы)*/
 //                          'class'=>'CProfileLogRoute',
 //                          'levels'=>'profile',
 //                          'enabled'=>true,
 //                    ),
-                ),
-        ),
+//                ),
+//        ),
 
         'cache' => array(
             'class'=>'system.caching.CFileCache',
