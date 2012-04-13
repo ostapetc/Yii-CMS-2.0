@@ -75,6 +75,7 @@ class PageAdminController extends AdminController
         {
             $this->redirect(array('view', 'id'=> $model->id));
         }
+
         $this->render('update', array('form' => $form,));
     }
 

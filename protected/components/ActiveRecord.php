@@ -240,9 +240,9 @@ abstract class ActiveRecord extends CActiveRecord
     /**
      * @param CModelEvent $event
      */
-    public function onBeforeFormRender($event)
+    public function onInitFormElements($event)
     {
-        $this->raiseEvent('onBeforeFormRender', $event);
+        $this->raiseEvent('onInitFormElements', $event);
     }
 
 }

@@ -29,4 +29,5 @@ class TagsInput extends InputWidget
                         CClientScript::POS_READY
                     );
     }
+
 }
