@@ -3,6 +3,7 @@
 class FileManagerBehavior extends ActiveRecordBehavior
 {
     public $attached_model;
+    public $tags = array();
 
     private function _tmpPrefix()
     {
@@ -48,11 +49,29 @@ class FileManagerBehavior extends ActiveRecordBehavior
     public function beforeFormRender($event)
     {
         $elements = $event->sender->getElements();
-        $elements['file_manager'] = array( //TODO: add real data
-            'type'      => 'file_manager',
-            'tag'       => 'a',
-            'data_type' => 'image'
-        );
+
+        foreach ($this->tags as $tag => $data)
+        {
+            if (is_string($data))
+            {
+                $elements['file_manager_'.$data] = array(
+                    'type'      => 'file_manager',
+                    'tag'       => $tag,
+                    'data_type' => 'image',
+                    'title'     => $data
+                );
+            }
+            elseif (is_array($data))
+            {
+                $elements['file_manager_'.$data['title']] = array(
+                    'type'      => 'file_manager',
+                    'tag'       => $tag,
+                    'data_type' => $data['data_type'],
+                    'title'     => $data['title']
+                );
+            }
+        }
+
         $event->sender->setElements($elements);
     }
 }

@@ -13,7 +13,6 @@ $(function() {
         var lang_id = $select.val();
         if (lang_id)
         {
-            alert('/img/icons/flags/' + lang_id + '.png');
             $('#lang_label').html('<img src="/img/icons/flags/' + lang_id + '.png" border="0" />');
         }
         else

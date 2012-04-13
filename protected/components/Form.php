@@ -215,6 +215,30 @@ class Form extends CForm
             }
         }
 
+        if (method_exists($this->model, 'meta'))
+        {
+            $meta = $this->model->meta();
+
+            $languages = Language::getList();
+
+            if (isset($meta['language']) && count($languages) > 1)
+            {
+                $elements['language'] = array(
+                    'type'  => 'dropdownlist',
+                    'items' => $languages
+                );
+            }
+        }
+
+        $behaviors = $this->model->behaviors();
+
+        if (isset($behaviors['Tag']))
+        {
+            $elements['tags'] = array(
+                'type' => 'application.components.formElements.TagsInput.TagsInput'
+            );
+        }
+
         return $elements;
     }
 }
