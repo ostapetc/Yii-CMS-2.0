@@ -1,6 +1,6 @@
 <?
  
-class AuthObjectBehavior extends CActiveRecordBehavior
+class AuthObjectBehavior extends ActiveRecordBehavior
 {
     public $roles;
 

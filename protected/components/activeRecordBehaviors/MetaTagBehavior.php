@@ -1,9 +1,8 @@
 <?
 
-class MetaTagBehavior extends CActiveRecordBehavior
+class MetaTagBehavior extends ActiveRecordBehavior
 {
     private static $_meta_tags;
-
 
     public function afterSave($event)
     {
@@ -69,6 +68,13 @@ class MetaTagBehavior extends CActiveRecordBehavior
         }
 
         return self::$_meta_tags[$key];
+    }
+
+    public function initFormElements($event)
+    {
+        $elements = $event->sender->getElements();
+        $elements['meta_tags'] = array('type'=>'meta_tags');
+        $event->sender->setElements($elements);
     }
 }
 

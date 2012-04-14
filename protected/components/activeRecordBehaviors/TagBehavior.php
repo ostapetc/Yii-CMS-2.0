@@ -1,6 +1,6 @@
 <?
 
-class TagBehavior extends CActiveRecordBehavior
+class TagBehavior extends ActiveRecordBehavior
 {
     private static $_tags;
 
@@ -18,7 +18,6 @@ class TagBehavior extends CActiveRecordBehavior
 //
 //        }
 
-        die;
         return parent::afterSave($event);
     }
 
@@ -37,6 +36,17 @@ class TagBehavior extends CActiveRecordBehavior
 //            'model_id'  => get_class($this->owner)
 //        ));
 //    }
+
+
+    public function initFormElements($event)
+    {
+        $elements = $event->sender->getElements();
+        $elements['tags'] = array(
+            'type' => 'application.components.formElements.TagsInput.TagsInput'
+        );
+        $event->sender->setElements($elements);
+    }
+
 }
 
 

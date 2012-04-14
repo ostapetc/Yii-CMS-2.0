@@ -12,7 +12,7 @@
  * @version 1.05
  * @package yiiext.behaviors.model.trees
  */
-class NestedSetBehavior extends CActiveRecordBehavior
+class NestedSetBehavior extends ActiveRecordBehavior
 {
 	public $hasManyRoots=false;
 	public $rootAttribute='root';

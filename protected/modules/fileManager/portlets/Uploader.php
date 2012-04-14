@@ -53,7 +53,7 @@ class Uploader extends JuiInputWidget
     {
         parent::init();
 
-        if (!array_key_exists('Attachment', $this->model->behaviors()))
+        if (!array_key_exists('FileManager', $this->model->behaviors()))
         {
             throw new CException('Требуется подключение behavior FileManagerBehavior в моделе!');
         }
