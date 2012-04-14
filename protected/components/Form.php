@@ -7,6 +7,8 @@ class Form extends CForm
 
     public $inputElementClass = null;
 
+    private $_is_elements_inited = false;
+
     public $defaultActiveFormSettings = array(
         'enableAjaxValidation'=>true,
         'clientOptions' => array(
@@ -38,6 +40,10 @@ class Form extends CForm
         $this->formatDateAttributes();
     }
 
+    public function init()
+    {
+        $this->initElements();
+    }
 
     public static function getFullAlias($alias)
     {
@@ -59,6 +65,21 @@ class Form extends CForm
         }
     }
 
+    public function initElements()
+    {
+        if (!$this->_is_elements_inited)
+        {
+            try
+            {
+                $this->model->onInitFormElements(new CEvent($this));
+            }
+            catch(Exception $e)
+            {
+                YII_DEBUG ? Yii::app()->handleException($e) : Yii::app()->log($e);
+            }
+            $this->_is_elements_inited = true;
+        }
+    }
 
     public function __toString()
     {
@@ -206,21 +227,7 @@ class Form extends CForm
             }
         }
 
-        if (method_exists($this->model, 'meta'))
-        {
-            $meta = $this->model->meta();
-
-            $languages = Language::getList();
-
-            if (isset($meta['language']) && count($languages) > 1)
-            {
-                $elements['language'] = array(
-                    'type'  => 'dropdownlist',
-                    'items' => $languages
-                );
-            }
-        }
-
         return $elements;
     }
+
 }

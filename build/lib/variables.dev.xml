@@ -1,0 +1,28 @@
+<project name="variables.dev" basedir="../" default="yii-cms">
+
+    <property name="version.cms" value="2.0.0" />
+
+    <property name="app.dir" value="../protected/" />
+    <property name="webroot" value="../" />
+
+    <property name="db.host" value="localhost" />
+    <property name="db.user" value="root" />
+    <property name="db.pass" value="" />
+    <property name="db.name" value="yii_base" />
+
+    <property name="mysql.dump" value="" />
+
+
+    <property name="repo.remote.path" value="" />
+    <property name="repo.local.path" value="" />
+
+
+
+    <property name="php.local.bin" value="D:\Winginx\php5\php.exe" />
+
+    <property name="yiic" value="${app.dir}/yiic.php" />
+
+
+
+</project>
+

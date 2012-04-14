@@ -11,11 +11,16 @@
     margin: 0 0 0 10px;
 }
 
-input, textarea, select, .uneditable-input{
+input, textarea, .uneditable-input{
     width: 420px;
 }
+
+select {
+    width: 430px;
+}
+
 .chosen select{
-    width: 429px
+    width: 429px;
 }
 
 textarea {

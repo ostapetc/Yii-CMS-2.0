@@ -1,6 +1,6 @@
 <?
 
-class DateFormatBehavior extends CActiveRecordBehavior
+class DateFormatBehavior extends ActiveRecordBehavior
 {
     const DB_DATE_TIME_FORMAT = 'Y-m-d h:i:c';
     const DB_DATE_FORMAT      = 'Y-m-d';

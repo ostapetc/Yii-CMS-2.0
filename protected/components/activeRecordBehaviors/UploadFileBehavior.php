@@ -1,6 +1,6 @@
 <?
 
-class UploadFileBehavior extends CActiveRecordBehavior
+class UploadFileBehavior extends ActiveRecordBehavior
 {
     private $_params = array(
         'hash_store' => true
