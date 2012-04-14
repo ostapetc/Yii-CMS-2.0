@@ -227,6 +227,12 @@ class Form extends CForm
             }
         }
 
+        $behaviors = $this->model->behaviors();
+        if (isset($behaviors['TagBehavior']))
+        {
+            $elements['TagsInput'] = array('type' => 'TagsInput');
+        }
+
         return $elements;
     }
 
