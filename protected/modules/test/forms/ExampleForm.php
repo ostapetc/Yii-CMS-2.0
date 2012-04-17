@@ -3,8 +3,7 @@
 return array(
     'enctype'    => 'multipart/form-data',
     'activeForm' => array(
-        'id'                   => 'exampleModel-form',
-        'enableAjaxValidation' => true,
+        'id'                   => 'example-form',
         'clientOptions'        => array(
             'validateOnSubmit'=> true
         ),
@@ -26,7 +25,7 @@ return array(
             'type' => 'text',
         ),
         'password' => array(
-            'type' => 'text',
+            'type' => 'password',
         ),
         'birthdate' => array(
             'type' => 'date',
@@ -45,12 +44,12 @@ return array(
         ),
         'gender' => array(
             'type' => 'dropdownlist',
-            'items' => ExampleModel::$gender_oprions,
+            'items' => Example::$gender_options,
             'empty' => 'не выбрано',
         ),
         'status' => array(
             'type' => 'dropdownlist',
-            'items' => ExampleModel::$status_oprions,
+            'items' => Example::$status_options,
             'empty' => 'не выбрано',
         ),
         'activate_code' => array(

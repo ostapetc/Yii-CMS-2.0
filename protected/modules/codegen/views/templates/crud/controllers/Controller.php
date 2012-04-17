@@ -1,12 +1,12 @@
 <? echo "<?\n"; ?>
 
-class <?= $class ?>Controller extends BaseController
+class <?= $class ?>Controller extends Controller
 {
     public static function actionsTitles()
     {
         return array(
-            'View'  => 'Просмотр <?= $class ?>',
-            'index' => 'Управление <?= $class ?>',
+            'View'  => 'Просмотр <?= $genetive ?>',
+            'Index' => 'Список <?= $accusative ?>',
         );
     }
 

@@ -1,0 +1,20 @@
+.content {
+  -webkit-transform:rotate(7deg);
+  -moz-transform:rotate(7deg);
+  -ms-transform:rotate(7deg);
+  -o-transform:rotate(7deg);
+  transform:rotate(7deg);
+  -webkit-box-shadow:0 2px 4px rgba(0,0,0,0.45);
+  -moz-box-shadow:0 2px 4px rgba(0,0,0,0.45);
+  box-shadow:0 2px 4px rgba(0,0,0,0.45);
+}
+.captcha img { vertical-align:top; }
+.errorMessage { color:#b94a48; }
+.content {
+  padding:20px;
+  margin-bottom:30px;
+  background-color:#f5f5f5;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;
+}

@@ -2,13 +2,19 @@
 
 class Crud extends CFormModel
 {
-    public $model;
+    public $class;
+
+    public $genetive;
+
+    public $instrumental;
+
+    public $accusative;
 
 
     public function rules()
     {
         return array(
-            array('model', 'required')
+            array('class, genetive, instrumental, accusative', 'required')
         );
     }
 }

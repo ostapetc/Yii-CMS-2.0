@@ -38,16 +38,21 @@ class FormAdminController extends AdminController
         );
 
         $elements = array();
-        foreach ($meta as $attr => $data)
+        foreach ($meta as $data)
         {
+            $attr = $data['Field'];
             if (in_array($attr, array('id', 'date_create', 'date_update')))
             {
                 continue;
             }
 
-            if (in_array($attr, array('file', 'image', 'photo', 'icon')))
+            if (in_array($attr, Model::$file_attributes))
             {
                 $elements[$attr] = array('type' => 'file');
+            }
+            else if (in_array($attr, array('password', 'password_c')))
+            {
+                $elements[$attr] = array('type' => 'password');
             }
             else if (substr($attr, 0, 3) == 'is_')
             {
@@ -73,7 +78,7 @@ class FormAdminController extends AdminController
             {
                 $elements[$attr] = array(
                     'type'  => 'dropdownlist',
-                    'items' => $model_class . '::$' . $attr .'_oprions',
+                    'items' => $model_class . '::$' . $attr .'_options',
                     'empty' => 'не выбрано'
                 );
             }
@@ -92,9 +97,16 @@ class FormAdminController extends AdminController
         $form_path = array_shift(glob(MODULES_PATH . '*' . DS . 'models' . DS . $model_class . '.php'));
         $form_path = str_replace(
             array(DS . 'models', $model_class),
-            array(DS . 'forms', str_replace('Model', 'Form', $model_class)),
+            array(DS . 'forms', $model_class . 'Form'),
             $form_path
         );
+
+        $dir = pathinfo($form_path, PATHINFO_DIRNAME);
+        if (!is_dir($dir))
+        {
+            mkdir($dir, 0777, true);
+            chmod($dir, 0777);
+        }
 
         file_put_contents($form_path, $code);
     }

@@ -7,13 +7,13 @@ class TestModule extends WebModule
 
     public static function name()
     {
-        return 'test';
+        return 'test name';
     }
 
 
     public static function description()
     {
-        return 'test';
+        return 'test description ';
     }
 
 
