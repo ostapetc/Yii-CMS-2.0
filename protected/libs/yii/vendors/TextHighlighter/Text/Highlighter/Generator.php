@@ -1,4 +1,4 @@
-<?
+<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 /**
 * Syntax highlighter class generator
@@ -999,7 +999,7 @@ class Text_Highlighter_Generator extends  XML_Parser
         usort($syntax['toplevel'], array(&$this, '_sortLookFor'));
         $syntax['case'] = $this->_case;
         $this->_code = <<<CODE
-<?
+<?php
 /**
  * Auto-generated class. {$this->language} syntax highlighting
 CODE;

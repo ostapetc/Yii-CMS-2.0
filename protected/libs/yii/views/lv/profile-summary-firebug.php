@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Profilēšanas kopsavilkums");
 	console.log(" skaits   kopā    vidēji     min      max   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

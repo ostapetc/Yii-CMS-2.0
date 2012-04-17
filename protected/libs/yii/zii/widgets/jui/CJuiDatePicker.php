@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CJuiDatePicker class file.
  *

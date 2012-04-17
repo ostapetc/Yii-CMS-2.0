@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CJuiProgressBar class file.
  *

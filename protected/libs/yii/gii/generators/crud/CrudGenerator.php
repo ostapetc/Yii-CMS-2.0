@@ -1,4 +1,4 @@
-<?
+<?php
 
 class CrudGenerator extends CCodeGenerator
 {

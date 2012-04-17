@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDbCacheDependency class file.
  *

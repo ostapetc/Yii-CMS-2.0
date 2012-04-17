@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Auto-generated class. JAVASCRIPT syntax highlighting 
  *

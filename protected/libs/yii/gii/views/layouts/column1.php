@@ -1,7 +1,7 @@
-<? $this->beginContent('gii.views.layouts.main'); ?>
+<?php $this->beginContent('gii.views.layouts.main'); ?>
 <div class="container">
 	<div id="content">
-		<? echo $content; ?>
+		<?php echo $content; ?>
 	</div><!-- content -->
 </div>
-<? $this->endContent(); ?>
+<?php $this->endContent(); ?>

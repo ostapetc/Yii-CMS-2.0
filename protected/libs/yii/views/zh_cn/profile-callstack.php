@@ -8,7 +8,7 @@
 		<th>步骤</th>
 		<th>时间 (秒)</th>
 	</tr>
-<?
+<?php
 foreach ( $data as $index => $entry ) {
 	$color = ($index % 2) ? '#F5F5F5' : '#FFFFFF';
 	list ( $proc, $time, $level ) = $entry;

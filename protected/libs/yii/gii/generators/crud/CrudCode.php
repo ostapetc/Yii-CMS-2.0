@@ -1,4 +1,4 @@
-<?
+<?php
 
 class CrudCode extends CCodeModel
 {

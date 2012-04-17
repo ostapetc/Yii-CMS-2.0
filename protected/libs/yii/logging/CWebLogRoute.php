@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CWebLogRoute class file.
  *

@@ -77,6 +77,12 @@ abstract class ActiveRecord extends CActiveRecord
             return parent::__get($name);
         } catch (CException $e)
         {
+            if (substr($name, -6) == '_label')
+            {
+                $attribute = substr($name, 0, -6);
+                return $this->getAttributeLabel($attribute);
+            }
+
             $method_name = StringHelper::underscoreToCamelcase($name);
             $method_name = 'get' . ucfirst($method_name);
 

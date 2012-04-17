@@ -8,19 +8,23 @@ class Param extends ActiveRecord
 
     const SCENARIO_VALUE_UPDATE = 'value_update';
 
+    const OPTION_NAME_VALUE_SEPARATOR = '=';
+
     const ELEMENT_TEXTAREA = 'textarea';
     const ELEMENT_EDITOR   = 'editor';
     const ELEMENT_TEXT     = 'text';
     const ELEMENT_CHECKBOX = 'checkbox';
     const ELEMENT_FILE     = 'file';
+    const ELEMENT_SELECT   = 'select';
 
 
     public static $elements = array(
-        self::ELEMENT_TEXT     => "Строка",
-        self::ELEMENT_TEXTAREA => "Текст",
-        self::ELEMENT_EDITOR   => "Редактор",
-        self::ELEMENT_CHECKBOX => "Галочка",
-        self::ELEMENT_FILE     => "Файл"
+        self::ELEMENT_TEXT     => 'Строка',
+        self::ELEMENT_TEXTAREA => 'Текст',
+        self::ELEMENT_EDITOR   => 'Редактор',
+        self::ELEMENT_CHECKBOX => 'Галочка',
+        self::ELEMENT_FILE     => 'Файл',
+        self::ELEMENT_SELECT   => 'Выпадающий список'
     );
 
 
@@ -50,10 +54,39 @@ class Param extends ActiveRecord
 			array('code', 'length', 'max'=>50),
 			array('name', 'length', 'max'=>100),
 			array('element', 'length', 'max'=>8),
+            array('element', 'in', 'range' => self::$elements),
             array('value', 'safe'),
-            array('element', 'safe', 'on' => array(self::SCENARIO_CREATE, self::SCENARIO_UPDATE))
+            array('options', 'optionsValidator'),
+            array('element', 'safe', 'on' => array(self::SCENARIO_CREATE, self::SCENARIO_UPDATE)),
 		);
 	}
+
+
+    public function optionsValidator($attribute)
+    {
+        if ($this->element != self::ELEMENT_SELECT)
+        {
+            return;
+        }
+
+        if (empty($this->options))
+        {
+            $this->addError($attribute, 'Введите список значений!');
+            return;
+        }
+
+        $options = explode("\n", $this->$attribute);
+        foreach ($options as $option)
+        {
+            $option = trim($option);
+
+            if (!empty($option) && !preg_match('|^.*' . self::OPTION_NAME_VALUE_SEPARATOR . '.*$|', $option))
+            {
+                $this->addError($attribute, 'неверный формат');
+                return;
+            }
+        }
+    }
 
 
 	public function search($module_id = null)
@@ -181,5 +214,25 @@ class Param extends ActiveRecord
         }
 
         return array();
+    }
+
+
+    public function beforeSave()
+    {
+        $options = array();
+
+        foreach (explode("\n", $this->options) as $i => $string)
+        {
+            $string = trim($string);
+
+            if (!empty($string))
+            {
+                $options[] = $string;
+            }
+        }
+
+        $this->options = implode("\n", $options);
+
+        return parent::beforeSave();
     }
 }

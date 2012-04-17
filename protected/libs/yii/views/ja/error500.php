@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>サーバ内部エラー</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 ウエブサーバがリクエストを処理している途中にサーバの内部エラーが起きました。
-担当(<? echo $data['admin']; ?>)にこの問題を連絡してください。
+担当(<?php echo $data['admin']; ?>)にこの問題を連絡してください。
 </p>
 <p>
 ありがとうございます。
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

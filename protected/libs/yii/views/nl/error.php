@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Fout <? echo $data['code']; ?></title>
+        <title>Fout <?php echo $data['code']; ?></title>
         <style type="text/css">
             /*<![CDATA[*/
             body {font-family:"Verdana";font-weight:normal;color:black;background-color:white;}
@@ -16,10 +16,10 @@
     </head>
 
     <body>
-        <h1>Fout <? echo $data['code']; ?></h1>
-        <h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+        <h1>Fout <?php echo $data['code']; ?></h1>
+        <h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
         <p>De bovenstaande fout trad op toen deze server uw aanvraag probeerde te verwerken.</p>
-        <p>Als u van mening bent dat dit een server fout is, neem dan a.u.b. contact op met de <? echo $data['admin']; ?> </p>
-        <div class="version"><? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?></div>
+        <p>Als u van mening bent dat dit een server fout is, neem dan a.u.b. contact op met de <?php echo $data['admin']; ?> </p>
+        <div class="version"><?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?></div>
     </body>
 </html>

@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Profiling Summary Report");
 	console.log(" cuenta  total  promedio    min      max   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

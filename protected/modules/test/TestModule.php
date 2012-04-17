@@ -1,19 +1,19 @@
 <?
 
 class TestModule extends WebModule
-{	
-	public static $active = false;
+{
+	public static $active = true;
 
 
     public static function name()
     {
-        return 'test';
+        return 'test name';
     }
 
 
     public static function description()
     {
-        return 'test';
+        return 'test description ';
     }
 
 
@@ -31,20 +31,15 @@ class TestModule extends WebModule
 		));
 	}
 
-	public function beforeControllerAction($controller, $action)
-	{
-		if(parent::beforeControllerAction($controller, $action))
-		{
-			return true;
-		}
-		else
-        {
-            return false;
-        }
-	}
-
 
     public static function adminMenu()
+    {
+        return array(
+        );
+    }
+
+
+    public static function routes()
     {
         return array(
         );

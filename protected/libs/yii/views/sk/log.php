@@ -3,7 +3,7 @@
 	<tr>
 		<th style="background:black;color:white;" colspan="5">
 			Log aplikácie
-			<?
+			<?php 
 				$t = round(microtime(true) - YII_BEGIN_TIME, 3);
 				$m = function_exists('memory_get_usage') ?  '['.round(memory_get_usage()/1024/1024, 3).' MB]' : '';
 				echo " * Stránka vygenerovaná za {$t} sek ~ ".round(1/$t)." strán/sek. ".$m;
@@ -16,7 +16,7 @@
 		<th>Kategória</th>
 		<th>Zpráva</th>
 	</tr>
-<?
+<?php
 $colors=array(
 	CLogger::LEVEL_PROFILE=>'#DFFFE0',
 	CLogger::LEVEL_INFO=>'#FFFFDF',

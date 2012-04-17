@@ -1,4 +1,4 @@
-<?
+<?php
 
 class FormCode extends CCodeModel
 {
@@ -47,7 +47,7 @@ class FormCode extends CCodeModel
 <p>The form has been generated successfully.</p>
 <p>You may add the following code in an appropriate controller class to invoke the view:</p>
 EOD;
-		$code="<?\n".$this->render($this->templatePath.'/action.php');
+		$code="<?php\n".$this->render($this->templatePath.'/action.php');
 		return $output.highlight_string($code,true);
 	}
 

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'gv_GB'.
  *

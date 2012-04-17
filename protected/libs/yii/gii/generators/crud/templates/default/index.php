@@ -1,4 +1,4 @@
-<? echo "<?\n"; ?>
+<?php echo "<?php\n"; ?>
 
 $this->widget('zii.widgets.CListView', array(
     'dataProvider'     => $data_provider,

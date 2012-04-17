@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDataProvider is a base class that implements the {@link IDataProvider} interface.
  *

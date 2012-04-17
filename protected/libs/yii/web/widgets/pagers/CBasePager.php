@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CBasePager class file.
  *

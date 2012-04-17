@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CMessageSource class file.
  *

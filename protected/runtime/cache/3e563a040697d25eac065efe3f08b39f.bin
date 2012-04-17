@@ -1,0 +1,107 @@
+a:2:{i:0;s:6476:"<li>
+    <a data-toggle="modal" href="#login">Login</a></li>
+<div id="login" class="modal fade">
+
+<div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+
+    <h3>Вход</h3>
+</div>
+
+<div class="modal-body">
+    <div id="yw0"><ul id="yw3" class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#yw0_tab_1">Вход</a></li>
+<li class=""><a data-toggle="tab" href="#yw0_tab_2">Регистрация</a></li>
+<li class=""><a data-toggle="tab" href="#yw0_tab_3">Забыли пароль?</a></li>
+</ul><div class="tab-content"><div id="yw0_tab_1" class="tab-pane fade in active"><form class="form-vertical" id="login-form" action="/users/user/login" method="post"><div style="visibility:hidden"><input type="hidden" value="1" name="yform_e09a3895" id="yform_e09a3895" /></div>
+<dl class='text control-group'><dd>
+<label for="login_email_input" class="required">Email <span class="required">*</span></label>
+<input class="text" id="login_email_input" name="User[email]" type="text" maxlength="200" />
+
+<span class="help-block" id="login_email_input_em_" style="display: none"></span></dd></dl>
+<dl class='password control-group'><dd>
+<label for="login_password_input" class="required">Пароль <span class="required">*</span></label>
+<input class="password" id="login_password_input" name="User[password]" type="password" />
+
+<span class="help-block" id="login_password_input_em_" style="display: none"></span></dd></dl>
+
+<dl class="buttons control-group"><dd><input value="Войти" class="btn btn-primary" name="submit" type="submit" />
+<dd></dl>
+
+</form></div><div id="yw0_tab_2" class="tab-pane fade"><form class="form-vertical" id="registration-form" action="/users/user/registration" method="post"><div style="visibility:hidden"><input type="hidden" value="1" name="yform_5c486485" id="yform_5c486485" /></div>
+<dl class='text control-group'><dd>
+<label for="User_email" class="required">Email <span class="required">*</span></label>
+<input class="text" name="User[email]" id="User_email" type="text" maxlength="200" />
+
+<span class="help-block" id="User_email_em_" style="display: none"></span></dd></dl>
+<dl class='text control-group'><dd>
+<label for="User_first_name" class="required">Имя <span class="required">*</span></label>
+<input class="text" name="User[first_name]" id="User_first_name" type="text" maxlength="40" />
+
+<span class="help-block" id="User_first_name_em_" style="display: none"></span></dd></dl>
+<dl class='text control-group'><dd>
+<label for="User_last_name" class="required">Фамилия <span class="required">*</span></label>
+<input class="text" name="User[last_name]" id="User_last_name" type="text" maxlength="40" />
+
+<span class="help-block" id="User_last_name_em_" style="display: none"></span></dd></dl>
+<dl class='text control-group'><dd>
+<label for="User_patronymic" class="required">Отчество <span class="required">*</span></label>
+<input class="text" name="User[patronymic]" id="User_patronymic" type="text" maxlength="40" />
+
+<span class="help-block" id="User_patronymic_em_" style="display: none"></span></dd></dl>
+<dl class='text control-group'><dd>
+<label for="User_phone" class="required">Мобильный телефон <span class="required">*</span></label>
+<input class="text" name="User[phone]" id="User_phone" type="text" />
+
+<span class="help-block" id="User_phone_em_" style="display: none"></span></dd></dl>
+<dl class='date control-group'><dd>
+<label for="User_birthdate" class="required">Дата рождения <span class="required">*</span></label>
+<div class="input-prepend"><span class="add-on"><i class="icon-calendar"></i></span><input class="date text date_picker" id="User_birthdate" name="User[birthdate]" type="text" /></div>
+
+<span class="help-block" id="User_birthdate_em_" style="display: none"></span></dd></dl>
+<dl class='dropdownlist control-group'><dd>
+<label for="User_gender" class="required">Пол <span class="required">*</span></label>
+<select class="dropdownlist" name="User[gender]" id="User_gender">
+<option value="man">Мужской</option>
+<option value="woman">Женский</option>
+</select>
+
+<span class="help-block" id="User_gender_em_" style="display: none"></span></dd></dl>
+<dl class='password control-group'><dd>
+<label for="User_password" class="required">Пароль <span class="required">*</span></label>
+<input class="password" name="User[password]" id="User_password" type="password" />
+
+<span class="help-block" id="User_password_em_" style="display: none"></span></dd></dl>
+<dl class='password control-group'><dd>
+<label for="User_password_c" class="required">Пароль еще раз <span class="required">*</span></label>
+<input class="password" name="User[password_c]" id="User_password_c" type="password" />
+
+<span class="help-block" id="User_password_c_em_" style="display: none"></span></dd></dl>
+<dl class='captcha control-group'><dd>
+<label for="User_captcha">Введите код</label>
+<input id="User_captcha" name="User[captcha]" type="text" /><img id="yw1" src="/main/help/captcha/v/4f859a8a05951" alt="" />
+
+<span class="help-block" id="User_captcha_em_" style="display: none"></span></dd></dl>
+
+<dl class="buttons control-group"><dd><input value="Зарегистрироваться" class="btn btn-primary" name="submit" type="submit" />
+<dd></dl>
+
+</form></div><div id="yw0_tab_3" class="tab-pane fade"><form class="form-vertical" id="password-recovery-form" action="/users/user/changePasswordRequest" method="post"><div style="visibility:hidden"><input type="hidden" value="1" name="yform_f819f5c1" id="yform_f819f5c1" /></div>
+<dl class='text control-group'><dd>
+<label for="User_email" class="required">Email <span class="required">*</span></label>
+<input class="text" name="User[email]" id="User_email" type="text" maxlength="200" />
+
+<span class="help-block" id="User_email_em_" style="display: none"></span></dd></dl>
+<dl class='captcha control-group'><dd>
+<label for="recovery_captcha_input">Введите код</label>
+<input id="recovery_captcha_input" name="User[captcha]" type="text" /><img id="yw2" src="/main/help/captcha/v/4f859a8a1a61e" alt="" />
+
+<span class="help-block" id="recovery_captcha_input_em_" style="display: none"></span></dd></dl>
+
+<dl class="buttons control-group"><dd><input value="сохранить" class="btn btn-primary" name="submit" type="submit" />
+<dd></dl>
+
+</form></div></div></div></div>
+<div class="modal-footer">
+</div>
+</div>";i:1;N;}

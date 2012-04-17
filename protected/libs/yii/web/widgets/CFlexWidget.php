@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CFlexWidget class file.
  *

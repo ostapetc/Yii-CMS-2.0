@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CActiveForm class file.
  *
@@ -89,27 +89,27 @@
  * The following is a piece of sample view code showing how to use CActiveForm:
  *
  * <pre>
- * <? $form = $this->beginWidget('CActiveForm', array(
+ * <?php $form = $this->beginWidget('CActiveForm', array(
  *     'id'=>'user-form',
  *     'enableAjaxValidation'=>true,
  *     'enableClientValidation'=>true,
  *     'focus'=>array($model,'firstName'),
  * )); ?>
  *
- * <? echo $form->errorSummary($model); ?>
+ * <?php echo $form->errorSummary($model); ?>
  *
  * <div class="row">
- *     <? echo $form->labelEx($model,'firstName'); ?>
- *     <? echo $form->textField($model,'firstName'); ?>
- *     <? echo $form->error($model,'firstName'); ?>
+ *     <?php echo $form->labelEx($model,'firstName'); ?>
+ *     <?php echo $form->textField($model,'firstName'); ?>
+ *     <?php echo $form->error($model,'firstName'); ?>
  * </div>
  * <div class="row">
- *     <? echo $form->labelEx($model,'lastName'); ?>
- *     <? echo $form->textField($model,'lastName'); ?>
- *     <? echo $form->error($model,'lastName'); ?>
+ *     <?php echo $form->labelEx($model,'lastName'); ?>
+ *     <?php echo $form->textField($model,'lastName'); ?>
+ *     <?php echo $form->error($model,'lastName'); ?>
  * </div>
  *
- * <? $this->endWidget(); ?>
+ * <?php $this->endWidget(); ?>
  * </pre>
  *
  * To respond to the AJAX validation requests, we need the following class code:

@@ -13,81 +13,87 @@ class CrudAdminController extends AdminController
 
     public function actionCreate()
     {
-        $code = $this->getFormCode('User');
-
-
-        die;
         $model = new Crud();
         $form  = new Form('codegen.CrudForm', $model);
 
-        $this->performAjaxValidation($model);
-
         if ($form->submitted() && $model->validate())
         {
-            die;
+            Yii::import('application.modules.codegen.controllers.FormAdminController');
+
+            FormAdminController::generateAndSaveForm($model->class);
+
+            $params = $model->attributes;
+            $params['module'] = AppManager::getModelModule($model->class);
+
+            $controllers_path  = 'application.modules.codegen.views.templates.crud.controllers';
+            $controllers_files = glob(Yii::getPathOfAlias($controllers_path) . DS . '*');
+            foreach ($controllers_files as $controller_file)
+            {
+                $file_name = pathinfo($controller_file, PATHINFO_FILENAME);
+
+                $code = $this->renderPartial($controllers_path . '.' . $file_name, $params, true);
+
+                $file_name = $model->class . $file_name . '.php';
+
+                $dir = MODULES_PATH . $params['module'] . DS . 'controllers' . DS;
+                if (!is_dir($dir))
+                {
+                    mkdir($dir, 0777, true);
+                    chmod($dir, 0777);
+                }
+
+                $file_path = $dir . $file_name;
+
+                file_put_contents($file_path, $code);
+                chmod($file_path, 0777);
+            }
+
+            $views_path  = 'application.modules.codegen.views.templates.crud.views';
+            $views_files = glob(Yii::getPathOfAlias($views_path) . DS . '*' . DS . '*');
+
+            foreach($views_files as $view_file)
+            {
+                $view_file      = str_replace(Yii::getPathOfAlias($views_path) , '', $view_file);
+                $file_name      = pathinfo($view_file, PATHINFO_BASENAME);
+                $file_code      = $this->renderPartial($views_path . str_replace(array(DS, '.php') , array('.', ''), $view_file), $params, true);
+                $view_file_path = MODULES_PATH . $params['module'] . DS . 'views' . $view_file;
+                $view_file_dir  = pathinfo($view_file_path, PATHINFO_DIRNAME);
+                $child_dir      = pathinfo($view_file_dir, PATHINFO_FILENAME);
+
+                if ($child_dir == 'client')
+                {
+                    $view_file_dir = str_replace('client', lcfirst($model->class), $view_file_dir);
+                }
+                else if ($child_dir == 'admin')
+                {
+                    $view_file_dir = str_replace('admin', lcfirst($model->class) . 'Admin', $view_file_dir);
+                }
+
+                if (!is_dir($view_file_dir))
+                {
+                    mkdir($view_file_dir, 0777, true);
+                    chmod($view_file_dir, 0777);
+                }
+
+                $file_path = $view_file_dir . DS . $file_name;
+
+                file_put_contents($file_path, $file_code);
+                chmod($file_path, 0777);
+            }
+
+            $msg = "Добавьте  в метод adminMenu()  в файле " . ucfirst($params['module']) . "Module.php<br/>
+                   'Управление {$params['instrumental']}'    => Yii::app()->createUrl('/{$params['module']}/" . lcfirst($params['class']) . "Admin/manage'), <br/>
+                   'Создать {$params['accusative']}' => Yii::app()->createUrl(''/{$params['module']}/" . lcfirst($params['class']) . "Admin/create'),";
+
+            Yii::app()->user->setFlash(Controller::MSG_SUCCESS, 'CRUD создан!');
+            Yii::app()->user->setFlash(Controller::MSG_INFO, $msg);
+
+            $this->redirect($_SERVER['REQUEST_URI']);
         }
 
         $this->render('create', array(
             'form' => $form
         ));
-    }
-
-
-    public function getFormCode($model_class)
-    {
-        $model  = ActiveRecord::model($model_class);
-        $meta   = $model->meta();
-        $params = array(
-            'class'  => $model_class,
-            'upload' => (bool) $model->uploadFiles()
-        );
-
-        $elements = array();
-        foreach ($meta as $attr => $data)
-        {
-            if (in_array($attr, array('id', 'date_create', 'date_update')))
-            {
-                continue;
-            }
-
-            if (in_array($attr, array('file', 'image', 'photo', 'icon')))
-            {
-                $elements[$attr] = array('type' => 'file');
-            }
-            else if (substr($attr, 0, 3) == 'is_')
-            {
-                $elements[$attr] = array('type' => 'checkbox');
-            }
-            else if (preg_match('|varchar\(([0-9]+)\)|', $data['Type'], $length))
-            {
-                $length = $length[1];
-                if ($length <= 55)
-                {
-                    $elements[$attr] = array('type' => 'text');
-                }
-                else
-                {
-                    $elements[$attr] = array('type' => 'textarea');
-                }
-            }
-            else if (in_array($data['Type'], array('date', 'datetime')))
-            {
-                $elements[$attr] = array('type' => 'date');
-            }
-            else if (preg_match('|enum\(.*?\)|', $data['Type']))
-            {
-                $elements[$attr] = array(
-                    'type'  => 'dropdownlist',
-                    'items' => $model_class . '::$' . $attr .'_options',
-                    'empty' => 'не выбрано'
-                );
-            }
-        }
-
-        $params['elements'] = $elements;
-
-        $code = $this->renderPartial('codegen.views.templates.crud.forms.Form', $params, true);
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/form.php', $code);
     }
 
 
@@ -108,4 +114,7 @@ class CrudAdminController extends AdminController
             ));
         }
     }
+
+
+
 }

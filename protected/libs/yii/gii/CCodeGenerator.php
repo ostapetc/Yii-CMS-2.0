@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CCodeGenerator class file.
  *

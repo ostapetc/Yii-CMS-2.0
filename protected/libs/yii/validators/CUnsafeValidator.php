@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CUnsafeValidator class file.
  *

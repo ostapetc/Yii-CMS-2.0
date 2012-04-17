@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CDbDataReader class file
  *

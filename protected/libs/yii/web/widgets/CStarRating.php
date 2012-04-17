@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CStarRating class file.
  *

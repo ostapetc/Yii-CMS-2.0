@@ -20,16 +20,16 @@ p {font-family:"Verdana";font-weight:normal;color:black;font-size:9pt;margin-top
 
 <body>
 <h1>Εσωτερικό Σφάλμα Διακομιστή</h1>
-<h2><? echo nl2br(CHtml::encode($data['message'])); ?></h2>
+<h2><?php echo nl2br(CHtml::encode($data['message'])); ?></h2>
 <p>
 Υπήρξε ένα εσωτερικό σφάλμα στο διακομιστή κατά την επεξεργασία της αίτησής σας.
-Παρακαλούμε επικοινωνήστε με <? echo $data['admin']; ?> για να αναφέρετε το πρόβλημα.
+Παρακαλούμε επικοινωνήστε με <?php echo $data['admin']; ?> για να αναφέρετε το πρόβλημα.
 </p>
 <p>
 Ευχαριστούμε.
 </p>
 <div class="version">
-<? echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
+<?php echo date('Y-m-d H:i:s',$data['time']) .' '. $data['version']; ?>
 </div>
 </body>
 </html>

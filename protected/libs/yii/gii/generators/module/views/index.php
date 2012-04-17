@@ -2,24 +2,24 @@
 
 <p>This generator helps you to generate the skeleton code needed by a Yii module.</p>
 
-<? $form=$this->beginWidget('CCodeForm', array('model'=>$model)); ?>
+<?php $form=$this->beginWidget('CCodeForm', array('model'=>$model)); ?>
 
 	<div class="row">
-		<? echo $form->labelEx($model,'moduleID'); ?>
-		<? echo $form->textField($model,'moduleID',array('size'=>65)); ?>
+		<?php echo $form->labelEx($model,'moduleID'); ?>
+		<?php echo $form->textField($model,'moduleID',array('size'=>65)); ?>
 
-		<? echo $form->labelEx($model,'name'); ?>
-		<? echo $form->textField($model,'name',array('size'=>65)); ?>
+		<?php echo $form->labelEx($model,'name'); ?>
+		<?php echo $form->textField($model,'name',array('size'=>65)); ?>
 
-		<? echo $form->labelEx($model,'description'); ?>
-		<? echo $form->textarea($model,'description',array('cols' => 74)); ?>
+		<?php echo $form->labelEx($model,'description'); ?>
+		<?php echo $form->textarea($model,'description',array('cols' => 74)); ?>
 		<div class="tooltip">
 			Module ID is case-sensitive. It should only contain word characters.
 			The generated module class will be named after the module ID.
 			For example, a module ID <code>forum</code> will generate the module class
 			<code>ForumModule</code>.
 		</div>
-		<? echo $form->error($model,'moduleID'); ?>
+		<?php echo $form->error($model,'moduleID'); ?>
 	</div>
 
-<? $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

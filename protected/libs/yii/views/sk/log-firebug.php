@@ -3,7 +3,7 @@
 if(typeof(console)=='object')
 {
 	console.group("Aplikačný Log");
-<?
+<?php
 foreach($data as $index=>$log)
 {
 	$time=date('H:i:s.',$log[3]).(int)(($log[3]-(int)$log[3])*1000);

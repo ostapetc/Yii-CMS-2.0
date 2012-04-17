@@ -1,11 +1,11 @@
 <div class="form login">
-<? $form=$this->beginWidget('CActiveForm'); ?>
+<?php $form=$this->beginWidget('CActiveForm'); ?>
 	<p>Please enter your password</p>
 
-	<? echo $form->passwordField($model,'password'); ?>
-	<? echo $form->error($model,'password'); ?>
+	<?php echo $form->passwordField($model,'password'); ?>
+	<?php echo $form->error($model,'password'); ?>
 
-	<? echo CHtml::submitButton('Enter'); ?>
+	<?php echo CHtml::submitButton('Enter'); ?>
 
-<? $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 </div><!-- form -->

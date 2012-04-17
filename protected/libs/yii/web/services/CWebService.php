@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CWebService class file.
  *

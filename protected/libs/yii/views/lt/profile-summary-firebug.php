@@ -4,7 +4,7 @@ if(typeof(console)=='object')
 {
 	console.group("Suminė profiliavimo ataskaita");
 	console.log(" kiekis   viso   vid.    min.      maks.   ");
-<?
+<?php
 foreach($data as $index=>$entry)
 {
 	$proc=CJavaScript::quote($entry[0]);

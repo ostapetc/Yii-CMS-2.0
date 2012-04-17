@@ -164,7 +164,7 @@ class ModelAdminController extends AdminController
 
         foreach ($meta as $data)
         {
-            if ($data['Null'] == 'NO')
+            if ($data['Null'] == 'NO' && !in_array($data['Field'], Model::$not_required_attributes))
             {
                 $required[] = $data['Field'];
             }

@@ -3,11 +3,11 @@
 <p>This generator helps you to quickly generate a new controller class,
 one or several controller actions and their corresponding views.</p>
 
-<? $form=$this->beginWidget('CCodeForm', array('model'=>$model)); ?>
+<?php $form=$this->beginWidget('CCodeForm', array('model'=>$model)); ?>
 
 	<div class="row">
-		<? echo $form->labelEx($model,'controller'); ?>
-		<? echo $form->textField($model,'controller',array('size'=>65)); ?>
+		<?php echo $form->labelEx($model,'controller'); ?>
+		<?php echo $form->textField($model,'controller',array('size'=>65)); ?>
 		<div class="tooltip">
 			Controller ID is case-sensitive. Below are some examples:
 			<ul>
@@ -19,26 +19,26 @@ one or several controller actions and their corresponding views.</p>
 				</li>
 			</ul>
 		</div>
-		<? echo $form->error($model,'controller'); ?>
+		<?php echo $form->error($model,'controller'); ?>
 	</div>
 
 	<div class="row sticky">
-		<? echo $form->labelEx($model,'baseClass'); ?>
-		<? echo $form->textField($model,'baseClass',array('size'=>65)); ?>
+		<?php echo $form->labelEx($model,'baseClass'); ?>
+		<?php echo $form->textField($model,'baseClass',array('size'=>65)); ?>
 		<div class="tooltip">
 			This is the class that the new controller class will extend from.
 			Please make sure the class exists and can be autoloaded.
 		</div>
-		<? echo $form->error($model,'baseClass'); ?>
+		<?php echo $form->error($model,'baseClass'); ?>
 	</div>
 
 	<div class="row">
-		<? echo $form->labelEx($model,'actions'); ?>
-		<? echo $form->textField($model,'actions',array('size'=>65)); ?>
+		<?php echo $form->labelEx($model,'actions'); ?>
+		<?php echo $form->textField($model,'actions',array('size'=>65)); ?>
 		<div class="tooltip">
 			Action IDs are case-insensitive. Separate multiple action IDs with commas or spaces.
 		</div>
-		<? echo $form->error($model,'actions'); ?>
+		<?php echo $form->error($model,'actions'); ?>
 	</div>
 
-<? $this->endWidget(); ?>
+<?php $this->endWidget(); ?>

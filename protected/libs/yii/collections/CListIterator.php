@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * CListIterator class file.
  *

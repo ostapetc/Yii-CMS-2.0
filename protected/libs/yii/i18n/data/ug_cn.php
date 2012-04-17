@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'ug_CN'.
  *

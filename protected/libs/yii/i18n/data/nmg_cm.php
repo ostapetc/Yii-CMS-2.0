@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'nmg_CM'.
  *

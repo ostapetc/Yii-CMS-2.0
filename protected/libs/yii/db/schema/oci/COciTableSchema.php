@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * COciTableSchema class file.
  *

@@ -11,7 +11,7 @@
 		<th>Kategoria</th>
 		<th>Wiadomość</th>
 	</tr>
-<?
+<?php
 $colors=array(
 	CLogger::LEVEL_PROFILE=>'#DFFFE0',
 	CLogger::LEVEL_INFO=>'#FFFFDF',

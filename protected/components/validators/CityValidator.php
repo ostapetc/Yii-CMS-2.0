@@ -17,7 +17,7 @@ class CityValidator extends CValidator
 		    	}
 		    	else
 		    	{
-		    		$this->addError($object, $attribute, Yii::t('main', 'Город не найден'));
+		    		$this->addError($object, $attribute, 'Город не найден');
 		    	}
     		}
     	}

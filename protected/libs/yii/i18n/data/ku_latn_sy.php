@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Locale data for 'ku_Latn_SY'.
  *
