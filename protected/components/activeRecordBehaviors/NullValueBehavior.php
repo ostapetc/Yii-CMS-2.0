@@ -1,6 +1,6 @@
 <?
 
-class NullValueBehavior extends CActiveRecordBehavior
+class NullValueBehavior extends ActiveRecordBehavior
 {
     public function beforeSave()
     {

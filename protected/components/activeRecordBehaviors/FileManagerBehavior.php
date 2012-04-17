@@ -1,8 +1,9 @@
 <?
 
-class AttachmentBehavior extends CActiveRecordBehavior
+class FileManagerBehavior extends ActiveRecordBehavior
 {
     public $attached_model;
+    public $tags = array();
 
     private function _tmpPrefix()
     {
@@ -43,5 +44,34 @@ class AttachmentBehavior extends CActiveRecordBehavior
         }
 
         return parent::beforeDelete($event);
+    }
+
+    public function initFormElements($event)
+    {
+        $elements = $event->sender->getElements();
+
+        foreach ($this->tags as $tag => $data)
+        {
+            if (is_string($data))
+            {
+                $elements['file_manager_'.$data] = array(
+                    'type'      => 'file_manager',
+                    'tag'       => $tag,
+                    'data_type' => 'image',
+                    'title'     => $data
+                );
+            }
+            elseif (is_array($data))
+            {
+                $elements['file_manager_'.$data['title']] = array(
+                    'type'      => 'file_manager',
+                    'tag'       => $tag,
+                    'data_type' => $data['data_type'],
+                    'title'     => $data['title']
+                );
+            }
+        }
+
+        $event->sender->setElements($elements);
     }
 }

@@ -242,4 +242,13 @@ abstract class ActiveRecord extends CActiveRecord
         return $this;
     }
 
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onInitFormElements($event)
+    {
+        $this->raiseEvent('onInitFormElements', $event);
+    }
+
 }

@@ -1,8 +1,11 @@
 <?
-
 $form = include "UserForm.php";
 
-$form['activeForm']['id'] = 'login-form';
+$form['activeForm'] = array(
+    'id'                   => 'login-form',
+    'enableAjaxValidation' => false,
+    'clientOptions'        => array('validateOnSubmit' => false)
+);
 
 $form['elements'] = array(
     'email'    => array(

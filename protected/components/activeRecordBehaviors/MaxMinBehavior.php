@@ -1,6 +1,6 @@
 <?
  
-class MaxMinBehavior extends CActiveRecordBehavior
+class MaxMinBehavior extends ActiveRecordBehavior
 {
     public function max($attr)
     {

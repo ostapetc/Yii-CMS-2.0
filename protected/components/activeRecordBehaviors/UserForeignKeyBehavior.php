@@ -1,6 +1,6 @@
 <?
  
-class UserForeignKeyBehavior extends  CActiveRecordBehavior
+class UserForeignKeyBehavior extends  ActiveRecordBehavior
 {
     public function beforeValidate()
     {

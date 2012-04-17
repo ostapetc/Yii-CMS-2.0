@@ -11,7 +11,7 @@ return CMap::mergeArray(
 		        'password'                => '7alla9icea',
 		        'charset'                 => 'utf8',
                 'schemaCachingDuration' => 86400,
-		        //'enableProfiling'  => true, 
+		        //'enableProfiling'  => true,
 	        )
 	    ) 
     )
