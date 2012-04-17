@@ -1,7 +1,4 @@
-<project name="variables.dev" basedir="../">
-
-    <property name="build.version" value="2.0.0" />
-
+<project name="variables.dev" basedir="../" default="yii-cms">
     <property name="app.dir" value="../protected/" />
     <property name="webroot" value="../" />
 
