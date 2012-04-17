@@ -29,9 +29,8 @@ class UserAdminController extends AdminController
         $form = new Form('users.LoginForm', $model);
         $form->action = '';
         $form->cancel_button_show = false;
-
-        unset($form->activeForm['enableAjaxValidation']);
-        unset($form->activeForm['clientOptions']);
+        $form->activeForm['enableAjaxValidation'] = false;
+        $form->activeForm['clientOptions']['validateOnSubmit'] = false;
 
         $params = array(
             "model"      => $model,
