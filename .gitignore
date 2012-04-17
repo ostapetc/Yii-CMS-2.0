@@ -41,7 +41,7 @@ build/config/buildinfo.properties
 
 
 #my adds
-/assets/
+assets/
 /upload/fileManager
 /protected/config/development.php
 /protected/runtime
