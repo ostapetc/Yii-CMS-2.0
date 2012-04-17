@@ -29,17 +29,21 @@
         <delete dir="./doc/" />
         <mkdir dir="./doc/" mode="0777" />
         <phpdoc2 title="API Documentation" destdir="./doc" template="responsive">
-            <fileset dir="${app.dir}">
-                <include name="**/*.php" />
-                <exclude name="libs/**/*.php" />
-                <exclude name="extensions/**/*.php" />
-                <exclude name="**/bootstrap/**/*.php" />
-                <exclude name="**/views/**/*.php" />
-                <exclude name="**/tests/**/*.php" />
-                <exclude name="**/yiic.php" />
-            </fileset>
+            <fileset dir="${app.dir}" includes="**/*.php" excludes="${doc.excludes}" />
         </phpdoc2>
     </target>
+
+    <target name="build.set_version">
+        <reflexive>
+            <fileset dir="${build.dir}" includes="${build.set_version.includes}" excludes="${build.set_version.excludes}" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="@version \$(Id)\$" replace="@version ${build.version}" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
 
     <target name="build" depends="clear.cache, db.migrate, doc.generate">
         <echo msg="All done." />

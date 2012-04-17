@@ -1,6 +1,6 @@
-<project name="variables.dev" basedir="../" default="yii-cms">
+<project name="variables.dev" basedir="../">
 
-    <property name="version.cms" value="2.0.0" />
+    <property name="build.version" value="2.0.0" />
 
     <property name="app.dir" value="../protected/" />
     <property name="webroot" value="../" />
@@ -16,7 +16,11 @@
     <property name="repo.remote.path" value="" />
     <property name="repo.local.path" value="" />
 
+    <property name="doc.excludes" value="libs/**/*.php, extensions/**/*.php, **/bootstrap/**/*.php, **/views/**/*.php, **/tests/**/*.php, **/yiic.php" />
+    <property name="build.set_version.excludes" value="libs/**/*.php, extensions/**/*.php, **/bootstrap/**/*.php, **/views/**/*.php, **/tests/**/*.php, **/yiic.php" />
+    <property name="build.set_version.includes" value="**/*.php, **/*.js, **/*.css" />
 
+    <property name="build.dir" value="${webroot}/build/tmp" />
 
     <property name="php.local.bin" value="D:\Winginx\php5\php.exe" />
 
