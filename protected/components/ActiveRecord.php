@@ -206,6 +206,7 @@ abstract class ActiveRecord extends CActiveRecord
         return $this->_meta;
     }
 
+
     public function optionsTree($name = 'name', $id = null, $result = array(), $value = 'id', $spaces = 0, $parent_id = null)
     {
         $objects = $this->findAllByAttributes(array(

@@ -13,6 +13,8 @@ class TagBehavior extends CActiveRecordBehavior
 
         if (isset($_POST[$model_id]['tags']))
         {
+            TagRel::model()->deleteAllByAttributes(array('model_id' => $model_id, 'object_id' => $this->owner->id));
+
             foreach (explode(',', $_POST[$model_id]['tags']) as $tag_name)
             {
                 $tag = Tag::model()->find("name = '{$tag_name}'");
@@ -30,13 +32,9 @@ class TagBehavior extends CActiveRecordBehavior
                 $tag_rel->tag_id    = $tag->id;
                 $tag_rel->object_id = $this->owner->id;
                 $tag_rel->model_id  = $model_id;
-                p($tag_rel->errors);
-                v($tag_rel->save());
-                v($tag_rel->attributes);
+                $tag_rel->save(false);
             }
-            die;
         }
-
     }
 
 

@@ -3971,3 +3971,617 @@ in /var/www/self-actualization/protected/views/layouts/main.php (159)
 in /var/www/self-actualization/protected/modules/main/controllers/MainController.php (67)
 2012/02/25 20:50:09 [trace] [system.CModule] Loading "assetManager" application component
 in /var/www/self-actualization/protected/modules/main/controllers/MainController.php (67)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "log" application component
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "request" application component
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "cache" application component
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (10)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (10)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "urlManager" application component
+in W:\html\yiicms2\www\protected\modules\codegen\CodegenModule.php (38)
+in W:\html\yiicms2\www\protected\components\AppManager.php (77)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "db" application component
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:56:56 [trace] [system.db.CDbConnection] Opening DB connection
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `params`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `params`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:56:56 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'codegen'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'content'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'mailer'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "messages" application component
+in W:\html\yiicms2\www\protected\libs\functions.php (41)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT t1.message AS message, t2.translation AS translation
+FROM languages_messages t1, languages_translations t2
+WHERE t1.id=t2.id AND t1.category=:category AND t2.language=:language
+in W:\html\yiicms2\www\protected\libs\functions.php (41)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `languages_messages`
+in W:\html\yiicms2\www\protected\libs\functions.php (50)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `languages_messages`
+in W:\html\yiicms2\www\protected\libs\functions.php (50)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:56:56 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'main'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:56:56 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'test'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:56:56 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'users'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\modules\content\ContentModule.php (51)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (37)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.base.CModule] Loading "content" module
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.web.filters.CFilterChain] Running filter LanguageFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "session" application component
+in W:\html\yiicms2\www\protected\components\filters\LanguageFilter.php (13)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\filters\LanguageFilter.php (20)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.web.filters.CFilterChain] Running filter SiteEnableFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.web.filters.CFilterChain] Running filter HttpsFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.web.filters.CFilterChain] Running filter XssFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.web.filters.CFilterChain] Running filter StatisticFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.web.filters.CFilterChain] Running filter ThemeFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "bootstrap" application component
+in W:\html\yiicms2\www\protected\components\AdminController.php (64)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "clientScript" application component
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (56)
+in W:\html\yiicms2\www\protected\components\AdminController.php (64)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.CModule] Loading "user" application component
+in W:\html\yiicms2\www\protected\components\AdminController.php (66)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (8)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (9)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (10)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (11)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (12)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (13)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (8)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (9)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (10)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (11)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (12)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (13)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `pages`
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (20)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `pages`
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (20)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (36)
+2012/04/18 00:56:56 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (37)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (36)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (37)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\views\pageAdmin\manage.php (2)
+2012/04/18 00:56:57 [trace] [system.CModule] Loading "assetManager" application component
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (350)
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (85)
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (62)
+2012/04/18 00:56:57 [trace] [system.db.ar.CActiveRecord] Param.findByAttributes()
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (136)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (32)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `params` `t` WHERE `t`.`code`=:yp0 LIMIT 1
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (136)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (32)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (34)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (36)
+2012/04/18 00:56:57 [trace] [system.CModule] Loading "widgetFactory" application component
+in W:\html\yiicms2\www\protected\components\Controller.php (219)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (38)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `languages`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (16)
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `languages`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (16)
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+2012/04/18 00:56:57 [trace] [system.db.ar.CActiveRecord] Language.findAll()
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+in W:\html\yiicms2\www\protected\components\Controller.php (219)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (38)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `languages` `t` ORDER BY id='ru' DESC
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+in W:\html\yiicms2\www\protected\components\Controller.php (219)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (38)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `users`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\users\models\User.php (48)
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `users`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\users\models\User.php (48)
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+2012/04/18 00:56:57 [trace] [system.db.ar.CActiveRecord] User.findByPk()
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:56:57 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `users` `t` WHERE `t`.`id`='1' LIMIT 1
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:56:57 [trace] [system.CModule] Loading "coreMessages" application component
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (77)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (55)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (69)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\main\views\mainAdmin\_search.php (2)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (122)
+2012/04/18 00:56:57 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (123)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "log" application component
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "request" application component
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "cache" application component
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (10)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (10)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "urlManager" application component
+in W:\html\yiicms2\www\protected\modules\codegen\CodegenModule.php (38)
+in W:\html\yiicms2\www\protected\components\AppManager.php (77)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "db" application component
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:57:14 [trace] [system.db.CDbConnection] Opening DB connection
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `params`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `params`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (39)
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+2012/04/18 00:57:14 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'codegen'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'content'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'mailer'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "messages" application component
+in W:\html\yiicms2\www\protected\libs\functions.php (41)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT t1.message AS message, t2.translation AS translation
+FROM languages_messages t1, languages_translations t2
+WHERE t1.id=t2.id AND t1.category=:category AND t2.language=:language
+in W:\html\yiicms2\www\protected\libs\functions.php (41)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `languages_messages`
+in W:\html\yiicms2\www\protected\libs\functions.php (50)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `languages_messages`
+in W:\html\yiicms2\www\protected\libs\functions.php (50)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+2012/04/18 00:57:14 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'main'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:57:14 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'test'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:57:14 [trace] [system.db.ar.CActiveRecord] Param.count()
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.db.CDbCommand] Querying SQL: SELECT COUNT(*) FROM `params` `t` WHERE module_id = 'users'
+in W:\html\yiicms2\www\protected\components\AppManager.php (79)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (24)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\components\AppManager.php (82)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\modules\content\ContentModule.php (51)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\UrlManager.php (37)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.base.CModule] Loading "content" module
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.web.filters.CFilterChain] Running filter LanguageFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "session" application component
+in W:\html\yiicms2\www\protected\components\filters\LanguageFilter.php (13)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (61)
+in W:\html\yiicms2\www\protected\components\filters\LanguageFilter.php (20)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.web.filters.CFilterChain] Running filter SiteEnableFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.web.filters.CFilterChain] Running filter HttpsFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.web.filters.CFilterChain] Running filter XssFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.web.filters.CFilterChain] Running filter StatisticFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.web.filters.CFilterChain] Running filter ThemeFilter.filter()
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "bootstrap" application component
+in W:\html\yiicms2\www\protected\components\AdminController.php (64)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "clientScript" application component
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (56)
+in W:\html\yiicms2\www\protected\components\AdminController.php (64)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.CModule] Loading "user" application component
+in W:\html\yiicms2\www\protected\components\AdminController.php (66)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (8)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (9)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (10)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (11)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (12)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (13)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (8)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (9)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (10)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (11)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (12)
+2012/04/18 00:57:14 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (13)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `pages`
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (20)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `pages`
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (20)
+in W:\html\yiicms2\www\index.php (29)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (36)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (37)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (36)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\models\Page.php (37)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\content\views\pageAdmin\manage.php (2)
+2012/04/18 00:57:15 [trace] [system.CModule] Loading "assetManager" application component
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (350)
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (85)
+in W:\html\yiicms2\www\protected\components\bootstrap\components\Bootstrap.php (62)
+2012/04/18 00:57:15 [trace] [system.db.ar.CActiveRecord] Param.findByAttributes()
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (136)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (32)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `params` `t` WHERE `t`.`code`=:yp0 LIMIT 1
+in W:\html\yiicms2\www\protected\modules\main\models\Param.php (136)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (32)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (34)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (36)
+2012/04/18 00:57:15 [trace] [system.CModule] Loading "widgetFactory" application component
+in W:\html\yiicms2\www\protected\components\Controller.php (219)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (38)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `languages`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (16)
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `languages`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\main\models\Language.php (16)
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+2012/04/18 00:57:15 [trace] [system.db.ar.CActiveRecord] Language.findAll()
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+in W:\html\yiicms2\www\protected\components\Controller.php (219)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (38)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `languages` `t` ORDER BY id='ru' DESC
+in W:\html\yiicms2\www\protected\modules\main\portlets\LanguageSwitcherAdmin.php (7)
+in W:\html\yiicms2\www\protected\components\Controller.php (219)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (38)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW COLUMNS FROM `users`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\users\models\User.php (48)
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `users`
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (18)
+in W:\html\yiicms2\www\protected\modules\users\models\User.php (48)
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+2012/04/18 00:57:15 [trace] [system.db.ar.CActiveRecord] User.findByPk()
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:57:15 [trace] [system.db.CDbCommand] Querying SQL: SELECT * FROM `users` `t` WHERE `t`.`id`='1' LIMIT 1
+in W:\html\yiicms2\www\protected\components\WebUser.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:57:15 [trace] [system.CModule] Loading "coreMessages" application component
+in W:\html\yiicms2\www\protected\components\ActiveRecord.php (77)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (47)
+in W:\html\yiicms2\www\protected\modules\content\controllers\PageAdminController.php (30)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (55)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (69)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\modules\main\views\mainAdmin\_search.php (2)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (122)
+2012/04/18 00:57:15 [trace] [system.caching.CFileCache] Serving "languages_messages" from cache
+in W:\html\yiicms2\www\protected\modules\main\models\LanguageMessage.php (57)
+in W:\html\yiicms2\www\protected\libs\functions.php (47)
+in W:\html\yiicms2\www\protected\views\layouts\admin\main.php (123)

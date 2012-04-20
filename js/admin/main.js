@@ -34,4 +34,7 @@ $(function()
         self.replaceWith(a);
     });
 
+    $(".btn-success, .btn_view_site").each(function() {
+        $(this).html($(this).html().toLowerCase());
+    });
 });

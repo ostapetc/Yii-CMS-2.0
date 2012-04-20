@@ -165,7 +165,7 @@ return array(
             'itemChildTable'  => 'auth_items_childs',
             'defaultRoles'    => array('guest')
         ),
-       // 'log'=>array(
+//        'log'=>array(
 //                'class'=>'CLogRouter',
 //                'routes'=>array(
 //                    array(
@@ -184,6 +184,16 @@ return array(
 //                    ),
 //                ),
 //        ),
+//        'log'=>array(
+//                'class'=>'CLogRouter',
+//                'routes'=>array(
+//                    array(
+//                        'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                        'ipFilters'=>array('127.0.0.1','192.168.1.215'),
+//                    ),
+//                ),
+//            ),
+
 
         'cache' => array(
             'class'=>'system.caching.CFileCache',
