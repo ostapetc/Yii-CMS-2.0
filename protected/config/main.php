@@ -1,81 +1,23 @@
 <?
-$modules_includes = array();
-$modules_dirs     = scandir(MODULES_PATH);
-
-foreach ($modules_dirs as $module)
-{
-    if ($module[0] == ".") {
-        continue;
-    }
-
-    $modules[] = $module;
-
-    $modules_includes[] = "application.modules.{$module}.*";
-    $modules_includes[] = "application.modules.{$module}.models.*";
-    $modules_includes[] = "application.components.bootstrap.widgets.*";
-    $modules_includes[] = "application.modules.{$module}.portlets.*";
-    $modules_includes[] = "application.modules.{$module}.forms.*";
-    $modules_includes[] = "application.modules.{$module}.components.*";
-    $modules_includes[] = "application.modules.{$module}.components.zii.*";
-    $modules_includes[] = "application.components.zii.gridColumns.*";
-}
-
-$modules['webshell'] = array(
-    'class'        => 'ext.webshell.WebShellModule',
-    'exitUrl'      => '/',
-    'wtermOptions' => array(
-        'PS1' => '%',
-    ),
-    'commands'       => array(
-        'test' => array('js:function(){return "Hello, world!";}', 'Just a test.'),
-    ),
-    'ipFilters'      => array('*', '::1'),
-    'yiicCommandMap' => array(
-        'email'  => array(
-            'class'=> 'ext.mailer.MailerCommand',
-            'from' => 'www.pismeco@gmail.com',
-        ),
-        'migrate'=> array(
-            'class'          => 'system.cli.commands.MigrateCommand',
-            'migrationPath'  => 'application.components.migrations',
-            'migrationTable' => 'tbl_migration',
-            'connectionID'   => 'db',
-            'templateFile'   => 'application.migrations.template',
-            'interactive'    => false, //in web not define STDIN
-        ),
-    ),
-);
-
-$modules['gii'] = array(
-    'class'          => 'system.gii.GiiModule',
-    'generatorPaths' => array('application.components.gii'),
-    'password'       => 'giisecret',
-    'ipFilters'      => array(
-        '127.0.0.1',
-        '::1'
-    )
-);
-
-return array(
+return CMap::mergeArray(array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'     => '',
     'preload'  => array('log'),
-    'import'   => array_merge($modules_includes, array(
+    'import'   => array(
         'application.components.*',
         'application.components.Form',
         'application.components.validators.*',
         'application.components.zii.*',
+        "application.components.zii.gridColumns.*",
         'application.components.formElements.*',
         'application.components.baseWidgets.*',
         'application.components.bootstrap.widgets.*',
         'application.components.activeRecordBehaviors.*',
         'application.libs.helpers.*',
-        'ext.yiiext.filters.setReturnUrl.ESetReturnUrlFilter',
-        'application.modules.srbac.controllers.SBaseController',
         'application.extensions.yiidebugtb.*',
-    )),
-    'modules'    => $modules,
+    ),
+    'modules'    => array('content', 'codegen', 'fileManager', 'mailer', 'main', 'users', 'rbac'),
     'components' => array(
         'messages' => array(
             'class' => 'CDbMessageSource',
@@ -190,14 +132,15 @@ return array(
         ),
     ),
 
-    'onBeginRequest' => array('UrlManager', 'collectRules'),
+    'onBeginRequest' => array('AppManager', 'init'),
+
 
     'params'         => array(
-        'save_site_actions' => false,
+        'save_site_actions' => true,
         'multilanguage_support' => true,
-        'collect_routes_form_modules' => true,
+        'collect_routes_from_modules' => true,
         'themes_enabled' => false
     )
-);
+), require (ENV.'.php'));
 
 

@@ -18,7 +18,6 @@ abstract class ActiveRecord extends CActiveRecord
         return parent::model($className);
     }
 
-
     public function behaviors()
     {
         return array(
@@ -242,10 +241,6 @@ abstract class ActiveRecord extends CActiveRecord
         return $this;
     }
 
-
-    /**
-     * @param CModelEvent $event
-     */
     public function onBeforeInitForm($event)
     {
         $this->raiseEvent('onBeforeInitForm', $event);

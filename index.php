@@ -23,7 +23,9 @@ require_once(LIBRARY_PATH.'functions.php');
 $session = new CHttpSession;
 $session->open();
 
-$config = YII_DEBUG ? 'development' : 'production';
-$config = PROTECTED_PATH . 'config' . DS . $config . '.php';
+define('ENV', YII_DEBUG ? 'development' : 'production');
+//$config = 'install';
+
+$config = PROTECTED_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
 
 Yii::createWebApplication($config)->run();

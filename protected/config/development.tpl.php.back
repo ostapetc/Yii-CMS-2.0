@@ -3,10 +3,10 @@
 return array(
     'components' => array(
         'db' => array(
-            'connectionString'      => 'mysql:localhost=localhost;dbname=yii_base;',
+            'connectionString'      => 'mysql:%DB_HOST%=localhost;dbname=%DB_NAME%;',
             'emulatePrepare'        => true,
-            'username'              => 'root',
-            'password'              => '',
+            'username'              => '%DB_LOGIN%',
+            'password'              => '%DB_PASS%',
             'charset'               => 'utf8',
             'enableProfiling'       => true,
         )

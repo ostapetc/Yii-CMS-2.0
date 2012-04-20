@@ -4,7 +4,7 @@ class ClientFormInputElement extends BaseFormInputElement
     public $widgets = array(
         'captcha'           => 'Captcha',
         'date'              => 'FJuiDatePicker',
-
+        'multi_select'      => 'EMultiSelect',
     );
 
 

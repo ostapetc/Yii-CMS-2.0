@@ -1,8 +1,6 @@
 <?
 class Form extends CForm
 {
-    public $side;
-
     public $back_button_show = true;
 
     public $inputElementClass = null;
@@ -18,25 +16,29 @@ class Form extends CForm
 
     public function __construct($config, $model = null, $parent = null)
     {
-        if ($this->side == null)
-        {
-            $this->side = Yii::app()->controller instanceof AdminController ? 'admin' : 'client';
-        }
-
-        if ($this->inputElementClass == null)
-        {
-            $this->inputElementClass = ucfirst($this->side) . 'FormInputElement';
-        }
-
-
         if (is_string($config))
         {
             $config = self::getFullAlias($config);
         }
 
+        $side = (Yii::app()->controller instanceof AdminController ? 'admin' : 'client');
+        if ($this->inputElementClass == null)
+        {
+            $this->inputElementClass = ucfirst($side) . 'FormInputElement';
+        }
+
         parent::__construct($config, $model, $parent);
 
-        $this->addAttributesToButtons();
+        $this->addAttributesToButtons($side);
+        if (!($this->getParent() instanceof self) && $side == 'admin')
+        {
+//            $elements = $this->getElements()->toArray();
+//            array_unshift($elements, $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info'));
+//            $this->getElements()->copyFrom($elements);
+
+            $this->attributes['class'] = 'admin_form';
+        }
+
         $this->formatDateAttributes();
     }
 
@@ -99,6 +101,7 @@ class Form extends CForm
                     hasError ? cg.removeClass("success") : cg.addClass("success");
                 }';
             }
+            Yii::app()->clientScript->registerScriptFile('/js/plugins/hint.js');
 
             try
             {
@@ -113,19 +116,6 @@ class Form extends CForm
                 Yii::app()->handleException($e);
             }
         }
-    }
-
-    public function renderBody()
-    {
-        $output = parent::renderBody();
-
-        if (!($this->getParent() instanceof self) && $this->side == 'admin')
-        {
-            $this->attributes['class'] = 'admin_form';
-            return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
-        }
-
-        return $output;
     }
 
 
@@ -160,9 +150,9 @@ class Form extends CForm
         }
     }
 
-    public function renderButtons()
+    public function renderButtons($side = null)
     {
-        $is_admin_form = !($this->getParent() instanceof self) && $this->side == 'admin';
+        $is_admin_form = !($this->getParent() instanceof self) && $side == 'admin';
         if ($this->back_button_show && !$this->buttons->itemAt('back') && $is_admin_form)
         {
             $this->buttons->add("back", array(

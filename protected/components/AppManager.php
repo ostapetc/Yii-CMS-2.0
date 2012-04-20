@@ -5,7 +5,8 @@ class AppManager
     private static $_modules_client_menu;
 
     private static $pathAliaces = array(
-        'gridColumns' => 'application.components.zii.gridColumns'
+        'gridColumns' => 'application.components.zii.gridColumns',
+        'bootstrap' => 'application.components.bootstrap',
     );
 
 
@@ -21,6 +22,9 @@ class AppManager
     public static function init()
     {
         self::initPathOfAliaces();
+        foreach (Yii::app()->getModules() as $m => $c) {
+            Yii::app()->getModule($m);
+        }
         Yii::app()->urlManager->collectRules();
     }
 
@@ -28,13 +32,9 @@ class AppManager
     public static function getModulesData($active = null, $check_allowed_links = false)
     {
         $modules = array();
-        foreach (scandir(MODULES_PATH) as $module_dir)
-        {
-            if ($module_dir[0] == '.')
-            {
-                continue;
-            }
 
+        foreach (Yii::app()->getModules() as $module_dir => $module_settings)
+        {
             $module_class = ucfirst($module_dir) . 'Module';
             $module_path  = MODULES_PATH . $module_dir . '/' . $module_class . '.php';
 
@@ -76,11 +76,11 @@ class AppManager
             {
                 $module['admin_menu'] = call_user_func(array($module_class, 'adminMenu'));
 
-                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
-                if ($settins_count)
-                {
-                    $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));
-                }
+//                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
+//                if ($settins_count)
+//                {
+//                    $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));
+//                }
 
                 if ($check_allowed_links)
                 {

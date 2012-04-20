@@ -1,5 +1,5 @@
 <?
-Yii::import('zii.widgets.CWidget');
+Yii::import('system.web.widgets.CWidget');
 
 abstract class Widget extends CWidget
 {

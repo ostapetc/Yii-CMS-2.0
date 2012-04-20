@@ -26,7 +26,9 @@ class MainModule extends WebModule
     public function init()
     {
         $this->setImport(array(
-            'main.models.*', 'main.components.*',
+            'main.models.*',
+            'main.components.*',
+            'main.portlets.*'
         ));
     }
 
@@ -80,8 +82,8 @@ class MainModule extends WebModule
     public static function routes()
     {
         return array(
-            '/off'        => 'main/main/off',
-            '/admin'      => 'content/pageAdmin/manage',
+            'off'        => 'main/main/off',
+            'admin'      => 'main/mainAdmin/index',
             'sitemap'     => 'main/help/sitemap',
             'sitemap.xml' => 'main/help/sitemapxml'
         );

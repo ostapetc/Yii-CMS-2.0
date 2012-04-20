@@ -54,7 +54,7 @@ class EMultiSelect extends JuiInputWidget
 
         $cs = Yii::app()->getClientScript();
         $cs->registerCssFile($this->assets . '/ui.multiselect.css');
-        $cs->registerScriptFile($this->assets . '/ui.multiselect.js');
+        $cs->registerScriptFile($this->assets . '/ui.multiselect.js', CClientScript::POS_END);
 
         $parameters = CJavaScript::encode(array(
             'sortable'     => $this->sortable,
@@ -64,8 +64,7 @@ class EMultiSelect extends JuiInputWidget
         ));
 
         $cs->registerScript('EMultiSelect',
-            '$(".multiselect").multiselect(' . $parameters . ');', CClientScript::POS_READY);
-
+            '$("#'.$this->id.'").multiselect(' . $parameters . ');', CClientScript::POS_READY);
     }
 
 

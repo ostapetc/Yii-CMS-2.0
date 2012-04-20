@@ -1,6 +1,6 @@
 <?php
 
-class Module extends CFormModel
+class Module extends FormModel
 {
     public $id;
 

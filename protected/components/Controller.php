@@ -22,7 +22,7 @@ abstract class Controller extends CController
 
 
     public $system_actions = array(
-        'captcha'
+        'captcha','help','error'
     );
 
     abstract public static function actionsTitles();
@@ -60,13 +60,13 @@ abstract class Controller extends CController
 
     public function beforeAction($action)
     {
-        Yii::import('codegen.models.Model');
-
-        $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
-
         if (in_array($action->id, $this->system_actions))
         {
             return true;
+        }
+        else
+        {
+            $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
         }
 
         $action_titles = $action->controller->actionsTitles();
