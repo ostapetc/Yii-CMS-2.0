@@ -1,0 +1,29 @@
+<project name="variables.dev" basedir="../" default="yii-cms">
+    <property name="app.dir" value="../protected/" />
+    <property name="webroot" value="../" />
+
+    <property name="db.host" value="localhost" />
+    <property name="db.user" value="root" />
+    <property name="db.pass" value="" />
+    <property name="db.name" value="yii_base" />
+
+    <property name="mysql.dump" value="" />
+
+
+    <property name="repo.remote.path" value="" />
+    <property name="repo.local.path" value="" />
+
+    <property name="doc.excludes" value="libs/**/*.php, extensions/**/*.php, **/bootstrap/**/*.php, **/views/**/*.php, **/tests/**/*.php, **/yiic.php" />
+    <property name="build.set_version.excludes" value="libs/**/*.php, extensions/**/*.php, **/bootstrap/**/*.php, **/views/**/*.php, **/tests/**/*.php, **/yiic.php" />
+    <property name="build.set_version.includes" value="**/*.php, **/*.js, **/*.css" />
+
+    <property name="build.dir" value="${webroot}/build/tmp" />
+
+    <property name="php.local.bin" value="D:\Winginx\php5\php.exe" />
+
+    <property name="yiic" value="${app.dir}/yiic.php" />
+
+
+
+</project>
+

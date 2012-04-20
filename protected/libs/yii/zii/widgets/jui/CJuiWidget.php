@@ -117,8 +117,8 @@ abstract class CJuiWidget extends CWidget
 				$cs->registerCssFile($this->themeUrl.'/'.$this->theme.'/'.$cssFile);
 		}
 
-		$cs->registerCoreScript('jquery');
-		if(is_string($this->scriptFile))
+        $cs->registerCoreScript('jquery');
+        if(is_string($this->scriptFile))
 			$this->registerScriptFile($this->scriptFile);
 		else if(is_array($this->scriptFile))
 		{

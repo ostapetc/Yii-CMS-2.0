@@ -76,7 +76,7 @@ class AppManager
             {
                 $module['admin_menu'] = call_user_func(array($module_class, 'adminMenu'));
 
-                $settins_count = Param::model()->cache(3000)->count("module_id = '{$module_dir}'");
+                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
                 if ($settins_count)
                 {
                     $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));

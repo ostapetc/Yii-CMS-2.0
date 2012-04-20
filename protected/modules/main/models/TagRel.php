@@ -35,4 +35,3 @@ class TagRel extends ActiveRecord
 		return array();
 	}
 }
-

@@ -18,7 +18,7 @@ class AllInOneInput extends JuiInputWidget
 
     public function run()
     {
-        $el = new FormInputElement(array(
+        $el = new ClientFormInputElement(array(
             'type' => 'text',
             'name' => $this->attribute,
         ), $this);

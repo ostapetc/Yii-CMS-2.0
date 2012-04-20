@@ -1,0 +1,30 @@
+@import "variables.less";
+@import "mixins.less";
+
+body {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.install-top-menu {
+    .center-block();
+    .navbar-inner {
+        .border-radius();
+        .box-shadow(0 3px 5px rgba(0,0,0,.55));
+    }
+    margin-top: 10px;
+}
+
+.content {
+}
+
+.support {
+    color: @successText;
+}
+
+.not-support {
+    color: @errorText;
+}
+.btn{
+    .box-shadow();
+}

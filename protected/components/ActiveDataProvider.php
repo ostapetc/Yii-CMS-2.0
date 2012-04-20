@@ -1,9 +1,20 @@
 <?
+/**
+ * demo comment
+ *
+ * @package cms
+ * @subpackage components
+ */
 class ActiveDataProvider extends CActiveDataProvider
 {
     const PAGE_SIZE = 10;
 
-
+    /**
+     * demo comment
+     *
+     * @param mixed $modelClass
+     * @param array $config
+     */
     public function __construct($modelClass, $config = array())
     {
         if (!isset($config['pagination']['pageSize']))

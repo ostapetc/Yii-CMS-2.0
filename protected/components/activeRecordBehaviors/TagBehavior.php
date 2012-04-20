@@ -1,48 +1,54 @@
 <?
 
-class TagBehavior extends CActiveRecordBehavior
+class TagBehavior extends ActiveRecordBehavior
 {
     private static $_tags;
 
 
-    public function afterSave()
+    public function afterSave($event)
     {
-        $this->_deleteRels();
+        //parent::afterSave($event);
 
-        $model_id = get_class($this->owner);
 
-        if (isset($_POST[$model_id]['tags']))
-        {
-            TagRel::model()->deleteAllByAttributes(array('model_id' => $model_id, 'object_id' => $this->owner->id));
+        //$this->_deleteRels();
 
-            foreach (explode(',', $_POST[$model_id]['tags']) as $tag_name)
-            {
-                $tag = Tag::model()->find("name = '{$tag_name}'");
-                if (!$tag)
-                {
-                    $tag = new Tag();
-                    $tag->name = $tag_name;
-                    if (!$tag->save())
-                    {
-                        throw new CHttpException("can't save tag");
-                    }
-                }
+//        $tags = Yii::app()->request->getParam('Tag');
+//        if ($tags)
+//        {
+//
+//        }
 
-                $tag_rel = new TagRel();
-                $tag_rel->tag_id    = $tag->id;
-                $tag_rel->object_id = $this->owner->id;
-                $tag_rel->model_id  = $model_id;
-                $tag_rel->save(false);
-            }
-        }
+        return parent::afterSave($event);
     }
 
 
-    public function _deleteRels()
+//    public function afterDelete($event)
+//    {
+//        $this->_deleteRels();
+//        return parent::afterDelete($event);
+//    }
+
+
+//    private function _deleteRels()
+//    {
+//        TagRel::model()->deleteAllByAttributes(array(
+//            'object_id' => $this->owner->id,
+//            'model_id'  => get_class($this->owner)
+//        ));
+//    }
+
+
+    public function initFormElements($event)
     {
-        TagRel::model()->exists("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
+        $elements = $event->sender->getElements();
+        $elements['tags'] = array(
+            'type' => 'application.components.formElements.TagsInput.TagsInput'
+        );
+        $event->sender->setElements($elements);
     }
+
 }
+
 
 
 

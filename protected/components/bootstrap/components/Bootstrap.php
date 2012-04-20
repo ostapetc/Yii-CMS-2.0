@@ -52,8 +52,6 @@ class Bootstrap extends CApplicationComponent
 	{
 		if (!Yii::getPathOfAlias('bootstrap'))
 			Yii::setPathOfAlias('bootstrap', realpath(dirname(__FILE__).'/..'));
-
-		Yii::app()->clientScript->registerCoreScript('jquery');
 	}
 
     public function registerScripts()

@@ -4,11 +4,11 @@ class ActiveRecordBehavior extends CActiveRecordBehavior
     public function events()
     {
         return array_merge(parent::events(), array(
-            'onInitFormElements'=>'initFormElements',
+            'onBeforeInitForm'=>'beforeInitForm',
         ));
     }
 
-    public function initFormElements($event)
+    public function beforeInitForm($event)
     {
     }
 

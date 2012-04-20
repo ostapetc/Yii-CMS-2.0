@@ -35,11 +35,7 @@
 
             <div class="btn_view_site"><a href="/"><? echo t('На сайт'); ?></a></div>
 
-            <div style="float: right;margin-right:20px">
-                <?php if($this->beginCache('LanguageSwitcherAdmin', array('duration'=>3600))) { ?>
-                    <? $this->widget('LanguageSwitcherAdmin'); ?>
-                <?php $this->endCache(); } ?>
-            </div>
+            <div style="float: right;margin-right:20px"><? $this->widget('LanguageSwitcherAdmin'); ?></div>
 
         </hgroup>
     </header>
@@ -79,10 +75,7 @@
     <aside id="sidebar" class="column">
         <? $this->renderPartial('main.views.mainAdmin._search'); ?>
         <hr/>
-
-        <?php if($this->beginCache('AdminMenu', array('duration'=>3600))) { ?>
-            <? $this->widget('AdminMenu'); ?>
-        <?php $this->endCache(); } ?>
+        <? $this->widget('AdminMenu'); ?>
 
         <footer>
             <hr/>

@@ -1,4 +1,8 @@
 <?
+/**
+ * @package form
+ * @version
+ */
 class AdminFormInputElement extends BaseFormInputElement
 {
     public $layout="{hint}\n{label}\n{input}\n{error}";
