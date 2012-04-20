@@ -58,40 +58,40 @@
 </head>
 
 <body>
-<!---->
-<!--<div class="navbar navbar-fixed-top">-->
-<!--    <div class="navbar-inner">-->
-<!--        <div class="container-fluid">-->
-<!--            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">-->
-<!--                <span class="icon-bar"></span>-->
-<!--                <span class="icon-bar"></span>-->
-<!--                <span class="icon-bar"></span>-->
-<!--            </a>-->
-<!--            <a class="brand" href="/">Yii-CMS 2.0</a>-->
-<!---->
-<!--            <div class="nav-collapse">-->
-<!--                --><?// //$this->widget('TopMenu');?>
-<!---->
-<!--                <p class="navbar-text pull-right">-->
-<!--                    --><?// $this->widget('main.portlets.LanguageSwitcher') ?>
-<!--                </p>-->
-<!---->
-<!--                <p class="navbar-text pull-right divider-vertical"></p>-->
-<!---->
-<!--                <ul class="nav pull-right">-->
-<!--                    --><?// $this->widget('users.portlets.LoginPanel'); ?>
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <!--/.nav-collapse -->-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/">Yii-CMS 2.0</a>
+
+            <div class="nav-collapse">
+                <? //$this->widget('TopMenu');?>
+
+                <p class="navbar-text pull-right">
+                    <? $this->widget('main.portlets.LanguageSwitcher') ?>
+                </p>
+
+                <p class="navbar-text pull-right divider-vertical"></p>
+
+                <ul class="nav pull-right">
+                    <? $this->widget('users.portlets.LoginPanel'); ?>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span3">
             <div class="well sidebar-nav">
-<!--                --><?// $this->widget('SidebarMenu'); ?>
+                <? $this->widget('SidebarMenu'); ?>
             </div>
             <? //$this->widget('SidebarBanners') ?>
         </div>
