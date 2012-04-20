@@ -71,7 +71,7 @@ class Form extends CForm
         {
             try
             {
-                $this->model->onInitFormElements(new CEvent($this));
+                $this->model->onBeforeInitForm(new CEvent($this));
             }
             catch(Exception $e)
             {

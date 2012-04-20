@@ -5,7 +5,8 @@ class LanguagesBehavior extends ActiveRecordBehavior
 
     private function defineLanguage()
     {
-        if (Yii::app()->controller instanceof AdminController) {
+        if (Yii::app()->controller instanceof AdminController)
+        {
             return Yii::app()->language;
         }
         else
@@ -17,13 +18,14 @@ class LanguagesBehavior extends ActiveRecordBehavior
 
     public function language($language_id = null)
     {
-        if (!$language_id) {
-            $language_id = $this->defineLanguage();
-            ;
+        if (!$language_id)
+        {
+            $language_id = $this->defineLanguage();;
         }
 
         $meta = $this->owner->meta();
-        if (!isset($meta['language'])) {
+        if (!isset($meta['language']))
+        {
             $msg = "У таблицы '" . $this->owner->tableName() . "' отсутствует поле 'language' <br/>";
 
             $msg .= "<a href='" . Yii::app()->createUrl(
@@ -47,7 +49,7 @@ class LanguagesBehavior extends ActiveRecordBehavior
     }
 
 
-    public function initFormElements($event)
+    public function beforeInitForm($event)
     {
         $elements = $event->sender->getElements();
         $meta = $this->owner->meta();
