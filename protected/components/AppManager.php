@@ -5,7 +5,8 @@ class AppManager
     private static $_modules_client_menu;
 
     private static $pathAliaces = array(
-        'gridColumns' => 'application.components.zii.gridColumns'
+        'gridColumns' => 'application.components.zii.gridColumns',
+        'bootstrap' => 'application.components.bootstrap'
     );
 
 
