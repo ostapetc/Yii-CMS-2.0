@@ -1,4 +1,4 @@
-<?
+    <?
 
 class TagsInput extends InputWidget
 {

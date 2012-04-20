@@ -23,8 +23,9 @@ class Tag extends ActiveRecord
 	public function rules()
 	{
 		return array(
-			array('tag', 'required'),
-			array('tag', 'unique'),
+			array('name', 'required'),
+			array('name', 'unique'),
+            array('name', 'filter', 'filter' => 'strip_tags'),
 		);
 	}
 
@@ -38,7 +39,7 @@ class Tag extends ActiveRecord
     public function search()
    	{
    		$criteria = new CDbCriteria;
-   		$criteria->compare('tag', $this->object_id, true);
+   		$criteria->compare('name', $this->object_id, true);
 
    		return new ActiveDataProvider(get_class($this), array(
    			'criteria' => $criteria

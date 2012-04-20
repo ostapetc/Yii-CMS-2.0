@@ -47,7 +47,8 @@ class LanguageAdminController extends AdminController
         {
             $model = $form->model;
             if ($model->save())
-            {    print_r($model->getErrors());
+            {
+                echo "saved";
                 die;
                 $this->redirect($this->createUrl('manage'));
             }

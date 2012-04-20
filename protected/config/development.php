@@ -1,4 +1,4 @@
-<?php
+<?
 
 return array(
     'components' => array(
@@ -12,6 +12,4 @@ return array(
         )
     )
 );
-
-
 
