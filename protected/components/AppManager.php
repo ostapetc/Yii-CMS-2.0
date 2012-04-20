@@ -21,6 +21,10 @@ class AppManager
     public static function init()
     {
         self::initPathOfAliaces();
+        foreach (Yii::app()->getModules() as $module => $config)
+        {
+            Yii::app()->getModule($module);
+        }
         Yii::app()->urlManager->collectRules();
     }
 
