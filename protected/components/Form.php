@@ -69,7 +69,7 @@ class Form extends CForm
 
     public function initElements()
     {
-        if (!$this->_is_elements_inited)
+        if (!$this->_is_elements_inited && $this->model instanceof ActiveRecord)
         {
             try
             {
