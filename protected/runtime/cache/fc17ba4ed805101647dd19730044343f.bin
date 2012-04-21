@@ -1,0 +1,95 @@
+a:2:{i:0;a:2:{i:0;s:7180:"            <div class="portlet" id="yw2">
+<div class="portlet-content">
+<div id="admin_menu">
+    
+    <h3>Генератор кода</h3>
+    <ul class="toggle">
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/codegen/moduleAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Создать модуль</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/codegen/modelAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Создать модель</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/codegen/formAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Создать форму</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/codegen/crudAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Создать CRUD</a>
+            </li>
+            </ul>
+    
+    <h3>Контент</h3>
+    <ul class="toggle">
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/content/pageAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Список страниц</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/content/pageAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Добавить страницу</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/content/menuAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Управление меню</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/content/menuAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Добавить меню</a>
+            </li>
+            </ul>
+    
+    <h3>Рассылка</h3>
+    <ul class="toggle">
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/mailer/outboxEmailAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Исходящие письма</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/mailer/emailTemplateAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Шаблоны</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/mailer/emailTemplateAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Добавить шаблон</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/ParamAdmin/manage/module_id/mailer" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Параметры</a>
+            </li>
+            </ul>
+    
+    <h3>Система</h3>
+    <ul class="toggle">
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/logAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Логирование</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/LanguageAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Языки</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/main/LanguageAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Добавить язык</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/LanguageMessageAdmin/manage" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Языки (переводы)</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Create.png">
+                <a href="/main/LanguageMessageAdmin/create" style="background: url(/img/admin/actions_icons/Create.png) no-repeat center left;">Языки (добавить перевод)</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/ParamAdmin/manage/module_id/main" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Параметры</a>
+            </li>
+            </ul>
+    
+    <h3>test name</h3>
+    <ul class="toggle">
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/ParamAdmin/manage/module_id/test" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Параметры</a>
+            </li>
+            </ul>
+    
+    <h3>Пользователи</h3>
+    <ul class="toggle">
+                                <li class="action_icon" icon_url="/assets/2caf65b9/img/actions_icons/User_Manage.png">
+                <a href="/users/userAdmin/manage" style="background: url(/assets/2caf65b9/img/actions_icons/User_Manage.png) no-repeat center left;">Все пользователи </a>
+            </li>
+                                <li class="action_icon" icon_url="/assets/2caf65b9/img/actions_icons/User_Create.png">
+                <a href="/users/userAdmin/create" style="background: url(/assets/2caf65b9/img/actions_icons/User_Create.png) no-repeat center left;">Добавить пользователя</a>
+            </li>
+                                <li class="action_icon" icon_url="/img/admin/actions_icons/Manage.png">
+                <a href="/main/ParamAdmin/manage/module_id/users" style="background: url(/img/admin/actions_icons/Manage.png) no-repeat center left;">Параметры</a>
+            </li>
+            </ul>
+</div></div>
+</div>        ";i:1;N;}i:1;N;}

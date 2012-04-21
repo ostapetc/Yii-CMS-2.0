@@ -157,7 +157,7 @@ return CMap::mergeArray(array(
     'onBeginRequest' => array('AppManager', 'init'),
 
 
-    'params'         => array(
+    'params' => array(
         'save_site_actions' => true,
         'multilanguage_support' => true,
         'collect_routes_from_modules' => true,

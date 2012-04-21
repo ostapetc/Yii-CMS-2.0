@@ -1,4 +1,8 @@
-<? 
+<?
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set('xdebug.max_nesting_level', 1000);
+
 define('DS', DIRECTORY_SEPARATOR);
 
 $_SERVER['DOCUMENT_ROOT'] = str_replace(array('\\', '/'), DS, $_SERVER['DOCUMENT_ROOT']);
@@ -12,8 +16,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'con
 
 $yii = LIBRARY_PATH . 'yii' . DS . 'yii.php';
 
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
 
 date_default_timezone_set('Europe/Moscow');
 

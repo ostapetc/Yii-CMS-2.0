@@ -1,0 +1,15 @@
+a:2:{i:0;a:2:{i:0;s:734:"                    <div class="portlet" id="yw0">
+<div class="portlet-content">
+
+<div id="country-select">
+    <form action="/main/main/ChangeLanguage" id="select-lang-form">
+        <select id="country-options" name="set_language">
+                                            <option value="ru" selected>русский</option>
+                                            <option value="en" >english</option>
+                                            <option value="ta" >Балгария</option>
+                    </select>
+        <input type="hidden" name="back_url" value="L3J1L2NvbnRlbnQvcGFnZUFkbWluL3VwZGF0ZS9pZC8z">
+        <input value="Select" type="submit"/>
+    </form>
+</div></div>
+</div>                ";i:1;a:2:{i:0;a:3:{i:0;s:12:"clientScript";i:1;s:18:"registerScriptFile";i:2;a:1:{i:0;s:30:"/js/admin/language_switcher.js";}}i:1;a:3:{i:0;s:12:"clientScript";i:1;s:15:"registerCssFile";i:2;a:1:{i:0;s:32:"/css/admin/language_switcher.css";}}}}i:1;N;}
