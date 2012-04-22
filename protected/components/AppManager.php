@@ -318,7 +318,7 @@ class AppManager
 
     public static function getConfig()
     {
-        return include PROTECTED_PATH . 'config/main.php';
+        return include APP_PATH . 'config/main.php';
     }
 
 

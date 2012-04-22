@@ -1,6 +1,14 @@
 <?php
 class InstallHelper
 {
+    /**
+     * parse file and
+     *
+     * @static
+     * @param $source
+     * @param $target
+     * @param $data
+     */
     public static function parseFile($source, $target, $data)
     {
        $content = strtr(file_get_contents($source), $data);

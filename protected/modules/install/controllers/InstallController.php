@@ -64,6 +64,7 @@ class InstallController extends Controller
 
             if (MsgStream::getInstance()->count() == 0)
             {
+                Yii::app()->user->setState('step1', $model->attributes);
                 $this->redirect('step2');
             }
         }
@@ -74,8 +75,12 @@ class InstallController extends Controller
 
     public function actionStep2()
     {
+        $step1 = new Step1();
+        $step1->attributes = Yii::app()->user->getState('step1');
+
         $model = new Step2();
         $form = new Form('install.Step2', $model);
+
 
         $this->performAjaxValidation($model);
 
@@ -85,7 +90,7 @@ class InstallController extends Controller
 
             //set configs
             //install base modules
-
+            Yii::app()->user->setState('step2', $model->attributes);
             //$this->redirect('step3');
         }
 
@@ -94,6 +99,12 @@ class InstallController extends Controller
 
     public function actionStep3()
     {
+        $step1 = new Step1();
+        $step1->attributes = Yii::app()->user->getState('step1');
+
+        $step2 = new Step2();
+        $step2->attributes = Yii::app()->user->getState('step2');
+
         //done!
         //replace config in index.php
         //redirect - no end

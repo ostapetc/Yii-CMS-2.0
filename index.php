@@ -2,6 +2,7 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 ini_set('xdebug.max_nesting_level', 1000);
+date_default_timezone_set('Europe/Moscow');
 
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -13,14 +14,9 @@ if (substr($_SERVER['DOCUMENT_ROOT'], -1) != DS)
 }
 
 require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'constants.php';
-
-$yii = LIBRARY_PATH . 'yii' . DS . 'yii.php';
-
-
-date_default_timezone_set('Europe/Moscow');
-
-require_once($yii);
-require_once(LIBRARY_PATH.'functions.php');
+//require_once dirname(__FILE__) . '/WebApplication.php';
+require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
+require_once LIBRARIES_PATH . 'functions.php';
 
 $session = new CHttpSession;
 $session->open();
@@ -31,6 +27,6 @@ $env = YII_DEBUG ? 'development' : 'production';
 
 define('ENV', $env);
 
-$config = PROTECTED_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
+$config = APP_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
 
 Yii::createWebApplication($config)->run();

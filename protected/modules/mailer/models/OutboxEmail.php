@@ -117,7 +117,7 @@ class OutboxEmail extends ActiveRecord
 
     private static function sendMail($email_to, $subject, $body)
     {
-        require_once LIBRARY_PATH . 'PHPMailer_v5.1/class.phpmailer.php';
+        require_once LIBRARIES_PATH . 'PHPMailer_v5.1/class.phpmailer.php';
 
         $settings = Param::model()->findCodesValues('mailer');
 
