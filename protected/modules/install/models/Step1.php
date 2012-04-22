@@ -1,7 +1,7 @@
 <?php
 class Step1 extends FormModel
 {
-    public $db_host;
+    public $db_host = 'localhost';
     public $db_login;
     public $db_pass;
     public $db_name;

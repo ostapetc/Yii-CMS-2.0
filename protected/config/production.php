@@ -1,14 +1,16 @@
-<?
+<?php
 
 return array(
     'components' => array(
         'db' => array(
-            'connectionString' => 'mysql:host=openserver;dbname=yiicms_2.0;',
-            'emulatePrepare' => true,
-            'username' => 'mysql',
-            'password' => 'mysql',
-            'charset' => 'utf8',
-            'enableProfiling' => true,
+            'connectionString'      => 'mysql:%DB_HOST%=localhost;dbname=%DB_NAME%;',
+            'emulatePrepare'        => true,
+            'username'              => '%DB_LOGIN%',
+            'password'              => '%DB_PASS%',
+            'charset'               => 'utf8',
         )
     )
 );
+
+
+

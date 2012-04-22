@@ -25,8 +25,11 @@ require_once(LIBRARY_PATH.'functions.php');
 $session = new CHttpSession;
 $session->open();
 
-define('ENV', YII_DEBUG ? 'development' : 'production');
+$env = YII_DEBUG ? 'development' : 'production';
+//$env = 'production';
 //$config = 'install';
+
+define('ENV', $env);
 
 $config = PROTECTED_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
 

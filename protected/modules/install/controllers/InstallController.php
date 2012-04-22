@@ -46,10 +46,28 @@ class InstallController extends Controller
 
         if ($form->submitted() && $model->validate())
         {
-            $this->parseFile('application.config.development', $model->getDbPatterns());
-            $this->parseFile('application.config.production', array());
-            $this->redirect('step2');
+            //create db
+            $db_create_status = InstallHelper::createDb($model);
+            if ($db_create_status === true)
+            {
+                //create configs
+                InstallHelper::parseConfig('development', $model->getDbPatterns());
+                InstallHelper::parseConfig('production', array());
+            }
+            else
+            {
+                if (!InstallHelper::$pdo_error_happend)
+                {
+                    MsgStream::getInstance()->enqueue($db_create_status, 'error');
+                }
+            }
+
+            if (MsgStream::getInstance()->count() == 0)
+            {
+                $this->redirect('step2');
+            }
         }
+
 
         $this->render('step1', array('form' => $form));
     }
@@ -63,7 +81,7 @@ class InstallController extends Controller
 
         if ($form->submitted() && $model->validate())
         {
-            $this->parseFile('application.config.main', $model->getMainConfigPatterns());
+            InstallFileHelper::parseConfig('main', $model->getMainConfigPatterns());
 
             //set configs
             //install base modules
@@ -82,14 +100,6 @@ class InstallController extends Controller
         //install - uninstall
     }
 
-    private function parseFile($alias, $data)
-    {
-        $file = Yii::getPathOfAlias($alias);
-
-        $content = strtr(file_get_contents($file.'.tpl.php'), $data);
-        rename ($file.'.tpl.php', $file.'.php');
-        file_put_contents($file.'.php', $content);
-    }
 
     public function actionError()
     {

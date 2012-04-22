@@ -8,8 +8,8 @@ return array(
         '<b>Настройки базы данных:</b>',
         'db_host'               => array('type' => 'text', 'hint' => 'В большинстве случаев localhost'),
         'db_name'               => array('type' => 'text', 'hint' => 'Если не существует будет создана'),
-        'db_login'              => array('type' => 'password'),
-        'db_pass'               => array('type' => 'text'),
+        'db_login'              => array('type' => 'text'),
+        'db_pass'               => array('type' => 'password'),
     ),
     'buttons'    => array(
         'submit' => array(

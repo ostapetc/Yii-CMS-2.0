@@ -137,7 +137,7 @@ abstract class Controller extends CController
     }
 
 
-    public function msg($msg, $type)
+    public static function msg($msg, $type)
     {
         return CHtml::tag('div', array('class'=>"alert alert-{$type}"), $msg);
     }
