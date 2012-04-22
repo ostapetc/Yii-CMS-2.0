@@ -20,7 +20,6 @@ abstract class Controller extends CController
 
     public $is_ssl_protected = false;
 
-
     public $system_actions = array(
         'captcha','help','error'
     );
@@ -76,14 +75,17 @@ abstract class Controller extends CController
             throw new CException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
+        $this->setTitle($action);
+
+        return true;
+    }
+
+    public function afterAction($action)
+    {
         if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
         {
             MainModule::saveSiteAction();
         }
-
-        $this->setTitle($action);
-
-        return true;
     }
 
 

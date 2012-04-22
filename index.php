@@ -14,7 +14,6 @@ if (substr($_SERVER['DOCUMENT_ROOT'], -1) != DS)
 }
 
 require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'constants.php';
-//require_once dirname(__FILE__) . '/WebApplication.php';
 require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
 require_once LIBRARIES_PATH . 'functions.php';
 
