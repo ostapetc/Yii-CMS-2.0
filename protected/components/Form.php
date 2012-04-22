@@ -67,11 +67,11 @@ class Form extends CForm
 
     public function initElements()
     {
-        if (!$this->_is_elements_inited && $this->model instanceof ActiveRecord)
+        if (!$this->_is_elements_inited)
         {
             try
             {
-                $this->model->onInitFormElements(new CEvent($this));
+                $this->model->onBeforeInitForm(new CEvent($this));
             }
             catch(Exception $e)
             {

@@ -19,6 +19,7 @@
     Yii::app()->bootstrap->registerScripts();
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles').'.less'));
+    $cs->registerScriptFile('/js/plugins/hint.js');
 
     if (YII_DEBUG)
     {

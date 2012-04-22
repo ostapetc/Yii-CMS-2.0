@@ -17,6 +17,7 @@
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
     $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');
     $cs->registerScriptFile('/js/admin/main.js');
+    $cs->registerScriptFile('/js/plugins/hint.js');
     ?>
 
     <!--[if lt IE 9]>

@@ -32,7 +32,7 @@ class InstallModule extends WebModule
     public static function routes()
     {
         return array(
-            '/'        => 'install/install/index',
+            '/install'        => 'install/install/index',
         );
     }
 }
