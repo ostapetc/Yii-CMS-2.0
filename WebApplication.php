@@ -9,22 +9,45 @@
  */
 class MsgStream
 {
+    /**
+     * @var CQueue
+     */
     private $queue;
 
+    /**
+     * Create queue
+     */
     private function __construct()
     {
         $this->queue = new CQueue();
     }
+
+    /**
+     * private for Singleton
+     */
     private function __clone() {}
+
+    /**
+     * private for Singleton, prevention creating by serialize
+     */
     private function __wakeup() {}
 
+    /**
+     * @var self
+     */
     protected static $_instance;
-
 
     const TYPE_ERROR = 'error';
     const TYPE_SUCCESS = 'success';
     const TYPE_INFO = 'info';
 
+    /**
+     * proxy all calling to CQueue instance
+     *
+     * @param $name
+     * @param $params
+     * @return mixed
+     */
     public function __call($name, $params)
     {
         return call_user_func_array(array($this->queue, $name), $params);
@@ -46,25 +69,24 @@ class MsgStream
     }
 
     /**
-     * Set type to a message item
+     * Set type item and add to queue
      *
-     * @param mixed $item
+     * @param string $item
      * @param string|null $type error|success|info
      */
-    public function enqueue($item, $type = null)
+    public function enqueue(string $item, $type = null)
     {
-        if (is_array($item))
-        {
-            $item_array = $item;
-        }
-        else
-        {
-            $item_array = array('item'=>$item);
-        }
-        $item_array['type'] = $type;
-        return $this->queue->enqueue($item_array);
+        return $this->queue->enqueue(array(
+            'item' => $item,
+            'type' => $type
+        ));
     }
 
+    /**
+     * render all items using Controller::msg method
+     *
+     * @return string
+     */
     public function render()
     {
         $str = '';
@@ -104,7 +126,10 @@ class MsgStream
 class WebApplication extends CWebApplication {
 
     /**
-     * add error report to MessageStream
+     * Add error report to MessageStream and logging error
+     *
+     * Error can came from OS and will using OS default encoding
+     * method try to encode it to UTF-8
      *
      * @param $code
      * @param $message
@@ -116,9 +141,11 @@ class WebApplication extends CWebApplication {
         if (ENV == 'production')
         {
             $encoding = mb_detect_encoding($message, 'ASCII,WINDOWS-1251,UTF-8', true);
+            //if no-utf-8 try to encode error message
             $log = $encoding == 'UTF-8' ? $message : @iconv($encoding, 'UTF-8//TRANSLIT//IGNORE', $message);
-            MsgStream::getInstance()->enqueue($log, 'error');
+            MsgStream::getInstance()->enqueue($log, 'error'); //show only message
 
+            //log all
             $log .= "code: " . $code . "\n";
             $log .= 'file: ' . $file . "\n" . "line: " . $line . "\n";
             if(isset($_SERVER['REQUEST_URI']))
