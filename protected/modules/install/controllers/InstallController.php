@@ -8,10 +8,8 @@ class InstallController extends Controller
         return array();
     }
 
-    public function beforeAction($action)
-    {
-        return true;
-    }
+    public function beforeAction($action) {return true;}
+    public function afterAction($action) {}
 
     public $layout = 'install';
 
@@ -78,14 +76,18 @@ class InstallController extends Controller
         $model = new Step2();
         $form = new Form('install.Step2', $model);
 
-
         $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->validate())
         {
-            InstallFileHelper::parseConfig('main', $model->getMainConfigPatterns());
-
-            //set configs
+            InstallHelper::parseConfig('main', $model->getMainConfigPatterns());
+try{
+            foreach ($model->modules as $module)
+            {
+                Yii::app()->executor->addCommands($module.'.commands');
+            }
+}catch(Exception $e){Y::dump($e);}
+            $commands_result = Yii::app()->executor->emigrate('create install tmp');
             //install base modules
             Yii::app()->user->setState('step2', $model->attributes);
             //$this->redirect('step3');

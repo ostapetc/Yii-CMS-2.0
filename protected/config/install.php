@@ -20,6 +20,9 @@ return array(
     ),
     'modules'    => array('install'),
     'components' => array(
+        'executor' => array(
+            'class' => 'application.components.CommandExecutor',
+        ),
         'messages' => array(
             'class' => 'CDbMessageSource',
             'sourceMessageTable'     => 'languages_messages',

@@ -38,6 +38,7 @@ class CHelpCommand extends CConsoleCommand
 	{
 		$runner=$this->getCommandRunner();
 		$commands=$runner->commands;
+        Y::dump($commands);
 		if(isset($args[0]))
 			$name=strtolower($args[0]);
 		if(!isset($args[0]) || !isset($commands[$name]))

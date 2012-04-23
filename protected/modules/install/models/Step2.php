@@ -52,10 +52,10 @@ class Step2 extends FormModel
         $modules = array();
         foreach (array_merge($this->modules, array('main', 'users', 'rbac')) as $module)
         {
-            $module[] = "'".$module."'";
+            $modules[] = $module;
         }
         return array(
-            '%MODULES%'                     => implode(', ',$modules),
+            '%MODULES%'                     => implode('", "',$modules),
             '%SAVE_SITE_ACTIONS%'           => $this->save_site_actions ? 'true' : 'false',
             '%MULTILANGUAGE_SUPPORT%'       => $this->multilanguage_support ? 'true' : 'false',
             '%COLLECT_ROUTES_FROM_MODULES%' => $this->collect_routes_from_modules ? 'true' : 'false',

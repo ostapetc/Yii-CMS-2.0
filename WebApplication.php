@@ -74,7 +74,7 @@ class MsgStream
      * @param string $item
      * @param string|null $type error|success|info
      */
-    public function enqueue(string $item, $type = null)
+    public function enqueue($item, $type = null)
     {
         return $this->queue->enqueue(array(
             'item' => $item,
@@ -110,6 +110,8 @@ class MsgStream
  * @method WebUser getUser()
  * @property MetaTags $metaTags
  * @method MetaTags getMetaTags()
+ * @property CommandExecutor $executor
+ * @method CommandExecutor getExecutor()
  * @property CImageComponent $image
  * @method CImageComponent getImage()
  * @property DaterComponent $dater
@@ -124,6 +126,13 @@ class MsgStream
  * @method CLogRouter getLog()
  */
 class WebApplication extends CWebApplication {
+
+
+    public function initSystemHandlers()
+    {
+        parent::initSystemHandlers();
+        register_shutdown_function(array($this, 'handleShutDown'));
+    }
 
     /**
      * Add error report to MessageStream and logging error
@@ -178,6 +187,15 @@ class WebApplication extends CWebApplication {
         else
         {
             parent::handleException($exception);
+        }
+    }
+
+    public function handleShutDown()
+    {
+        $error = error_get_last();
+        if ($error != null && isset($error['code'], $error['message'], $error['file'], $error['line']))
+        {
+            $this->handleError($error['code'], $error['message'], $error['file'], $error['line']);
         }
     }
 }

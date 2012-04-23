@@ -6,6 +6,7 @@ return CMap::mergeArray(array(
     'preload'  => array('log'),
     'import'   => array(
         'application.components.*',
+        'application.components.interfaces.*',
         'application.components.Form',
         'application.components.validators.*',
         'application.components.zii.*',
@@ -17,7 +18,7 @@ return CMap::mergeArray(array(
         'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
-    'modules'    => '%MODULES%',
+    'modules'    => array('%MODULES%'),
     'components' => array(
         'messages' => array(
             'class' => 'CDbMessageSource',
