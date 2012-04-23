@@ -6,6 +6,7 @@ return array(
     'preload'  => array('log'),
     'import'   => array(
         'application.components.*',
+        'application.components.interfaces.*',
         'application.components.Form',
         'application.components.validators.*',
         'application.components.zii.*',

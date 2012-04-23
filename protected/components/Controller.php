@@ -1,5 +1,5 @@
 <?
-abstract class Controller extends CController
+abstract class Controller extends CController implements ControllerInterface
 {
     const MSG_SUCCESS = 'success';
     const MSG_DANGER  = 'danger';
@@ -23,9 +23,6 @@ abstract class Controller extends CController
     public $system_actions = array(
         'captcha','help','error'
     );
-
-    abstract public static function actionsTitles();
-
 
     public function filters()
     {

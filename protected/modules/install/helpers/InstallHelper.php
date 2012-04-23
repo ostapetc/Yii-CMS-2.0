@@ -47,7 +47,7 @@ class InstallHelper
             $sql = "CREATE DATABASE IF NOT EXISTS `{$model->db_name}` CHARACTER SET utf8 COLLATE utf8_general_ci";
             //$this->execute() do echo some information for console. it needn't
             $connection->createCommand($sql)->execute();
-            $return = true;
+            $return = !self::$pdo_error_happend;
         }
         catch(Exception $e)
         {

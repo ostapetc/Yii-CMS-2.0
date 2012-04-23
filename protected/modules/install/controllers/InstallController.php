@@ -8,7 +8,7 @@ class InstallController extends Controller
         return array();
     }
 
-    public function beforeAction()
+    public function beforeAction($action)
     {
         return true;
     }
@@ -54,12 +54,9 @@ class InstallController extends Controller
                 InstallHelper::parseConfig('development', $model->getDbPatterns());
                 InstallHelper::parseConfig('production', array());
             }
-            else
+            else if (is_string($db_create_status))
             {
-                if (!InstallHelper::$pdo_error_happend)
-                {
-                    MsgStream::getInstance()->enqueue($db_create_status, 'error');
-                }
+                MsgStream::getInstance()->enqueue($db_create_status, 'error');
             }
 
             if (MsgStream::getInstance()->count() == 0)
