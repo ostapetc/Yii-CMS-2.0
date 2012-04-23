@@ -81,13 +81,11 @@ class InstallController extends Controller
         if ($form->submitted() && $model->validate())
         {
             InstallHelper::parseConfig('main', $model->getMainConfigPatterns());
-try{
             foreach ($model->modules as $module)
             {
                 Yii::app()->executor->addCommands($module.'.commands');
             }
-}catch(Exception $e){Y::dump($e);}
-            $commands_result = Yii::app()->executor->emigrate('create install tmp');
+            Yii::app()->executor->emigrate('create install tmp');
             //install base modules
             Yii::app()->user->setState('step2', $model->attributes);
             //$this->redirect('step3');
