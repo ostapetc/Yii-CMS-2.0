@@ -16,6 +16,8 @@
     $cs->registerScriptFile('/js/admin/hideshow.js');
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
     $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');
+    $cs->registerScriptFile('/js/admin/jquery.hotkeys.js');
+    $cs->registerScriptFile('/js/admin/jquery.console.js');
     $cs->registerScriptFile('/js/admin/main.js');
     $cs->registerScriptFile('/js/plugins/hint.js');
     ?>
@@ -28,6 +30,7 @@
 
 
 <body>
+    <? $this->widget('main.portlets.Console') ?>
     <header id="header">
         <hgroup>
             <h1 class="site_title" ><a href="/admin" style="margin-left: 20px"><?= Param::get('project_name'); ?></a></h1>

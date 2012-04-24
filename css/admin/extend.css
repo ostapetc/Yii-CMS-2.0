@@ -80,3 +80,14 @@ ul ul{
     margin-left: 0;
 }
 
+.admin-console{
+    position: fixed;
+    top: 0;
+    height: 350px;
+    width: 100%;
+    background: #888;
+    display: none;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    border-bottom: 2px solid #666;
+}
