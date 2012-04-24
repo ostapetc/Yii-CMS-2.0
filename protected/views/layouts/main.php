@@ -97,7 +97,8 @@
             <? //$this->widget('SidebarBanners') ?>
         </div>
         <div class="span9">
-            <? echo $content ?>
+            <?= MsgStream::getInstance()->render();?>
+            <?= $content ?>
         </div>
     </div>
     <hr>
