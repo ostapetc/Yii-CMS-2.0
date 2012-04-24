@@ -32,6 +32,9 @@ return CMap::mergeArray(array(
     ),
     'modules'    => $modules,
     'components' => array(
+        'executor' => array(
+            'class' => 'application.components.CommandExecutor',
+        ),
         'messages' => array(
             'class' => 'CDbMessageSource',
             'sourceMessageTable'     => 'languages_messages',

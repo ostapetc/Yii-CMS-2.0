@@ -11,6 +11,7 @@ class HelpAdminController extends AdminController
         return array(
             'Sortable'         => 'Изменение позиции',
             'ManyManySortable' => 'Изменение позиции для отношений ManyMany',
+            'Console'          => 'Консоль',
             'SaveAttribute'    => 'Сохранение Атрибута'
         );
     }
@@ -20,6 +21,9 @@ class HelpAdminController extends AdminController
         return array(
             'sortable'         => array(
                 'class' => 'ext.sortable.SortableAction',
+            ),
+            'console'         => array(
+                'class' => 'main.components.ConsoleAction',
             ),
             'manyManySortable' => array(
                 'class' => 'ext.sortable.ManyManySortableAction',

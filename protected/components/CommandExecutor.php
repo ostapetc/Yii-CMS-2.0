@@ -30,9 +30,10 @@ class CommandExecutor extends CApplicationComponent
             array_push($args, $item);
         }
         ob_start();
+        ob_implicit_flush(false);
         array_push($args, '--interactive=0');
         $this->runner->run($args);
-        return htmlentities(ob_get_clean(), null, Yii::app()->charset);
+        return ob_get_clean();
     }
 
     public function addCommands($alias)
