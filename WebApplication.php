@@ -19,7 +19,7 @@ class MsgStream
      */
     private function __construct()
     {
-        $this->queue = new CQueue();
+        $this->queue = new CQueue(Yii::app()->session->get('core_messages', array()));
     }
 
     /**
@@ -50,7 +50,9 @@ class MsgStream
      */
     public function __call($name, $params)
     {
-        return call_user_func_array(array($this->queue, $name), $params);
+        $result = call_user_func_array(array($this->queue, $name), $params);
+        Yii::app()->getSession()->add('core_messages', $this->queue->toArray());
+        return $result;
     }
 
     /**
@@ -76,10 +78,12 @@ class MsgStream
      */
     public function enqueue($item, $type = null)
     {
-        return $this->queue->enqueue(array(
+        $result = $this->queue->enqueue(array(
             'item' => $item,
             'type' => $type
         ));
+        Yii::app()->getSession()->add('core_messages', $this->queue->toArray());
+        return $result;
     }
 
     /**
@@ -87,13 +91,14 @@ class MsgStream
      *
      * @return string
      */
-    public function render()
+    public function render($clear = true)
     {
         $str = '';
         foreach ($this->queue->toArray() as $item)
         {
             $str .= Yii::app()->controller->msg($item['item'], $item['type']);
         }
+        $this->clear();
         return $str;
     }
 }
@@ -134,61 +139,21 @@ class WebApplication extends CWebApplication {
         register_shutdown_function(array($this, 'handleShutDown'));
     }
 
-    /**
-     * Add error report to MessageStream and logging error
-     *
-     * Error can came from OS and will using OS default encoding
-     * method try to encode it to UTF-8
-     *
-     * @param $code
-     * @param $message
-     * @param $file
-     * @param $line
-     */
-    public function handleError($code,$message,$file,$line)
+    public function displayError($code, $message, $file, $line)
     {
         if (ENV == 'production')
         {
             $encoding = mb_detect_encoding($message, 'ASCII,WINDOWS-1251,UTF-8', true);
             //if no-utf-8 try to encode error message
             $log = $encoding == 'UTF-8' ? $message : @iconv($encoding, 'UTF-8//TRANSLIT//IGNORE', $message);
-            MsgStream::getInstance()->enqueue($log, 'error'); //show only message
-
-            //log all
-            $log .= "code: " . $code . "\n";
-            $log .= 'file: ' . $file . "\n" . "line: " . $line . "\n";
-            if(isset($_SERVER['REQUEST_URI']))
-                $log.='REQUEST_URI='.$_SERVER['REQUEST_URI'];
-
-            Yii::log($log,CLogger::LEVEL_ERROR,'php');
+            MsgStream::getInstance()->enqueue($log, MsgStream::TYPE_ERROR); //show only message
         }
         else
         {
-            parent::handleError($code,$message,$file,$line);
+            parent::displayError($code, $message, $file, $line);
         }
     }
 
-    /**
-     * add exception report to MessageStream
-     *
-     * @param Exception $exception
-     */
-    public function handleException($exception)
-    {
-        if (ENV == 'production')
-        {
-            $log = $exception->getMessage();
-            MsgStream::getInstance()->enqueue($log, 'error');
-            $log .= 'file: ' . $exception->getFile() . "\n" . "line: " . $exception->getLine() . "\n";
-            $log .= $exception->getTrace() . "\n";\
-
-            Yii::log($log, CLogger::LEVEL_ERROR);
-        }
-        else
-        {
-            parent::handleException($exception);
-        }
-    }
 
     public function handleShutDown()
     {

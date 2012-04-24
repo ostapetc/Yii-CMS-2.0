@@ -109,6 +109,7 @@ return CMap::mergeArray(array(
         ),
 
         'errorHandler' => array(
+            'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
@@ -146,6 +147,8 @@ return CMap::mergeArray(array(
     ),
 
     'onBeginRequest' => array('AppManager', 'init'),
+    'onException'    => array('AppManager', 'exceptionHandler'),
+//    'onError'        => array('AppManager', 'onError'),
 
     'params'         => array(
         'save_site_actions' => true,

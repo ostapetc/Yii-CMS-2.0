@@ -68,6 +68,12 @@
         </div>
     </div>
     <div class="row-fluid content">
+        <?
+        if (MsgStream::getInstance()->count())
+        {
+            echo MsgStream::getInstance()->render();
+        }
+        ?>
         <?= $content ?>
     </div>
     <hr>

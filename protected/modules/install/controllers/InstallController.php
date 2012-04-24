@@ -5,7 +5,9 @@ class InstallController extends Controller
 
     public function filters()
     {
-        return array();
+        return array(
+            array('application.components.filters.ReturnUrlFilter'),
+        );
     }
 
     public function beforeAction($action) {return true;}
@@ -41,7 +43,6 @@ class InstallController extends Controller
         $form = new Form('install.Step1', $model);
 
         $this->performAjaxValidation($model);
-
         if ($form->submitted() && $model->validate())
         {
             //create db

@@ -325,6 +325,7 @@ class AppManager
     public static function getModelModule($model_class)
     {
         $file = $model_class . '.php';
+
         foreach (glob(MODULES_PATH . '*') as $module_dir)
         {
             if (file_exists($module_dir . DS . 'models' . DS . $file))
@@ -332,6 +333,17 @@ class AppManager
                 return pathinfo($module_dir, PATHINFO_BASENAME);
             }
         }
+    }
+
+
+    public function errorHandler(CErrorEvent $event)
+    {
+        //log in newrelic
+    }
+
+    public function exceptionHandler(CExceptionEvent $event)
+    {
+        //log in newrelic
     }
 }
 

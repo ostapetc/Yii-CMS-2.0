@@ -100,7 +100,8 @@ return array(
         ),
 
         'errorHandler' => array(
-            'errorAction' => 'install/install/error',
+            'class' => 'application.components.ErrorHandler',
+            'errorAction' => '/install/install/error',
         ),
 
         'authManager'  => array(
@@ -136,7 +137,10 @@ return array(
         ),
     ),
 
+
     'onBeginRequest' => array('AppManager', 'init'),
+    'onException'    => array('AppManager', 'exceptionHandler'),
+    'onError'        => array('AppManager', 'onError'),
 
 
     'params'         => array(

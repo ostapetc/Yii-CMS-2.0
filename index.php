@@ -1,4 +1,5 @@
 <?
+
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 ini_set('xdebug.max_nesting_level', 1000);
@@ -22,11 +23,11 @@ $env = YII_DEBUG ? 'development' : 'production';
 //$config = 'install';
 
 define('ENV', $env);
-
 $config = APP_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
 
 $session = new CHttpSession;
 $session->open();
 $app = Yii::createWebApplication($config);
 $app->setComponent('session',$session);
+
 $app->run();

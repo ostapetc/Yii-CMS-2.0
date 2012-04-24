@@ -34,6 +34,7 @@ abstract class Controller extends CController implements ControllerInterface
             array('application.components.filters.MetaTagsFilter + view'),
             array('application.components.filters.StatisticFilter'),
             array('application.components.filters.ThemeFilter'),
+            array('application.components.filters.ReturnUrlFilter'),
         );
     }
 
