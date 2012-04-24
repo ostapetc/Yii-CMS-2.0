@@ -18,8 +18,8 @@ require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
 require_once LIBRARIES_PATH . 'functions.php';
 
 $env = YII_DEBUG ? 'development' : 'production';
-$env = 'production';
-$config = 'install';
+//$env = 'production';
+//$config = 'install';
 
 define('ENV', $env);
 
