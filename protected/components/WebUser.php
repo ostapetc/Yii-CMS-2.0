@@ -6,7 +6,6 @@ class WebUser extends CWebUser
 
     private static $_role;
 
-
     public function getRole()
     {	
         if (self::$_role == null)

@@ -8,7 +8,7 @@ $this->tabs = array(
 
 $languages = Language::getList();
 
-$this->widget('BootDetailView', array(
+$this->widget('AdminDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
         'title',
@@ -35,5 +35,10 @@ $this->widget('BootDetailView', array(
             'type'  => 'raw',
             'value' => $model->text
         ),
+        array(
+          'label' => 'Тэги',
+          'type'  => 'raw',
+          'value' => Tag::getString(get_class($model), $model->id)
+      ),
 	),
 ));

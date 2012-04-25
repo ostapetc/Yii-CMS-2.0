@@ -75,24 +75,25 @@ header#header h2.section_title {
 .btn_view_site {
     float: right;
     /*width: 9%;*/
-    margin-right: 37px;
+    /*margin-right: 37px;*/
 }
 
 .btn_view_site a {
     display: block;
-    margin-top: 1px;
-    width: 91px;
-    height: 27px;
+    margin-top: 4px;
+    width: 66px;
+    height: 20px;
     background: url(/img/admin/btn_view_site.png) no-repeat;
-    text-align: center;
-    line-height: 29px;
+    text-align: left;
+    line-height: 19px;
     color: #fff;
     text-decoration: none;
     text-shadow: 0 -1px 0 #000;
+    padding-left: 10px;
 }
 
 .btn_view_site a:hover {
-    background-position: 0 -27px;
+    background-position: 0 -20px;
 }
 
 /* Secondary Header Bar */

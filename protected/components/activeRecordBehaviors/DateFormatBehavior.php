@@ -8,7 +8,7 @@ class DateFormatBehavior extends ActiveRecordBehavior
     public $not_formattable_attrs = array('date_create', 'date_update');
 
 
-    public function beforeSave()
+    public function beforeSave($event)
     {
         $model = $this->getOwner();
 

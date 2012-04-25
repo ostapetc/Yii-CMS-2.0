@@ -37,17 +37,6 @@ class Language extends ActiveRecord
 	}
 
 
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            array(
-                 'Tag'    => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-            )
-        );
-    }
-
-
 	public function relations()
 	{
 		return array(
@@ -80,9 +69,14 @@ class Language extends ActiveRecord
     }
 
 
+    //WTF? flash, parent::afterSave()
     public function afterSave()
     {
-        Yii::app()->cache->flush('languages');
+        if (parent::afterSave())
+        {
+            Yii::app()->cache->flush('languages');
+        }
+
     }
 
 

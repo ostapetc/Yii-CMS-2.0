@@ -7,10 +7,6 @@
     padding-right: 2px;
 }
 
-.grid-view .filters
-{
-    display: none;
-}
 .grid-view .filters input[type=text], .grid-view .filters select{
     font-size:     11px;
     padding:       2px;
@@ -33,10 +29,6 @@
 .grid-view .button-column{
     width:       1px;
     white-space: nowrap;
-}
-
-.grid-view .filters_link{
-    color: #356635;
 }
 
 .grid-view .pager-select{

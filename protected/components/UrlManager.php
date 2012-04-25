@@ -19,7 +19,7 @@ class UrlManager extends CUrlManager
             '/<controller:\w+>/<action:\w+>'          => '<controller>/<action>',
         );
 
-        if (Yii::app()->params['collect_routes_form_modules'])
+        if (Yii::app()->params['collect_routes_from_modules'])
         {
             $modules = AppManager::getModulesData(true);
             foreach ($modules as $class => $data)
@@ -32,6 +32,7 @@ class UrlManager extends CUrlManager
         }
 
         $multilanguage_support = Yii::app()->params['multilanguage_support'];
+
         if ($multilanguage_support)
         {
             $languages = Language::getList();
@@ -55,7 +56,6 @@ class UrlManager extends CUrlManager
 
         $routes                                  = array_reverse($routes);
         $routes['<language:(en|ru)>/<route:.*>'] = '<route>';
-
         Yii::app()->urlManager->addRules($routes);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Crud extends CFormModel
+class Crud extends FormModel
 {
     public $class;
 

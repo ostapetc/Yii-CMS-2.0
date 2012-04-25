@@ -29,6 +29,7 @@ class Page extends ActiveRecord
             array(
                  'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
                  'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
+                'TagBehavior' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
                  'FileManager' => array(
                      'class'=>'application.components.activeRecordBehaviors.FileManagerBehavior',
                     'tags' => array(
@@ -120,15 +121,16 @@ class Page extends ActiveRecord
 
 
     public function beforeSave()
-    {
-        if (parent::beforeSave()) {
-            if ($this->url != '/') {
+    {   return true;
+        if (parent::beforeSave())
+        {
+            if ($this->url != '/')
+            {
                 $this->url = trim($this->url, "/");
             }
 
             return true;
         }
-        return false;
     }
 
 

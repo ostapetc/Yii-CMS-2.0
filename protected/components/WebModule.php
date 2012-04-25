@@ -1,15 +1,10 @@
 <?
-abstract class WebModule extends CWebModule {
+abstract class WebModule extends CWebModule implements WebModuleInterface
+{
 
     public static $active = true;
 
     public static $base_module = false;
-
-    public static abstract function name();
-
-    public static abstract function description();
-
-    public static abstract function version();
 
     protected $_assetsUrl;
 

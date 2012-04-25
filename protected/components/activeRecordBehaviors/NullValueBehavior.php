@@ -2,7 +2,7 @@
 
 class NullValueBehavior extends ActiveRecordBehavior
 {
-    public function beforeSave()
+    public function beforeSave($event)
     {
         $model = $this->getOwner();
 

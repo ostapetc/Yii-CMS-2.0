@@ -1,6 +1,6 @@
 <?php
 
-class Model extends CFormModel
+class Model extends FormModel
 {
     public $name;
 

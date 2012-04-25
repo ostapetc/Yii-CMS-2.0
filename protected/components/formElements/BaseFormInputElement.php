@@ -1,6 +1,8 @@
 <?
 abstract class BaseFormInputElement extends CFormInputElement
 {
+    public $layout="{hint}\n{label}\n{input}\n{error}";
+
     public $widgets = array();
 
     public $widgets_path = 'application.components.formElements';

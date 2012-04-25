@@ -87,7 +87,7 @@ class Y extends CComponent
             CVarDumper::dump($var, $depth, true);
             echo '</pre>';
 
-            Y::end();
+            exit();
         }
     }
 
@@ -110,6 +110,6 @@ class Y extends CComponent
             echo $data;
         }
 
-        Yii::app()->end();
+        exit();
     }
 }

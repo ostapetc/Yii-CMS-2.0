@@ -19,6 +19,7 @@
     Yii::app()->bootstrap->registerScripts();
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles').'.less'));
+    $cs->registerScriptFile('/js/plugins/hint.js');
 
     if (YII_DEBUG)
     {
@@ -91,12 +92,13 @@
     <div class="row-fluid">
         <div class="span3">
             <div class="well sidebar-nav">
-                <? $this->widget('SidebarMenu'); ?>
+<!--                --><?// $this->widget('SidebarMenu'); ?>
             </div>
             <? //$this->widget('SidebarBanners') ?>
         </div>
         <div class="span9">
-            <? echo $content ?>
+            <?= MsgStream::getInstance()->render();?>
+            <?= $content ?>
         </div>
     </div>
     <hr>

@@ -21,17 +21,8 @@ $(function()
     $('.column').equalHeight();
 
 
-    $('.hint').each(function()
-    {
-        var self = $(this),
-            a = $('<a href="#" style="background: url(/img/admin/hint.png) no-repeat; width: 16px; height: 16px; display: block; float: left">')
-                .tooltip({
-                    placement:'top',
-                    title:self.html()
-                });
 
-        self.hide();
-        self.replaceWith(a);
+    $(".btn-success, .btn_view_site").each(function() {
+        $(this).html($(this).html().toLowerCase());
     });
-
 });

@@ -43,6 +43,7 @@ class PageController extends Controller
     public function actionMain()
     {
         $page = Page::model()->published()->findByAttributes(array("url" => "/"));
+
         if (!$page)
         {
             $this->pageNotFound();
