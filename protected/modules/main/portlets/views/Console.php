@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function()
     {
+
         /* First console */
         var console = $('<div class="admin-console">');
 
@@ -18,6 +19,7 @@
             {
                 controller.ajaxloader = $('<span class="ajax-loader"> | Loading...</span>');
                 controller.inner.find('.jquery-console-prompt:last').append(controller.ajaxloader);
+
                 $.post("/main/helpAdmin/console", {command:line}, function(data) {
                     report(data);
                     controller.ajaxloader.remove();

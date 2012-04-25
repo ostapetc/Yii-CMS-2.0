@@ -83,22 +83,24 @@ ul ul{
 .admin-console{
     position: fixed;
     top: 0;
-    height: 350px;
+    height: 60%;
     width: 100%;
-    background: #777;
+    color:#eee;
+    background: #666;
     display: none;
     font-family: Consolas, monospace;
     font-size: 14px;
-    border-bottom: 2px solid #666;
+    border-bottom: 2px solid #333;
     word-wrap: break-word;
     box-shadow: 0 0 20px rgba(0,0,0,0.9); /* Параметры тени */
 }
 div.jquery-console-inner{
     font-family: Consolas, monospace;
-    height: 350px;
+    height: 100%;
     width: 100%;
     overflow:auto;
 }
 span.jquery-console-cursor{
-    border-left: #333 2px solid;
+    margin-left: 1px;
+    border-left: #eee 2px solid;
 }
