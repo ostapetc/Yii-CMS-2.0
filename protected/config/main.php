@@ -1,4 +1,16 @@
 <?
+$modules_includes = array();
+$modules_dirs     = scandir(MODULES_PATH);
+
+foreach ($modules_dirs as $module)
+{
+    if ($module[0] == ".") {
+        continue;
+    }
+
+    $modules[] = $module;
+}
+
 return CMap::mergeArray(array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -18,8 +30,11 @@ return CMap::mergeArray(array(
         'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
-    'modules'    => array('content", "codegen", "fileManager", "mailer", "main", "users", "rbac'),
+    'modules'    => $modules,
     'components' => array(
+        'executor' => array(
+            'class' => 'application.components.CommandExecutor',
+        ),
         'messages' => array(
             'class' => 'CDbMessageSource',
             'sourceMessageTable'     => 'languages_messages',
@@ -97,6 +112,7 @@ return CMap::mergeArray(array(
         ),
 
         'errorHandler' => array(
+            'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
@@ -135,12 +151,11 @@ return CMap::mergeArray(array(
 
     'onBeginRequest' => array('AppManager', 'init'),
 
-
     'params'         => array(
-//        'save_site_actions' => true,
-//        'multilanguage_support' => true,
-//        'collect_routes_from_modules' => true,
-//        'themes_enabled' => false
+        'save_site_actions' => true,
+        'multilanguage_support' => true,
+        'collect_routes_from_modules' => true,
+        'themes_enabled' => false
     )
 ), require (ENV.'.php'));
 
