@@ -242,6 +242,7 @@ abstract class ActiveRecord extends CActiveRecord
         return $this;
     }
 
+    /*--------------events-------------------*/
 
     /**
      * @param CModelEvent $event
@@ -250,5 +251,40 @@ abstract class ActiveRecord extends CActiveRecord
     {
         $this->raiseEvent('onBeforeInitForm', $event);
     }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onAfterInitForm($event)
+    {
+        $this->raiseEvent('onAfterInitForm', $event);
+    }
+
+    public function onBeforeGridInit($event)
+    {
+        $this->raiseEvent('onBeforeGridInit', $event);
+    }
+
+    public function onAfterGridInit($event)
+    {
+        $this->raiseEvent('onAfterGridInit', $event);
+    }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onBeforeGridInitColumns($event)
+    {
+        $this->raiseEvent('onBeforeGridInitColumns', $event);
+    }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onAfterGridInitColumns($event)
+    {
+        $this->raiseEvent('onAfterGridInitColumns', $event);
+    }
+
 
 }

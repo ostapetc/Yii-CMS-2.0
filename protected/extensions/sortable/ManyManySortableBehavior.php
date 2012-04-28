@@ -1,6 +1,6 @@
 <?
 
-class ManyManySortableBehavior extends CActiveRecordBehavior
+class ManyManySortableBehavior extends ActiveRecordBehavior
 {
     public $relation;
     public $map_field;
@@ -149,4 +149,18 @@ class ManyManySortableBehavior extends CActiveRecordBehavior
                 ->execute();
         }
     }
+
+
+    public function beforeGridInitColumns($event)
+    {
+        if ($event->sender->many_many_sortable)
+        {
+            $event->sender->addColumn(array(
+                'class' => 'ext.sortable.ManyManySortableColumn',
+                'header'=> t('Сортировка')
+            ), -1);
+        }
+    }
+
+
 }

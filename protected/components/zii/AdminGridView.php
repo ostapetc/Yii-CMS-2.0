@@ -29,45 +29,18 @@ class AdminGridView extends BootGridView
 
     public function init()
     {
-        $this->attachBehaviors($this->behaviors());
-
-        if (!isset($this->htmlOptions['class']))
-        {
-            $this->htmlOptions['class'] = 'grid-view';
-        }
-
-        if (!isset($this->htmlOptions['id']))
-        {
-            $this->htmlOptions['id'] = $this->getId();
-        }
+        $this->dataProvider->model->onBeforeGridInit(new CModelEvent($this));
 
         if ($this->baseScriptUrl === null)
         {
             $this->baseScriptUrl = Yii::app()->getAssetManager()
-                ->publish(Yii::getPathOfAlias('application.components.zii.assets')) .
-                '/adminGrid';
+                ->publish(Yii::getPathOfAlias('application.components.zii.assets.adminGrid'));
         }
 
-        if ($this->cssFile !== false)
-        {
-            if ($this->cssFile === null)
-            {
-                $this->cssFile = $this->baseScriptUrl . '/styles.css';
-            }
-            Yii::app()->getClientScript()->registerCssFile($this->cssFile);
-        }
-
-        $this->initColumns();
-
+        parent::init();
+        $this->dataProvider->model->onAfterGridInit(new CModelEvent($this));
         $this->formatDateValues();
     }
-
-
-    public function behaviors()
-    {
-        return array();
-    }
-
 
     public function formatDateValues()
     {
@@ -153,21 +126,7 @@ class AdminGridView extends BootGridView
 
     public function initColumns()
     {
-        if ($this->many_many_sortable)
-        {
-            $this->addColumn(array(
-                'class' => 'ext.sortable.ManyManySortableColumn',
-                'header'=> t('Сортировка')
-            ), -1);
-        }
-
-        if ($this->sortable)
-        {
-            $this->addColumn(array(
-                'class' => 'ext.sortable.SortableColumn',
-                'header'=> t('Сортировка')
-            ), -1);
-        }
+        $this->dataProvider->model->onBeforeGridInitColumns(new CModelEvent($this));
 
         if ($this->mass_removal)
         {
@@ -180,7 +139,9 @@ class AdminGridView extends BootGridView
                 )
             ));
         }
+
         parent::initColumns();
+        $this->dataProvider->model->onAfterGridInitColumns(new CModelEvent($this));
     }
 
 
