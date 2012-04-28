@@ -1,5 +1,4 @@
 <?
-
 class InstallController extends Controller
 {
 
@@ -29,7 +28,6 @@ class InstallController extends Controller
 
     public function actionIndex()
     {
-
         $support['PHP'] = array(
             'is_support'      => version_compare(phpversion(), '5.3', '>'),
             'version'         => phpversion(),
@@ -40,7 +38,6 @@ class InstallController extends Controller
 
     public function actionStep1()
     {
-        throw new CException('asdf');
         $model = new Step1();
         $form = new Form('install.Step1', $model);
 

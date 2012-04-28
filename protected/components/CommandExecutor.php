@@ -1,7 +1,10 @@
 <?php
 class CommandExecutor extends CApplicationComponent
 {
-    private $runner;
+    /**
+     * @var CConsoleCommandRunner
+     */
+    public $runner;
 
     public function init()
     {
@@ -12,7 +15,7 @@ class CommandExecutor extends CApplicationComponent
         {
             $this->addCommands($id.'.commands');
         }
-        $this->addCommands('ext.migrate');
+        $this->runner->commands['migrate'] = Yii::getPathOfAlias('ext.migrate.EMigrateCommand').'.php';
 
         parent::init();
     }
@@ -29,11 +32,19 @@ class CommandExecutor extends CApplicationComponent
         {
             array_push($args, $item);
         }
-        ob_start();
-        ob_implicit_flush(false);
-        array_push($args, '--interactive=0');
-        $this->runner->run($args);
-        return ob_get_clean();
+        try
+        {
+            ob_start();
+            ob_implicit_flush(false);
+            array_push($args, '--interactive=0');
+            $this->runner->run($args);
+            $result = ob_get_clean();
+        } catch( Exception $e) {
+            ob_clean();
+            $result = $e->getMessage();
+        }
+
+        return $result;
     }
 
     public function addCommands($alias)
