@@ -29,7 +29,6 @@ class Page extends ActiveRecord
             array(
                  'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
                  'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
-                'TagBehavior' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
                  'FileManager' => array(
                      'class'=>'application.components.activeRecordBehaviors.FileManagerBehavior',
                     'tags' => array(
