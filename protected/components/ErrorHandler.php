@@ -16,11 +16,11 @@ class ErrorHandler extends CErrorHandler
                 }
                 else
                 {
-                    if ($data['type'] == 'Exception')
+                    if ($view == 'exception')
                     {
                         MsgStream::getInstance()->enqueue($data['message'], 'error');
                     }
-                    elseif ($data['type'] == 'Error')
+                    elseif ($view == 'error')
                     {
                         MsgStream::getInstance()->enqueue($data['message'], 'error');
                     }

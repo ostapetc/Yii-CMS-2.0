@@ -1,9 +1,7 @@
 <?
-
 ini_set("display_errors", 1);
-
 error_reporting(E_ALL);
-
+ini_set('xdebug.max_nesting_level', 1000);
 date_default_timezone_set('Europe/Moscow');
 
 define('DS', DIRECTORY_SEPARATOR);
@@ -20,16 +18,10 @@ require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
 require_once LIBRARIES_PATH . 'functions.php';
 
 $env = YII_DEBUG ? 'development' : 'production';
-//$env = 'production';
-//$config = 'install';
+$env = 'production';
+$config = 'install';
 
 define('ENV', $env);
 $config = APP_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
 
-$session = new CHttpSession;
-$session->open();
-
-$app = Yii::createWebApplication($config);
-$app->setComponent('session',$session);
-
-$app->run();
+Yii::createWebApplication($config)->run();

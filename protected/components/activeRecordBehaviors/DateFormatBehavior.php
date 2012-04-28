@@ -78,4 +78,71 @@ class DateFormatBehavior extends ActiveRecordBehavior
         return $criteria;
     }
 
+
+    public function afterGridInitColumns($event)
+    {
+        $grid = $event->sender;
+        $data = $grid->dataProvider->data;
+
+        $data_columns = array();
+
+        foreach ($grid->columns as $col)
+        {
+            if (isset($col->name))
+            {
+                $data_columns[$col->name] = $col;
+            }
+        }
+
+        foreach ($data as $item)
+        {
+            foreach ($item as $attr => $value)
+            {
+                //if hasn't column for it attr OR if set value of column
+                if (!isset($data_columns[$attr]) || $data_columns[$attr]->value != null)
+                {
+                    continue;
+                }
+
+                //if not is date OR datetime
+                if (!Yii::app()->dater->isDbDate($value))
+                {
+                    continue;
+                }
+
+                $no_values = array('0000-00-00 00:00:00', '0000-00-00');
+                $new_value = in_array($value, $no_values) ? null : Yii::app()->dater->readableFormat($value);
+
+                if (is_array($item))
+                {
+                    $item[$attr] = $new_value;
+                }
+                else
+                {
+                    $item->$attr = $new_value;
+                }
+            }
+        }
+
+        $grid->dataProvider->setData($data);
+    }
+
+    public function beforeFormInit($event)
+    {
+        if (!($model = $event->sender->model))
+        {
+            return false;
+        }
+
+        foreach ($model->attributes as $attr => $value)
+        {
+            if (Yii::app()->dater->isDbDate($value))
+            {
+                $model->$attr = Yii::app()->dater->formFormat($value);
+            }
+        }
+
+        $event->sender->model = $model;
+    }
+
 }
