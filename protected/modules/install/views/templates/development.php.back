@@ -3,7 +3,7 @@
 return array(
     'components' => array(
         'db' => array(
-            'connectionString'      => 'mysql:%DB_HOST%=localhost;dbname=%DB_NAME%;',
+            'connectionString'      => 'mysql:host=%DB_HOST%;dbname=%DB_NAME%;',
             'emulatePrepare'        => true,
             'username'              => '%DB_LOGIN%',
             'password'              => '%DB_PASS%',
