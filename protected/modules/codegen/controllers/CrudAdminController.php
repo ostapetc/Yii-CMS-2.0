@@ -87,7 +87,7 @@ class CrudAdminController extends AdminController
 
             Yii::app()->user->setFlash(Controller::MSG_SUCCESS, 'CRUD создан!');
             Yii::app()->user->setFlash(Controller::MSG_INFO, $msg);
-
+            die;
             $this->redirect($_SERVER['REQUEST_URI']);
         }
 

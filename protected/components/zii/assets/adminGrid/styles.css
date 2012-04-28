@@ -43,3 +43,12 @@
 {
     background: url(preloader.gif) no-repeat;
 }
+
+.filters td:last-child {
+    text-align: center !important;
+}
+
+.filters td:last-child a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+}

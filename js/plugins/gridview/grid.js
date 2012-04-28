@@ -23,6 +23,7 @@
             var self = this;
             self._initSwitchPageSize();
             self._initPageSizer();
+            self._initSettingsIcon();
 
             if (self.options.mass_removal)
             {
@@ -94,10 +95,14 @@
             });
 
         },
+        _initSettingsIcon: function() {
+            var grid      = this.element.find('table');
+            var model_id  = grid.attr('model_id');
+            var widget_id = grid.attr('widget_id');
 
-    })
-    ;
-})
-    (jQuery);
+            $('.filters td:last').html('<a href="/main/widgetAdmin/columnsManage/model_id/' + model_id + '/widget_id/' + widget_id + '" class="columns-settings">колонки</a>');
+        }
+    });
+})(jQuery);
 
 

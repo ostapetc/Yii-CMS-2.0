@@ -40,3 +40,6 @@ textarea {
     display:       block;
     margin-bottom: 1px;
 }
+.help-block {
+    color: red;
+}

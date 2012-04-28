@@ -70,6 +70,33 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
+    public function label($attribute)
+    {
+        $labels = $this->attributeLabels();
+
+        if (isset($labels[$attribute]) && !empty($labels[$attribute]))
+        {
+            return $labels[$attribute];
+        }
+
+        return ucfirst(str_replace('_', ' ', $attribute));
+    }
+
+
+    public function value($attribute)
+    {
+        $method_name = 'format' . ucfirst($attribute);
+        if (method_exists($this, $method_name))
+        {
+            return $this->$method_name();
+        }
+        else
+        {
+            return $this->$attribute;
+        }
+    }
+
+
     public function __get($name)
     {
         try
@@ -201,10 +228,11 @@ abstract class ActiveRecord extends CActiveRecord
     {
         if ($this->_meta == null);
         {
-            $this->_meta = Yii::app()->db->cache(YII_DEBUG ? 0 : 3600)->createCommand("SHOW FUll columns FROM " . $this->tableName())->queryAll();
+            $this->_meta = Yii::app()->db->cache(3600)->createCommand("SHOW FUll columns FROM " . $this->tableName())->queryAll();
         }
         return $this->_meta;
     }
+
 
     public function optionsTree($name = 'name', $id = null, $result = array(), $value = 'id', $spaces = 0, $parent_id = null)
     {
@@ -250,5 +278,8 @@ abstract class ActiveRecord extends CActiveRecord
     {
         $this->raiseEvent('onBeforeInitForm', $event);
     }
+
+
+
 
 }
