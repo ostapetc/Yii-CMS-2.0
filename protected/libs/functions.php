@@ -1,19 +1,19 @@
 <?
-
-function p($data)
+/**
+ * PHP 5.2 compatibility
+ */
+if (function_exists('lcfirst') === false)
 {
-    echo '<pre>';
-    CVarDumper::dump($data, 1000, false);
-    echo '</pre>';
+    function lcfirst($str)
+    {
+        $str[0] = strtolower($str[0]);
+        return $str;
+    }
 }
 
-
-function v($data)
-{
-    echo "<pre>" . var_dump($data) . "</pre>";
-}
-
-
+/**
+ * PHP 5.2 compatibility
+ */
 if (function_exists('get_called_class') === false)
 {
     function get_called_class()
@@ -26,16 +26,10 @@ if (function_exists('get_called_class') === false)
 }
 
 
-if (function_exists('lcfirst') === false)
-{
-    function lcfirst($str)
-    {
-        $str[0] = strtolower($str[0]);
-        return $str;
-    }
-}
-
-
+/**
+ * @param $message
+ * @return string
+ */
 function t($message)
 {
     $translated_message = Yii::t('main', $message);
@@ -56,60 +50,71 @@ function t($message)
     return $message;
 }
 
-//для работы моих отладочных функций нужны 2 переменных, мне их глобальными объявлять?
-class Y extends CComponent
+/*--------------------debug functions----------------*/
+function p($data)
 {
-    private static $startSkipCount = 0;
-    private static $skipCount = 0;
+    echo '<pre>';
+    CVarDumper::dump($data, 1000, false);
+    echo '</pre>';
+}
 
 
-    /**
-     * Ярлык для функции dump класса CVarDumper для отладки приложения
-     *
-     * @param mixed   $var   переменная для вывода
-     * @param boolean $toDie остановить ли дальнейшее выполнение приложения, по умолчанию - true
-     */
-    public static function dump($var, $skipCount = 0, $depth = 2)
+function v($data)
+{
+    echo "<pre>" . var_dump($data) . "</pre>";
+}
+
+
+
+/**
+ * Debug функция, использемая только для отладки
+ *
+ * @param $var
+ * @param int $skipCount
+ * @param int $depth
+ */
+function dump($var, $skipCount = 0, $depth = 2)
+{
+    static $startSkipCount = 0;
+    static $localSkipCount = 0;
+
+    if ($startSkipCount == 0) {
+        $startSkipCount = $localSkipCount = $skipCount;
+    }
+    else
     {
-        if (self::$startSkipCount == 0) {
-            self::$startSkipCount = self::$skipCount = $skipCount;
-        }
-        else
-        {
-            self::$skipCount--;
-        }
-
-        if (self::$skipCount == 0)
-        {
-            self::$startSkipCount = 0;
-
-            echo '<pre>';
-            CVarDumper::dump($var, $depth, true);
-            echo '</pre>';
-
-            exit();
-        }
+        $localSkipCount--;
     }
 
-
-    /**
-     * Выводит текст и завершает приложение (применяется в ajax-действиях)
-     *
-     * @param string $text текст для вывода
-     */
-    public static function end($data = '')
+    if ($localSkipCount == 0)
     {
-        if (is_array($data))
-        {
-            echo '<pre>';
-            print_r($data);
-            echo '</pre>';
-        }
-        else
-        {
-            echo $data;
-        }
+        $startSkipCount = 0;
+
+        echo '<pre>';
+        CVarDumper::dump($var, $depth, true);
+        echo '</pre>';
 
         exit();
     }
+}
+
+/**
+ * Выводит текст и завершает приложение (применяется в ajax-действиях)
+ *
+ * @param string|array $text текст|массив для вывода
+ */
+function stop($data = '')
+{
+    if (is_array($data))
+    {
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
+    }
+    else
+    {
+        echo $data;
+    }
+
+    exit();
 }

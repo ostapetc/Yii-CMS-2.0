@@ -24,9 +24,4 @@ $env = YII_DEBUG ? 'development' : 'production';
 define('ENV', $env);
 $config = APP_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
 
-$session = new CHttpSession;
-$session->open();
-$app = Yii::createWebApplication($config);
-$app->setComponent('session',$session);
-
-$app->run();
+Yii::createWebApplication($config)->run();
