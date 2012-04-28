@@ -43,7 +43,7 @@ class Form extends CForm
     {
         $this->model->onBeforeFormInit(new CEvent($this));
         parent::init();
-        $this->model->onafterFormInit(new CEvent($this));
+        $this->model->onAfterFormInit(new CEvent($this));
     }
 
     public static function getFullAlias($alias)
