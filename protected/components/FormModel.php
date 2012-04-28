@@ -5,17 +5,17 @@ class FormModel extends CFormModel
     /**
      * @param CModelEvent $event
      */
-    public function onBeforeInitForm($event)
+    public function onBeforeFormInit($event)
     {
-        $this->raiseEvent('onBeforeInitForm', $event);
+        $this->raiseEvent('onBeforeFormInit', $event);
     }
 
     /**
      * @param CModelEvent $event
      */
-    public function onAftrerInitForm($event)
+    public function onAfterFormInit($event)
     {
-        $this->raiseEvent('onAfterInitForm', $event);
+        $this->raiseEvent('onAfterFormInit', $event);
     }
 
     /**

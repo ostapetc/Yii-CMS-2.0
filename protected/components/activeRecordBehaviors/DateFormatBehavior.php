@@ -79,8 +79,7 @@ class DateFormatBehavior extends ActiveRecordBehavior
     }
 
 
-
-    public function afterGridInit($event)
+    public function afterGridInitColumns($event)
     {
         $grid = $event->sender;
         $data = $grid->dataProvider->data;
@@ -126,6 +125,24 @@ class DateFormatBehavior extends ActiveRecordBehavior
         }
 
         $grid->dataProvider->setData($data);
+    }
+
+    public function beforeFormInit($event)
+    {
+        if (!($model = $event->sender->model))
+        {
+            return false;
+        }
+
+        foreach ($model->attributes as $attr => $value)
+        {
+            if (Yii::app()->dater->isDbDate($value))
+            {
+                $model->$attr = Yii::app()->dater->formFormat($value);
+            }
+        }
+
+        $event->sender->model = $model;
     }
 
 }

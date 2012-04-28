@@ -247,17 +247,17 @@ abstract class ActiveRecord extends CActiveRecord
     /**
      * @param CModelEvent $event
      */
-    public function onBeforeInitForm($event)
+    public function onBeforeFormInit($event)
     {
-        $this->raiseEvent('onBeforeInitForm', $event);
+        $this->raiseEvent('onBeforeFormInit', $event);
     }
 
     /**
      * @param CModelEvent $event
      */
-    public function onAfterInitForm($event)
+    public function onAfterFormInit($event)
     {
-        $this->raiseEvent('onAfterInitForm', $event);
+        $this->raiseEvent('onafterFormInit', $event);
     }
 
     public function onBeforeGridInit($event)

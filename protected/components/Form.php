@@ -37,12 +37,13 @@ class Form extends CForm
         parent::__construct($config, $model, $parent);
 
         $this->addAttributesToButtons();
-        $this->formatDateAttributes();
     }
 
     public function init()
     {
-        $this->initElements();
+        $this->model->onBeforeFormInit(new CEvent($this));
+        parent::init();
+        $this->model->onafterFormInit(new CEvent($this));
     }
 
     public static function getFullAlias($alias)
@@ -62,22 +63,6 @@ class Form extends CForm
         else
         {
             return $alias;
-        }
-    }
-
-    public function initElements()
-    {
-        if (!$this->_is_elements_inited)
-        {
-            try
-            {
-                $this->model->onBeforeInitForm(new CEvent($this));
-            }
-            catch(Exception $e)
-            {
-                YII_DEBUG ? Yii::app()->handleException($e) : Yii::app()->log($e);
-            }
-            $this->_is_elements_inited = true;
         }
     }
 
@@ -194,27 +179,6 @@ class Form extends CForm
             $this->buttons[$i] = $button;
         }
     }
-
-
-    function formatDateAttributes()
-    {
-        if (!$this->model)
-        {
-            return false;
-        }
-
-        $model = $this->model;
-        foreach ($model->attributes as $attr => $value)
-        {
-            if (Yii::app()->dater->isDbDate($value))
-            {
-                $model->$attr = Yii::app()->dater->formFormat($value);
-            }
-        }
-
-        $this->model = $model;
-    }
-
 
     public function getElements()
     {

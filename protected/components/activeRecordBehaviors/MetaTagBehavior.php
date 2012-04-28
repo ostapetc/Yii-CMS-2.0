@@ -70,8 +70,9 @@ class MetaTagBehavior extends ActiveRecordBehavior
         return self::$_meta_tags[$key];
     }
 
-    public function beforeInitForm($event)
+    public function beforeFormInit($event)
     {
+
         $elements = $event->sender->getElements();
         $elements['meta_tags'] = array('type'=>'meta_tags');
         $event->sender->setElements($elements);

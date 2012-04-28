@@ -49,7 +49,7 @@ class LanguagesBehavior extends ActiveRecordBehavior
     }
 
 
-    public function beforeInitForm($event)
+    public function beforeFormInit($event)
     {
         $elements = $event->sender->getElements();
         $meta = $this->owner->meta();

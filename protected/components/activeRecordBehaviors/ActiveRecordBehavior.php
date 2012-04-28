@@ -4,8 +4,8 @@ class ActiveRecordBehavior extends CActiveRecordBehavior
     public function events()
     {
         return array_merge(parent::events(), array(
-            'onBeforeInitForm'=>'beforeInitForm',
-            'onAfterInitForm'=>'afterInitForm',
+            'onBeforeFormInit'=>'beforeFormInit',
+            'onAfterFormInit'=>'afterFormInit',
             'onBeforeGridInitColumns'=>'beforeGridInitColumns',
             'onAfterGridInitColumns'=>'afterGridInitColumns',
             'onBeforeGridInit'=>'beforeGridInit',
@@ -13,12 +13,12 @@ class ActiveRecordBehavior extends CActiveRecordBehavior
         ));
     }
 
-    public function beforeInitForm($event)
+    public function beforeFormInit($event)
     {
     }
 
 
-    public function afterInitForm($event)
+    public function afterFormInit($event)
     {
     }
 
