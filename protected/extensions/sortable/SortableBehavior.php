@@ -1,5 +1,5 @@
 <?
-class SortableBehavior extends CActiveRecordBehavior
+class SortableBehavior extends ActiveRecordBehavior
 {
     //заполняем айдишниками
     public function fillOrderColumn($column)
@@ -53,4 +53,17 @@ class SortableBehavior extends CActiveRecordBehavior
         
         parent::beforeFind($event);
     }
+
+
+    public function beforeGridInitColumns($event)
+    {
+        if ($event->sender->sortable)
+        {
+            $event->sender->addColumn(array(
+                'class' => 'ext.sortable.SortableColumn',
+                'header'=> t('Сортировка')
+            ), -1);
+        }
+    }
+
 }

@@ -1,5 +1,4 @@
 <?
-
 class LanguageMessage extends ActiveRecord
 {
     const PAGE_SIZE = 10;

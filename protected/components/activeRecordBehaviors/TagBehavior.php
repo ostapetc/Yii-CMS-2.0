@@ -55,7 +55,7 @@ class TagBehavior extends CActiveRecordBehavior
 //    }
 
 
-    public function beforeInitForm($event)
+    public function beforeFormInit($event)
     {
         TagRel::model()->exists("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
     }

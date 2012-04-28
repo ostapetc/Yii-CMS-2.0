@@ -1,16 +1,4 @@
 <?
-$modules_includes = array();
-$modules_dirs     = scandir(MODULES_PATH);
-
-foreach ($modules_dirs as $module)
-{
-    if ($module[0] == ".") {
-        continue;
-    }
-
-    $modules[] = $module;
-}
-
 return CMap::mergeArray(array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -30,11 +18,8 @@ return CMap::mergeArray(array(
         'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
-    'modules'    => $modules,
+    'modules'    => array('content", "codegen", "fileManager", "mailer", "main", "users", "rbac'),
     'components' => array(
-        'executor' => array(
-            'class' => 'application.components.CommandExecutor',
-        ),
         'messages' => array(
             'class' => 'CDbMessageSource',
             'sourceMessageTable'     => 'languages_messages',
@@ -112,11 +97,10 @@ return CMap::mergeArray(array(
         ),
 
         'errorHandler' => array(
-            'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
-        'authManager' => array(
+        'authManager'  => array(
             'class'           => 'CDbAuthManager',
             'connectionID'    => 'db',
             'itemTable'       => 'auth_items',
@@ -124,14 +108,8 @@ return CMap::mergeArray(array(
             'itemChildTable'  => 'auth_items_childs',
             'defaultRoles'    => array('guest')
         ),
-//        'log' => array(
-//            'class'  => 'CLogRouter',
-//            'routes' => array(
-//                 array(
-//                     'class'     => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-//                     'ipFilters' => array('*'),
-//                 ),
-//             ),
+       // 'log'=>array(
+//                'class'=>'CLogRouter',
 //                'routes'=>array(
 //                    array(
 //                        'class'        => 'DbLogRoute',
@@ -156,14 +134,13 @@ return CMap::mergeArray(array(
     ),
 
     'onBeginRequest' => array('AppManager', 'init'),
-    'onException'    => array('AppManager', 'exceptionHandler'),
-//    'onError'        => array('AppManager', 'onError'),
+
 
     'params'         => array(
-        'save_site_actions' => false,
-        'multilanguage_support' => true,
-        'collect_routes_from_modules' => true,
-        'themes_enabled' => false
+//        'save_site_actions' => true,
+//        'multilanguage_support' => true,
+//        'collect_routes_from_modules' => true,
+//        'themes_enabled' => false
     )
 ), require (ENV.'.php'));
 

@@ -46,7 +46,7 @@ class FileManagerBehavior extends ActiveRecordBehavior
         return parent::beforeDelete($event);
     }
 
-    public function beforeInitForm($event)
+    public function beforeFormInit($event)
     {
         $elements = $event->sender->getElements();
 
