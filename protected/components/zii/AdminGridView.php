@@ -3,7 +3,7 @@
 Yii::import("zii.widgets.grid.CGridView");
 
 
-class AdminGridView extends BootGridView
+class AdminGridView extends GridView
 {
     public $itemsCssClass = "table table-striped table-bordered table-condensed";
 
@@ -26,11 +26,8 @@ class AdminGridView extends BootGridView
 
     public $template = '{pagerSelect}{summary}<br/>{pocket}{items}{pager}';
 
-
     public function init()
     {
-        $this->dataProvider->model->onBeforeGridInit(new CModelEvent($this));
-
         if ($this->baseScriptUrl === null)
         {
             $this->baseScriptUrl = Yii::app()->getAssetManager()
@@ -38,112 +35,7 @@ class AdminGridView extends BootGridView
         }
 
         parent::init();
-        $this->dataProvider->model->onAfterGridInit(new CModelEvent($this));
-        $this->formatDateValues();
     }
-
-    public function formatDateValues()
-    {
-        $data = $this->dataProvider->data;
-
-        foreach ($data as $item)
-        {
-            foreach ($item as $attr => $value)
-            {
-                if (!Yii::app()->dater->isDbDate($value))
-                {
-                    continue;
-                }
-
-                if (!($column = $this->findColumnByName($attr))) //if hasn't column for it attr
-                {
-                    continue;
-                }
-
-                if ($column->value != null) //if set value of column
-                {
-                    continue;
-                }
-
-
-                $no_values = array('0000-00-00 00:00:00', '0000-00-00');
-                $new_value = in_array($value, $no_values) ? null : Yii::app()->dater->readableFormat($value);
-
-                if (is_array($item))
-                {
-                    $item[$attr] = $new_value;
-                }
-                else
-                {
-                    $item->$attr = $new_value;
-                }
-            }
-
-        }
-
-        $this->dataProvider->setData($data);
-    }
-
-
-    public function findColumnByName($attr)
-    {
-        foreach ($this->columns as $col)
-        {
-            if (isset($col->name) && $col->name == $attr)
-            {
-                return $col;
-            }
-        }
-    }
-
-
-    /**
-     * Добавляет колонки перед последней колонкой
-     *
-     * @param $configs конфиги для колонок
-     */
-    public function addColumns($configs, $pos = 0)
-    {
-        $last_index = $pos >= 0 ? $pos : count($this->columns) + $pos;
-        $configs[]  = $this->columns[$last_index];
-        array_splice($this->columns, $last_index, 1, $configs);
-    }
-
-
-    /**
-     * Добавляет колонку перед последней колонкой
-     * @param $config конфиг колонки
-     */
-    public function addColumn($config, $pos = 0)
-    {
-        $last_index = $pos >= 0 ? $pos : count($this->columns) + $pos;
-        $configs    = array(
-            $config, $this->columns[$last_index]
-        );
-        array_splice($this->columns, $last_index, 1, $configs);
-    }
-
-
-    public function initColumns()
-    {
-        $this->dataProvider->model->onBeforeGridInitColumns(new CModelEvent($this));
-
-        if ($this->mass_removal)
-        {
-            $this->addColumn(array(
-                'class'               => 'CCheckBoxColumn',
-                'header'              => "<input type='checkbox' class='object_checkboxes'>",
-                'selectableRows'      => 2,
-                'checkBoxHtmlOptions' => array(
-                    'class'    => 'object_checkbox'
-                )
-            ));
-        }
-
-        parent::initColumns();
-        $this->dataProvider->model->onAfterGridInitColumns(new CModelEvent($this));
-    }
-
 
     public function renderItems()
     {

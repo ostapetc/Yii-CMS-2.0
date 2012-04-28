@@ -28,6 +28,7 @@ $this->widget('AdminGridView', array(
                 return $languages[$data->language];
             }
         ),
+        'date_create',
 		array(
 			'class'=>'CButtonColumn',
 		),
