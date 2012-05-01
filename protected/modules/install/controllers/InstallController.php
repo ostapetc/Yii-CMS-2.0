@@ -28,29 +28,8 @@ class InstallController extends Controller
 
     public function actionIndex()
     {
-        $requirements = array(
-            'PHP' => array(
-                'is_support'      => version_compare(phpversion(), '5.3', '>'),
-                'version'         => phpversion(),
-                'minimal_version' => '5.3',
-            ),
-            'Reflection' => array(
-                'is_support'      => class_exists('Reflection', false),
-            ),
-            'SPL' => array(
-                'is_support'      => extension_loaded("SPL"),
-            ),
-            'DOMDocument' => array(
-                'is_support'      => class_exists("DOMDocument", false),
-            ),
-            'mcrypt' => array(
-                'is_support'      => extension_loaded("mcrypt"),
-            ),
-            'soap' => array(
-                'is_support'      => extension_loaded("soap"),
-            ),
-        );
-        $this->render('index', array('support' => $requirements));
+        $installer = new SimpleCmsInstaller();
+        $this->render('index', array('support' => $installer->getRequirements()));
     }
 
     public function actionStep1()
@@ -61,13 +40,14 @@ class InstallController extends Controller
         $this->performAjaxValidation($model);
         if ($form->submitted() && $model->validate())
         {
+            $installer = new SimpleCmsInstaller();
             //create db
-            $db_create_status = InstallHelper::createDb($model);
+            $db_create_status = $installer->createDb($model);
             if ($db_create_status === true)
             {
                 //create configs
-                InstallHelper::parseConfig('development', $model->getDbPatterns());
-                InstallHelper::parseConfig('production', array());
+                $installer->parseConfig('development', $model->getDbPatterns());
+                $installer->parseConfig('production', array());
             }
             else if (is_string($db_create_status))
             {
@@ -97,15 +77,16 @@ class InstallController extends Controller
 
         if ($form->submitted() && $model->validate())
         {
-            InstallHelper::parseConfig('main', $model->getMainConfigPatterns());
+            $installer = new SimpleCmsInstaller();
+            $installer->parseConfig('main', $model->getMainConfigPatterns());
 
             //install modules
             Yii::app()->setModules($model->modules);
             foreach ($model->modules as $module)
             {
-                dump(Yii::app()->getModule($module)->install());
                 Yii::app()->executor->addCommands($module.'.commands');
             }
+            Yii::app()->executor->migrate('up install');
             Yii::app()->executor->migrate('up');
             //install base modules
             Yii::app()->user->setState('install_step2', $model->attributes);

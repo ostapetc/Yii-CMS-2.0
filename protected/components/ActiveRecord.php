@@ -318,6 +318,4 @@ abstract class ActiveRecord extends CActiveRecord
         $this->raiseEvent('onAfterGridInitColumns', $event);
     }
 
-
-
 }

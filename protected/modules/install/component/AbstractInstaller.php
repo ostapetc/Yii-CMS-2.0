@@ -1,6 +1,35 @@
 <?php
-class InstallHelper
+abstract class AbstractInstaller extends CComponent
 {
+    public function getRequirements()
+    {
+        return array(
+            'PHP' => array(
+                'is_support'      => version_compare(phpversion(), '5.3', '>'),
+                'version'         => phpversion(),
+                'minimal_version' => '5.3',
+            ),
+            'Reflection' => array(
+                'is_support'      => class_exists('Reflection', false),
+            ),
+            'SPL' => array(
+                'is_support'      => extension_loaded("SPL"),
+            ),
+            'DOMDocument' => array(
+                'is_support'      => class_exists("DOMDocument", false),
+            ),
+            'mcrypt' => array(
+                'is_support'      => extension_loaded("mcrypt"),
+            ),
+            'soap' => array(
+                'is_support'      => extension_loaded("soap"),
+            ),
+        );
+    }
+
+    abstract public function initDataBase($configuration);
+    abstract public function initUsers();
+
     /**
      * parse file and
      *
@@ -9,7 +38,7 @@ class InstallHelper
      * @param $target
      * @param $data
      */
-    public static function parseFile($source, $target, $data)
+    public function parseFile($source, $target, $data)
     {
        $content = strtr(file_get_contents($source), $data);
        copy ($source, $target);
@@ -23,7 +52,7 @@ class InstallHelper
      * @param $file
      * @param $data
      */
-    public static function parseConfig($file, $data)
+    public function parseConfig($file, $data)
     {
        $source = Yii::getPathOfAlias('install.views.templates.'.$file).'.php';
        $target = Yii::getPathOfAlias('application.config.'.$file).'.php';
@@ -37,7 +66,7 @@ class InstallHelper
      * @param Step1 $model
      * @return bool|string true or error message
      */
-    public static function createDb(Step1 $model)
+    public function createDb(Step1 $model)
     {
         set_error_handler(array('InstallHelper', 'pdoErrorHandler'));
         try
@@ -67,5 +96,4 @@ class InstallHelper
             Yii::app()->handleError($code, 'Невозможно подключиться к базе данных по указанным параметрам', $file, $line);
         }
     }
-
 }
