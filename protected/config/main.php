@@ -11,7 +11,7 @@ foreach ($modules_dirs as $module)
     $modules[] = $module;
 }
 
-return CMap::mergeArray(array(
+return array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'     => '',
@@ -124,26 +124,6 @@ return CMap::mergeArray(array(
             'itemChildTable'  => 'auth_items_childs',
             'defaultRoles'    => array('guest')
         ),
-       // 'log'=>array(
-//                'class'=>'CLogRouter',
-//                'routes'=>array(
-//                    array(
-//                        'class'        => 'DbLogRoute',
-//                        'levels'       => 'error, warning, info',
-//                        'connectionID' => 'db',
-//                        'logTableName' => 'log',
-//                        'enabled'      => true
-//                    ),
-//                    array(
-//                           /*направляем результаты профайлинга в ProfileLogRoute (отображается
-//                           внизу страницы)*/
-//                          'class'=>'CProfileLogRoute',
-//                          'levels'=>'profile',
-//                          'enabled'=>true,
-//                    ),
-//                ),
-//        ),
-
         'cache' => array(
             'class'=>'system.caching.CFileCache',
         ),
@@ -157,6 +137,4 @@ return CMap::mergeArray(array(
         'collect_routes_from_modules' => true,
         'themes_enabled' => false
     )
-), require (ENV.'.php'));
-
-
+);

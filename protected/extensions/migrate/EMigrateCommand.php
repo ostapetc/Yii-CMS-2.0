@@ -237,7 +237,17 @@ class EMigrateCommand extends MigrateCommand
 			$this->migrationPath = Yii::getPathOfAlias($this->modulePaths[$this->applicationModuleName]);
 		}
 		if (!is_dir($this->migrationPath)) {
-			die("\nError: '{$this->migrationPath}' does not exist or is not a directory!\n\n");
+            $arr = explode(DS, $this->migrationPath);
+            array_pop($arr);
+            $pre_path = implode (DS, $arr);
+            if (is_dir($pre_path))
+            {
+                mkdir($this->migrationPath);
+            }
+            else
+            {
+                die("\nError: '{$this->migrationPath}' does not exist or is not a directory!\n\n");
+            }
 		}
 		parent::actionCreate($args);
 	}

@@ -18,10 +18,13 @@ require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
 require_once LIBRARIES_PATH . 'functions.php';
 
 $env = YII_DEBUG ? 'development' : 'production';
-//$env = 'production';
-//$config = 'install';
+defined('ENV') || define('ENV', $env);
 
-define('ENV', $env);
-$config = APP_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';
+if (ENV !== 'production')
+{
+    require_once LIBRARIES_PATH . 'debug.php';
+}
+
+$config = APP_PATH . 'config' . DS . ENV .'.php';
 
 Yii::createWebApplication($config)->run();
