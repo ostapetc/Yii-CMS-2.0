@@ -1,5 +1,17 @@
 <?
-return CMap::mergeArray(array(
+$modules_includes = array();
+$modules_dirs     = scandir(MODULES_PATH);
+
+foreach ($modules_dirs as $module)
+{
+    if ($module[0] == ".") {
+        continue;
+    }
+
+    $modules[] = $module;
+}
+
+return array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'     => '',
@@ -18,8 +30,11 @@ return CMap::mergeArray(array(
         'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
-    'modules'    => array('%MODULES%'),
+    'modules'    => $modules,
     'components' => array(
+        'executor' => array(
+            'class' => 'application.components.CommandExecutor',
+        ),
         'messages' => array(
             'class' => 'CDbMessageSource',
             'sourceMessageTable'     => 'languages_messages',
@@ -62,7 +77,7 @@ return CMap::mergeArray(array(
             'class'    => 'CClientScript',
         ),
         'session'      => array(
-//            'autoStart'=> true
+            'autoStart'=> true
         ),
         'user'         => array(
             'allowAutoLogin' => true,
@@ -97,6 +112,7 @@ return CMap::mergeArray(array(
         ),
 
         'errorHandler' => array(
+            'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
@@ -108,25 +124,6 @@ return CMap::mergeArray(array(
             'itemChildTable'  => 'auth_items_childs',
             'defaultRoles'    => array('guest')
         ),
-       // 'log'=>array(
-//                'class'=>'CLogRouter',
-//                'routes'=>array(
-//                    array(
-//                        'class'        => 'DbLogRoute',
-//                        'levels'       => 'error, warning, info',
-//                        'connectionID' => 'db',
-//                        'logTableName' => 'log',
-//                        'enabled'      => true
-//                    ),
-//                    array(
-//                           /*направляем результаты профайлинга в ProfileLogRoute (отображается
-//                           внизу страницы)*/
-//                          'class'=>'CProfileLogRoute',
-//                          'levels'=>'profile',
-//                          'enabled'=>true,
-//                    ),
-//                ),
-//        ),
 
         'cache' => array(
             'class'=>'system.caching.CFileCache',
@@ -135,13 +132,10 @@ return CMap::mergeArray(array(
 
     'onBeginRequest' => array('AppManager', 'init'),
 
-
     'params'         => array(
-//        'save_site_actions' => %SAVE_SITE_ACTIONS%,
-//        'multilanguage_support' => %MULTILANGUAGE_SUPPORT%,
-//        'collect_routes_from_modules' => %COLLECT_ROUTES_FROM_MODULES%,
-//        'themes_enabled' => %THEMES_ENABLED%
+        'save_site_actions' => %SAVE_SITE_ACTIONS%,
+        'multilanguage_support' => %MULTILANGUAGE_SUPPORT%,
+        'collect_routes_from_modules' => %COLLECT_ROUTES_FROM_MODULES%,
+        'themes_enabled' => %THEMES_ENABLED%
     )
-), require (ENV.'.php'));
-
-
+);

@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-        <? foreach ($support as $technology => $data) { ?>
+        <? foreach ($model->getRequirements() as $technology => $data) { ?>
             <tr class="<?= $data['is_support'] ? 'support' : 'not-support'; ?>">
                 <td><?= $technology ?></td>
                 <td><?= $data['is_support'] ? 'Да' : 'Нет' ?> </td>
@@ -19,6 +19,21 @@
                 <td><?= isset($data['reason']) ? $data['reason'] : '' ?> </td>
             </tr>
         <? } ?>
+        <? $is_writable_array = $model->getIsWritableDirectories() ?>
+        <tr class="<?= !in_array(false, $is_writable_array) ? 'support' : 'not-support'; ?>">
+            <td>
+                Доступ на запись
+            </td>
+            <td>
+                <? foreach ($is_writable_array as $dir => $is_writable) { ?>
+                    <?= $dir ?> - <?= $is_writable ? 'Да' : 'Нет'?><br/>
+                <? } ?>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
     </tbody>
 </table>
 

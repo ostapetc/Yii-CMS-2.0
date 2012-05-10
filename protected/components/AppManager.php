@@ -335,51 +335,7 @@ class AppManager
         }
     }
 
-
-    public function errorHandler(CErrorEvent $event)
-    {
-        //log in newrelic
-    }
-
-    public function exceptionHandler(CExceptionEvent $event)
-    {
-        //log in newrelic
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

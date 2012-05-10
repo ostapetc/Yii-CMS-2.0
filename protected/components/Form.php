@@ -1,33 +1,37 @@
 <?
 class Form extends CForm
 {
-    public $side;
+    public $back_button_show;
 
-    public $back_button_show = true;
-
-    public $inputElementClass = null;
-
-    private $_is_elements_inited = false;
+    public $inputElementClass;
 
     public $defaultActiveFormSettings = array(
+        'class' => 'BootActiveForm',
         'enableAjaxValidation'=>true,
         'clientOptions' => array(
             'validateOnType' => true,
             'validateOnSubmit' => true,
+            'afterValidateAttribute' => 'js:function(form, attribute, data, hasError){
+                                            var cg = $("#"+attribute.inputID).closest(".control-group");
+                                            hasError ? cg.addClass("error") : cg.removeClass("error");
+                                            hasError ? cg.removeClass("success") : cg.addClass("success");
+                                        }',
+        'inlineErrors' => false
     ));
 
     public function __construct($config, $model = null, $parent = null)
     {
-        if ($this->side == null)
+        $side = Yii::app()->controller instanceof AdminController ? 'admin' : 'client';
+
+        if ($this->inputElementClass === null)
         {
-            $this->side = Yii::app()->controller instanceof AdminController ? 'admin' : 'client';
+            $this->inputElementClass = ucfirst($side) . 'FormInputElement';
         }
 
-        if ($this->inputElementClass == null)
+        if ($this->back_button_show === null)
         {
-            $this->inputElementClass = ucfirst($this->side) . 'FormInputElement';
+            $tihs->back_button_show = $side == 'admin';
         }
-
 
         if (is_string($config))
         {
@@ -72,28 +76,16 @@ class Form extends CForm
         {
             $this->activeForm = CMap::mergeArray($this->defaultActiveFormSettings, $this->activeForm);
 
-            $this->activeForm['class']        = 'BootActiveForm';
-            $this->activeForm['inlineErrors'] = false;
-
-            if (isset($this->activeForm['enableAjaxValidation']) && $this->activeForm['enableAjaxValidation'])
-            {
-                $this->activeForm['clientOptions']['validateOnType'] = true;
-                $this->activeForm['clientOptions']['afterValidateAttribute'] = 'js:function(form, attribute, data, hasError){
-                    var cg = $("#"+attribute.inputID).closest(".control-group");
-                    hasError ? cg.addClass("error") : cg.removeClass("error");
-                    hasError ? cg.removeClass("success") : cg.addClass("success");
-                }';
-            }
-
             try
             {
-                $profile_id = 'Form::'.$this->activeForm['id'];
                 //profile form
+                $profile_id = 'Form::'.$this->activeForm['id'];
                 Yii::beginProfile($profile_id);
                 $res = parent::__toString();
                 Yii::endProfile($profile_id);
                 return $res;
-            } catch (Exception $e)
+            }
+            catch (Exception $e)
             {
                 Yii::app()->handleException($e);
             }
@@ -104,7 +96,7 @@ class Form extends CForm
     {
         $output = parent::renderBody();
 
-        if (!($this->getParent() instanceof self) && $this->side == 'admin')
+        if (!($this->getParent() instanceof self) && Yii::app()->controller instanceof AdminController)
         {
             $this->attributes['class'] = 'admin_form';
             return $this->getParent()->msg(t('Поля отмеченные * обязательны.'), 'info') . $output;
@@ -147,8 +139,7 @@ class Form extends CForm
 
     public function renderButtons()
     {
-        $is_admin_form = !($this->getParent() instanceof self) && $this->side == 'admin';
-        if ($this->back_button_show && !$this->buttons->itemAt('back') && $is_admin_form)
+        if ($this->back_button_show && !$this->buttons->itemAt('back'))
         {
             $this->buttons->add("back", array(
                 'type'  => 'link',

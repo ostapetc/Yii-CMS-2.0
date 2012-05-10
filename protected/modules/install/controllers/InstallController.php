@@ -28,29 +28,7 @@ class InstallController extends Controller
 
     public function actionIndex()
     {
-        $requirements = array(
-            'PHP' => array(
-                'is_support'      => version_compare(phpversion(), '5.3', '>'),
-                'version'         => phpversion(),
-                'minimal_version' => '5.3',
-            ),
-            'Reflection' => array(
-                'is_support'      => class_exists('Reflection', false),
-            ),
-            'SPL' => array(
-                'is_support'      => extension_loaded("SPL"),
-            ),
-            'DOMDocument' => array(
-                'is_support'      => class_exists("DOMDocument", false),
-            ),
-            'mcrypt' => array(
-                'is_support'      => extension_loaded("mcrypt"),
-            ),
-            'soap' => array(
-                'is_support'      => extension_loaded("soap"),
-            ),
-        );
-        $this->render('index', array('support' => $requirements));
+        $this->render('index', array('model' => new Step0()));
     }
 
     public function actionStep1()
@@ -62,12 +40,10 @@ class InstallController extends Controller
         if ($form->submitted() && $model->validate())
         {
             //create db
-            $db_create_status = InstallHelper::createDb($model);
+            $db_create_status = $model->createDb();
             if ($db_create_status === true)
             {
-                //create configs
-                InstallHelper::parseConfig('development', $model->getDbPatterns());
-                InstallHelper::parseConfig('production', array());
+                Yii::app()->user->setState('install_configs', $model->getConfigs());
             }
             else if (is_string($db_create_status))
             {
@@ -76,19 +52,16 @@ class InstallController extends Controller
 
             if (MsgStream::getInstance()->count() == 0)
             {
-                Yii::app()->user->setState('install_step1', $model->attributes);
+                $model->saveInSession();
                 $this->redirect('step2');
             }
         }
-
 
         $this->render('step1', array('form' => $form));
     }
 
     public function actionStep2()
     {
-        $step1 = new Step1();
-        $step1->attributes = Yii::app()->user->getState('install_step1');
 
         $model = new Step2();
         $form = new Form('install.Step2', $model);
@@ -97,19 +70,38 @@ class InstallController extends Controller
 
         if ($form->submitted() && $model->validate())
         {
-            InstallHelper::parseConfig('main', $model->getMainConfigPatterns());
+            $configs = CMap::mergeArray(Yii::app()->user->getState('install_configs'), $model->getConfigs());
+            Yii::app()->user->setState('install_configs',$configs);
 
+            $step1 = new Step1();
+            $step1->loadFromSession();
+
+            Yii::app()->setComponent('db', $step1->createDbConnection());
             //install modules
             Yii::app()->setModules($model->modules);
+            Yii::app()->executor->migrate('up --module=install');
             foreach ($model->modules as $module)
             {
-                dump(Yii::app()->getModule($module)->install());
+                if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
+                {
+                    dump(Yii::app()->executor->migrate('up --module=main'));
+                }
+
                 Yii::app()->executor->addCommands($module.'.commands');
             }
-            Yii::app()->executor->migrate('up');
+
+            foreach (Yii::app()->getModules() as $module => $conf)
+            {
+                $module =Yii::app()->getModule($module);
+                if (method_exists($module, 'install'))
+                {
+                    $module->install();
+                }
+            }
+
+            $model->saveInSession();
             //install base modules
-            Yii::app()->user->setState('install_step2', $model->attributes);
-            //$this->redirect('step3');
+            $this->redirect('step3');
         }
 
         $this->render('step2', array('form' => $form));
@@ -117,17 +109,19 @@ class InstallController extends Controller
 
     public function actionStep3()
     {
-        $step1 = new Step1();
-        $step1->attributes = Yii::app()->user->getState('install_step1');
-
-        $step2 = new Step2();
-        $step2->attributes = Yii::app()->user->getState('install_step2');
-
-
+        $configs = Yii::app()->user->getState('install_configs');
+        foreach ($configs as $file => $data)
+        {
+//            InstallHelper::parseConfig($file, $data);
+        }
         //done!
         //replace config in index.php
-        //redirect - no end
-        //install - uninstall
+        $this->redirect('end');
+    }
+
+    public function actionEnd()
+    {
+        $this->render('end');
     }
 
 

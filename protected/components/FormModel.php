@@ -1,7 +1,6 @@
 <?php
 class FormModel extends CFormModel
 {
-
     /**
      * @param CModelEvent $event
      */
