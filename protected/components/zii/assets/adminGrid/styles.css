@@ -7,10 +7,6 @@
     padding-right: 2px;
 }
 
-.grid-view .filters
-{
-    display: none;
-}
 .grid-view .filters input[type=text], .grid-view .filters select{
     font-size:     11px;
     padding:       2px;
@@ -35,10 +31,6 @@
     white-space: nowrap;
 }
 
-.grid-view .filters_link{
-    color: #356635;
-}
-
 .grid-view .pager-select{
     float:  right;
     margin: 0 0 10px 0;
@@ -50,4 +42,13 @@
 .grid-view-loading
 {
     background: url(preloader.gif) no-repeat;
+}
+
+.filters td:last-child {
+    text-align: center !important;
+}
+
+.filters td:last-child a {
+    color: #000000 !important;
+    text-decoration: underline !important;
 }

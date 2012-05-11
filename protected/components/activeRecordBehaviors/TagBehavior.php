@@ -20,18 +20,21 @@ class TagBehavior extends CActiveRecordBehavior
                 {
                     $tag = new Tag();
                     $tag->name = $tag_name;
-                    $tag->save();
+                    if (!$tag->save())
+                    {
+                        throw new CHttpException("can't save tag");
+                    }
                 }
 
-                if ($tag->id)
-                {
-                    $tag_rel = new TagRel();
-                    $tag_rel->tag_id    = $tag->id;
-                    $tag_rel->object_id = $this->owner->id;
-                    $tag_rel->model_id  = $model_id;
-                    $tag_rel->save(false);
-                }
+                $tag_rel = new TagRel();
+                $tag_rel->tag_id    = $tag->id;
+                $tag_rel->object_id = $this->owner->id;
+                $tag_rel->model_id  = $model_id;
+                p($tag_rel->errors);
+                v($tag_rel->save());
+                v($tag_rel->attributes);
             }
+            die;
         }
 
     }
@@ -39,15 +42,22 @@ class TagBehavior extends CActiveRecordBehavior
 
     public function _deleteRels()
     {
-        TagRel::model()->deleteAll("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
+        TagRel::model()->exists("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
     }
 
 
-    public function beforeInitForm($event)
+//    private function _deleteRels()
+//    {
+//        TagRel::model()->deleteAllByAttributes(array(
+//            'object_id' => $this->owner->id,
+//            'model_id'  => get_class($this->owner)
+//        ));
+//    }
+
+
+    public function beforeFormInit($event)
     {
-        $elements = $event->sender->getElements();
-        $elements['TagsInput'] = array('type' => 'TagsInput');
-        $event->sender->setElements($elements);
+        TagRel::model()->exists("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
     }
 }
 

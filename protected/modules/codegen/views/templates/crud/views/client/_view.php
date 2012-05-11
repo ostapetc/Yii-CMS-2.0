@@ -5,7 +5,7 @@ $labels = $model->attributeLabels();
 ?>
 
 <? foreach ($meta as $data): ?>
-<?='<?= $data->' . $data['Field'] . '_label?>: <?= $data->' . $data['Field'] . '?>' . "\n"?> <br/>
+<?='<strong><?= $data->label(\'' . $data['Field'] . '\') ?></strong>: <?= $data->value(\'' . $data['Field'] . '\') ?>' . "\n"?> <br/>
 <? endforeach ?>
 
 <br/>

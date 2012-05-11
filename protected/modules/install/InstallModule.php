@@ -25,7 +25,7 @@ class InstallModule extends WebModule
     public function init()
     {
         $this->setImport(array(
-            'install.models.*', 'install.components.*',
+            'install.models.*', 'install.components.*', 'install.helpers.*'
         ));
     }
 

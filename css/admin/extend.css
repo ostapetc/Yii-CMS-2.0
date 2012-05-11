@@ -80,3 +80,27 @@ ul ul{
     margin-left: 0;
 }
 
+.admin-console{
+    position: fixed;
+    top: 0;
+    height: 60%;
+    width: 100%;
+    color:#eee;
+    background: #666;
+    display: none;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    border-bottom: 2px solid #333;
+    word-wrap: break-word;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9); /* Параметры тени */
+}
+div.jquery-console-inner{
+    font-family: Consolas, monospace;
+    height: 100%;
+    width: 100%;
+    overflow:auto;
+}
+span.jquery-console-cursor{
+    margin-left: 1px;
+    border-left: #eee 2px solid;
+}

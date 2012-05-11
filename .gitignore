@@ -36,16 +36,11 @@ publish
 .idea
 
 # build script local files
-build/buildinfo.properties
-build/config/buildinfo.properties
-
+*.properties
 
 #my adds
-/assets/
+/assets
 /upload/fileManager
 /protected/config/development.php
+/protected/runtime
 
-#не получается
-protected/runtime/cache
-/protected/runtime/cache/
-/protected/runtime/cache/*

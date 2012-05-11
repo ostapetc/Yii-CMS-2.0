@@ -6,7 +6,6 @@ if (!$_SERVER['DOCUMENT_ROOT']) //for console application
 }
 
 defined('YII_DEBUG')       || define('YII_DEBUG', true);
-defined('ENV')             || define('ENV', YII_DEBUG ? 'development' : 'production');
 defined('PROTECTED_PATH')  || define('PROTECTED_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS);
 defined('RUNTIME_PATH')    || define('RUNTIME_PATH', PROTECTED_PATH . DS . 'runtime' . DS);
 defined('MODULES_PATH')    || define('MODULES_PATH', PROTECTED_PATH . 'modules' . DS);

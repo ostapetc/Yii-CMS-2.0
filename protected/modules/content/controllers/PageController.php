@@ -5,20 +5,19 @@ class PageController extends Controller
     public static function actionsTitles()
     {
         return array(
-            'View'   => 'Просмотр страницы',
-            'Main'   => 'Главная страница',
-            'Search' => 'Поиск',
-            'Create' => 'Добавление страницы'
+            "View"   => "Просмотр страницы",
+            "Main"   => "Главная страница",
+            "Search" => "Поиск"
         );
     }
 
 
     public function actionView()
     {
-        $id = $this->request->getParam('id');
+        $id = $this->request->getParam("id");
         if ($id)
         {
-            $page = Page::model()->findByPk($id);
+            $page = Page::model()->published()->findByPk($id);
             if (!$page || mb_strlen($page->url, 'utf-8') > 0)
             {
                 $this->pageNotFound();
@@ -26,8 +25,8 @@ class PageController extends Controller
         }
         else
         {
-            $url  = $this->request->getParam('url');
-            $page = Page::model()->language()->findByAttributes(array('url' => $url));
+            $url  = $this->request->getParam("url");
+            $page = Page::model()->language()->published()->findByAttributes(array("url" => $url));
             if (!$page)
             {
                 $this->pageNotFound();
@@ -37,24 +36,24 @@ class PageController extends Controller
         $this->crumbs = array($page->title);
         $this->_setMetaTags($page);
 
-        $this->render('view', array('page' => $page));
+        $this->render("view", array("page" => $page));
     }
 
 
     public function actionMain()
     {
-//        $page = Page::model()->published()->findByAttributes(array('url' => '/'));
-//        if (!$page)
-//        {
-//            $this->pageNotFound();
-//        }
-//
-//        $this->_setMetaTags($page);
-//
+        $page = Page::model()->published()->findByAttributes(array("url" => "/"));
+        if (!$page)
+        {
+            $this->pageNotFound();
+        }
+
+        $this->_setMetaTags($page);
+
         $this->render('main', array(
+            'page' => $page
         ));
     }
-
 
     private function _setMetaTags(Page $page)
     {

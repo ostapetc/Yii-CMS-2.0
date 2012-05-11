@@ -78,7 +78,7 @@ class UploadFileBehavior extends ActiveRecordBehavior
     }
 
 
-    public function beforeDelete()
+    public function beforeDelete($event)
     {
         $model = $this->getOwner();
 

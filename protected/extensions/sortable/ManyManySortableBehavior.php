@@ -1,6 +1,6 @@
 <?
 
-class ManyManySortableBehavior extends CActiveRecordBehavior
+class ManyManySortableBehavior extends ActiveRecordBehavior
 {
     public $relation;
     public $map_field;
@@ -43,31 +43,29 @@ class ManyManySortableBehavior extends CActiveRecordBehavior
         list($table, $fk1, $fk2) = SqlHelper::parseManyMany($this->owner, $this->relation);
 
         $db      = Yii::app()->db;
-        $command = $db->createCommand();
+        $command = $db->createCommand()->select($this->map_field)->from($table)
+                        ->where("{$fk1}=:product_id AND {$fk2}=:category_id ");
 
         if ($prev != -1)
         {
-            $prevO = $command->select($this->map_field)->from($table)
-                ->where("{$fk1}=:product_id AND {$fk2}=:category_id ", array(
+            $prevO = $command->queryScalar(array(
                 ':product_id' => $prev,
                 ':category_id'=> $cat_id,
-            ))->queryScalar();
+            ));
         }
         if ($curr != -1)
         {
-            $currO = $command->select($this->map_field)->from($table)
-                ->where("{$fk1}=:product_id AND {$fk2}=:category_id ", array(
+            $currO = $command->queryScalar(array(
                 ':product_id' => $curr,
                 ':category_id'=> $cat_id,
-            ))->queryScalar();
+            ));
         }
         if ($next != -1)
         {
-            $nextO = $command->select($this->map_field)->from($table)
-                ->where("{$fk1}=:product_id AND {$fk2}=:category_id ", array(
+            $nextO = $command->queryScalar(array(
                 ':product_id' => $next,
                 ':category_id'=> $cat_id,
-            ))->queryScalar();
+            ));
         }
 
         if (isset($prevO) && $currO < $prevO)
@@ -149,4 +147,18 @@ class ManyManySortableBehavior extends CActiveRecordBehavior
                 ->execute();
         }
     }
+
+
+    public function beforeGridInitColumns($event)
+    {
+        if ($event->sender->many_many_sortable)
+        {
+            $event->sender->addColumn(array(
+                'class' => 'ext.sortable.ManyManySortableColumn',
+                'header'=> t('Сортировка')
+            ), -1);
+        }
+    }
+
+
 }

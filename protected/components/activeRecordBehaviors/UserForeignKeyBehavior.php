@@ -2,7 +2,7 @@
  
 class UserForeignKeyBehavior extends  ActiveRecordBehavior
 {
-    public function beforeValidate()
+    public function beforeValidate($event)
     {
         $model = $this->getOwner();
         

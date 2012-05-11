@@ -16,12 +16,15 @@ class AdminGridView extends BootGridView
     public $buttons = null;
 
     public $sortable = false;
+
     public $many_many_sortable = false;
+
     public $cat_id = false;
 
     public $_pocket;
 
     public $mass_removal = false;
+
     public $filter_hint = false;
 
     public $template = '{pagerSelect}{summary}<br/>{pocket}{items}{pager}';
@@ -144,15 +147,65 @@ class AdminGridView extends BootGridView
     public function addColumn($config, $pos = 0)
     {
         $last_index = $pos >= 0 ? $pos : count($this->columns) + $pos;
-        $configs    = array(
-            $config, $this->columns[$last_index]
-        );
+        if (isset($this->columns[$last_index]))
+        {
+            $configs = array(
+                $config,
+                $this->columns[$last_index]
+            );
+        }
+        else
+        {
+            $configs = array($config);
+        }
+
         array_splice($this->columns, $last_index, 1, $configs);
     }
 
 
     public function initColumns()
     {
+        $button_column_exists = false;
+
+        $attributes_columns = $this->columns;
+        foreach ($attributes_columns as $i => $data)
+        {
+            if (isset($data['class']))
+            {
+                if ($data['class'] == 'CButtonColumn')
+                {
+                    $button_column_exists = true;
+                }
+
+                unset($attributes_columns[$i]);
+            }
+        }
+
+        if (!$attributes_columns)
+        {
+            $model = $this->filter;
+
+            $attributes = WidgetManager::getVisibleColumns(get_class($model), $this->id);
+            if ($attributes)
+            {
+                foreach ($attributes as $i => $attribute)
+                {
+                    $this->addColumn(
+                        array(
+                            'name'  => $attribute,
+                            'value' => $model->value($attribute)
+                        ),
+                        $i
+                    );
+                }
+            }
+        }
+
+        if (!$button_column_exists)
+        {
+            $this->addColumn(array('class' => 'CButtonColumn'), count($this->columns) + 1);
+        }
+
         if ($this->many_many_sortable)
         {
             $this->addColumn(array(
@@ -188,7 +241,7 @@ class AdminGridView extends BootGridView
     {
         if ($this->dataProvider->getItemCount() > 0 || $this->showTableOnEmpty)
         {
-            echo "<table class='{$this->itemsCssClass}' cellpadding='0' cellspacing='0' width='100%'>\n";
+            echo "<table class='{$this->itemsCssClass}' model_id='" . get_class($this->filter) . "' widget_id='" . $this->id . "' cellpadding='0' cellspacing='0' width='100%'>\n";
             $this->renderTableHeader();
             $this->renderTableBody();
             $this->renderTableFooter();

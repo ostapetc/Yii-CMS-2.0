@@ -1,6 +1,6 @@
 <?
 
-class MailerOutbox extends ActiveRecord
+class OutboxEmail extends ActiveRecord
 {
     const STATUS_SENT    = 'sent';
     const STATUS_QUEUE   = 'queue';
@@ -97,26 +97,26 @@ class MailerOutbox extends ActiveRecord
 
     public static function sendEmails()
     {
-        $outbox_emails = MailerOutbox::model()->findAllByAttributes(
-            array('status' => MailerOutbox::STATUS_QUEUE),
+        $outbox_emails = OutboxEmail::model()->findAllByAttributes(
+            array('status' => OutboxEmail::STATUS_QUEUE),
             array('order'  => 'date_create')
         );
 
         foreach ($outbox_emails as $outbox_email)
         {
-            $outbox_email->status = MailerOutbox::STATUS_PROCESS;
+            $outbox_email->status = OutboxEmail::STATUS_PROCESS;
             $outbox_email->save();
 
             try
             {
-                self::sendMail($outbox_email->email, $outbox_email->subject, $outbox_email->body);
+                self::sendMail($outbox_email->email, $outbox_email->subject, $outbox_email->text);
 
                 $outbox_email->date_send = new CDbExpression('NOW()');
-                $outbox_email->status    = MailerOutbox::STATUS_SENT;
+                $outbox_email->status    = OutboxEmail::STATUS_SENT;
             }
             catch (Exception $e)
             {
-                $outbox_email->status = MailerOutbox::STATUS_ERROR;
+                $outbox_email->status = OutboxEmail::STATUS_ERROR;
                 $outbox_email->log    = $e->getMessage();
             }
 

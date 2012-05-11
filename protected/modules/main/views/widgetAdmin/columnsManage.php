@@ -48,9 +48,9 @@
 <fieldset class="columns_fieldset">
     <label>Видимые поля</label>
     <ul class="columns visible">
-    <? foreach ($visible_columns as $name => $label): ?>
+    <? foreach ($visible_columns as $attribute): ?>
         <li class="column-li">
-            <a class="btn field" attribute="<?= $name ?>"><?= $label ?></a>
+            <a class="btn field" attribute="<?= $attribute ?>"><?= $model->label($attribute) ?></a>
         </li>
     <? endforeach ?>
     </ul>
@@ -64,9 +64,9 @@
 <fieldset class="columns_fieldset">
     <label>Невидимые поля</label>
     <ul class="columns">
-    <? foreach ($hidden_columns as $name => $label): ?>
+    <? foreach ($hidden_columns as $attribute): ?>
         <li class="column-li">
-            <a class="btn field" attribute="<?= $name ?>"><?= $label ?></a>
+            <a class="btn field" attribute="<?= $attribute ?>"><?= $model->label($attribute) ?></a>
         </li>
     <? endforeach ?>
     </ul>

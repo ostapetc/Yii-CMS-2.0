@@ -1,0 +1,5 @@
+<?
+class ButtonColumn extends BootButtonColumn
+{
+
+}

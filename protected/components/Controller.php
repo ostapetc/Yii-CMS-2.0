@@ -1,5 +1,5 @@
 <?
-abstract class Controller extends CController
+abstract class Controller extends CController implements ControllerInterface
 {
     const MSG_SUCCESS = 'success';
     const MSG_DANGER  = 'danger';
@@ -20,13 +20,9 @@ abstract class Controller extends CController
 
     public $is_ssl_protected = false;
 
-
     public $system_actions = array(
         'captcha','help','error'
     );
-
-    abstract public static function actionsTitles();
-
 
     public function filters()
     {
@@ -38,6 +34,7 @@ abstract class Controller extends CController
             array('application.components.filters.MetaTagsFilter + view'),
             array('application.components.filters.StatisticFilter'),
             array('application.components.filters.ThemeFilter'),
+            array('application.components.filters.ReturnUrlFilter'),
         );
     }
 
@@ -78,14 +75,17 @@ abstract class Controller extends CController
             throw new CException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
         }
 
+        $this->setTitle($action);
+
+        return true;
+    }
+
+    public function afterAction($action)
+    {
         if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
         {
             MainModule::saveSiteAction();
         }
-
-        $this->setTitle($action);
-
-        return true;
     }
 
 
@@ -139,7 +139,7 @@ abstract class Controller extends CController
     }
 
 
-    public function msg($msg, $type)
+    public static function msg($msg, $type)
     {
         return CHtml::tag('div', array('class'=>"alert alert-{$type}"), $msg);
     }

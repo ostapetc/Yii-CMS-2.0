@@ -1,17 +1,16 @@
 <?
-
 class InstallController extends Controller
 {
 
     public function filters()
     {
-        return array();
+        return array(
+            array('application.components.filters.ReturnUrlFilter'),
+        );
     }
 
-    public function beforeAction()
-    {
-        return true;
-    }
+    public function beforeAction($action) {return true;}
+    public function afterAction($action) {}
 
     public $layout = 'install';
 
@@ -29,12 +28,7 @@ class InstallController extends Controller
 
     public function actionIndex()
     {
-        $support['PHP'] = array(
-            'is_support'      => version_compare(phpversion(), '5.3', '>'),
-            'version'         => phpversion(),
-            'minimal_version' => '5.3',
-        );
-        $this->render('index', array('support' => $support));
+        $this->render('index', array('model' => new Step0()));
     }
 
     public function actionStep1()
@@ -43,12 +37,24 @@ class InstallController extends Controller
         $form = new Form('install.Step1', $model);
 
         $this->performAjaxValidation($model);
-
         if ($form->submitted() && $model->validate())
         {
-            $this->parseFile('application.config.development', $model->getDbPatterns());
-            $this->parseFile('application.config.production', array());
-            $this->redirect('step2');
+            //create db
+            $db_create_status = $model->createDb();
+            if ($db_create_status === true)
+            {
+                Yii::app()->user->setState('install_configs', $model->getConfigs());
+            }
+            else if (is_string($db_create_status))
+            {
+                MsgStream::getInstance()->enqueue($db_create_status, 'error');
+            }
+
+            if (MsgStream::getInstance()->count() == 0)
+            {
+                $model->saveInSession();
+                $this->redirect('step2');
+            }
         }
 
         $this->render('step1', array('form' => $form));
@@ -56,6 +62,7 @@ class InstallController extends Controller
 
     public function actionStep2()
     {
+
         $model = new Step2();
         $form = new Form('install.Step2', $model);
 
@@ -63,12 +70,38 @@ class InstallController extends Controller
 
         if ($form->submitted() && $model->validate())
         {
-            $this->parseFile('application.config.main', $model->getMainConfigPatterns());
+            $configs = CMap::mergeArray(Yii::app()->user->getState('install_configs'), $model->getConfigs());
+            Yii::app()->user->setState('install_configs',$configs);
 
-            //set configs
+            $step1 = new Step1();
+            $step1->loadFromSession();
+
+            Yii::app()->setComponent('db', $step1->createDbConnection());
+            //install modules
+            Yii::app()->setModules($model->modules);
+            Yii::app()->executor->migrate('up --module=install');
+            foreach ($model->modules as $module)
+            {
+                if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
+                {
+                    dump(Yii::app()->executor->migrate('up --module=main'));
+                }
+
+                Yii::app()->executor->addCommands($module.'.commands');
+            }
+
+            foreach (Yii::app()->getModules() as $module => $conf)
+            {
+                $module =Yii::app()->getModule($module);
+                if (method_exists($module, 'install'))
+                {
+                    $module->install();
+                }
+            }
+
+            $model->saveInSession();
             //install base modules
-
-            //$this->redirect('step3');
+            $this->redirect('step3');
         }
 
         $this->render('step2', array('form' => $form));
@@ -76,20 +109,21 @@ class InstallController extends Controller
 
     public function actionStep3()
     {
+        $configs = Yii::app()->user->getState('install_configs');
+        foreach ($configs as $file => $data)
+        {
+//            InstallHelper::parseConfig($file, $data);
+        }
         //done!
         //replace config in index.php
-        //redirect - no end
-        //install - uninstall
+        $this->redirect('end');
     }
 
-    private function parseFile($alias, $data)
+    public function actionEnd()
     {
-        $file = Yii::getPathOfAlias($alias);
-
-        $content = strtr(file_get_contents($file.'.tpl.php'), $data);
-        rename ($file.'.tpl.php', $file.'.php');
-        file_put_contents($file.'.php', $content);
+        $this->render('end');
     }
+
 
     public function actionError()
     {
@@ -106,3 +140,5 @@ class InstallController extends Controller
         }
     }
 }
+
+

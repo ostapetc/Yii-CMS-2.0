@@ -1,7 +1,6 @@
 <?php
-class Step2 extends FormModel
+class Step2 extends AbstractInstallModel
 {
-
     public $admin_login;
     public $admin_pass;
     public $admin_pass_confirm;
@@ -52,14 +51,22 @@ class Step2 extends FormModel
         $modules = array();
         foreach (array_merge($this->modules, array('main', 'users', 'rbac')) as $module)
         {
-            $module[] = "'".$module."'";
+            $modules[] = $module;
         }
         return array(
-            '%MODULES%'                     => implode(', ',$modules),
+            '%MODULES%'                     => implode('", "',$modules),
             '%SAVE_SITE_ACTIONS%'           => $this->save_site_actions ? 'true' : 'false',
             '%MULTILANGUAGE_SUPPORT%'       => $this->multilanguage_support ? 'true' : 'false',
             '%COLLECT_ROUTES_FROM_MODULES%' => $this->collect_routes_from_modules ? 'true' : 'false',
             '%THEMES_ENABLED%'              => $this->themes_enabled ? 'true' : 'false',
+        );
+    }
+
+
+    public function getConfigs()
+    {
+        return array(
+            'main' => $this->getMainConfigPatterns()
         );
     }
 

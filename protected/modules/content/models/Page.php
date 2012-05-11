@@ -38,9 +38,16 @@ class Page extends ActiveRecord
         return array_merge(
             parent::behaviors(),
             array(
-                'MetaTag'     => array('class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'),
-                'Sortable'    => array('class' => 'ext.sortable.SortableBehavior'),
-                'TagBehavior' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
+                 'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
+                 'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
+                 'FileManager' => array(
+                     'class'=>'application.components.activeRecordBehaviors.FileManagerBehavior',
+                    'tags' => array(
+                        'files' => t('files'),
+                        'photos' => t('photos')
+                    )
+                 ),
+                 'Tag'        => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
             )
         );
     }
@@ -51,6 +58,11 @@ class Page extends ActiveRecord
         return array(
             array('title, language', 'required'),
             array('language', 'safe'),
+            array(
+                'is_published',
+                'numerical',
+                'integerOnly' => true
+            ),
             array(
                 'url', 'length',
                 'max' => 250
@@ -66,7 +78,7 @@ class Page extends ActiveRecord
                 'filter' => 'strip_tags'
             ),
             array(
-                'id, title, url, text, date_create', 'safe',
+                'id, title, url, text, is_published, date_create', 'safe',
                 'on'=> 'search'
             ),
             array(
@@ -98,15 +110,16 @@ class Page extends ActiveRecord
         $criteria->compare('title', $this->title, true);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('text', $this->text, true);
+        $criteria->compare('is_published', $this->is_published);
         $criteria->compare('date_create', $this->date_create, true);
         $criteria->compare('language', $this->language, true);
 
         return new ActiveDataProvider(get_class($this), array(
-             'criteria'   => $criteria,
-             'pagination' => array(
-                 'pageSize' => self::PAGE_SIZE
-             )
-        ));
+                                                             'criteria'   => $criteria,
+                                                             'pagination' => array(
+                                                                 'pageSize' => self::PAGE_SIZE
+                                                             )
+                                                        ));
     }
 
 

@@ -64,9 +64,9 @@ class CrudAdminController extends AdminController
                 {
                     $view_file_dir = str_replace('client', lcfirst($model->class), $view_file_dir);
                 }
-                else if ($child_dir == 'Admin')
+                else if ($child_dir == 'admin')
                 {
-                    $view_file_dir = str_replace('Admin', lcfirst($model->class) . 'Admin', $view_file_dir);
+                    $view_file_dir = str_replace('admin', lcfirst($model->class) . 'Admin', $view_file_dir);
                 }
 
                 if (!is_dir($view_file_dir))

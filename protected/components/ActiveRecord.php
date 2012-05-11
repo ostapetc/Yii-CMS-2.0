@@ -70,13 +70,39 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
+    public function label($attribute)
+    {
+        $labels = $this->attributeLabels();
+
+        if (isset($labels[$attribute]) && !empty($labels[$attribute]))
+        {
+            return $labels[$attribute];
+        }
+
+        return ucfirst(str_replace('_', ' ', $attribute));
+    }
+
+
+    public function value($attribute)
+    {
+        $method_name = 'format' . ucfirst($attribute);
+        if (method_exists($this, $method_name))
+        {
+            return $this->$method_name();
+        }
+        else
+        {
+            return $this->$attribute;
+        }
+    }
+
+
     public function __get($name)
     {
         try
         {
             return parent::__get($name);
-        }
-        catch (CException $e)
+        } catch (CException $e)
         {
             if (substr($name, -6) == '_label')
             {
@@ -244,8 +270,52 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function onBeforeInitForm($event)
+    /**
+     * @param CModelEvent $event
+     */
+    public function onBeforeFormInit($event)
     {
-        $this->raiseEvent('onBeforeInitForm', $event);
+        $this->raiseEvent('onBeforeFormInit', $event);
     }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onAfterFormInit($event)
+    {
+        $this->raiseEvent('onAfterFormInit', $event);
+    }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onBeforeGridInit($event)
+    {
+        $this->raiseEvent('onAfterGridInit', $event);
+    }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onAfterGridInit($event)
+    {
+        $this->raiseEvent('onAfterGridInit', $event);
+    }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onBeforeGridInitColumns($event)
+    {
+        $this->raiseEvent('onBeforeGridInitColumns', $event);
+    }
+
+    /**
+     * @param CModelEvent $event
+     */
+    public function onAfterGridInitColumns($event)
+    {
+        $this->raiseEvent('onAfterGridInitColumns', $event);
+    }
+
 }

@@ -33,13 +33,8 @@ class AppManager
     public static function getModulesData($active = null, $check_allowed_links = false)
     {
         $modules = array();
-        foreach (scandir(MODULES_PATH) as $module_dir)
+        foreach (Yii::app()->getModules() as $module_dir => $module_config)
         {
-            if ($module_dir[0] == '.')
-            {
-                continue;
-            }
-
             $module_class = ucfirst($module_dir) . 'Module';
             $module_path  = MODULES_PATH . $module_dir . '/' . $module_class . '.php';
 
@@ -81,11 +76,11 @@ class AppManager
             {
                 $module['admin_menu'] = call_user_func(array($module_class, 'adminMenu'));
 
-                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
-                if ($settins_count)
-                {
-                    $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));
-                }
+//                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
+//                if ($settins_count)
+//                {
+//                    $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));
+//                }
 
                 if ($check_allowed_links)
                 {
@@ -323,13 +318,14 @@ class AppManager
 
     public static function getConfig()
     {
-        return include PROTECTED_PATH . 'config/main.php';
+        return include APP_PATH . 'config/main.php';
     }
 
 
     public static function getModelModule($model_class)
     {
         $file = $model_class . '.php';
+
         foreach (glob(MODULES_PATH . '*') as $module_dir)
         {
             if (file_exists($module_dir . DS . 'models' . DS . $file))
@@ -338,41 +334,8 @@ class AppManager
             }
         }
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

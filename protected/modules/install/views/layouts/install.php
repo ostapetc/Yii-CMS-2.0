@@ -18,6 +18,8 @@
     $cs->registerCoreScript('jquery');
     Yii::app()->bootstrap->registerScripts();
     $cs->registerCssFile('/css/site/form.css');
+    $cs->registerScriptFile('/js/plugins/hint.js');
+
     $cs->registerCssFile(
         Yii::app()->assetManager->publish(Yii::getPathOfAlias('install.assets.css.install') . '.less')
     );
@@ -66,6 +68,7 @@
         </div>
     </div>
     <div class="row-fluid content">
+        <?= MsgStream::getInstance()->render();?>
         <?= $content ?>
     </div>
     <hr>

@@ -6,6 +6,7 @@ class MainController extends Controller
     {
         return array(
             "Error"          => "Ошибка на странице",
+            "Error404"       => "Страница не найдена",
             "Search"         => "Поиск по сайту",
             "ChangeLanguage" => "Смена языка"
         );
@@ -69,6 +70,21 @@ class MainController extends Controller
 	    }
 	}
 
+
+    public function actionError404()
+    {
+        if($error=Yii::app()->errorHandler->error)
+        {
+            if(Yii::app()->request->isAjaxRequest)
+            {
+                echo $error['message'];
+            }
+            else
+            {
+                $this->render('error404', $error);
+            }
+        }
+    }
 
     public function actionChangeLanguage($set_language, $back_url)
     {
