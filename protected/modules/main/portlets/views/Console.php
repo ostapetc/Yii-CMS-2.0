@@ -1,7 +1,6 @@
 <script type="text/javascript">
     $(document).ready(function()
     {
-
         /* First console */
         var console = $('<div class="admin-console">');
 

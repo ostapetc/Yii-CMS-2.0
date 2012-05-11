@@ -84,7 +84,7 @@ class InstallController extends Controller
             {
                 if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
                 {
-                    dump(Yii::app()->executor->migrate('up --module=main'));
+                    Yii::app()->executor->migrate('up --module=main');
                 }
 
                 Yii::app()->executor->addCommands($module.'.commands');
