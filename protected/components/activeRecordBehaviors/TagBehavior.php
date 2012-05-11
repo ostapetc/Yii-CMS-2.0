@@ -20,21 +20,18 @@ class TagBehavior extends CActiveRecordBehavior
                 {
                     $tag = new Tag();
                     $tag->name = $tag_name;
-                    if (!$tag->save())
-                    {
-                        throw new CHttpException("can't save tag");
-                    }
+                    $tag->save();
                 }
 
-                $tag_rel = new TagRel();
-                $tag_rel->tag_id    = $tag->id;
-                $tag_rel->object_id = $this->owner->id;
-                $tag_rel->model_id  = $model_id;
-                p($tag_rel->errors);
-                v($tag_rel->save());
-                v($tag_rel->attributes);
+                if ($tag->id)
+                {
+                    $tag_rel = new TagRel();
+                    $tag_rel->tag_id    = $tag->id;
+                    $tag_rel->object_id = $this->owner->id;
+                    $tag_rel->model_id  = $model_id;
+                    $tag_rel->save(false);
+                }
             }
-            die;
         }
 
     }
@@ -42,23 +39,15 @@ class TagBehavior extends CActiveRecordBehavior
 
     public function _deleteRels()
     {
-        TagRel::model()->exists("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
+        TagRel::model()->deleteAll("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
     }
 
 
-//    private function _deleteRels()
-//    {
-//        TagRel::model()->deleteAllByAttributes(array(
-//            'object_id' => $this->owner->id,
-//            'model_id'  => get_class($this->owner)
-//        ));
-//    }
-
-
     public function beforeInitForm($event)
->>>>>>> Temporary merge branch 2
     {
-        TagRel::model()->exists("object_id = '{$this->owner->id}' AND model_id = '" . get_class($this->owner) . "'");
+        $elements = $event->sender->getElements();
+        $elements['TagsInput'] = array('type' => 'TagsInput');
+        $event->sender->setElements($elements);
     }
 }
 

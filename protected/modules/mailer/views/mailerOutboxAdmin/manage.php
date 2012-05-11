@@ -1,7 +1,7 @@
 <?
-//$this->tabs = array(
-//    'добавить исходящее письмо' => $this->createUrl('create')
-//);
+$this->tabs = array(
+    'добавить исходящее письмо' => $this->createUrl('create')
+);
 
 $this->widget('AdminGridView', array(
 	'id'           => 'outbox-email-grid',
@@ -9,7 +9,11 @@ $this->widget('AdminGridView', array(
 	'filter'       => $model,
 	'columns'      => array(
 		array('name' => 'email'),
-		array('name' => 'subject'),
+		array(
+            'name'   => 'template_id',
+            'value'  => '$data->template->name',
+            'filter' => CHtml::listData(MailerTemplate::model()->findAll(), 'id', 'name')
+        ),
         array(
             'name'   => 'status',
             'value'  => '$data->status_caption',

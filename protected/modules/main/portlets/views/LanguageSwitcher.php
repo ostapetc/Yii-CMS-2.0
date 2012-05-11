@@ -1,17 +1,5 @@
-<?
-$max_index = count($langs) - 1;
-foreach ($langs as $i => $lang)
-{
-    if ($lang->id == Yii::app()->language)
-    {
-        echo '<b>' . $lang->name . '</b>';
-    }
-    else
-    {
-        echo CHtml::link($lang->name, '/' . $lang->id);
-    }
-    if ($max_index > $i)
-    {
-        echo '&nbsp;|&nbsp;';
-    }
-}
+<? foreach ($languages as $id => $name): ?>
+    <a href="/<?= $id ?>" title="<?= $name ?>"><img title='<?= $name ?>' alt='<?= $name ?>' src="/img/icons/<?= $id ?>.png" /></a>
+<? endforeach ?>
+
+

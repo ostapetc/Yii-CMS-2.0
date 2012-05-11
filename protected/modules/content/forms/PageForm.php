@@ -10,14 +10,19 @@ return array(
             'hint' => 'Это пример подсказки к элементу формы. Симпотично, удобно, ахуенно',
             'type' => 'text'
         ),
-        'url'          => array(
+        'url' => array(
             'type'   => 'alias',
             'source' => 'title'
         ),
-        'is_published' => array(
-            'type' => 'checkbox'
+        'status' => array(
+            'type'  => 'dropdownlist',
+            'items' => Page::$status_options
         ),
-        'text'         => array(
+        'tags' => array(
+            'type'  => 'TagsInput',
+            'label' => 'Теги'
+        ),
+        'text' => array(
             'type' => 'editor'
         ),
     ),

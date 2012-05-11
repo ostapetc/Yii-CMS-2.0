@@ -10,10 +10,7 @@ return array(
     ),
     'elements'       => array(
         'email'      => array('type' => 'text'),
-        'first_name' => array('type' => 'text'),
-        'last_name'  => array('type' => 'text'),
-        'patronymic' => array('type' => 'text'),
-        'phone'      => array('type' => 'text'),
+        'name'       => array('type' => 'text'),
         'birthdate'  => array('type' => 'date'),
         'gender'     => array(
             'type'  => 'dropdownlist',
@@ -29,7 +26,10 @@ return array(
         ),
         'password'   => array('type' => 'password'),
         'password_c' => array('type' => 'password'),
-        'captcha'    => array('type' => 'captcha'),
+        'captcha'    => array(
+            'type'  => 'captcha',
+            'class' => 'captcha'
+        ),
     ),
     'buttons'        => array(
         'submit' => array(

@@ -1,0 +1,13 @@
+.span12 form {
+    margin: auto !important;
+    width: 450px;
+    text-align: left !important;
+}
+
+.span12 h1 {
+    margin: 20px auto 30px auto !important;
+}
+
+.span12 {
+    text-align: center;
+}

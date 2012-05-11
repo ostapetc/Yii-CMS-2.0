@@ -1,4 +1,9 @@
 <?
+
+/**
+ * TODO: когда attribute unsafe и есть в форме он должен автоматом не выводиться(так по дефолту в Yii)
+ */
+
 class Form extends CForm
 {
     public $side;
@@ -15,6 +20,7 @@ class Form extends CForm
             'validateOnType' => true,
             'validateOnSubmit' => true,
     ));
+
 
     public function __construct($config, $model = null, $parent = null)
     {
@@ -40,10 +46,12 @@ class Form extends CForm
         $this->formatDateAttributes();
     }
 
+
     public function init()
     {
         $this->initElements();
     }
+
 
     public static function getFullAlias($alias)
     {
@@ -65,13 +73,14 @@ class Form extends CForm
         }
     }
 
+
     public function initElements()
     {
         if (!$this->_is_elements_inited && $this->model instanceof ActiveRecord)
         {
             try
             {
-                $this->model->onInitFormElements(new CEvent($this));
+                $this->model->onBeforeInitForm(new CEvent($this));
             }
             catch(Exception $e)
             {
@@ -80,6 +89,7 @@ class Form extends CForm
             $this->_is_elements_inited = true;
         }
     }
+
 
     public function __toString()
     {
@@ -114,6 +124,7 @@ class Form extends CForm
             }
         }
     }
+
 
     public function renderBody()
     {
@@ -159,6 +170,7 @@ class Form extends CForm
             return $element->render();
         }
     }
+
 
     public function renderButtons()
     {

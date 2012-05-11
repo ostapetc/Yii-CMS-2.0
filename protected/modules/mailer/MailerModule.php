@@ -1,7 +1,16 @@
 <?
 
 class MailerModule extends WebModule
-{	
+{
+    const PARAM_REPLY_EMAIL = 'reply_email';
+    const PARAM_FROM_EMAIL  = 'from_email';
+    const PARAM_FROM_NAME   = 'from_name';
+    const PARAM_PASSWORD    = 'password';
+    const PARAM_LOGIN       = 'login';
+    const PARAM_HOST        = 'host';
+    const PARAM_PORT        = 'port';
+
+
 	public static $active = true;
 
 
@@ -47,9 +56,9 @@ class MailerModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Исходящие письма' => Yii::app()->createUrl('/mailer/outboxEmailAdmin/manage'),
-            'Шаблоны'          => Yii::app()->createUrl('/mailer/emailTemplateAdmin/manage'),
-            'Добавить шаблон'  => Yii::app()->createUrl('/mailer/emailTemplateAdmin/create'),
+            'Исходящие письма' => Yii::app()->createUrl('/mailer/mailerOutboxAdmin/manage'),
+            'Шаблоны'          => Yii::app()->createUrl('/mailer/mailerTemplateAdmin/manage'),
+            'Добавить шаблон'  => Yii::app()->createUrl('/mailer/mailerTemplateAdmin/create'),
         );
     }
 }

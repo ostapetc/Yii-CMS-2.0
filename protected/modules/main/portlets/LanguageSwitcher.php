@@ -1,10 +1,11 @@
 <?
-class LanguageSwitcher extends CWidget
+
+class LanguageSwitcher extends Widget
 {
     public function run()
     {
         $this->render('LanguageSwitcher', array(
-            'langs' => Language::model()->findAll()
+            'languages' => Language::getList()
         ));
     }
 }

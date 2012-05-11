@@ -44,7 +44,7 @@
         <div class="user">
             <p>
                 <?
-                $user_name = Yii::app()->user->model->full_name;
+                $user_name = Yii::app()->user->model->name;
                 if (mb_strlen($user_name, 'utf-8') > 13)
                 {
                     $user_name = mb_substr($user_name, 0, 13, 'utf-8') . '...';

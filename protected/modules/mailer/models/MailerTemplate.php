@@ -29,7 +29,7 @@ class MailerTemplate extends ActiveRecord
     {
         return array(
             array(
-                'name, subject',
+                'name, subject, code',
                 'required'
             ),
             array(
@@ -38,12 +38,17 @@ class MailerTemplate extends ActiveRecord
                 'max' => 200
             ),
             array(
-                'name',
+                'name, code',
                 'unique'
             ),
             array(
                 'body',
                 'safe'
+            ),
+            array(
+                'code',
+                'length',
+                'max' => 70
             )
         );
     }
@@ -92,7 +97,7 @@ class MailerTemplate extends ActiveRecord
 
     public static function getDir()
     {
-        return Yii::getPathOfAlias('application.modules.mailer.views.emailTemplates') . DS;
+        return Yii::getPathOfAlias('application.modules.mailer.views.templates') . DS;
     }
 
 
@@ -108,43 +113,68 @@ class MailerTemplate extends ActiveRecord
     }
 
 
-    public function compiledBody(User $user)
+    public function constructBody(User $user)
     {
         $body = file_get_contents($this->getFilePath());
+        $body = $this->replaceMarks($body, $user);
         $body = str_replace(
-            array(
-                '{{ACTIVATE_ACCOUNT_HREF}}'
-            ),
-            array(
-                Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->generateActivateCode())
-            ),
-            $body
-        );
-
-        $template = file_get_contents(Yii::getPathOfAlias('application.modules.mailer.views.emailTemplates') . DS . 'template.html');
-        $template = str_replace(
             array(
                 '{{SUBJECT}}',
                 '{{BODY}}',
-                '{{}}'
             ),
             array(
                 $this->subject,
                 $body
             ),
-            $template
+            file_get_contents(Yii::getPathOfAlias('application.modules.mailer.views.templates') . DS . 'template.html')
         );
 
-        return $template;
+        return $body;
     }
 
 
-    public static function markersDescriptions()
+    public function constructSubject(User $user)
     {
-        return array(
-            '{{SUBJECT}}'               => 'Тема письма',
-            '{{BODY}}'                  => 'Содержание письма',
-            '{{ACTIVATE_ACCOUNT_HREF}}' => 'Адрес ссылки активации аккаунта'
+       return $this->replaceMarks($this->subject, $user);
+    }
+
+
+    public function replaceMarks($text, User $user)
+    {
+        $params = Param::model()->getValues();
+        foreach ($params as $name => $value)
+        {
+            $name = '{{' . strtoupper($name). '}}';
+            $text = str_replace($name, $value, $text);
+        }
+
+        $text = str_replace(
+            array(
+                '{{ACTIVATE_ACCOUNT_HREF}}'
+            ),
+            array(
+                Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code)
+            ),
+            $text
         );
+
+        return $text;
+    }
+
+
+    /**
+     * Checks for the required templates, use it before code in which they are used
+     * @static
+     * @param $code
+     * @throws CException
+     */
+    public static function checkRequired($code)
+    {
+        $code  = trim($code);
+        $exist = MailerTemplate::model()->exists("code = '{$code}'");
+        if (!$exist)
+        {
+            throw new CException("Не найден обязательный шаблон письма с кодом: {$code}");
+        }
     }
 }

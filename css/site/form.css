@@ -1,0 +1,58 @@
+.checkbox
+{
+    padding-left:  0;
+}
+
+.errorMessage{
+    color: #B94A48
+}
+
+.back_button{
+    margin: 0 0 0 10px;
+}
+
+input, textarea, .uneditable-input{
+    width: 420px;
+}
+
+select {
+    width: 430px;
+}
+
+.chosen select{
+    width: 429px;
+}
+
+textarea {
+    min-height: 180px;
+    max-width: 98%;
+}
+/*file manager*/
+.fileupload-content button{
+    line-height: 14px;
+}
+
+.editable span{
+    border-bottom: 1px #AAF dashed;
+}
+
+.editable textarea, .editable input{
+    display:       block;
+    margin-bottom: 1px;
+}
+
+.date_picker {
+    width: 393px;
+}
+
+.captcha.control-group input {
+    width: 100px !important;
+    margin-right: 15px;
+}
+.captcha.control-group a {
+    margin-left: 15px;
+}
+
+.help-block {
+    color: red !important;
+}

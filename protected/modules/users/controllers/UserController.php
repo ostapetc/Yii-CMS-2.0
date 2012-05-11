@@ -4,6 +4,8 @@ class UserController extends Controller
 {
     const ERROR_PASSWORD_RECOVER_AUTH = 'Вы не можете восстановить пароль будучи авторизованным!';
 
+    public $layout = '//layouts/middle';
+
 
     public function filters()
     {
@@ -64,9 +66,7 @@ class UserController extends Controller
                     $auth_error = $identity->errorCode;
                     if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
                     {
-                        $auth_error .= "<br/><a href='" . $this->createUrl('activateAccountRequest') . "'>
-                    							Мне не пришло письмо, активировать аккаунт повторно
-                    						</a>";
+                        $auth_error .= "<br/><a href='" . $this->createUrl('/activateAccountRequest') . "'>Активировать аккаунт повторно</a>";
                     }
                     else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
                     {
@@ -92,15 +92,19 @@ class UserController extends Controller
     }
 
 
+    /**
+     * TODO: не работает капча
+     * TODO: не проходит валидация по birthdate 18.9.1985, нужно чтобы было в календаре 18.09.1985
+     * TODO
+     */
     public function actionRegistration()
     {
-        Param::model()->checkRequired(array(
-            User::SETTING_REGISTRATION_MAIL_BODY, User::SETTING_REGISTRATION_MAIL_SUBJECT,
-            User::SETTING_REGISTRATION_DONE_MESSAGE
-        ));
+        MailerTemplate::checkRequired(UsersModule::MAILER_TEMPLATE_REGISTRATION);
+        Param::checkRequired(UsersModule::PARAM_REGISTRATION_DONE_MESSAGE);
 
         $user = new User(User::SCENARIO_REGISTRATION);
         $form = new Form('users.RegistrationForm', $user);
+
         $this->performAjaxValidation($user);
 
         if (isset($_POST['User']))
@@ -110,19 +114,23 @@ class UserController extends Controller
             {
                 $user->password = md5($user->password);
                 $user->generateActivateCode();
-                $user->save(false);
 
-                $assignment           = new AuthAssignment();
-                $assignment->itemname = AuthItem::ROLE_DEFAULT;
-                $assignment->userid   = $user->id;
-                $assignment->save();
+                if ($user->save(false))
+                {
+                    $assignment = new AuthAssignment();
+                    $assignment->itemname = AuthItem::ROLE_DEFAULT;
+                    $assignment->userid   = $user->id;
+                    $assignment->save();
 
-                $user->sendActivationMail();
+                    Yii::app()->user->setFlash('success', Param::model()->getValue(UsersModule::PARAM_REGISTRATION_DONE_MESSAGE));
 
-                Yii::app()->user->setFlash('done', Param::model()
-                    ->getValue(User::SETTING_REGISTRATION_DONE_MESSAGE));
-
-                $this->redirect($_SERVER['REQUEST_URI']);
+                    $this->redirect($_SERVER['REQUEST_URI']);
+                }
+                else
+                {
+                    p($user->errors);
+                    throw new CHttpException('Ошибка сохранения пользователя!');
+                }
             }
         }
 
@@ -166,8 +174,8 @@ class UserController extends Controller
     public function actionActivateAccountRequest()
     {
         $model = new User(User::SCENARIO_ACTIVATE_REQUEST);
+        $form  = new Form('users.ActivateRequestForm', $model);
 
-        $form = new Form('users.ActivateRequestForm', $model);
         $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
@@ -175,8 +183,7 @@ class UserController extends Controller
             $model->attributes = $_POST['User'];
             if ($model->validate())
             {
-                $user = $model->findByAttributes(array('email' => $_POST['User']['email']));
-
+                $user = User::model()->findByAttributes(array('email' => $_POST['User']['email']));
                 if (!$user)
                 {
                     $error = UserIdentity::ERROR_UNKNOWN;

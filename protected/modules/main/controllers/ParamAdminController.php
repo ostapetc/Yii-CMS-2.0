@@ -87,9 +87,11 @@ class ParamAdminController extends AdminController
 
     public function actionDelete($id)
     {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
-        ));
-    }
+        $this->loadModel($id)->delete();
 
+        if (!isset($_GET['ajax']))
+        {
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('manage'));
+        }
+    }
 }

@@ -2,9 +2,20 @@
 class ClientFormInputElement extends BaseFormInputElement
 {
     public $widgets = array(
+        'alias'             => 'AliasField',
+        'file'              => 'FileWidget',
         'captcha'           => 'Captcha',
-        'date'              => 'FJuiDatePicker',
+        'chosen'            => 'Chosen',
+        'all_in_one_input'  => 'AllInOneInput',
         'multi_select'      => 'EMultiSelect',
+        'date'              => 'FJuiDatePicker',
+        'checkbox'          => 'IphoneCheckbox',
+        'multi_autocomplete'=> 'MultiAutocomplete',
+        'editor'            => 'TinyMCE',
+        'markdown'          => 'EMarkitupWidget',
+        'autocomplete'      => 'zii.widgets.jui.CAutoComplete',
+        'meta_tags'         => 'main.portlets.MetaTags',
+        'file_manager'      => 'fileManager.portlets.Uploader',
     );
 
 

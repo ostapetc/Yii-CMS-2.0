@@ -11,13 +11,6 @@ class User extends ActiveRecord
     const GENDER_MAN   = "man";
     const GENDER_WOMAN = "woman";
 
-    const SETTING_CHANGE_PASSWORD_REQUEST_MAIL_SUBJECT = 'change_password_request_mail_subject';
-    const SETTING_CHANGE_PASSWORD_REQUEST_MAIL_BODY    = 'change_password_request_mail_body';
-    const SETTING_ACTIVATE_REQUEST_DONE_MESSAGE        = 'activate_request_done_message';
-    const SETTING_REGISTRATION_MAIL_SUBJECT            = 'registration_mail_subject';
-    const SETTING_REGISTRATION_DONE_MESSAGE            = 'registration_done_message';
-    const SETTING_REGISTRATION_MAIL_BODY               = 'registration_mail_body';
-
     const SCENARIO_CHANGE_PASSWORD_REQUEST = 'ChangePasswordRequest';
     const SCENARIO_ACTIVATE_REQUEST        = 'ActivateRequest';
     const SCENARIO_CHANGE_PASSWORD         = 'ChangePassword';
@@ -68,16 +61,6 @@ class User extends ActiveRecord
     );
 
 
-    public function getName()
-    {
-        return implode(' ', array(
-            $this->last_name,
-            $this->first_name,
-            $this->patronymic
-        ));
-    }
-
-
     public function getUserDir()
     {
         $dir  = "upload/users/".$this->id."/";
@@ -100,8 +83,8 @@ class User extends ActiveRecord
                 'captcha',
                 'captcha',
                 'on' => array(
-                    self::SCENARIO_REGISTRATION,
-                    self::SCENARIO_ACTIVATE_REQUEST,
+                    //self::SCENARIO_REGISTRATION,
+//                    self::SCENARIO_ACTIVATE_REQUEST,
                     self::SCENARIO_CHANGE_PASSWORD_REQUEST,
                 ),
             ),
@@ -118,21 +101,21 @@ class User extends ActiveRecord
                 )
             ),
             array(
-                'first_name, last_name, patronymic, phone',
+                'name',
                 'required',
                 'on' => array(self::SCENARIO_REGISTRATION)
             ),
             array(
-                'first_name, last_name, patronymic',
+                'name',
                 'length',
                 'max' => 40
             ),
             array(
-                'first_name, last_name, patronymic',
+                'name',
                 'RuLatAlphaValidator'
             ),
             array(
-                'birthdate, gender',
+                'gender',
                 'required',
                 'on' => array(self::SCENARIO_REGISTRATION)
             ),
@@ -188,19 +171,15 @@ class User extends ActiveRecord
                     self::SCENARIO_CREATE
                 )
             ),
+            //array(
+            //    'birthdate',
+            //    'date',
+            //    'format'  => 'dd.mm.yyyy',
+            //    'message' => 'Верный формат даты (дд.мм.гггг) используйте календарь.',
+            //    'on'      => self::SCENARIO_REGISTRATION
+            //),
             array(
-                'phone',
-                'PhoneValidator'
-            ),
-            array(
-                'birthdate',
-                'date',
-                'format'  => 'dd.mm.yyyy',
-                'message' => 'Верный формат даты (дд.мм.гггг) используйте календарь.',
-                'on'      => self::SCENARIO_REGISTRATION
-            ),
-            array(
-                'first_name, last_name, patronymic',
+                'name',
                 'length',
                 'min' => 2
             ),
@@ -218,10 +197,6 @@ class User extends ActiveRecord
                 'status',
                 'in',
                 'range' => array_keys(self::$status_options)
-            ),
-            array(
-                'birthdate,activate_code',
-                'safe'
             ),
             array(
                 'email',
@@ -260,9 +235,7 @@ class User extends ActiveRecord
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('email', $this->email, true);
-        $criteria->compare('first_name', $this->first_name, true);
-        $criteria->compare('last_name', $this->last_name, true);
-        $criteria->compare('patronymic', $this->patronymic, true);
+        $criteria->compare('name', $this->name, true);
         $criteria->compare('birthdate', $this->birthdate, true);
         $criteria->compare('gender', $this->gender, true);
         $criteria->compare('status', $this->status, true);
@@ -295,9 +268,10 @@ class User extends ActiveRecord
     }
 
 
-    public function generateActivateCode()
+    public function generateActivateCode($save = false)
     {
         $this->activate_code = md5($this->id.$this->name.$this->email.time(true).rand(5, 10));
+        return $this->activate_code;
     }
 
 
@@ -309,7 +283,7 @@ class User extends ActiveRecord
 
         if (!$assigment)
         {
-            $assigment           = new AuthAssignment();
+            $assigment = new AuthAssignment();
             $assigment->itemname = AuthItem::ROLE_DEFAULT;
             $assigment->userid   = $this->id;
             $assigment->save();
@@ -323,60 +297,5 @@ class User extends ActiveRecord
     {
         return $this->role->name == AuthItem::ROLE_ROOT;
     }
-
-
-    public function sendActivationMail()
-    {
-        $mailler_letter = MailerLetter::model();
-
-        $subject = Param::model()->getValue(self::SETTING_REGISTRATION_MAIL_SUBJECT);
-        $subject = $mailler_letter->compileText($subject);
-
-        $body = Param::model()->getValue(self::SETTING_REGISTRATION_MAIL_BODY);
-        $body = $mailler_letter->compileText($body, array('user' => $this));
-
-        MailerModule::sendMail($this->email, $subject, $body);
-    }
-
-
-    public function activateAccountUrl()
-    {
-        $url = 'http://'.$_SERVER['HTTP_HOST'];
-        $url .= Yii::app()->controller->createUrl('/activateAccount/'.$this->activate_code.'/'.md5($this->email));
-        return $url;
-    }
-
-
-    public function changePasswordUrl()
-    {
-        $url = 'http://'.$_SERVER['HTTP_HOST'];
-        $url .= Yii::app()->controller->createUrl('/changePassword/'.$this->password_change_code.'/'.md5($this->email));
-        return $url;
-    }
-
-
-    public function getFullName()
-    {
-        $name_attrs = array('last_name', 'first_name', 'patronymic');
-        $full_name  = array();
-
-        foreach ($name_attrs as $i => $attr)
-        {
-            if (!empty($this->$attr))
-            {
-                $full_name[] = $this->$attr;
-            }
-        }
-
-        if ($full_name)
-        {
-            return implode(' ', $full_name);
-        }
-        else
-        {
-            return $this->email;
-        }
-    }
-
 }
 

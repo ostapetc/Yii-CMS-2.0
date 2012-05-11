@@ -34,7 +34,7 @@ return array(
         'operations'    => array(
             'type'   => 'multi_select',
             'items'  => CHtml::listData($operations, 'name', 'description'),
-            'params' => array('height' => '400px'),
+            //'params' => array('height' => '400px'),
         ),
         'childs'        => array(
             'type'  => 'hidden',

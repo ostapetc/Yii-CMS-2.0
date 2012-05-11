@@ -22,10 +22,10 @@ date_default_timezone_set('Europe/Moscow');
 require_once($yii);
 require_once(LIBRARY_PATH.'functions.php');
 
-$session = new CHttpSession;
-$session->open();
+//$session = new CHttpSession;
+//$session->open();
 
-define('ENV', YII_DEBUG ? 'development' : 'production');
+//define('ENV', YII_DEBUG ? 'development' : 'production');
 //$config = 'install';
 
 $config = PROTECTED_PATH . 'config' . DS . (isset($config) ? $config : 'main').'.php';

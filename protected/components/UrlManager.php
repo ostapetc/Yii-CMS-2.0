@@ -56,6 +56,7 @@ class UrlManager extends CUrlManager
 
         $routes                                  = array_reverse($routes);
         $routes['<language:(en|ru)>/<route:.*>'] = '<route>';
+
         Yii::app()->urlManager->addRules($routes);
     }
 }

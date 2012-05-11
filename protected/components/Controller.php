@@ -41,6 +41,7 @@ abstract class Controller extends CController
         );
     }
 
+
     public function actions()
     {
         return array(
@@ -57,6 +58,7 @@ abstract class Controller extends CController
             )
         );
     }
+
 
     public function beforeAction($action)
     {
@@ -214,6 +216,7 @@ abstract class Controller extends CController
     public function widget($className,$properties=array(),$captureOutput=false)
     {
         $profile_id = 'Widget::'.$className;
+
         //profile widget
         Yii::beginProfile($profile_id);
         $res = parent::widget($className,$properties,true);

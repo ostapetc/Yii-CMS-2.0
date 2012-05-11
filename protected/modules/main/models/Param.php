@@ -109,7 +109,7 @@ class Param extends ActiveRecord
 	}
 
 
-    public function findCodesValues($module_id = null)
+    public function getValues($module_id = null)
     {
         if ($module_id)
         {
@@ -128,6 +128,12 @@ class Param extends ActiveRecord
         }
 
         return $result;
+    }
+
+
+    public function findCodesValues($module_id = null)
+    {
+        return $this->getValues($module_id);
     }
 
 
@@ -152,15 +158,24 @@ class Param extends ActiveRecord
     }
 
 
+    /**
+     * Checks for the required Params, use it before code in which they are used
+     * @static
+     * @param array or string $codes
+     * @param null $module_id
+     * @throws Exception
+     */
     public static function checkRequired($codes, $module_id = null)
     {
+        if (!is_array($codes)) $codes = array($codes);
+
         $settings = self::model()->findCodesValues($module_id);
 
         foreach ($codes as $code)
         {
             if (!array_key_exists($code, $settings))
             {
-                throw new Exception('Не найдена обязательная настройка: ' . $code);
+                throw new CException('Не найдена обязательная настройка с кодом: ' . $code);
             }
         }
     }

@@ -63,10 +63,11 @@ if (isset($_GET['query']))
         </form>
     </li>
     <li class="divider-vertical"></li>
-<!--    <li style="padding-right: 0 !important;">-->
-<!--        <a href="/ru" style="padding-right: 0 !important;"><img src="/img/icons/ru.png" /></a>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--        <a href="/en"><img src="/img/icons/en.png" /></a>-->
-<!--    </li>-->
+    <li class="auth_li">
+        <? Yii::app()->controller->renderPartial('application.modules.users.views.user._authBox') ?>
+    </li>
+    <li class="divider-vertical"></li>
+    <li class="languages_li">
+        <? $this->widget('LanguageSwitcher') ?>
+    </li>
 </ul>

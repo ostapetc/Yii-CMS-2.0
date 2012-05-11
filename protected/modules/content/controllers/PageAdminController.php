@@ -44,7 +44,7 @@ class PageAdminController extends AdminController
                 'id' => $model->id
             ));
         }
-
+        p($model->errors);
         $this->render('create', array('form' => $form));
     }
 

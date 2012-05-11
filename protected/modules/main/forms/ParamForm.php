@@ -1,5 +1,26 @@
 <?
 
+Yii::app()->clientScript->registerScript(
+    'Param-form',
+    '
+    var oprions_element = $("#Param_options").parents("dl:eq(0)");
+
+    if ($("#Param_element").val() != "select") {
+        oprions_element.hide();
+    }
+
+    $("#Param_element").change(function() {
+        if ($(this).val() == "select") {
+            oprions_element.show();
+        }
+        else {
+            oprions_element.hide();
+        }
+    });
+    ',
+    CClientScript::POS_READY
+);
+
 if ($this->model->scenario == Param::SCENARIO_VALUE_UPDATE)
 {
     $elements = array(
@@ -57,7 +78,7 @@ else
 return array(
     'enctype'    => 'multipart/form-data',
     'activeForm' => array(
-        'id'                   => 'setting-form',
+        'id' => 'Param-form',
     ),
     'elements' => $elements,
     'buttons'    => array(

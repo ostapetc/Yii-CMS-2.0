@@ -13,6 +13,19 @@ class MailerOutboxController extends Controller
 
     public function actionSendEmails()
     {
+        Param::checkRequired(
+            array(
+                MailerModule::PARAM_REPLY_EMAIL,
+                MailerModule::PARAM_FROM_EMAIL,
+                MailerModule::PARAM_FROM_NAME,
+                MailerModule::PARAM_PASSWORD,
+                MailerModule::PARAM_LOGIN,
+                MailerModule::PARAM_HOST,
+                MailerModule::PARAM_PORT,
+            ),
+            'mailer'
+        );
+
         MailerOutbox::sendEmails();
     }
 
@@ -31,7 +44,6 @@ class MailerOutboxController extends Controller
         {
             $recipient->status = MailerRecipient::STATUS_ACCEPTED;
             $recipient->save();
-            p($recipient->errorsHtml());
         }
     }
 }

@@ -16,11 +16,6 @@ $this->widget('AdminGridView', array(
 			'type' => 'raw'
 		),
 		'url',
-		array(
-			'name'  => 'is_published',
-			'value' => '$data->is_published ? t("Да") : t("Нет")',
-			'filter' => array(t("Нет"),t("Да"))
-		),
         array(
             'name'  => 'language',
             'value' => function ($data) {

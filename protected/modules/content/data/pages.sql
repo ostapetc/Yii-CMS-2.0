@@ -1,19 +1,54 @@
-#
-# Структура для таблицы `pages`: 
-#
+-- phpMyAdmin SQL Dump
+-- version 3.4.9
+-- http://www.phpmyadmin.net
+--
+-- Хост: openserver:3306
+-- Время создания: Апр 21 2012 г., 22:07
+-- Версия сервера: 5.1.61
+-- Версия PHP: 5.3.9
 
-CREATE TABLE `pages` (
-  `id` INTEGER(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `lang` CHAR(2) COLLATE utf8_general_ci DEFAULT 'ru' COMMENT 'Язык',
-  `title` VARCHAR(200) COLLATE utf8_general_ci NOT NULL COMMENT 'Заголовок',
-  `url` VARCHAR(250) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Адрес',
-  `text` TEXT COLLATE utf8_general_ci NOT NULL COMMENT 'Текст',
-  `is_published` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT 'Опубликована',
-  `date_create` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создана',
-  PRIMARY KEY USING BTREE (`id`) COMMENT '',
-   INDEX `lang` USING BTREE (`lang`) COMMENT '',
-  CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-)ENGINE=InnoDB
-AUTO_INCREMENT=18 AVG_ROW_LENGTH=3276 CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
-COMMENT=''
-;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- База данных: `yiicms_2.0`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `language` char(2) DEFAULT 'ru' COMMENT 'Язык',
+  `title` varchar(200) NOT NULL COMMENT 'Заголовок',
+  `url` varchar(250) DEFAULT NULL COMMENT 'Адрес',
+  `text` text NOT NULL COMMENT 'Текст',
+  `is_published` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Опубликована',
+  `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создана',
+  `order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pages_language_fk` (`language`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `pages`
+--
+ALTER TABLE `pages`
+  ADD CONSTRAINT `pages_language_fk` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

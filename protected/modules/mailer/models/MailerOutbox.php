@@ -39,12 +39,14 @@ class MailerOutbox extends ActiveRecord
 	public function rules()
 	{
 		return array(
-			array('email, subject, text', 'required'),
-			array('email, user_name, subject', 'length', 'max' => 250),
-			array('solution', 'length', 'max' => 100),
+			array('email, subject, body, template_id, user_id', 'required'),
+			array('email, subject', 'length', 'max' => 250),
 			array('date_send, log', 'safe'),
+            array('email', 'email'),
+            array('template_id', 'numerical', 'integerOnly' => true),
+            array('user_id', 'numerical', 'integerOnly' => true),
             array('status', 'in', 'range' => self::$status_list),
-			array('id, email, user_name, solution, status, log, subject, text, date_create, date_send', 'safe', 'on' => 'search'),
+			array('id, email, status, log, subject, body, date_create, date_send', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -52,6 +54,16 @@ class MailerOutbox extends ActiveRecord
 	public function relations()
 	{
 		return array(
+            'user' => array(
+                self::BELONGS_TO,
+                'User',
+                'user_id'
+            ),
+            'template' => array(
+                self::BELONGS_TO,
+                'MailerTemplate',
+                'template_id'
+            )
 		);
 	}
 
@@ -61,10 +73,8 @@ class MailerOutbox extends ActiveRecord
 		$criteria = new CDbCriteria;
 		$criteria->compare('id', $this->id, true);
 		$criteria->compare('email', $this->email, true);
-		$criteria->compare('user_name', $this->user_name, true);
-		$criteria->compare('solution', $this->solution, true);
 		$criteria->compare('subject', $this->subject, true);
-		$criteria->compare('text', $this->text, true);
+		$criteria->compare('template_id', $this->template_id);
         $criteria->compare('status', $this->status, true);
         $criteria->compare('log', $this->log, true);
 		$criteria->compare('date_create', $this->date_create, true);
@@ -99,7 +109,7 @@ class MailerOutbox extends ActiveRecord
 
             try
             {
-                self::sendMail($outbox_email->email, $outbox_email->subject, $outbox_email->text);
+                self::sendMail($outbox_email->email, $outbox_email->subject, $outbox_email->body);
 
                 $outbox_email->date_send = new CDbExpression('NOW()');
                 $outbox_email->status    = MailerOutbox::STATUS_SENT;

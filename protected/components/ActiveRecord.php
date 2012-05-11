@@ -75,7 +75,8 @@ abstract class ActiveRecord extends CActiveRecord
         try
         {
             return parent::__get($name);
-        } catch (CException $e)
+        }
+        catch (CException $e)
         {
             if (substr($name, -6) == '_label')
             {
@@ -243,12 +244,8 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    /**
-     * @param CModelEvent $event
-     */
-    public function onInitFormElements($event)
+    public function onBeforeInitForm($event)
     {
-        $this->raiseEvent('onInitFormElements', $event);
+        $this->raiseEvent('onBeforeInitForm', $event);
     }
-
 }

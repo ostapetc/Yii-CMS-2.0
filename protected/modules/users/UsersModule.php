@@ -2,9 +2,12 @@
 
 class UsersModule extends WebModule
 {
+    const MAILER_TEMPLATE_REGISTRATION = 'user_registration';
+
+    const PARAM_REGISTRATION_DONE_MESSAGE = 'registration_done_message';
+
 	public static $active = true;
-		
-	
+
     public static $base_module = true;
 
 
@@ -52,7 +55,7 @@ class UsersModule extends WebModule
             '/logout'                               => 'users/user/logout',
             '/logout'                               => 'users/user/logout',
             '/registration'                         => 'users/user/registration',
-            '/activateAccount/<code:.*>/<email:.*>' => 'users/user/activateAccount',
+            '/activateAccount/<code:.*>'            => 'users/user/activateAccount',
             '/activateAccountRequest'               => 'users/user/activateAccountRequest',
             '/changePasswordRequest'                => 'users/user/changePasswordRequest',
             '/changePassword/<code:.*>/<email:.*>'  => 'users/user/changePassword',

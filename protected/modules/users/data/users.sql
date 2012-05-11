@@ -4,9 +4,7 @@
 
 CREATE TABLE `users` (
   `id` INTEGER(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(40) COLLATE utf8_general_ci NOT NULL COMMENT 'Имя',
-  `last_name` VARCHAR(40) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Фамилия',
-  `patronymic` VARCHAR(40) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Отчество',
+  `name` VARCHAR(40) COLLATE utf8_general_ci NOT NULL COMMENT 'Имя',
   `email` VARCHAR(200) COLLATE utf8_general_ci NOT NULL COMMENT 'Email',
   `phone` VARCHAR(50) COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Мобильный телефон',
   `password` VARCHAR(32) COLLATE utf8_general_ci NOT NULL COMMENT 'Пароль',

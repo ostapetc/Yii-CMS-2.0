@@ -40,3 +40,11 @@ textarea {
     display:       block;
     margin-bottom: 1px;
 }
+
+.required span{
+    color: red;
+}
+
+.help-block {
+    color: red !important;
+}

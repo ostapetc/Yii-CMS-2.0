@@ -5,11 +5,12 @@ class MailerOutboxAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'   => 'Просмотр исходящего письма',
-            'Create' => 'Создание чего?',
-            'Update' => 'Редактирование чего?',
-            'Delete' => 'Удаление чего?',
-            'Manage' => 'Исходящие письма',
+            'View'     => 'Просмотр исходящего письма',
+            'Create'   => 'Создание чего?',
+            'Update'   => 'Редактирование чего?',
+            'Delete'   => 'Удаление чего?',
+            'Manage'   => 'Исходящие письма',
+            'BodyView' => 'Посмотр тела письма'
         );
     }
 
@@ -25,14 +26,20 @@ class MailerOutboxAdminController extends AdminController
 	public function actionCreate()
 	{
 		$model = new MailerOutbox;
+		$form  = new Form('mailer.MailerOutboxForm', $model);
 		
-		$form = new Form('mailer.MailerOutboxForm', $model);
-		
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['MailerOutbox']))
 		{
-			$model->attributes = $_POST['MailerOutbox'];
+            $model->attributes = $_POST['MailerOutbox'];
+
+            $template = MailerTemplate::model()->findByPk($model->template_id);
+            $user     = User::model()->findByPk($model->user_id);
+
+            $model->subject = $template->constructSubject($user);
+            $model->body    = $template->constructBody($user);
+
 			if($model->save())
             {
                 $this->redirect(array('view', 'id' => $model->id));
@@ -40,29 +47,6 @@ class MailerOutboxAdminController extends AdminController
 		}
 
 		$this->render('create', array(
-			'form' => $form,
-		));
-	}
-
-
-	public function actionUpdate($id)
-	{
-		$model = $this->loadModel($id);
-
-		$form = new Form('mailer.MailerOutboxForm', $model);
-
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['MailerOutbox']))
-		{
-			$model->attributes = $_POST['MailerOutbox'];
-			if($model->save())
-            {
-                $this->redirect(array('view', 'id' => $model->id));
-            }
-		}
-
-		$this->render('update', array(
 			'form' => $form,
 		));
 	}
@@ -121,4 +105,11 @@ class MailerOutboxAdminController extends AdminController
 			Yii::app()->end();
 		}
 	}
+
+
+    public function actionBodyView($id)
+    {
+        $this->layout = false;
+        echo $this->loadModel($id)->body;
+    }
 }

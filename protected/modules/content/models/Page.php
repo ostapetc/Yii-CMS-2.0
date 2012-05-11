@@ -4,6 +4,17 @@ class Page extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
+    const STATUS_UNPUBLISHED = 'unpublished';
+    const STATUS_PUBLISHED   = 'published';
+    const STATUS_DRAFT       = 'draft';
+
+    public static $status_options = array(
+        self::STATUS_UNPUBLISHED => 'неопубликовано',
+        self::STATUS_PUBLISHED   => 'опубликовано',
+        self::STATUS_DRAFT       => 'черновик'
+    );
+
+
     public function name()
     {
         return 'Страницы';
@@ -27,17 +38,9 @@ class Page extends ActiveRecord
         return array_merge(
             parent::behaviors(),
             array(
-                 'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
-                 'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
+                'MetaTag'     => array('class' => 'application.components.activeRecordBehaviors.MetaTagBehavior'),
+                'Sortable'    => array('class' => 'ext.sortable.SortableBehavior'),
                 'TagBehavior' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 'FileManager' => array(
-                     'class'=>'application.components.activeRecordBehaviors.FileManagerBehavior',
-                    'tags' => array(
-                        'files' => t('files'),
-                        'photos' => t('photos')
-                    )
-                 ),
-                 'Tag'        => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
             )
         );
     }
@@ -48,11 +51,6 @@ class Page extends ActiveRecord
         return array(
             array('title, language', 'required'),
             array('language', 'safe'),
-            array(
-                'is_published',
-                'numerical',
-                'integerOnly' => true
-            ),
             array(
                 'url', 'length',
                 'max' => 250
@@ -68,9 +66,19 @@ class Page extends ActiveRecord
                 'filter' => 'strip_tags'
             ),
             array(
-                'id, title, url, text, is_published, date_create', 'safe',
+                'id, title, url, text, date_create', 'safe',
                 'on'=> 'search'
             ),
+            array(
+                'status',
+                'in',
+                'range' => array_keys(self::$status_options)
+            ),
+            array(
+                'user_id',
+                'numerical',
+                'integerOnly' => true
+            )
         );
     }
 
@@ -90,16 +98,15 @@ class Page extends ActiveRecord
         $criteria->compare('title', $this->title, true);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('text', $this->text, true);
-        $criteria->compare('is_published', $this->is_published);
         $criteria->compare('date_create', $this->date_create, true);
         $criteria->compare('language', $this->language, true);
 
         return new ActiveDataProvider(get_class($this), array(
-                                                             'criteria'   => $criteria,
-                                                             'pagination' => array(
-                                                                 'pageSize' => self::PAGE_SIZE
-                                                             )
-                                                        ));
+             'criteria'   => $criteria,
+             'pagination' => array(
+                 'pageSize' => self::PAGE_SIZE
+             )
+        ));
     }
 
 

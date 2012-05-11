@@ -34,6 +34,8 @@ class ContentModule extends WebModule
         return array(
             'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
             'Добавить страницу' => '/content/pageAdmin/create',
+            'Разделы страниц'   => '/content/pageSectionAdmin/manage',
+            'Добавить раздел'   => '/content/pageSectionAdmin/create',
             'Управление меню'   => '/content/menuAdmin/manage',
             'Добавить меню'     => '/content/menuAdmin/create',
         );

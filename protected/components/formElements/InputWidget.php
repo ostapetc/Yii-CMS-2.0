@@ -1,5 +1,7 @@
 <?
+
 Yii::import('zii.widgets.jui.CJuiInputWidget');
+
 abstract class InputWidget extends CInputWidget
 {
     public $name;
@@ -17,6 +19,7 @@ abstract class InputWidget extends CInputWidget
         $this->attachBehaviors($this->behaviors());
         parent::init();
     }
+
 
     public function behaviors()
     {
@@ -40,5 +43,6 @@ abstract class InputWidget extends CInputWidget
 
     public function run()
     {
+
     }
 }

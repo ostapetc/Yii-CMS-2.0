@@ -18,6 +18,7 @@ class AdminFormInputElement extends BaseFormInputElement
         'checkbox'          => 'IphoneCheckbox',
         'multi_autocomplete'=> 'MultiAutocomplete',
         'editor'            => 'TinyMCE',
+        'elrteEditor'       => 'application.extensions.elrte.elRTE',
         'markdown'          => 'EMarkitupWidget',
         'autocomplete'      => 'zii.widgets.jui.CAutoComplete',
         'meta_tags'         => 'main.portlets.MetaTags',
@@ -32,13 +33,16 @@ class AdminFormInputElement extends BaseFormInputElement
             case 'file_manager':
                 $id    = isset($this->id) ? $this->id : 'uploader' . $this->attributes['tag'];
                 $title = isset($this->attributes['title']) ? $this->attributes['title'] : 'Файлы';
+
                 return array(
                     'name'        => $this->attributes['tag'],
                     'id'          => $id,
                     'title'       => $title
                 );
+
             case 'alias':
                 return array('class' => 'text');
+
             case 'date':
                 return array(
                     'options'    => array(
@@ -47,6 +51,7 @@ class AdminFormInputElement extends BaseFormInputElement
                     'language'   => 'ru',
                     'htmlOptions'=> array('class'=> 'date text date_picker')
                 );
+
             case 'autocomplete':
                 return array(
                     'minChars'   => 2,
@@ -57,22 +62,27 @@ class AdminFormInputElement extends BaseFormInputElement
                         'class' => 'text'
                     )
                 );
+
             case 'dropdownlist':
                 return array(
                     'class'=> 'dropdownlist cmf-skinned-select'
                 );
+
             case 'password':
                 return array(
                     'class'=> 'dropdownlist text'
                 );
+
             case 'markdown':
                 return array(
                     'settings' => 'markdown'
                 );
+
             case 'checkbox':
                 return array(
                     'class' => ''
                 );
+
             default:
                 return array(
                     'class' => $this->type

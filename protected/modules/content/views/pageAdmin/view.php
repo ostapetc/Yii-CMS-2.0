@@ -14,10 +14,6 @@ $this->widget('AdminDetailView', array(
         'title',
 		'url',
 		array(
-            'name'  => 'is_published',
-            'value' => $model->is_published ? t('Да') : t('Нет')
-        ),
-		array(
             'name'  => 'date_create',
             'value' => date('d.m.Y h:i', strtotime($model->date_create))
         ),

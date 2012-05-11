@@ -18,8 +18,6 @@ $form['elements'] = array(
     )
 );
 
-$form['action'] = Yii::app()->controller->createUrl('/users/user/login');
-
 $form['buttons']['submit']['value'] = t('Войти');
 
 return $form;

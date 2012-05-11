@@ -23,15 +23,24 @@ class LanguagesBehavior extends ActiveRecordBehavior
             $language_id = $this->defineLanguage();;
         }
 
+        $field_exists = false;
+
         $meta = $this->owner->meta();
-        if (!isset($meta['language']))
+        foreach ($meta as $data)
+        {
+            if ($data['Field'] == 'language')
+            {
+                $field_exists = true;
+                break;
+            }
+        }
+
+        if (!$field_exists)
         {
             $msg = "У таблицы '" . $this->owner->tableName() . "' отсутствует поле 'language' <br/>";
+            $msg .= "<a href='" . Yii::app()->createUrl('main/languageAdmin/createTableField', array('model' => get_class($this->owner))) . "'>создать данное поле в таблице</a>";
 
-            $msg .= "<a href='" . Yii::app()->createUrl(
-                'main/languageAdmin/createTableField', array('model' => get_class($this->owner))
-            ) . "'>создать данное поле в таблице</a>";
-            throw new CHttpException($msg);
+            throw new CHttpException(500, $msg);
         }
 
         $criteria = $this->owner->getDbCriteria();
