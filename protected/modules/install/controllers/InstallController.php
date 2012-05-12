@@ -78,11 +78,13 @@ class InstallController extends Controller
             //install modules
             Yii::app()->setModules($model->modules);
             Yii::app()->executor->migrate('up --module=install');
+            Yii::app()->executor->migrate('up --module=main');
             foreach ($model->modules as $module)
             {
+                $enabled_modules[] = $module;
                 if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
                 {
-                    Yii::app()->executor->migrate('up --module=main');
+                    Yii::app()->executor->migrate('up --module='.$module);
                 }
 
                 Yii::app()->executor->addCommands($module.'.commands');
