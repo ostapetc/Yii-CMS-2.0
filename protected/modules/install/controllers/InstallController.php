@@ -69,7 +69,7 @@ class InstallController extends Controller
         if ($form->submitted() && $model->validate())
         {
             $configs = CMap::mergeArray(Yii::app()->user->getState('install_configs'), $model->getConfigs());
-            Yii::app()->user->setState('install_configs',$configs);
+            Yii::app()->user->setState('install_configs', $configs);
 
             $step1 = new Step1();
             $step1->loadFromSession();
@@ -90,11 +90,7 @@ class InstallController extends Controller
 
             foreach (Yii::app()->getModules() as $module => $conf)
             {
-                $module =Yii::app()->getModule($module);
-                if (method_exists($module, 'install'))
-                {
-                    $module->install();
-                }
+                Yii::app()->getModule($module)->install();
             }
 
             $model->saveInSession();

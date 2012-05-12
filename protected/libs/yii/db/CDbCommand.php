@@ -330,7 +330,7 @@ class CDbCommand extends CComponent
 				Yii::beginProfile('system.db.CDbCommand.execute('.$this->getText().')','system.db.CDbCommand.execute');
 
 			$this->prepare();
-			if($params===array())
+            if($params===array())
 				$this->_statement->execute();
 			else
 				$this->_statement->execute($params);
@@ -343,7 +343,7 @@ class CDbCommand extends CComponent
 		}
 		catch(Exception $e)
 		{
-			if($this->_connection->enableProfiling)
+            if($this->_connection->enableProfiling)
 				Yii::endProfile('system.db.CDbCommand.execute('.$this->getText().')','system.db.CDbCommand.execute');
             $errorInfo = $e instanceof PDOException ? $e->errorInfo : null;
             $message = $e->getMessage();
