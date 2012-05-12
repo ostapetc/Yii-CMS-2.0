@@ -1,7 +1,6 @@
 <?
 class InstallController extends Controller
 {
-
     public function filters()
     {
         return array(
@@ -13,7 +12,6 @@ class InstallController extends Controller
     public function afterAction($action) {}
 
     public $layout = 'install';
-
 
     public static function actionsTitles()
     {
