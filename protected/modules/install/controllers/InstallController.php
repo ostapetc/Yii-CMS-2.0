@@ -75,6 +75,7 @@ class InstallController extends Controller
             $step1->loadFromSession();
 
             Yii::app()->setComponent('db', $step1->createDbConnection());
+            $step1->executeBaseDump();
             //install modules
             Yii::app()->setModules($model->modules);
             Yii::app()->executor->migrate('up --module=install');
@@ -118,7 +119,7 @@ class InstallController extends Controller
 
     public function actionEnd()
     {
-        $this->render('end');
+        $this->redirect('/');
     }
 
 

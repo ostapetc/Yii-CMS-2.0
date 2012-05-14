@@ -85,4 +85,24 @@ class Step1 extends AbstractInstallModel
             'production' => array()
         );
     }
+
+    public function executeBaseDump()
+    {
+        $file_content = file(Yii::getPathOfAlias('webroot').'/yiicms_2.0.sql');
+        $query = "";
+        foreach($file_content as $sql_line){
+            $is_good_line = trim($sql_line) != "" && strpos($sql_line, "--") === false;
+            if(!$is_good_line)
+            {
+                continue;
+            }
+
+            $query .= $sql_line;
+            if (substr(rtrim($query), -1) == ';')
+            {
+                $result = Yii::app()->db->createCommand($query)->execute();
+                $query = "";
+            }
+        }
+    }
 }

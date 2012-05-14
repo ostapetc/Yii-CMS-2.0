@@ -2,12 +2,12 @@
 
 class TopMenu extends Portlet
 {
-    const CODE = "TOP_MENU";
+    const ID = "1";
 
 
     public function renderContent()
     {
-        $menu = Menu::model()->language()->published()->find("code = '" . self::CODE . "'");
+        $menu = Menu::model()->language()->published()->find("t.id = '" . self::ID . "'");
         if (!$menu)
         {
             return;
