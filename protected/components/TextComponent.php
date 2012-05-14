@@ -259,4 +259,15 @@ class TextComponent extends CApplicationComponent
         }
         return $text;
     }
+
+
+    public function parseTemplate($file, $data)
+    {
+        $formatted_data = array();
+        foreach ($data as $key => $val)
+        {
+            $formatted_data['{{'.$key.'}}'] = $val;
+        }
+        return strtr(file_get_contents($file), $formatted_data);
+    }
 }

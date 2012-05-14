@@ -11,7 +11,7 @@ class InstallHelper
      */
     public static function parseFile($source, $target, $data)
     {
-        $content = strtr(file_get_contents($source), $data);
+        $content = Yii::app()->text->parseFile($source, $data);
 //        copy ($source, $target);
         file_put_contents($target, $content);
     }

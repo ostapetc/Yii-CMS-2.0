@@ -29,7 +29,7 @@ class Step1 extends AbstractInstallModel
 
     public function getDbPatterns()
     {
-        return array('%DB_HOST%' => $this->db_host, '%DB_PASS%' => $this->db_pass, '%DB_LOGIN%' => $this->db_login, '%DB_NAME%' => $this->db_name);
+        return array('DB_HOST' => $this->db_host, 'DB_PASS' => $this->db_pass, 'DB_LOGIN' => $this->db_login, 'DB_NAME' => $this->db_name);
     }
 
     public function createDbConnection($db_must_exists = true)
