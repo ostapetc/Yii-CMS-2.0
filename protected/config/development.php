@@ -1,6 +1,5 @@
 <?
-
-return array(
+return CMap::mergeArray(require('main.php'), array(
     'components' => array(
         'db' => array(
             'connectionString'      => 'mysql:localhost=localhost;dbname=yii_base;',
@@ -11,5 +10,5 @@ return array(
             'enableProfiling'       => true,
         )
     )
-);
+));
 

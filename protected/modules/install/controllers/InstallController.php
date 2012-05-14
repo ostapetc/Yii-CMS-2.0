@@ -110,8 +110,8 @@ class InstallController extends Controller
         {
 //            InstallHelper::parseConfig($file, $data);
         }
-        //done!
-        //replace config in index.php
+
+//        @unlink(Yii::getPathOfAlias('webroot.insall').'.php');
         $this->redirect('end');
     }
 

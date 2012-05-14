@@ -6,8 +6,8 @@ if (!$_SERVER['DOCUMENT_ROOT']) //for console application
 }
 
 defined('YII_DEBUG')       || define('YII_DEBUG', true);
-defined('PROTECTED_PATH')  || define('PROTECTED_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS);
-defined('RUNTIME_PATH')    || define('RUNTIME_PATH', PROTECTED_PATH . DS . 'runtime' . DS);
-defined('MODULES_PATH')    || define('MODULES_PATH', PROTECTED_PATH . 'modules' . DS);
-defined('LIBRARY_PATH')    || define('LIBRARY_PATH', PROTECTED_PATH . 'libs' . DS);
+defined('APP_PATH')        || define('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS);
+defined('RUNTIME_PATH')    || define('RUNTIME_PATH', APP_PATH . DS . 'runtime' . DS);
+defined('MODULES_PATH')    || define('MODULES_PATH', APP_PATH . 'modules' . DS);
+defined('LIBRARIES_PATH')  || define('LIBRARIES_PATH', APP_PATH . 'libs' . DS);
 defined('YII_TRACE_LEVEL') || define('YII_TRACE_LEVEL',3);

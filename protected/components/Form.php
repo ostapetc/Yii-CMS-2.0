@@ -41,7 +41,6 @@ class Form extends CForm
         parent::__construct($config, $model, $parent);
 
         $this->addAttributesToButtons();
-        $this->formatDateAttributes();
     }
 
     public function init()
