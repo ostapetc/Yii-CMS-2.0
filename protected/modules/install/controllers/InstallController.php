@@ -95,7 +95,7 @@ class InstallController extends Controller
                 Yii::app()->getModule($module)->install();
             }
 
-            $step1->deleteDisableModules();
+//            $step1->deleteDisableModules();
 
             $model->saveInSession();
             //install base modules
