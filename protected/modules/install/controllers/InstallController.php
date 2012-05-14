@@ -75,14 +75,13 @@ class InstallController extends Controller
             $step1->loadFromSession();
 
             Yii::app()->setComponent('db', $step1->createDbConnection());
-            $step1->executeBaseDump();
+            $step1->executeDbDump(Yii::getPathOfAlias('webroot').'/yiicms_2.0.sql');
+
             //install modules
             Yii::app()->setModules($model->modules);
             Yii::app()->executor->migrate('up --module=install');
-            Yii::app()->executor->migrate('up --module=main');
-            foreach ($model->modules as $module)
+            foreach (Yii::app()->getModules()  as $module)
             {
-                $enabled_modules[] = $module;
                 if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
                 {
                     Yii::app()->executor->migrate('up --module='.$module);
@@ -95,6 +94,8 @@ class InstallController extends Controller
             {
                 Yii::app()->getModule($module)->install();
             }
+
+            $step1->deleteDisableModules();
 
             $model->saveInSession();
             //install base modules

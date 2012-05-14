@@ -86,9 +86,14 @@ class Step1 extends AbstractInstallModel
         );
     }
 
-    public function executeBaseDump()
+    /**
+     * execute file with sql dump of db
+     *
+     * @param $file_path
+     */
+    public function executeDbDump($file_path)
     {
-        $file_content = file(Yii::getPathOfAlias('webroot').'/yiicms_2.0.sql');
+        $file_content = file($file_path);
         $query = "";
         foreach($file_content as $sql_line){
             $is_good_line = trim($sql_line) != "" && strpos($sql_line, "--") === false;
@@ -100,9 +105,27 @@ class Step1 extends AbstractInstallModel
             $query .= $sql_line;
             if (substr(rtrim($query), -1) == ';')
             {
-                $result = Yii::app()->db->createCommand($query)->execute();
+                Yii::app()->db->createCommand($query)->execute();
                 $query = "";
             }
+        }
+    }
+
+    public function  deleteDisableModules()
+    {
+        $modules = array_keys(Yii::app()->getModules());
+        $module_path = Yii::getPathOfAlias('application.modules');
+        foreach(scandir($module_path) as $module_dir)
+        {
+            if ($module_dir[0] == ".")
+            {
+                continue;
+            }
+
+           if (!in_array($module_dir, $modules))
+           {
+               FileSystemHelper::removeDirectory($module_path . DS . $module_dir);
+           }
         }
     }
 }

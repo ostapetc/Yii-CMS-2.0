@@ -16,6 +16,22 @@ class FileSystemHelper
         return false;
     }
 
+
+    /**
+     * Delete directory fast and recursive
+     *
+     * @static
+     * @param $path
+     */
+    public static function removeDirectory($path)
+    {
+        foreach(glob($path . '*', GLOB_MARK) as $file) {
+            $is_dir = substr($file, -1) == DS;
+            $is_dir ? self::removeDirectory($file) : unlink($file);
+        }
+        rmdir($path);
+    }
+
     public static function getUniqFileName($file, $dir)
     {
         $dir = trim('/', $dir);

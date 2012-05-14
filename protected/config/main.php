@@ -4,7 +4,8 @@ $modules_dirs     = scandir(MODULES_PATH);
 
 foreach ($modules_dirs as $module)
 {
-    if ($module[0] == ".") {
+    if ($module[0] == ".")
+    {
         continue;
     }
 
