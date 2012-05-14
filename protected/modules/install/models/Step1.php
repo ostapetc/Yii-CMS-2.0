@@ -124,7 +124,7 @@ class Step1 extends AbstractInstallModel
 
            if (!in_array($module_dir, $modules))
            {
-               FileSystemHelper::removeDirectory($module_path . DS . $module_dir);
+               FileSystemHelper::deleteDirRecursive($module_path . DS . $module_dir);
            }
         }
     }

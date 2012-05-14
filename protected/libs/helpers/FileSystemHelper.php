@@ -17,21 +17,6 @@ class FileSystemHelper
     }
 
 
-    /**
-     * Delete directory fast and recursive
-     *
-     * @static
-     * @param $path
-     */
-    public static function removeDirectory($path)
-    {
-        foreach(glob($path . '*', GLOB_MARK) as $file) {
-            $is_dir = substr($file, -1) == DS;
-            $is_dir ? self::removeDirectory($file) : unlink($file);
-        }
-        rmdir($path);
-    }
-
     public static function getUniqFileName($file, $dir)
     {
         $dir = trim('/', $dir);
@@ -52,41 +37,19 @@ class FileSystemHelper
         return $name;
     }
 
-
-    public static function deleteDirRecursive($dir_name)
+    /**
+     * Delete directory fast and recursive
+     *
+     * @static
+     * @param $path
+     */
+    public static function deleteDirRecursive($path)
     {
-        if (!is_dir($dir_name))
-        {
-            return false;
+        foreach(glob($path . '*', GLOB_MARK) as $file) {
+            $is_dir = substr($file, -1) == DS;
+            $is_dir ? self::removeDirectory($file) : unlink($file);
         }
-
-        $dir_handle = opendir($dir_name);
-
-        if (!$dir_handle)
-        {
-            return false;
-        }
-
-        while (($file = readdir($dir_handle)) !== false)
-        {
-            if ($file == "." or $file == "..")
-            {
-                continue;
-            }
-
-            if (!is_dir($dir_name . "/" . $file))
-            {
-                unlink($dir_name . "/" . $file);
-            }
-            else
-            {
-                self::deleteDirRecursive($dir_name . '/' . $file);
-            }
-        }
-
-        rmdir($dir_name);
-        closedir($dir_handle);
-        return true;
+        rmdir($path);
     }
 
 
