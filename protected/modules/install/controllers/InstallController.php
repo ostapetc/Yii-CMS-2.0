@@ -112,6 +112,7 @@ class InstallController extends Controller
         }
 
 //        @unlink(Yii::getPathOfAlias('webroot.insall').'.php');
+//        @unlink(Yii::getPathOfAlias('application.config.install').'.php');
         $this->redirect('end');
     }
 

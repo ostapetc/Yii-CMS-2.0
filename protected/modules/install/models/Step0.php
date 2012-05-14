@@ -30,7 +30,7 @@ class Step0 extends CComponent
 
     public function getMustWritableDirectories()
     {
-        return array('application.modules', 'application.config', 'application.runtime', 'webroot.assets');
+        return array('application.modules', 'application.config', 'application.runtime', 'webroot.assets', 'application.config', 'install.views.templates');
     }
 
     public function getIsWritableDirectories()
