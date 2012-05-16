@@ -8,8 +8,9 @@ $conf = CMap::mergeArray(require ('main.php'), array(
             'rules' => array(
                 '' => 'install/install'
             )
-        )
+        ),
     ),
+    'modules' => array('install'),
     'onBeginRequest' => function($event) {
         $assets = Yii::getPathOfAlias('webroot.assets');
         $runtime = Yii::getPathOfAlias('application.runtime');
@@ -19,8 +20,5 @@ $conf = CMap::mergeArray(require ('main.php'), array(
         } catch (Exception $e) {}
     }
 ));
-
-$conf['modules'] = array('install');
-
 unset($conf['components']['authManager']);
 return $conf;

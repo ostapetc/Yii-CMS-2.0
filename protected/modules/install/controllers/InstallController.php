@@ -60,7 +60,6 @@ class InstallController extends Controller
 
     public function actionStep2()
     {
-
         $model = new Step2();
         $form = new Form('install.Step2', $model);
 
@@ -75,21 +74,26 @@ class InstallController extends Controller
             $step1->loadFromSession();
 
             Yii::app()->setComponent('db', $step1->createDbConnection());
-            $step1->executeDbDump(Yii::getPathOfAlias('webroot').'/yiicms_2.0.sql');
-
             //install modules
             Yii::app()->setModules($model->modules);
+
+            //base db init
+            $step1->dbInit(Yii::app()->getModules());
+
+            //migrate
             Yii::app()->executor->migrate('up --module=install');
-            foreach (Yii::app()->getModules()  as $module)
+            foreach (Yii::app()->getModules() as $module)
             {
                 if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
                 {
                     Yii::app()->executor->migrate('up --module='.$module);
                 }
-
-                Yii::app()->executor->addCommands($module.'.commands');
             }
 
+            //commands collect
+            Yii::app()->executor->addCommandsFromModules(Yii::app()->getModules());
+
+            //run install method
             foreach (Yii::app()->getModules() as $module => $conf)
             {
                 Yii::app()->getModule($module)->install();
