@@ -5,7 +5,6 @@ Yii::import('zii.widgets.jui.CJuiInputWidget');
 abstract class InputWidget extends CInputWidget
 {
     public $name;
-    public $class; //this field use in _form layout
     public $type = 'text';
 
     public $form_id;

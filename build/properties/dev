@@ -14,7 +14,7 @@ db.name=diplom
 
 
 # shell commands
-shell.version.next = awk -F \. {'print $1"."$2"."++$3'}
+shell.version.next = awk -F"." {'print $1"."$2"."++$3'}
 
 
 mysql.dump=""

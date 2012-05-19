@@ -205,7 +205,7 @@ class CFormInputElement extends CFormElement
 		if(isset(self::$coreTypes[$this->type]))
 		{
 			$method=self::$coreTypes[$this->type];
-			if(strpos($method,'List')!==false)
+            if(strpos($method,'List')!==false)
 				return CHtml::$method($this->getParent()->getModel(), $this->name, $this->items, $this->attributes);
 			else
 				return CHtml::$method($this->getParent()->getModel(), $this->name, $this->attributes);
