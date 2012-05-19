@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="yii-cms" basedir="." default="build">
+
+    <exec dir=".." outputProperty="basedir" command="pwd" />
+    <property file="properties/dev" />
+    <tstamp /> <!-- Sets the DSTAMP, TSTAMP and TODAY properties -->
+
+    <target name="git">
+        <gitpull repository="${deploy.dir}" force="true" />
+        <exec dir="${deploy.dir}" outputProperty="git.lasttag" command="git tag -l '*.*.*' | sort -V | tail -n 1" />
+        <exec dir="${deploy.dir}" outputProperty="git.tag" command="echo ${git.lasttag} | ${shell.version.next}" />
+        <gittag repository="${deploy.dir}" name="${git.tag}" />
+        <gitpush repository="${deploy.dir}" tags="true" />
+   </target>
+
+    <target name="rsync">
+        <property file="properties/sync" />
+        <taskdef name="sync" classname="phing.tasks.ext.FileSyncTask" />
+        <sync
+            sourcedir="${sync.source.dir}"
+            destinationdir="${sync.destination.dir}"
+            excludefile="${sync.exclude.file}"
+            listonly="false"
+            verbose="false" />
+    </target>
+
+    <target name="clear.cache">
+        <echo>Clear assets</echo>
+        <delete dir="${webroot}/assets/" />
+        <mkdir dir="${webroot}/assets/" mode="0777" />
+        <echo>Clear runtime</echo>
+        <delete dir="${app.dir}/runtime/" />
+        <mkdir dir="${app.dir}/runtime/" mode="0777" />
+    </target>
+
+    <target name="db.migrate">
+        <exec command="php ${yiic} migrate" />
+    </target>
+
+
+    <target name="doc">
+        <property file="properties/doc" />
+        <delete dir="${doc.dir}" />
+        <mkdir dir="${doc.dir}" mode="0777" />
+        <phpdoc2 title="API Documentation" destdir="${doc.dir}" template="responsive">
+            <fileset dir="${app.dir}" includes="**/*.php" excludes="${doc.excludes}" />
+        </phpdoc2>
+    </target>
+
+    <target name="set_version">
+        <reflexive>
+            <fileset dir="${deploy.dir}" includes="${build.set_version.includes}" excludes="${build.set_version.excludes}" />
+            <filterchain>
+                <replaceregexp>
+                    <regexp pattern="@version \$(Id)\$" replace="@version ${git.tag}" />
+                </replaceregexp>
+            </filterchain>
+        </reflexive>
+    </target>
+
+    <target name="build" depends="doc">
+        <echo msg="All done." />
+    </target>
+
+</project>
+
