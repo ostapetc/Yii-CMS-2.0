@@ -58,7 +58,17 @@
         </reflexive>
     </target>
 
-    <target name="build" depends="doc">
+    <target name="check.env">
+        <echo message="!!!" />
+        <exec outputProperty="env" command="dialog --backtitle 'Check ENV' \
+        --radiolist 'Check ENV' 10 40 3 \
+         1 'Linux 7.2' off \
+         2 'Solaris 9' on \
+         3 'HPUX 11i' off" />
+        <echo message="${env}" />
+   </target>
+
+    <target name="build" depends="check.env">
         <echo msg="All done." />
     </target>
 
