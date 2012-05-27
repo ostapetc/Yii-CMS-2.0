@@ -118,7 +118,7 @@ class Step1 extends AbstractInstallModel
      */
     public function dbInit($modules)
     {
-        foreach (Yii::app()->getModules() as $module)
+        foreach ($modules as $module)
         {
             $file = Yii::getPathOfAlias($module.'.migrations').'/install.sql';
             if (is_file($file))

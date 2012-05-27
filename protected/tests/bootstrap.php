@@ -1,5 +1,4 @@
 <?
-
 $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__) . '/../../') . '/';
 
 require_once dirname(__FILE__) . '/../config/constants.php';

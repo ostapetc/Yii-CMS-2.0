@@ -1,5 +1,4 @@
 <?
-
 define('APP_PATH', realpath(dirname(__FILE__) . '/../') . DIRECTORY_SEPARATOR);
 define('MODULES_PATH', APP_PATH . 'modules' . DIRECTORY_SEPARATOR);
 define('LIBRARIES_PATH', APP_PATH . 'libs' . DIRECTORY_SEPARATOR);

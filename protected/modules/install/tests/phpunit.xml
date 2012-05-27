@@ -1,0 +1,16 @@
+<phpunit bootstrap="bootstrap.php"
+		colors="false"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnFailure="false">
+
+    <testsuite name="all tests">
+            <directory>./</directory>
+        </testsuite>
+
+    <selenium>
+		<browser name="Firefox" browser="*firefox" />
+	</selenium>
+
+</phpunit>
