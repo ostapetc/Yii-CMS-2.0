@@ -16,15 +16,12 @@ if (substr($_SERVER['DOCUMENT_ROOT'], -1) != DS)
 require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'constants.php';
 require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
 require_once LIBRARIES_PATH . 'functions.php';
+require_once LIBRARIES_PATH . 'debug.php';
 
 $env = YII_DEBUG ? 'development' : 'production';
 defined('ENV') || define('ENV', $env);
+defined('CONFIG') || define('CONFIG', $env);
 
-if (ENV !== 'production')
-{
-    require_once LIBRARIES_PATH . 'debug.php';
-}
-
-$config = APP_PATH . 'config' . DS . ENV .'.php';
+$config = APP_PATH . 'config' . DS . CONFIG .'.php';
 
 Yii::createWebApplication($config)->run();

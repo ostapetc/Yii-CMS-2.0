@@ -18,14 +18,14 @@ class CrudAdminController extends AdminController
 
         if ($form->submitted() && $model->validate())
         {
-            Yii::import('application.modules.codegen.controllers.FormAdminController');
+            Yii::import('codegen.controllers.FormAdminController');
 
             FormAdminController::generateAndSaveForm($model->class);
 
             $params = $model->attributes;
             $params['module'] = AppManager::getModelModule($model->class);
 
-            $controllers_path  = 'application.modules.codegen.views.templates.crud.controllers';
+            $controllers_path  = 'codegen.views.templates.crud.controllers';
             $controllers_files = glob(Yii::getPathOfAlias($controllers_path) . DS . '*');
             foreach ($controllers_files as $controller_file)
             {
@@ -48,7 +48,7 @@ class CrudAdminController extends AdminController
                 chmod($file_path, 0777);
             }
 
-            $views_path  = 'application.modules.codegen.views.templates.crud.views';
+            $views_path  = 'codegen.views.templates.crud.views';
             $views_files = glob(Yii::getPathOfAlias($views_path) . DS . '*' . DS . '*');
 
             foreach($views_files as $view_file)
