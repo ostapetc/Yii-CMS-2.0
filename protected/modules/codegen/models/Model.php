@@ -17,7 +17,7 @@ class Model extends FormModel
     public static $not_required_attributes = array('id', 'date_create', 'date_update');
 
     public static $extra_behaviors = array(
-        'Сортировка' => 'application.extensions.sortable.SortableBehavior',
+        'Сортировка' => 'ext.sortable.SortableBehavior',
         'Мета тэги'  => 'application.components.activeRecordBehaviors.MetaTagBehavior'
     );
 

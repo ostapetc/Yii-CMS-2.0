@@ -60,11 +60,6 @@ class <?= $class ?>AdminController extends AdminController
 
 	public function actionDelete($id)
 	{
-		if(!Yii::app()->request->isPostRequest)
-		{
-            $this->badRequest();
-        }
-
         $this->loadModel($id)->delete();
 
         if(!isset($_GET['ajax']))

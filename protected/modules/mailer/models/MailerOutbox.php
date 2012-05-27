@@ -1,6 +1,6 @@
 <?
 
-class OutboxEmail extends ActiveRecord
+class MailerOutbox extends ActiveRecord
 {
     const STATUS_SENT    = 'sent';
     const STATUS_QUEUE   = 'queue';

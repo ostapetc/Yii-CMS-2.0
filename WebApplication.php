@@ -9,22 +9,13 @@
  */
 class MsgStream extends SplQueue
 {
-    /**
-     * Create queue
-     */
-    private function __construct()
-    {
-    }
 
     /**
      * private for Singleton
      */
-    private function __clone() {}
-
-    /**
-     * private for Singleton, prevention creating by serialize
-     */
-    private function __wakeup() {}
+    protected function __construct() {}
+    protected function __clone() {}
+    protected function __wakeup() {}
 
     /**
      * @var self
@@ -53,7 +44,7 @@ class MsgStream extends SplQueue
      * get singleton instance
      *
      * @static
-     * @return MessageStream
+     * @return MsgStream
      */
     public static function getInstance()
     {
@@ -72,19 +63,22 @@ class MsgStream extends SplQueue
      */
     public function enqueue($item, $type = null)
     {
-        $result = parent::enqueue(array(
+        parent::enqueue(array(
             'item' => $item,
             'type' => $type
         ));
         Yii::app()->getSession()->add('core_messages', iterator_to_array($this));
-        return $result;
     }
 
     public function clear()
     {
         $this->setIteratorMode(SplQueue::IT_MODE_DELETE); //need clear???
         iterator_to_array($this);
-        $this->setIteratorMode(SplQueue::IT_MODE_KEEP); //need clear???
+        $this->setIteratorMode(SplQueue::IT_MODE_KEEP);
+        if (Yii::app()->getSession()->hasProperty('core_messages'))
+        {
+            Yii::app()->getSession()->remove('core_messages');
+        }
     }
 
     /**
@@ -118,6 +112,8 @@ class MsgStream extends SplQueue
  * @method AssetManager getAssetManager()
  * @property WebUser $user
  * @method WebUser getUser()
+ * @property TextComponent $text
+ * @method TextComponent getText()
  * @property MetaTags $metaTags
  * @method MetaTags getMetaTags()
  * @property CommandExecutor $executor

@@ -42,16 +42,12 @@ class InstallController extends Controller
             if ($db_create_status === true)
             {
                 Yii::app()->user->setState('install_configs', $model->getConfigs());
+                $model->saveInSession();
+                $this->redirect('step2');
             }
             else if (is_string($db_create_status))
             {
                 MsgStream::getInstance()->enqueue($db_create_status, 'error');
-            }
-
-            if (MsgStream::getInstance()->count() == 0)
-            {
-                $model->saveInSession();
-                $this->redirect('step2');
             }
         }
 
@@ -70,8 +66,7 @@ class InstallController extends Controller
             $configs = CMap::mergeArray(Yii::app()->user->getState('install_configs'), $model->getConfigs());
             Yii::app()->user->setState('install_configs', $configs);
 
-            $step1 = new Step1();
-            $step1->loadFromSession();
+            $step1 = Step1::loadFromSession();
 
             Yii::app()->setComponent('db', $step1->createDbConnection());
             //install modules
@@ -99,8 +94,7 @@ class InstallController extends Controller
                 Yii::app()->getModule($module)->install();
             }
 
-//            $step1->deleteDisableModules();
-
+            //$step1->deleteDisableModules();
             $model->saveInSession();
             //install base modules
             $this->redirect('step3');
@@ -126,7 +120,6 @@ class InstallController extends Controller
     {
         $this->redirect('/');
     }
-
 
     public function actionError()
     {

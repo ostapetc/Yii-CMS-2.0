@@ -18,8 +18,11 @@ class AbstractInstallModel extends FormModel
      * @static
      * @return AbstractInstallModel
      */
-    public function loadFromSession()
+    public static function loadFromSession()
     {
-        $this->attributes = Yii::app()->user->getState('install_'.get_class($this));
+        $class = get_called_class();
+        $model = new $class();
+        $model->attributes = Yii::app()->user->getState('install_'.$class);
+        return $model;
     }
 }

@@ -86,7 +86,7 @@ class FormAdminController extends AdminController
 
         $params['elements'] = $elements;
 
-        return Yii::app()->controller->renderPartial('application.modules.codegen.views.templates.crud.forms.Form', $params, true);
+        return Yii::app()->controller->renderPartial('codegen.views.templates.crud.forms.Form', $params, true);
     }
 
 

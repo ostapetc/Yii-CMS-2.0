@@ -97,7 +97,7 @@ class MailerTemplate extends ActiveRecord
 
     public static function getDir()
     {
-        return Yii::getPathOfAlias('application.modules.mailer.views.templates') . DS;
+        return Yii::getPathOfAlias('mailer.views.templates') . DS;
     }
 
 
@@ -117,16 +117,12 @@ class MailerTemplate extends ActiveRecord
     {
         $body = file_get_contents($this->getFilePath());
         $body = $this->replaceMarks($body, $user);
-        $body = str_replace(
+        $body = Yii::app()->text->parseTemplate(
+            file_get_contents(Yii::getPathOfAlias('mailer.views.templates') . DS . 'template.html'),
             array(
-                '{{SUBJECT}}',
-                '{{BODY}}',
-            ),
-            array(
-                $this->subject,
-                $body
-            ),
-            file_get_contents(Yii::getPathOfAlias('application.modules.mailer.views.templates') . DS . 'template.html')
+                'SUBJECT' => $this->subject,
+                'BODY' => $body,
+            )
         );
 
         return $body;
@@ -142,23 +138,8 @@ class MailerTemplate extends ActiveRecord
     public function replaceMarks($text, User $user)
     {
         $params = Param::model()->getValues();
-        foreach ($params as $name => $value)
-        {
-            $name = '{{' . strtoupper($name). '}}';
-            $text = str_replace($name, $value, $text);
-        }
-
-        $text = str_replace(
-            array(
-                '{{ACTIVATE_ACCOUNT_HREF}}'
-            ),
-            array(
-                Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code)
-            ),
-            $text
-        );
-
-        return $text;
+        $params['ACTIVATE_ACCOUNT_HREF'] = Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code);
+        return Yii::app()->text->parseTemplate($text, $params);
     }
 
 

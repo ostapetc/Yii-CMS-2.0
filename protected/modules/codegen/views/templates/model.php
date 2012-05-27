@@ -1,5 +1,9 @@
 <? echo "<?\n"; ?>
-
+/**
+<? foreach ($meta as $data): ?>
+ * @property $<?= $data['Field']."\n" ?>
+<? endforeach ?>
+ */
 class <?= $class ?> extends ActiveRecord
 {
     const PAGE_SIZE = 20;
