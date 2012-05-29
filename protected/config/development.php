@@ -2,13 +2,13 @@
 return CMap::mergeArray(require('main.php'), array(
     'components' => array(
         'db' => array(
-            'connectionString'      => 'mysql:localhost=localhost;dbname=yii_base;',
-            'emulatePrepare'        => true,
-            'username'              => 'root',
-            'password'              => '',
-            'charset'               => 'utf8',
-            'enableProfiling'       => true,
+            'connectionString' => 'mysql:host=openserver;dbname=yiicms_2.0',
+            'emulatePrepare'   => true,
+            'username'         => 'mysql',
+            'password'         => 'mysql',
+            'charset'          => 'utf8',
+            'enableProfiling'  => true,
         )
     )
-);
+));
 
