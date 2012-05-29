@@ -1,20 +1,18 @@
 <? $this->renderPartial('application.views.layouts._header'); ?>
 
-<div class="span9">
-    <h1><?= $this->page_title ?></h1>
+<div class="span10">
+    <? if ($this->page_title): ?>
+        <h1><?= $this->page_title ?></h1>
+    <? endif ?>
+
     <? echo $content ?>
 </div>
 
-<div class="span3">
-    <div class="well ">
-        123
-    </div>
+<div class="span4">
+    <? $this->widget('sidebarManager'); ?>
 
     <div class="well">
-        23
-    </div>
-    <div class="well">
-        23
+        standart sidebar
     </div>
 </div>
 

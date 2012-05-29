@@ -5,11 +5,11 @@ class LanguageMessageAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Manage'        => 'Управление переводами',
-            'Update'        => 'Редактирование переводов',
-            'Create'        => 'Добавление переводов',
-            'Delete'        => 'Удаление переводов',
-            'NotUsableList' => 'Неиспользуемые переводы'
+            'manage'        => 'Управление переводами',
+            'update'        => 'Редактирование переводов',
+            'create'        => 'Добавление переводов',
+            'delete'        => 'Удаление переводов',
+            'notUsableList' => 'Неиспользуемые переводы'
         );
     }
 

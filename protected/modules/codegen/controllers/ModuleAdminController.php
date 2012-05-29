@@ -5,8 +5,8 @@ class ModuleAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Create'   => 'Создание модуля',
-            'GetFiles' => 'Показать файлы модуля'
+            'create'   => 'Создание модуля',
+            'getFiles' => 'Показать файлы модуля'
         );
     }
 

@@ -5,13 +5,13 @@ class MenuSectionAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Update"           => "Редактирование ссылки меню",
-            "Create"           => "Добавление ссылки меню",
-            "View"             => "Просмотр ссылки меню",
-            "Delete"           => "Удаление ссылки меню",
-            "Sorting"          => "Сортировка",
-            "Manage"           => "Управление ссылками меню",
-            "UpdateTree"       => "Редактирование дерева",
+            "update"           => "Редактирование ссылки меню",
+            "create"           => "Добавление ссылки меню",
+            "view"             => "Просмотр ссылки меню",
+            "delete"           => "Удаление ссылки меню",
+            "sorting"          => "Сортировка",
+            "manage"           => "Управление ссылками меню",
+            "updateTree"       => "Редактирование дерева",
         );
     }
 

@@ -130,11 +130,10 @@ return array(
     ),
 
     'onBeginRequest' => array('AppManager', 'init'),
-
-    'params'         => array(
-        'save_site_actions' => true,
-        'multilanguage_support' => true,
+    'params' => array(
+        'save_site_actions'           => true,
+        'multilanguage_support'       => false,
         'collect_routes_from_modules' => true,
-        'themes_enabled' => false
+        'themes_enabled'              => false
     )
 );

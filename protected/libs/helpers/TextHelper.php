@@ -96,11 +96,6 @@ class TextHelper
             "ю"  => "yu",
             "я"  => "ya",
             " "  => "_",
-            "."  => "",
-            ","  => "",
-            "?"  => "",
-            "!"  => "",
-            ":"  => ""
         );
 
         return strtr($string, $words);

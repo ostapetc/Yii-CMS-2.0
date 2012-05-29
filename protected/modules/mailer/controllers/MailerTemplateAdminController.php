@@ -5,12 +5,12 @@ class MailerTemplateAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'     => 'Просмотр шаблона рассылки',
-            'Create'   => 'Создание шаблона рассылки',
-            'Update'   => 'Редактирование шаблона рассылки',
-            'Delete'   => 'Удаление шаблона рассылки',
-            'Manage'   => 'Управление шаблонами рассылки',
-            'BodyView' => 'Посмотр тела письма'
+            'view'     => 'Просмотр шаблона рассылки',
+            'create'   => 'Создание шаблона рассылки',
+            'update'   => 'Редактирование шаблона рассылки',
+            'delete'   => 'Удаление шаблона рассылки',
+            'manage'   => 'Управление шаблонами рассылки',
+            'bodyView' => 'Посмотр тела письма'
         );
     }
 

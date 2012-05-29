@@ -5,13 +5,13 @@ class MetaTagAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'            => 'Просмотр мета-тега',
-            'Create'          => 'Создание мета-тега',
-            'Update'          => 'Редактирование мета-тега',
-            'Delete'          => 'Удаление мета-тега',
-            'Manage'          => 'Управление мета-тегами',
-            'GetModelObjects' => 'Получение объектов модели',
-            'GetMetaTagData'  => 'Получение данных тега'
+            'view'            => 'Просмотр мета-тега',
+            'create'          => 'Создание мета-тега',
+            'update'          => 'Редактирование мета-тега',
+            'delete'          => 'Удаление мета-тега',
+            'manage'          => 'Управление мета-тегами',
+            'getModelObjects' => 'Получение объектов модели',
+            'getMetaTagData'  => 'Получение данных тега'
         );
     }
 

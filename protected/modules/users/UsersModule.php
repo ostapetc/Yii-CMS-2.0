@@ -2,7 +2,9 @@
 
 class UsersModule extends WebModule
 {
-    const MAILER_TEMPLATE_REGISTRATION = 'user_registration';
+    const MAILER_TEMPLATE_REGISTRATION    = 'user_registration';
+    const MAILER_TEMPLATE_ACTIVATION      = 'user_activation';
+    const MAILER_TEMPLATE_CHANGE_PASSWORD = 'user_change_password';
 
     const PARAM_REGISTRATION_DONE_MESSAGE = 'registration_done_message';
 
@@ -50,15 +52,15 @@ class UsersModule extends WebModule
     public static function routes()
     {
         return array(
-            '/admin/login/*'                        => 'users/userAdmin/login',
-            '/login'                                => 'users/user/login',
-            '/logout'                               => 'users/user/logout',
-            '/logout'                               => 'users/user/logout',
-            '/registration'                         => 'users/user/registration',
-            '/activateAccount/<code:.*>'            => 'users/user/activateAccount',
-            '/activateAccountRequest'               => 'users/user/activateAccountRequest',
-            '/changePasswordRequest'                => 'users/user/changePasswordRequest',
-            '/changePassword/<code:.*>/<email:.*>'  => 'users/user/changePassword',
+            '/admin/login/*'             => 'users/userAdmin/login',
+            '/login'                     => 'users/user/login',
+            '/logout'                    => 'users/user/logout',
+            '/logout'                    => 'users/user/logout',
+            '/registration'              => 'users/user/registration',
+            '/activateAccount/<code:.*>' => 'users/user/activateAccount',
+            '/activateAccountRequest'    => 'users/user/activateAccountRequest',
+            '/changePasswordRequest'     => 'users/user/changePasswordRequest',
+            '/changePassword/<code:.*>'  => 'users/user/changePassword',
         );
     }
 }

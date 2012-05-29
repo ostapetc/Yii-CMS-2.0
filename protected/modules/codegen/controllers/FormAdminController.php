@@ -5,7 +5,7 @@ class FormAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Create' => 'Создание формы'
+            'create' => 'Создание формы'
         );
     }
 

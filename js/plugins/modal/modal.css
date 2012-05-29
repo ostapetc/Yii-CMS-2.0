@@ -1,0 +1,15 @@
+#modal-frame {
+    border:0;
+    width: 100%;
+    height: 100%;
+
+}
+
+div.modal {
+    /*overflow: hidden;*/
+    height: auto !important;
+}
+
+.modal-body {
+    height: 100%;
+}

@@ -79,15 +79,15 @@ class User extends ActiveRecord
     public function rules()
     {
         return array(
-            array(
-                'captcha',
-                'captcha',
-                'on' => array(
-                    //self::SCENARIO_REGISTRATION,
+//            array(
+//                'captcha',
+//                'captcha',
+//                'on' => array(
+//                    self::SCENARIO_REGISTRATION,
 //                    self::SCENARIO_ACTIVATE_REQUEST,
-                    self::SCENARIO_CHANGE_PASSWORD_REQUEST,
-                ),
-            ),
+//                    self::SCENARIO_CHANGE_PASSWORD_REQUEST,
+//                ),
+//            ),
             array(
                 'email',
                 'required',
@@ -114,11 +114,11 @@ class User extends ActiveRecord
                 'name',
                 'RuLatAlphaValidator'
             ),
-            array(
-                'gender',
-                'required',
-                'on' => array(self::SCENARIO_REGISTRATION)
-            ),
+    //            array(
+    //                'gender',
+    //                'required',
+    //                'on' => array(self::SCENARIO_REGISTRATION)
+    //            ),
             array(
                 'password_c, password',
                 'required',
@@ -206,8 +206,13 @@ class User extends ActiveRecord
             array(
                 'id, email, birthdate, gender, status, date_create',
                 'safe',
-                'on'=> 'search'
+                'on'=> self::SCENARIO_SEARCH
             ),
+            array(
+                'activate_date',
+                'safe',
+                'on' => self::SCENARIO_ACTIVATE_REQUEST
+            )
         );
     }
 
@@ -262,7 +267,6 @@ class User extends ActiveRecord
         return array_merge(parent::attributeLabels(), array(
                 "password_c"   => "Пароль еще раз",
                 "remember_me"  => "Запомни меня",
-                "captcha"      => "Введите код",
                 "role"         => "Роль"
             ));
     }
@@ -297,5 +301,55 @@ class User extends ActiveRecord
     {
         return $this->role->name == AuthItem::ROLE_ROOT;
     }
+
+
+    public function getPhotoLink()
+    {
+        $photo_src = '/img/icons/user.gif';
+        $image     =  CHtml::image($photo_src, $this->name, array('title' => $this->name, 'border' => 0));
+
+        return CHtml::link($image, "/user/{$this->id}", array('class' => 'user-photo-link', 'width' => '23', 'height' => '23'));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

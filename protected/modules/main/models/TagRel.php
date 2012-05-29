@@ -24,8 +24,9 @@ class TagRel extends ActiveRecord
 	{
 		return array(
 			array('model_id, object_id, tag_id', 'required'),
-			array('model_id, object_id, tag_id', 'length', 'max' => 11),
-            array('model_id, object_id, tag_id', 'numerical', 'integerOnly' => true),
+			array('object_id, tag_id', 'length', 'max' => 11),
+            array('object_id, tag_id', 'numerical', 'integerOnly' => true),
+            array('model_id', 'length' , 'max' => 50)
 		);
 	}
 

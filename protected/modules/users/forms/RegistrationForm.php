@@ -2,12 +2,12 @@
 $form = include "UserForm.php";
 
 $form['activeForm']['id'] = 'registration-form';
-$form['action'] = Yii::app()->controller->createUrl('/users/user/registration');
 
 unset($form['elements']['status']);
 unset($form['elements']['role']);
 unset($form['elements']['captcha']);
 unset($form['elements']['birthdate']);
+unset($form['elements']['gender']);
 
 $form['buttons']['submit']['value'] = 'Зарегистрироваться';
 

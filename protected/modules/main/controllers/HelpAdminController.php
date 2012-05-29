@@ -9,10 +9,10 @@ class HelpAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Sortable'         => 'Изменение позиции',
-            'ManyManySortable' => 'Изменение позиции для отношений ManyMany',
-            'Console'          => 'Консоль',
-            'SaveAttribute'    => 'Сохранение Атрибута'
+            'sortable'         => 'Изменение позиции',
+            'manyManySortable' => 'Изменение позиции для отношений ManyMany',
+            'console'          => 'Консоль',
+            'saveAttribute'    => 'Сохранение Атрибута'
         );
     }
 

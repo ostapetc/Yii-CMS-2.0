@@ -5,12 +5,12 @@ class PageAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Manage"      => t("Управление страницами"),
-            "Create"      => t("Добавление страницы"),
-            "View"        => t("Просмотр страницы"),
-            "Update"      => t("Редактирование страницы"),
-            "Delete"      => t("Удаление страницы"),
-            "GetJsonData" => t("Получение данных страницы (JSON)")
+            "manage"      => t("Управление страницами"),
+            "create"      => t("Добавление страницы"),
+            "view"        => t("Просмотр страницы"),
+            "update"      => t("Редактирование страницы"),
+            "delete"      => t("Удаление страницы"),
+            "getJsonData" => t("Получение данных страницы (JSON)")
         );
     }
 
@@ -31,24 +31,6 @@ class PageAdminController extends AdminController
     }
 
 
-    public function actionCreate()
-    {
-        $model = new Page(ActiveRecord::SCENARIO_CREATE);
-        $form  = new Form('content.PageForm', $model);
-        $this->performAjaxValidation($model);
-
-        if ($form->submitted() && $model->save())
-        {
-            $this->redirect(array(
-                'view',
-                'id' => $model->id
-            ));
-        }
-        p($model->errors);
-        $this->render('create', array('form' => $form));
-    }
-
-
     public function actionView($id)
     {
         $model = $this->loadModel($id);
@@ -61,22 +43,6 @@ class PageAdminController extends AdminController
         {
             $this->render('view', array('model' => $model));
         }
-    }
-
-
-    public function actionUpdate($id)
-    {
-        $model = $this->loadModel($id);
-
-        $form = new Form('content.PageForm', $model);
-        $this->performAjaxValidation($model);
-
-        if ($form->submitted() && $model->save())
-        {
-            $this->redirect(array('view', 'id'=> $model->id));
-        }
-
-        $this->render('update', array('form' => $form,));
     }
 
 

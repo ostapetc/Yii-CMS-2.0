@@ -56,6 +56,11 @@ class PageSection extends ActiveRecord
                 self::BELONGS_TO,
                 'PageSection',
                 'parent_id'
+            ),
+            'childs' => array(
+                self::HAS_MANY,
+                'PageSection',
+                'parent_id'
             )
         );
     }

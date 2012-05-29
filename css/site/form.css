@@ -11,7 +11,7 @@
     margin: 0 0 0 10px;
 }
 
-input, textarea, .uneditable-input{
+.form-vertical input[type=text], .form-vertical input[type=password], .form-vertical textarea, .form-vertical .uneditable-input{
     width: 420px;
 }
 
@@ -53,6 +53,11 @@ textarea {
     margin-left: 15px;
 }
 
-.help-block {
+.help-block, .help-inline {
     color: red !important;
 }
+
+.wide-from input[type=text], .wide-from select, .wide-from textarea {
+    width: 100% !important;
+}
+

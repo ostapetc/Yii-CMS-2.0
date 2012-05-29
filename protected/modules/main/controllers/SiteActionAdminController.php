@@ -5,7 +5,7 @@ class SiteActionAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Manage" => "Просмотр действий сайта"
+            "manage" => "Просмотр действий сайта"
         );
     }
 

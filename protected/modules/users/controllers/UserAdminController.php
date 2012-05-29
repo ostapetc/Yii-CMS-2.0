@@ -5,12 +5,12 @@ class UserAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Login"  => "Авторизация",
-            "Manage" => "Управление пользователями",
-            "View"   => "Просмотр пользователя",
-            "Create" => "Добавление пользователя",
-            "Update" => "Редактирование пользователя",
-            "Delete" => "Удаление пользователя"
+            'login'  => 'Авторизация',
+            'manage' => 'Управление пользователями',
+            'view'   => 'Просмотр пользователя',
+            'create' => 'Добавление пользователя',
+            'update' => 'Редактирование пользователя',
+            'delete' => 'Удаление пользователя'
         );
     }
 

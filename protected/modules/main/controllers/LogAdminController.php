@@ -5,7 +5,7 @@ class LogAdminController extends AdminController
     public static function actionsTitles() 
     {
         return array(
-            "Manage" => "Управление логами"
+            'manage' => 'Управление логами'
         );    
     }
 

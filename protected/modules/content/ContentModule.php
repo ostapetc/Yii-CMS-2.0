@@ -45,15 +45,11 @@ class ContentModule extends WebModule
     public static function routes()
     {
         $routes = array(
-            '/page/<id:\d+>' => 'content/page/view',
-            '/page/<url:.*>' => 'content/page/view',
-            '/search'        => 'content/page/search'
+            '/'                     => 'content/page/index',
+            '/page/<id:\d+>'        => 'content/page/view',
+            '/page/create'          => 'content/page/create',
+            '/page/update/<id:\d+>' => 'content/page/update',
         );
-
-        foreach (array_keys(Language::getList()) as $language)
-        {
-            $routes["/"] = 'content/page/main';
-        }
 
         return $routes;
     }

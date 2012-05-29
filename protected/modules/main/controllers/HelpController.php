@@ -9,9 +9,9 @@ class HelpController extends Controller
     public static function actionsTitles()
     {
         return array(
-            'Captcha'    => 'Капча',
-            'Sitemap'    => 'Карта сайта',
-            'Sitemapxml' => 'XML карта сайта'
+            'captcha'    => 'Капча',
+            'sitemap'    => 'Карта сайта',
+            'sitemapxml' => 'XML карта сайта'
         );
     }
 

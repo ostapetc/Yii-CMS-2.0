@@ -5,8 +5,8 @@ class ModelAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Create'  => 'Генерация модели',
-            'GetCode' => 'Получить код'
+            'create'  => 'Генерация модели',
+            'getCode' => 'Получить код'
         );
     }
 

@@ -5,7 +5,7 @@ class MenuSectionController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "View"   => "Просмотр страницы",
+            "view"   => "Просмотр страницы",
         );
     }
 

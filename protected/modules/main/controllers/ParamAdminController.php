@@ -5,11 +5,11 @@ class ParamAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'   => 'Просмотр параметра',
-            'Create' => 'Добавление параметра',
-            'Update' => 'Редактирование параметра',
-            'Manage' => 'Управление параметрами',
-            'Delete' => 'Удаление параметра'
+            'view'   => 'Просмотр параметра',
+            'create' => 'Добавление параметра',
+            'update' => 'Редактирование параметра',
+            'manage' => 'Управление параметрами',
+            'delete' => 'Удаление параметра'
         );
     }
 

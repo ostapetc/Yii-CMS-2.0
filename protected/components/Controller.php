@@ -1,4 +1,8 @@
 <?
+
+/**
+ * TODO: убить интерфес он тут не нужен
+ */
 abstract class Controller extends CController implements ControllerInterface
 {
     const MSG_SUCCESS = 'success';
@@ -59,23 +63,18 @@ abstract class Controller extends CController implements ControllerInterface
 
     public function beforeAction($action)
     {
-        if (in_array($action->id, $this->system_actions))
+        $action_name = lcfirst($action->id);
+
+        if (in_array($action_name, $this->system_actions))
         {
             return true;
         }
         else
         {
-            $item_name = AuthItem::constructName(Yii::app()->controller->id, $action->id);
+            $item_name = AuthItem::constructName(Yii::app()->controller->id, $action_name);
         }
 
-        $action_titles = $action->controller->actionsTitles();
-
-        if (!isset($action_titles[ucfirst($action->id)]))
-        {
-            throw new CException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
-        }
-
-        $this->setTitle($action);
+        $this->setTitle($action_name);
 
         return true;
     }
@@ -95,23 +94,21 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    public function setTitle($action)
+    public function setTitle($action_name)
     {
-        $action_titles = call_user_func(array(
-            get_class($action->controller), 'actionsTitles'
-        ));
+        $action_titles = $this->actionsTitles();
 
-        if (in_array($action->id, $this->system_actions))
+        if (in_array($action_name, $this->system_actions))
         {
             return;
         }
 
-        if (!isset($action_titles[ucfirst($action->id)]))
+        if (!isset($action_titles[$action_name]))
         {
-            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
+            throw new CHttpException('Не найден заголовок для дейсвия ' . $action_name);
         }
 
-        $this->page_title = $action_titles[ucfirst($action->id)];
+        $this->page_title = $action_titles[$action_name];
     }
 
 
@@ -232,4 +229,27 @@ abstract class Controller extends CController implements ControllerInterface
         }
     }
 
+
+    public function render($view, $params = array())
+    {
+        if (isset($_GET['popup']))
+        {
+            $this->layout = '//layouts/admin/clear';
+        }
+
+        return parent::render($view, $params);
+    }
+
+
+    public function redirect($params)
+    {
+        if (isset($_GET['popup']))
+        {
+            $view = array_shift($params);
+            $params['popup'] = 1;
+            array_unshift($params, $view);
+        }
+
+        parent::redirect($params);
+    }
 }

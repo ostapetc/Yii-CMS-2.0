@@ -12,12 +12,13 @@ class Form extends CForm
             'validateOnType' => true,
             'validateOnSubmit' => true,
             'afterValidateAttribute' => 'js:function(form, attribute, data, hasError){
-                                            var cg = $("#"+attribute.inputID).closest(".control-group");
-                                            hasError ? cg.addClass("error") : cg.removeClass("error");
-                                            hasError ? cg.removeClass("success") : cg.addClass("success");
-                                        }',
+                        var cg = $("#"+attribute.inputID).closest(".control-group");
+                        hasError ? cg.addClass("error") : cg.removeClass("error");
+                        hasError ? cg.removeClass("success") : cg.addClass("success");
+                    }',
         'inlineErrors' => false
     ));
+
 
     public function __construct($config, $model = null, $parent = null)
     {
@@ -41,8 +42,8 @@ class Form extends CForm
         parent::__construct($config, $model, $parent);
 
         $this->addAttributesToButtons();
-        $this->formatDateAttributes();
     }
+
 
     public function init()
     {
@@ -50,6 +51,7 @@ class Form extends CForm
         parent::init();
         $this->model->onAfterFormInit(new CEvent($this));
     }
+
 
     public static function getFullAlias($alias)
     {
@@ -70,6 +72,7 @@ class Form extends CForm
             return $alias;
         }
     }
+
 
     public function __toString()
     {
@@ -92,6 +95,7 @@ class Form extends CForm
             }
         }
     }
+
 
     public function renderBody()
     {
@@ -138,6 +142,7 @@ class Form extends CForm
         }
     }
 
+
     public function renderButtons()
     {
         if ($this->back_button_show && !$this->buttons->itemAt('back'))
@@ -159,7 +164,7 @@ class Form extends CForm
     }
 
 
-    function addAttributesToButtons()
+    public function addAttributesToButtons()
     {
         foreach ($this->buttons as $i => $button)
         {
@@ -171,6 +176,7 @@ class Form extends CForm
             $this->buttons[$i] = $button;
         }
     }
+
 
     public function getElements()
     {
@@ -186,4 +192,12 @@ class Form extends CForm
         return $elements;
     }
 
+
+    /**
+     * TODO: восстановить метод
+     */
+    public function clear()
+    {
+
+    }
 }

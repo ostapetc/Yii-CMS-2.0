@@ -969,3 +969,7 @@ fieldset textarea:focus {
 .null {
     color: #8a1f11;
 }
+
+#el-df-tab-main input {
+    width: 20px !important;
+}

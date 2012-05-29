@@ -5,10 +5,10 @@ class MainController extends Controller
     public static function actionsTitles() 
     {
         return array(
-            "Error"          => "Ошибка на странице",
-            "Error404"       => "Страница не найдена",
-            "Search"         => "Поиск по сайту",
-            "ChangeLanguage" => "Смена языка"
+            "error"          => "Ошибка на странице",
+            "error404"       => "Страница не найдена",
+            "search"         => "Поиск по сайту",
+            "changeLanguage" => "Смена языка"
         );
     }
     

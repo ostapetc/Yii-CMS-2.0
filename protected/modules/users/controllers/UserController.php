@@ -31,13 +31,13 @@ class UserController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "Login"                  => "Авторизация",
-            "Logout"                 => "Выход",
-            "Registration"           => "Регистрация",
-            "ActivateAccount"        => "Активация аккаунта",
-            "ActivateAccountRequest" => "Запрос на активацию аккаунта",
-            "ChangePassword"         => "Смена пароля",
-            "ChangePasswordRequest"  => "Запрос на смену пароля",
+            "login"                  => "Авторизация",
+            "logout"                 => "Выход",
+            "registration"           => "Регистрация",
+            "activateAccount"        => "Активация аккаунта",
+            "activateAccountRequest" => "Запрос на активацию аккаунта",
+            "changePassword"         => "Смена пароля",
+            "changePasswordRequest"  => "Запрос на смену пароля",
         );
     }
 
@@ -66,21 +66,20 @@ class UserController extends Controller
                     $auth_error = $identity->errorCode;
                     if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
                     {
-                        $auth_error .= "<br/><a href='" . $this->createUrl('/activateAccountRequest') . "'>Активировать аккаунт повторно</a>";
+                        $auth_error.= '<br/>' . CHtml::link('Не пришло письмо? Активировать аккаунт повторно?', '/activateAccountReques');
                     }
                     else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
                     {
-                        $auth_error .= "<br/><a href='" . $this->createUrl('changePasswordRequest') . "'>
-                    							Восстановить пароль
-                    						</a>";
+                        $auth_error.= '<br/>' . CHtml::link('Восстановить пароль', 'changePasswordRequest');
                     }
+
+                    Yii::app()->user->setFlash('error', $auth_error);
                 }
             }
         }
 
         $this->render('login', array(
-            'form'       => $form,
-            'auth_error' => isset($auth_error) ? $auth_error : null
+            'form' => $form
         ));
     }
 
@@ -114,9 +113,15 @@ class UserController extends Controller
             {
                 $user->password = md5($user->password);
                 $user->generateActivateCode();
+                $user->activate_date = new CDbExpression('NOW()');
 
                 if ($user->save(false))
                 {
+                    $outbox = new MailerOutbox();
+                    $outbox->user_id     = $user->id;
+                    $outbox->template_id = MailerTemplate::model()->getIdByCode(UsersModule::MAILER_TEMPLATE_REGISTRATION);
+                    $outbox->save();
+
                     $assignment = new AuthAssignment();
                     $assignment->itemname = AuthItem::ROLE_DEFAULT;
                     $assignment->userid   = $user->id;
@@ -126,11 +131,6 @@ class UserController extends Controller
 
                     $this->redirect($_SERVER['REQUEST_URI']);
                 }
-                else
-                {
-                    p($user->errors);
-                    throw new CHttpException('Ошибка сохранения пользователя!');
-                }
             }
         }
 
@@ -138,41 +138,38 @@ class UserController extends Controller
     }
 
 
-    public function actionActivateAccount($code, $email)
+    public function actionActivateAccount($code)
     {
         $user = User::model()->findByAttributes(array('activate_code' => $code));
-
-        if ($user && md5($user->email) == $email)
+        if ($user)
         {
-            if (strtotime($user->date_create) + 24 * 3600 > time())
+            if (strtotime($user->activate_date) + 24 * 3600 > time())
             {
                 $user->activate_date = null;
                 $user->activate_code = null;
                 $user->status        = User::STATUS_ACTIVE;
                 $user->save();
 
-                Yii::app()->user->setFlash('acrivate_done', 'Активация аккаунта прошла успешно! Вы можете авторизоваться.');
-
-                $this->redirect('/login');
+                Yii::app()->user->setFlash('success', 'Активация аккаунта прошла успешно. Вы можете авторизоваться.');
             }
             else
             {
-                $activate_error = 'С момента регистрации прошло больше суток!';
+                Yii::app()->user->setFlash('error', 'Срок действия активации аккаунта истек');
             }
         }
         else
         {
-            $activate_error = 'Неверные данные активации аккаунта!';
+            Yii::app()->user->setFlash('error', 'C момента отправки письма прошло больше суток');
         }
 
-        $this->render('activateAccount', array(
-            'activate_error' => isset($activate_error) ? $activate_error : null
-        ));
+        $this->redirect('/login');
     }
 
 
     public function actionActivateAccountRequest()
     {
+        MailerTemplate::checkRequired(UsersModule::MAILER_TEMPLATE_ACTIVATION);
+
         $model = new User(User::SCENARIO_ACTIVATE_REQUEST);
         $form  = new Form('users.ActivateRequestForm', $model);
 
@@ -186,7 +183,7 @@ class UserController extends Controller
                 $user = User::model()->findByAttributes(array('email' => $_POST['User']['email']));
                 if (!$user)
                 {
-                    $error = UserIdentity::ERROR_UNKNOWN;
+                    Yii::app()->user->setFlash('error', 'Введенный вами Email не найден');
                 }
                 else
                 {
@@ -194,20 +191,24 @@ class UserController extends Controller
                     {
                         case User::STATUS_NEW:
                             $user->generateActivateCode();
+                            $user->scenario      = User::SCENARIO_ACTIVATE_REQUEST;
+                            $user->activate_date = new CDbExpression('NOW()');
                             $user->save();
-                            $user->sendActivationMail();
 
-                            Yii::app()->user->setFlash('done', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
+                            $outbox = new MailerOutbox();
+                            $outbox->user_id     = $user->id;
+                            $outbox->template_id = MailerTemplate::model()->getIdByCode(UsersModule::MAILER_TEMPLATE_ACTIVATION);
+                            $outbox->save();
 
-                            $this->redirect($this->createUrl('activateAccountRequest'));
+                            Yii::app()->user->setFlash('success', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
                             break;
 
                         case User::STATUS_ACTIVE:
-                            $error = UserIdentity::ERROR_ALREADY_ACTIVE;
+                            Yii::app()->user->setFlash('error', UserIdentity::ERROR_ALREADY_ACTIVE);
                             break;
 
                         case User::STATUS_BLOCKED:
-                            $error = UserIdentity::ERROR_BLOCKED;
+                            Yii::app()->user->setFlash('error',UserIdentity::ERROR_BLOCKED);
                             break;
                     }
                 }
@@ -215,21 +216,18 @@ class UserController extends Controller
         }
 
         $this->render('activateAccountRequest', array(
-            'form'  => $form,
-            'error' => isset($error) ? $error : null
+            'form'  => $form
         ));
     }
 
 
     public function actionChangePasswordRequest()
     {
-        Param::model()->checkRequired(array(
-            User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_SUBJECT,
-            User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_BODY
-        ));
+        MailerTemplate::checkRequired(UsersModule::MAILER_TEMPLATE_CHANGE_PASSWORD);
 
         $model = new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST);
         $form  = new Form('users.ChangePasswordRequestForm', $model);
+
         $this->performAjaxValidation($model);
 
         if (isset($_POST['User']))
@@ -237,81 +235,75 @@ class UserController extends Controller
             $model->attributes = $_POST['User'];
             if ($model->validate())
             {
-                $user = $model->findByAttributes(array('email' => $model->email));
+                $user = User::model()->find("email = '{$model->email}'");
                 if ($user)
                 {
                     if ($user->status == User::STATUS_ACTIVE)
                     {
-                        $user->password_change_code = md5(
-                            $user->password . $user->email . $user->id . time());
-                        $user->password_change_date = new CDbExpression('NOW()');
+                        $user->password_recover_code = md5($user->password . $user->email . $user->id . time());
+                        $user->password_recover_date = new CDbExpression('NOW()');
                         $user->save();
 
-                        $mailer_letter = MailerLetter::model();
+                        $outbox = new MailerOutbox();
+                        $outbox->template_id = MailerTemplate::model()->getIdByCode(UsersModule::MAILER_TEMPLATE_CHANGE_PASSWORD);
+                        $outbox->user_id     = $user->id;
+                        $outbox->save();
 
-                        $settings = Param::model()->findCodesValues();
-
-                        $subject = $mailer_letter->compileText($settings[User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_SUBJECT], array('user' => $user));
-
-                        $body = $mailer_letter->compileText($settings[User::SETTING_CHANGE_PASSWORD_REQUEST_MAIL_BODY], array('user' => $user));
-
-                        MailerModule::sendMail($user->email, $subject, $body);
-
-                        Yii::app()->user->setFlash('done', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
-
-                        $this->redirect($this->createUrl('changePasswordRequest'));
+                        Yii::app()->user->setFlash('success', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
 
                     }
                     else if ($user->status == User::STATUS_NEW)
                     {
-                        $error = UserIdentity::ERROR_NOT_ACTIVE;
+                        Yii::app()->user->setFlash('error', UserIdentity::ERROR_NOT_ACTIVE);
                     }
                     else
                     {
-                        $error = UserIdentity::ERROR_BLOCKED;
+                        Yii::app()->user->setFlash('error', UserIdentity::ERROR_BLOCKED);
                     }
                 }
                 else
                 {
-                    $error = UserIdentity::ERROR_UNKNOWN;
+                    Yii::app()->user->setFlash('error', UserIdentity::ERROR_UNKNOWN_EMAIL);
                 }
+
+                $this->redirect($_SERVER['REQUEST_URI']);
             }
         }
 
         $this->render("changePasswordRequest", array(
-            'form'  => $form,
-            'error' => isset($error) ? $error : null
+            'form' => $form,
         ));
     }
 
 
-    public function actionChangePassword($code, $email)
+    public function actionChangePassword($code)
     {
         $model = new User(User::SCENARIO_CHANGE_PASSWORD);
         $form  = new Form('users.ChangePasswordForm', $model);
+
         $this->performAjaxValidation($model);
 
-        $user = User::model()->findByAttributes(array('password_change_code' => $code));
-
-        if (!$user || md5($user->email) != $email)
+        $user = User::model()->findByAttributes(array('password_recover_code' => $code));
+        if (!$user)
         {
-            $error = 'Неверная ссылка изменения пароля!';
+            Yii::app()->user->setFlash('error', 'Неверная ссылка изменения пароля');
+            $this->redirect('/login');
         }
         else
         {
-            if (strtotime($user->password_change_date) + 24 * 3600 > time())
+            if (strtotime($user->password_recover_date) + 24 * 3600 > time())
             {
                 if (isset($_POST['User']))
                 {
                     $model->attributes = $_POST['User'];
                     if ($model->validate())
                     {
-                        $user->password_change_code = null;
-                        $user->password_change_date = null;
-                        $user->password             = md5($_POST['User']['password']);
+                        $user->password_recover_code = null;
+                        $user->password_recover_date = null;
+                        $user->password              = md5($_POST['User']['password']);
                         $user->save();
 
-                        Yii::app()->user->setFlash('change_password_done', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
+                        Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
 
                         $this->redirect('/login');
                     }
@@ -319,14 +311,14 @@ class UserController extends Controller
             }
             else
             {
-                $error = 'С момента запроса на восстановление пароля прошло больше суток!';
+                Yii::app()->user->setFlash('error', 'С момента запроса на восстановление пароля прошло больше суток');
+                $this->redirect('/login');
             }
         }
 
         $this->render('changePassword', array(
             'model' => $model,
-            'form'  => $form,
-            'error' => isset($error) ? $error : null
+            'form'  => $form
         ));
     }
 }

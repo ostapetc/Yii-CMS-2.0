@@ -150,10 +150,12 @@ class MailerTemplate extends ActiveRecord
 
         $text = str_replace(
             array(
-                '{{ACTIVATE_ACCOUNT_HREF}}'
+                '{{ACTIVATE_ACCOUNT_HREF}}',
+                '{{CHANGE_PASSWORD_HREF}}'
             ),
             array(
-                Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code)
+                Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code),
+                Yii::app()->createAbsoluteUrl('/changePassword/' . $user->password_recover_code)
             ),
             $text
         );
@@ -175,6 +177,20 @@ class MailerTemplate extends ActiveRecord
         if (!$exist)
         {
             throw new CException("Не найден обязательный шаблон письма с кодом: {$code}");
+        }
+    }
+
+
+    /**
+     * @param $code
+     * @return integer
+     */
+    public function getIdByCode($code)
+    {
+        $template = $this->find("code = '" . $code . "'");
+        if ($template)
+        {
+            return $template->id;
         }
     }
 }

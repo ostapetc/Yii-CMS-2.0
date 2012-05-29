@@ -5,8 +5,8 @@ class CrudAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'Create'   => 'Создание CRUD-а',
-            'GetFiles' => 'Получить файлы'
+            'create'   => 'Создание CRUD-а',
+            'getFiles' => 'Получить файлы'
         );
     }
 

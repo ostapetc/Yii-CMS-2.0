@@ -9,6 +9,7 @@ class UserIdentity extends CUserIdentity
     const ERROR_ACTIVATE_DATE  = "Вышла дата активации";
     const ERROR_ALREADY_ACTIVE = "Ваш аккаунт уже активирован";
     const ERROR_UNKNOWN        = "Неверный email и/или пароль";
+    const ERROR_UNKNOWN_EMAIL  = "Пользователь с таким Email не найден";
     const ERROR_BLOCKED        = "Ваш аккаунт заблокирован";
     const ERROR_NOT_ACTIVE     = "Ваш аккаун не активирован";
 

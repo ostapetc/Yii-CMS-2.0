@@ -1,6 +1,6 @@
 <?
 $this->tabs = array(
-    'добавить исходящее письмо' => $this->createUrl('create')
+    'отправить письмо' => $this->createUrl('create')
 );
 
 $this->widget('AdminGridView', array(

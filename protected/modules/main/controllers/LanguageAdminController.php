@@ -5,11 +5,11 @@ class LanguageAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Create"           => "Добавление языка",
-            "Update"           => "Редактирование языка",
-            "Delete"           => "Удаление языка",
-            "Manage"           => "Управление языками",
-            "CreateTableField" => "Добавление поля 'language' к таблице"
+            'create'           => 'Добавление языка',
+            'update'           => 'Редактирование языка',
+            'delete'           => 'Удаление языка',
+            'manage'           => 'Управление языками',
+            'createTableField' => 'Добавление поля "language" к таблице'
         );
     }
 
@@ -48,7 +48,7 @@ class LanguageAdminController extends AdminController
             $model = $form->model;
             if ($model->save())
             {
-                echo "saved";
+                echo 'saved';
                 die;
                 $this->redirect($this->createUrl('manage'));
             }
@@ -99,7 +99,7 @@ class LanguageAdminController extends AdminController
 
             Yii::app()->db->createCommand($sql)->execute();
 
-            $sql = "ALTER TABLE `{$table}` ADD CONSTRAINT `{$table}_language_fk` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE";
+            $sql = 'ALTER TABLE `{$table}` ADD CONSTRAINT `{$table}_language_fk` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE';
 
             Yii::app()->db->createCommand($sql)->execute();
         }

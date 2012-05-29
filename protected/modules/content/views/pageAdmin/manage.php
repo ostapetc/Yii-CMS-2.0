@@ -1,21 +1,22 @@
 <?
-$this->page_title = t('Страницы сайта');
-
 $this->tabs = array(
     'Добавить страницу' => $this->createUrl('create')
 );
 
 $this->widget('AdminGridView', array(
-	'id' => 'page-grid',
+	'id'           => 'page-grid',
 	'dataProvider' => $model->search(),
-	'filter' => $model,
-//    'sortable' => true,
+	'filter'       => $model,
 	'columns' => array(
 		array(
 			'name' => 'title',
 			'type' => 'raw'
 		),
-		'url',
+		array(
+            'name'   => 'status',
+            'value'  => 'Page::$status_options[$data->status]',
+            'filter' => Page::$status_options
+        ),
         array(
             'name'  => 'language',
             'value' => function ($data) {

@@ -1,6 +1,6 @@
 <?
 
-class OutboxEmail extends ActiveRecord
+class MailerOutbox extends ActiveRecord
 {
     const STATUS_SENT    = 'sent';
     const STATUS_QUEUE   = 'queue';
@@ -8,6 +8,8 @@ class OutboxEmail extends ActiveRecord
     const STATUS_ERROR   = 'error';
 
     const PAGE_SIZE = 10;
+
+    const MAILS_PACKET_SIZE = 20;
 
 
     public static $status_list = array(
@@ -97,26 +99,29 @@ class OutboxEmail extends ActiveRecord
 
     public static function sendEmails()
     {
-        $outbox_emails = OutboxEmail::model()->findAllByAttributes(
-            array('status' => OutboxEmail::STATUS_QUEUE),
-            array('order'  => 'date_create')
+        $outbox_emails = MailerOutbox::model()->findAllByAttributes(
+            array('status' => MailerOutbox::STATUS_QUEUE),
+            array(
+                'order' => 'date_create',
+                'limit' => self::MAILS_PACKET_SIZE
+            )
         );
 
         foreach ($outbox_emails as $outbox_email)
         {
-            $outbox_email->status = OutboxEmail::STATUS_PROCESS;
-            $outbox_email->save();
+            //$outbox_email->status = MailerOutbox::STATUS_PROCESS;
+            //$outbox_email->save();
 
             try
             {
-                self::sendMail($outbox_email->email, $outbox_email->subject, $outbox_email->text);
+                self::sendMail($outbox_email->email, $outbox_email->subject, $outbox_email->body);
 
                 $outbox_email->date_send = new CDbExpression('NOW()');
-                $outbox_email->status    = OutboxEmail::STATUS_SENT;
+                $outbox_email->status    = MailerOutbox::STATUS_SENT;
             }
             catch (Exception $e)
             {
-                $outbox_email->status = OutboxEmail::STATUS_ERROR;
+                $outbox_email->status = MailerOutbox::STATUS_ERROR;
                 $outbox_email->log    = $e->getMessage();
             }
 
@@ -125,9 +130,9 @@ class OutboxEmail extends ActiveRecord
     }
 
 
-    private static function sendMail($email_to, $subject, $body)
+    public static function sendMail($email_to, $subject, $body)
     {
-        require_once LIBRARY_PATH . 'PHPMailer_v5.1/class.phpmailer.php';
+        require_once LIBRARIES_PATH . 'PHPMailer_v5.1/class.phpmailer.php';
 
         $settings = Param::model()->findCodesValues('mailer');
 
@@ -174,6 +179,33 @@ class OutboxEmail extends ActiveRecord
         $mail->ClearAttachments();
         $mail->ClearBCCs();
         $mail->ClearAddresses();
+    }
+
+
+    public function beforeValidate()
+    {
+        if (parent::beforeValidate() && $this->isNewRecord)
+        {
+            $user     = User::model()->findByPk($this->user_id);
+            $template = MailerTemplate::model()->findByPk($this->template_id);
+
+            if (!$this->subject)
+            {
+                $this->subject = $template->constructSubject($user);
+            }
+
+            if (!$this->body)
+            {
+                $this->body = $template->constructBody($user);
+            }
+
+            if (!$this->email)
+            {
+                $this->email = $user->email;
+            }
+        }
+
+        return true;
     }
 }
 

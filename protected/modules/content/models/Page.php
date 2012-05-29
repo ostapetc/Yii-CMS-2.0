@@ -38,16 +38,7 @@ class Page extends ActiveRecord
         return array_merge(
             parent::behaviors(),
             array(
-                 'MetaTag'  => array('class'=>'application.components.activeRecordBehaviors.MetaTagBehavior'),
-                 'Sortable'  => array('class'=>'ext.sortable.SortableBehavior'),
-                 'FileManager' => array(
-                     'class'=>'application.components.activeRecordBehaviors.FileManagerBehavior',
-                    'tags' => array(
-                        'files' => t('files'),
-                        'photos' => t('photos')
-                    )
-                 ),
-                 'Tag'        => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
+                 'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
             )
         );
     }
@@ -58,11 +49,6 @@ class Page extends ActiveRecord
         return array(
             array('title, language', 'required'),
             array('language', 'safe'),
-            array(
-                'is_published',
-                'numerical',
-                'integerOnly' => true
-            ),
             array(
                 'url', 'length',
                 'max' => 250
@@ -78,7 +64,7 @@ class Page extends ActiveRecord
                 'filter' => 'strip_tags'
             ),
             array(
-                'id, title, url, text, is_published, date_create', 'safe',
+                'id, title, url, text, date_create', 'safe',
                 'on'=> 'search'
             ),
             array(
@@ -98,7 +84,23 @@ class Page extends ActiveRecord
     public function relations()
     {
         return array(
-            'language_model' => array(self::BELONGS_TO, 'Language', 'language'),
+            'language_model' => array(
+                self::BELONGS_TO,
+                'Language',
+                'language'
+            ),
+            'tags_rels' => array(
+                self::HAS_MANY ,
+                'TagRel',
+                'object_id',
+                'condition' => "model_id = 'Page'"
+            ),
+            'tags' => array(
+                self::HAS_MANY,
+                'Tag',
+                'tag_id',
+                'through' => 'tags_rels'
+            )
         );
     }
 
@@ -110,24 +112,26 @@ class Page extends ActiveRecord
         $criteria->compare('title', $this->title, true);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('text', $this->text, true);
-        $criteria->compare('is_published', $this->is_published);
+        $criteria->compare('status', $this->status);
         $criteria->compare('date_create', $this->date_create, true);
         $criteria->compare('language', $this->language, true);
 
         return new ActiveDataProvider(get_class($this), array(
-                                                             'criteria'   => $criteria,
-                                                             'pagination' => array(
-                                                                 'pageSize' => self::PAGE_SIZE
-                                                             )
-                                                        ));
+             'criteria'   => $criteria,
+             'pagination' => array(
+                 'pageSize' => self::PAGE_SIZE
+             )
+        ));
     }
 
 
     public function getHref()
     {
         $url = trim($this->url);
-        if ($url) {
-            if ($url[0] != "/") {
+        if ($url)
+        {
+            if ($url[0] != "/")
+            {
                 $url = "/page/{$url}";
             }
 
@@ -141,7 +145,7 @@ class Page extends ActiveRecord
 
 
     public function beforeSave()
-    {   return true;
+    {
         if (parent::beforeSave())
         {
             if ($this->url != '/')
@@ -158,13 +162,9 @@ class Page extends ActiveRecord
     {
         $content = $this->text;
 
-        if (RbacModule::isAllow('PageAdmin_Update')) {
-            $content .= "<br/>" . CHtml::link(
-                t('Редактировать'), array(
-                                         '/content/pageAdmin/update/',
-                                         'id'=> $this->id
-                                    ), array('class'=> 'btn btn-danger')
-            );
+        if (RbacModule::isAllow('PageAdmin_Update'))
+        {
+            $content .= "<br/>" . CHtml::link(t('Редактировать'), array('/content/pageAdmin/update/','id'=> $this->id), array('class'=> 'btn btn-danger'));
         }
 
         return $content;

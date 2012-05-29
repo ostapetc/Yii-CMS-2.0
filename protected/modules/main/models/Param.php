@@ -58,6 +58,7 @@ class Param extends ActiveRecord
             array('value', 'safe'),
             array('options', 'optionsValidator'),
             array('element', 'safe', 'on' => array(self::SCENARIO_CREATE, self::SCENARIO_UPDATE)),
+            array('code, name, module_id, element, value', 'safe', 'on' => self::SCENARIO_SEARCH)
 		);
 	}
 
@@ -97,6 +98,7 @@ class Param extends ActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('value',$this->value,true);
 		$criteria->compare('element',$this->element,true);
+        $criteria->compare('module_id',$this->module_id,true);
 
         if ($module_id)
         {

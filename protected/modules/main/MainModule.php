@@ -51,31 +51,35 @@ class MainModule extends WebModule
     }
 
 
+    /**
+     * @todo вынести в фильтр как и установку title, метод setTitle
+     *
+     */
     public static function saveSiteAction()
     {
-        $action = Yii::app()->controller->action;
-
-        $action_titles = call_user_func(array(get_class(Yii::app()->controller), 'actionsTitles'));
-
-        if (!isset($action_titles[ucfirst($action->id)]))
-        {
-            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
-        }
-
-        $title = $action_titles[ucfirst($action->id)];
-
-        $site_action             = new SiteAction();
-        $site_action->title      = $title;
-        $site_action->module     = $action->controller->module->id;
-        $site_action->controller = $action->controller->id;
-        $site_action->action     = $action->id;
-
-        if (!Yii::app()->user->isGuest)
-        {
-            $site_action->user_id = Yii::app()->user->id;
-        }
-
-        $site_action->save();
+//        $action = Yii::app()->controller->action;
+//
+//        $action_titles = call_user_func(array(get_class(Yii::app()->controller), 'actionsTitles'));
+//
+//        if (!isset($action_titles[ucfirst($action->id)]))
+//        {
+//            throw new CHttpException('Не найден заголовок для дейсвия ' . ucfirst($action->id));
+//        }
+//
+//        $title = $action_titles[ucfirst($action->id)];
+//
+//        $site_action             = new SiteAction();
+//        $site_action->title      = $title;
+//        $site_action->module     = $action->controller->module->id;
+//        $site_action->controller = $action->controller->id;
+//        $site_action->action     = $action->id;
+//
+//        if (!Yii::app()->user->isGuest)
+//        {
+//            $site_action->user_id = Yii::app()->user->id;
+//        }
+//
+//        $site_action->save();
     }
 
 

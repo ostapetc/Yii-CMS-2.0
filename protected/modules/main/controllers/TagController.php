@@ -5,7 +5,7 @@ class TagController extends Controller
     public static function actionsTitles()
     {
         return array(
-            'AutoComplete' => 'Автодополнение тегов'
+            'autoComplete' => 'Автодополнение тегов'
         );
     }
 

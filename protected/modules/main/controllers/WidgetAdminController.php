@@ -5,7 +5,7 @@ class WidgetAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'ColumnsManage' => 'Настройка колонок виджета'
+            'columnsManage' => 'Настройка колонок виджета'
         );
     }
 

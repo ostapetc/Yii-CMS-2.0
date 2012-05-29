@@ -17,6 +17,7 @@ abstract class AdminController extends Controller
         ));
     }
 
+
     private function initAssets()
     {
         $assets_dir = MODULES_PATH . Yii::app()->controller->module->id . '/assets/';

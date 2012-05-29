@@ -1,36 +1,11 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8"/>
-    <title>Yii CMS Admin Panel</title>
-
-    <?
-    $cs = Yii::app()->clientScript;
-    $cs->registerCoreScript('jquery');
-    $cs->registerCoreScript('jquery.ui');
-    Yii::app()->bootstrap->registerScripts();
-    $cs->registerCssFile('/css/admin/layout.css');
-    $cs->registerCssFile('/css/admin/form.css');
-    $cs->registerCssFile('/css/admin/extend.css');
-    $cs->registerScriptFile('/js/admin/hideshow.js');
-    $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
-    $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');
-    $cs->registerScriptFile('/js/admin/jquery.hotkeys.js');
-    $cs->registerScriptFile('/js/admin/jquery.console.js');
-    $cs->registerScriptFile('/js/admin/main.js');
-    $cs->registerScriptFile('/js/plugins/hint.js');
-    ?>
-
-    <!--[if lt IE 9]>
-    <link rel="stylesheet" href="/css/admin/ie.css" type="text/css" media="screen"/>
-    <script src="/js/admin/html5.js"></script>
-    <![endif]-->
-</head>
+<? $this->renderPartial('application.views.layouts.admin._header'); ?>
 
 
 <body>
+    <?= $this->renderPartial('application.views.layouts.admin._modal'); ?>
+
     <? $this->widget('main.portlets.Console') ?>
+
     <header id="header">
         <hgroup>
             <h1 class="site_title" ><a href="/admin" style="margin-left: 20px"><?= Param::get('project_name'); ?></a></h1>

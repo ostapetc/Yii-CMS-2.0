@@ -130,7 +130,8 @@ abstract class ActiveRecord extends CActiveRecord
         try
         {
             return parent::__set($name, $val);
-        } catch (CException $e)
+        }
+        catch (CException $e)
         {
             $method_name = StringHelper::underscoreToCamelcase($name);
             $method_name = 'set' . ucfirst($method_name);
@@ -233,11 +234,13 @@ abstract class ActiveRecord extends CActiveRecord
         return $this->_meta;
     }
 
+
     public function optionsTree($name = 'name', $id = null, $result = array(), $value = 'id', $spaces = 0, $parent_id = null)
     {
-        $objects = $this->findAllByAttributes(array(
-            'parent_id' => $parent_id
-        ));
+        $objects = $this->findAllByAttributes(
+            array('parent_id' => $parent_id),
+            array('order'     => 'parent_id')
+        );
 
         foreach ($objects as $object)
         {
@@ -246,13 +249,11 @@ abstract class ActiveRecord extends CActiveRecord
                 continue;
             }
 
-            $result[$object->$value] = str_repeat("_", $spaces) . $object->$name;
+            $result[$object->$value] = str_repeat(".", $spaces) . $object->$name;
 
             if ($object->childs)
             {
-                $spaces += 2;
-
-                $result = $this->optionsTree($name, $id, $result, $value, $spaces, $object->id);
+                $result = $this->optionsTree($name, $id, $result, $value, $spaces+2, $object->id);
             }
         }
 
@@ -318,4 +319,16 @@ abstract class ActiveRecord extends CActiveRecord
         $this->raiseEvent('onAfterGridInitColumns', $event);
     }
 
+
+    public function getErrorsArray()
+    {
+        $array = array();
+
+        foreach ($this->errors as $attr => $errors)
+        {
+            $array = array_merge($array, $errors);
+        }
+
+        return $array;
+    }
 }

@@ -5,8 +5,8 @@ class MailerOutboxController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "SendEmails" => "Отправка писем",
-            "ConfirmReceipt" => "Подтверждение получения письма"
+            'sendEmails'     => 'Отправка писем',
+            'confirmReceipt' => 'Подтверждение получения письма'
         );
     }
 

@@ -335,7 +335,18 @@ class AppManager
         }
     }
 
-}
 
+    public static function getModulesNames()
+    {
+        $names = array();
+
+        foreach (array_keys(Yii::app()->getModules()) as $module)
+        {
+            $names[$module] = Yii::app()->getModule($module)->name();
+        }
+
+        return $names;
+    }
+}
 
 

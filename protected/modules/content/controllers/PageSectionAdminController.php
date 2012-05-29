@@ -5,11 +5,11 @@ class PageSectionAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'   => 'Просмотр Раздела страниц',
-            'Create' => 'Создание Раздела страниц',
-            'Update' => 'Редактирование Раздела страниц',
-            'Delete' => 'Удаление Раздела страниц',
-            'Manage' => 'Управление Разделами страниц',
+            'view'   => 'Просмотр Раздела страниц',
+            'create' => 'Создание Раздела страниц',
+            'update' => 'Редактирование Раздела страниц',
+            'delete' => 'Удаление Раздела страниц',
+            'manage' => 'Управление Разделами страниц',
         );
     }
 

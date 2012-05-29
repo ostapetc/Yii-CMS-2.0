@@ -5,10 +5,10 @@ class MenuAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "Create" => "Добавление меню",
-            "Update" => "Редактирование меню",
-            "Manage" => "Управление меню",
-            "Delete" => "Удаление меню",
+            "create" => "Добавление меню",
+            "update" => "Редактирование меню",
+            "manage" => "Управление меню",
+            "delete" => "Удаление меню",
         );
     }
 

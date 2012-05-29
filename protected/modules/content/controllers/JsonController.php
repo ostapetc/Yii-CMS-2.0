@@ -4,10 +4,10 @@ class JsonController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "Go" => t("Просмотр страницы"),
-            "Index" => t("Просмотр страницы"),
-            "Name" => t("Просмотр страницы"),
-            "Model" => t("Главная страница")
+            'go'    => 'Просмотр страницы',
+            'index' => 'Просмотр страницы',
+            'name'  => 'Просмотр страницы',
+            'model' => 'Главная страница'
         );
     }
 
@@ -22,14 +22,14 @@ class JsonController extends Controller
         }
         $methods = CJavaScript::encode($methods);
         Yii::app()->getClientScript()->registerScriptFile('/js/plugins/jsonRpc.js')
-        ->registerScript("tmp","ServerApi('tmp', {$methods});");
+        ->registerScript('tmp','ServerApi("tmp", "{$methods})")');
 
         $page = Page::model()->findByAttributes(array('url'=>'/'));
         $this->render('/page/main', array('page' => $page));
     }
     public function actionIndex()
     {
-        $a = file_get_contents("php://input");
+        $a = file_get_contents('php://input');
         echo Y::end(CJSON::decode($a));
     }
 

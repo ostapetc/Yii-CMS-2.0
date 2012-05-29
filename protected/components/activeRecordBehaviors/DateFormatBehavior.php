@@ -10,6 +10,8 @@ class DateFormatBehavior extends ActiveRecordBehavior
 
     public function beforeSave($event)
     {
+        if (!isset(Yii::app()->dater)) return;
+
         $model = $this->getOwner();
 
         $columns = $this->getOwner()->metaData->columns;

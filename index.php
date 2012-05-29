@@ -28,3 +28,36 @@ if (ENV !== 'production')
 $config = APP_PATH . 'config' . DS . ENV .'.php';
 
 Yii::createWebApplication($config)->run();
+
+//Page::model()->deleteAll('id <> 35');
+//
+//$page = Page::model()->findByPk(35);
+//
+//for ($i = 0; $i < 20; $i ++)
+//{
+//    $_POST['Page']['tags'] = 'Тег1,Тег2';
+//
+//    $p = new Page();
+//    $p->user_id = $page->user_id;
+//    $p->title = $page->title;
+//    $p->text = $page->text;
+//    $p->status = Page::STATUS_PUBLISHED;
+//    $p->save();
+//}
+//
+
+//PageSectionRel::model()->deleteAll();
+//
+//$pages = Page::model()->findAll();
+//$sections = PageSection::model()->findAll();
+//
+//foreach ($pages as $page)
+//{
+//    foreach ($sections as $section)
+//    {
+//        $rel = new PageSectionRel();
+//        $rel->page_id = $page->id;
+//        $rel->section_id = $section->id;
+//        $rel->save();
+//    }
+//}

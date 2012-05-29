@@ -5,9 +5,9 @@ class MainAdminController extends AdminController
     public static function actionsTitles() 
     {
         return array(
-            'Index'          => 'Просмотр главной страницы',
-            'Modules'        => 'Просмотр списка модулей',
-            'SessionPerPage' => 'Установки кол-ва элементов на странице',
+            'index'          => 'Просмотр главной страницы',
+            'modules'        => 'Просмотр списка модулей',
+            'sessionPerPage' => 'Установки кол-ва элементов на странице',
         );
     }    
     

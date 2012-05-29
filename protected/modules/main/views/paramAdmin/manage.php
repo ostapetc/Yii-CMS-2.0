@@ -9,8 +9,9 @@ $this->widget('AdminGridView', array(
 	'filter'       => $model,
 	'columns'      => array(
         array(
-            'name'  => 'module_id',
-            'value' => 'AppManager::getModuleName($data->module_id)',
+            'name'   => 'module_id',
+            'value'  => 'AppManager::getModuleName($data->module_id)',
+            'filter' => AppManager::getModulesNames()
         ),
 		array(
             'name'        => 'name',
@@ -19,12 +20,9 @@ $this->widget('AdminGridView', array(
             )
         ),
         array(
-            'name'        => 'value',
-            'value'       => '$data->formated_value;',
-            'type'        => 'raw',
-            'htmlOptions' => array(
-                'update' => true
-            )
+            'name'  => 'value',
+            'value' => '$data->formated_value;',
+            'type'  => 'raw',
         ),
 		array(
 			'class'    =>'CButtonColumn',
@@ -33,7 +31,10 @@ $this->widget('AdminGridView', array(
                 'updateValue' => array(
                     'imageUrl' => '/img/icons/floppy.png',
                     'label'    => 'Изменить значение',
-                    'url'      => 'Yii::app()->controller->createUrl("update", array("id" => $data->id, "scenario" => "value_update"))'
+                    'url'      => 'Yii::app()->controller->createUrl("update", array("id" => $data->id, "scenario" => "value_update"))',
+                    'options'  => array(
+                        'class' => 'popup'
+                    )
                 )
             )
 		),
