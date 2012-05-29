@@ -145,8 +145,5 @@ class Uploader extends JuiInputWidget
             )
         ));
     }
-
-
-
 }
 

@@ -77,7 +77,7 @@ class ModelAdminController extends AdminController
             $params['rules'].= $this->addUniqueRules($meta);
             $params['rules'].= $this->addCoreValidatorRules($meta);
 
-            $code = $this->renderPartial('application.modules.codegen.views.templates.model', $params, true);
+            $code = $this->renderPartial('codegen.views.templates.model', $params, true);
 
             //file_put_contents($_SERVER['DOCUMENT_ROOT'] . 'model.php', $code);
 

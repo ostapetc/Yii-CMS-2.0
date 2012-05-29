@@ -1,7 +1,6 @@
 <?
 class InstallController extends Controller
 {
-
     public function filters()
     {
         return array(
@@ -13,7 +12,6 @@ class InstallController extends Controller
     public function afterAction($action) {}
 
     public $layout = 'install';
-
 
     public static function actionsTitles()
     {
@@ -44,16 +42,12 @@ class InstallController extends Controller
             if ($db_create_status === true)
             {
                 Yii::app()->user->setState('install_configs', $model->getConfigs());
+                $model->saveInSession();
+                $this->redirect('step2');
             }
             else if (is_string($db_create_status))
             {
                 MsgStream::getInstance()->enqueue($db_create_status, 'error');
-            }
-
-            if (MsgStream::getInstance()->count() == 0)
-            {
-                $model->saveInSession();
-                $this->redirect('step2');
             }
         }
 
@@ -62,7 +56,6 @@ class InstallController extends Controller
 
     public function actionStep2()
     {
-
         $model = new Step2();
         $form = new Form('install.Step2', $model);
 
@@ -71,34 +64,37 @@ class InstallController extends Controller
         if ($form->submitted() && $model->validate())
         {
             $configs = CMap::mergeArray(Yii::app()->user->getState('install_configs'), $model->getConfigs());
-            Yii::app()->user->setState('install_configs',$configs);
+            Yii::app()->user->setState('install_configs', $configs);
 
-            $step1 = new Step1();
-            $step1->loadFromSession();
+            $step1 = Step1::loadFromSession();
 
             Yii::app()->setComponent('db', $step1->createDbConnection());
             //install modules
             Yii::app()->setModules($model->modules);
+
+            //base db init
+            $step1->dbInit(Yii::app()->getModules());
+
+            //migrate
             Yii::app()->executor->migrate('up --module=install');
-            foreach ($model->modules as $module)
+            foreach (Yii::app()->getModules() as $module)
             {
                 if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
                 {
-                    dump(Yii::app()->executor->migrate('up --module=main'));
+                    Yii::app()->executor->migrate('up --module='.$module);
                 }
-
-                Yii::app()->executor->addCommands($module.'.commands');
             }
 
+            //commands collect
+            Yii::app()->executor->addCommandsFromModules(Yii::app()->getModules());
+
+            //run install method
             foreach (Yii::app()->getModules() as $module => $conf)
             {
-                $module =Yii::app()->getModule($module);
-                if (method_exists($module, 'install'))
-                {
-                    $module->install();
-                }
+                Yii::app()->getModule($module)->install();
             }
 
+            //$step1->deleteDisableModules();
             $model->saveInSession();
             //install base modules
             $this->redirect('step3');
@@ -114,16 +110,16 @@ class InstallController extends Controller
         {
 //            InstallHelper::parseConfig($file, $data);
         }
-        //done!
-        //replace config in index.php
+
+//        @unlink(Yii::getPathOfAlias('webroot.insall').'.php');
+//        @unlink(Yii::getPathOfAlias('application.config.install').'.php');
         $this->redirect('end');
     }
 
     public function actionEnd()
     {
-        $this->render('end');
+        $this->redirect('/');
     }
-
 
     public function actionError()
     {
@@ -140,5 +136,3 @@ class InstallController extends Controller
         }
     }
 }
-
-

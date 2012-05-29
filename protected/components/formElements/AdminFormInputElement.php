@@ -40,9 +40,6 @@ class AdminFormInputElement extends BaseFormInputElement
                     'title'       => $title
                 );
 
-            case 'alias':
-                return array('class' => 'text');
-
             case 'date':
                 return array(
                     'options'    => array(
@@ -65,28 +62,18 @@ class AdminFormInputElement extends BaseFormInputElement
 
             case 'dropdownlist':
                 return array(
-                    'class'=> 'dropdownlist cmf-skinned-select'
-                );
-
-            case 'password':
-                return array(
-                    'class'=> 'dropdownlist text'
+                    'class' => 'dropdownlist cmf-skinned-select'
                 );
 
             case 'markdown':
                 return array(
-                    'settings' => 'markdown'
-                );
-
-            case 'checkbox':
-                return array(
-                    'class' => ''
+                    'htmlOptions'=> array(
+                        'settings' => 'markdown'
+                    )
                 );
 
             default:
-                return array(
-                    'class' => $this->type
-                );
+                return array();
         }
     }
 

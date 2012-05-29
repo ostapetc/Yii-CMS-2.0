@@ -53,4 +53,11 @@ class ContentModule extends WebModule
 
         return $routes;
     }
+
+    public function install()
+    {
+        parent::install();
+        $upload_dir = Yii::getPathOfAlias('webroot.upload.pages');
+        is_dir($upload_dir) or @mkdir($upload_dir, 755);
+    }
 }

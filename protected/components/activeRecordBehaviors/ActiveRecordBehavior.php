@@ -1,4 +1,7 @@
 <?php
+/**
+ * Base class for AR behavior, incapsulate some additional events
+ */
 class ActiveRecordBehavior extends CActiveRecordBehavior
 {
     public function events()

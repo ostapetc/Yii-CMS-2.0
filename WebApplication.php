@@ -7,30 +7,15 @@
  * @author Alexey Sharov
  * @version $Id$
  */
-class MsgStream
+class MsgStream extends SplQueue
 {
-    /**
-     * @var CQueue
-     */
-    private $queue;
-
-    /**
-     * Create queue
-     */
-    private function __construct()
-    {
-        $this->queue = new CQueue(Yii::app()->session->get('core_messages', array()));
-    }
 
     /**
      * private for Singleton
      */
-    private function __clone() {}
-
-    /**
-     * private for Singleton, prevention creating by serialize
-     */
-    private function __wakeup() {}
+    protected function __construct() {}
+    protected function __clone() {}
+    protected function __wakeup() {}
 
     /**
      * @var self
@@ -42,7 +27,7 @@ class MsgStream
     const TYPE_INFO = 'info';
 
     /**
-     * proxy all calling to CQueue instance
+     * proxy all calling to Spl*Queue instance
      *
      * @param $name
      * @param $params
@@ -50,8 +35,8 @@ class MsgStream
      */
     public function __call($name, $params)
     {
-        $result = call_user_func_array(array($this->queue, $name), $params);
-        Yii::app()->getSession()->add('core_messages', $this->queue->toArray());
+        $result = parent::$name($params);
+        Yii::app()->getSession()->add('core_messages', iterator_to_array($this));
         return $result;
     }
 
@@ -59,7 +44,7 @@ class MsgStream
      * get singleton instance
      *
      * @static
-     * @return MessageStream
+     * @return MsgStream
      */
     public static function getInstance()
     {
@@ -78,12 +63,22 @@ class MsgStream
      */
     public function enqueue($item, $type = null)
     {
-        $result = $this->queue->enqueue(array(
+        parent::enqueue(array(
             'item' => $item,
             'type' => $type
         ));
-        Yii::app()->getSession()->add('core_messages', $this->queue->toArray());
-        return $result;
+        Yii::app()->getSession()->add('core_messages', iterator_to_array($this));
+    }
+
+    public function clear()
+    {
+        $this->setIteratorMode(SplQueue::IT_MODE_DELETE); //need clear???
+        iterator_to_array($this);
+        $this->setIteratorMode(SplQueue::IT_MODE_KEEP);
+        if (Yii::app()->getSession()->hasProperty('core_messages'))
+        {
+            Yii::app()->getSession()->remove('core_messages');
+        }
     }
 
     /**
@@ -91,14 +86,18 @@ class MsgStream
      *
      * @return string
      */
-    public function render($clear = true)
+    public function render($clear = false)
     {
         $str = '';
-        foreach ($this->queue->toArray() as $item)
+        if ($clear)
+        {
+            $this->setIteratorMode(SplQueue::IT_MODE_DELETE); //need clear???
+        }
+        foreach ($this as $item)
         {
             $str .= Yii::app()->controller->msg($item['item'], $item['type']);
         }
-        $this->clear();
+        $this->setIteratorMode(SplQueue::IT_MODE_KEEP);
         return $str;
     }
 }
@@ -113,6 +112,8 @@ class MsgStream
  * @method AssetManager getAssetManager()
  * @property WebUser $user
  * @method WebUser getUser()
+ * @property TextComponent $text
+ * @method TextComponent getText()
  * @property MetaTags $metaTags
  * @method MetaTags getMetaTags()
  * @property CommandExecutor $executor
@@ -138,22 +139,6 @@ class WebApplication extends CWebApplication {
         parent::initSystemHandlers();
         register_shutdown_function(array($this, 'handleShutDown'));
     }
-
-    public function displayError($code, $message, $file, $line)
-    {
-        if (ENV == 'production')
-        {
-            $encoding = mb_detect_encoding($message, 'ASCII,WINDOWS-1251,UTF-8', true);
-            //if no-utf-8 try to encode error message
-            $log = $encoding == 'UTF-8' ? $message : @iconv($encoding, 'UTF-8//TRANSLIT//IGNORE', $message);
-            MsgStream::getInstance()->enqueue($log, MsgStream::TYPE_ERROR); //show only message
-        }
-        else
-        {
-            parent::displayError($code, $message, $file, $line);
-        }
-    }
-
 
     public function handleShutDown()
     {

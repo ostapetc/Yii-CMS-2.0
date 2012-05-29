@@ -32,9 +32,7 @@ class ClientFormInputElement extends BaseFormInputElement
                     'htmlOptions'=> array('class'=> 'date text date_picker')
                 );
             default:
-                return array(
-                    'class' => $this->type
-                );
+                return array();
         }
     }
 }

@@ -4,6 +4,8 @@ define('DS', DIRECTORY_SEPARATOR);
 
 require_once dirname(__FILE__) . DS . 'constants.php';
 
+$config = include(dirname(__FILE__) . "/{$config}.php");
+unset($config['preload']);
 
 $modules_includes = array();
 $modules_dirs     = scandir(MODULES_PATH);

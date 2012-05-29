@@ -32,6 +32,7 @@ abstract class BaseFormInputElement extends CFormInputElement
             {
                 $this->type = $this->widgets_path . str_repeat('.' . $this->type, 2);
             }
+
             $attributes                  = $this->attributes;
             $attributes['model']         = $this->getParent()->getModel();
             $attributes['attribute']     = $this->name;

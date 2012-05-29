@@ -259,4 +259,36 @@ class TextComponent extends CApplicationComponent
         }
         return $text;
     }
+
+
+    /**
+     * parse template file content
+     * @see parseTemplate
+     *
+     * @param $file
+     * @param $data
+     * @return string
+     */
+    public function parseTemplateFile($file, $data)
+    {
+        return $this->parseTemplate(file_get_contents($file), $data);
+    }
+
+    /**
+     * parse template string.
+     * template syntax is {{SOME_VAR}}
+     *
+     * @param $str
+     * @param $data array( SOME_VAR => 'value', ... )
+     * @return string
+     */
+    public function parseTemplate($str, $data)
+    {
+        $formatted_data = array();
+        foreach ($data as $key => $val)
+        {
+            $formatted_data['{{'.$key.'}}'] = $val;
+        }
+        return strtr($str, $formatted_data);
+    }
 }

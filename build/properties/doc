@@ -1,0 +1,2 @@
+doc.excludes = "libs/**, extensions/**, bootstrap/**, views/**, tests/**, **/yiic.php"
+doc.dir = ${basedir}/doc

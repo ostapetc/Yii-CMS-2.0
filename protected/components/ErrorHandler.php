@@ -13,23 +13,13 @@ class ErrorHandler extends CErrorHandler
                 if ($data['type'] == 'CHttpException' && $data['code'] == 404)
                 {
                     Yii::app()->runController($this->error404);
+                    return true;
                 }
-                else
+                if ($view == 'exception' || $view == 'error')
                 {
-                    if ($view == 'exception')
-                    {
-                        MsgStream::getInstance()->enqueue($data['message'], 'error');
-                    }
-                    elseif ($view == 'error')
-                    {
-                        MsgStream::getInstance()->enqueue($data['message'], 'error');
-                    }
-                    if (!$this->tryRedirectOnPreviousUrl())
-                    {
-                        Yii::app()->runController($this->errorAction);
-                    }
+                    MsgStream::getInstance()->enqueue($data['message'], 'error');
                 }
-                return true;
+                $this->tryRedirectOnPreviousUrl();
             }
             catch(Exception $e)
             {
@@ -70,14 +60,13 @@ class ErrorHandler extends CErrorHandler
 
         $is_index = $return_url == '/index.php';
         $is_cycle = (!empty($return_url)) && isset($_SERVER['REQUEST_URI']) && ($return_url == $_SERVER['REQUEST_URI']);
-        if ($is_index || $is_cycle)
+        if ($return_url === false || $is_index || $is_cycle)
         {
-            return false;
+            throw new CException("Can't redirect back");
         }
         else
         {
             $this->redirect($return_url);
-            return true;
         }
     }
 }

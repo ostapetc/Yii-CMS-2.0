@@ -29,7 +29,7 @@ class Step1 extends AbstractInstallModel
 
     public function getDbPatterns()
     {
-        return array('%DB_HOST%' => $this->db_host, '%DB_PASS%' => $this->db_pass, '%DB_LOGIN%' => $this->db_login, '%DB_NAME%' => $this->db_name);
+        return array('DB_HOST' => $this->db_host, 'DB_PASS' => $this->db_pass, 'DB_LOGIN' => $this->db_login, 'DB_NAME' => $this->db_name);
     }
 
     public function createDbConnection($db_must_exists = true)
@@ -84,5 +84,65 @@ class Step1 extends AbstractInstallModel
             'development' => $this->getDbPatterns(),
             'production' => array()
         );
+    }
+
+    /**
+     * execute file with sql dump of db
+     *
+     * @param $file_path
+     */
+    public function executeDbDump($file_path)
+    {
+        $file_content = file($file_path);
+        $query = "";
+        foreach($file_content as $sql_line){
+            $is_good_line = trim($sql_line) != "" && strpos($sql_line, "--") === false;
+            if(!$is_good_line)
+            {
+                continue;
+            }
+
+            $query .= $sql_line;
+            if (substr(rtrim($query), -1) == ';')
+            {
+                Yii::app()->db->createCommand($query)->execute();
+                $query = "";
+            }
+        }
+    }
+
+    /**
+     * db base initialization, run module/migration/install.sql
+     *
+     * @param array $modules
+     */
+    public function dbInit($modules)
+    {
+        foreach ($modules as $module)
+        {
+            $file = Yii::getPathOfAlias($module.'.migrations').'/install.sql';
+            if (is_file($file))
+            {
+                $this->executeDbDump($file);
+            }
+        }
+    }
+
+    public function  deleteDisableModules()
+    {
+        $modules = array_keys(Yii::app()->getModules());
+        $module_path = Yii::getPathOfAlias('application.modules');
+        foreach(scandir($module_path) as $module_dir)
+        {
+            if ($module_dir[0] == ".")
+            {
+                continue;
+            }
+
+           if (!in_array($module_dir, $modules))
+           {
+               FileSystemHelper::deleteDirRecursive($module_path . DS . $module_dir);
+           }
+        }
     }
 }

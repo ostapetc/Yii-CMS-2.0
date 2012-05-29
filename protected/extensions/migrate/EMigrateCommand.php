@@ -89,7 +89,7 @@ class EMigrateCommand extends MigrateCommand
 					$this->_modulePaths[$module] = $alias;
 					$path = Yii::getPathOfAlias($alias);
 					if ($path === false || !is_dir($path)) {
-						$this->_disabledModules[] = $module;
+//						$this->_disabledModules[] = $module;
 					}
 
 				} else {

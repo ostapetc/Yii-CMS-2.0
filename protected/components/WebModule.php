@@ -22,4 +22,12 @@ abstract class WebModule extends CWebModule implements WebModuleInterface
     {
         return array();
     }
+
+    public function install()
+    {
+    }
+
+    public function uninstall()
+    {
+    }
 }
