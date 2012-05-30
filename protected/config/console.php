@@ -1,8 +1,11 @@
 <?
 
-define('DS', DIRECTORY_SEPARATOR);
+require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'constants.php';
 
-require_once dirname(__FILE__) . DS . 'constants.php';
+if (!$_SERVER['DOCUMENT_ROOT'])
+{
+    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../') . DS;
+}
 
 $config = include(dirname(__FILE__) . "/{$config}.php");
 unset($config['preload']);

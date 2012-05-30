@@ -2,7 +2,7 @@
 return CMap::mergeArray(require('main.php'), array(
     'components' => array(
         'db' => array(
-            'connectionString' => 'mysql:host=openserver;dbname=yiicms_2.0',
+            'connectionString' => 'mysql:host=openserver;dbname=yiicms',
             'emulatePrepare'   => true,
             'username'         => 'mysql',
             'password'         => 'mysql',

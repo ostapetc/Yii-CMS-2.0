@@ -272,9 +272,9 @@ class User extends ActiveRecord
     }
 
 
-    public function generateActivateCode($save = false)
+    public function generateActivateCode()
     {
-        $this->activate_code = md5($this->id.$this->first_name.$this->email.time(true).rand(5, 10));
+        $this->activate_code = md5($this->id . $this->first_name . $this->email . time(true) . rand(5, 10));
         return $this->activate_code;
     }
 

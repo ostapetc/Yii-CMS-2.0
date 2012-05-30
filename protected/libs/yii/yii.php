@@ -8,7 +8,7 @@ class Yii extends YiiBase
 {
     public static function createWebApplication($config=null)
     {
-        return self::createApplication('WebApplication',$config);
+        return self::createApplication('CWebApplication',$config);
     }
 }
 
