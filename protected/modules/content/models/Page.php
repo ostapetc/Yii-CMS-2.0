@@ -39,6 +39,7 @@ class Page extends ActiveRecord
             parent::behaviors(),
             array(
                  'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
+                 'FileManager' => array('class' => 'application.components.activeRecordBehaviors.FileManagerBehavior'),
             )
         );
     }
@@ -100,7 +101,8 @@ class Page extends ActiveRecord
                 'Tag',
                 'tag_id',
                 'through' => 'tags_rels'
-            )
+            ),
+            'gallery'    => Yii::app()->getModule('fileManager')->getRelation($this, 'gallery')
         );
     }
 

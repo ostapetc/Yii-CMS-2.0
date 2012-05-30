@@ -4,12 +4,12 @@ class FileManagerAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "UpdateAttr"   => "Редактирование файла",
-            "Upload"       => "Загрузка файлов",
-            "SavePriority" => "Сортировка",
-            "Delete"       => "Удаление файла",
-            "ExistFiles"   => "Загрузка существующих файлов",
-            "Manage"       => "Управление файлами"
+            "updateAttr"   => "Редактирование файла",
+            "upload"       => "Загрузка файлов",
+            "savePriority" => "Сортировка",
+            "delete"       => "Удаление файла",
+            "existFiles"   => "Загрузка существующих файлов",
+            "manage"       => "Управление файлами"
         );
     }
 

@@ -344,12 +344,18 @@ class FileManager extends ActiveRecord
 
 	public function getHref()
 	{
-        return $this->getDownloadUrl();
+        return '/' . $this->path . '/' . $this->name;
 	}
+
+    public function getServerDir()
+    {
+        return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/';
+    }
 
     public function getServerPath()
     {
         return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/' . $this->name;
     }
+
 
 }

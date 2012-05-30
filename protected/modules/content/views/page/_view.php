@@ -16,6 +16,8 @@
         <?= $data->text ?>
     <? endif ?>
 
+    <? $this->widget('fileManager.portlets.FancyGallery', array('model' => $data, 'tag' => 'gallery')) ?>
+
     <ul class="tags">
         <? foreach ($data->tags as $i => $tag): ?>
             <? if ($i > 0): ?>, <? endif ?>

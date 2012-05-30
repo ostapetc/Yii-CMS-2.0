@@ -1,7 +1,9 @@
 <?
 Yii::import('zii.widgets.CPortlet');
 
-
+/**
+ * @property string $assets
+ */
 abstract class Portlet extends CPortlet
 {
     public function init()

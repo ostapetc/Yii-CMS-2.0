@@ -24,6 +24,12 @@ return array(
             'type'  => 'TagsInput',
             'label' => 'Теги'
         ),
+        'gallery' => array(
+            'type'      => 'file_manager',
+            'tag'       => 'gallery',
+            'data_type' => 'image',
+            'title'     => 'Файлы для скачивания'
+        ),
     ),
     'buttons'              => array(
         'submit' => array(
