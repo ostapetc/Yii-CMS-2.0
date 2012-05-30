@@ -101,17 +101,17 @@ class User extends ActiveRecord
                 )
             ),
             array(
-                'first_name',
+                'name',
                 'required',
                 'on' => array(self::SCENARIO_REGISTRATION)
             ),
             array(
-                'first_name',
+                'name',
                 'length',
                 'max' => 40
             ),
             array(
-                'first_name',
+                'name',
                 'RuLatAlphaValidator'
             ),
     //            array(
@@ -179,7 +179,7 @@ class User extends ActiveRecord
             //    'on'      => self::SCENARIO_REGISTRATION
             //),
             array(
-                'first_name',
+                'name',
                 'length',
                 'min' => 2
             ),
@@ -240,7 +240,7 @@ class User extends ActiveRecord
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('email', $this->email, true);
-        $criteria->compare('first_name', $this->first_name, true);
+        $criteria->compare('name', $this->name, true);
         $criteria->compare('birthdate', $this->birthdate, true);
         $criteria->compare('gender', $this->gender, true);
         $criteria->compare('status', $this->status, true);
@@ -274,7 +274,7 @@ class User extends ActiveRecord
 
     public function generateActivateCode()
     {
-        $this->activate_code = md5($this->id . $this->first_name . $this->email . time(true) . rand(5, 10));
+        $this->activate_code = md5($this->id . $this->name . $this->email . time(true) . rand(5, 10));
         return $this->activate_code;
     }
 

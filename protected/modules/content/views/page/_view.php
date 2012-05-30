@@ -1,5 +1,7 @@
 <div class="page">
-    <h1 class="page-title"><?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?></h1>
+    <? if ($preview): ?>
+        <h1 class="page-title"><?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?></h1>
+    <? endif ?>
 
     <div class="sections">
         <a title="Вы не подписаны на этот хаб" class="section " href="http://habrahabr.ru/hub/copyright/">Копирайт</a>,
@@ -56,6 +58,10 @@
     </div>
 </div>
 <br clear="all"/>
+
+<? if (!$preview): ?>
+    <?= $this->widget('CommentsPortlet', array('model' => $data)); ?>
+<? endif ?>
 
 
 

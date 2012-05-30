@@ -18,9 +18,14 @@ class LanguagesBehavior extends ActiveRecordBehavior
 
     public function language($language_id = null)
     {
+        if (!Yii::app()->params->multilanguage_support)
+        {
+            return $this->owner;
+        }
+
         if (!$language_id)
         {
-            $language_id = $this->defineLanguage();;
+            $language_id = $this->defineLanguage();
         }
 
         $field_exists = false;

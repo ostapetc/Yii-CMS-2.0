@@ -34,10 +34,8 @@ class PageController extends Controller
     }
 
 
-    public function actionView()
+    public function actionView($id)
     {
-        $id = $this->request->getParam("id");
-
         $page = Page::model()->language()->findByPk($id);
         if (!$page)
         {

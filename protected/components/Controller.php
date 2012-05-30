@@ -130,6 +130,12 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
+    protected function badRequest()
+    {
+        throw new CHttpException(400, t('Неверный запрос!'));
+    }
+
+
     public function getRequest()
     {
         return Yii::app()->request;
