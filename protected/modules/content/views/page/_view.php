@@ -16,7 +16,13 @@
         <?= $data->text ?>
     <? endif ?>
 
-    <? $this->widget('fileManager.portlets.FancyGallery', array('model' => $data, 'tag' => 'gallery')) ?>
+    <? $this->widget('fileManager.portlets.ImageGallery', array(
+        'model' => $data,
+        'tag' => 'gallery',
+        'cssFile' => '/css/site/post_image_carousel.css',
+        'htmlOptions' => array('class'=>'post_image_carousel'),
+        'size' => array('width'=>150, 'height' => 200)
+    )) ?>
 
     <ul class="tags">
         <? foreach ($data->tags as $i => $tag): ?>

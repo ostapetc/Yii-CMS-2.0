@@ -27,10 +27,12 @@ class ImageHolder //Класс Image занять под расширение
     {
         try
         {
+            $this->_htmlOptions['width'] = $this->_size['width'];
+            $this->_htmlOptions['height'] = $this->_size['height'];
             return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
         } catch (Exception $e)
         {
-//            Yii::app()->handleException($e);
+            Yii::app()->handleException($e);
         }
     }
 
