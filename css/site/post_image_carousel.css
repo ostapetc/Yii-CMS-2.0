@@ -1,0 +1,42 @@
+.post_image_carousel .jcarousel-container-horizontal {
+    padding: 0 25px;
+    margin-right: 0;
+    overflow: hidden;
+}
+.post_image_carousel .jcarousel-clip {
+    overflow: hidden;
+}
+.post_image_carousel  li{
+    padding: 10px;
+    margin: 5px 11px;
+    border:1px solid #ccc;
+    background: none;
+    background-color: #eee;
+    box-shadow: 0px 1px 2px 0px #B7B7B7;
+}
+.post_image_carousel .jcarousel-next-horizontal {
+    position: absolute;
+    top: 44%;
+    right: 0;
+    margin-right: 3px;
+    width: 15px;
+    height: 28px;
+    cursor: pointer;
+    background: transparent url(/img/site/blog-arrows.jpg) no-repeat top right;
+}
+.post_image_carousel .jcarousel-next-horizontal {
+    background: transparent url(/img/site/blog-arrows.jpg) no-repeat bottom right;
+}
+.post_image_carousel .jcarousel-prev-horizontal {
+    position: absolute;
+    top: 44%;
+    left: 0;
+    margin-left: 3px;
+    width: 15px;
+    height: 28px;
+    cursor: pointer;
+    background: transparent url(/img/site/blog-arrows.jpg) no-repeat top left;
+}
+.post_image_carousel .jcarousel-prev-horizontal {
+    background: transparent url(/img/site/blog-arrows.jpg) no-repeat bottom left;
+}

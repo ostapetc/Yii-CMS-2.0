@@ -42,7 +42,7 @@ class FileManagerModule extends WebModule
     {
         $manager = new FileManager();
         return new CActiveDataProvider('FileManager', array(
-            'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->dbCriteria
+            'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->dbCriteria,
         ));
     }
 
