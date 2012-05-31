@@ -451,16 +451,6 @@ a.read-more {
     color: #339900;
 }
 
-.middle-well {
-    margin: 50px auto  !important;
-    width: auto !important;
-    display: inline-block;
-}
-
-.middle-well h1 {
-    display: inline;
-}
-
-.middle-well form {
-    display: inline;
+.modal {
+    display: none;
 }

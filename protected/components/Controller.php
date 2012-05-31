@@ -240,7 +240,7 @@ abstract class Controller extends CController implements ControllerInterface
     {
         if (isset($_GET['popup']))
         {
-            $this->layout = '//layouts/admin/clear';
+            $this->layout = false;
         }
 
         return parent::render($view, $params);

@@ -102,7 +102,13 @@ class Page extends ActiveRecord
                 'tag_id',
                 'through' => 'tags_rels'
             ),
-            'gallery'    => Yii::app()->getModule('fileManager')->getRelation($this, 'gallery')
+            'gallery' => Yii::app()->getModule('fileManager')->getRelation($this, 'gallery'),
+            'comments_count' => array(
+                self::STAT,
+                'Comment',
+                'object_id',
+                'condition' => "model_id = 'Page'"
+            )
         );
     }
 

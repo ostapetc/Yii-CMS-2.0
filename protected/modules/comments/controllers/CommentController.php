@@ -33,21 +33,11 @@ class CommentController extends Controller
         $comment->attributes = $_POST['Comment'];
         if ($comment->validate())
         {
-//            $root = Comment::model()->findByAttributes(
-//                array('object' => $comment->object),
-//                array('order'  => '`left`')
-//            );
-
-            //if ($root)
-            //{
-                if (isset($_POST['Comment']['parent_id']) && is_numeric($_POST['Comment']['parent_id']))
-                {
-                    $root = Comment::model()->findByPk($_POST['Comment']['parent_id']);
-                    $comment->appendTo($root);
-                }
-
-
-            //}
+            if (isset($_POST['Comment']['parent_id']) && is_numeric($_POST['Comment']['parent_id']))
+            {
+                $root = Comment::model()->findByPk($_POST['Comment']['parent_id']);
+                $comment->appendTo($root);
+            }
             else
             {
                 $comment->saveNode();
@@ -56,12 +46,13 @@ class CommentController extends Controller
     }
 
 
-    public function actionList($object)
+    public function actionList($object_id, $model_id)
     {
         $this->layout = false;
 
         $criteria = new CDbCriteria();
-        $criteria->compare('object', $object);
+        $criteria->compare('object_id', $object_id);
+        $criteria->compare('model_id', $model_id);
         $criteria->order = '`root`, `left`';
         $criteria->with  = array('user');
 

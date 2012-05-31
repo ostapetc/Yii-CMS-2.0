@@ -25,7 +25,8 @@ class CommentsPortlet extends Portlet
     public function renderContent()
     {
         $this->render('CommentsPortlet', array(
-            'object' => Comment::defineObject($this->model)
+            'model_id'  => get_class($this->model),
+            'object_id' => $this->model->id
         ));
     }
 }

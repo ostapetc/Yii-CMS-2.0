@@ -37,9 +37,10 @@
         });
 
         function loadCommentsList() {
-            var comment_object = $("input[name='Comment[object]']").val();
+            var object_id = $("input[name='Comment[object_id]']").val();
+            var model_id  = $("input[name='Comment[model_id]']").val();
 
-            $.get('/comments/comment/list/object/' + comment_object, function(html) {
+            $.get('/comments/comment/list/object_id/' + object_id + '/model_id/' + model_id, function(html) {
                 $comments_div.html(html);
             });
         }
@@ -55,10 +56,11 @@
     <?= CHtml::beginForm('/comments/comment/create', 'post', array('id' => 'comment-form')) ?>
     <?= CHtml::label('Комментарий', 'Comment[text]', array('label' => 'Комментарий', 'id' => 'comment-label')) ?>
     <?= CHtml::textArea('Comment[text]', null, array('style' => 'width: 100%')) ?> <br/>
-    <?= CHtml::hiddenField('Comment[object]', $object); ?>
+    <?= CHtml::hiddenField('Comment[object_id]', $object_id); ?>
+    <?= CHtml::hiddenField('Comment[model_id]', $model_id); ?>
     <?= CHtml::hiddenField('Comment[parent_id]'); ?>
     <?= CHtml::submitButton('Добавить') ?>
     <?= CHtml::endForm() ?>
 <? else: ?>
-    <?= Controller::msg('Комментировать могут только зарегистрированные пользователи!', 'info') ?>
+    <?= Controller::msg('Комментировать могут только зарегистрированные пользователи!', 'warning') ?>
 <? endif ?>

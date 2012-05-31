@@ -5,7 +5,8 @@
  * @property $root
  * @property $left
  * @property $right
-* @property  $object
+ * @property $object_id
+ * @property $model_id
  * @property $level
  * @property $text
  * @property $date_create
@@ -47,27 +48,16 @@ class Comment extends ActiveRecord
                 'integerOnly' => true
             ),
             array(
-                'object',
-                'objectExists'
+                'object_id',
+                'numerical',
+                'integerOnly' => true
+            ),
+            array(
+                'model_id',
+                'length',
+                'max' => 50
             )
         );
-    }
-
-
-    public function objectExists()
-    {
-        $object = explode('_', $this->object);
-        if (count($object) == 2)
-        {
-            list($class, $pk) = $object;
-            $model = ActiveRecord::model($class)->findByPk($pk);
-            if ($model)
-            {
-                return true;
-            }
-        }
-
-        $this->addError('object', 'невалидный');
     }
 
 
@@ -131,8 +121,10 @@ class Comment extends ActiveRecord
     }
 
 
-    public static function defineObject(ActiveRecord $model)
+    public function setModel(ActiveRecord $model)
     {
-        return get_class($model) . '_' . $model->primaryKey;
+        $this->object_id = $model->primaryKey;
+        $this->model_id  = get_class($model);
+        return $this;
     }
 }
