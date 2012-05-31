@@ -5,6 +5,7 @@
  * @property $root
  * @property $left
  * @property $right
+* @property  $object
  * @property $level
  * @property $text
  * @property $date_create
@@ -37,28 +38,28 @@ class Comment extends ActiveRecord
     {
         return array(
             array(
-                'root, text',
+                'text',
                 'required'
             ),
             array(
                 'root',
-                'length',
-                'max' => 70
+                'numerical',
+                'integerOnly' => true
             ),
             array(
-                'root',
-                'rootExists'
-            ),
+                'object',
+                'objectExists'
+            )
         );
     }
 
 
-    public function rootExists()
+    public function objectExists()
     {
-        $root = explode('_', $this->root);
-        if (count($root) == 2)
+        $object = explode('_', $this->object);
+        if (count($object) == 2)
         {
-            list($class, $pk) = $root;
+            list($class, $pk) = $object;
             $model = ActiveRecord::model($class)->findByPk($pk);
             if ($model)
             {
@@ -66,7 +67,7 @@ class Comment extends ActiveRecord
             }
         }
 
-        $this->addError('root', 'невалидный');
+        $this->addError('object', 'невалидный');
     }
 
 
@@ -87,6 +88,11 @@ class Comment extends ActiveRecord
     public function relations()
     {
         return array(
+            'user' => array(
+                self::BELONGS_TO,
+                'User',
+                'user_id'
+            )
         );
     }
 
@@ -125,7 +131,7 @@ class Comment extends ActiveRecord
     }
 
 
-    public static function defineRoot(ActiveRecord $model)
+    public static function defineObject(ActiveRecord $model)
     {
         return get_class($model) . '_' . $model->primaryKey;
     }

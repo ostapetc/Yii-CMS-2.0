@@ -58,3 +58,36 @@ Yii::createWebApplication($config)->run();
 //        $rel->save();
 //    }
 //}
+
+
+//$root = new Comment();
+//
+//$root = new Comment();
+//$root->text      = time();
+//$root->user_id   = 1;
+//$root->object    = 'Page_35';
+//$root->saveNode();
+//
+//for ($i = 0; $i < 5; $i++)
+//{
+//    $comment = new Comment();
+//    $comment->text      = 'ch ' . $i;
+//    $comment->user_id   = 1;
+//    $comment->object    = 'Page_35';
+//    $comment->appendTo($root);
+//
+//    for ($k = 0; $k < 3; $k++) {
+//        $s_comment = new Comment();
+//        $s_comment->text      = 'ch 1' . $i . $k;
+//        $s_comment->user_id   = 1;
+//        $s_comment->object    = 'Page_35';
+//        $s_comment->appendTo($comment);
+//    }
+//}
+
+
+//$comments = Comment::model()->findAllByAttributes(array('root' => 9), array('order' => '`left`'));
+//foreach ($comments as $comment)
+//{
+//    echo "<div style='padding-left: " . (10 * $comment->level) . "px'>{$comment->text}</div>";
+//}
