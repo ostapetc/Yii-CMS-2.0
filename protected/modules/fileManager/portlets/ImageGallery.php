@@ -4,7 +4,8 @@ class ImageGallery extends BaseFileListView
 {
     public $emptyText = '';
     public $template = "{items}";
-    public $fancyboxOptions = array(
+    public $fancyboxOptions = array();
+    public $defaultFancyboxOptions = array(
         'openEffect'  => 'fade',
         'closeEffect' => 'fade',
         'prevEffect' => 'fade',
@@ -28,7 +29,8 @@ class ImageGallery extends BaseFileListView
         )
     );
 
-    public $carouselOptions = array(
+    public $carouselOptions = array();
+    public $defalultCarouselOptions = array(
         'scroll' => 1
     );
     public $enablePagination = false;
@@ -50,8 +52,8 @@ class ImageGallery extends BaseFileListView
     public function registerScripts()
     {
         $id = $this->htmlOptions['id'];
-        $options = CJavaScript::encode($this->fancyboxOptions);
-        $carouselOptions = CJavaScript::encode($this->carouselOptions);
+        $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
+        $carouselOptions = CJavaScript::encode(CMap::mergeArray($this->defalultCarouselOptions, $this->carouselOptions));
         $assets = $this->assets.'/imageGallery/';
         Yii::app()->clientScript
             ->registerScriptFile($assets.'fancybox/jquery.fancybox.pack.js')
