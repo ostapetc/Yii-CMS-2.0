@@ -5,6 +5,8 @@
  * @property $root
  * @property $left
  * @property $right
+ * @property $object_id
+ * @property $model_id
  * @property $level
  * @property $text
  * @property $date_create
@@ -37,36 +39,29 @@ class Comment extends ActiveRecord
     {
         return array(
             array(
-                'root, text',
+                'text',
                 'required'
             ),
             array(
                 'root',
-                'length',
-                'max' => 70
+                'numerical',
+                'integerOnly' => true
             ),
             array(
-                'root',
-                'rootExists'
+                'object_id',
+                'numerical',
+                'integerOnly' => true
             ),
+            array(
+                'model_id',
+                'length',
+                'max' => 50
+            ),
+            array(
+                'object_id',
+                'ObjectExistsValidator'
+            )
         );
-    }
-
-
-    public function rootExists()
-    {
-        $root = explode('_', $this->root);
-        if (count($root) == 2)
-        {
-            list($class, $pk) = $root;
-            $model = ActiveRecord::model($class)->findByPk($pk);
-            if ($model)
-            {
-                return true;
-            }
-        }
-
-        $this->addError('root', 'невалидный');
     }
 
 
@@ -87,6 +82,11 @@ class Comment extends ActiveRecord
     public function relations()
     {
         return array(
+            'user' => array(
+                self::BELONGS_TO,
+                'User',
+                'user_id'
+            )
         );
     }
 
@@ -125,8 +125,16 @@ class Comment extends ActiveRecord
     }
 
 
-    public static function defineRoot(ActiveRecord $model)
+    public function setModel(ActiveRecord $model)
     {
-        return get_class($model) . '_' . $model->primaryKey;
+        $this->object_id = $model->primaryKey;
+        $this->model_id  = get_class($model);
+        return $this;
+    }
+
+
+    public function formatDateCreate()
+    {
+        return Yii::app()->dateFormatter->formatDateTime(strtotime($this->date_create), 'long', 'short');
     }
 }

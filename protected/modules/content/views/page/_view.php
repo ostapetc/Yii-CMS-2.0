@@ -16,7 +16,16 @@
         <?= $data->text ?>
     <? endif ?>
 
-    <? $this->widget('fileManager.portlets.FancyGallery', array('model' => $data, 'tag' => 'gallery')) ?>
+    <?
+//жутко гадит в консоль ошибками
+//    $this->widget('fileManager.portlets.ImageGallery', array(
+//        'model' => $data,
+//        'tag' => 'gallery',
+//        'cssFile' => '/css/site/post_image_carousel.css',
+//        'htmlOptions' => array('class'=>'post_image_carousel'),
+//        'size' => array('width'=>150, 'height' => 200)
+//    ))
+    ?>
 
     <ul class="tags">
         <? foreach ($data->tags as $i => $tag): ?>
@@ -55,7 +64,7 @@
         </div>
 
         <div class="comments">
-            <a href="http://habrahabr.ru/post/144422/#comments" title="Читать комментарии"><span class="all">68</span> </a>
+            <a href="<?= $data->href ?>#comments" title="Читать комментарии"><span class="all"><?= $data->comments_count ?></span> </a>
         </div>
     </div>
 </div>

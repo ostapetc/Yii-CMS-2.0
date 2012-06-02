@@ -50,7 +50,7 @@ class UserController extends Controller
 
         $form = new Form('users.LoginForm', $model);
 
-        if (isset($_POST['User']['email']) && isset($_POST['User']["password"]))
+        if (isset($_POST['User']['email']) && isset($_POST['User']["password"]) && !isset($_POST['ajax']))
         {
             $model->attributes = $_POST['User'];
 

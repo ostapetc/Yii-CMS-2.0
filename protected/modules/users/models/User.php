@@ -308,7 +308,23 @@ class User extends ActiveRecord
         $photo_src = '/img/icons/user.gif';
         $image     =  CHtml::image($photo_src, $this->name, array('title' => $this->name, 'border' => 0));
 
-        return CHtml::link($image, "/user/{$this->id}", array('class' => 'user-photo-link', 'width' => '23', 'height' => '23'));
+        return CHtml::link($image, $this->href, array('class' => 'user-photo-link', 'width' => '23', 'height' => '23'));
+    }
+
+
+    public function getLink()
+    {
+        return CHtml::link(
+            $this->name,
+            $this->href,
+            array('class' => 'user-link')
+        );
+    }
+
+
+    public function getHref()
+    {
+        return Yii::app()->createUrl('/user/' . $this->id);
     }
 }
 

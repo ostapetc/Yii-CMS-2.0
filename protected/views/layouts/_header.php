@@ -16,43 +16,31 @@
     $cs->registerCoreScript('jquery');
     $cs->registerCoreScript('jquery.ui');
     Yii::app()->bootstrap->registerScripts();
+
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile('/css/site/style.css');
-    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));
+    $cs->registerCssFile('/css/site/comments.css');
+    $cs->registerScriptFile('/js/site/modal-windows.js');
+
     $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
     $cs->registerScriptFile('/js/plugins/modal/bootstrap-modal.js');
     $cs->registerCssFile('/js/plugins/modal/modal.css');
-
+    $cs->registerScriptFile('/js/plugins/blockUI/blockUI.js');
+    $cs->registerScriptFile('/js/plugins/blockUI/loaders.js');
+    $cs->registerScriptFile('/js/plugins/bootstrap/bootstrap-modal.js');
     if (YII_DEBUG)
     {
         $cs->registerScriptFile('/js/plugins/debug.js');
     }
-    ?>
-    <!--    <script type="text/javascript">-->
-    <!--        $(document).ready(function()-->
-    <!--        {-->
-    <!--            $('.modal').appendTo('body');-->
-    <!---->
-    <!--            $('a[data-toggle=tab][data-url]').on('shown', function(e)-->
-    <!--            {-->
-    <!--                var tab = $(e.target); // activated tab-->
-    <!--                $(tab.attr('href')).load(tab.data('url'));-->
-    <!--                e.relatedTarget // previous tab-->
-    <!--            });-->
-    <!---->
-    <!--        });-->
-    <!--    </script>-->
 
-    <!-- Le fav and touch icons -->
+
+    ?>
+
     <link rel="shortcut icon" href="/favicon.ico">
-    <!--    <link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
-    <!--    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">-->
-    <!--    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">-->
+
 </head>
 
 <body>
-
-<?= $this->renderPartial('application.views.layouts.admin._modal'); ?>
 
 <div class="navbar navbar-top">
     <div class="navbar-inner">

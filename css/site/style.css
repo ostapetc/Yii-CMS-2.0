@@ -451,3 +451,23 @@ a.read-more {
     color: #339900;
 }
 
+.modal {
+    display: none;
+}
+
+#top-menu .user-link {
+    text-decoration: underline !important;
+    color: #FFFFFF !important;
+}
+
+.red {
+    color: #CC0000;
+}
+
+.green {
+    color: #339900;
+}
+
+.grey {
+    color: #A9A9A9;
+}

@@ -4,12 +4,21 @@
     text-align: left !important;
 }
 
-.span12 h1 {
-    margin: 20px auto 30px auto !important;
+.middle-well {
+    width: 1115px !important;
 }
 
-.span12 {
-    text-align: center;
+.middle-well h1 {
+    display: inline;
+}
+
+.middle-well form {
+    display: inline;
 }
 
 
+.middle-well .alert {
+    margin-top: 15px !important;
+    margin-bottom: 20px !important;
+    width: 390px;
+}

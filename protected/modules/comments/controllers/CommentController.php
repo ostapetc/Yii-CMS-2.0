@@ -11,7 +11,8 @@ class CommentController extends Controller
     public static function actionsTitles()
     {
         return array(
-            'create' => 'Добавление комментария'
+            'create' => 'Добавление комментария',
+            'list'   => 'Список комментариев'
         );
     }
 
@@ -28,23 +29,37 @@ class CommentController extends Controller
             $this->badRequest();
         }
 
-        $c = new Comment();
-        $c->text = 'lalal';
-        $c->root = 'Page_35';
-        $c->saveNode();
-        p($c->errors);
+        $comment = new Comment(ActiveRecord::SCENARIO_CREATE);
+        $comment->attributes = $_POST['Comment'];
+        if ($comment->validate())
+        {
+            if (isset($_POST['Comment']['parent_id']) && is_numeric($_POST['Comment']['parent_id']))
+            {
+                $root = Comment::model()->findByPk($_POST['Comment']['parent_id']);
+                $comment->appendTo($root);
+            }
+            else
+            {
+                $comment->saveNode();
+            }
+        }
+    }
 
-//        $comment = new Comment(ActiveRecord::SCENARIO_CREATE);
-//        $comment->attributes = $_POST['Comment'];
-//        if ($comment->save())
-//        {   echo "eee";
-//            CJSON::encode(array('done' => true));
-//        }
-//        else
-//        {
-//            CJSON::encode(array('error' => true));
-//        }
-//
-//        p($comment->errors);
+
+    public function actionList($object_id, $model_id)
+    {
+        $this->layout = false;
+
+        $criteria = new CDbCriteria();
+        $criteria->compare('object_id', $object_id);
+        $criteria->compare('model_id', $model_id);
+        $criteria->order = '`root`, `left`';
+        $criteria->with  = array('user');
+
+        $comments = Comment::model()->findAll($criteria);
+
+        $this->render('list', array(
+            'comments' => $comments
+        ));
     }
 }

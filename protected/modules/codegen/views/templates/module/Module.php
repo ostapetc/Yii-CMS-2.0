@@ -27,7 +27,7 @@ class <?= ucfirst($id); ?>Module extends WebModule
 	{
 		$this->setImport(array(
 			'<?= $id; ?>.models.*',
-			'<?= $id; ?>.components.*',
+			'<?= $id; ?>.portlets.*',
 		));
 	}
 

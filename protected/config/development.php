@@ -8,7 +8,6 @@ return CMap::mergeArray(require('main.php'), array(
             'password'         => 'mysql',
             'charset'          => 'utf8',
             'enableProfiling'  => true,
-        )
+        ),
     )
 ));
-
