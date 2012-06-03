@@ -3,7 +3,8 @@ class Form extends CForm
 {
     public $back_button_show;
 
-    public $inputElementClass;
+    public $inputElementClass = 'FormInputElement';
+    public $buttonElementClass = 'FormButtonElement';
 
     public $defaultActiveFormSettings = array(
         'class' => 'BootActiveForm',
@@ -24,14 +25,9 @@ class Form extends CForm
     {
         $side = Yii::app()->controller instanceof AdminController ? 'admin' : 'client';
 
-        if ($this->inputElementClass === null)
-        {
-            $this->inputElementClass = ucfirst($side) . 'FormInputElement';
-        }
-
         if ($this->back_button_show === null)
         {
-            $tihs->back_button_show = $side == 'admin';
+            $this->back_button_show = $side == 'admin';
         }
 
         if (is_string($config))
