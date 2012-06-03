@@ -97,6 +97,4 @@ class FileManagerBehavior extends ActiveRecordBehavior
         $event->sender->setElements($elements);
     }
 
-
-
 }

@@ -1,4 +1,6 @@
 <?
+//yiicms2@yahoo.com
+//yiicms2pass
 class FileManagerAdminController extends AdminController
 {
     public static function actionsTitles()

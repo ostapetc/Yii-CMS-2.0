@@ -9,7 +9,7 @@ class UserController extends Controller
 
     public function filters()
     {
-        return array('accessControl');
+        return CMap::mergeArray(parent::filters(), array('accessControl'));
     }
 
 
@@ -33,6 +33,7 @@ class UserController extends Controller
         return array(
             "login"                  => "Авторизация",
             "logout"                 => "Выход",
+            "view"                   => "Страница пользователя",
             "registration"           => "Регистрация",
             "activateAccount"        => "Активация аккаунта",
             "activateAccountRequest" => "Запрос на активацию аккаунта",
@@ -320,5 +321,11 @@ class UserController extends Controller
             'model' => $model,
             'form'  => $form
         ));
+    }
+
+    public function actionView($id)
+    {
+        $user = User::model()->findByPk($id);
+        $this->render('view', array('model' => $user));
     }
 }
