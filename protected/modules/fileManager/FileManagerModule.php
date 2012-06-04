@@ -38,21 +38,21 @@ class FileManagerModule extends WebModule
     }
 
 
-    public function getDataProviderByModel($model, $tag)
+    public function getDataProviderByModel($model, $tag, $config = array())
     {
         $manager = new FileManager();
-        return new CActiveDataProvider('FileManager', array(
+        return new CActiveDataProvider('FileManager', CMap::mergeArray(array(
             'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->dbCriteria,
-        ));
+        ), $config));
     }
 
 
-    public function getAlbumsDataProvider($model)
+    public function getAlbumsDataProvider($model, $config = array())
     {
         $manager = new FileAlbum();
-        return new CActiveDataProvider('FileAlbum', array(
+        return new CActiveDataProvider('FileAlbum', CMap::mergeArray(array(
             'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->dbCriteria,
-        ));
+        ), $config));
     }
 
 }

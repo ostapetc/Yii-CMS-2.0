@@ -196,4 +196,37 @@ class Form extends CForm
     {
 
     }
+
+
+    public function toModal($title, $options = array())
+    {
+        ob_start();
+        ob_implicit_flush(false);
+
+        $options['callback'] = isset($options['callback']) ? $options['callback'] : 'function() {}';
+        $options['modalTitle'] = isset($options['modalTitle']) ? $options['modalTitle'] : $title;
+        $options['id'] = isset($options['id']) ? $options['id'] : $this->activeForm['id'] . '_modal';
+        $options['linkOptions'] = isset($options['linkOptions']) ? $options['linkOptions'] : array();
+        $options['form'] = $this;
+
+        $this->activeForm['clientOptions']['afterValidate'] = 'js:function($form, data, hasError) {
+            if (!hasError)
+            {
+                (' . $options['callback'] . ')($form, data);
+                $("#' . $options['id'] . '").modal("hide");
+                $form.get(0).reset();
+            }
+            return false;
+        }';
+        echo CHtml::link($title, '#' . $options['id'], CMap::mergeArray(array('data-toggle'=> 'modal'), $options['linkOptions']));
+        Yii::app()->controller->beginWidget('BootModal', array(
+            'htmlOptions' => array(
+                'id' => $options['id']
+            )
+        ));
+        Yii::app()->controller->renderPartial('//layouts/_modalForm', $options);
+        Yii::app()->controller->endWidget('BootModal');
+
+        return ob_get_clean();
+    }
 }
