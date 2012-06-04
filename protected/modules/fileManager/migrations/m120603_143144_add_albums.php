@@ -11,7 +11,7 @@ class m120603_143144_add_albums extends EDbMigration
         `status`  enum('deleted','active') NULL COMMENT 'Статус' ,
         `model_id`  varchar(50) NULL ,
         `object_id` varchar(50) NULL ,
-        `order`  int(11) UNSIGNED NULL AFTER `object_id`,
+        `order`  int(11) UNSIGNED NULL,
         PRIMARY KEY (`id`),
         INDEX `model_object` (`model_id`, `object_id`)
         )
