@@ -14,7 +14,9 @@ class m120603_143144_add_albums extends EDbMigration
         `order`  int(11) UNSIGNED NULL AFTER `object_id`,
         PRIMARY KEY (`id`),
         INDEX `model_object` (`model_id`, `object_id`)
-        );
+        )
+        COLLATE='utf8_general_ci'
+        ENGINE=InnoDB;
         ");
 	}
 
