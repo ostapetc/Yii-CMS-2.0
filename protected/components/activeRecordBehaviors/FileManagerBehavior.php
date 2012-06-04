@@ -2,7 +2,6 @@
 
 class FileManagerBehavior extends ActiveRecordBehavior
 {
-    public $attached_model;
     public $tags = array();
 
     public function init()
@@ -29,14 +28,14 @@ class FileManagerBehavior extends ActiveRecordBehavior
 
     private function _tmpPrefix()
     {
-        return 'tmp_' . $this->attached_model . '_' . Yii::app()->user->id;
+        return 'tmp_' . get_class($this->getOwner()) . '_' . Yii::app()->user->id;
     }
 
     public function findAllAttaches()
     {
         $model     = $this->getOwner();
         $object_id = $model->isNewRecord ? $this->_tmpPrefix() : $model->id;
-        return ActiveRecord::model($this->attached_model)->findAllByAttributes(array(
+        return ActiveRecord::model(get_class($this->getOwner()))->findAllByAttributes(array(
             'object_id' => $object_id,
             'model_id'  => get_class($model)
         ));

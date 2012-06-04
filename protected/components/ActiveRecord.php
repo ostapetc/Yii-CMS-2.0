@@ -338,11 +338,11 @@ abstract class ActiveRecord extends CActiveRecord
         $attach->model_id = get_class($this);
         if ($this->getIsNewRecord())
         {
-            $attach->object_id = $this->getPrimaryKey();
+            $attach->object_id = 'tmp_' . get_class($this) . '_' . Yii::app()->user->id;
         }
         else
         {
-            $attach->object_id = 'tmp_' . $this->attached_model . '_' . Yii::app()->user->id;
+            $attach->object_id = $this->getPrimaryKey();
         }
 
         return $attach;

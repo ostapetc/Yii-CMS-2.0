@@ -18,14 +18,10 @@ class FileAlbumController extends AdminController
         $model = new FileAlbum;
         $form = new Form('FileManager.AlbumForm', $model);
 
-        if ($form->submitted('ajax') && !$model->validate())
+        if ($form->submitted('submit') && !$model->validate())
         {
             $this->performAjaxValidation($model);
         }
-        if ($model->save(false))
-        {
-            $this->render('view', array('model' => $model));
-        }
-
+        $model->save(false);
     }
 }
