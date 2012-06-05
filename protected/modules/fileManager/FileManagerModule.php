@@ -38,7 +38,7 @@ class FileManagerModule extends WebModule
     }
 
 
-    public function getDataProviderByModel($model, $tag, $config = array())
+    public function getFilesDataProvider($model, $tag, $config = array())
     {
         $manager = new FileManager();
         return new CActiveDataProvider('FileManager', CMap::mergeArray(array(

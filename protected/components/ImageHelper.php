@@ -59,6 +59,12 @@ class ImageHolder //Класс Image занять под расширение
 
 class ImageHelper
 {
+    public static function placeholder(array $size, $text = null)
+    {
+        $dim = $size['width'].'x'.$size['height'];
+        $text = $text ? $text : $dim;
+        return 'http://placehold.it/'.$dim.'&text='.urlencode($text);
+    }
 
     public static function thumb($dir, $file, array $size, $crop = false)
     {
