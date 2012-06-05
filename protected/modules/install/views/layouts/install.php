@@ -68,7 +68,14 @@
         </div>
     </div>
     <div class="row-fluid content">
-        <?= MsgStream::getInstance()->render();?>
+        <?
+        foreach(Yii::app()->user->getFlashes() as $key => $message) {
+            if (in_array($key, Controller::$msg_types))
+            {
+                echo Yii::app()->controller->msg($msg, $type);
+            }
+        }
+        ?>
         <?= $content ?>
     </div>
     <hr>

@@ -10,6 +10,8 @@ abstract class Controller extends CController implements ControllerInterface
     const MSG_ERROR   = 'error';
     const MSG_INFO    = 'info';
 
+    public static $msg_types = array(self::MSG_DANGER, self::MSG_ERROR, self::MSG_INFO, self::MSG_SUCCESS);
+
     public $layout = '//layouts/main';
 
     public $page_title;
