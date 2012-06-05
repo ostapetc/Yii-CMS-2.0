@@ -28,17 +28,6 @@ abstract class JuiInputWidget extends CJuiInputWidget
     }
 
 
-    /**
-     * Обязательный метод для $parent {@link CFormElement}
-     *
-     * @return CModel
-     */
-    public function getModel()
-    {
-        return $this->model;
-    }
-
-
     public function renderDialog($view, $params = array(), $return = false)
     {
         $options = array(

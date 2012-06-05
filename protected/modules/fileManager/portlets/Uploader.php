@@ -5,7 +5,6 @@ Yii::import('zii.widgets.jui.CJuiWidget');
 class Uploader extends JuiInputWidget
 {
     public $model;
-    public $id;
     public $title;
 
     public $data_type; //image, sound, video, document
@@ -71,7 +70,7 @@ class Uploader extends JuiInputWidget
             throw new CException('Параметр data_type является обязательным  и может принемать значения: image, sound, video, document');
 
         if ($this->tag === null)
-            throw new CException('Параметр tag является обязательным');
+            $this->tag = $this->attribute;
 
         $this->id = 'uploader_'.get_class($this->model).$this->tag;
         $this->assets = Yii::app()->getModule('fileManager')->assetsUrl();
@@ -135,8 +134,8 @@ class Uploader extends JuiInputWidget
                 'buttons'=> array(
                     array(
                         'text' => t('Сохранить'),
-                        'click'=> 'js:function() { $(this).dialog("close"); }',
-                        'create'=> 'js:function(event, ui) { $(this).addClass("btn btn-primary"); }'
+                        'click'=> "js:function() { $(this).dialog('close'); }",
+                        'create'=> "js:function(event, ui) { $(this).addClass('btn btn-primary'); }"
                     )
                 )
             ),

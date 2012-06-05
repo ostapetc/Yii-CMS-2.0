@@ -35,6 +35,7 @@ class FormInputElement extends CFormInputElement
          * than at some input will be same id. we must set different id.
          * but Yii generate non different id for error tag.
          */
+
         if (!isset($this->errorOptions['inputID']) && isset($this->attributes['id']))
         {
             $this->errorOptions['inputID'] = $this->attributes['id'];
@@ -68,11 +69,10 @@ class FormInputElement extends CFormInputElement
         switch ($this->type)
         {
             case 'file_manager':
-                $id    = isset($this->id) ? $this->id : 'uploader' . $this->attributes['tag'];
+                $id    = isset($this->attributes['id']) ? $this->attributes['id'] : 'uploader' . $this->name;
                 $title = isset($this->attributes['title']) ? $this->attributes['title'] : 'Файлы';
 
                 return array(
-                    'name'        => $this->attributes['tag'],
                     'id'          => $id,
                     'title'       => $title
                 );
