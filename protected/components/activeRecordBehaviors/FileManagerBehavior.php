@@ -4,9 +4,9 @@ class FileManagerBehavior extends ActiveRecordBehavior
 {
     public $tags = array();
 
-    public function init()
+    public function attach($owner)
     {
-        parent::init();
+        parent::attach($owner);
         $this->addRelations();
     }
 
@@ -19,9 +19,17 @@ class FileManagerBehavior extends ActiveRecordBehavior
             $model->getMetaData()->addRelation($tag, array(
                 CActiveRecord::HAS_MANY,
                 $storage_class,
-                'object_id',
+                "object_id",
                 'condition' => "$tag.model_id = '" . get_class($model) . "' AND $tag.tag='$tag'",
-                'order'     => '$tag.order DESC'
+                'order'     => "$tag.order DESC"
+            ));
+            $rel = $tag.'_first';
+            $model->getMetaData()->addRelation($rel, array(
+                CActiveRecord::HAS_ONE,
+                $storage_class,
+                'object_id',
+                'condition' => "$rel.model_id = '" . get_class($model) . "' AND $rel.tag='$tag'",
+                'order'     => "$rel.order DESC"
             ));
         }
     }
@@ -67,6 +75,7 @@ class FileManagerBehavior extends ActiveRecordBehavior
         return parent::beforeDelete($event);
     }
 
+    /*
     public function beforeFormInit($event)
     {
         $elements = $event->sender->getElements();
@@ -95,5 +104,5 @@ class FileManagerBehavior extends ActiveRecordBehavior
 
         $event->sender->setElements($elements);
     }
-
+*/
 }

@@ -109,25 +109,10 @@ class FileAlbum extends ActiveRecord
         ));
     }
 
-
     public function getHref()
     {
-        $url = trim($this->url);
-        if ($url)
-        {
-            if ($url[0] != "/")
-            {
-                $url = "/page/{$url}";
-            }
-
-            return $url;
-        }
-        else
-        {
-            return "/page/" . $this->id;
-        }
+        return Yii::app()->controller->createUrl('/fileManager/fileAlbum/view', array('id' => $this->id));
     }
-
 
     public function parent($model_id, $id)
     {

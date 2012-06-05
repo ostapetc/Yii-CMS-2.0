@@ -13,7 +13,7 @@ abstract class BaseFileListView extends ListView
     {
         if ($this->dataProvider === null)
         {
-            $this->dataProvider = Yii::app()->getModule('fileManager')->getDataProviderByModel($this->model, $this->tag);
+            $this->dataProvider = Yii::app()->getModule('fileManager')->getFilesDataProvider($this->model, $this->tag);
             $this->dataProvider->pagination = false;
         }
 

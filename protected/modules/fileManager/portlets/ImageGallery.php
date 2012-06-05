@@ -63,7 +63,6 @@ class ImageGallery extends BaseFileListView
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.js')
             ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-media.js')
-            ->registerScriptFile($assets.'jcarousel/jquery.jcarousel.js')
-            ->registerScript($id, "$('#$id a').fancybox($options); $('#{$this->getId()} .{$this->itemsCssClass}').jcarousel($carouselOptions)");
+            ->registerScript($id, "$('#$id a').fancybox($options); ");
     }
 }

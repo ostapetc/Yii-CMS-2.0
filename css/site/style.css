@@ -471,3 +471,11 @@ a.read-more {
 .grey {
     color: #A9A9A9;
 }
+
+
+
+
+.user_albums {}
+.user_albums li{position: relative;}
+.user_albums .caption{background: rgba(0, 0, 0, 0.5); color: #FFF; text-decoration: none; font-weight: bold; position: absolute; left: 5px; right: 5px; bottom: 5px;}
+.user_albums a:hover {text-decoration: none;}

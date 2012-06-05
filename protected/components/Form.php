@@ -198,7 +198,7 @@ class Form extends CForm
     }
 
 
-    public function toModal($title, $options = array())
+    public function toModalWindow($title, $options = array())
     {
         ob_start();
         ob_implicit_flush(false);
