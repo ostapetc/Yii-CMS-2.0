@@ -160,14 +160,14 @@ abstract class CBaseController extends CComponent
 	 */
 	public function widget($className,$properties=array(),$captureOutput=false)
 	{
-		if($captureOutput)
+        if($captureOutput)
 		{
 			ob_start();
 			ob_implicit_flush(false);
 			$widget=$this->createWidget($className,$properties);
 			$widget->run();
-			return ob_get_clean();
-		}
+            return ob_get_clean();
+        }
 		else
 		{
 			$widget=$this->createWidget($className,$properties);

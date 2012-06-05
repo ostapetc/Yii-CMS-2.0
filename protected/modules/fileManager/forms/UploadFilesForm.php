@@ -11,7 +11,6 @@ return array(
     'elements' => array(
         'files' => array(
             'type'      => 'file_manager',
-            'tag'       => 'files',
             'data_type' => 'image',
             'title'     => 'Файлы'
         ),

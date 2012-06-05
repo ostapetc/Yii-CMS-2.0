@@ -15,11 +15,9 @@
             <thead>
             <tr>
                 <th style="width: 60px"></th>
-                <?foreach (
-                $this->fields as $header
-            ): ?>
+                <? foreach ($this->fields as $header) { ?>
                 <th style="width: 150px"><? echo $header['header'];?></th>
-                <? endforeach; ?>
+                <? } ?>
                 <th style="width: 50px"></th>
                 <th style="width: 50px">Размер</th>
                 <th style="width: 50px"></th>

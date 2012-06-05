@@ -1,11 +1,15 @@
 <div class="user_photos">
     <div>Альбомы</div>
     <?
-    echo $form->toModalWindow('Добавить фото', array(
-        'callback' => 'function ($form, data) {
-            $.fn.yiiListView.update("photos");
-        }'
+    $widget = $this->widget("fileManager.portlets.Uploader", array(
+        'model' => $model,
+        'attribute' => 'files',
+        'data_type' => 'image',
+        'title' => 'Добавить фото'
     ));
+    Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').bind('dialogclose',function(event) {
+            $.fn.yiiListView.update('photos');
+    })");
     $this->widget('fileManager.portlets.ImageGallery', array(
         'id'=>'photos',
         'template' => "{pager}\n{items}\n{pager}",
