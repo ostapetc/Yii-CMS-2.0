@@ -30,7 +30,4 @@
 
     ));
     ?>
-    <div class="hide">
-        <div id="comment_form">Коментарчики</div>
-    </div>
 </div>
