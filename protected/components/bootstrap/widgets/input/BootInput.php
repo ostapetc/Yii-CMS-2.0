@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * BootInput class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -10,7 +10,6 @@
 /**
  * Bootstrap input widget.
  * Used for rendering inputs according to Bootstrap standards.
- * @todo Implement BootInputInline and BootInputVertical. http://twitter.github.com/bootstrap/base-css.html#forms
  */
 abstract class BootInput extends CInputWidget
 {
@@ -50,21 +49,32 @@ abstract class BootInput extends CInputWidget
 
 	/**
 	 * Initializes the widget.
+	 * @throws CException if the widget could not be initialized.
 	 */
 	public function init()
 	{
-		if ($this->form === null)
+		if (!isset($this->form))
 			throw new CException(__CLASS__.': Failed to initialize widget! Form is not set.');
 
-		if ($this->model === null)
+		if (!isset($this->model))
 			throw new CException(__CLASS__.': Failed to initialize widget! Model is not set.');
 
-		if ($this->type === null)
+		if (!isset($this->type))
 			throw new CException(__CLASS__.': Failed to initialize widget! Input type is not set.');
+
+		if ($this->type === self::TYPE_UNEDITABLE)
+		{
+			$classes = 'uneditable-input';
+			if (isset($this->htmlOptions['class']))
+				$this->htmlOptions['class'] .= ' '.$classes;
+			else
+				$this->htmlOptions['class'] = $classes;
+		}
 	}
 
 	/**
 	 * Runs the widget.
+	 * @throws CException if the widget type is invalid.
 	 */
 	public function run()
 	{
@@ -128,7 +138,97 @@ abstract class BootInput extends CInputWidget
 	}
 
 	/**
-	 * Returns the error text for this block.
+	 * Returns the label for the input.
+	 * @param array $htmlOptions additional HTML attributes
+	 * @return string the label
+	 */
+	protected function getLabel($htmlOptions = array())
+	{
+		if ($this->label !== false && !in_array($this->type, array('checkbox', 'radio')) && $this->hasModel())
+			return $this->form->labelEx($this->model, $this->attribute, $htmlOptions);
+		else if ($this->label !== null)
+			return $this->label;
+		else
+			return '';
+	}
+
+	/**
+	 * Returns the prepend element for the input.
+	 * @param array $htmlOptions additional HTML attributes
+	 * @return string the element
+	 */
+	protected function getPrepend($htmlOptions = array())
+	{
+		if ($this->hasAddOn())
+		{
+			$classes = 'add-on';
+			if (isset($htmlOptions['class']))
+				$htmlOptions['class'] .= ' '.$classes;
+			else
+				$htmlOptions['class'] = $classes;
+
+			$classes = $this->getInputContainerCssClass();
+			ob_start();
+			echo '<div class="'.$classes.'">';
+			if (isset($this->htmlOptions['prepend']))
+				echo CHtml::tag('span', $htmlOptions, $this->htmlOptions['prepend']);
+			return ob_get_clean();
+		}
+		else
+			return '';
+	}
+
+	/**
+	 * Returns the append element for the input.
+	 * @param array $htmlOptions additional HTML attributes
+	 * @return string the element
+	 */
+	protected function getAppend($htmlOptions = array())
+	{
+		if ($this->hasAddOn())
+		{
+			$classes = 'add-on';
+			if (isset($htmlOptions['class']))
+				$htmlOptions['class'] .= ' '.$classes;
+			else
+				$htmlOptions['class'] = $classes;
+
+			ob_start();
+			if (isset($this->htmlOptions['append']))
+				echo CHtml::tag('span', $htmlOptions, $this->htmlOptions['append']);
+			echo '</div>';
+			return ob_get_clean();
+		}
+		else
+			return '';
+	}
+
+	/**
+	 * Returns the input container CSS classes.
+	 * @return string the classes
+	 */
+	protected function getInputContainerCssClass()
+	{
+		$classes = array();
+		if (isset($this->htmlOptions['prepend']))
+			$classes[] = 'input-prepend';
+		if (isset($this->htmlOptions['append']))
+			$classes[] = 'input-append';
+
+		return implode(' ', $classes);
+	}
+
+	/**
+	 * Returns whether the input has an add-on (prepend and/or append).
+	 * @return boolean the result
+	 */
+	protected function hasAddOn()
+	{
+		return isset($this->htmlOptions['prepend']) || isset($this->htmlOptions['append']);
+	}
+
+	/**
+	 * Returns the error text for the input.
 	 * @param array $htmlOptions additional HTML attributes
 	 * @return string the error text
 	 */
@@ -138,7 +238,7 @@ abstract class BootInput extends CInputWidget
 	}
 
 	/**
-	 * Returns the hint text for this block.
+	 * Returns the hint text for the input.
 	 * @return string the hint text
 	 */
 	protected function getHint()
@@ -154,16 +254,13 @@ abstract class BootInput extends CInputWidget
 	}
 
 	/**
-	 * Returns the label for this block.
-	 * @param array $htmlOptions additional HTML attributes
-	 * @return string the label
+	 * Returns the container CSS class for the input.
+	 * @return string the CSS class.
 	 */
-	protected function getLabel($htmlOptions = array())
+	protected function getContainerCssClass()
 	{
-		if ($this->label !== false && !in_array($this->type, array('checkbox', 'radio')) && $this->hasModel())
-			return $this->form->labelEx($this->model, $this->attribute, $htmlOptions);
-		else if ($this->label !== null)
-			return $this->label;
+		if ($this->model->hasErrors(CHtml::resolveName($this->model, $this->attribute)))
+			return CHtml::$errorCss;
 		else
 			return '';
 	}
