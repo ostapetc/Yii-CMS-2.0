@@ -7,9 +7,9 @@
         'data_type' => 'image',
         'title' => 'Добавить фото'
     ));
-    Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').bind('dialogclose',function(event) {
-            $.fn.yiiListView.update('photos');
-    });");
+//    Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').bind('dialogclose',function(event) {
+//            $.fn.yiiListView.update('photos');
+//    });");
     $this->widget('fileManager.portlets.ImageGallery', array(
         'id'=>'photos',
         'template' => "{pager}\n{items}\n{pager}",

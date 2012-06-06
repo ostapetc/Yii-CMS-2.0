@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * BootActiveForm class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -14,12 +14,13 @@ Yii::import('bootstrap.widgets.input.BootInput');
  */
 class BootActiveForm extends CActiveForm
 {
-	// The different form types.
+	// Form types.
 	const TYPE_VERTICAL = 'vertical';
 	const TYPE_INLINE = 'inline';
 	const TYPE_HORIZONTAL = 'horizontal';
 	const TYPE_SEARCH = 'search';
 
+	// Input classes.
 	const INPUT_HORIZONTAL = 'bootstrap.widgets.input.BootInputHorizontal';
 	const INPUT_INLINE = 'bootstrap.widgets.input.BootInputInline';
 	const INPUT_SEARCH = 'bootstrap.widgets.input.BootInputSearch';
@@ -196,12 +197,13 @@ class BootActiveForm extends CActiveForm
 	 * @param CModel $model the data model
 	 * @param string $attribute the attribute
 	 * @param array $htmlOptions additional HTML attributes
+	 * @param array $captchaOptions the captcha options
 	 * @return string the generated row
 	 * @since 0.9.3
 	 */
-	public function captchaRow($model, $attribute, $htmlOptions = array())
+	public function captchaRow($model, $attribute, $htmlOptions = array(), $captchaOptions = array())
 	{
-		return $this->inputRow(BootInput::TYPE_CAPTCHA, $model, $attribute, null, $htmlOptions);
+		return $this->inputRow(BootInput::TYPE_CAPTCHA, $model, $attribute, $captchaOptions, $htmlOptions);
 	}
 
 	/**
@@ -388,7 +390,7 @@ class BootActiveForm extends CActiveForm
 			'model'=>get_class($model),
 			'name'=>CHtml::resolveName($model, $attribute),
 			'enableAjaxValidation'=>$enableAjaxValidation,
-			'inputContainer'=>'div.clearfix', // Bootstrap requires this
+			'inputContainer'=>'div.control-group', // Bootstrap requires this
 		);
 
 		$optionNames = array(
