@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * BootGridView class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -8,6 +8,7 @@
  */
 
 Yii::import('zii.widgets.grid.CGridView');
+Yii::import('bootstrap.widgets.BootDataColumn');
 
 /**
  * Bootstrap grid view widget.
@@ -15,10 +16,17 @@ Yii::import('zii.widgets.grid.CGridView');
  */
 class BootGridView extends CGridView
 {
+	// Table types.
+	const TYPE_PLAIN = '';
+	const TYPE_STRIPED = 'striped';
+	const TYPE_BORDERED = 'bordered';
+	const TYPE_CONDENSED = 'condensed';
+
 	/**
-	 * @var string the CSS class name for the container table. Defaults to 'table'.
+	 * @var string|array the table type.
+	 * Valid values are '', 'striped', 'bordered' and/or ' condensed'.
 	 */
-	public $itemsCssClass = 'table table-striped';
+	public $type = self::TYPE_PLAIN;
 	/**
 	 * @var string the CSS class name for the pager container.
 	 * Defaults to 'pagination'.
@@ -30,8 +38,65 @@ class BootGridView extends CGridView
 	 */
 	public $pager = array('class'=>'bootstrap.widgets.BootPager');
 	/**
-	 * @var string the URL of the CSS file used by this detail view.
+	 * @var string the URL of the CSS file used by this grid view.
 	 * Defaults to false, meaning that no CSS will be included.
 	 */
 	public $cssFile = false;
+
+	/**
+	 * Initializes the widget.
+	 */
+	public function init()
+	{
+		parent::init();
+
+		$classes = array('table');
+
+		if (is_string($this->type))
+			$this->type = explode(' ', $this->type);
+
+		$validTypes = array(self::TYPE_STRIPED, self::TYPE_BORDERED, self::TYPE_CONDENSED);
+
+		foreach ($this->type as $type)
+			if (in_array($type, $validTypes))
+				$classes[] = 'table-'.$type;
+
+		$this->itemsCssClass .= ' '.implode(' ', $classes);
+	}
+
+	/**
+	 * Creates column objects and initializes them.
+	 */
+	protected function initColumns()
+	{
+		foreach ($this->columns as $i => $column)
+		{
+			if (is_array($column) && !isset($column['class']))
+				$this->columns[$i]['class'] = 'bootstrap.widgets.BootDataColumn';
+		}
+
+		parent::initColumns();
+	}
+
+	/**
+	 * Creates a column based on a shortcut column specification string.
+	 * @param mixed $text the column specification string
+	 * @return \BootDataColumn|\CDataColumn the column instance
+	 * @throws CException if the column format is incorrect
+	 */
+	protected function createDataColumn($text)
+	{
+		if (!preg_match('/^([\w\.]+)(:(\w*))?(:(.*))?$/', $text, $matches))
+			throw new CException(Yii::t('zii', 'The column must be specified in the format of "Name:Type:Label", where "Type" and "Label" are optional.'));
+
+		$column = new BootDataColumn($this);
+		$column->name = $matches[1];
+		if (isset($matches[3]) && $matches[3] !== '')
+			$column->type = $matches[3];
+
+		if (isset($matches[5]))
+			$column->header = $matches[5];
+
+		return $column;
+	}
 }

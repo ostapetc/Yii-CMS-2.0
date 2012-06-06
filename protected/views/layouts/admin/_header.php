@@ -14,14 +14,13 @@
     $cs->registerCssFile('/css/admin/form.css');
     $cs->registerCssFile('/css/admin/extend.css');
     $cs->registerScriptFile('/js/admin/hideshow.js');
-    $cs->registerScriptFile('/js/admin/bootstrap-modal.js');
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
     $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');
     $cs->registerScriptFile('/js/admin/jquery.hotkeys.js');
     $cs->registerScriptFile('/js/admin/jquery.console.js');
     $cs->registerScriptFile('/js/admin/main.js');
     $cs->registerScriptFile('/js/plugins/hint.js');
-    $cs->registerScriptFile('/js/plugins/modal/bootstrap-modal.js');
+    Yii::app()->bootstrap->registerModal();
     ?>
 
     <!--[if lt IE 9]>

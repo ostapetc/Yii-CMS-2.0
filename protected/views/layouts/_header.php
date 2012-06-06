@@ -23,11 +23,10 @@
     $cs->registerScriptFile('/js/site/modal-windows.js');
 
     $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
-    $cs->registerScriptFile('/js/plugins/modal/bootstrap-modal.js');
     $cs->registerCssFile('/js/plugins/modal/modal.css');
     $cs->registerScriptFile('/js/plugins/blockUI/blockUI.js');
     $cs->registerScriptFile('/js/plugins/blockUI/loaders.js');
-    $cs->registerScriptFile('/js/plugins/bootstrap/bootstrap-modal.js');
+    Yii::app()->bootstrap->registerModal();
     if (YII_DEBUG)
     {
         $cs->registerScriptFile('/js/plugins/debug.js');

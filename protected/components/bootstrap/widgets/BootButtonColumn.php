@@ -1,23 +1,32 @@
-<?
+<?php
 /**
  * BootButtonColumn class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
  * @copyright  Copyright &copy; Christoffer Niska 2011-
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package bootstrap.widgets
+ * @since 0.9.8
  */
 
 Yii::import('zii.widgets.grid.CButtonColumn');
 
 /**
  * Bootstrap button column widget.
- * Used to set zbuttons to use Glyphicons instead of the defaults.
- * @since 0.9.8
+ * Used to set buttons to use Glyphicons instead of the defaults images.
  */
 class BootButtonColumn extends CButtonColumn
 {
+	/**
+	 * @var string the view button icon (defaults to 'eye-open').
+	 */
 	public $viewButtonIcon = 'eye-open';
+	/**
+	 * @var string the update button icon (defaults to 'pencil').
+	 */
 	public $updateButtonIcon = 'pencil';
+	/**
+	 * @var string the delete button icon (defaults to 'trash').
+	 */
 	public $deleteButtonIcon = 'trash';
 
 	/**
