@@ -1,4 +1,5 @@
 <div class="user_photos">
+    <div>Альбомы</div>
     <?
     $widget = $this->widget("fileManager.portlets.Uploader", array(
         'model' => $model,
