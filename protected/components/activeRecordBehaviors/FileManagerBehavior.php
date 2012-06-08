@@ -5,6 +5,28 @@ class FileManagerBehavior extends ActiveRecordBehavior
     public $attached_model;
     public $tags = array();
 
+    public function init()
+    {
+        parent::init();
+        $this->addRelations();
+    }
+
+    private function addRelations()
+    {
+        $model = $this->getOwner();
+        foreach ($this->tags as $tag => $data)
+        {
+            $storage_class = isset($data['class']) ? $data['class'] : 'FileManager';
+            $model->getMetaData()->addRelation($tag, array(
+                CActiveRecord::HAS_MANY,
+                $storage_class,
+                'object_id',
+                'condition' => "$tag.model_id = '" . get_class($model) . "' AND $tag.tag='$tag'",
+                'order'     => '$tag.order DESC'
+            ));
+        }
+    }
+
     private function _tmpPrefix()
     {
         return 'tmp_' . $this->attached_model . '_' . Yii::app()->user->id;
@@ -74,5 +96,7 @@ class FileManagerBehavior extends ActiveRecordBehavior
 
         $event->sender->setElements($elements);
     }
+
+
 
 }

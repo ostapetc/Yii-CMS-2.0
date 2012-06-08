@@ -46,14 +46,4 @@ class FileManagerModule extends WebModule
         ));
     }
 
-    public function getRelation($model, $tag)
-    {
-        return array(
-            CActiveRecord::HAS_MANY,
-            'FileManager',
-            'object_id',
-            'condition' => "$tag.model_id = '" . get_class($model) . "' AND $tag.tag='$tag'",
-            'order'     => '$tag.order DESC'
-        );
-    }
 }
