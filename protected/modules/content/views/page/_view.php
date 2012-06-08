@@ -52,11 +52,7 @@
 
         <div class="published">23 мая 2012, 22:28</div>
 
-        <div class="favorite">
-            <a title="Только зарегистрированные пользователи могут добавлять посты в избранное" onclick="return false;" href="#" class="guest"></a>
-        </div>
-
-        <div title="Количество пользователей, добавивших пост в избранное" class="favs_count">12</div>
+        <? $this->widget('FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
             <a href="http://habrahabr.ru/users/Mairon/" title="Автор текста">Mairon</a>

@@ -1,0 +1,43 @@
+.favorite {
+    float: left;
+    padding: 5px 0;
+    padding-top: 6px;
+    margin-right: 5px;
+}
+
+.favorite a {
+    width: 15px;
+    height: 13px;
+    display: block;
+    margin-top: 1px;
+}
+
+.favorite a.guest {
+    cursor: help;
+    background: url("/img/icons/favs.gif") no-repeat left bottom;
+}
+
+.favorite a.guest {
+    cursor: help;
+    background: url("/img/icons/favs.gif") no-repeat left top;
+}
+
+.favorite a.user {
+    cursor: pointer;
+    background: url("/img/icons/favs.gif") no-repeat left bottom;
+}
+
+.favorite a.added {
+    cursor: help;
+    background: url("/img/icons/favs.gif") no-repeat left bottom;
+}
+
+.favs_count {
+    float: left;
+    font-size: 9px;
+    line-height: 28px;
+    cursor: help;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
