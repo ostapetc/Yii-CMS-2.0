@@ -1,0 +1,67 @@
+.comment .well {
+    background-color: #fdfdfd !important;
+    box-shadow: none;
+    padding: 8px 12px;
+}
+
+.comment .user-link {
+    color: #666666;
+    display: block;
+    float: left;
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: underline;
+    margin-top: 4px;
+}
+
+.comment .user-photo-link {
+    display: block;
+    float: left;
+    margin-right: 10px;
+    margin-left: 3px;
+}
+
+.comment .date {
+    color: #666666;
+    display: block;
+    float: left;
+    font-size: 11px;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+.comment {
+    margin-bottom: 9px;
+}
+
+.comment .head {
+    margin-bottom: 15px;
+    height: 16px;
+}
+
+.comment a.answer {
+    text-decoration: underline;
+    font-size: 11px;
+    margin-top: 5px !important;
+    float: left;
+}
+
+.comment a.hash {
+    font-size: 11px;
+    margin-top: 5px !important;
+    float: left;
+    margin-right: 10px;
+    color: #000000;
+}
+
+.comment .rating {
+    float: right;
+    margin-top: 10px;
+    margin-right: 1px;
+}
+
+.comment .rating-value{
+    float: left;
+    margin-right: 12px;
+    font-weight: bold;
+}

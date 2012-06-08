@@ -24,7 +24,7 @@ select {
 }
 
 textarea {
-    min-height: 180px;
+    min-height: 100px;
     max-width: 98%;
 }
 /*file manager*/

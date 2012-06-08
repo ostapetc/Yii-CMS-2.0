@@ -24,9 +24,6 @@ abstract class Controller extends CController implements ControllerInterface
 
     public $is_ssl_protected = false;
 
-    public $system_actions = array(
-        'captcha','help','error'
-    );
 
     public function filters()
     {
@@ -65,19 +62,11 @@ abstract class Controller extends CController implements ControllerInterface
     {
         $action_name = lcfirst($action->id);
 
-        if (in_array($action_name, $this->system_actions))
-        {
-            return true;
-        }
-        else
-        {
-            $item_name = AuthItem::constructName(Yii::app()->controller->id, $action_name);
-        }
-
         $this->setTitle($action_name);
 
         return true;
     }
+
 
     public function afterAction($action)
     {
@@ -97,11 +86,6 @@ abstract class Controller extends CController implements ControllerInterface
     public function setTitle($action_name)
     {
         $action_titles = $this->actionsTitles();
-
-        if (in_array($action_name, $this->system_actions))
-        {
-            return;
-        }
 
         if (!isset($action_titles[$action_name]))
         {

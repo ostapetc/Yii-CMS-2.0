@@ -21,7 +21,7 @@
     <li><?= CHtml::link('Войти', '/login', array('class' => 'show-modal-link', 'data-modal-id' => 'login-modal')); ?></li>
     <li><?= CHtml::link('Регистрация', '/registration', array('class' => 'show-modal-link', 'data-modal-id' => 'registration-modal')); ?></li>
 <? else: ?>
-    <li><?= CHtml::link(Yii::app()->user->model->name, '/users/user/profile', array('style' => 'text-decoration: underline !important; color: #FFFFFF')); ?></li>
+    <li><?= Yii::app()->user->model->getLink(array('class' => 'user-link')); ?></li>
     <li><?= CHtml::link('выйти', '/users/user/logout'); ?></li>
     <li style="padding-top: 9px"><?= Yii::app()->user->model->photo_link ?></li>
 <? endif ?>

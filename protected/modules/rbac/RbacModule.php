@@ -36,59 +36,13 @@ class RbacModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Роли'              => '/rbac/RoleAdmin/manage',
-			'Назначение ролей'  => '/rbac/RoleAdmin/assignment',
-        	'Добавить роль'     => '/rbac/RoleAdmin/create',
-        	'Операции'          => '/rbac/OperationAdmin/manage',
-        	'Добавить операцию' => '/rbac/OperationAdmin/create',
-        	'Задачи'            => '/rbac/TaskAdmin/manage',
-        	'Добавить задачу'   => '/rbac/TaskAdmin/create'        	
+            'Роли' => '/rbac/RoleAdmin/manage',
         );
     }
 
 
-    public static function isAllow($item_name)
+    public static function isAllow($auth_item)
     {
-        if (isset(Yii::app()->user->role) && Yii::app()->user->role == AuthItem::ROLE_ROOT)
-        {
-            return true;
-        }
-
-        $auth_item = AuthItem::model()->findByPk($item_name);
-
-        if (!$auth_item)
-        {
-            Yii::log('Задача $item_name не найдена!');
-            return false;
-        }
-
-        if ($auth_item->allow_for_all)
-        {
-            return true;
-        }
-
-        if ($auth_item->tasks)
-        {
-            foreach ($auth_item->tasks as $task)
-            {
-                if ($task->allow_for_all)
-                {
-                    return true;
-                }
-                elseif (Yii::app()->user->checkAccess($task->name))
-                {
-                    return true;
-                }
-            }
-        }
-        else
-        {
-            if (Yii::app()->user->checkAccess($auth_item->name))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 }

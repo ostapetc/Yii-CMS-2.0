@@ -19,9 +19,7 @@
 
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile('/css/site/style.css');
-    $cs->registerCssFile('/css/site/page.css');
-    $cs->registerCssFile('/css/site/favorites.css');
-
+    $cs->registerCssFile('/css/site/comments.css');
     $cs->registerScriptFile('/js/site/modal-windows.js');
 
 //    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));

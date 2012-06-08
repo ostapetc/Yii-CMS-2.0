@@ -56,6 +56,10 @@ class Comment extends ActiveRecord
                 'model_id',
                 'length',
                 'max' => 50
+            ),
+            array(
+                'object_id',
+                'ObjectExistsValidator'
             )
         );
     }
@@ -126,5 +130,11 @@ class Comment extends ActiveRecord
         $this->object_id = $model->primaryKey;
         $this->model_id  = get_class($model);
         return $this;
+    }
+
+
+    public function formatDateCreate()
+    {
+        return Yii::app()->dateFormatter->formatDateTime(strtotime($this->date_create), 'long', 'short');
     }
 }
