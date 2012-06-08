@@ -1,33 +1,44 @@
 <?
-$this->page_title = 'Роли';
-
-function tasksLink($role)
-{
-	return "<a href='/rbac/TaskAdmin/RolesTasks/role/{$role}'>перейти</a>";
-}
-
-$not_system_role = '!in_array($data->name, AuthItem::$system_roles)';
-
-$this->widget('AdminGridView', array(
-	'id' => 'news-grid',
-	'dataProvider' => $model->search(AuthItem::TYPE_ROLE),
-	'filter'   => $model,
-    'sortable' => true,
-	'columns'  => array(
-        'name',
-        'description',
-		array('name' => 'tasks', 'value' => 'tasksLink($data->name)', 'type' => 'raw', 'filter' => false),
-		array(
-			'class' => 'CButtonColumn',
-            'buttons' => array(
-                'update' => array(
-                    'visible' => $not_system_role
-                ),
-                'delete' => array(
-                    'visible' => $not_system_role
-                )
-            )
-		),
-	),
-)); 
+$this->tabs = array(
+    'добавить роль' => $this->createUrl('create')
+);
 ?>
+
+<script type="text/javascript">
+    $(function() {
+        var confirm_msg = '<?= t('Удаление роли может привести к неработоспособности системы! Удалить роль?'); ?>';
+
+        $('.delete-role').click(function() {
+            if (confirm(confirm_msg)) {
+                $.post($(this).attr('href'), function() {
+                    location.href = '';
+                })
+            }
+
+            return false;
+        });
+    });
+</script>
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th><?= t('Имя') ?></th>
+        <th><?= t('Описание') ?></th>
+        <th width="50"></th>
+    </tr>
+    <? foreach ($roles as $role): ?>
+        <tr>
+            <td>
+                <?= $role->name ?>
+            </td>
+            <td>
+                <?= $role->description ?>
+            </td>
+            <td>
+                <?= CHtml::link(CHtml::image('/img/admin/update.png'), array('update', 'name' => $role->name)) ?>
+                &nbsp;
+                <?= CHtml::link(CHtml::image('/img/admin/delete.png'), array('delete', 'name' => $role->name), array("class" => "delete-role")) ?>
+            </td>
+        </tr>
+    <? endforeach ?>
+</table>
