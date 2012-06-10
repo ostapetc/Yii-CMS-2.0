@@ -1354,7 +1354,7 @@
 
 			opts = $.extend(true, {}, F.defaults.helpers.overlay, opts);
 
-			this.overlay = $('<div id="fancybox-overlay"></div>').css(opts.css).appendTo('body');
+            this.overlay = $('<div id="fancybox-overlay"></div>').css(opts.css).appendTo('body');
 
 			if (opts.closeClick) {
 				this.overlay.bind('click.fb', F.close);
