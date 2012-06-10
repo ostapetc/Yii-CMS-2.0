@@ -61,7 +61,6 @@ class FileManagerAdminController extends AdminController
             $res[] = array(
                 'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
                 'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
-                'size'           => $file['size'],
                 'url'            => $file['href'],
                 'thumbnail_url'  => $file['icon'],
                 'delete_url'     => $file['deleteUrl'],
