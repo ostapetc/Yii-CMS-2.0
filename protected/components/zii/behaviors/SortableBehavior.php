@@ -14,8 +14,18 @@ class SortableBehavior extends CBehavior
             $.post('{$this->saveUrl}', jQuery('#{$id} ul').sortable('serialize'));
         }";
         $jsOptions=empty($this->sortableOptions) ? '' : CJavaScript::encode($this->sortableOptions);
+        if ($owner instanceof CListView || $owner instanceof CGridView)
+        {
+            if (!$owner->afterAjaxUpdate)
+            {
+                $owner->afterAjaxUpdate = "js:function() {
+                    jQuery('#{$id} ul').sortable({$jsOptions});
+                    jQuery('#{$id} ul').disableSelection();
+                }";
+            }
+        }
         Yii::app()->getClientScript()
             ->registerCoreScript('jquery.ui')
-            ->registerScript(__CLASS__.'#'.$id,"jQuery('#{$id} ul').sortable({$jsOptions});");
+            ->registerScript(__CLASS__.'#'.$id,"jQuery('#{$id} ul').sortable({$jsOptions});jQuery('#{$id} ul').disableSelection();");
     }
 }
