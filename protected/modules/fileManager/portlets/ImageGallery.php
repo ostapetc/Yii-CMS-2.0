@@ -10,29 +10,24 @@ class ImageGallery extends BaseFileListView
         'closeEffect' => 'fade',
         'prevEffect' => 'fade',
         'nextEffect' => 'fade',
+        'minWidth' => '800px',
+        'autoCenter' => false,
+        'autoSize' => false,
+        'autoResize' => false,
+        'mouseWheel' => false,
+        'tpl' => array(
+            'wrap' => '<div class="fancybox-wrap"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div> <div style="height: 100px"></div> </div>',
+        ),
         'helpers'	=> array(
 			'title'	=> array(
-				'type' => 'outside'
+				'type' => 'over'
 			),
-            'overlay'	=> array(
-                'opacity' => 0.8,
-                'css' => array(
-                    'background-color' => '#000'
-                    )
-                ),
-            'thumbs' => array(
-                'width'	=> 50,
-                'height' => 50
-            ),
-            'buttons' => array(),
+            'overlay'	=> null,
+            'vkstyle'	=> null,
             'media' => array(),
-        )
+        ),
     );
 
-    public $carouselOptions = array();
-    public $defalultCarouselOptions = array(
-        'scroll' => 1
-    );
     public $enablePagination = false;
     public $itemView ='fileManager.portlets.views.imageGalleryItem';
     public $itemsTagName = 'ul';
@@ -52,17 +47,19 @@ class ImageGallery extends BaseFileListView
     public function registerScripts()
     {
         $id = $this->htmlOptions['id'];
-        $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
-        $carouselOptions = CJavaScript::encode(CMap::mergeArray($this->defalultCarouselOptions, $this->carouselOptions));
         $assets = $this->assets.'/imageGallery/';
+
+        $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
         Yii::app()->clientScript
-            ->registerScriptFile($assets.'fancybox/jquery.fancybox.pack.js')
+            ->registerScriptFile($assets.'fancybox/jquery.fancybox.js')
             ->registerCssFile($assets.'fancybox/jquery.fancybox.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-buttons.js')
             ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-buttons.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.js')
             ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-media.js')
+            ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.js')
             ->registerScript($id, "$('#$id a').fancybox($options); ");
     }
+
 }

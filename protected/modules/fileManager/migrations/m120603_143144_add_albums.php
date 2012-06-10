@@ -12,6 +12,7 @@ class m120603_143144_add_albums extends EDbMigration
         `model_id`  varchar(50) NULL ,
         `object_id` varchar(50) NULL ,
         `order`  int(11) UNSIGNED NULL,
+        `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Добавлено',
         PRIMARY KEY (`id`),
         INDEX `model_object` (`model_id`, `object_id`)
         )
