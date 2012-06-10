@@ -10,6 +10,8 @@
             $.fn.yiiListView.update('photos');
     });");
     ?>
+    <br />
+    <br />
     <?
     $this->widget('fileManager.portlets.ImageGallery', array(
         'id'=>'photos',
