@@ -20,6 +20,7 @@
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile('/css/site/style.css');
     $cs->registerCssFile('/css/site/comments.css');
+    $cs->registerCssFile('/css/icons.css');
     $cs->registerScriptFile('/js/site/modal-windows.js');
 
     $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));

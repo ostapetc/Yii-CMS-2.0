@@ -1,0 +1,38 @@
+.icon-sortable{
+    width:               16px;
+    height:              16px;
+    line-height:         16px;
+    background-image:    url("/img/icons/sort.png");
+    background-repeat:   no-repeat;
+    background-position: 0 0;
+    cursor:              pointer;
+}
+
+.icon-loader{
+    width:               16px;
+    height:              16px;
+    line-height:         16px;
+    background-image:    url("/img/icons/ajax-loader.gif");
+    background-repeat:   no-repeat;
+    background-position: 0 0;
+}
+
+.icon-ok-btn{
+    width:               16px;
+    height:              16px;
+    line-height:         16px;
+    background-image:    url("/img/icons/ok_16.png");
+    background-repeat:   no-repeat;
+    background-position: 0 0;
+    cursor:              pointer;
+}
+
+.icon-cancel-btn{
+    width:               16px;
+    height:              16px;
+    line-height:         16px;
+    background-image:    url("/img/icons/cancel_16.png");
+    background-repeat:   no-repeat;
+    background-position: 0 0;
+    cursor:              pointer;
+}

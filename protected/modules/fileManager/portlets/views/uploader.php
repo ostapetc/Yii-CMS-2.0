@@ -20,8 +20,9 @@
                 <tr>
                     <th style="width: 60px"></th>
                     <? foreach ($this->fields as $header) { ?>
-                    <th style="width: 150px"><? echo $header['header'];?></th>
+                    <th style="width: 250px"><? echo $header['header'];?></th>
                     <? } ?>
+                    <th style="width: 50px"></th>
                     <th style="width: 50px">Удалить</th>
                 </tr>
                 </thead>

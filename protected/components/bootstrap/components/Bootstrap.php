@@ -56,6 +56,13 @@ class Bootstrap extends CApplicationComponent
 
     public function registerScripts()
     {
+        Yii::app()->clientScript
+            ->registerScriptFile($this->getAssetsUrl().'/js/bootstrap.min.js')
+            ->registerCssFile($this->getAssetsUrl().'/css/bootstrap.min.css')
+            ->registerCssFile($this->getAssetsUrl().'/css/bootstrap-responsive.min.css')
+            ->registerCssFile($this->getAssetsUrl().'/css/bootstrap-yii.css');
+        return false;
+
         if ($this->coreCss)
             $this->registerCss();
 
@@ -293,6 +300,7 @@ class Bootstrap extends CApplicationComponent
 	 */
 	protected function registerPlugin($name, $selector = null, $options = array(), $defaultSelector = null)
 	{
+        return false;
 		if (!$this->isPluginRegistered($name))
 		{
 			$this->registerScriptFile("bootstrap-{$name}.js");
