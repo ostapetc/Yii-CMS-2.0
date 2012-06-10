@@ -16,7 +16,6 @@
         <td class="progress-holder">
             <div></div>
         </td>
-        <td class="size">${sizef}</td>
         <td class="start">
             <button>Start</button>
         </td>
@@ -33,7 +32,6 @@
         {{if error}}
         <td></td>
         <td class="{title}">${title}</td>
-        <td class="size">${size}</td>
         <td class="error" colspan="2">Error:
             {{if error === 1}}  <? echo Yii::t('FileManagerModule.interface', 'Файл превышает размер допустимый сервером (php.ini директива)') ?>
             {{else error === 2}}<? echo Yii::t('FileManagerModule.interface', 'файл слишком велик (HTML директива)') ?>
