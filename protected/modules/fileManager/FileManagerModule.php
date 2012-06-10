@@ -1,7 +1,7 @@
 <?
 class FileManagerModule extends WebModule
 {
-    public static $active = false;
+    public static $active = true;
 
     public function init()
     {
@@ -10,7 +10,6 @@ class FileManagerModule extends WebModule
             'fileManager.models.*'
         ));
     }
-
 
     public static function name()
     {
@@ -33,10 +32,16 @@ class FileManagerModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            "Все файлы" => "/fileManager/fileManagerAdmin/manage"
+            "Все файлы" => "/fileManager/fileManagerAdmin/manage",
         );
     }
 
+    public static function routes()
+    {
+        return array(
+            '/userAlbums/<userId:\d*>' => 'fileManager/fileAlbum/userAlbums',
+        );
+    }
 
     public function getFilesDataProvider($model, $tag, $config = array())
     {

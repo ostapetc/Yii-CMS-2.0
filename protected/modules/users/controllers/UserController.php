@@ -326,7 +326,6 @@ class UserController extends Controller
     public function actionView($id)
     {
         $user = User::model()->findByPk($id);
-        $form = new Form('FileManager.AlbumForm', $user->getNewAttachedModel('FileAlbum'));
-        $this->render('view', array('model' => $user, 'form' => $form));
+        $this->render('view', array('model' => $user));
     }
 }
