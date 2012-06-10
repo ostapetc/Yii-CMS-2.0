@@ -60,13 +60,4 @@ class FileManagerModule extends WebModule
         ), $config));
     }
 
-
-    public function getAlbumsDataProvider($model)
-    {
-        $manager = new FileAlbum();
-        return new CActiveDataProvider('FileAlbum', array(
-            'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->dbCriteria,
-        ));
-    }
-
 }
