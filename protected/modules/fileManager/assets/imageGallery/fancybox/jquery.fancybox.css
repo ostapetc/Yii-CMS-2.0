@@ -235,21 +235,3 @@
 
 
 
-
-/*
-ADDITIONAL CLASSES
-*/
-
-.fancybox-title-over-wrap {
-    right: 0;
-}
-
-.layer-overlay{
-    position: absolute;
-    z-index: 8030;
-    overflow-y: auto;
-    width: 100%;
-    left: 0;
-    top: 0;
-    background: rgba(0,0,0,0.85);
-}

@@ -20,10 +20,12 @@
             var overlay = $('.layer-overlay').length ? $('.layer-overlay') : $('<div class=\"layer-overlay\">').css({
                 height:$(window).height()
             }).appendTo('body');
-            $('.fancybox-wrap').prependTo(overlay);
             $('body').css('overflow', 'hidden');
-            var widget = opts.additionalWidget;
 
+            var layer_margin = $('#layer-margin').length ? $('#layer-margin') : $('<div id="layer-margin">').css('height', '100px');
+            $('.fancybox-wrap').prependTo(overlay).append(layer_margin);
+
+            var widget = opts.additionalWidget;
             if (widget)
             {
                 $('.fancybox-skin').append($('<br/>'));
@@ -33,7 +35,7 @@
         },
         afterClose: function() {
             $('body').css('overflow', 'auto');
-            $('.layer-overlay').remove();
+            $('.layer-overlay').hide();
         }
 	};
 
