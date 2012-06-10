@@ -19,7 +19,7 @@ abstract class BaseFileListView extends ListView
 
         $this->assets  = Yii::app()->getModule('fileManager')->assetsUrl();
         parent::init();
-
     }
+
 
 }

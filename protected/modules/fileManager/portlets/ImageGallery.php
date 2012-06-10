@@ -22,10 +22,9 @@ class ImageGallery extends BaseFileListView
         ),
     );
 
-    public $enablePagination = false;
     public $itemView ='fileManager.portlets.views.imageGalleryItem';
     public $itemsTagName = 'ul';
-
+    public $enablePagination = false;
 
     public $size = array(
         'width' => 100,
@@ -42,7 +41,10 @@ class ImageGallery extends BaseFileListView
     {
         $id = $this->htmlOptions['id'];
         $assets = $this->assets.'/imageGallery/';
-
+        $this->attachBehavior('sortable', array(
+            'class' => 'application.components.zii.behaviors.SortableBehavior',
+            'saveUrl'=>Yii::app()->createUrl('/fileManager/fileManagerAdmin/savePriority')
+        ));
         $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
         Yii::app()->clientScript
             ->registerScriptFile($assets.'fancybox/jquery.fancybox.js')

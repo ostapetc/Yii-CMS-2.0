@@ -9,7 +9,7 @@
                 <span>Добавить файлы...</span>
                 <input type="file" name="file" multiple="">
             </span>
-            <div class="clear"></div>
+            <br class="clear" />
         </div>
         <div id="<? echo $this->id ?>-drop-zone" class="drop-zone">
             Перетащите сюда файлы
