@@ -49,10 +49,6 @@ class ImageGallery extends BaseFileListView
         Yii::app()->clientScript
             ->registerScriptFile($assets.'fancybox/jquery.fancybox.js')
             ->registerCssFile($assets.'fancybox/jquery.fancybox.css')
-            ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-buttons.js')
-            ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-buttons.css')
-            ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.js')
-            ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-media.js')
             ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.js')
