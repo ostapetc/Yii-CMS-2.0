@@ -12,18 +12,12 @@ class ImageGallery extends BaseFileListView
         'nextEffect' => 'fade',
         'minWidth' => '800px',
         'autoCenter' => false,
-        'autoSize' => false,
-        'autoResize' => false,
         'mouseWheel' => false,
-        'tpl' => array(
-            'wrap' => '<div class="fancybox-wrap"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div> <div style="height: 100px"></div> </div>',
-        ),
         'helpers'	=> array(
 			'title'	=> array(
 				'type' => 'over'
 			),
             'overlay'	=> null,
-            'vkstyle'	=> null,
             'media' => array(),
         ),
     );
@@ -58,6 +52,7 @@ class ImageGallery extends BaseFileListView
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.js')
             ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-media.js')
+            ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.js')
             ->registerScript($id, "$('#$id a').fancybox($options); ");
     }
