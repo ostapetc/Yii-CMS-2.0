@@ -122,7 +122,7 @@ class FileSystemHelper
      *
      * Устанавливать $depth больше 2-х не рекомендуется, сильно возрастают накладные расходы на хранение структуры каталогов.
      */
-    public static $saveOriginalFileName = true;
+    public static $saveOriginalFileName = false;  //если true, конечно же будут проблемы с нелатиницей, пробелами и пр.
     public static $depth = 1;
 
 
@@ -189,7 +189,7 @@ class FileSystemHelper
     {
         while (is_file('./' . $path . '/' . $file))
         {
-            $file = rand(0, 10) . $file;
+            $file = rand(0, 9) . $file;
         }
         return $file;
     }

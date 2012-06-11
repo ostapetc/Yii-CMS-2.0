@@ -98,7 +98,7 @@ abstract class Controller extends CController implements ControllerInterface
 
     /**
      * Set pageTitle if empty.
-     * Support actionProviders, see {@link CController::actions}
+     * Support actionProviders, see {@link CController::actions}, as ProviderClass::actionsTitles()
      *
      * @param array $action_titles
      * @param string $action_name

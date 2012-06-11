@@ -195,7 +195,7 @@ class FileManager extends ActiveRecord
         if ($file->saveAs('./' . $new_file))
         {
             list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH, true);
-            $this->title = $this->name;
+            $this->title = $file->name;
             return true;
         }
         else

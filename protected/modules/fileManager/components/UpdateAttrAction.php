@@ -1,5 +1,5 @@
 <?php
-class UpdateAttrAction extends CAction
+class UpdateAttrAction extends BaseFilesApiAction
 {
     public function run($id)
     {
