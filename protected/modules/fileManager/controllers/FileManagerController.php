@@ -4,12 +4,7 @@ class FileManagerController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "DownloadFile" => "Скачать файл",
-            "updateAttr"   => "Редактирование файла",
-            "upload"       => "Загрузка файлов",
-            "savePriority" => "Сортировка",
-            "delete"       => "Удаление файла",
-            "existFiles"   => "Загрузка существующих файлов",
+            "downloadFile" => "Скачать файл",
         );
     }
 

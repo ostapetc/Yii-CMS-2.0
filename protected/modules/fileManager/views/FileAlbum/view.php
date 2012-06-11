@@ -16,6 +16,8 @@
     <br />
     <br />
     <?
+
+    //Вынести action titles в провайдер, воспользоваться функцией CController
     $this->widget('fileManager.portlets.ImageGallery', array(
         'id'=>'photos',
         'template' => "{pager}\n{items}\n{pager}",

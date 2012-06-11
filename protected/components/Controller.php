@@ -76,7 +76,7 @@ abstract class Controller extends CController implements ControllerInterface
             $item_name = AuthItem::constructName(Yii::app()->controller->id, $action_name);
         }
 
-        $this->setTitle($action_name);
+        $this->setTitle($this->actionsTitles(), $action_name);
 
         return true;
     }
@@ -96,21 +96,45 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    public function setTitle($action_name)
+    /**
+     * Set pageTitle if empty.
+     * Support actionProviders, see {@link CController::actions}
+     *
+     * @param array $action_titles
+     * @param string $action_name
+     *
+     * @return mixed
+     * @throws CException
+     */
+    public function setTitle($action_titles, $action_name)
     {
-        $action_titles = $this->actionsTitles();
-
-        if (in_array($action_name, $this->system_actions))
+        $pos=strpos($action_name, '.');
+        if($pos===false && isset($action_titles[$action_name]))
         {
-            return;
+            return $this->page_title = $action_titles[$action_name];
+        }
+        else if($pos===false)
+        {
+            throw new CException('Не найден заголовок для дейсвия ' . $action_name);
         }
 
-        if (!isset($action_titles[$action_name]))
+		// the action is defined in a provider
+		$prefix = substr($action_name, 0, $pos+1);
+        $actions = $this->actions();
+        if (!isset($actions[$prefix]))
         {
-            throw new CHttpException('Не найден заголовок для дейсвия ' . $action_name);
+            throw new CException('Не найден заголовок для дейсвия ' . $action_name);
         }
 
-        $this->page_title = $action_titles[$action_name];
+		$action_name = (string)substr($action_name, $pos+1);
+
+		$provider = $actions[$prefix];
+        $provider_alias = is_string($provider) ? $provider : $provider['class'];
+
+		$class = Yii::import($provider_alias, true);
+		$map = call_user_func(array($class, 'actionsTitles'));
+
+		$this->setTitle($map, $action_name);
     }
 
 

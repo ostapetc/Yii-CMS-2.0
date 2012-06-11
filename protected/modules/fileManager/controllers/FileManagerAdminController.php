@@ -6,11 +6,7 @@ class FileManagerAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "fileApi.updateAttr"   => "Редактирование файла",
-            "fileApi.upload"       => "Загрузка файлов",
-            "fileApi.savePriority" => "Сортировка",
-            "fileApi.delete"       => "Удаление файла",
-            "fileApi.existFiles"   => "Загрузка существующих файлов",
+            "delete"   => "Удаление файла",
         );
     }
 
