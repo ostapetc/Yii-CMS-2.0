@@ -26,6 +26,8 @@ class ImageGallery extends BaseFileListView
     public $itemsTagName = 'ul';
     public $enablePagination = false;
 
+    public $sortableAction = '/fileManager/fileManagerAdmin/savePriority';
+
     public $size = array(
         'width' => 100,
         'height' => 100
@@ -35,7 +37,7 @@ class ImageGallery extends BaseFileListView
     {
         $this->attachBehavior('sortable', array(
             'class' => 'application.components.zii.behaviors.SortableBehavior',
-            'saveUrl'=>Yii::app()->createUrl('/fileManager/fileManagerAdmin/savePriority')
+            'saveUrl'=>Yii::app()->createUrl($this->sortableAction)
         ));
         parent::init();
         $this->registerScripts();

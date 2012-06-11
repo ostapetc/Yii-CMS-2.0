@@ -5,6 +5,19 @@ class FileManagerController extends Controller
     {
         return array(
             "DownloadFile" => "Скачать файл",
+            "updateAttr"   => "Редактирование файла",
+            "upload"       => "Загрузка файлов",
+            "savePriority" => "Сортировка",
+            "delete"       => "Удаление файла",
+            "existFiles"   => "Загрузка существующих файлов",
+        );
+    }
+
+
+    public function actions()
+    {
+        return array(
+            'fileApi.' => 'fileManager.components.FileApiActionProvider',
         );
     }
 

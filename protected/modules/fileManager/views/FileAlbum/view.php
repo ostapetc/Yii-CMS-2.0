@@ -4,7 +4,10 @@
         'model' => $model,
         'attribute' => 'files',
         'data_type' => 'image',
-        'title' => 'Добавить фото'
+        'title' => 'Добавить фото',
+        'uploadAction' => '/fileManager/fileManager/fileApi.upload',
+        'sortableAction' => '/fileManager/fileManager/fileApi.savePriority',
+        'existFilesAction' => '/fileManager/fileManager/fileApi.existFiles'
     ));
     Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
             $.fn.yiiListView.update('photos');
@@ -20,6 +23,7 @@
         'itemView' => '_view',
         'itemsTagName' => 'ul',
         'itemsCssClass' => 'thumbnails',
+        'sortableAction' => '/fileManager/fileManager/fileApi.savePriority',
         'fancyboxOptions' => array(
             'helpers'=> array(
                 'vkstyle' => array(

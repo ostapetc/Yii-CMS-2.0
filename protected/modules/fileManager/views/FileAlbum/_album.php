@@ -1,7 +1,7 @@
-<li class="span4">
+<li class="span3" style="width: 255px">
     <a href="<?= $data->href ?>" class="thumbnail">
         <?
-        $size = array('width' => 291, 'height' => 300);
+        $size = array('width' => 255, 'height' => 220);
         if ($file = $data->files_first)
         {
             echo ImageHelper::thumb($file->path, $file->name, $size, true);
