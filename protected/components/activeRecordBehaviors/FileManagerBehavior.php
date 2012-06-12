@@ -75,11 +75,15 @@ class FileManagerBehavior extends ActiveRecordBehavior
         return parent::beforeDelete($event);
     }
 
-    /*
+
     public function beforeFormInit($event)
     {
-        $elements = $event->sender->getElements();
+        if (!$event->sender->add_elements_from_behaviors)
+        {
+            return true;
+        }
 
+        $elements = $event->sender->getElements();
         foreach ($this->tags as $tag => $data)
         {
             if (is_string($data))
@@ -104,5 +108,5 @@ class FileManagerBehavior extends ActiveRecordBehavior
 
         $event->sender->setElements($elements);
     }
-*/
+
 }

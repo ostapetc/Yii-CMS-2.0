@@ -72,6 +72,10 @@ class MetaTagBehavior extends ActiveRecordBehavior
 
     public function beforeFormInit($event)
     {
+        if (!$event->sender->add_elements_from_behaviors)
+        {
+            return true;
+        }
 
         $elements = $event->sender->getElements();
         $elements['meta_tags'] = array('type'=>'meta_tags');

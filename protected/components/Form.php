@@ -2,7 +2,7 @@
 class Form extends CForm
 {
     public $back_button_show;
-
+    public $add_elements_from_behaviors = false;
     public $inputElementClass = 'FormInputElement';
     public $buttonElementClass = 'FormButtonElement';
 
