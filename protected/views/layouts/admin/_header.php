@@ -12,7 +12,7 @@
     Yii::app()->bootstrap->registerScripts();
     $cs->registerCssFile('/css/admin/layout.css');
     $cs->registerCssFile('/css/admin/form.css');
-    $cs->registerCssFile('/css/admin/icons.css');
+    $cs->registerCssFile('/css/icons.css');
     $cs->registerCssFile('/css/admin/extend.css');
     $cs->registerScriptFile('/js/admin/hideshow.js');
     $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
