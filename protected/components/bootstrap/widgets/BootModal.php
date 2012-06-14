@@ -45,7 +45,7 @@ class BootModal extends CWidget
 		if (!isset($this->htmlOptions['id']))
 			$this->htmlOptions['id'] = $this->getId();
 
-		$classes = 'modal fade';
+		$classes = 'modal';
 		if (isset($this->htmlOptions['class']))
 			$this->htmlOptions['class'] .= ' '.$classes;
 		else

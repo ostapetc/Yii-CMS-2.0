@@ -39,7 +39,7 @@ class FileManagerModule extends WebModule
     public static function routes()
     {
         return array(
-            '/userAlbums/<userId:\d*>' => 'fileManager/fileAlbum/userAlbums',
+            '/userAlbums/<userId:\d*>' => '/fileManager/fileAlbum/userAlbums',
         );
     }
 
