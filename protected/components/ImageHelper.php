@@ -37,6 +37,12 @@ class ImageHolder //Класс Image занять под расширение
     }
 
 
+    public function isRealImage()
+    {
+        $src = $this->getSrc();
+        return $src && is_file($src);
+    }
+
     public function getSrc()
     {
         return ImageHelper::process($this->_dir, $this->_file, $this->_size, $this->_crop);
@@ -63,7 +69,7 @@ class ImageHelper
     {
         $dim = $size['width'].'x'.$size['height'];
         $text = $text ? $text : $dim;
-        return 'http://placehold.it/'.$dim.'&text='.urlencode($text);
+        return CHtml::image('http://placehold.it/'.$dim.'&text='.urlencode($text), $text, $size);
     }
 
     public static function thumb($dir, $file, array $size, $crop = false)

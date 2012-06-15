@@ -8,7 +8,7 @@
         }
         else
         {
-            echo CHtml::image(ImageHelper::placeholder($size, 'Empty album'), '', $size);
+            echo ImageHelper::placeholder($size, 'Empty album');
         }
         ?>
         <div class="caption" style="">

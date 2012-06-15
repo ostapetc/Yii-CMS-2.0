@@ -79,7 +79,6 @@
         },
         beforeShow: function(opts)
         {
-            alert(F.current);
             var overlay = $('.layer-overlay').length ? $('.layer-overlay') : $('<div class=\"layer-overlay\">').css({
                 height: $(window).height()
             }).appendTo('body');

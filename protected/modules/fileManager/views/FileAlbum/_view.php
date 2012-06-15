@@ -1,7 +1,8 @@
 <?
 $size = array('width' => 134, 'height' => 125);
 $img = ImageHelper::thumb($data->path, $data->name, $size, true);
-if ($img) { ?>
+if ($img) {
+?>
     <li id="File_<?=$data->id?>" style="width: 134px; height: 120px;">
         <?
         echo CHtml::link($img, $data->href, array(
