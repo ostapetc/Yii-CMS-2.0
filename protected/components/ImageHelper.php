@@ -29,6 +29,7 @@ class ImageHolder //Класс Image занять под расширение
         {
             $this->_htmlOptions['width'] = $this->_size['width'];
             $this->_htmlOptions['height'] = $this->_size['height'];
+
             return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
         } catch (Exception $e)
         {
@@ -90,11 +91,11 @@ class ImageHelper
 
         //normalize dir
         $doc_root = $_SERVER['DOCUMENT_ROOT'];
-        if (substr($dir, 0, strlen($doc_root) !== $doc_root))
+
+        if (substr($dir, 0, strlen($doc_root)) !== $doc_root)
         {
             $dir = $doc_root . $dir;
         }
-
         $dir       = rtrim($dir, '/') . '/';
         $path_info = pathinfo($file);
 
