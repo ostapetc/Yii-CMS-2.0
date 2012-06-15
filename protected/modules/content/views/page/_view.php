@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="published">23 мая 2012, 22:28</div>
+        <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
         <? $this->widget('FavoritePortlet', array('model' => $data)); ?>
 

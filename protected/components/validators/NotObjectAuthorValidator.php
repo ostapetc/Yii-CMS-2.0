@@ -6,14 +6,24 @@
  * Time: 19:21
  * To change this template use File | Settings | File Templates.
  */
-class ObjectExistsValidator extends CValidator
+class NotObjectAuthorValidator extends CValidator
 {
     protected function validateAttribute($object, $attribute)
     {
+        if (Yii::app()->user->isGuest)
+        {
+            return;
+        }
+
         $object = ActiveRecord::model($object->model_id)->findByPk($object->object_id);
         if (!$object)
         {
-            $this->addError($object, $attribute, "Объекта с моделью '{$object->model_id}' и ID '{$object->object_id}' не существует!");
+            return;
+        }
+
+        if ($object->user_id == Yii::app()->user->id)
+        {
+            $this->addError($object, $attribute, "Автору объекта запрещено!");
         }
     }
 }

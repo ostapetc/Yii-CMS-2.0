@@ -1,8 +1,5 @@
 <?
 $form = include "UserForm.php";
-
-$form['action'] = Yii::app()->createUrl('/users/user/login');
-
 $form['activeForm'] = array(
     'id'                   => 'login-form',
     'enableAjaxValidation' => true,

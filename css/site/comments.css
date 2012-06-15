@@ -53,15 +53,3 @@
     margin-right: 10px;
     color: #000000;
 }
-
-.comment .rating {
-    float: right;
-    margin-top: 10px;
-    margin-right: 1px;
-}
-
-.comment .rating-value{
-    float: left;
-    margin-right: 12px;
-    font-weight: bold;
-}

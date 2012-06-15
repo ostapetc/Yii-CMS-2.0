@@ -1,7 +1,10 @@
 <script type="text/javascript">
     $(function() {
         $('#nagigate_section_btn').click(function() {
-
+            var section = $('#nagigate_section').val();
+            if (section)  {
+                location.href = '/page/section/' + section;
+            }
         });
     });
 </script>

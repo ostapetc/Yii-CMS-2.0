@@ -48,6 +48,10 @@ class Rating extends ActiveRecord
                 'ObjectExistsValidator'
             ),
             array(
+                'object_id',
+                'NotObjectAuthorValidator'
+            ),
+            array(
                 'value', 'in', 'range' => array('1', '-1')
             )
         );
@@ -93,42 +97,57 @@ class Rating extends ActiveRecord
     }
 
 
-    public static function get(ActiveRecord $model)
+    public static function getValue($model, $object_id = null)
     {
-        $sql = "SELECT SUM(`value`)
-                       FROM " . self::tableName() . "
-                       WHERE object_id = '{$model->id}' AND
-                             model_id  = '" .  get_class($model) . "'";
-
-        return Yii::app()->db->createCommand($sql)->queryScalar();
-    }
-
-
-    public static function getHtml($model_or_rating)
-    {
-        if ($model_or_rating instanceof ActiveRecord)
+        if ($model instanceof ActiveRecord)
         {
-            $rating = self::get($model_or_rating);
+            $model_id  = get_class($model);
+            $object_id = $model->id;
         }
         else
         {
-            $rating = $model_or_rating;
+            if (!is_numeric($object_id))
+            {
+                throw new CException(t('Неверные аргументы'));
+            }
+
+            $model_id = $model;
         }
 
-        if ($rating == 0)
+        $sql = "SELECT SUM(`value`)
+                       FROM " . self::tableName() . "
+                       WHERE object_id = '{$object_id}' AND
+                             model_id  = '" . $model_id . "'";
+
+        $rating = Yii::app()->db->createCommand($sql)->queryScalar();
+        if (is_null($rating))
         {
-            $class = 'grey';
+            return 0;
         }
-        else if ($rating > 0)
+        else
         {
-            $class  = 'green';
-            $rating = '+' . $rating;
+            return $rating;
+        }
+    }
+
+
+    public static function getHtml($rating_value)
+    {
+        if ($rating_value == 0)
+        {
+            $rating_value = 0;
+            $class        = 'grey';
+        }
+        else if ($rating_value > 0)
+        {
+            $rating_value = '+' . $rating_value;
+            $class        = 'green';
         }
         else
         {
             $class = 'red';
         }
 
-        return "<span class='rating-value {$class}'>{$rating}</span>";
+        return "<div class='rating-value {$class}'>{$rating_value}</div>";
     }
 }

@@ -110,6 +110,12 @@ class Page extends ActiveRecord
                 'tag_id',
                 'through' => 'tags_rels'
             ),
+            'comments_count' => array(
+                self::STAT,
+                'Comment',
+                'object_id',
+                'condition' => 'model_id = "Page"'
+            )
         );
     }
 

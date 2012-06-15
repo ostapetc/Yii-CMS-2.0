@@ -6,55 +6,15 @@ $labels = array(
 );
 ?>
 
-<?= $rating ?>
+<div class="rating">
+    <?= $rating ?>
 
-<? if (Yii::app()->user->isGuest): ?>
-
-    <?=
-    CHtml::image(
-        '/img/icons/minus_na.png',
-        $labels['denied'],
-        array('title' => $labels['denied'])
-    )
-    ?>
-
-    <?=
-    CHtml::image(
-        '/img/icons/plus_na.png',
-        $labels['denied'],
-        array('title' => $labels['denied'])
-    )
-    ?>
-
-<? else: ?>
-
-    <?=
-    CHtml::image(
-        '/img/icons/minus.png',
-        $labels['minus'],
-        array(
-             'title'     => $labels['minus'],
-             'value'     => '-1',
-             'class'     => 'rating-img',
-             'object_id' => $object_id,
-             'model_id'  => $model_id
-        )
-    )
-    ?>
-
-    <?=
-    CHtml::image(
-        '/img/icons/plus.png',
-        $labels['plus'],
-        array(
-             'title'     => $labels['plus'],
-             'value'     => '1',
-             'class'     => 'rating-img',
-             'object_id' => $object_id,
-             'model_id'  => $model_id
-        )
-    )
-    ?>
-
-<? endif ?>
+    <? if (Yii::app()->user->isGuest): ?>
+        <div title="<?= $labels['denied'] ?>" class="rating-vote minus-na"></div>
+        <div title="<?= $labels['denied'] ?>" class="rating-vote plus-na"></div>
+    <? else: ?>
+        <div title="<?= $labels['minus'] ?>" class="rating-vote minus" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
+        <div title="<?= $labels['plus'] ?>" class="rating-vote plus" value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
+    <? endif ?>
+</div>
 

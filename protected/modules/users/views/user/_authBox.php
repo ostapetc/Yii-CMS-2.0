@@ -18,7 +18,7 @@
 </script>
 
 <? if (Yii::app()->user->isGuest): ?>
-    <li><?= CHtml::link('Войти', '/login', array('class' => 'show-modal-link', 'data-modal-id' => 'login-modal')); ?></li>
+    <li><?= CHtml::link('Войти', '/login?redirect=' . $_SERVER['REQUEST_URI'], array('class' => 'show-modal-link', 'data-modal-id' => 'login-modal')); ?></li>
     <li><?= CHtml::link('Регистрация', '/registration', array('class' => 'show-modal-link', 'data-modal-id' => 'registration-modal')); ?></li>
 <? else: ?>
     <li><?= Yii::app()->user->model->getLink(array('class' => 'user-link')); ?></li>

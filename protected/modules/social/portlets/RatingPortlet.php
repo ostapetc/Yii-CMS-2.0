@@ -6,7 +6,7 @@
  * Time: 17:33
  * To change this template use File | Settings | File Templates.
  */
-class RatingVotes extends Portlet
+class RatingPortlet extends Portlet
 {
     public $model;
 
@@ -32,13 +32,14 @@ class RatingVotes extends Portlet
         }
         else
         {
-            $rating = Rating::get($this->model);
+            $rating = Rating::getValue($this->model);
+            $rating = Rating::getHtml($rating);
         }
 
-        $this->render('RatingVotes', array(
+        $this->render('RatingPortlet', array(
             'object_id' => $this->model->id,
             'model_id'  => get_class($this->model),
-            'rating'    => Rating::getHtml($rating)
+            'rating'    => $rating
         ));
     }
 }

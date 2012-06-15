@@ -6,7 +6,14 @@ $(function() {
 
         modal.modal('show');
 
-        $.get(action_url + '?popup=1', function(html) {
+        if (action_url.indexOf('?') != -1) {
+            action_url += '&popup=1'
+        }
+        else {
+            action_url += '?popup=1'
+        }
+
+        $.get(action_url, function(html) {
             modal.find('.modal-body').html(html);
         });
 

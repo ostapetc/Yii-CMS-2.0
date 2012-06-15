@@ -1,0 +1,49 @@
+.rating {
+    float: right;
+    margin-top: 10px;
+}
+.rating-value {
+    float: left;
+    font-weight: bold;
+    line-height: 15px;
+    margin-right: 5px;
+}
+
+.rating-vote {
+    width: 14px;
+    height: 14px;
+    float: left;
+    margin-left: 4px;
+}
+
+.rating-vote.plus-na {
+    background: url(/img/icons/plus_minus.gif) left top;
+    cursor: help;
+}
+
+.rating-vote.minus-na {
+    background: url(/img/icons/plus_minus.gif) left bottom;
+    cursor: help;
+}
+
+.rating-vote.plus {
+    background: url(/img/icons/plus_minus.gif) right top;
+    cursor: pointer;
+}
+
+.rating-vote.minus {
+    background: url(/img/icons/plus_minus.gif) right bottom;
+    cursor: pointer;
+}
+
+.rating-value.green {
+    color: #339900;
+}
+
+.rating-value.red {
+    color: #CC0000;
+}
+
+.rating-value.grey {
+    color: #808080;
+}

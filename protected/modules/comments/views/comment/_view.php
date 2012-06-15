@@ -7,9 +7,7 @@
         <a class="hash" href="#comment_<?= $comment->id ?>">#</a>
         <a class="answer" href="" comment_id="<?= $comment->id ?>" user_name="<?= $comment->user->name ?>">ответить</a>
 
-        <div class="rating">
-            <?= $this->widget('RatingVotes', array('model' => $comment)); ?>
-        </div>
+        <?= $this->widget('RatingPortlet', array('model' => $comment)); ?>
     </div>
 
     <div class="well">
