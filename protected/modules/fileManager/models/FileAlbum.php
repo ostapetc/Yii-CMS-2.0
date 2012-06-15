@@ -2,7 +2,8 @@
 
 class FileAlbum extends ActiveRecord
 {
-    const PAGE_SIZE = 20;
+    public static $image_size = array('width' => 163, 'height' => 125);
+    public static $album_size = array('width' => 260, 'height' => 220);
 
     const STATUS_ACTIVE  = 'active';
     const STATUS_DELETED = 'deleted';
