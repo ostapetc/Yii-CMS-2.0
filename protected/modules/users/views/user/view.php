@@ -27,4 +27,4 @@
     </div>
 </div>
 
-<? $this->renderPartial('_sidebar', array('model' => $model)) ?>
+<? $this->clips['sidebar'] .= $this->renderPartial('_sidebar', array('model' => $model), true) ?>
