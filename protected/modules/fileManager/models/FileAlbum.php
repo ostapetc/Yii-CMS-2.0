@@ -124,4 +124,39 @@ class FileAlbum extends ActiveRecord
         ));
         return $this;
     }
+
+    public function getOwner()
+    {
+        return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
+    }
+
+    public function isAttachedTo($model)
+    {
+        if (!is_object($model))
+        {
+            return false;
+        }
+
+        if ($this->model_id == get_class($model))
+        {
+            return $this->object_id == $model->getPrimaryKey();
+        }
+        else
+        {
+            $owner = $this->getOwner();
+            if (is_object($owner) && method_exists($owner, 'isAttachedTo'))
+            {
+                return $owner->isAttachedTo($model);
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    public function userCanEdit($user = null)
+    {
+        $this->isAttachedTo(Yii::app()->user->model);
+    }
 }

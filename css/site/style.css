@@ -475,4 +475,4 @@ a.read-more {
 .user_albums li{position: relative;}
 .user_albums .caption{background: rgba(0, 0, 0, 0.5); color: #FFF; text-decoration: none; font-weight: bold; position: absolute; left: 5px; right: 5px; bottom: 5px;}
 .user_albums a:hover {text-decoration: none;}
-.list-view {padding-top: 16px;}
+.list-view {padding-top: 20px;}

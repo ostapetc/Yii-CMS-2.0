@@ -1,21 +1,20 @@
 <div class="user_photos">
     <?
-    $widget = $this->widget("fileManager.portlets.Uploader", array(
-        'model' => $model,
-        'attribute' => 'files',
-        'data_type' => 'image',
-        'title' => 'Добавить фото',
-        'uploadAction' => '/fileManager/fileManager/upload',
-        'sortableAction' => '/fileManager/fileManager/savePriority',
-        'existFilesAction' => '/fileManager/fileManager/existFiles'
-    ));
-    Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
-            $.fn.yiiListView.update('photos', function() {alert(3)});
-    });");
-    ?>
-    <br />
-    <br />
-    <?
+    if ($model->isAttachedTo(Yii::app()->user->model))
+    {
+        $widget = $this->widget("fileManager.portlets.Uploader", array(
+            'model' => $model,
+            'attribute' => 'files',
+            'data_type' => 'image',
+            'title' => 'Добавить фото',
+            'uploadAction' => '/fileManager/fileManager/upload',
+            'sortableAction' => '/fileManager/fileManager/savePriority',
+            'existFilesAction' => '/fileManager/fileManager/existFiles'
+        ));
+        Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
+                $.fn.yiiListView.update('photos');
+        });");
+    }
 
     //Вынести action titles в провайдер, воспользоваться функцией CController
     $this->widget('fileManager.portlets.ImageGallery', array(
