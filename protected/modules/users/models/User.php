@@ -224,13 +224,13 @@ class User extends ActiveRecord
                 self::HAS_MANY ,
                 'FileAlbum',
                 'object_id',
-                'condition' => "model_id = '".get_class($this)."'"
+                'condition' => "file_albums.model_id = '".get_class($this)."'"
             ),
             'file_albums_count' => array(
                 self::STAT ,
                 'FileAlbum',
                 'object_id',
-                'condition' => "model_id = '".get_class($this)."'"
+                'condition' => "t.model_id = '".get_class($this)."'"
             ),
             'assignment' => array(
                 self::HAS_ONE,
