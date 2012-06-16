@@ -99,7 +99,7 @@
         afterClose: function()
         {
             $('body').css('overflow', 'auto');
-            $('.layer-overlay').hide();
+            $('.layer-overlay').remove();
         }
     };
 

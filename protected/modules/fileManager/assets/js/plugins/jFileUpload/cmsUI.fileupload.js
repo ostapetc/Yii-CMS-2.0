@@ -87,6 +87,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
             self.children('span').editable(action, options).click();
             return false;
         });
+        this.element.delegate('form', 'submit', function() {return false;});
     },
     _adaptationToBrowser:function()
     {
