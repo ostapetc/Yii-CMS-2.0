@@ -10,7 +10,7 @@
     <div class="well">
         <?
             $this->clips['sidebar'] .= $this->widget('sidebarManager', array() , true);
-            echo $this->clips['sidebar'];
+            $this->renderClip('sidebar');
         ?>
     </div>
 </div>
