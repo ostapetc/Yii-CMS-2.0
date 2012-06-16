@@ -326,9 +326,22 @@ class UserController extends Controller
     public function actionView($id)
     {
         $this->layout = '//layouts/main';
-
-        $user = User::model()->findByPk($id);
+        $user = $this->loadModel($id);
         $form = new Form('FileManager.AlbumForm', $user->getNewAttachedModel('FileAlbum'));
+        $this->render('view', array('model' => $user, 'form' => $form));
+    }
+
+    public function actionEdit($id)
+    {
+        $this->layout = '//layouts/main';
+
+        $user = $this->loadModel($id);
+        $form = new Form('users.UserForm', $user);
+        $this->performAjaxValidation($user);
+        if ($form->submitted() && $user->save())
+        {
+            $this->redirect('view', array('id' => $id));
+        }
         $this->render('view', array('model' => $user, 'form' => $form));
     }
 }
