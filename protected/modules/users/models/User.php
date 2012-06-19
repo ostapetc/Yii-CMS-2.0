@@ -4,6 +4,8 @@ class User extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 
+    const PHOTO_PATH = 'upload/photo';
+
     const STATUS_ACTIVE  = 'active';
     const STATUS_NEW     = 'new';
     const STATUS_BLOCKED = 'blocked';
@@ -335,7 +337,7 @@ class User extends ActiveRecord
     {
         return array(
             'photo' => array(
-                'dir' => 'upload/photo'
+                'dir' => self::PHOTO_PATH
             )
         );
     }

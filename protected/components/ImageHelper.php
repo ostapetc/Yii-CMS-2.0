@@ -41,7 +41,7 @@ class ImageHolder //Класс Image занять под расширение
     public function isRealImage()
     {
         $src = $this->getSrc();
-        return $src && is_file($src);
+        return $src && is_file(Yii::getPathOfAlias('webroot').$src);
     }
 
     public function getSrc()

@@ -3,7 +3,7 @@
     <div class="span2">
         <?
         $avatar_size = array('width' => 170, 'height' => 100);
-        $avatar = ImageHelper::thumb(pathinfo($model->photo, PATHINFO_DIRNAME), basename($model->photo), $avatar_size, true);
+        $avatar = ImageHelper::thumb(User::PHOTO_PATH, $model->photo, $avatar_size, true);
         echo $avatar->isRealImage() ? $avatar : ImageHelper::placeholder($avatar_size);
         ?>
     </div>
