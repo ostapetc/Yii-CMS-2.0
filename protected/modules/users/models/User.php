@@ -111,6 +111,14 @@ class User extends ActiveRecord
                 'max' => 40
             ),
             array(
+                'photo', 'safe', 'on' => array(
+                    self::SCENARIO_CREATE,
+                    self::SCENARIO_REGISTRATION,
+                    self::SCENARIO_CABINET,
+                    self::SCENARIO_UPDATE
+                )
+            ),
+            array(
                 'name',
                 'RuLatAlphaValidator'
             ),
@@ -323,6 +331,14 @@ class User extends ActiveRecord
         return CHtml::link($image, $this->href, array('class' => 'user-photo-link', 'width' => '23', 'height' => '23'));
     }
 
+    public function uploadFiles()
+    {
+        return array(
+            'photo' => array(
+                'dir' => 'upload/photo'
+            )
+        );
+    }
 
     public function getLink()
     {
@@ -338,5 +354,6 @@ class User extends ActiveRecord
     {
         return Yii::app()->createUrl('/user/' . $this->id);
     }
+
 }
 

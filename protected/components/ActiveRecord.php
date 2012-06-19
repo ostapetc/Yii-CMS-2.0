@@ -22,30 +22,30 @@ abstract class ActiveRecord extends CActiveRecord
     public function behaviors()
     {
         return array(
-            'Languages'  => array(
-                'class' => 'application.components.activeRecordBehaviors.LanguagesBehavior'
-            ),
-            'NullValue'      => array(
-                'class' => 'application.components.activeRecordBehaviors.NullValueBehavior'
-            ),
-            'UserForeignKey' => array(
-                'class' => 'application.components.activeRecordBehaviors.UserForeignKeyBehavior'
-            ),
+//            'Languages'  => array(
+//                'class' => 'application.components.activeRecordBehaviors.LanguagesBehavior'
+//            ),
+//            'NullValue'      => array(
+//                'class' => 'application.components.activeRecordBehaviors.NullValueBehavior'
+//            ),
+//            'UserForeignKey' => array(
+//                'class' => 'application.components.activeRecordBehaviors.UserForeignKeyBehavior'
+//            ),
             'UploadFile'     => array(
                 'class' => 'application.components.activeRecordBehaviors.UploadFileBehavior'
             ),
-            'DateFormat'     => array(
-                'class' => 'application.components.activeRecordBehaviors.DateFormatBehavior'
-            ),
-            'Timestamp'      => array(
-                'class' => 'application.components.activeRecordBehaviors.TimestampBehavior'
-            ),
-            'MaxMin'         => array(
-                'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
-            ),
-            'RawFind'         => array(
-                'class' => 'application.components.activeRecordBehaviors.RawFindBehavior'
-            ),
+//            'DateFormat'     => array(
+//                'class' => 'application.components.activeRecordBehaviors.DateFormatBehavior'
+//            ),
+//            'Timestamp'      => array(
+//                'class' => 'application.components.activeRecordBehaviors.TimestampBehavior'
+//            ),
+//            'MaxMin'         => array(
+//                'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
+//            ),
+//            'RawFind'         => array(
+//                'class' => 'application.components.activeRecordBehaviors.RawFindBehavior'
+//            ),
         );
     }
 
@@ -200,14 +200,14 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function in($row, $values, $operator = 'AND')
+    public function inArray($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
         return $this;
     }
 
 
-    public function notIn($row, $values, $operator = 'AND')
+    public function notInArray($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addNotInCondition($row, $values, $operator);
         return $this;
@@ -347,4 +347,5 @@ abstract class ActiveRecord extends CActiveRecord
 
         return $attach;
     }
+
 }

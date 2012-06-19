@@ -16,6 +16,9 @@ return array(
             'type'  => 'dropdownlist',
             'items' => User::$gender_options
         ),
+        'photo' => array(
+            'type' => 'file'
+        ),
         'status'     => array(
             'type'  => 'dropdownlist',
             'items' => User::$status_options

@@ -21,19 +21,19 @@ class UploadFileBehavior extends ActiveRecordBehavior
         {
             $params = array_merge($this->_params, $params);
 
-            $model->$attr = CUploadedFile::getInstance($model, $attr);
+            $upload = CUploadedFile::getInstance($model, $attr);
 
-            if ($model->$attr)
+            if ($upload)
             {
-                $extension = pathinfo($model->$attr->name, PATHINFO_EXTENSION);
+                $extension = pathinfo($upload->name, PATHINFO_EXTENSION);
 
                 if ($params['hash_store'])
                 {
-                    $file_name = md5(rand(1, 200) . $model->$attr->name . time()) . "." . strtolower($extension);
+                    $file_name = md5(rand(1, 200) . $upload->name . time()) . "." . strtolower($extension);
                 }
                 else
                 {
-                    $file_name = $model->$attr->name;
+                    $file_name = $upload->name;
                 }
 
                 $file_dir = $_SERVER["DOCUMENT_ROOT"] . $params["dir"];
@@ -49,7 +49,7 @@ class UploadFileBehavior extends ActiveRecordBehavior
                 }
 
                 $file_path  = $file_dir . $file_name;
-                $file_saved = $model->$attr->saveAs($file_path);
+                $file_saved = $upload->saveAs($file_path);
 
                 if ($file_saved)
                 {
