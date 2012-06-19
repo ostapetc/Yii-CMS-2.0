@@ -1,8 +1,11 @@
 $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
+    
     options:{
         version:'1.0',
         existFilesUrl:'',
-        autoUpload: true
+        autoUpload: true,
+        previewFileTypes: /^$/,
+        previewAsCanvas : false
     },
     _create:function()
     {

@@ -34,6 +34,7 @@ class UserController extends Controller
             "login"                  => "Авторизация",
             "logout"                 => "Выход",
             "view"                   => "Страница пользователя",
+            "edit"                   => "Редактирование личных данных",
             "registration"           => "Регистрация",
             "activateAccount"        => "Активация аккаунта",
             "activateAccountRequest" => "Запрос на активацию аккаунта",
@@ -331,17 +332,19 @@ class UserController extends Controller
         $this->render('view', array('model' => $user, 'form' => $form));
     }
 
-    public function actionEdit($id)
+    public function actionEdit($userId)
     {
         $this->layout = '//layouts/main';
 
-        $user = $this->loadModel($id);
-        $form = new Form('users.UserForm', $user);
+        $user = $this->loadModel($userId);
+        $form = new Form('users.CabinetForm', $user);
+        $user->scenario = User::SCENARIO_CABINET;
+
         $this->performAjaxValidation($user);
         if ($form->submitted() && $user->save())
         {
-            $this->redirect('view', array('id' => $id));
+            $this->redirect($this->createUrl('view', array('id' => $userId)));
         }
-        $this->render('view', array('model' => $user, 'form' => $form));
+        $this->render('edit', array('model' => $user, 'form' => $form));
     }
 }

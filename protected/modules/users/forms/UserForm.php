@@ -26,10 +26,6 @@ return array(
         ),
         'password'   => array('type' => 'password'),
         'password_c' => array('type' => 'password'),
-        'captcha'    => array(
-            'type'  => 'captcha',
-            'class' => 'captcha'
-        ),
     ),
     'buttons'        => array(
         'submit' => array(
