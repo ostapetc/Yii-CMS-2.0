@@ -7,7 +7,7 @@ class BigBanners extends Portlet
         {
             return '';
         }
-        $banners = Banner::model()->authObject()->ordered()->findAll('is_big = 1 && is_active = 1');
+        $banners = Banner::model()->ordered()->findAll('is_big = 1 && is_active = 1');
 
         $banners = Banner::filter($banners);
 
