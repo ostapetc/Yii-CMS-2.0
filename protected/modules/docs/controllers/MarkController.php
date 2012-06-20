@@ -37,41 +37,6 @@ class MarkController extends CController
         $str = $this->renderFile($viewFile, array(), true);
         $str = $md->transform($str);
 
-        $this->render('tmpl',array('content'=>
-            $this->compileDocSyntax($str)
-        ));
-    }
-
-    protected function compileDocSyntax($str)
-    {
-        $str = preg_replace_callback("/\[#(\w+)\]/",array($this,'renderAnchor'),$str);
-        return $str;
-    }
-
-    protected function renderAnchor($matches)
-    {
-        return "<span id='{$matches[1]}'></span>";
-    }
-
-
-    public function error()
-    {
-
-    }
-    public function actionError()
-    {
-        if($error=Yii::app()->errorHandler->error)
-    	    {
-    	    	if(Yii::app()->request->isAjaxRequest)
-    	    	{
-    	    		echo $error['message'];
-    	    	}
-    	    	else
-    	    	{
-                    echo $error['message'];
-//    	        	$this->render('error', $error);
-    	        }
-    	    }
-
+        $this->render('tmpl',array('content'=> $str));
     }
 }
