@@ -113,9 +113,6 @@ class Banner extends ActiveRecord
             'sortable'       => array(
                 'class' => 'ext.sortable.SortableBehavior'
             ),
-            'AuthObject'     => array(
-                'class' => 'application.components.activeRecordBehaviors.AuthObjectBehavior'
-            )
         ));
 
         return $behaviors;
@@ -124,7 +121,7 @@ class Banner extends ActiveRecord
 
     public function search($is_big)
     {
-        $criteria = $this->model()->authObject('Edit')->getDbCriteria();
+        $criteria = $this->model()->getDbCriteria();
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('image', $this->image, true);
