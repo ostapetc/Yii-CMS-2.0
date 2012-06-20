@@ -1,6 +1,3 @@
-<?php
-$this->beginWidget('CMarkdown', array('purifyOutput'=> true));
-?>
 #Примеры для верстальщиков
 
 
@@ -681,8 +678,3 @@ form input.input-middle {
 9. Для форм используйте: input[type=val](использовать [att~=val],[att|=val],[att^=val] думаю не стоит)
 10. block элементы не должны располагаться в inline элементах (это bad practices)
 
-
-
-<?php
-$this->endWidget();
-?>

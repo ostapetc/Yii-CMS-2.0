@@ -13,7 +13,7 @@ class MarkController extends CController
         );
     }
 
-    public function actionIndex($view, $folder = '')
+    public function actionIndex($view = 'index', $folder = '')
     {
         $md = new CMarkdown;
         if ($folder)
