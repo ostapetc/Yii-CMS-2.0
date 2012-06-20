@@ -1,7 +1,7 @@
 <?
 class DocsModule extends WebModule
 {
-    public static $active = false;
+    public static $active = true;
 
 
     public static function name()
@@ -29,6 +29,14 @@ class DocsModule extends WebModule
 			'docs.portlets.*',
 		));
 	}
+
+    public static function routes()
+    {
+        return array(
+            '/docs/module/<module:.*>/<view:.*>' => '/docs/mark/module',
+            '/docs/base/<view:\w*>/' => '/docs/mark/index',
+        );
+    }
 
 
     public static function adminMenu()
