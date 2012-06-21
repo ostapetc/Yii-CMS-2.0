@@ -1031,7 +1031,7 @@ EOD;
 			$options['url']=self::normalizeUrl($options['url']);
 		if(!isset($options['cache']))
 			$options['cache']=false;
-		if(!isset($options['data']) && isset($options['type']))
+        if(!isset($options['data']) && isset($options['type']))
 			$options['data']='js:jQuery(this).parents("form").serialize()';
 		foreach(array('beforeSend','complete','error','success') as $name)
 		{

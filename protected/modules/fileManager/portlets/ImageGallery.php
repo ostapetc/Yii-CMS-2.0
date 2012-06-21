@@ -10,33 +10,23 @@ class ImageGallery extends BaseFileListView
         'closeEffect' => 'fade',
         'prevEffect' => 'fade',
         'nextEffect' => 'fade',
+        'minWidth' => '800px',
+        'autoCenter' => false,
+        'mouseWheel' => false,
         'helpers'	=> array(
 			'title'	=> array(
-				'type' => 'outside'
+				'type' => 'over'
 			),
-            'overlay'	=> array(
-                'opacity' => 0.8,
-                'css' => array(
-                    'background-color' => '#000'
-                    )
-                ),
-            'thumbs' => array(
-                'width'	=> 50,
-                'height' => 50
-            ),
-            'buttons' => array(),
+            'overlay'	=> null,
             'media' => array(),
-        )
+        ),
     );
 
-    public $carouselOptions = array();
-    public $defalultCarouselOptions = array(
-        'scroll' => 1
-    );
-    public $enablePagination = false;
     public $itemView ='fileManager.portlets.views.imageGalleryItem';
     public $itemsTagName = 'ul';
+    public $enablePagination = false;
 
+    public $sortableAction = '/fileManager/fileManagerAdmin/savePriority';
 
     public $size = array(
         'width' => 100,
@@ -45,6 +35,10 @@ class ImageGallery extends BaseFileListView
 
     public function init()
     {
+        $this->attachBehavior('sortable', array(
+            'class' => 'application.components.zii.behaviors.SortableBehavior',
+            'saveUrl'=>Yii::app()->createUrl($this->sortableAction)
+        ));
         parent::init();
         $this->registerScripts();
     }
@@ -52,18 +46,15 @@ class ImageGallery extends BaseFileListView
     public function registerScripts()
     {
         $id = $this->htmlOptions['id'];
-        $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
-        $carouselOptions = CJavaScript::encode(CMap::mergeArray($this->defalultCarouselOptions, $this->carouselOptions));
         $assets = $this->assets.'/imageGallery/';
+        $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
         Yii::app()->clientScript
-            ->registerScriptFile($assets.'fancybox/jquery.fancybox.pack.js')
+            ->registerScriptFile($assets.'fancybox/jquery.fancybox.js')
             ->registerCssFile($assets.'fancybox/jquery.fancybox.css')
-            ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-buttons.js')
-            ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-buttons.css')
-            ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.js')
-            ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-thumbs.css')
             ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-media.js')
-            ->registerScriptFile($assets.'jcarousel/jquery.jcarousel.js')
-            ->registerScript($id, "$('#$id a').fancybox($options); $('#{$this->getId()} .{$this->itemsCssClass}').jcarousel($carouselOptions)");
+            ->registerCssFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.css')
+            ->registerScriptFile($assets.'fancybox/helpers/jquery.fancybox-vkstyle.js')
+            ->registerScript($id, "$('#$id a').fancybox($options); ");
     }
+
 }

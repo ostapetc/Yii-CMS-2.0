@@ -334,6 +334,9 @@ class EMigrateCommand extends MigrateCommand
 		foreach($this->_runModulePaths as $module => $path)
 		{
 			$this->migrationPath = Yii::getPathOfAlias($path);
+            if (!is_dir($this->migrationPath)) {
+                continue;
+            }
 			foreach(parent::getNewMigrations() as $migration) {
 				if ($this->_scopeAddModule) {
 					$migrations[$migration] = $module.$this->moduleDelimiter.$migration;

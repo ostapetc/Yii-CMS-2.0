@@ -203,14 +203,14 @@ abstract class ActiveRecord extends CActiveRecord
     public function in($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
-        return $this->owner;
+        return $this;
     }
 
 
     public function notIn($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addNotInCondition($row, $values, $operator);
-        return $this->owner;
+        return $this;
     }
 
 
@@ -330,5 +330,21 @@ abstract class ActiveRecord extends CActiveRecord
         }
 
         return $array;
+    }
+
+    public function getNewAttachedModel($model_class)
+    {
+        $attach = new $model_class();
+        $attach->model_id = get_class($this);
+        if ($this->getIsNewRecord())
+        {
+            $attach->object_id = 'tmp_' . get_class($this) . '_' . Yii::app()->user->id;
+        }
+        else
+        {
+            $attach->object_id = $this->getPrimaryKey();
+        }
+
+        return $attach;
     }
 }

@@ -4,7 +4,15 @@ class FileManagerController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "DownloadFile" => "Скачать файл",
+            "downloadFile" => "Скачать файл",
+        );
+    }
+
+
+    public function actions()
+    {
+        return array(
+            'fileApi.' => 'fileManager.components.FileApiActionProvider',
         );
     }
 

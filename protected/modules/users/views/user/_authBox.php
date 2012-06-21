@@ -1,22 +1,3 @@
-<script type="text/javascript">
-    $(function() {
-//        var login_modal = $('#login-modal').modal({show : false}) ;
-//
-//        $('#login-link').click(function() {
-//            showLoginModal();
-//            return false;
-//        });
-//
-//        function showLoginModal() {
-//            login_modal.modal('show');
-//
-//            $.get('/users/user/login/popup/1', function(html) {
-//                login_modal.find('.modal-body').html(html);
-//            });
-//        }
-    });
-</script>
-
 <? if (Yii::app()->user->isGuest): ?>
     <li><?= CHtml::link('Войти', '/login?redirect=' . $_SERVER['REQUEST_URI'], array('class' => 'show-modal-link', 'data-modal-id' => 'login-modal')); ?></li>
     <li><?= CHtml::link('Регистрация', '/registration', array('class' => 'show-modal-link', 'data-modal-id' => 'registration-modal')); ?></li>

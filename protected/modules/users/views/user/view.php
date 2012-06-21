@@ -1,0 +1,33 @@
+<br/>
+<div class="row">
+    <div class="span2">
+<?
+$avatar_size = array('width' => 170, 'height' => 100);
+$avatar = ImageHelper::thumb(pathinfo($model->photo, PATHINFO_DIRNAME), basename($model->photo), $avatar_size, true);
+echo $avatar->isRealImage() ? $avatar : ImageHelper::placeholder($avatar_size);
+?>
+    </div>
+    <div class="span3">
+        <table class="table table-bordered table-striped">
+            <tbody>
+            <? if ($model->name) { ?>
+                <tr>
+                    <td>Имя</td>
+                    <td><?= $model->name ?></td>
+                </tr>
+            <? } ?>
+            <? if ($model->email) { ?>
+                <tr>
+                    <td>Email</td>
+                    <td><?= $model->email ?></td>
+                </tr>
+            <? } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?
+$this->beginClip('sidebar');
+    echo CHtml::link('Альбомы пользователя', $this->createUrl('/fileManager/fileAlbum/userAlbums', array('userId' => $model->id)));
+$this->endClip('sidebar');

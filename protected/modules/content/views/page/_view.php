@@ -60,7 +60,7 @@
         </div>
 
         <div class="comments">
-            <a href="<?= $data->href ?>#comments" title="Читать комментарии"><span class="all"><?= $data->comments_count ?></span> </a>
+<!--            <a href="--><?//= $data->href ?><!--#comments" title="Читать комментарии"><span class="all">--><?//= $data->comments_count ?><!--</span> </a>-->
         </div>
     </div>
 </div>

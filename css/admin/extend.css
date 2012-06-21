@@ -1,41 +1,3 @@
-.icon-sortable{
-    width:               16px;
-    height:              16px;
-    line-height:         16px;
-    background-image:    url("/img/icons/sort.png");
-    background-repeat:   no-repeat;
-    background-position: 0 0;
-    cursor:              pointer;
-}
-
-.icon-loader{
-    width:               16px;
-    height:              16px;
-    line-height:         16px;
-    background-image:    url("/img/icons/ajax-loader.gif");
-    background-repeat:   no-repeat;
-    background-position: 0 0;
-}
-
-.icon-ok-btn{
-    width:               16px;
-    height:              16px;
-    line-height:         16px;
-    background-image:    url("/img/icons/ok_16.png");
-    background-repeat:   no-repeat;
-    background-position: 0 0;
-    cursor:              pointer;
-}
-
-.icon-cancel-btn{
-    width:               16px;
-    height:              16px;
-    line-height:         16px;
-    background-image:    url("/img/icons/cancel_16.png");
-    background-repeat:   no-repeat;
-    background-position: 0 0;
-    cursor:              pointer;
-}
 a.btn:hover, a.btn:visited, a.btn:link{
     color: #FFF;
 }
@@ -75,6 +37,7 @@ ul ul{
     background-position:  10px 6px;
     padding-left: 30px;
 }
+
 #select-lang-form dd{
     padding: 0;
     margin-left: 0;

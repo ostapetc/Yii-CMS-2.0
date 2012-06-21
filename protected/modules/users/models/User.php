@@ -220,6 +220,18 @@ class User extends ActiveRecord
     public function relations()
     {
         return array(
+            'file_albums' => array(
+                self::HAS_MANY ,
+                'FileAlbum',
+                'object_id',
+                'condition' => "model_id = '".get_class($this)."'"
+            ),
+            'file_albums_count' => array(
+                self::STAT ,
+                'FileAlbum',
+                'object_id',
+                'condition' => "model_id = '".get_class($this)."'"
+            ),
             'assignment' => array(
                 self::HAS_ONE,
                 'AuthAssignment',
@@ -327,45 +339,4 @@ class User extends ActiveRecord
         return Yii::app()->createUrl('/user/' . $this->id);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

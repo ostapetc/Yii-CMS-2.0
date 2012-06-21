@@ -65,6 +65,11 @@ class LanguagesBehavior extends ActiveRecordBehavior
 
     public function beforeFormInit($event)
     {
+        if (!$event->sender->add_elements_from_behaviors)
+        {
+            return true;
+        }
+
         $elements = $event->sender->getElements();
         $meta = $this->owner->meta();
         $languages = Language::getList();
