@@ -15,15 +15,15 @@ class NotObjectAuthorValidator extends CValidator
             return;
         }
 
-        $object = ActiveRecord::model($object->model_id)->findByPk($object->object_id);
-        if (!$object)
+        $model = ActiveRecord::model($object->model_id)->findByPk($object->object_id);
+        if (!$model)
         {
             return;
         }
 
-        if ($object->user_id == Yii::app()->user->id)
+        if ($model->user_id == Yii::app()->user->id)
         {
-            $this->addError($object, $attribute, "Автору объекта запрещено!");
+            $this->addError($object, 'object_id', "Автору объекта запрещено!");
         }
     }
 }

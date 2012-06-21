@@ -45,6 +45,7 @@ class FavoritePortlet extends Portlet
         $this->render('FavoritePortlet', array(
             'model_id'  => $model_id,
             'object_id' => $object_id,
+            'model'     => $this->model,
             'count'     => $count,
             'added'     => $added,
             'guest_msg' => t('Только зарегистрированные пользователи могут добавлять посты в избранное'),

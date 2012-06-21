@@ -14,6 +14,8 @@ class Page extends ActiveRecord
         self::STATUS_DRAFT       => 'черновик'
     );
 
+    public $sections_ids;
+
 
     public function name()
     {
@@ -73,7 +75,7 @@ class Page extends ActiveRecord
                 'filter' => 'strip_tags'
             ),
             array(
-                'id, title, url, text, date_create', 'safe',
+                'id, title, url, text, status, date_create', 'safe',
                 'on'=> 'search'
             ),
             array(
@@ -85,6 +87,14 @@ class Page extends ActiveRecord
                 'user_id',
                 'numerical',
                 'integerOnly' => true
+            ),
+            array(
+                'sections_ids',
+                'safe',
+                'on' => array(
+                    self::SCENARIO_CREATE,
+                    self::SCENARIO_UPDATE
+                )
             )
         );
     }
@@ -115,6 +125,22 @@ class Page extends ActiveRecord
                 'Comment',
                 'object_id',
                 'condition' => 'model_id = "Page"'
+            ),
+            'user' => array(
+                self::BELONGS_TO,
+                'User',
+                'user_id'
+            ),
+            'sections_rels' => array(
+                self::HAS_MANY,
+                'PageSectionRel',
+                'page_id'
+            ),
+            'sections' => array(
+                self::HAS_MANY,
+                'PageSection',
+                'section_id',
+                'through' => 'sections_rels'
             )
         );
     }
@@ -137,6 +163,17 @@ class Page extends ActiveRecord
                  'pageSize' => self::PAGE_SIZE
              )
         ));
+    }
+
+
+    public function attributeLabels()
+    {
+        return array_merge(
+            parent::attributeLabels(),
+            array(
+                 'sections_ids' => t('Разделы')
+            )
+        );
     }
 
 
@@ -183,5 +220,30 @@ class Page extends ActiveRecord
         }
 
         return $content;
+    }
+
+
+    public function statusValue()
+    {
+        if (isset(self::$status_options[$this->status]))
+        {
+            return self::$status_options[$this->status];
+        }
+    }
+
+
+    public function updateSectionsRels()
+    {
+        if (!is_array($this->sections_ids)) return;
+
+        PageSectionRel::model()->deleteAll('page_id = ' . $this->id);
+
+        foreach ($this->sections_ids as $section_id)
+        {
+            $rel = new PageSectionRel();
+            $rel->section_id = $section_id;
+            $rel->page_id    = $this->id;
+            $rel->save();
+        }
     }
 }

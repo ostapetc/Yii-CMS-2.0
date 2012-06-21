@@ -2,10 +2,10 @@
 return CMap::mergeArray(require('main.php'), array(
     'components' => array(
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=cmf2',
+            'connectionString' => 'mysql:host=openserver;dbname=yiicms',
             'emulatePrepare'   => true,
-            'username'         => 'root',
-            'password'         => '',
+            'username'         => 'mysql',
+            'password'         => 'mysql',
             'charset'          => 'utf8',
             'enableProfiling'  => true,
         ),

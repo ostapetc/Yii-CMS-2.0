@@ -21,7 +21,8 @@ body {
 }
 
 .span10 {
-    width: 830px;
+    width: 815px;
+    padding-right: 15px;
 }
 
 .subnav {
@@ -77,4 +78,14 @@ body {
 
 .portlet-content {
     display: inline !important;
+}
+
+.span4 {
+    width: 324px;
+    margin-left: 0 !important;
+}
+
+.user-link {
+    color: #f5f5f5 !important;
+    text-decoration: underline !important;
 }

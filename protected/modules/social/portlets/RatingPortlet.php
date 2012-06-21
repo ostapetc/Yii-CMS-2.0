@@ -36,10 +36,27 @@ class RatingPortlet extends Portlet
             $rating = Rating::getHtml($rating);
         }
 
+        $model_id = get_class($this->model);
+
+        if (!Yii::app()->user->isGuest)
+        {
+            $exists = Rating::model()->existsByAttributes(array(
+                'user_id'   => Yii::app()->user->id,
+                'object_id' => $this->model->id,
+                'model_id'  => $model_id
+            ));
+        }
+        else
+        {
+            $exists = false;
+        }
+
         $this->render('RatingPortlet', array(
             'object_id' => $this->model->id,
-            'model_id'  => get_class($this->model),
-            'rating'    => $rating
+            'user_id'   => $this->model->user_id,
+            'model_id'  => $model_id,
+            'rating'    => $rating,
+            'exists'    => $exists
         ));
     }
 }

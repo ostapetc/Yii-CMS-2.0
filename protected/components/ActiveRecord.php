@@ -85,7 +85,7 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = 'format' . ucfirst(StringHelper::underscoreToCamelcase($attribute));
+        $method_name = lcfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
         if (method_exists($this, $method_name))
         {
             return $this->$method_name();
@@ -332,6 +332,7 @@ abstract class ActiveRecord extends CActiveRecord
         return $array;
     }
 
+
     public function getNewAttachedModel($model_class)
     {
         $attach = new $model_class();
@@ -346,5 +347,17 @@ abstract class ActiveRecord extends CActiveRecord
         }
 
         return $attach;
+    }
+
+
+    public function existsByAttributes($attributes)
+    {
+        $criteria = new CDbCriteria();
+        foreach ($attributes as $attribute => $value)
+        {
+            $criteria->compare($attribute, $value);
+        }
+
+        return $this->exists($criteria);
     }
 }

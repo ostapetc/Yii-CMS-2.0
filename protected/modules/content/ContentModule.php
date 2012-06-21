@@ -45,10 +45,12 @@ class ContentModule extends WebModule
     public static function routes()
     {
         $routes = array(
-            '/'                     => 'content/page/index',
-            '/page/<id:\d+>'        => 'content/page/view',
-            '/page/create'          => 'content/page/create',
-            '/page/update/<id:\d+>' => 'content/page/update',
+            '/'                          => 'content/page/index',
+            '/page/<id:\d+>'             => 'content/page/view',
+            '/page/create'               => 'content/page/create',
+            '/page/update/<id:\d+>'      => 'content/page/update',
+            '/page/user/<user_id:\d+>/*' => 'content/page/userPages',
+            '/page/section/<section_id:\d+>/*'   => 'content/page/sectionPages'
         );
 
         return $routes;

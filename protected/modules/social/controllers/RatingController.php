@@ -25,6 +25,7 @@ class RatingController extends Controller
 
         $rating = new Rating();
         $rating->attributes = $_POST['Rating'];
+
         if ($rating->save())
         {
             $rating = Rating::getValue($rating->model_id, $rating->object_id);

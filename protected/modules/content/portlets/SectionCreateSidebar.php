@@ -6,10 +6,10 @@
  * Time: 22:56
  * To change this template use File | Settings | File Templates.
  */
-class SectionCreate extends Portlet
+class SectionCreateSidebar extends Portlet
 {
     public function renderContent()
     {
-        $this->render('SectionCreate');
+        $this->render('SectionCreateSidebar');
     }
 }

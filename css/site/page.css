@@ -65,6 +65,7 @@
     line-height: 13px !important;
     margin-top: 10px !important;
     clear: both;
+    min-width: 400px;
 }
 
 .page .infopanel .novote {
@@ -77,87 +78,87 @@
 .page .infopanel .voting {
     float: left;
     position: relative;
-    padding: 0px 20px;
+    padding: 0px 5px;
     margin: 6px 0;
     margin-right: 23px;
 }
 
 /* еще не голосовал - не подсвечиваем ни чего. стрелки обычные, не затененные. */
-.page .infopanel .voting .plus {
-    width: 11px;
-    height: 15px;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0px;
-}
+/*.page .infopanel .voting .plus {*/
+    /*width: 11px;*/
+    /*height: 15px;*/
+    /*display: block;*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0px;*/
+/*}*/
 
-.page .infopanel .voting .minus {
-    width: 11px;
-    height: 15px;
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 0px;
-}
+/*.page .infopanel .voting .minus {*/
+    /*width: 11px;*/
+    /*height: 15px;*/
+    /*display: block;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 0px;*/
+/*}*/
 
-.page .infopanel .voting a.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll left bottom transparent;
-}
+/*.page .infopanel .voting a.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll left bottom transparent;*/
+/*}*/
 
-.page .infopanel .voting a.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll -11px bottom transparent;
-}
+/*.page .infopanel .voting a.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll -11px bottom transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted a.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right top transparent;
-}
+/*.page .infopanel .voting.voted a.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right top transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted a.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;
-}
+/*.page .infopanel .voting.voted a.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;*/
+/*}*/
 
-.page .infopanel .voting span.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right top transparent;
-}
+/*.page .infopanel .voting span.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right top transparent;*/
+/*}*/
 
-.page .infopanel .voting span.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;
-}
+/*.page .infopanel .voting span.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;*/
+/*}*/
 
 /* проголосовал в плюс - подсвечиваем стрелку вверх и затемняем стрелку вниз*/
-.page .infopanel .voting.voted_plus a.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll left top transparent;
-}
+/*.page .infopanel .voting.voted_plus a.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll left top transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted_plus span.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll left top transparent;
-}
+/*.page .infopanel .voting.voted_plus span.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll left top transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted_plus a.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;
-}
+/*.page .infopanel .voting.voted_plus a.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted_plus span.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;
-}
+/*.page .infopanel .voting.voted_plus span.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll right bottom transparent;*/
+/*}*/
 
 /* проголосовал в минус - подсвечиваем стрелку вниз и затемняем стрелку вверх */
-.page .infopanel .voting.voted_minus a.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll top right transparent;
-}
+/*.page .infopanel .voting.voted_minus a.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll top right transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted_minus span.plus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll top right transparent;
-}
+/*.page .infopanel .voting.voted_minus span.plus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll top right transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted_minus a.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll -11px top transparent;
-}
+/*.page .infopanel .voting.voted_minus a.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll -11px top transparent;*/
+/*}*/
 
-.page .infopanel .voting.voted_minus span.minus {
-    background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll -11px top transparent;
-}
+/*.page .infopanel .voting.voted_minus span.minus {*/
+    /*background: url("/img/icons/icons_vote_pages.gif") no-repeat scroll -11px top transparent;*/
+/*}*/
 
 /* общий балл не известен */
 .page .infopanel .voting .mark {
@@ -321,6 +322,9 @@
     font-weight: 700;
     background: url("/img/icons/bg-comments2.gif") no-repeat left 8px;
     padding-left: 17px;
+    /*height: 22px;*/
+    /*width: auto !important;*/
+    /*border:1px solid red;*/
 }
 
 .page .infopanel .comments a {
@@ -343,4 +347,11 @@
 .page {
     margin-bottom: 40px !important;
     clear: both !important;
+}
+
+
+.page-update, .page-update:hover {
+    color: #B94A48;
+    font-size: 14px;
+    text-decoration: underline;
 }

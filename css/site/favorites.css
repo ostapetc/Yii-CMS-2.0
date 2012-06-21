@@ -29,7 +29,7 @@
 
 .favorite a.added {
     cursor: help;
-    background: url("/img/icons/favs.gif") no-repeat left bottom;
+    background: url("/img/icons/favs.gif") no-repeat left top;
 }
 
 .favs_count {

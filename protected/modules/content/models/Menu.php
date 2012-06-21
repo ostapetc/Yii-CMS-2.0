@@ -22,7 +22,7 @@ class Menu extends ActiveRecord
         return 'menu';
     }
 
-
+    
     public function rules()
     {
         return array(
@@ -104,12 +104,7 @@ class Menu extends ActiveRecord
 
         foreach ($sections as $i => $section)
         {
-            if (!$section->is_published)
-            {
-                unset($sections[$i]);
-            }
-
-            if ($section->page && !$section->page->is_published)
+            if (!$section->is_published || ($section->page && !$section->page->is_published))
             {
                 unset($sections[$i]);
             }

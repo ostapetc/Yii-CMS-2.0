@@ -58,6 +58,7 @@ textarea {
 }
 
 .wide-from input[type=text], .wide-from select, .wide-from textarea {
-    width: 100% !important;
+    /*width: 100% !important;*/
+    width: 790px !important;
 }
 

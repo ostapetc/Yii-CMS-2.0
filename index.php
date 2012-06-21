@@ -91,3 +91,11 @@ Yii::createWebApplication($config)->run();
 //{
 //    echo "<div style='padding-left: " . (10 * $comment->level) . "px'>{$comment->text}</div>";
 //}
+
+
+//$pages = Page::model()->findAll();
+//foreach ($pages as $page)
+//{
+//    $page->title = $page->title . '(' . $page->id . ')';
+//    $page->save();
+//}

@@ -1,12 +1,12 @@
 .rating {
     float: right;
-    margin-top: 10px;
 }
 .rating-value {
     float: left;
     font-weight: bold;
     line-height: 15px;
     margin-right: 5px;
+    display: block;
 }
 
 .rating-vote {

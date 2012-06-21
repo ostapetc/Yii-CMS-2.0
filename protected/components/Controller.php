@@ -235,9 +235,12 @@ abstract class Controller extends CController implements ControllerInterface
     {
         if (isset($_GET['popup']))
         {
-            $view = array_shift($params);
-            $params['popup'] = 1;
-            array_unshift($params, $view);
+            if (is_array($params))
+            {
+                $view = array_shift($params);
+                $params['popup'] = 1;
+                array_unshift($params, $view);
+            }
         }
 
         parent::redirect($params);

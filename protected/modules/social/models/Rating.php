@@ -48,8 +48,15 @@ class Rating extends ActiveRecord
                 'ObjectExistsValidator'
             ),
             array(
-                'object_id',
+                'user_id',
                 'NotObjectAuthorValidator'
+            ),
+            array(
+                'user_id',
+                'MultiUniqueValidator',
+                'unique_attributes' => array(
+                    'user_id', 'object_id', 'model_id'
+                )
             ),
             array(
                 'value', 'in', 'range' => array('1', '-1')
