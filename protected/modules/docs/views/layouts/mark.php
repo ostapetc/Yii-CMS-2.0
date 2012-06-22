@@ -37,12 +37,14 @@
 </script>
 <div>
     <?php
+
     $conventions  = array(
         'Стандарты именования и кодирования'=> '/conventions/naming',
         'Структура директорий'              => '/conventions/directoryStructure',
         'Написание основных компонентов'    => '/conventions/mvc',
         'Совместная работа над проектом'    => '/conventions/cooperation',
     );
+
     $main_themes  = array(
         'ActiveRecordModel' => '/mainThemes/activeRecordModel',
         'GridView'          => '/mainThemes/gridView',
@@ -80,13 +82,12 @@
         {
             echo '<li>';
             $data = $val == '' ? array('class' => 'no-complete') : array();
-            echo CHtml::link($key, '/index.php' . $val, $data);
+            echo CHtml::link($key, '/docs/base'.$val, $data);
             echo '</li>';
         }
         echo '</ul>';
     }
     ?>
-
     <div id="header">
         <table style="width: 98%;" border="0" cellpadding="0" cellspacing="0">
             <tbody>
