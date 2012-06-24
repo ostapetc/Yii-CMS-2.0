@@ -85,7 +85,7 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = 'format' . ucfirst(StringHelper::underscoreToCamelcase($attribute));
+        $method_name = lcfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
         if (method_exists($this, $method_name))
         {
             return $this->$method_name();
@@ -200,14 +200,14 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function inArray($row, $values, $operator = 'AND')
+    public function in($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
         return $this;
     }
 
 
-    public function notInArray($row, $values, $operator = 'AND')
+    public function notIn($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addNotInCondition($row, $values, $operator);
         return $this;
@@ -258,6 +258,16 @@ abstract class ActiveRecord extends CActiveRecord
         }
 
         return $result;
+    }
+
+
+    public function authObject()
+    {
+        $object_ids = AuthObject::model()->getObjectsIds(get_class($this), Yii::app()->user->role);
+
+        $criteria = $this->getDbCriteria();
+        $criteria->addInCondition('id', $object_ids);
+        return $this;
     }
 
 
@@ -322,6 +332,7 @@ abstract class ActiveRecord extends CActiveRecord
         return $array;
     }
 
+
     public function getNewAttachedModel($model_class)
     {
         $attach = new $model_class();
@@ -338,4 +349,15 @@ abstract class ActiveRecord extends CActiveRecord
         return $attach;
     }
 
+
+    public function existsByAttributes($attributes)
+    {
+        $criteria = new CDbCriteria();
+        foreach ($attributes as $attribute => $value)
+        {
+            $criteria->compare($attribute, $value);
+        }
+
+        return $this->exists($criteria);
+    }
 }

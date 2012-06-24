@@ -61,7 +61,7 @@ class UserController extends Controller
                 $identity = new UserIdentity($model->email, $model->password);
                 if ($identity->authenticate())
                 {
-                    $this->redirect('/');
+                    $this->redirect(isset($_GET['redirect']) ? $_GET['redirect'] : '/');
                 }
                 else
                 {

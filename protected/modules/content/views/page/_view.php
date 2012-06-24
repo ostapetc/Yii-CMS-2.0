@@ -1,13 +1,22 @@
 <div class="page">
     <? if ($preview): ?>
-        <h1 class="page-title"><?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?></h1>
+        <h1 class="page-title">
+            <?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?>
+
+            <? if (Yii::app()->user->checkAccess('Page_update')): ?>
+            <?= CHtml::link(t('редактировать'), $this->createUrl('update', array('id' => $data->id)), array('class' => 'page-update')); ?>
+            <? endif ?>
+        </h1>
     <? endif ?>
 
-    <div class="sections">
-        <a title="Вы не подписаны на этот хаб" class="section " href="http://habrahabr.ru/hub/copyright/">Копирайт</a>,
-        <a title="Вы не подписаны на этот хаб" class="section " href="http://habrahabr.ru/hub/oracle/">Oracle</a>,
-        <a title="Вы не подписаны на этот хаб" class="section " href="http://habrahabr.ru/hub/google/">Google</a>
-    </div>
+    <? if ($data->sections): ?>
+        <div class="sections">
+            <? foreach ($data->sections as $i => $section): ?>
+                <? if ($i > 0): ?>,  <? endif; ?>
+                <?= CHtml::link($section->name, $this->createUrl('/page/section/' . $section->id), array('class' => 'section', 'title' => $section->name)); ?>
+            <? endforeach ?>
+        </div>
+    <? endif ?>
 
     <? if (isset($preview) && $preview): ?>
         <?= array_shift(explode('{{cut}}', $data->text)); ?>
@@ -15,17 +24,6 @@
     <? else: ?>
         <?= $data->text ?>
     <? endif ?>
-
-    <?
-//жутко гадит в консоль ошибками
-//    $this->widget('fileManager.portlets.ImageGallery', array(
-//        'model' => $data,
-//        'tag' => 'gallery',
-//        'cssFile' => '/css/site/post_image_carousel.css',
-//        'htmlOptions' => array('class'=>'post_image_carousel'),
-//        'size' => array('width'=>150, 'height' => 200)
-//    ))
-    ?>
 
     <ul class="tags">
         <? foreach ($data->tags as $i => $tag): ?>
@@ -36,35 +34,20 @@
 
     <div class="infopanel">
         <div class="voting">
-            <? if (Yii::app()->user->isGuest): ?>
-                <span title="Голосовать могут только зарегистрированные пользователи" class="plus"></span>
-                <span title="Голосовать могут только зарегистрированные пользователи" class="minus"></span>
-            <? else: ?>
-                <a title="Голосовать за" class="plus"></a>
-                <a title="Голосовать против" class="minus"></a>
-            <? endif ?>
-
-
-            <div class="mark">
-                <span title="Результат голосования виден только авторизованным пользователям" class="score">&mdash;</span>
-            </div>
+            <?= $this->widget('RatingPortlet', array('model' => $data)); ?>
         </div>
 
-        <div class="published">23 мая 2012, 22:28</div>
+        <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
-        <div class="favorite">
-            <a title="Только зарегистрированные пользователи могут добавлять посты в избранное" onclick="return false;" href="#" class="guest"></a>
-        </div>
-
-        <div title="Количество пользователей, добавивших пост в избранное" class="favs_count">12</div>
+        <? $this->widget('FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
-            <a href="http://habrahabr.ru/users/Mairon/" title="Автор текста">Mairon</a>
-            <span title="рейтинг пользователя" class="rating">472,1</span>
+            <a href="<?= $data->user->href ?>" title="Автор текста"><?= $data->user->name ?></a>
+            <span title="рейтинг пользователя" class="rating"><?= $data->user->rating ?></span>
         </div>
 
         <div class="comments">
-<!--            <a href="--><?//= $data->href ?><!--#comments" title="Читать комментарии"><span class="all">--><?//= $data->comments_count ?><!--</span> </a>-->
+            <a href="<?= $data->href ?>#comments" title="Читать комментарии"><span class="all"><?= $data->comments_count ?></span> </a>
         </div>
     </div>
 </div>

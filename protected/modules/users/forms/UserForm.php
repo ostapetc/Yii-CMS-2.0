@@ -1,6 +1,6 @@
 <?
 
-$roles = AuthItem::model()->findAllByAttributes(array('type' => AuthItem::TYPE_ROLE));
+$roles = AuthItem::model()->findAllByAttributes(array('type' => CAuthItem::TYPE_ROLE));
 
 return array(
     'activeForm'     => array(

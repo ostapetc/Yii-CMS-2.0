@@ -10,8 +10,6 @@ abstract class Controller extends CController implements ControllerInterface
     const MSG_ERROR   = 'error';
     const MSG_INFO    = 'info';
 
-    public static $msg_types = array(self::MSG_DANGER, self::MSG_ERROR, self::MSG_INFO, self::MSG_SUCCESS);
-
     public $layout = '//layouts/main';
 
     public $page_title;
@@ -26,9 +24,6 @@ abstract class Controller extends CController implements ControllerInterface
 
     public $is_ssl_protected = false;
 
-    public $system_actions = array(
-        'captcha','help','error'
-    );
 
     public function filters()
     {
@@ -67,19 +62,11 @@ abstract class Controller extends CController implements ControllerInterface
     {
         $action_name = lcfirst($action->id);
 
-        if (in_array($action_name, $this->system_actions))
-        {
-            return true;
-        }
-        else
-        {
-            $item_name = AuthItem::constructName(Yii::app()->controller->id, $action_name);
-        }
-
-        $this->setTitle($this->actionsTitles(), $action_name);
+        $this->setTitle($action_name);
 
         return true;
     }
+
 
     public function afterAction($action)
     {
@@ -96,45 +83,16 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    /**
-     * Set pageTitle if empty.
-     * Support actionProviders, see {@link CController::actions}, as ProviderClass::actionsTitles()
-     *
-     * @param array $action_titles
-     * @param string $action_name
-     *
-     * @return mixed
-     * @throws CException
-     */
-    public function setTitle($action_titles, $action_name)
+    public function setTitle($action_name)
     {
-        $pos=strpos($action_name, '.');
-        if($pos===false && isset($action_titles[$action_name]))
+        $action_titles = $this->actionsTitles();
+
+        if (!isset($action_titles[$action_name]))
         {
-            return $this->page_title = $action_titles[$action_name];
-        }
-        else if($pos===false)
-        {
-            throw new CException('Не найден заголовок для дейсвия ' . $action_name);
+            throw new CHttpException('Не найден заголовок для дейсвия ' . $action_name);
         }
 
-		// the action is defined in a provider
-		$prefix = substr($action_name, 0, $pos+1);
-        $actions = $this->actions();
-        if (!isset($actions[$prefix]))
-        {
-            throw new CException('Не найден заголовок для дейсвия ' . $action_name);
-        }
-
-		$action_name = (string)substr($action_name, $pos+1);
-
-		$provider = $actions[$prefix];
-        $provider_alias = is_string($provider) ? $provider : $provider['class'];
-
-		$class = Yii::import($provider_alias, true);
-		$map = call_user_func(array($class, 'actionsTitles'));
-
-		$this->setTitle($map, $action_name);
+        $this->page_title = $action_titles[$action_name];
     }
 
 
@@ -248,9 +206,17 @@ abstract class Controller extends CController implements ControllerInterface
 
         //profile widget
         Yii::beginProfile($profile_id);
-        $res = parent::widget($className,$properties,$captureOutput);
+        $res = parent::widget($className,$properties,true);
         Yii::endProfile($profile_id);
-        return $res;
+
+        if ($captureOutput)
+        {
+            return $res;
+        }
+        else
+        {
+            echo $res;
+        }
     }
 
 
@@ -269,9 +235,12 @@ abstract class Controller extends CController implements ControllerInterface
     {
         if (isset($_GET['popup']))
         {
-            $view = array_shift($params);
-            $params['popup'] = 1;
-            array_unshift($params, $view);
+            if (is_array($params))
+            {
+                $view = array_shift($params);
+                $params['popup'] = 1;
+                array_unshift($params, $view);
+            }
         }
 
         parent::redirect($params);

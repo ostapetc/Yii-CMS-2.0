@@ -24,11 +24,8 @@ class TagBehavior extends ActiveRecordBehavior
                 $tag_rel->tag_id    = $tag->id;
                 $tag_rel->object_id = $this->owner->id;
                 $tag_rel->model_id  = $model_id;
-
-                p($tag_rel->save());
             }
         }
-
     }
 
 

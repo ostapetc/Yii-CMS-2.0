@@ -1,7 +1,7 @@
 <?
-
-$this->page_title = 'Создание роли'; 
-
-echo $form; 
-
+$this->tabs = array(
+    'управление ролями' => $this->createUrl('manage')
+);
 ?>
+
+<?= $form ?>

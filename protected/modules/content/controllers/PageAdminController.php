@@ -47,20 +47,20 @@ class PageAdminController extends AdminController
 
 
     public function actionUpdate($id)
-   	{
-   		$model = $this->loadModel($id);
+    {
+   	$model = $this->loadModel($id);
         $form  = new Form('content.PageForm', $model);
 
         $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
-   		{
+   	{
             $this->redirect(array('view', 'id' => $model->id));
-   		}
+	}
 
-   		$this->render('update', array(
+   	$this->render('update', array(
             'form' => $form,
-   		));
+   	));
     }
 
     public function actionDelete($id)
