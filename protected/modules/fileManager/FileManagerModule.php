@@ -52,7 +52,9 @@ class FileManagerModule extends WebModule
             $criteria->mergeWith($config['criteria']);
             unset($config['criteria']);
         }
-        return new CActiveDataProvider('FileManager', CMap::mergeArray(array(
+        $dep = new CExpressionDependency($manager->max('id'));
+//        $dep = new CDbCacheDependency("SELECE MAX(id) FROM file_manager where tag='files' and model_id='FileAlbum' and object_id=18;");
+        return new CActiveDataProvider($manager->cache(3600, $dep), CMap::mergeArray(array(
             'criteria' => $criteria,
         ), $config));
     }
@@ -67,7 +69,10 @@ class FileManagerModule extends WebModule
             $criteria->mergeWith($config['criteria']);
             unset($config['criteria']);
         }
-        return new CActiveDataProvider('FileAlbum', CMap::mergeArray(array(
+//        $dep = new CDbCacheDependency("SELECE MAX(id) FROM file_manager where tag='files' and model_id='FileAlbum' and object_id=18;");
+        $dep = new CExpressionDependency($manager->max('id'));
+
+        return new CActiveDataProvider($manager->cache(3600,$dep), CMap::mergeArray(array(
             'criteria' => $criteria,
         ), $config));
     }

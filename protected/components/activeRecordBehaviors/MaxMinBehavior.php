@@ -16,13 +16,9 @@ class MaxMinBehavior extends ActiveRecordBehavior
 
     private function _getMinOrMax($attr, $min_max)
     {
-        $sql = "SELECT " . strtoupper($min_max) . "(`{$attr}`)
-                      FROM `" . $this->owner->tableName() . "`";
-
-        $res = Yii::app()->db->createCommand($sql)->queryColumn();
-        if ($res)
-        {
-            return $res[0];
-        }
+        $criteria = $this->getOwner()->getDbCriteria();
+        $criteria->select = strtoupper($min_max) . "({$attr})";
+        $cmd = Yii::app()->db->commandBuilder->createFindCommand($this->owner->tableName(), $criteria);
+        return $cmd->queryScalar();
     }
 }
