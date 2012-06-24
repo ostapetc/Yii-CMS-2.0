@@ -1,6 +1,6 @@
 <?php
 
-class Banner extends ActiveRecordModel
+class Banner extends ActiveRecord
 {
     const SIZE_WIDTH = 150;
 
