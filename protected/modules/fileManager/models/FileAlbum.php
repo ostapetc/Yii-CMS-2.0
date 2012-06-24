@@ -2,7 +2,8 @@
 
 class FileAlbum extends ActiveRecord
 {
-    const PAGE_SIZE = 20;
+    public static $image_size = array('width' => 163, 'height' => 125);
+    public static $album_size = array('width' => 260, 'height' => 220);
 
     const STATUS_ACTIVE  = 'active';
     const STATUS_DELETED = 'deleted';
@@ -122,5 +123,40 @@ class FileAlbum extends ActiveRecord
             'order'     => "$alias.order DESC"
         ));
         return $this;
+    }
+
+    public function getOwner()
+    {
+        return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
+    }
+
+    public function isAttachedTo($model)
+    {
+        if (!is_object($model))
+        {
+            return false;
+        }
+
+        if ($this->model_id == get_class($model))
+        {
+            return $this->object_id == $model->getPrimaryKey();
+        }
+        else
+        {
+            $owner = $this->getOwner();
+            if (is_object($owner) && method_exists($owner, 'isAttachedTo'))
+            {
+                return $owner->isAttachedTo($model);
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    public function userCanEdit($user = null)
+    {
+        $this->isAttachedTo(Yii::app()->user->model);
     }
 }

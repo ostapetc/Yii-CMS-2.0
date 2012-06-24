@@ -81,7 +81,7 @@
     <hr>
 
     <footer>
-        <p>Yii Environment Install</p>
+        <p>Install</p>
     </footer>
 </div>
 </body>

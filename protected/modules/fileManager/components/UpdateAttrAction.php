@@ -1,15 +1,16 @@
 <?php
 class UpdateAttrAction extends BaseFilesApiAction
 {
+    public $attributes = array();
+    public $model;
+
     public function run($id)
     {
-        $model = $this->controller->loadModel($id);
-
+        $model = $this->model ? ActiveRecord::model($this->model)->findByPk($id) : $this->controller->loadModel($id);
         $model->scenario = 'update';
-
         $this->controller->performAjaxValidation($model);
         $attr = $_POST['attr'];
-        if (isset($_POST[$attr]))
+        if (isset($_POST[$attr]) && in_array($attr , $this->attributes))
         {
             $model->$attr = trim(strip_tags($_POST[$attr]));
 

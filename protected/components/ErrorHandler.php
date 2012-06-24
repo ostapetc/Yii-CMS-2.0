@@ -23,6 +23,7 @@ class ErrorHandler extends CErrorHandler
             }
             catch(Exception $e)
             {
+                Yii::log($e->getTraceAsString(), CLogger::LEVEL_ERROR);
             }
 
             Yii::app()->user->setFlash('error', $data['message']);

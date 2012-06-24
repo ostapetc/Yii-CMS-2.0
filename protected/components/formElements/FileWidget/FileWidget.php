@@ -16,7 +16,7 @@ class FileWidget extends InputWidget
             $attribute_data = $files_data[$this->attribute];
             $directory = trim($attribute_data['dir'], '/');
 
-            $preview = ImageHelper::thumb($directory, $val, array('height'=> 128));
+            $preview = ImageHelper::thumb($directory, $val, array('width' => null, 'height'=> 128));
             $preview .= CHtml::ajaxLink('X', array('/main/helpAdmin/saveAttribute'), array(
                 'type'    => 'post',
                 'data'    => array(
@@ -30,7 +30,6 @@ class FileWidget extends InputWidget
             ), array('class'=> 'btn btn-danger delete-img'));
             echo CHtml::tag('div', array('id'=> $id), $preview);
         }
-        echo '<br/>';
         echo CHtml::activeFileField($this->model, $this->attribute, $this->htmlOptions);
     }
 }

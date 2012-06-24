@@ -13,10 +13,8 @@
             {{/if}}
         </td>
         {{else}}
-        <td class="progress-holder">
+        <td class="progress-holder start">
             <div></div>
-        </td>
-        <td class="start">
             <button>Start</button>
         </td>
         {{/if}}

@@ -16,11 +16,11 @@
 }
 
 select {
-    width: 430px;
+    width: 425px;
 }
 
 .chosen select{
-    width: 429px;
+    width: 419px;
 }
 
 textarea {
@@ -41,7 +41,7 @@ textarea {
     margin-bottom: 1px;
 }
 
-.date_picker {
+.form-vertical input.date_picker {
     width: 393px;
 }
 
@@ -61,4 +61,3 @@ textarea {
     /*width: 100% !important;*/
     width: 790px !important;
 }
-

@@ -5,12 +5,12 @@ class BannerAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'         => 'Просмотр банера',
-            'Create'       => 'Создание банера',
-            'Update'       => 'Редактирование банера',
-            'Delete'       => 'Удаление банера',
-            'Manage'       => 'Управление банерами',
-            'MovePosition' => 'Изменение приоритета банера'
+            'view'         => 'Просмотр банера',
+            'create'       => 'Создание банера',
+            'update'       => 'Редактирование банера',
+            'delete'       => 'Удаление банера',
+            'manage'       => 'Управление банерами',
+            'movePosition' => 'Изменение приоритета банера'
         );
     }
 
@@ -31,7 +31,7 @@ class BannerAdminController extends AdminController
         $this->performAjaxValidation($model);
 
         $form = $is_big == 1 ? 'BannerGigForm' : 'BannerForm';
-        $form = new BaseForm('banners.' . $form, $model);
+        $form = new Form('banners.' . $form, $model);
 
         if ($form->submitted('submit'))
         {
@@ -61,7 +61,7 @@ class BannerAdminController extends AdminController
         $model->scenario = Banner::SCENARIO_UPDATE;
 
         $this->performAjaxValidation($model);
-        $form = new BaseForm('banners.BannerForm', $model);
+        $form = new Form('banners.BannerForm', $model);
 
         if ($form->submitted('submit'))
         {

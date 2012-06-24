@@ -1,8 +1,11 @@
 $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
+    
     options:{
         version:'1.0',
         existFilesUrl:'',
-        autoUpload: true
+        autoUpload: true,
+        previewFileTypes: /^$/,
+        previewAsCanvas : false
     },
     _create:function()
     {
@@ -87,6 +90,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
             self.children('span').editable(action, options).click();
             return false;
         });
+        this.element.delegate('form', 'submit', function() {return false;});
     },
     _adaptationToBrowser:function()
     {

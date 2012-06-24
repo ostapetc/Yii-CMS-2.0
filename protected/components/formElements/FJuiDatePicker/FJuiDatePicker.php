@@ -93,7 +93,7 @@ EOD;
         else
             $field = CHtml::textField($name,$this->value,$this->htmlOptions);
 
-        echo CHtml::tag('div', array("class"=>"input-prepend"), $icon.$field);
+        echo CHtml::tag('div', array("class"=>"input-append"), $field.$icon);
 
         $options=CJavaScript::encode($this->options);
 

@@ -46,8 +46,14 @@ class FileManagerModule extends WebModule
     public function getFilesDataProvider($model, $tag, $config = array())
     {
         $manager = new FileManager();
+        $criteria = $manager->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->getDbCriteria();
+        if (isset($config['criteria']))
+        {
+            $criteria->mergeWith($config['criteria']);
+            unset($config['criteria']);
+        }
         return new CActiveDataProvider('FileManager', CMap::mergeArray(array(
-            'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->dbCriteria,
+            'criteria' => $criteria,
         ), $config));
     }
 
@@ -55,8 +61,14 @@ class FileManagerModule extends WebModule
     public function getAlbumsDataProvider($model, $config = array())
     {
         $manager = new FileAlbum();
+        $criteria = $manager->parent(get_class($model), $model->getPrimaryKey())->getDbCriteria();
+        if (isset($config['criteria']))
+        {
+            $criteria->mergeWith($config['criteria']);
+            unset($config['criteria']);
+        }
         return new CActiveDataProvider('FileAlbum', CMap::mergeArray(array(
-            'criteria' => $manager->parent(get_class($model), $model->getPrimaryKey())->dbCriteria,
+            'criteria' => $criteria,
         ), $config));
     }
 

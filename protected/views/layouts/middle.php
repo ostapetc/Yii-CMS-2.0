@@ -2,8 +2,8 @@
 
 <? Yii::app()->clientScript->registerCssFile('/css/site/middle.css'); ?>
 
-<div class="span12" style="width: 100%">
-    <div class="well middle-well">
+<div class="span12">
+    <div class="well">
         <? if ($this->page_title): ?>
             <h1><?= $this->page_title ?></h1>
         <? endif ?>

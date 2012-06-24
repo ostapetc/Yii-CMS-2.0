@@ -126,7 +126,8 @@ class FileManager extends ActiveRecord
         switch (true)
         {
             case $this->isImage:
-                $name = 'image';
+                $img = ImageHelper::thumb($this->getServerDir(), $this->name, array('width' => 48, 'height' => 48), true);
+                return $img->__toString();
                 break;
             case $this->isSound:
                 $name = 'sound';
@@ -140,13 +141,11 @@ class FileManager extends ActiveRecord
             case $this->isArchive:
                 $name = 'rar';
                 break;
-            case is_file('.' . $folder . $this->extension . '.jpg'):
-                $name = $this->extension;
-                break;
             default:
-                $name = 'any';
+                $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
                 break;
         }
+
         return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
     }
 

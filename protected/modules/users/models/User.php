@@ -4,6 +4,8 @@ class User extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 
+    const PHOTO_PATH = 'upload/photo';
+
     const STATUS_ACTIVE  = 'active';
     const STATUS_NEW     = 'new';
     const STATUS_BLOCKED = 'blocked';
@@ -109,6 +111,14 @@ class User extends ActiveRecord
                 'name',
                 'length',
                 'max' => 40
+            ),
+            array(
+                'photo', 'safe', 'on' => array(
+                    self::SCENARIO_CREATE,
+                    self::SCENARIO_REGISTRATION,
+                    self::SCENARIO_CABINET,
+                    self::SCENARIO_UPDATE
+                )
             ),
             array(
                 'name',
@@ -232,13 +242,13 @@ class User extends ActiveRecord
                 self::HAS_MANY ,
                 'FileAlbum',
                 'object_id',
-                'condition' => "model_id = '".get_class($this)."'"
+                'condition' => "file_albums.model_id = '".get_class($this)."'"
             ),
             'file_albums_count' => array(
                 self::STAT ,
                 'FileAlbum',
                 'object_id',
-                'condition' => "model_id = '".get_class($this)."'"
+                'condition' => "t.model_id = '".get_class($this)."'"
             ),
             'assignment' => array(
                 self::HAS_ONE,
@@ -331,6 +341,14 @@ class User extends ActiveRecord
         return CHtml::link($image, $this->href, array('class' => 'user-photo-link', 'width' => '23', 'height' => '23'));
     }
 
+    public function uploadFiles()
+    {
+        return array(
+            'photo' => array(
+                'dir' => self::PHOTO_PATH
+            )
+        );
+    }
 
     public function getLink()
     {
@@ -346,5 +364,6 @@ class User extends ActiveRecord
     {
         return Yii::app()->createUrl('/user/' . $this->id);
     }
+
 }
 

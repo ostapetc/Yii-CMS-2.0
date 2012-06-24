@@ -23,7 +23,6 @@ return array(
             Для вертикальных баннеров: 272 px в ширину<br/>
             Для горизонатльных баннеров: 1001x242 px'
         ),
-        'auth_objects' => array('type'     => 'AuthObjects'),
         'is_active' => array('type' => 'checkbox'),
         'date_active' => array(
             'type' => 'checkbox',

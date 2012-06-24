@@ -6,6 +6,11 @@ class Form extends CForm
     public $inputElementClass = 'FormInputElement';
     public $buttonElementClass = 'FormButtonElement';
 
+
+    public $attributes = array(
+        'enctype' => 'multipart/form-data', //eternal stupid error
+    );
+
     public $defaultActiveFormSettings = array(
         'class' => 'BootActiveForm',
         'enableAjaxValidation'=>true,
@@ -17,7 +22,7 @@ class Form extends CForm
                         hasError ? cg.addClass("error") : cg.removeClass("error");
                         hasError ? cg.removeClass("success") : cg.addClass("success");
                     }',
-        'inlineErrors' => false
+        'inlineErrors' => false,
     ));
 
 

@@ -23,7 +23,15 @@ class FileAlbumController extends Controller
         {
             $this->performAjaxValidation($model);
         }
-        $model->save(false);
+
+        if ($model->userCanEdit())
+        {
+            $model->save(false);
+        }
+        else
+        {
+            $this->forbidden();
+        }
     }
 
 
@@ -52,7 +60,7 @@ class FileAlbumController extends Controller
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        if ($model->saveFile() && $model->save())
+        if ($model->saveFile() && $model->userCanEdit() && $model->save())
         {
             $this->sendFilesAsJson(array($model));
         }

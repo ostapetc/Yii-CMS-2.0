@@ -16,6 +16,9 @@ return array(
             'type'  => 'dropdownlist',
             'items' => User::$gender_options
         ),
+        'photo' => array(
+            'type' => 'file'
+        ),
         'status'     => array(
             'type'  => 'dropdownlist',
             'items' => User::$status_options
@@ -26,10 +29,6 @@ return array(
         ),
         'password'   => array('type' => 'password'),
         'password_c' => array('type' => 'password'),
-        'captcha'    => array(
-            'type'  => 'captcha',
-            'class' => 'captcha'
-        ),
     ),
     'buttons'        => array(
         'submit' => array(
