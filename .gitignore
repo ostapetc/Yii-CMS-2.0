@@ -41,6 +41,8 @@ publish
 #my adds
 ./assets/
 ./upload/fileManager/
+./upload/fileManager/.*
+./upload/fileManager/\.*
 ./protected/config/development.php
 ./protected/runtime/
 
