@@ -27,7 +27,6 @@ class VideoModule extends WebModule
 	{
 		$this->setImport(array(
 			'video.models.*',
-			'video.portlets.*',
 		));
 	}
 

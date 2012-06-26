@@ -1,5 +1,6 @@
 <?
-return CMap::mergeArray(require('main.php'), array(
+Yii::beginProfile('asdf');
+$a = CMap::mergeArray(require('main.php'), array(
     'components' => array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=cms2',
@@ -27,3 +28,5 @@ return CMap::mergeArray(require('main.php'), array(
         ),
     )
 ));
+Yii::endProfile('asdf');
+return $a;;
