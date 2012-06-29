@@ -772,7 +772,7 @@ CREATE TABLE IF NOT EXISTS `mailer_outbox` (
 --
 
 INSERT INTO `mailer_outbox` (`id`, `user_id`, `template_id`, `email`, `subject`, `body`, `log`, `status`, `date_create`, `date_send`) VALUES
-(10, 36, 5, 'artem-moscow@yandex.ru', 'Восстановление пароля на сайте YOO CMF', '<!doctype>\r\n<html>\r\n	<head>\r\n		<meta http-equiv="content-type" content="text/html" charset="utf-8" />\r\n		<title>Восстановление пароля на сайте {{PROJECT_NAME}}</title>\r\n        <style type="text/css">\r\n        table, tbody, tr, td, img, font, a, i {\r\n            font-family: Arial;\r\n            border:0;\r\n            padding: 0;\r\n            margin: 0;\r\n            border-collapse: collapse;\r\n        }\r\n        p {\r\n            margin: 1em 0px;\r\n        }\r\n        font {\r\n            display: inline;\r\n        }\r\n      	</style>\r\n	</head>\r\n	<body style="margin:0;padding:0;width:800px; background: white;">\r\n        <p>Для восстановления пароля перейдите&nbsp;<a href="http://yiicms2/changePassword/d986e338c2d63b727efa0fb6449be748">по этой ссылке</a>.</p>\r\n<p>Адрес ссылки: http://yiicms2/changePassword/d986e338c2d63b727efa0fb6449be748</p>\r\n	</body>\r\n</html>', NULL, 'sent', '2012-05-19 16:08:24', '2012-05-19 16:08:48');
+(10, 36, 5, 'artem-moscow@yandex.ru', 'Восстановление пароля на сайте YeahBaby CMF', '<!doctype>\r\n<html>\r\n	<head>\r\n		<meta http-equiv="content-type" content="text/html" charset="utf-8" />\r\n		<title>Восстановление пароля на сайте {{PROJECT_NAME}}</title>\r\n        <style type="text/css">\r\n        table, tbody, tr, td, img, font, a, i {\r\n            font-family: Arial;\r\n            border:0;\r\n            padding: 0;\r\n            margin: 0;\r\n            border-collapse: collapse;\r\n        }\r\n        p {\r\n            margin: 1em 0px;\r\n        }\r\n        font {\r\n            display: inline;\r\n        }\r\n      	</style>\r\n	</head>\r\n	<body style="margin:0;padding:0;width:800px; background: white;">\r\n        <p>Для восстановления пароля перейдите&nbsp;<a href="http://yiicms2/changePassword/d986e338c2d63b727efa0fb6449be748">по этой ссылке</a>.</p>\r\n<p>Адрес ссылки: http://yiicms2/changePassword/d986e338c2d63b727efa0fb6449be748</p>\r\n	</body>\r\n</html>', NULL, 'sent', '2012-05-19 16:08:24', '2012-05-19 16:08:48');
 
 -- --------------------------------------------------------
 
@@ -1221,14 +1221,14 @@ INSERT INTO `params` (`id`, `module_id`, `code`, `name`, `value`, `element`, `op
 (9, 'users', 'registration_done_message', 'Сообщение о завершении регистрации', '<p>Вы успешно зарегистрированы в системе, на ваш Email отправлено письмо с инструкциями завершения регистрации.</p>', 'editor', NULL),
 (10, 'users', 'activate_request_done_message', 'Сообщение после повторного запроса активации аккаунта', 'Мы выслали на ваш Email письмо, в котором нужно будет пройти по ссылке для активации аккаунта!', 'textarea', NULL),
 (16, 'mailer', 'reply_email', 'Адрес для ответа', 'artem-moscow@yandex.ru', 'text', NULL),
-(19, 'mailer', 'from_name', 'Имя от кого', 'YOO CMF сайт', 'text', NULL),
+(19, 'mailer', 'from_name', 'Имя от кого', 'YeahBaby CMF сайт', 'text', NULL),
 (20, 'mailer', 'host', 'Хост', 'smtp.interaxions.ru', 'text', NULL),
 (21, 'mailer', 'port', 'Порт', '25', 'text', NULL),
 (22, 'mailer', 'login', 'Логин', 'royal.canin@interaxions.ru', 'text', NULL),
 (23, 'mailer', 'password', 'Пароль', '02mar11', 'text', NULL),
 (24, 'mailer', 'from_email', 'От кого(Email)', 'test@ya.ru', 'text', NULL),
 (25, 'main', 'SITE_ENABLED', 'Сайт доступен', '1', 'checkbox', NULL),
-(28, 'main', 'project_name', 'Название проекта', 'YOO CMF', 'text', NULL);
+(28, 'main', 'project_name', 'Название проекта', 'YeahBaby CMF', 'text', NULL);
 
 -- --------------------------------------------------------
 
