@@ -1,4 +1,4 @@
-<form id="form-search" class="form-search">
+<form id="form-search" class="form-search quick_search">
     <input type="text" placeholder="<? echo t('Быстрый поиск'); ?>" class="input-medium search-query">
 </form>
 <script type="text/javascript">
