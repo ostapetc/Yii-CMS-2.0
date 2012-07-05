@@ -9,6 +9,7 @@
  
 class DaterComponent extends CApplicationComponent
 {
+    
     const PATTERN_DB_DATE_TIME   = '#^(\d\d\d\d)-(\d\d?)-(\d\d?) (\d\d)\:(\d\d):(\d\d)$#';
     const PATTERN_DB_DATE        = '#^(\d\d\d\d)-(\d\d?)-(\d\d?)$#';
     const PATTERN_FORM_DATE_TIME = '#^(\d\d?)\.(\d\d?)\.(\d\d\d\d) (\d\d)\:(\d\d):(\d\d)$#';
