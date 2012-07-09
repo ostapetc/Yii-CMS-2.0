@@ -2,7 +2,7 @@
 
 class TextHelper
 {
-    public static function cut($text, $length, $tail = "...", $delim = '., -:;')
+    public static function cut($text, $length, $force = false, $tail = "...", $delim = '., -:;')
     {
         $text = strip_tags($text);
         if (mb_strlen($text, 'utf-8') <= $length)
@@ -10,14 +10,20 @@ class TextHelper
             return $text;
         }
 
-        $pos = mb_strpos($text, ' ', $length, 'utf-8');
-
-        if ($pos == false)
+        if ($force)
         {
-            return $text;
+            return trim(mb_substr($text, 0, $length, 'utf-8')) . $tail;
         }
-        return trim(mb_substr(html_entity_decode($text, ENT_NOQUOTES, 'utf-8'), 0, $pos, 'utf-8'), '., -:;') .
-            $tail;
+        else
+        {
+            $pos = mb_strpos($text, ' ', $length, 'utf-8');
+            if ($pos == false)
+            {
+                return $text;
+            }
+
+            return trim(mb_substr($text, 0, $pos, 'utf-8')) . $tail;
+        }
     }
 
 

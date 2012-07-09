@@ -1,4 +1,5 @@
 <?
+
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 ini_set('xdebug.max_nesting_level', 1000);
@@ -91,3 +92,10 @@ Yii::createWebApplication($config)->run();
 //{
 //    echo "<div style='padding-left: " . (10 * $comment->level) . "px'>{$comment->text}</div>";
 //}
+
+
+
+
+
+
+

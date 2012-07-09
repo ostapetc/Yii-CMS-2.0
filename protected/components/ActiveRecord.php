@@ -52,18 +52,22 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function attributeLabels()
     {
-        $labels = array();
-
         foreach ($this->meta() as $field_data)
         {
-            $labels[$field_data["Field"]] = t($field_data["Comment"]);
+            $label = trim($field_data["Comment"]);
+            if (empty($label))
+            {
+                $label = ucfirst($field_data["Field"]);
+            }
+
+            $labels[$field_data["Field"]] = t($label);
         }
 
-        $languages = Language::getList();
-        if (count($languages) > 1)
+        if (Yii::app()->params->multilanguage_support)
         {
             $labels['language'] = 'Язык';
         }
+
         $labels['captcha'] = 'Введите код с картинки';
 
         return $labels;
@@ -85,14 +89,24 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = 'format' . ucfirst(StringHelper::underscoreToCamelcase($attribute));
+        $method_name = 'get' . ucfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
         if (method_exists($this, $method_name))
         {
-            return $this->$method_name();
+            return $this->$method_name($attribute);
         }
         else
         {
             return $this->$attribute;
+        }
+    }
+
+
+    public function filter($attribute)
+    {
+        $method_name = 'get' . ucfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Filter';
+        if (method_exists($this, $method_name))
+        {
+            return $this->$method_name();
         }
     }
 

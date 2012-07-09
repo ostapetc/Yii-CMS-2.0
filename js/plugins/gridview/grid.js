@@ -100,7 +100,7 @@
             var model_id  = grid.attr('model_id');
             var widget_id = grid.attr('widget_id');
 
-            $('.filters td:last').html('<a href="/main/widgetAdmin/columnsManage/model_id/' + model_id + '/widget_id/' + widget_id + '" class="columns-settings">колонки</a>');
+            $('.filters td:last').html('<a href="/main/widgetAdmin/columnsManage/model_id/' + model_id + '/widget_id/' + widget_id + '/redirect/' + $('#current_url').val() + '" class="columns-settings">колонки</a>');
         }
     });
 })(jQuery);
