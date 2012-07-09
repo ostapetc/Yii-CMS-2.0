@@ -223,14 +223,14 @@ class User extends ActiveRecord
                 'safe',
                 'on' => self::SCENARIO_ACTIVATE_REQUEST
             ),
-            array(
-                'rating',
-                'numerical',
-                'integerOnly' => true
-            ),
-            array(
-                'rating', 'unsafe'
-            )
+//            array(
+//                'rating',
+//                'numerical',
+//                'integerOnly' => true
+//            ),
+//            array(
+//                'rating', 'unsafe'
+//            )
         );
     }
 

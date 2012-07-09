@@ -67,3 +67,7 @@ span.jquery-console-cursor{
     margin-left: 1px;
     border-left: #eee 2px solid;
 }
+
+.grid-view .filters .hasDatepicker{
+    display: inline-block !important;
+}
