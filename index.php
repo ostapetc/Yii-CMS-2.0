@@ -4,9 +4,7 @@ if (ini_get('short_open_tag') != '1')
     echo 'Please set short_open_tag directive';
     die;
 }
-?>
-
-<?
+?><?
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 ini_set('xdebug.max_nesting_level', 1000);
