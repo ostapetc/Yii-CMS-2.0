@@ -48,4 +48,10 @@ class WebUser extends CWebUser
 
         return $this->_model;
     }
+
+
+    public function checkAccess($auth_item, $params=array(), $allowCaching=true)
+    {
+        return true;
+    }
 }

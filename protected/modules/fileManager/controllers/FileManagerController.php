@@ -4,10 +4,101 @@ class FileManagerController extends Controller
     public static function actionsTitles()
     {
         return array(
-            "DownloadFile" => "Скачать файл",
+            "downloadFile" => "Скачать файл",
+            "upload" => "Скачать файл",
+            "existFiles" => "Скачать файл",
+            "savePriority" => "Скачать файл",
+            "updateAttr" => "Скачать файл",
         );
     }
 
+    public function actions()
+    {
+        return array(
+            'updateAttr' => array(
+                'class' => 'fileManager.components.UpdateAttrAction',
+                'attributes' => array(
+                    'title', 'descr'
+                )
+            ),
+            'savePriority' => array(
+                'class' => 'fileManager.components.SavePriorityAction',
+            )
+        );
+
+    }
+
+    protected function sendFilesAsJson($files)
+    {
+        $res = array();
+        foreach ((array)$files as $file)
+        {
+            $res[] = array(
+                'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
+                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
+                'url'            => $file['href'],
+                'thumbnail_url'  => $file['icon'],
+                'delete_url'     => $file['deleteUrl'],
+                'delete_type'    => "post",
+                'edit_url' => $this->createUrl('/fileManager/fileManager/updateAttr', array(
+                    'id'  => $file['id'],
+                )),
+                'id'             => 'File_' . $file->id,
+            );
+        }
+
+        echo CJSON::encode($res);
+    }
+
+    public function actionExistFiles($model_id, $object_id, $tag)
+    {
+        if ($object_id == 0)
+        {
+            $object_id = 'tmp_' . Yii::app()->user->id;
+        }
+
+        $existFiles = FileManager::model()->parent($model_id, $object_id)->tag($tag)->findAll();
+        $this->sendFilesAsJson($existFiles);
+    }
+
+    public function actionSavePriority()
+    {
+        $ids = array_reverse($_POST['File']);
+
+        $files = new FileManager('sort');
+
+        $case = SqlHelper::arrToCase('id', array_flip($ids), 't');
+        $arr  = implode(',', $ids);
+        Yii::app()->db->getCommandBuilder()
+            ->createSqlCommand("UPDATE {$files->tableName()} AS t SET t.order = {$case} WHERE t.id IN ({$arr})")
+            ->execute();
+    }
+
+
+    public function actionUpload($model_id, $object_id, $tag)
+    {
+        if ($object_id == 0)
+        {
+            $object_id = 'tmp_' . Yii::app()->user->id;
+        }
+
+        $model            = new FileManager('insert');
+        $model->object_id = $object_id;
+        $model->model_id  = $model_id;
+        $model->tag       = $tag;
+
+        if ($model->saveFile() && $model->save())
+        {
+            $this->sendFilesAsJson(array($model));
+        }
+        else
+        {
+            echo CJSON::encode(array(
+                'textStatus' => $model->error
+            ));
+        }
+
+    }
 
     public $x_send_file_enabled = true;
 

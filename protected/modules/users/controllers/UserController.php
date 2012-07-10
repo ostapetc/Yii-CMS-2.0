@@ -9,7 +9,7 @@ class UserController extends Controller
 
     public function filters()
     {
-        return array('accessControl');
+        return CMap::mergeArray(parent::filters(), array('accessControl'));
     }
 
 
@@ -33,6 +33,8 @@ class UserController extends Controller
         return array(
             "login"                  => "Авторизация",
             "logout"                 => "Выход",
+            "view"                   => "Страница пользователя",
+            "edit"                   => "Редактирование личных данных",
             "registration"           => "Регистрация",
             "activateAccount"        => "Активация аккаунта",
             "activateAccountRequest" => "Запрос на активацию аккаунта",
@@ -59,7 +61,7 @@ class UserController extends Controller
                 $identity = new UserIdentity($model->email, $model->password);
                 if ($identity->authenticate())
                 {
-                    $this->redirect('/');
+                    $this->redirect(isset($_GET['redirect']) ? $_GET['redirect'] : '/');
                 }
                 else
                 {
@@ -320,5 +322,29 @@ class UserController extends Controller
             'model' => $model,
             'form'  => $form
         ));
+    }
+
+    public function actionView($id)
+    {
+        $this->layout = '//layouts/main';
+        $user = $this->loadModel($id);
+        $form = new Form('FileManager.AlbumForm', $user->getNewAttachedModel('FileAlbum'));
+        $this->render('view', array('model' => $user, 'form' => $form));
+    }
+
+    public function actionEdit($userId)
+    {
+        $this->layout = '//layouts/main';
+
+        $user = $this->loadModel($userId);
+        $form = new Form('users.CabinetForm', $user);
+        $user->scenario = User::SCENARIO_CABINET;
+
+        $this->performAjaxValidation($user);
+        if ($form->submitted() && $user->save())
+        {
+            $this->redirect($this->createUrl('view', array('id' => $userId)));
+        }
+        $this->render('edit', array('model' => $user, 'form' => $form));
     }
 }

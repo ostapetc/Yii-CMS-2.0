@@ -39,8 +39,10 @@ publish
 *.properties
 
 #my adds
-assets
-upload/fileManager
-protected/config/development.php
-protected/runtime
+./assets/
+./upload/fileManager/
+./upload/fileManager/.*
+./upload/fileManager/\.*
+./protected/config/development.php
+./protected/runtime/
 

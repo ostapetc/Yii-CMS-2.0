@@ -1,0 +1,54 @@
+/**
+ * CSS styles for alphanumeric pager extension
+ */
+
+ul.yiiAlphaPager
+{
+	font-size:11px;
+	border:0;
+	margin:0;
+	padding:0;
+	line-height:200%;
+	display:block;
+    text-align:center
+}
+
+ul.yiiAlphaPager *
+{
+	display:inline;
+}
+
+ul.yiiAlphaPager a, ul.yiiAlphaPager span {
+    padding:1px 6px;
+}
+
+ul.yiiAlphaPager a:link,
+ul.yiiAlphaPager a:visited
+{
+	font-weight:bold;
+	color:#0e509e;
+	text-decoration:none;
+}
+
+ul.yiiAlphaPager .page a
+{
+	font-weight:normal;
+}
+
+ul.yiiAlphaPager a:hover
+{
+}
+
+ul.yiiAlphaPager .hidden a
+{
+    color:#888888;
+}
+ul.yiiAlphaPager .selected span
+{
+	color:#FFF;
+    background: #0e509e;
+}
+
+
+/* Uncomment following line to hide the ALL-button */
+/*ul.alphaPager .all { display:none; }*/

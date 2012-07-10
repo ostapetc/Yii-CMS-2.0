@@ -47,7 +47,7 @@ class InstallController extends Controller
             }
             else if (is_string($db_create_status))
             {
-                MsgStream::getInstance()->enqueue($db_create_status, 'error');
+                Yii::app()->user->setFlash('error', $db_create_status);
             }
         }
 

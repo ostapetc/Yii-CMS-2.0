@@ -1,20 +1,26 @@
 <? foreach ($sidebars as $type => $path): ?>
-    <div class="well">
-        <? try
+
+    <?
+    try
+    {
+        if ($type == 'partial')
         {
-            if ($type == 'partial')
-            {
-                Yii::app()->controller->renderPartial($path);
-            }
-            elseif ($type == 'widget')
-            {
-                Yii::app()->controller->widget($path);
-            }
+            $content = Yii::app()->controller->renderPartial($path, null, true);
         }
-        catch (CException $e)
+        elseif ($type == 'widget')
         {
-            echo $e->getMessage();
+            $content = Yii::app()->controller->widget($path, array(), true);
         }
-        ?>
-    </div>
+
+        if ($content)
+        {
+            echo "<div class='well'>{$content}</div>";
+        }
+    }
+    catch (CException $e)
+    {
+        echo $e->getMessage();
+    }
+    ?>
+
 <? endforeach ?>

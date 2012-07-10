@@ -74,4 +74,16 @@ class PageSectionRel extends ActiveRecord
         return array(
         );
     }
+
+
+    public function getSectionsIds($page_id)
+    {
+        $sql = "SELECT section_id
+                       FROM
+                       " . $this->tableName() . "
+                       WHERE page_id = {$page_id}";
+
+        $sections_ids = Yii::app()->db->createCommand($sql)->queryAll();
+        return ArrayHelper::extract($sections_ids, 'section_id');
+    }
 }

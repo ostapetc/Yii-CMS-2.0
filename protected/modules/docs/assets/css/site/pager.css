@@ -1,0 +1,60 @@
+ul.yiiPager
+{
+    text-align: center;
+    display: block;
+    padding: 5px 0 5px;
+}
+
+ul.yiiPager *
+{
+	display:inline;
+}
+
+ul.yiiPager span{
+    background: #9aafe5;
+    width:20px;
+    height:19px;
+    text-align: center;
+    color:#FFF;
+    font-size: 14px;
+    padding:1px 6px;
+}
+
+ul.yiiPager a:link,
+ul.yiiPager a:visited
+{
+    text-decoration: none;
+    color:#272727;
+    font-size: 14px;
+    width: 20px;
+    height:19px;
+    text-align: center;
+}
+
+ul.yiiPager .page a
+{
+    padding:1px 6px;
+	font-weight:normal;
+}
+
+ul.yiiPager a:hover
+{
+    text-decoration: underline;
+
+}
+
+ul.yiiPager .hidden a
+{
+	/*border:solid 1px #DEDEDE;*/
+	color:#888888 !important;
+    display: none;
+}
+
+/**
+ * Hide first and last buttons by default.
+ */
+ul.yiiPager .first,
+ul.yiiPager .last
+{
+	/*display:none;*/
+}

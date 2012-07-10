@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * BootPager class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -13,6 +13,15 @@
 class BootPager extends CLinkPager
 {
 	/**
+	 * @var string the text shown before page buttons. Defaults to ''.
+	 */
+	public $header = '';
+	/**
+	 * @var string the URL of the CSS file used by this pager.
+	 * Defaults to false, meaning that no CSS will be included.
+	 */
+	public $cssFile = false;
+	/**
 	 * @var boolean whether to display the first and last items.
 	 */
 	public $displayFirstAndLast = false;
@@ -22,23 +31,17 @@ class BootPager extends CLinkPager
 	 */
 	public function init()
 	{
-		if ($this->header === null)
-			$this->header = ''; // Bootstrap does not use a header
-
 		if ($this->nextPageLabel === null)
-			$this->nextPageLabel=Yii::t('bootstrap','Next').' &rarr;';
+			$this->nextPageLabel = Yii::t('bootstrap','Next').' &rarr;';
 
 		if ($this->prevPageLabel === null)
-			$this->prevPageLabel='&larr; '.Yii::t('bootstrap','Previous');
+			$this->prevPageLabel = '&larr; '.Yii::t('bootstrap','Previous');
 
 		if ($this->firstPageLabel === null)
-			$this->firstPageLabel=Yii::t('bootstrap','First');
+			$this->firstPageLabel = Yii::t('bootstrap','First');
 
 		if ($this->lastPageLabel === null)
-			$this->lastPageLabel=Yii::t('bootstrap','Last');
-
-		if ($this->cssFile === null)
-			$this->cssFile = false; // Bootstrap has its own css
+			$this->lastPageLabel = Yii::t('bootstrap','Last');
 
 		if (!isset($this->htmlOptions['class']))
 			$this->htmlOptions['class'] = ''; // would default to yiiPager

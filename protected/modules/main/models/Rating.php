@@ -45,8 +45,8 @@ class Rating extends ActiveRecord
              ),
 
             array(
-                '',
-                'unique'
+                'user_id',
+                'NotObjectAuthorValidator'
             ),
         );
     }

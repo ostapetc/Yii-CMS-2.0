@@ -5,7 +5,6 @@ Yii::import('zii.widgets.jui.CJuiWidget');
 class Uploader extends JuiInputWidget
 {
     public $model;
-    public $id;
     public $title;
 
     public $data_type; //image, sound, video, document
@@ -39,6 +38,11 @@ class Uploader extends JuiInputWidget
 
     public $uploadUrl;
     public $assets;
+
+    public $uploadAction = '/fileManager/fileManagerAdmin/upload';
+    public $sortableAction = '/fileManager/fileManagerAdmin/savePriority';
+    public $existFilesAction = '/fileManager/fileManagerAdmin/existFiles';
+
     private $allowType = array (
         'document'=>'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
         'image'=>'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
@@ -71,12 +75,12 @@ class Uploader extends JuiInputWidget
             throw new CException('Параметр data_type является обязательным  и может принемать значения: image, sound, video, document');
 
         if ($this->tag === null)
-            throw new CException('Параметр tag является обязательным');
+            $this->tag = $this->attribute;
 
         $this->id = 'uploader_'.get_class($this->model).$this->tag;
         $this->assets = Yii::app()->getModule('fileManager')->assetsUrl();
 
-        $this->uploadUrl = Yii::app()->createUrl('/fileManager/fileManagerAdmin/upload', array(
+        $this->uploadUrl = Yii::app()->createUrl($this->uploadAction, array(
             'model_id'  => get_class($this->model),
             'object_id' => $this->model->id ? $this->model->id : 0,
             'data_type' => $this->data_type,
@@ -90,9 +94,9 @@ class Uploader extends JuiInputWidget
             'maxFileSize'               => $this->maxFileSize,
             'acceptFileTypes'           => $this->allowType[$this->data_type],
 //            'maxChunkSize'              => 1*1000*1000,
-            'sortableSaveUrl'           => Yii::app()->createUrl('/fileManager/fileManagerAdmin/savePriority'),
+            'sortableSaveUrl'           => Yii::app()->createUrl($this->sortableAction),
             'limitConcurrentUploads'    => 0,
-            'existFilesUrl'             => Yii::app()->createUrl('/fileManager/fileManagerAdmin/existFiles', array(
+            'existFilesUrl'             => Yii::app()->createUrl($this->existFilesAction, array(
                                                 'model_id'  => get_class($this->model),
                                                 'object_id' => $this->model->id ? $this->model->id : 0,
                                                 'tag'       => $this->tag
@@ -130,16 +134,7 @@ class Uploader extends JuiInputWidget
         }
 
         $this->renderDialog('uploader', array(
-            'dialogOptions' => array(
-                'title' => $this->title,
-                'buttons'=> array(
-                    array(
-                        'text' => t('Сохранить'),
-                        'click'=> 'js:function() { $(this).dialog("close"); }',
-                        'create'=> 'js:function(event, ui) { $(this).addClass("btn btn-primary"); }'
-                    )
-                )
-            ),
+            'title' => $this->title,
             'linkOptions'=>array(
                 'class'=> 'btn btn-info'
             )

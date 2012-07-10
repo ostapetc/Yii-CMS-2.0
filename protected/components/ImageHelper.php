@@ -29,6 +29,7 @@ class ImageHolder //Класс Image занять под расширение
         {
             $this->_htmlOptions['width'] = $this->_size['width'];
             $this->_htmlOptions['height'] = $this->_size['height'];
+
             return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
         } catch (Exception $e)
         {
@@ -36,6 +37,12 @@ class ImageHolder //Класс Image занять под расширение
         }
     }
 
+
+    public function isRealImage()
+    {
+        $src = $this->getSrc();
+        return $src && is_file(Yii::getPathOfAlias('webroot').$src);
+    }
 
     public function getSrc()
     {
@@ -59,6 +66,12 @@ class ImageHolder //Класс Image занять под расширение
 
 class ImageHelper
 {
+    public static function placeholder(array $size, $text = null)
+    {
+        $dim = $size['width'].'x'.$size['height'];
+        $text = $text ? $text : $dim;
+        return CHtml::image('http://placehold.it/'.$dim.'&text='.urlencode($text), $text, $size);
+    }
 
     public static function thumb($dir, $file, array $size, $crop = false)
     {
@@ -78,11 +91,11 @@ class ImageHelper
 
         //normalize dir
         $doc_root = $_SERVER['DOCUMENT_ROOT'];
-        if (substr($dir, 0, strlen($doc_root) !== $doc_root))
+
+        if (substr($dir, 0, strlen($doc_root)) !== $doc_root)
         {
             $dir = $doc_root . $dir;
         }
-
         $dir       = rtrim($dir, '/') . '/';
         $path_info = pathinfo($file);
 

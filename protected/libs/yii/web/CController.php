@@ -304,7 +304,7 @@ class CController extends CBaseController
 	{
 		$priorAction=$this->_action;
 		$this->_action=$action;
-		if($this->beforeAction($action))
+        if($this->beforeAction($action))
 		{
 			if($action->runWithParams($this->getActionParams())===false)
 				$this->invalidActionParams($action);
@@ -435,22 +435,22 @@ class CController extends CBaseController
 	 */
 	protected function createActionFromMap($actionMap,$actionID,$requestActionID,$config=array())
 	{
-		if(($pos=strpos($actionID,'.'))===false && isset($actionMap[$actionID]))
+        if(($pos=strpos($actionID,'.'))===false && isset($actionMap[$actionID]))
 		{
 			$baseConfig=is_array($actionMap[$actionID]) ? $actionMap[$actionID] : array('class'=>$actionMap[$actionID]);
-			return Yii::createComponent(empty($config)?$baseConfig:array_merge($baseConfig,$config),$this,$requestActionID);
+            return Yii::createComponent(empty($config)?$baseConfig:array_merge($baseConfig,$config),$this,$requestActionID);
 		}
 		else if($pos===false)
 			return null;
 
 		// the action is defined in a provider
 		$prefix=substr($actionID,0,$pos+1);
-		if(!isset($actionMap[$prefix]))
+        if(!isset($actionMap[$prefix]))
 			return null;
 		$actionID=(string)substr($actionID,$pos+1);
 
 		$provider=$actionMap[$prefix];
-		if(is_string($provider))
+        if(is_string($provider))
 			$providerType=$provider;
 		else if(is_array($provider) && isset($provider['class']))
 		{
@@ -656,7 +656,7 @@ class CController extends CBaseController
 		else if(($module=$this->getModule())===null)
 			$module=Yii::app();
 
-		return $this->resolveViewFile($layoutName,$module->getLayoutPath(),Yii::app()->getViewPath(),$module->getViewPath());
+        return $this->resolveViewFile($layoutName,$module->getLayoutPath(),Yii::app()->getViewPath(),$module->getViewPath());
 	}
 
 	/**

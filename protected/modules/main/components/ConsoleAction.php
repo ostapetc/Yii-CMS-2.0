@@ -17,7 +17,9 @@ class ConsoleAction extends CAction
                 echo Yii::app()->executor->$command();
             }
 
-        }catch(Exception $e) {
+        }
+        catch(Exception $e)
+        {
             echo $e->getMessage();
         }
     }

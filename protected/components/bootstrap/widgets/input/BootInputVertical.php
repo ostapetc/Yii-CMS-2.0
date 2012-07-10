@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * BootInputVertical class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -22,7 +22,7 @@ class BootInputVertical extends BootInput
 	protected function captcha()
 	{
 		echo $this->getLabel().'<div class="captcha">';
-		echo '<div class="widget">'.$this->widget('CCaptcha', array('showRefreshButton'=>false), true).'</div>';
+		echo '<div class="widget">'.$this->widget('CCaptcha', $this->data, true).'</div>';
 		echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
 		echo $this->getError().$this->getHint();
 		echo '</div>';
@@ -34,9 +34,10 @@ class BootInputVertical extends BootInput
 	 */
 	protected function checkBox()
 	{
-		echo '<label class="checkbox" for="'.CHtml::getIdByName(CHtml::resolveName($this->model, $this->attribute)).'">';
+		$attribute = $this->attribute;
+		echo '<label class="checkbox" for="'.CHtml::getIdByName(CHtml::resolveName($this->model, $attribute)).'">';
 		echo $this->form->checkBox($this->model, $this->attribute, $this->htmlOptions).PHP_EOL;
-		echo $this->model->getAttributeLabel($this->attribute);
+		echo $this->model->getAttributeLabel($attribute);
 		echo $this->getError().$this->getHint();
 		echo '</label>';
 	}
@@ -91,7 +92,9 @@ class BootInputVertical extends BootInput
 	protected function passwordField()
 	{
 		echo $this->getLabel();
+		echo $this->getPrepend();
 		echo $this->form->passwordField($this->model, $this->attribute, $this->htmlOptions);
+		echo $this->getAppend();
 		echo $this->getError().$this->getHint();
 	}
 
@@ -101,9 +104,10 @@ class BootInputVertical extends BootInput
 	 */
 	protected function radioButton()
 	{
-		echo '<label class="radio" for="'.CHtml::getIdByName(CHtml::resolveName($this->model, $this->attribute)).'">';
+		$attribute = $this->attribute;
+		echo '<label class="radio" for="'.CHtml::getIdByName(CHtml::resolveName($this->model, $attribute)).'">';
 		echo $this->form->radioButton($this->model, $this->attribute, $this->htmlOptions).PHP_EOL;
-		echo $this->model->getAttributeLabel($this->attribute);
+		echo $this->model->getAttributeLabel($attribute);
 		echo $this->getError().$this->getHint();
 		echo '</label>';
 	}
@@ -147,7 +151,9 @@ class BootInputVertical extends BootInput
 	protected function textField()
 	{
 		echo $this->getLabel();
+		echo $this->getPrepend();
 		echo $this->form->textField($this->model, $this->attribute, $this->htmlOptions);
+		echo $this->getAppend();
 		echo $this->getError().$this->getHint();
 	}
 
@@ -158,7 +164,7 @@ class BootInputVertical extends BootInput
 	protected function uneditableField()
 	{
 		echo $this->getLabel();
-		echo '<span class="uneditable-input">'.$this->model->{$this->attribute}.'</span>';
+		echo CHtml::tag('span', $this->htmlOptions, $this->model->{$this->attribute});
 		echo $this->getError().$this->getHint();
 	}
 }

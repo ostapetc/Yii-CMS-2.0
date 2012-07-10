@@ -23,7 +23,7 @@ return array(
         'tags' => array(
             'type'  => 'TagsInput',
             'label' => 'Теги'
-        )
+        ),
     ),
     'buttons'              => array(
         'submit' => array(

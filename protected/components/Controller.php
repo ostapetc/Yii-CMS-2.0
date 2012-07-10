@@ -222,7 +222,7 @@ abstract class Controller extends CController implements ControllerInterface
 
     public function render($view, $params = array())
     {
-        if (isset($_GET['modal']))
+        if (isset($_GET['popup']))
         {
             $this->layout = false;
         }
@@ -233,11 +233,14 @@ abstract class Controller extends CController implements ControllerInterface
 
     public function redirect($params)
     {
-        if (isset($_GET['modal']))
+        if (isset($_GET['popup']))
         {
-            $view = array_shift($params);
-            $params['modal'] = 1;
-            array_unshift($params, $view);
+            if (is_array($params))
+            {
+                $view = array_shift($params);
+                $params['popup'] = 1;
+                array_unshift($params, $view);
+            }
         }
 
         parent::redirect($params);

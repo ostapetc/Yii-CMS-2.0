@@ -19,9 +19,13 @@
 
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile('/css/site/style.css');
+    $cs->registerCssFile('/css/site/page.css');
     $cs->registerCssFile('/css/site/comments.css');
+    $cs->registerCssFile('/css/site/favorites.css');
+    $cs->registerCssFile('/css/site/rating.css');
     $cs->registerScriptFile('/js/site/modal-windows.js');
 
+//    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));
     $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
     $cs->registerScriptFile('/js/plugins/modal/bootstrap-modal.js');
     $cs->registerCssFile('/js/plugins/modal/modal.css');
@@ -59,15 +63,7 @@
     </div>
 
     <div class="subnav">
-        <ul class="nav nav-pills">
-            <li class=""><a href="#labels">Labels</a></li>
-            <li class=""><a href="#badges">Badges</a></li>
-            <li class=""><a href="#typography">Typography</a></li>
-            <li class=""><a href="#thumbnails">Thumbnails</a></li>
-            <li class=""><a href="#alerts">Alerts</a></li>
-            <li class=""><a href="#progress">Progress bars</a></li>
-            <li class=""><a href="#misc">Miscellaneous</a></li>
-        </ul>
+        <? $this->widget('MainMenu'); ?>
     </div>
 </div>
 

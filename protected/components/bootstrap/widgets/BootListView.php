@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * BootListView class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -23,4 +23,9 @@ class BootListView extends CListView
 	 * @var array the configuration for the pager.
 	 */
 	public $pager = array('class'=>'bootstrap.widgets.BootPager');
+	/**
+	 * @var string the URL of the CSS file used by this detail view.
+	 * Defaults to false, meaning that no CSS will be included.
+	 */
+	public $cssFile = false;
 }

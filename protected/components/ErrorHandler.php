@@ -17,16 +17,16 @@ class ErrorHandler extends CErrorHandler
                 }
                 if ($view == 'exception' || $view == 'error')
                 {
-                    MsgStream::getInstance()->enqueue($data['message'], 'error');
+                    Yii::app()->user->setFlash('error', $data['message']);
                 }
                 $this->tryRedirectOnPreviousUrl();
             }
             catch(Exception $e)
             {
+                Yii::log($e->getTraceAsString(), CLogger::LEVEL_ERROR);
             }
 
-            MsgStream::getInstance()->clear();
-            MsgStream::getInstance()->enqueue($data['message'], 'error');
+            Yii::app()->user->setFlash('error', $data['message']);
 
             $this->redirect($this->maintanance);
         }

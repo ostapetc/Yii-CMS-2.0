@@ -5,7 +5,7 @@ Yii::import("zii.widgets.grid.CGridView");
 
 class AdminGridView extends BootGridView
 {
-    public $itemsCssClass = "table table-striped table-bordered table-condensed";
+    public $itemsCssClass = "table table-striped table-bordered table-condensed items";
 
     public $cssFile = null;
 
@@ -60,8 +60,7 @@ class AdminGridView extends BootGridView
             Yii::app()->getClientScript()->registerCssFile($this->cssFile);
         }
 
-        $this->initColumns();
-
+        parent::init();
         $this->formatDateValues();
     }
 

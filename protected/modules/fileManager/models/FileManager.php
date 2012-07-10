@@ -5,10 +5,6 @@ class FileManager extends ActiveRecord
     const UPLOAD_PATH  = 'upload/fileManager';
     const FILE_POSTFIX = '';
 
-    public $extension;
-
-    public $size;
-
     public $error;
 
 
@@ -130,7 +126,8 @@ class FileManager extends ActiveRecord
         switch (true)
         {
             case $this->isImage:
-                $name = 'image';
+                $img = ImageHelper::thumb($this->getServerDir(), $this->name, array('width' => 48, 'height' => 48), true);
+                return $img->__toString();
                 break;
             case $this->isSound:
                 $name = 'sound';
@@ -144,13 +141,11 @@ class FileManager extends ActiveRecord
             case $this->isArchive:
                 $name = 'rar';
                 break;
-            case is_file('.' . $folder . $this->extension . '.jpg'):
-                $name = $this->extension;
-                break;
             default:
-                $name = 'any';
+                $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
                 break;
         }
+
         return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
     }
 
@@ -199,8 +194,7 @@ class FileManager extends ActiveRecord
         if ($file->saveAs('./' . $new_file))
         {
             list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH, true);
-            $this->title = $this->name;
-            $this->fill();
+            $this->title = $file->name;
             return true;
         }
         else
@@ -214,9 +208,11 @@ class FileManager extends ActiveRecord
     /**
      * @return string formatted file size
      */
-    public function getFormatSize()
+    public function getSize()
     {
-        $size = $this->size;
+        $file = $this->getServerPath();
+
+        $size = is_file($file) ? filesize($file) : NULL;
 
         $metrics[0] = 'байт';
         $metrics[1] = 'кб.';
@@ -234,22 +230,10 @@ class FileManager extends ActiveRecord
         return $ret;
     }
 
-
-    public function afterFind()
+    public function getExtension()
     {
-        parent::afterFind();
-        $this->fill();
+        return pathinfo($this->name, PATHINFO_EXTENSION);
     }
-
-
-    public function fill()
-    {
-        $file            = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
-        $this->size      = is_file($file) ? filesize($file) : NULL; //$this->formatSize($this->basePath.$this->name);
-        $this->size      = $this->getFormatSize();
-        $this->extension = pathinfo($this->name, PATHINFO_EXTENSION);
-    }
-
 
     public function getNameWithoutExt()
     {
@@ -356,6 +340,4 @@ class FileManager extends ActiveRecord
     {
         return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/' . $this->name;
     }
-
-
 }

@@ -52,22 +52,18 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function attributeLabels()
     {
+        $labels = array();
+
         foreach ($this->meta() as $field_data)
         {
-            $label = trim($field_data["Comment"]);
-            if (empty($label))
-            {
-                $label = ucfirst($field_data["Field"]);
-            }
-
-            $labels[$field_data["Field"]] = t($label);
+            $labels[$field_data["Field"]] = t($field_data["Comment"]);
         }
 
-        if (Yii::app()->params->multilanguage_support)
+        $languages = Language::getList();
+        if (count($languages) > 1)
         {
             $labels['language'] = 'Язык';
         }
-
         $labels['captcha'] = 'Введите код с картинки';
 
         return $labels;
@@ -89,24 +85,14 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = 'get' . ucfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
+        $method_name = lcfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
         if (method_exists($this, $method_name))
         {
-            return $this->$method_name($attribute);
+            return $this->$method_name();
         }
         else
         {
             return $this->$attribute;
-        }
-    }
-
-
-    public function filter($attribute)
-    {
-        $method_name = 'get' . ucfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Filter';
-        if (method_exists($this, $method_name))
-        {
-            return $this->$method_name();
         }
     }
 
@@ -217,14 +203,14 @@ abstract class ActiveRecord extends CActiveRecord
     public function in($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
-        return $this->owner;
+        return $this;
     }
 
 
     public function notIn($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addNotInCondition($row, $values, $operator);
-        return $this->owner;
+        return $this;
     }
 
 
@@ -344,5 +330,34 @@ abstract class ActiveRecord extends CActiveRecord
         }
 
         return $array;
+    }
+
+
+    public function getNewAttachedModel($model_class)
+    {
+        $attach = new $model_class();
+        $attach->model_id = get_class($this);
+        if ($this->getIsNewRecord())
+        {
+            $attach->object_id = 'tmp_' . get_class($this) . '_' . Yii::app()->user->id;
+        }
+        else
+        {
+            $attach->object_id = $this->getPrimaryKey();
+        }
+
+        return $attach;
+    }
+
+
+    public function existsByAttributes($attributes)
+    {
+        $criteria = new CDbCriteria();
+        foreach ($attributes as $attribute => $value)
+        {
+            $criteria->compare($attribute, $value);
+        }
+
+        return $this->exists($criteria);
     }
 }
