@@ -58,6 +58,35 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
+    public function topMenuItems()
+    {
+        return array(
+            array(
+                'label' => t('Страницы'),
+                'url'   => array('content/page/index')
+            ),
+            array(
+                'label' => t('Разделы'),
+                'url'   => array('content/pageSection/index')
+            ),
+            array(
+                'label' => t('Люди'),
+                'url'   => ''
+            ),
+            array(
+                'label' => t('Активность'),
+                'url'   => ''
+            ),
+        );
+    }
+
+
+    public function topSubMenuItems()
+    {
+        return array();
+    }
+
+
     public function beforeAction($action)
     {
         $action_name = lcfirst($action->id);

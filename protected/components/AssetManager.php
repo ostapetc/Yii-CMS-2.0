@@ -111,6 +111,7 @@ class AssetManager extends CAssetManager {
                     {
 						$parserClass = Yii::import($this->parsers[$suffix]['class']);
 						$parser = new $parserClass($this->parsers[$suffix]['options']);
+
 						file_put_contents($dstFile, $parser->parse($src));
 					}
 					else

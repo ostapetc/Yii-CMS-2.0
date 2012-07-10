@@ -54,16 +54,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/">Yii-CMS 2.0</a>
-
+            <a class="brand" href="/">Project Name</a>
             <div class="nav-collapse">
                 <? $this->widget('TopMenu'); ?>
+                <? $this->widget('TopRightMenu'); ?>
             </div>
         </div>
     </div>
 
     <div class="subnav">
-        <? $this->widget('MainMenu'); ?>
+        <? $this->widget('TopSubMenu'); ?>
     </div>
 </div>
 

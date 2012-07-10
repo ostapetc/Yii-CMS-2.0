@@ -21,7 +21,6 @@ class ContentModule extends WebModule
 
 	public function init()
 	{
-
 		$this->setImport(array(
 			'content.models.*',
 			'content.portlets.*',
@@ -33,11 +32,11 @@ class ContentModule extends WebModule
     {
         return array(
             'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
-            'Добавить страницу' => '/content/pageAdmin/create',
-            'Разделы страниц'   => '/content/pageSectionAdmin/manage',
-            'Добавить раздел'   => '/content/pageSectionAdmin/create',
-            'Управление меню'   => '/content/menuAdmin/manage',
-            'Добавить меню'     => '/content/menuAdmin/create',
+            'Добавить страницу' => Yii::app()->createUrl('/content/pageAdmin/create'),
+            'Разделы страниц'   => Yii::app()->createUrl('/content/pageSectionAdmin/manage'),
+            'Добавить раздел'   => Yii::app()->createUrl('/content/pageSectionAdmin/create'),
+            'Управление меню'   => Yii::app()->createUrl('/content/menuAdmin/manage'),
+            'Добавить меню'     => Yii::app()->createUrl('/content/menuAdmin/create'),
         );
     }
 
@@ -50,6 +49,7 @@ class ContentModule extends WebModule
             '/page/create'               => 'content/page/create',
             '/page/update/<id:\d+>'      => 'content/page/update',
             '/page/user/<user_id:\d+>/*' => 'content/page/userPages',
+            '/page/tag/<tag_name:[a-zA-Zа-яА-Я ]+>' => 'content/page/tagPages',
             '/page/section/<section_id:\d+>/*'   => 'content/page/sectionPages'
         );
 

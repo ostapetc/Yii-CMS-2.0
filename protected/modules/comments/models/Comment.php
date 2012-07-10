@@ -15,6 +15,9 @@ class Comment extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
+    const COMMENTS_DENIED_ATTRIBUTE = 'comments_denied ';
+
+    public $target_model;
 
 
     public function name()
@@ -59,9 +62,30 @@ class Comment extends ActiveRecord
             ),
             array(
                 'object_id',
-                'ObjectExistsValidator'
+                'ModelExistsValidator'
+            ),
+            array(
+                'object_id',
+                'deniedValidator'
             )
         );
+    }
+
+
+    public function deniedValidator()
+    {
+//        $attribute = self::COMMENTS_DENIED_ATTRIBUTE;
+//        v(array_key_exists($attribute, $this->target_model->attributes)); die;
+//        if (!$this->target_model || !array_key_exists($attribute, $this->target_model->attributes))
+//        {
+//            return;
+//        }
+//        die('da');
+//        if ($this->target_model->$attribute)
+//        {
+//            $this->addError('object_id', t('comments denied'));
+//            die('poppo');
+//        }
     }
 
 
