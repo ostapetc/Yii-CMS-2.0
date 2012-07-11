@@ -34,12 +34,12 @@
 
     <div class="infopanel">
         <div class="voting">
-            <?= $this->widget('RatingPortlet', array('model' => $data)); ?>
+            <? $this->widget('social.portlets.RatingPortlet', array('model' => $data)); ?>
         </div>
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
-        <? $this->widget('FavoritePortlet', array('model' => $data)); ?>
+        <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
             <a href="<?= $data->user->href ?>" title="Автор текста"><?= $data->user->name ?></a>
@@ -54,7 +54,7 @@
 <br clear="all"/>
 
 <? if (!$preview): ?>
-    <?= $this->widget('CommentsPortlet', array('model' => $data)); ?>
+    <? $this->widget('CommentsPortlet', array('model' => $data)); ?>
 <? endif ?>
 
 

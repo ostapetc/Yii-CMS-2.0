@@ -48,3 +48,7 @@ textarea {
 .help-block {
     color: red !important;
 }
+
+.form-vertical label {
+    font-weight: bold;
+}

@@ -75,6 +75,7 @@ class ModelAdminController extends AdminController
             $params['rules'].= $this->addLengthRules($meta);
             $params['rules'].= $this->addInRangeRules($meta);
             $params['rules'].= $this->addUniqueRules($meta);
+            $params['rules'].= $this->addNumericalRules($meta);
             $params['rules'].= $this->addCoreValidatorRules($meta);
 
             $code = $this->renderPartial('codegen.views.templates.model', $params, true);
@@ -112,10 +113,13 @@ class ModelAdminController extends AdminController
             }
         }
 
-        return "            array(
+        if ($rules)
+        {
+            return "            array(
                 '" . implode(', ', $rules) . "',
                 'unique'
             ),\n";
+        }
     }
 
 
@@ -176,6 +180,30 @@ class ModelAdminController extends AdminController
                 '{$required}',
                 'required'
             ),\n";
+    }
+
+
+    public function addNumericalRules($meta)
+    {
+        $numerical = array();
+
+        foreach ($meta as $data)
+        {
+            if (preg_match('|int\([0-9]+\)|', $data['Type']))
+            {
+                $numerical[] = $data['Field'];
+            }
+        }
+
+        if ($numerical)
+        {
+            $numerical = implode(', ', $numerical);
+            return  "            array(
+                '{$numerical}',
+                'numerical',
+                'integerOnly' => true
+            ),\n";
+        }
     }
 
 

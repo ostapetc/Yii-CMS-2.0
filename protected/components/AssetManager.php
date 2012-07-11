@@ -111,7 +111,6 @@ class AssetManager extends CAssetManager {
                     {
 						$parserClass = Yii::import($this->parsers[$suffix]['class']);
 						$parser = new $parserClass($this->parsers[$suffix]['options']);
-
 						file_put_contents($dstFile, $parser->parse($src));
 					}
 					else
@@ -144,8 +143,6 @@ class AssetManager extends CAssetManager {
 				return $this->_published[$path]=$this->getBaseUrl().'/'.$dir;
 			}
 		}
-		throw new CException(Yii::t('yii','The asset "{asset}" to be published does not exist.',
-			array('{asset}'=>$path)));
 	}
 
 }

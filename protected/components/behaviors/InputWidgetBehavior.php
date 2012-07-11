@@ -23,7 +23,7 @@ class InputWidgetBehavior extends CBehavior
             }
         }
 
-        return $this->_assets;
+        return $this->_assets . '/';
     }
 
 

@@ -118,15 +118,19 @@ return array(
         ),
 
         'authManager'  => array(
-            'class'           => 'CDbAuthManager',
-            'connectionID'    => 'db',
-            'itemTable'       => 'auth_items',
-            'assignmentTable' => 'auth_assignments',
-            'itemChildTable'  => 'auth_items_childs',
-            'defaultRoles'    => array('guest')
+            'class' => 'DbAuthManager'
         ),
         'cache' => array(
             'class'=>'system.caching.CFileCache',
+        ),
+        'log'=>array(
+            'class'=>'CLogRouter',
+            'routes'=>array(
+                array(
+                    'class'     => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    'ipFilters' => array('127.0.0.5'),
+                ),
+            ),
         ),
     ),
 

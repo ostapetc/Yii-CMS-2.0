@@ -89,11 +89,10 @@ class AdminGridView extends BootGridView
                     continue;
                 }
 
-                if ($column->value != null) //if set value of column
-                {
-                    continue;
-                }
-
+//                if ($column->value != null) //if set value of column
+//                {
+//                    continue;
+//                }
 
                 $no_values = array('0000-00-00 00:00:00', '0000-00-00');
                 $new_value = in_array($value, $no_values) ? null : Yii::app()->dater->readableFormat($value);
@@ -185,6 +184,7 @@ class AdminGridView extends BootGridView
             $model = $this->filter;
 
             $attributes = WidgetManager::getVisibleColumns(get_class($model), $this->id);
+
             if ($attributes)
             {
                 foreach ($attributes as $i => $attribute)
@@ -192,7 +192,9 @@ class AdminGridView extends BootGridView
                     $this->addColumn(
                         array(
                             'name'  => $attribute,
-                            'value' => $model->value($attribute)
+                            'value' => '$data->value("' . $attribute . '")',
+                            'type'  => 'raw',
+                            'filter' => $model->filter($attribute),
                         ),
                         $i
                     );
@@ -232,6 +234,7 @@ class AdminGridView extends BootGridView
                 )
             ));
         }
+
         parent::initColumns();
     }
 

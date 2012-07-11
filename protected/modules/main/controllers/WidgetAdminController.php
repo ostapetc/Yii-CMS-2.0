@@ -20,13 +20,22 @@ class WidgetAdminController extends AdminController
                 WidgetManager::getVisibleColumnsFilePath($model_id, $widget_id),
                 serialize(explode(',', $_POST['columns']))
             );
+
+            if (isset($_GET['redirect']))
+            {
+                $this->redirect(base64_decode($_GET['redirect']));
+            }
         }
 
         $visible_columns = WidgetManager::getVisibleColumns($model_id, $widget_id);
-        $hidden_columns = array();
+        $hidden_columns  = array();
+        $attributes      = array_keys($model->attributeLabels());
+        $visible_columns = array_intersect($visible_columns, $attributes);
 
-        foreach (array_keys($model->attributes) as $attribute)
+        foreach ($attributes as $attribute)
         {
+            if ($attribute == 'captcha') continue;
+
             if (in_array($attribute, $visible_columns)) continue;
             $hidden_columns[] = $attribute;
         }
