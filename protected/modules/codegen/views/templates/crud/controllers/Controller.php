@@ -5,8 +5,8 @@ class <?= $class ?>Controller extends Controller
     public static function actionsTitles()
     {
         return array(
-            'View'  => 'Просмотр <?= $genetive ?>',
-            'Index' => 'Список <?= $accusative ?>',
+            'view'  => 'Просмотр <?= $genetive ?>',
+            'index' => 'Список <?= $accusative ?>',
         );
     }
 
