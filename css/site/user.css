@@ -7,6 +7,8 @@
     /*border: 1px solid red;*/
     padding-top: 8px !important;
     float: left !important;
+    font-size: 48px;
+    color: gray !important;
 }
 
 .profile-head .label {

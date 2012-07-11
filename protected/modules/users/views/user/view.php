@@ -45,7 +45,7 @@ switch (true)
         <tr>
             <td><?= $model->label('birthdate') ?></td>
             <td>
-                <?= $model->value('birthdate') ?>
+                <?= $model->value('birthdate') ?: t('не указана'); ?>
             </td>
         </tr>
         <tr>
