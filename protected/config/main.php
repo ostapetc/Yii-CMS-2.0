@@ -123,15 +123,6 @@ return array(
         'cache' => array(
             'class'=>'system.caching.CFileCache',
         ),
-        'log'=>array(
-            'class'=>'CLogRouter',
-            'routes'=>array(
-                array(
-                    'class'     => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters' => array('127.0.0.5'),
-                ),
-            ),
-        ),
     ),
 
     'onBeginRequest' => array('AppManager', 'init'),
