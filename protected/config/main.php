@@ -28,7 +28,7 @@ return array(
         'application.components.baseWidgets.*',
         'application.components.bootstrap.widgets.*',
         'application.components.activeRecordBehaviors.*',
-        'application.libs.helpers.*',
+        'application.components.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
     'modules'    => $modules,

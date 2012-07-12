@@ -4,7 +4,7 @@
             <?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?>
 
             <? if (Yii::app()->user->checkAccess('Page_update')): ?>
-            <?= CHtml::link(t('редактировать'), $this->createUrl('update', array('id' => $data->id)), array('class' => 'page-update')); ?>
+                <?= CHtml::link(t('редактировать'), $this->createUrl('update', array('id' => $data->id)), array('class' => 'page-update')); ?>
             <? endif ?>
         </h1>
     <? endif ?>
@@ -28,7 +28,7 @@
     <ul class="tags">
         <? foreach ($data->tags as $i => $tag): ?>
             <? if ($i > 0): ?>, <? endif ?>
-            <li><a rel="tag" href="<?= $this->createUrl("/pages/tag/{$tag->name}"); ?>"><?= $tag->name ?></a></li>
+            <li><a rel="tag" href="<?= $this->createUrl("/page/tag/{$tag->name}"); ?>"><?= $tag->name ?></a></li>
         <? endforeach ?>
     </ul>
 

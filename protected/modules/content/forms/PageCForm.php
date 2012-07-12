@@ -28,14 +28,17 @@ return array(
             'attribute' => 'text'
         ),
         'sections_ids' => array(
-            'type'     => 'dropdownlist',
-            'multiple' => true,
-            'items'    => PageSection::model()->optionsTree(),
+            'type'  => 'application.components.formElements.MultiSelect.MultiSelect',
+            'items' => PageSection::model()->optionsTree(),
+            'model' => $this->model
         ),
         'tags' => array(
             'type'  => 'TagsInput',
-            'label' => 'Теги'
+            'label' => t('Теги')
         ),
+        'comments_denied' => array(
+            'type' => 'checkbox'
+        )
     ),
     'buttons'              => array(
         'submit' => array(

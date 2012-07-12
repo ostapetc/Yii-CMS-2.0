@@ -1,0 +1,54 @@
+.tablesorter th a{
+    color: #222222;
+}
+
+.button-column a{
+    padding-left:  2px;
+    padding-right: 2px;
+}
+
+.grid-view .filters input[type=text], .grid-view .filters select{
+    font-size:     11px;
+    padding:       2px;
+    display:       block;
+    width:         96%;
+    margin-bottom: 0;
+}
+.grid-view .filters input[type=text]{
+    height: 16px;
+}
+.grid-view .filters select{
+    height: 22px;
+}
+.grid-view th a{
+    font-weight:     bold;
+    color:           #333333;
+    text-decoration: underline;
+}
+
+.grid-view .button-column{
+    width:       1px;
+    white-space: nowrap;
+}
+
+.grid-view .pager-select{
+    float:  right;
+    margin: 0 0 10px 0;
+}
+.grid-view .summary{
+    float:  right;
+    margin: 5px;
+}
+.grid-view-loading
+{
+    background: url(preloader.gif) no-repeat;
+}
+
+.filters td:last-child {
+    text-align: center !important;
+}
+
+.filters td:last-child a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+}
