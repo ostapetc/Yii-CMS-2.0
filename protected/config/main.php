@@ -113,7 +113,7 @@ return array(
         ),
 
         'errorHandler' => array(
-            'class' => 'application.components.ErrorHandler',
+           // 'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 

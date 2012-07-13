@@ -1,0 +1,28 @@
+.allow_tr {
+    background-color: #ddffdd;
+}
+
+.deny_tr {
+    background-color: #e9967a;
+}
+
+.links_td {
+    text-align: right;
+    width: 200px;
+}
+
+.deny_link {
+    color: red;
+}
+
+.allow_link {
+    color: green;
+}
+
+.links_td a {
+    text-decoration: underline;
+}
+
+.links_td {
+    text-align: right !important;
+}

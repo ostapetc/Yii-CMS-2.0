@@ -57,7 +57,7 @@ class MainController extends Controller
     
 	public function actionError()
 	{
-	    if($error=Yii::app()->errorHandler->error)
+	    if($error = Yii::app()->errorHandler->error)
 	    {
 	    	if(Yii::app()->request->isAjaxRequest)
 	    	{
@@ -73,7 +73,7 @@ class MainController extends Controller
 
     public function actionError404()
     {
-        if($error=Yii::app()->errorHandler->error)
+        if($error = Yii::app()->errorHandler->error)
         {
             if(Yii::app()->request->isAjaxRequest)
             {
@@ -85,6 +85,7 @@ class MainController extends Controller
             }
         }
     }
+
 
     public function actionChangeLanguage($set_language, $back_url)
     {

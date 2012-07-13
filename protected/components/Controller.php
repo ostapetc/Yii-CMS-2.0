@@ -28,6 +28,7 @@ abstract class Controller extends CController implements ControllerInterface
     public function filters()
     {
         return array(
+            array('application.components.filters.RbacFilter'),
             array('application.components.filters.LanguageFilter'),
             array('application.components.filters.SiteEnableFilter'),
             array('application.components.filters.HttpsFilter'),
@@ -131,12 +132,11 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    protected function forbidden($auth_item = null)
+    public function forbidden($msg = null)
     {
-        $msg = t('Запрещено!');
-        if (YII_DEBUG && $auth_item)
+        if (!$msg)
         {
-            $msg.= ' AuthItem : ' .$auth_item;
+            $msg = t('Запрещено!');
         }
     
         throw new CHttpException(403, $msg);
