@@ -24,7 +24,7 @@ $this->tabs = array(
     <tr>
         <th><?= t('Имя') ?></th>
         <th><?= t('Описание') ?></th>
-        <th width="50"></th>
+        <th width="70"></th>
     </tr>
     <? foreach ($roles as $role): ?>
         <tr>
@@ -35,9 +35,11 @@ $this->tabs = array(
                 <?= $role->description ?>
             </td>
             <td>
-                <?= CHtml::link(CHtml::image('/img/admin/update.png'), array('update', 'name' => $role->name)) ?>
+                <?= CHtml::link(CHtml::image('/img/admin/lock.png'), array('taskAdmin/allow', 'role_name' => $role->name), array('title' => t('Права доступа'))) ?>
                 &nbsp;
-                <?= CHtml::link(CHtml::image('/img/admin/delete.png'), array('delete', 'name' => $role->name), array("class" => "delete-role")) ?>
+                <?= CHtml::link(CHtml::image('/img/admin/update.png'), array('update', 'name' => $role->name), array('title' => 'Редактировать')) ?>
+                &nbsp;
+                <?= CHtml::link(CHtml::image('/img/admin/delete.png'), array('delete', 'name' => $role->name), array('class' => 'delete-role', 'title' => 'Удалить')) ?>
             </td>
         </tr>
     <? endforeach ?>

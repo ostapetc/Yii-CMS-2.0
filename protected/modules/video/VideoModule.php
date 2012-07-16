@@ -34,6 +34,8 @@ class VideoModule extends WebModule
     public static function adminMenu()
     {
         return array(
+            'Управление аккаунтами' => Yii::app()->createUrl('video/videoAccountAdmin/manage'),
+            'Создать аккаунт'       => Yii::app()->createUrl('/video/videoAccountAdmin/create'),
         );
     }
 

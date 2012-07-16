@@ -29,7 +29,7 @@
         $('#save_button').click(function() {
             var attributes = new Array();
 
-            $('.columns.visible a').each(function() {
+            $('.columns.visible div').each(function() {
                 attributes.push($(this).attr("attribute"));
             });
 
@@ -50,7 +50,9 @@
     <ul class="columns visible">
     <? foreach ($visible_columns as $attribute): ?>
         <li class="column-li">
-            <a class="btn field" attribute="<?= $attribute ?>"><?= $model->label($attribute) ?></a>
+            <div class="btn field" attribute="<?= $attribute ?>">
+                <strong><?= $model->label($attribute) ?></strong> | <?= $attribute ?>
+            </div>
         </li>
     <? endforeach ?>
     </ul>
@@ -66,7 +68,9 @@
     <ul class="columns">
     <? foreach ($hidden_columns as $attribute): ?>
         <li class="column-li">
-            <a class="btn field" attribute="<?= $attribute ?>"><?= $model->label($attribute) ?></a>
+            <div class="btn field" attribute="<?= $attribute ?>">
+                <strong><?= $model->label($attribute) ?></strong> | <?= $attribute ?>
+            </div>
         </li>
     <? endforeach ?>
     </ul>

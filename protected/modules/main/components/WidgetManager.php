@@ -16,7 +16,7 @@ class WidgetManager
             return unserialize(file_get_contents($file_path));
         }
 
-        return array();
+        return ActiveRecord::model($model_id)->attributeNames();
     }
 
 

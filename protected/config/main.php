@@ -28,7 +28,7 @@ return array(
         'application.components.baseWidgets.*',
         'application.components.bootstrap.widgets.*',
         'application.components.activeRecordBehaviors.*',
-        'application.libs.helpers.*',
+        'application.components.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
     'modules'    => $modules,
@@ -113,17 +113,12 @@ return array(
         ),
 
         'errorHandler' => array(
-            'class' => 'application.components.ErrorHandler',
+           // 'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
         'authManager'  => array(
-            'class'           => 'CDbAuthManager',
-            'connectionID'    => 'db',
-            'itemTable'       => 'auth_items',
-            'assignmentTable' => 'auth_assignments',
-            'itemChildTable'  => 'auth_items_childs',
-            'defaultRoles'    => array('guest')
+            'class' => 'DbAuthManager'
         ),
         'cache' => array(
             'class'=>'system.caching.CFileCache',

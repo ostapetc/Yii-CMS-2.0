@@ -26,7 +26,7 @@ class Model extends FormModel
     {
         return array(
             array('name, class, table, module', 'required'),
-            array('class', 'fileNotExists'),
+            //array('class', 'fileNotExists'),
             array('table', 'TableExistsValidator')
         );
     }

@@ -1,0 +1,18 @@
+.os-date-picker input,  .os-date-picker select{
+    float: left !important;
+}
+
+.os-date-picker .day {
+    width: 70px;
+    margin-right: 5px;
+}
+
+.os-date-picker .month {
+    width: 90px;
+    margin-right: 5px;
+}
+
+.os-date-picker .year {
+    width: 34px;
+    text-align: center !important;
+}

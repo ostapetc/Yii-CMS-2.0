@@ -7,19 +7,19 @@ class SocialModule extends WebModule
 
     public static function name()
     {
-        return '';
+        return 'Социальность';
     }
 
 
     public static function description()
     {
-        return '';
+        return 'Социальность';
     }
 
 
     public static function version()
     {
-        return '0.0';
+        return '1.0';
     }
 
 
@@ -27,6 +27,7 @@ class SocialModule extends WebModule
 	{
 		$this->setImport(array(
 			'social.models.*',
+			'social.portlets.*',
 		));
 	}
 

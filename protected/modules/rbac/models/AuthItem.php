@@ -2,6 +2,12 @@
 
 class AuthItem extends ActiveRecord
 {
+    const SCENARIO_OPERATION = 'operation';
+    const SCENARIO_TASK      = 'task';
+
+    const ROLE_ROOT = 'admin';
+
+
     public function name()
     {
 
@@ -28,8 +34,8 @@ class AuthItem extends ActiveRecord
 			array(
 			    'name', 
 			    'match', 
-			    'pattern' => '/^[A-Za-z_]+$/ui', 
-			    'message' => 'только латинский алфавит и нижнее подчеркивание'
+			    'pattern' => '/^[A-Za-z_0-9]+$/ui',
+			    'message' => 'только латинский алфавит и нижнее подчеркивание и цифры'
 			),
 			array('type, allow_for_all', 'numerical', 'integerOnly' => true),
 			array('name', 'length', 'max' => 64),
@@ -39,7 +45,81 @@ class AuthItem extends ActiveRecord
 		);
 	}
 
-	
+
+    public function relations()
+    {
+        return array(
+            'childs' => array(
+                self::HAS_MANY,
+                'AuthItemChild',
+                'parent'
+            ),
+
+            'operations' => array(
+                self::HAS_MANY,
+                'AuthItem',
+                array('child' => 'name'),
+                'through' => 'childs'
+            )
+        );
+    }
+
+
+    public static function constructName($controller, $action)
+    {
+        return ucfirst($controller) . '_' . ucfirst($action);
+    }
+
+
+    public function allowForRole($role_name)
+    {
+        $cauth_item_role = Yii::app()->authManager->getAuthItem($role_name);
+        if ($cauth_item_role)
+        {
+            return $cauth_item_role->checkAccess($this->name);
+        }
+    }
+
+
+//    public function actionExists()
+//    {
+//        list($controller, $action) = explode('_', $this->name);
+//
+//        $controller_class = $controller . 'Controller';
+//        $controller_file  = $controller_class  . '.php';
+//
+//        $modules = Yii::app()->getModules();
+//
+//        foreach ($modules as $module)
+//        {
+//            $module_dir  = array_shift(explode('.', $module['class']));
+//            $module_path = Yii::getPathOfAlias("application.modules.{$module_dir}");
+//
+//            $controllers_path = $module_path . DIRECTORY_SEPARATOR . 'controllers' .DIRECTORY_SEPARATOR;
+//            if (!is_dir($controllers_path))
+//            {
+//                continue;
+//            }
+//
+//            $controllers_files = scandir($controllers_path);
+//
+//            if (in_array($controller_file, $controllers_files))
+//            {
+//                require_once $controllers_path . $controller_file;
+//
+//                if (method_exists($controller_class, "action{$action}"))
+//                {
+//                    return true;
+//                }
+//                else
+//                {
+//                    return false;
+//                }
+//            }
+//        }
+//    }
+
+
 //	public function getModulesWithActions()
 //	{
 //        $result = array();
@@ -67,49 +147,4 @@ class AuthItem extends ActiveRecord
 //
 //        return $result;
 //	}
-	
-
-    public static function constructName($controller, $action)
-    {
-        return ucfirst($controller) . '_' . ucfirst($action);
-    }
-
-
-    public function actionExists()
-    {
-        list($controller, $action) = explode('_', $this->name);
-
-        $controller_class = $controller . 'Controller';
-        $controller_file  = $controller_class  . '.php';
-
-        $modules = Yii::app()->getModules();
-
-        foreach ($modules as $module)
-        {
-            $module_dir  = array_shift(explode('.', $module['class']));
-            $module_path = Yii::getPathOfAlias("application.modules.{$module_dir}");
-
-            $controllers_path = $module_path . DIRECTORY_SEPARATOR . 'controllers' .DIRECTORY_SEPARATOR;
-            if (!is_dir($controllers_path))
-            {
-                continue;
-            }
-
-            $controllers_files = scandir($controllers_path);
-            
-            if (in_array($controller_file, $controllers_files))
-            {
-                require_once $controllers_path . $controller_file;
-
-                if (method_exists($controller_class, "action{$action}"))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-    }
 }

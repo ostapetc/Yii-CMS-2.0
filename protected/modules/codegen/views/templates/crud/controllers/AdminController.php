@@ -5,11 +5,11 @@ class <?= $class ?>AdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            'View'   => 'Просмотр <?= $genetive ?>',
-            'Create' => 'Создание <?= $genetive ?>',
-            'Update' => 'Редактирование <?= $genetive ?>',
-            'Delete' => 'Удаление <?= $genetive ?>',
-            'Manage' => 'Управление <?= $instrumental ?>',
+            'view'   => 'Просмотр <?= $genetive ?>',
+            'create' => 'Создание <?= $genetive ?>',
+            'update' => 'Редактирование <?= $genetive ?>',
+            'delete' => 'Удаление <?= $genetive ?>',
+            'manage' => 'Управление <?= $instrumental ?>',
         );
     }
 

@@ -36,7 +36,8 @@ class RbacModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Роли' => '/rbac/RoleAdmin/manage',
+            'Роли'              => '/rbac/RoleAdmin/manage',
+            'Операции и задачи' => '/rbac/TaskAdmin/manage'
         );
     }
 

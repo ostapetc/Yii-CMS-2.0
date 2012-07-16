@@ -1,7 +1,4 @@
-<? $this->pageTitle=Yii::app()->name . ' - Error';  ?>
+<? $this->page_title = 'Error ' . $code;  ?>
 
-<h2>Error <? echo $code; ?></h2>
 
-<div class="error">
-    <? echo CHtml::encode($message); ?>
-</div>
+<?= $this->msg($message, 'error') ?>
