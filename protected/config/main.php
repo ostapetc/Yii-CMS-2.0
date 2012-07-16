@@ -75,7 +75,7 @@ return array(
             'newFileMode' => 0644
         ),
         'clientScript' => array(
-            'class'    => 'CClientScript',
+            'class'    => 'CClientScript', //'ext.mtClientScript.mtClientScript', //if need optimize && you have java
         ),
         'session'      => array(
 //            'autoStart'=> true
