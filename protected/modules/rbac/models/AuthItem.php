@@ -5,7 +5,9 @@ class AuthItem extends ActiveRecord
     const SCENARIO_OPERATION = 'operation';
     const SCENARIO_TASK      = 'task';
 
-    const ROLE_ROOT = 'admin';
+    const ROLE_DEFAULT = 'user';
+    const ROLE_GUEST   = 'guest';
+    const ROLE_ROOT    = 'admin';
 
 
     public function name()

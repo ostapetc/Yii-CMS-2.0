@@ -1,0 +1,49 @@
+.subnav {
+    background-color: #EEEEEE;
+    background-image: -moz-linear-gradient(center top , #F5F5F5 0%, #EEEEEE 100%);
+    background-repeat: repeat-x;
+    border: 1px solid #E5E5E5;
+    height: 36px;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.subnav a {
+    color: #838383;
+    text-shadow: none !important;
+}
+
+.subnav a:hover {
+    color: #333333 !important;
+}
+
+.navbar-inner {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+#top-right-menu a {
+     color: #ffffff;
+ }
+
+.top-menu a {
+    color: #f5f5f5;
+}
+
+.top-menu a, #top-right-menu a {
+    margin-top: 3px;
+}
+
+#top-right-menu {
+    float:right !important;
+}
+
+.top-sub-menu li.active a {
+    background-color: #EEEEEE !important;
+    font-weight: bold;
+    height: 10px !important;
+    color: #808080 !important;
+}

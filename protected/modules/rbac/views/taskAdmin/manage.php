@@ -1,64 +1,44 @@
 <style type="text/css">
-    #auth-items h5, #auth-items span {
-        /*float: left;*/
-    }
-
-    #auth-items .new-auth-item {
-        float: right;
-        font-weight: bold;
-        font-size: 10px;
-        color: green;
-        clear: both;
-    }
-
-    #auth-items hr {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .operation-name {
-        color: gray;
-        font-size: 10px;
-    }
-
-    .operation-li:hover {
-        background-color: #f5f5f5;
+    .items.table b {
+        cursor: pointer;
     }
 </style>
 
+
 <script type="text/javascript">
     $(function() {
-        $('#auth-items h5 input[type=checkbox]').click(function() {
-            checkChildCheckbox($(this));
+        /*$('.items.table').find('tr').each(function() {
+            if ($(this).find('.operation-chbox').length == 1) {
+                $(this).hide();
+            }
         });
 
-        $('.operation-li input[type=checkbox]').click(function() {
-            var parent_chbox = $(this).parents('.task-li:eq(0)').find('h5 input[type=checkbox]');
+        $('.items.table b').click(function() {
+            var parent = $(this).parents('tr:eq(0)').find('.task-chbox').data('name');
+
+            $('.items.table').find('input[data-parent="' + parent + '"]').each(function() {
+                $(this).parents('tr:eq(0)').slideToggle();
+            })
+        });*/
+
+
+        $('.operation-chbox').click(function() {
+            var parent  = $(this).data('parent');
+            var $parent = $('input[data-name="' + parent + '"]');
 
             if ($(this).is(':checked')) {
-                parent_chbox.prop('checked', true);
+                $parent.prop('checked', true);
             }
-            else
-            {
-                var checked_childs = parent_chbox.parents('li:eq(0)').find('.operation-li input[type=checkbox]:checked');
-                if (checked_childs.length == 0) {
-                    parent_chbox.prop('checked', false);
+            else {
+                if ($('input[data-parent="' + parent + '"]:checked').length == 0) {
+                    $parent.prop('checked', false);
                 }
             }
         });
-
-        function checkChildCheckbox(parent_checkbox) {
-            var checked = parent_checkbox.is(':checked');
-            var disabled = checked ? false : true;
-
-            parent_checkbox.parents('li:eq(0)').find('ul input[type=checkbox]').attr({
-                'checked'  : checked,
-                'disabled' : disabled
-            });
-        }
     });
 </script>
 
+<?= CHtml::beginForm() ?>
 
 <?
 $this->widget('BootGridView', array(
@@ -75,9 +55,10 @@ $this->widget('BootGridView', array(
                 }
                 else
                 {
-                    return str_repeat('&nbsp;', 5) . "{$data['description']}";
+                    return str_repeat('&nbsp;', 5) . "<span data-parent='{$data['parent']}'>{$data['description']}</span>";
                 }
             },
+
         ),
         array(
             'header'      => 'Добавлена',
@@ -94,7 +75,11 @@ $this->widget('BootGridView', array(
                     return CHtml::checkBox(
                         "AuthItem[{$data['name']}][description]",
                         $data['exists'],
-                        array('value' => $data['description'])
+                        array(
+                            'value'     => $data['description'],
+                            'class'     => 'task-chbox',
+                            'data-name' => $data['name']
+                        )
                     );
                 }
                 else
@@ -102,7 +87,11 @@ $this->widget('BootGridView', array(
                     return CHtml::checkBox(
                         "AuthItem[{$data['parent']}][operations][{$data['name']}]",
                         $data['exists'],
-                        array('value' => $data['description'])
+                        array(
+                            'value'       => $data['description'],
+                            'class'       => 'operation-chbox',
+                            'data-parent' => $data['parent']
+                        )
                     );
                 }
             },
@@ -112,6 +101,8 @@ $this->widget('BootGridView', array(
 ));
 ?>
 
+<?= CHtml::submitButton(t('сохранить'), array('class' => 'btn btn-primary')); ?>
+<?= CHtml::endForm() ?>
 
 <?//= CHtml::beginForm() ?>
 <!--<ul id='auth-items'>-->

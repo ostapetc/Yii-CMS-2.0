@@ -23,7 +23,7 @@ class RbacFilter extends CFilter
             {
                 $msg = t('Зарещено!') . ' ' . t($item_name) . '<br/>';
                 $msg.= CHtml::link(
-                    'Разрешить для данной роли',
+                    'Разрешить для роли "' . Yii::app()->user->role . '"',
                     Yii::app()->createUrl('/rbac/task/allow', array('item_name' => $item_name))
                 );
             }

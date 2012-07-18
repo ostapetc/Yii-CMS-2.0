@@ -5,4 +5,3 @@
 <div class="modal-body">
     <?= $form; ?>
 </div>
-    

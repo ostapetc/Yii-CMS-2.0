@@ -74,7 +74,7 @@ class TaskAdminController extends AdminController
         {
             $items_names = array();
             foreach ($_POST['AuthItem'] as $task_name => $data)
-            {
+            {   p($_POST['AuthItem']); die;
                 if (!isset($data['description'])) continue;
 
                 $items_names[] = $task_name;
