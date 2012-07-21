@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignments` (
 
 INSERT INTO `auth_assignments` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 ('admin', 1, NULL, NULL),
-('user', 36, NULL, NULL);
+('user', 2, NULL, NULL),
+('admin', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2478,7 +2479,6 @@ INSERT INTO `tags_rels` (`id`, `tag_id`, `object_id`, `model_id`) VALUES
 (399, 42, 258, 'Page');
 
 -- --------------------------------------------------------
-
 --
 -- Структура таблицы `tbl_migration`
 --
@@ -2486,6 +2486,7 @@ INSERT INTO `tags_rels` (`id`, `tag_id`, `object_id`, `model_id`) VALUES
 CREATE TABLE IF NOT EXISTS `tbl_migration` (
   `version` varchar(255) NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
+  `module` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
 
@@ -2493,20 +2494,40 @@ CREATE TABLE IF NOT EXISTS `tbl_migration` (
 -- Дамп данных таблицы `tbl_migration`
 --
 
-INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
-('m000000_000000_base', 1328899451),
-('m120208_234523_docs', 1328899453),
-('m120210_213443_banners', 1328900855),
-('m120210_223441_banners', 1328902503),
-('m120211_105306_captcha', 1328946802),
-('m120211_110937_menu_links', 1328947816),
-('m120211_143806_AR', 1328960362),
-('m120211_165455_sitempa', 1328968696),
-('m120211_170148_news', 1328968915),
-('m120225_213735_is_published2', 1330195146),
-('m120226_005110_is_published3', 1330206716),
-('m120222_000430_add_user_tracking_to_pages_and_revisions', 1330273189),
-('m120222_004351_add_timestamps', 1330273189);
+INSERT INTO `tbl_migration` (`version`, `apply_time`, `module`) VALUES
+('m000000_000000_base_fileManager', 1342855036, 'fileManager'),
+('m120603_143144_add_albums', 1342855036, 'fileManager'),
+('m000000_000000_base_comments', 1342855036, 'comments'),
+('m120701_004346_comments_create', 1342855036, 'comments'),
+('m000000_000000_base_content', 1342855036, 'content'),
+('m120701_004612_pages_create', 1342855036, 'content'),
+('m120701_004620_pages_sections_create', 1342855036, 'content'),
+('m120701_004626_pages_sections_rels_create', 1342855037, 'content'),
+('m120701_004651_menu_create', 1342855037, 'content'),
+('m120701_004658_menu_sections_create', 1342855037, 'content'),
+('m000000_000000_base_mailer', 1342855037, 'mailer'),
+('m120701_005013_mailer_outbox_create', 1342855037, 'mailer'),
+('m120701_005105_mailer_templates_create', 1342855252, 'mailer'),
+('m000000_000000_base_main', 1342855252, 'main'),
+('m120701_005157_feedback_create', 1342855252, 'main'),
+('m120701_005219_languages_create', 1342856425, 'main'),
+('m120701_005225_languages_messages_create', 1342856344, 'main'),
+('m120701_005231_languages_translations_create', 1342856344, 'main'),
+('m120701_005242_log_create', 1342856344, 'main'),
+('m120701_005251_meta_tags_create', 1342856344, 'main'),
+('m120701_005259_params_create', 1342856344, 'main'),
+('m120701_005307_site_actions_create', 1342856344, 'main'),
+('m000000_000000_base_social', 1342856344, 'social'),
+('m120701_005352_favorites_create', 1342856344, 'social'),
+('m120701_005357_ratings_create', 1342856344, 'social'),
+('m000000_000000_base_tags', 1342856344, 'tags'),
+('m120701_005414_tags_create', 1342856344, 'tags'),
+('m120701_005423_tags_rels_create', 1342856344, 'tags'),
+('m000000_000000_base_users', 1342856344, 'users'),
+('m120701_005441_users_create', 1342857853, 'users'),
+('m120710_232834_friends_create', 1342857853, 'social'),
+('m120711_215433_labels_create', 1342857853, 'social'),
+('m120711_215440_labels_rels_create', 1342857853, 'social');
 
 -- --------------------------------------------------------
 
@@ -2530,7 +2551,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Зарегистрирован',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
 
 --
 -- Дамп данных таблицы `users`
@@ -2538,7 +2559,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `birthdate`, `gender`, `status`, `photo`, `activate_code`, `activate_date`, `password_recover_code`, `password_recover_date`, `date_create`) VALUES
 (1, 'Иван', 'admin@ya.ru', 'e10adc3949ba59abbe56e057f20f883e', '2003-05-20', 'man', 'active', NULL, '070a63ae33af0eb7986992e774dc53e8', '2011-05-21 09:18:39', NULL, NULL, '2011-05-19 00:25:50'),
-(36, 'artos1', 'artem-moscow@yandex.ru', 'ce75287f5b0f666d015f6cd86003bcc6', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2012-05-19 16:05:24');
+(2, 'artos1', 'artem-moscow@yandex.ru', 'ce75287f5b0f666d015f6cd86003bcc6', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2012-05-19 16:05:24'),
+(3, '', 'www.pismeco@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2012-05-19 16:05:24');
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
