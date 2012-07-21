@@ -1,28 +1,12 @@
 <?
-if (!$_SERVER['DOCUMENT_ROOT'])
-{
-    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../') . DS;
-}
-
-require_once 'constants.php';
-
 return CMap::mergeArray(require(CONFIG . '.php'), array(
-    'language' => 'en',
-    'components' => array(
-        'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=cms2',
-            'emulatePrepare'   => true,
-            'username'         => 'root',
-            'password'         => '',
-            'charset'          => 'utf8',
-            'enableProfiling'  => true,
+    'language'   => 'en',
+    'commandMap' => array(
+        'migrate'    => array(
+            'class' => 'ext.migrate.EMigrateCommand',
         ),
-        'commandMap' => array(
-            'migrate' => array(
-            'class'  => 'ext.migrate.EMigrateCommand',
-        )
-    )
-)));
+    ),
+));
 
 
 //require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'constants.php';

@@ -359,7 +359,7 @@ class MigrateCommand extends CConsoleCommand
 		echo "*** applying $class\n";
 		$start=microtime(true);
 		$migration=$this->instantiateMigration($class);
-		if($migration->up()!==false)
+        if($migration->up()!==false)
 		{
 			$this->getDbConnection()->createCommand()->insert($this->migrationTable, array(
 				'version'=>$class,

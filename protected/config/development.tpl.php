@@ -1,5 +1,5 @@
 <?
-return array_merge_recursive(require('main.php'), array(
+return CMap::mergeArray(require('main.php'), array(
     'components' => array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=cms2',
