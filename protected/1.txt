@@ -1,7 +1,0 @@
-
-Yii Migration Tool v1.0 (based on Yii v1.1.10)
-
-Total 1 new migration to be applied:
-    m120625_191814_create_table_migs
-
-Apply the above migration? [yes|no] Завершить выполнение пакетного файла [Y(да)/N(нет)]? 

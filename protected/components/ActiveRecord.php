@@ -85,7 +85,7 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = 'get' . ucfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
+        $method_name = lcfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
         if (method_exists($this, $method_name))
         {
             return $this->$method_name();

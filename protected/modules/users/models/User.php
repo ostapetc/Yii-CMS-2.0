@@ -1,15 +1,10 @@
 <?
 
-/**
- * @property birthdate
- */
 class User extends ActiveRecord
 {
     const PAGE_SIZE = 10;
 
-    const PHOTO_PATH       = 'upload/photo';
-    const PHOTO_SIZE_SMALL = 23;
-    const PHOTO_SIZE_BIG   = 48;
+    const PHOTO_PATH = 'upload/photo';
 
     const STATUS_ACTIVE  = 'active';
     const STATUS_NEW     = 'new';
@@ -228,18 +223,14 @@ class User extends ActiveRecord
                 'safe',
                 'on' => self::SCENARIO_ACTIVATE_REQUEST
             ),
-            array(
-                'rating', 'unsafe'
-            ),
-            array(
-                'rating',
-                'numerical'
-            ),
-            array(
-                'remember_me',
-                'safe',
-                'on' => self::SCENARIO_LOGIN
-            )
+//            array(
+//                'rating',
+//                'numerical',
+//                'integerOnly' => true
+//            ),
+//            array(
+//                'rating', 'unsafe'
+//            )
         );
     }
 
@@ -264,26 +255,11 @@ class User extends ActiveRecord
                 'AuthAssignment',
                 'userid'
             ),
-            'role' => array(
+            'role'       => array(
                 self::HAS_ONE,
                 'AuthItem',
                 array('itemname'=>'name'),
                 'through' => 'assignment'
-            ),
-            'pages_count' => array(
-                self::STAT,
-                'Page',
-                'user_id'
-            ),
-            'favorites_count' => array(
-                self::STAT,
-                'Favorite',
-                'user_id'
-            ),
-            'comments_count' => array(
-                self::STAT,
-                'Comment',
-                'user_id'
             )
         );
     }
@@ -319,9 +295,9 @@ class User extends ActiveRecord
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), array(
-                'password_c'   => t('Повторите пароль'),
-                'remember_me'  => t('Запомнить меня'),
-                'role'         => t('Роль')
+                "password_c"   => "Пароль еще раз",
+                "remember_me"  => "Запомни меня",
+                "role"         => "Роль"
             ));
     }
 
@@ -357,36 +333,13 @@ class User extends ActiveRecord
     }
 
 
-    public function getPhotoHtml($size = self::PHOTO_SIZE_SMALL)
+    public function getPhotoLink()
     {
         $photo_src = '/img/icons/user.gif';
+        $image     =  CHtml::image($photo_src, $this->name, array('title' => $this->name, 'border' => 0));
 
-        return CHtml::image(
-            $photo_src,
-            $this->name,
-            array(
-                'title'  => $this->name,
-                'border' => 0,
-                'width'  => $size,
-                'height' => $size
-            )
-        );
+        return CHtml::link($image, $this->href, array('class' => 'user-photo-link', 'width' => '23', 'height' => '23'));
     }
-
-
-    public function getPhotoLink($size = self::PHOTO_SIZE_SMALL)
-    {
-        return CHtml::link(
-            $this->getPhotoHtml($size),
-            $this->href,
-            array(
-                'class'  => 'user-photo-link',
-                'width'  => $size,
-                'height' => $size
-            )
-        );
-    }
-
 
     public function uploadFiles()
     {
@@ -412,31 +365,5 @@ class User extends ActiveRecord
         return Yii::app()->createUrl('/user/' . $this->id);
     }
 
-
-    /**
-     * TODO: надо придумать авто преобразование даты
-     */
-    public function getBirthdateValue()
-    {
-        if ($this->birthdate)
-        {
-            return Yii::app()->dateFormatter->formatDateTime(strtotime($this->birthdate), 'long', null);
-        }
-    }
-
-
-    public function getDateCreateValue()
-    {
-        return Yii::app()->dateFormatter->formatDateTime(strtotime($this->date_create), 'long', null);
-    }
-
-
-    public function getGenderValue()
-    {
-        if (isset(self::$gender_options[$this->gender]))
-        {
-            return self::$gender_options[$this->gender];
-        }
-    }
 }
 

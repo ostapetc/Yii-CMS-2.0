@@ -1,3 +1,5 @@
+<? $this->page_title = null; ?>
+
 <?
 $this->widget('ListView', array(
     'id'           => 'Page-listView',

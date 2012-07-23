@@ -5,8 +5,6 @@ class AuthItem extends ActiveRecord
     const SCENARIO_OPERATION = 'operation';
     const SCENARIO_TASK      = 'task';
 
-    const ROLE_ROOT = 'admin';
-
 
     public function name()
     {
@@ -34,8 +32,8 @@ class AuthItem extends ActiveRecord
 			array(
 			    'name', 
 			    'match', 
-			    'pattern' => '/^[A-Za-z_0-9]+$/ui',
-			    'message' => 'только латинский алфавит и нижнее подчеркивание и цифры'
+			    'pattern' => '/^[A-Za-z_]+$/ui', 
+			    'message' => 'только латинский алфавит и нижнее подчеркивание'
 			),
 			array('type, allow_for_all', 'numerical', 'integerOnly' => true),
 			array('name', 'length', 'max' => 64),

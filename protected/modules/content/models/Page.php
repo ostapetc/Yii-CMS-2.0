@@ -95,11 +95,6 @@ class Page extends ActiveRecord
                     self::SCENARIO_CREATE,
                     self::SCENARIO_UPDATE
                 )
-            ),
-            array(
-                'comments_denied',
-                'in',
-                'range' => array(0, 1)
             )
         );
     }

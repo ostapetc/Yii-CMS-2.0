@@ -4,7 +4,7 @@ $this->tabs = array(
     'редактировать'        => $this->createUrl('update', array('id' => $model->id)),
 );
 
-$this->widget('AdminDetailView', array(
+$this->widget('DetailView', array(
 	'data'       => $model,
 	'attributes' => array(
 		array(

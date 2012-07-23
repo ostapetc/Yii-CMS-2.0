@@ -28,7 +28,7 @@ return array(
         'application.components.baseWidgets.*',
         'application.components.bootstrap.widgets.*',
         'application.components.activeRecordBehaviors.*',
-        'application.components.helpers.*',
+        'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
     ),
     'modules'    => $modules,
@@ -75,7 +75,7 @@ return array(
             'newFileMode' => 0644
         ),
         'clientScript' => array(
-            'class'    => 'CClientScript', //'ext.mtClientScript.mtClientScript', //if need optimize && you have java
+            'class'    => 'CClientScript',
         ),
         'session'      => array(
 //            'autoStart'=> true
@@ -113,7 +113,7 @@ return array(
         ),
 
         'errorHandler' => array(
-           // 'class' => 'application.components.ErrorHandler',
+            'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
@@ -122,6 +122,10 @@ return array(
         ),
         'cache' => array(
             'class'=>'system.caching.CFileCache',
+        ),
+        'log'=>array(
+            'class'=>'CLogRouter',
+            'routes'=>array(),
         ),
     ),
 

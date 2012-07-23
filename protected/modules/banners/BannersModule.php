@@ -53,10 +53,10 @@ class BannersModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Баннеры (горизонт.)'   => Yii::app()->createUrl('/banners/bannerAdmin/manage/is_big/1'),
-            'Баннеры (вертикаль.)'  => Yii::app()->createUrl('/banners/bannerAdmin/manage/is_big/0'),
-            'Добавить (горизонт.)'  => Yii::app()->createUrl('/banners/bannerAdmin/create/is_big/1'),
-            'Добавить (вертикаль.)' => Yii::app()->createUrl('/banners/bannerAdmin/create/is_big/0'),
+            'Баннеры (горизонт.)'   => '/banners/bannerAdmin/manage/is_big/1',
+            'Баннеры (вертикаль.)'  => '/banners/bannerAdmin/manage/is_big/0',
+            'Добавить (горизонт.)'  => '/banners/bannerAdmin/create/is_big/1',
+            'Добавить (вертикаль.)' => '/banners/bannerAdmin/create/is_big/0',
         );
     }
 

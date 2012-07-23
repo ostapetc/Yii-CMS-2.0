@@ -50,16 +50,8 @@ class WebUser extends CWebUser
     }
 
 
-    public function checkAccess($auth_item_name, $params = array(), $allow_caching = true)
-    {   return true;
-        if (Yii::app()->user->isRootRole()) return true;
-
-        $auth_item = AuthItem::model()->findByPk($auth_item_name);
-        if ($auth_item && $auth_item['allow_for_all'])
-        {
-            return true;
-        }
-
-        return parent::checkAccess($auth_item_name, $params, $allow_caching);
+    public function checkAccess($auth_item, $params=array(), $allowCaching=true)
+    {
+        return true;
     }
 }

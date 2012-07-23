@@ -48,7 +48,6 @@ class FileManager extends ActiveRecord
         );
     }
 
-
     public function parent($model_id, $id)
     {
         $alias = $this->getTableAlias();
@@ -74,7 +73,6 @@ class FileManager extends ActiveRecord
     {
         return Yii::app()->controller->createUrl('/fileManager/fileManagerAdmin/delete', array('id' => $this->id));
     }
-
 
     public function getIsImage()
     {

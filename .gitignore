@@ -40,6 +40,7 @@ publish
 
 #my adds
 assets/*
-protected/runtime/*
 upload/fileManager/*
+protected/config/development.php
+protected/runtime/*
 

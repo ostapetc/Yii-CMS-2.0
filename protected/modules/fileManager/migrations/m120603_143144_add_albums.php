@@ -1,8 +1,8 @@
 <?php
 
-class m120603_143144_add_albums extends EDbMigration
+class m120603_143144_add_albums extends DbMigration
 {
-	public function up()
+	public function safeUp()
 	{
         $this->execute("CREATE TABLE `file_albums` (
         `id`  int(11) UNSIGNED NULL AUTO_INCREMENT COMMENT 'id' ,
@@ -21,7 +21,7 @@ class m120603_143144_add_albums extends EDbMigration
         ");
 	}
 
-	public function down()
+	public function safeDown()
 	{
 		echo "m120603_143144_add_albums does not support migration down.\n";
 		return false;

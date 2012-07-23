@@ -1,18 +1,35 @@
 <?
-
+/**
+ * EMultiSelect class file.
+ *
+ * PHP Version 5.1
+ *
+ * @category Vencidi
+ * @package  Widget
+ * @author   Loren <wiseloren@yiiframework.com>
+ * @license  http://www.opensource.org/licenses/mit-license.php MIT
+ * @link     http://www.vencidi.com/ Vencidi
+ * @since    3.0
+ */
+/**
+ * EMultiSelect Creates Multiple Select Boxes
+ *
+ * @category Vencidi
+ * @package  Widget
+ * @author   Loren <wiseloren@yiiframework.com>
+ * @license  http://www.opensource.org/licenses/mit-license.php MIT
+ * @version  Release: 1.0
+ * @link     http://www.vencidi.com/ Vencidi
+ * @since    3.0
+ */
 class EMultiSelect extends JuiInputWidget
 {
-    public $sortable   = true;
-
+    public $sortable = true;
     public $searchable = true;
-
-    public $height     = '175px';
-
-    public $data;
-
+    public $height = '175px';
     public $onchange;
-
     public $class;
+
 
     /**
      * Initializes everything
@@ -21,16 +38,6 @@ class EMultiSelect extends JuiInputWidget
      */
     public function init()
     {
-        if (!$this->model instanceof CModel)
-        {
-            throw new CException(t('Needs `model` param instance of CModel'));
-        }
-
-        if (!is_array($this->data))
-        {
-            throw new CException(t('Needs `data` param as array'));
-        }
-
         parent::init();
         $this->registerScripts();
     }
@@ -57,13 +64,13 @@ class EMultiSelect extends JuiInputWidget
         ));
 
         $cs->registerScript('EMultiSelect',
-            '$("#' . $this->id . '").multiselect(' . $parameters . ');', CClientScript::POS_READY);
+            '$("#'.$this->id.'").multiselect(' . $parameters . ');', CClientScript::POS_READY);
     }
 
 
     public function run()
     {
-        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->data, array(
+        echo CHtml::activeDropDownList($this->model, $this->attribute, $this->input_element->items, array(
             'multiple' => 'multiple',
             'key'      => isset($this->key) ? $this->key : 'id',
             'class'    => 'multiselect'

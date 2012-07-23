@@ -12,12 +12,13 @@ class VideoAccount extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
-    const SERVICE_YOUTUBE  = 'youtube';
-    const SERVICE_FACEBOOK = 'facebook';
 
-    public static $service_options = array(
-        self::SERVICE_YOUTUBE  => 'YouTube',
-        self::SERVICE_FACEBOOK => 'Facebook'
+    const HOSTING_VIMEO = 'vimeo';
+    const HOSTING_RUTUBE = 'rutube';
+
+    public static $hosting_options = array(
+        self::HOSTING_VIMEO => 'vimeo',
+        self::HOSTING_RUTUBE => 'rutube',
     );
 
 
@@ -43,23 +44,22 @@ class VideoAccount extends ActiveRecord
     {
         return array(
             array(
-                'service, api_key, auth_url',
+                'hosting, api_key, api_secret, request_url, auth_url, access_url',
                 'required'
             ),
             array(
-                'service',
-                'in',
-                'range' => self::$service_options
-            ),
-            array(
-                'login, password',
-                'required',
-                'on' => self::SERVICE_YOUTUBE
-            ),
-            array(
-                'login, password',
+                'api_key, api_secret, request_url, auth_url, access_url',
                 'length',
-                'max' => 100
+                'max' => 250
+             ),
+            array(
+                'hosting',
+                'in',
+                'range' => self::$hosting_options
+            ),
+            array(
+                '',
+                'unique'
             ),
         );
     }
@@ -76,7 +76,7 @@ class VideoAccount extends ActiveRecord
     {
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('service', $this->service, true);
+        $criteria->compare('hosting', $this->hosting, true);
         $criteria->compare('api_key', $this->api_key, true);
         $criteria->compare('api_secret', $this->api_secret, true);
         $criteria->compare('request_url', $this->request_url, true);

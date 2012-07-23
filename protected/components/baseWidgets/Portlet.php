@@ -21,10 +21,4 @@ class Portlet extends CPortlet
             )
         );
     }
-
-
-    public function createUrl($url, $params = array())
-    {
-        return Yii::app()->controller->createUrl($url, $params);
-    }
 }

@@ -1,5 +1,4 @@
 <?
-define('CONFIG', 'development');
 
 defined('DS')              || define('DS', DIRECTORY_SEPARATOR);
 defined('YII_DEBUG')       || define('YII_DEBUG', true);

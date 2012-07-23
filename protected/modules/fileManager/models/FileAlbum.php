@@ -2,10 +2,6 @@
 
 class FileAlbum extends ActiveRecord
 {
-    /*
-     * TODO: why not constants?
-     * i think not even constants, methods would be more flexible
-     */
     public static $image_size = array('width' => 163, 'height' => 125);
     public static $album_size = array('width' => 260, 'height' => 220);
 

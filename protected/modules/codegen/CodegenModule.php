@@ -35,11 +35,10 @@ class CodegenModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Создать модуль'   => Yii::app()->createUrl('/codegen/moduleAdmin/create'),
-            'Создать модель'   => Yii::app()->createUrl('/codegen/modelAdmin/create'),
-            'Создать миграцию' => Yii::app()->createUrl('/codegen/migrationAdmin/create'),
-            'Создать форму'    => Yii::app()->createUrl('/codegen/formAdmin/create'),
-            'Создать CRUD'     => Yii::app()->createUrl('/codegen/crudAdmin/create'),
+            'Создать модуль' => Yii::app()->createUrl('/codegen/moduleAdmin/create'),
+            'Создать модель' => Yii::app()->createUrl('/codegen/modelAdmin/create'),
+            'Создать форму'  => Yii::app()->createUrl('/codegen/formAdmin/create'),
+            'Создать CRUD'   => Yii::app()->createUrl('/codegen/crudAdmin/create'),
         );
     }
 }

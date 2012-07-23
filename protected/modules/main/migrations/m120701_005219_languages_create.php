@@ -1,9 +1,9 @@
 <?
-class m120701_005219_languages_create extends EDbMigration
+class m120701_005219_languages_create extends DbMigration
 {
-    public function up()
+    public function safeUp()
     {
-        $this->execute("DROP TABLE IF EXISTS `languages`");
+        $this->execute("DROP TABLE IF EXISTS `languages`;");
 
         $this->execute("
             CREATE TABLE `languages` (
@@ -11,12 +11,12 @@ class m120701_005219_languages_create extends EDbMigration
                 `name` varchar(15) NOT NULL COMMENT 'Название',
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `name` (`name`)
-              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
     }
 
 
-    public function down()
+    public function safeDown()
     {
         return false;
     }

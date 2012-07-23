@@ -1,8 +1,4 @@
 <?php
-
-/**
- * TODO: WTF?
- */
 class ErrorHandler extends CErrorHandler
 {
     public $maintanance = '/maintanance.php';
@@ -10,7 +6,7 @@ class ErrorHandler extends CErrorHandler
 
     public function render($view, $data)
     {
-        if (CONFIG == 'production')
+        if (ENV == 'production')
         {
             try
             {

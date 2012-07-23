@@ -1,7 +1,7 @@
 <?
-class m120701_005251_meta_tags_create extends EDbMigration
+class m120701_005251_meta_tags_create extends DbMigration
 {
-    public function up()
+    public function safeUp()
     {
         $this->execute("DROP TABLE IF EXISTS `meta_tags`");
 
@@ -22,7 +22,7 @@ class m120701_005251_meta_tags_create extends EDbMigration
     }
 
 
-    public function down()
+    public function safeDown()
     {
         return false;
     }

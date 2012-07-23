@@ -43,8 +43,8 @@ class UsersModule extends WebModule
     public static function adminMenu()
     {
         return array(
-            'Все пользователи '     => Yii::app()->createUrl('/users/userAdmin/manage'),
-            'Добавить пользователя' => Yii::app()->createUrl('/users/userAdmin/create'),
+            'Все пользователи '     => '/users/userAdmin/manage',
+            'Добавить пользователя' => '/users/userAdmin/create',
         );
     }
 
@@ -54,7 +54,7 @@ class UsersModule extends WebModule
         return array(
             '/admin/login/*'             => 'users/userAdmin/login',
             '/login'                     => 'users/user/login',
-            '/user/<id:\d*>'             => 'users/user/view',
+            '/user/<id:\d*>'              => 'users/user/view',
             '/logout'                    => 'users/user/logout',
             '/registration'              => 'users/user/registration',
             '/activateAccount/<code:.*>' => 'users/user/activateAccount',

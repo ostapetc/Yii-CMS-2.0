@@ -10,6 +10,10 @@
 
 <div class="span4">
     <? $this->widget('sidebarManager'); ?>
+
+    <div class="well">
+        standart sidebar
+    </div>
 </div>
 
 <? $this->renderPartial('application.views.layouts._footer'); ?>

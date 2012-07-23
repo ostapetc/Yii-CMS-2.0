@@ -1,24 +1,12 @@
 <?
-$_SERVER['DOCUMENT_ROOT'] = realpath('../') . DIRECTORY_SEPARATOR;
-
-require_once 'constants.php';
-
 return CMap::mergeArray(require(CONFIG . '.php'), array(
-    'components' => array(
-        'db' => array(
-            'connectionString' => 'mysql:host=openserver;dbname=yiicms',
-            'emulatePrepare'   => true,
-            'username'         => 'mysql',
-            'password'         => 'mysql',
-            'charset'          => 'utf8',
-            'enableProfiling'  => true,
+    'language'   => 'en',
+    'commandMap' => array(
+        'migrate'    => array(
+            'class' => 'ext.migrate.EMigrateCommand',
         ),
-        'commandMap' => array(
-            'migrate' => array(
-            'class'  => 'ext..migrate.EMigrateCommand',
-        )
-    )
-)));
+    ),
+));
 
 
 //require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'constants.php';
