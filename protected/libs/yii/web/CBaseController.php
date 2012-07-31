@@ -61,7 +61,7 @@
  * </pre>
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CBaseController.php 3515 2011-12-28 12:29:24Z mdomba $
+ * @version $Id$
  * @package system.web
  * @since 1.0
  */
@@ -160,14 +160,14 @@ abstract class CBaseController extends CComponent
 	 */
 	public function widget($className,$properties=array(),$captureOutput=false)
 	{
-        if($captureOutput)
+		if($captureOutput)
 		{
 			ob_start();
 			ob_implicit_flush(false);
 			$widget=$this->createWidget($className,$properties);
 			$widget->run();
-            return ob_get_clean();
-        }
+			return ob_get_clean();
+		}
 		else
 		{
 			$widget=$this->createWidget($className,$properties);

@@ -7,12 +7,6 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'moduleID'); ?>
 		<?php echo $form->textField($model,'moduleID',array('size'=>65)); ?>
-
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>65)); ?>
-
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textarea($model,'description',array('cols' => 74)); ?>
 		<div class="tooltip">
 			Module ID is case-sensitive. It should only contain word characters.
 			The generated module class will be named after the module ID.

@@ -66,7 +66,7 @@
  * @property array $keys The list of session variable names.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CHttpSession.php 3511 2011-12-27 00:02:53Z alexander.makarow $
+ * @version $Id$
  * @package system.web
  * @since 1.0
  */
@@ -112,10 +112,7 @@ class CHttpSession extends CApplicationComponent implements IteratorAggregate,Ar
 		if($this->getUseCustomStorage())
 			@session_set_save_handler(array($this,'openSession'),array($this,'closeSession'),array($this,'readSession'),array($this,'writeSession'),array($this,'destroySession'),array($this,'gcSession'));
 
-//        if (!session_id())
-//        {
-            @session_start();
-//        }
+		@session_start();
 		if(YII_DEBUG && session_id()=='')
 		{
 			$message=Yii::t('yii','Failed to start session.');

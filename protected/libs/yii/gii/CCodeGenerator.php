@@ -18,8 +18,11 @@
  * while the latter should return a success message to be displayed when
  * code files are successfully generated.
  *
+ * @property string $pageTitle The page title.
+ * @property string $viewPath The view path of the generator.
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CCodeGenerator.php 2799 2011-01-01 19:31:13Z qiang.xue $
+ * @version $Id$
  * @package system.gii
  * @since 1.1.2
  */
@@ -59,7 +62,6 @@ class CCodeGenerator extends CController
 	public function actionIndex()
 	{
 		$model=$this->prepare();
-
 		if($model->files!=array() && isset($_POST['generate'], $_POST['answers']))
 		{
 			$model->answers=$_POST['answers'];
@@ -74,6 +76,7 @@ class CCodeGenerator extends CController
 	/**
 	 * The code preview action.
 	 * This action shows up the specified generated code.
+	 * @throws CHttpException if unable to find code generated.
 	 */
 	public function actionCode()
 	{
@@ -91,6 +94,7 @@ class CCodeGenerator extends CController
 	/**
 	 * The code diff action.
 	 * This action shows up the difference between the newly generated code and the corresponding existing code.
+	 * @throws CHttpException if unable to find code generated.
 	 */
 	public function actionDiff()
 	{

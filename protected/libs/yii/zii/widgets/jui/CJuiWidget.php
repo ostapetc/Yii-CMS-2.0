@@ -14,7 +14,7 @@
  *
  * @author Sebastian Thierer <sebathi@gmail.com>
  * @author Qiang Xue <qiang.xue@gmail.com>
- * @version $Id: CJuiWidget.php 2799 2011-01-01 19:31:13Z qiang.xue $
+ * @version $Id$
  * @package zii.widgets.jui
  * @since 1.1
  */
@@ -117,8 +117,8 @@ abstract class CJuiWidget extends CWidget
 				$cs->registerCssFile($this->themeUrl.'/'.$this->theme.'/'.$cssFile);
 		}
 
-        $cs->registerCoreScript('jquery');
-        if(is_string($this->scriptFile))
+		$cs->registerCoreScript('jquery');
+		if(is_string($this->scriptFile))
 			$this->registerScriptFile($this->scriptFile);
 		else if(is_array($this->scriptFile))
 		{

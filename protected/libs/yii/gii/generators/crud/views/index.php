@@ -14,9 +14,6 @@ $('#{$class}_model').bind('keyup change', function(){
 	}
 });
 ");
-
-//echo (get_class(Yii::app()->controller));
-
 ?>
 <h1>Crud Generator</h1>
 
