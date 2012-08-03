@@ -106,6 +106,26 @@ class TextComponent extends CApplicationComponent
         return strtr($string, $words);
     }
 
+    public function alphabetRu()
+    {
+        $res = array();
+        foreach(range(chr(0xC0),chr(0xDF)) as $lit) {
+            $res[] = iconv('CP1251','UTF-8',$lit);
+        }
+        return $res;
+    }
+
+    public function alphabetEn()
+    {
+        $res = array();
+        foreach(range("A","Z") as $lit) {
+            $res[] = $lit;
+        }
+        return $res;
+    }
+
+
+
     function antimat($string)
     {
         //setlocale (LC_ALL, "ru_RU.UTF8");
