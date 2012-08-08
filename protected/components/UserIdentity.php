@@ -20,12 +20,37 @@ class UserIdentity extends CUserIdentity
         $this->remember_me = $remember_me;
     }
 
+    /**
+     * Generate hash for raw password
+     *
+     * @static
+     * @param $str
+     * @return string
+     */
+    public static function crypt($str)
+    {
+        $salt = substr(str_replace('+', '.', base64_encode(sha1(microtime(true), true))), 0, 22);
+        return crypt($str, '$2a$12$' . $salt);
+    }
+
+    /**
+     * Compare 1 encrypted and 1 non-encrypted passwords
+     *
+     * @static
+     * @param string $internal encrypted password
+     * @param string $external non-encrypted password
+     * @return bool
+     */
+    public static function checkPassword($internal, $external)
+    {
+        return $internal == crypt($external, $internal);
+    }
 
     public function authenticate($admin_panel = false)
     {
         $user = User::model()->findByAttributes(array("email" => $this->username));
 
-        if (!$user || $user->password != md5($this->password))
+        if (!$user || !$this->checkPassword($user->password, $this->password))
         {
             $this->errorCode = self::ERROR_UNKNOWN;
             return;
@@ -38,7 +63,7 @@ class UserIdentity extends CUserIdentity
                 $this->_id = $user->id;
 
                 if ($this->remember_me)
-                {	
+                {
                     Yii::app()->user->login($this, 3600 * 24 * 7);
                 }
                 else
@@ -67,7 +92,7 @@ class UserIdentity extends CUserIdentity
                 return false;
             }
         }
-        
+
         return !$this->errorCode;
     }
 

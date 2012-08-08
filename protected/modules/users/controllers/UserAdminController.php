@@ -101,7 +101,7 @@ class UserAdminController extends AdminController
             $model = $form->model;
             if ($model->validate())
             {
-                $model->password = md5($model->password);
+                $model->password = UserIdentity::crypt($model->password);
                 $model->save(false);
 
                 $assignment           = new AuthAssignment();
@@ -140,7 +140,7 @@ class UserAdminController extends AdminController
             {
                 if ($_POST['User']['password'] != $old_password)
                 {
-                    $model->password = md5($model->password);
+                    $model->password = UserIdentity::crypt($model->password);
                 }
 
                 $model->save(false);

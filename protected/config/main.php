@@ -11,7 +11,7 @@ foreach ($modules_dirs as $module)
 
     $modules[] = $module;
 }
-
+unset($modules[9]);
 return array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -134,6 +134,7 @@ return array(
         'save_site_actions'           => true,
         'multilanguage_support'       => false,
         'collect_routes_from_modules' => true,
-        'themes_enabled'              => false
+        'themes_enabled'              => false,
+        'salt'                        => 'some_secret_key', // substr(str_replace('+', '.', base64_encode(sha1(microtime(true), true))), 0, 22)
     )
 );

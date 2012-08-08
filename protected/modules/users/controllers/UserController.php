@@ -113,7 +113,7 @@ class UserController extends Controller
             $user->attributes = $_POST['User'];
             if ($user->validate())
             {
-                $user->password = md5($user->password);
+                $user->password = UserIdentity::crypt($user->password);
                 $user->generateActivateCode();
                 $user->activate_date = new CDbExpression('NOW()');
 
@@ -302,7 +302,7 @@ class UserController extends Controller
                     {
                         $user->password_recover_code = null;
                         $user->password_recover_date = null;
-                        $user->password              = md5($_POST['User']['password']);
+                        $user->password              = UserIdentity::crypt($_POST['User']['password']);
                         $user->save();
 
                         Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
