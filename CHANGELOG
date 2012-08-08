@@ -1,0 +1,12 @@
+Version pre-alpha-2.0.0 work in progress
+-------------------------------
+- Enh #2: Design FileUpload Popup (nizsheanez)
+- Enh #3: Additing form elements from behaviors (nizsheanez)
+- Bug #4: Add bootstrap caret to grid-view (nizsheanez)
+- Enh #7: Personal page making (nizsheanez)
+- Enh #8: Banners module create (nizsheanez)
+- Enh #14: Maintenance mode (nizsheanez)
+- Bug #18: MaxMinBehavior - add supporting owner criteria (nizsheanez)
+- Enh #23: Add short_open_tag directive checking (nizsheanez)
+- Bug #24: Repare migrations (nizsheanez)
+- Enh #22: Passwords Bcrypt encoding (nizsheanez)
