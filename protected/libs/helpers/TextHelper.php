@@ -1,8 +1,20 @@
-<?
+<?php
 
+/**
+ * Хелпер для работы с текстом
+ */
 class TextHelper
 {
-    public static function cut($text, $length, $force = false, $tail = "...", $delim = '., -:;')
+    /**
+     * Обрезает текст до нужной длинны
+     * @param string $text Текст
+     * @param intval $lenght Длинна строки
+     * @param boolean $force 
+     * @param string $tail
+     * @param string $delim Разделители
+     * @return Обрезанный текст
+     */
+    public static function cut($text, $length, $force = false, $tail = "…", $delim = '., -:;')
     {
         $text = strip_tags($text);
         if (mb_strlen($text, 'utf-8') <= $length)
@@ -27,13 +39,22 @@ class TextHelper
     }
 
 
+    /**
+     * Получает url из строки
+     * @param string $string Строка с текстом
+     * @return string Url
+     */
     public static function toUrl($string)
     {
-        $string = self::translit($string);
-        return str_replace(" ", "_", $string);
+        return str_replace(" ", "_", self::translit($string));
     }
 
-
+    
+    /**
+     * Транслитезация
+     * @param string $string Строка с текстом
+     * @return string Результат
+     */
     public static function translit($string)
     {
         $words = array(
@@ -107,7 +128,12 @@ class TextHelper
         return strtr($string, $words);
     }
 
-
+    
+    /**
+     * Антимат фильтр
+     * @param string $string Текст
+     * @return string Обработанный текст
+     */
     function antimat($string)
     {
         $let_matches = array(
@@ -180,7 +206,7 @@ class TextHelper
 
 
     /**
-     * Генерирует заданное колличество паракрафов с текстом.
+     * Генерирует заданное колличество параграфов с текстом.
      *
      * @param int    $count
      * @param int    $words
