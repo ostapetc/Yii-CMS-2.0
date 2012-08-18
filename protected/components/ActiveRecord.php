@@ -85,7 +85,7 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = lcfirst(StringHelper::underscoreToCamelcase($attribute)) . 'Value';
+        $method_name = lcfirst(Yii::app()->text->underscoreToCamelcase($attribute)) . 'Value';
         if (method_exists($this, $method_name))
         {
             return $this->$method_name();
@@ -110,7 +110,7 @@ abstract class ActiveRecord extends CActiveRecord
                 return $this->getAttributeLabel($attribute);
             }
 
-            $method_name = StringHelper::underscoreToCamelcase($name);
+            $method_name = Yii::app()->text->underscoreToCamelcase($name);
             $method_name = 'get' . ucfirst($method_name);
 
             if (method_exists($this, $method_name))
@@ -133,7 +133,7 @@ abstract class ActiveRecord extends CActiveRecord
         }
         catch (CException $e)
         {
-            $method_name = StringHelper::underscoreToCamelcase($name);
+            $method_name = Yii::app()->text->underscoreToCamelcase($name);
             $method_name = 'set' . ucfirst($method_name);
 
             if (method_exists($this, $method_name))

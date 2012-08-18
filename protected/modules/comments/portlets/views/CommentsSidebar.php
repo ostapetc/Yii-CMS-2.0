@@ -30,7 +30,7 @@
         <div class="s-comment">
             <?= $comment->user->photo_link ?>
             <?= $comment->user->link ?> →
-            <?= CHtml::link(TextHelper::cut($comment->text, 130), "/", array('class' => 'l-comment')); ?>
+            <?= CHtml::link(Yii::app()->text->cut($comment->text, 130), "/", array('class' => 'l-comment')); ?>
         </div>
         <br clear="all" />
     <? endforeach ?>

@@ -1,8 +1,21 @@
 <?
-
+/**
+ * Contain all needed string modification functionality
+ */
 class TextComponent extends CApplicationComponent
 {
-    public static function cut($text, $length, $delim = '., -:;', $tail = "")
+
+    /**
+     * Cut the text, by word or chars count
+     *
+     * @param        $text
+     * @param        $length
+     * @param string $delim
+     * @param string $tail
+     *
+     * @return string
+     */
+    public function cut($text, $length, $tail = "")
     {
         $text = strip_tags($text);
         if (mb_strlen($text, 'utf-8') <= $length)
@@ -16,19 +29,32 @@ class TextComponent extends CApplicationComponent
         {
             return $text;
         }
-        return trim(mb_substr(html_entity_decode($text, ENT_NOQUOTES, 'utf-8'), 0, $pos, 'utf-8'), '., -:;') .
-            $tail;
+        $substr = mb_substr(html_entity_decode($text, ENT_NOQUOTES, 'utf-8'), 0, $pos, 'utf-8');
+        return trim($substr, '., -:;') . $tail;
     }
 
 
-    public static function toUrl($string)
+    /**
+     * Convert string to url forman (only EN alphabet and "_")
+     *
+     * @param $string
+     *
+     * @return mixed
+     */
+    public function toUrl($string)
     {
-        $string = self::translit($string);
-        return str_replace(" ", "_", $string);
+        return str_replace(" ", "_", self::translit($string));
     }
 
 
-    public static function translit($string)
+    /**
+     * Translit
+     *
+     * @param $string
+     *
+     * @return string
+     */
+    public function translit($string)
     {
         $words = array(
             "А"  => "A",
@@ -106,26 +132,46 @@ class TextComponent extends CApplicationComponent
         return strtr($string, $words);
     }
 
+
+    /**
+     * Get array of RU alphabet in UTF-8
+     *
+     * @return array
+     */
     public function alphabetRu()
     {
         $res = array();
-        foreach(range(chr(0xC0),chr(0xDF)) as $lit) {
-            $res[] = iconv('CP1251','UTF-8',$lit);
+        foreach (range(chr(0xC0), chr(0xDF)) as $lit)
+        {
+            $res[] = iconv('CP1251', 'UTF-8', $lit);
         }
         return $res;
     }
 
+
+    /**
+     * Get array of EN alphabet in UTF-8
+     *
+     * @return array
+     */
     public function alphabetEn()
     {
         $res = array();
-        foreach(range("A","Z") as $lit) {
+        foreach (range("A", "Z") as $lit)
+        {
             $res[] = $lit;
         }
         return $res;
     }
 
 
-
+    /**
+     * Replace non censuring terms to given string
+     *
+     * @param $string
+     *
+     * @return string
+     */
     function antimat($string)
     {
         //setlocale (LC_ALL, "ru_RU.UTF8");
@@ -143,9 +189,20 @@ class TextComponent extends CApplicationComponent
             "ё" => "е"
         );
         $bad_words   = array(
-            ".*ху(й|и|я|е|л(и|е)).*", ".*пи(з|с)д.*", "бля.*", ".*бля(д|т|ц).*", "(с|сц)ук(а|о|и).*", "еб.*",
-            ".*уеб.*", "Позитивеб.*", ".*еб(а|и)(н|с|щ|ц).*", ".*ебу(ч|щ).*", ".*пид(о|е)р.*", ".*хер.*",
-            "г(а|о)ндон", ".*Позитивлуп.*"
+            ".*ху(й|и|я|е|л(и|е)).*",
+            ".*пи(з|с)д.*",
+            "бля.*",
+            ".*бля(д|т|ц).*",
+            "(с|сц)ук(а|о|и).*",
+            "еб.*",
+            ".*уеб.*",
+            "Позитивеб.*",
+            ".*еб(а|и)(н|с|щ|ц).*",
+            ".*ебу(ч|щ).*",
+            ".*пид(о|е)р.*",
+            ".*хер.*",
+            "г(а|о)ндон",
+            ".*Позитивлуп.*"
         );
 
         $counter     = 0;
@@ -200,7 +257,7 @@ class TextComponent extends CApplicationComponent
 
 
     /**
-     * Генерирует заданное колличество паракрафов с текстом.
+     * Generate given counts of Paragraphs
      *
      * @param int    $count
      * @param int    $words
@@ -217,15 +274,16 @@ class TextComponent extends CApplicationComponent
         {
             if (!empty($wrapperTag))
             {
-                $text .= CHtml::tag($wrapperTag, array(), $this->lipsumWords($words,
-                    $loremIpsumFirst && $i == 0));
+                $text .= CHtml::tag($wrapperTag, array(),
+                    $this->lipsumWords($words, $loremIpsumFirst && $i == 0));
             }
         }
         return $text;
     }
 
+
     /**
-     * Генерирует заданное колличество слов
+     * Generate given counts of Words
      *
      * @param mixed $count           the number of words.
      * @param mixed $loremIpsumFirst which start with "Lorem ipsum dolor sit amet".
@@ -235,21 +293,128 @@ class TextComponent extends CApplicationComponent
     public function lipsumWords($count = 0, $loremIpsumFirst = true)
     {
         $library      = array(
-            "lorem", 'ipsum', "dolor", "sit", "amet", "integer", "vut", "nunc", "risus", "a", "sagittis",
-            "turpis", "nunc", "eu", "urna", "urna", "pellentesque", "porttitor", "est", "ut", "augue",
-            "cursus", "scelerisque", "in", "hac", "habitasse", "platea", "dictumst", "sed", "ut", "odio", "a",
-            "ultricies", "dapibus", "cum", "sociis", "natoque", "penatibus", "et", "magnis", "dis",
-            "parturient", "montes", "nascetur", "ridiculus", "mus", "etiam", "vel", "lacus", "magna", "nec",
-            "aliquam", "augue", "lundium", "integer", "porttitor", "porta", "in", "rhoncus", "adipiscing",
-            "diam", "ultrices", "turpis", "auctor", "aenean", "pulvinar", "egestas", "ac", "placerat", "sed",
-            "lectus", "mauris", "rhoncus", "mid", "tincidunt", "dignissim", "elementum", "in", "odio", "duis",
-            "vel", "magna", "elit", "phasellus", "tincidunt", "nisi", "pid", "pulvinar", "placerat", "purus",
-            "augue", "aliquet", "tortor", "et", "tristique", "turpis", "enim", "nec", "nisi", "proin",
-            "facilisis", "adipiscing", "enim", "ac", "mattis", "arcu", "elementum", "et", "cras", "massa",
-            "non", "velit", "tempor", "scelerisque", "ac", "quis", "eros",
+            "lorem",
+            'ipsum',
+            "dolor",
+            "sit",
+            "amet",
+            "integer",
+            "vut",
+            "nunc",
+            "risus",
+            "a",
+            "sagittis",
+            "turpis",
+            "nunc",
+            "eu",
+            "urna",
+            "urna",
+            "pellentesque",
+            "porttitor",
+            "est",
+            "ut",
+            "augue",
+            "cursus",
+            "scelerisque",
+            "in",
+            "hac",
+            "habitasse",
+            "platea",
+            "dictumst",
+            "sed",
+            "ut",
+            "odio",
+            "a",
+            "ultricies",
+            "dapibus",
+            "cum",
+            "sociis",
+            "natoque",
+            "penatibus",
+            "et",
+            "magnis",
+            "dis",
+            "parturient",
+            "montes",
+            "nascetur",
+            "ridiculus",
+            "mus",
+            "etiam",
+            "vel",
+            "lacus",
+            "magna",
+            "nec",
+            "aliquam",
+            "augue",
+            "lundium",
+            "integer",
+            "porttitor",
+            "porta",
+            "in",
+            "rhoncus",
+            "adipiscing",
+            "diam",
+            "ultrices",
+            "turpis",
+            "auctor",
+            "aenean",
+            "pulvinar",
+            "egestas",
+            "ac",
+            "placerat",
+            "sed",
+            "lectus",
+            "mauris",
+            "rhoncus",
+            "mid",
+            "tincidunt",
+            "dignissim",
+            "elementum",
+            "in",
+            "odio",
+            "duis",
+            "vel",
+            "magna",
+            "elit",
+            "phasellus",
+            "tincidunt",
+            "nisi",
+            "pid",
+            "pulvinar",
+            "placerat",
+            "purus",
+            "augue",
+            "aliquet",
+            "tortor",
+            "et",
+            "tristique",
+            "turpis",
+            "enim",
+            "nec",
+            "nisi",
+            "proin",
+            "facilisis",
+            "adipiscing",
+            "enim",
+            "ac",
+            "mattis",
+            "arcu",
+            "elementum",
+            "et",
+            "cras",
+            "massa",
+            "non",
+            "velit",
+            "tempor",
+            "scelerisque",
+            "ac",
+            "quis",
+            "eros",
         );
         $punctuations = array(
-            '.', ',', '!',
+            '.',
+            ',',
+            '!',
         );
 
         $text             = '';
@@ -282,11 +447,13 @@ class TextComponent extends CApplicationComponent
 
 
     /**
-     * parse template file content
+     * Parse template file content using {@link TextComponent::parseTemplate}
+     *
      * @see parseTemplate
      *
      * @param $file
      * @param $data
+     *
      * @return string
      */
     public function parseTemplateFile($file, $data)
@@ -294,12 +461,13 @@ class TextComponent extends CApplicationComponent
         return $this->parseTemplate(file_get_contents($file), $data);
     }
 
+
     /**
-     * parse template string.
-     * template syntax is {{SOME_VAR}}
+     * Parse template string. Template syntax is {{SOME_VAR}}
      *
      * @param $str
      * @param $data array( SOME_VAR => 'value', ... )
+     *
      * @return string
      */
     public function parseTemplate($str, $data)
@@ -307,8 +475,47 @@ class TextComponent extends CApplicationComponent
         $formatted_data = array();
         foreach ($data as $key => $val)
         {
-            $formatted_data['{{'.$key.'}}'] = $val;
+            $formatted_data['{{' . $key . '}}'] = $val;
         }
         return strtr($str, $formatted_data);
+    }
+
+
+    /**
+     * Convert Underscore coding style to Camelcase
+     *
+     * @param $string
+     *
+     * @return string
+     */
+    public static function underscoreToCamelcase($string)
+    {
+        $result = '';
+
+        $string = explode('_', $string);
+        foreach ($string as $i => $sub_string)
+        {
+            if ($i != 0)
+            {
+                $sub_string = ucfirst($sub_string);
+            }
+
+            $result .= $sub_string;
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * Convert Camelcase coding style to Underscore
+     *
+     * @param $string
+     *
+     * @return string
+     */
+    public static function camelCaseToUnderscore($string)
+    {
+        return strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $string));
     }
 }
