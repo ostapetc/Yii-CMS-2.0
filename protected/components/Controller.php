@@ -220,29 +220,4 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    public function render($view, $params = array())
-    {
-        if (isset($_GET['popup']))
-        {
-            $this->layout = false;
-        }
-
-        return parent::render($view, $params);
-    }
-
-
-    public function redirect($params)
-    {
-        if (isset($_GET['popup']))
-        {
-            if (is_array($params))
-            {
-                $view = array_shift($params);
-                $params['popup'] = 1;
-                array_unshift($params, $view);
-            }
-        }
-
-        parent::redirect($params);
-    }
 }
