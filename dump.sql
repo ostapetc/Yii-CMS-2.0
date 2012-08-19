@@ -1,23 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 3.5.0
 -- http://www.phpmyadmin.net
 --
--- Хост: openserver:3306
--- Время создания: Июл 09 2012 г., 18:50
--- Версия сервера: 5.1.63-community-log
--- Версия PHP: 5.2.17
+-- Хост: localhost
+-- Время создания: Авг 19 2012 г., 20:08
+-- Версия сервера: 5.1.62-community
+-- Версия PHP: 5.4.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- База данных: `yiicms`
+-- База данных: `cms2`
 --
 
 -- --------------------------------------------------------
@@ -26,6 +20,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `actions`
 --
 
+DROP TABLE IF EXISTS `actions`;
 CREATE TABLE IF NOT EXISTS `actions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
@@ -37,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Добавлено',
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -45,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
 -- Структура таблицы `auth_assignments`
 --
 
+DROP TABLE IF EXISTS `auth_assignments`;
 CREATE TABLE IF NOT EXISTS `auth_assignments` (
   `itemname` varchar(64) NOT NULL,
   `userid` int(11) unsigned NOT NULL,
@@ -52,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `auth_assignments` (
   `data` text,
   PRIMARY KEY (`itemname`,`userid`),
   KEY `userid` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `auth_assignments`
@@ -60,8 +56,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignments` (
 
 INSERT INTO `auth_assignments` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 ('admin', 1, NULL, NULL),
-('user', 2, NULL, NULL),
-('admin', 3, NULL, NULL);
+('admin', 3, NULL, NULL),
+('user', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -69,6 +65,7 @@ INSERT INTO `auth_assignments` (`itemname`, `userid`, `bizrule`, `data`) VALUES
 -- Структура таблицы `auth_items`
 --
 
+DROP TABLE IF EXISTS `auth_items`;
 CREATE TABLE IF NOT EXISTS `auth_items` (
   `name` varchar(64) NOT NULL COMMENT 'Название',
   `type` int(11) NOT NULL COMMENT 'Тип',
@@ -78,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `auth_items` (
   `allow_for_all` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Доступно всем',
   PRIMARY KEY (`name`),
   UNIQUE KEY `description` (`description`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `auth_items`
@@ -124,19 +121,19 @@ INSERT INTO `auth_items` (`name`, `type`, `description`, `bizrule`, `data`, `all
 -- Структура таблицы `auth_items_childs`
 --
 
+DROP TABLE IF EXISTS `auth_items_childs`;
 CREATE TABLE IF NOT EXISTS `auth_items_childs` (
   `parent` varchar(64) NOT NULL,
   `child` varchar(64) NOT NULL,
   PRIMARY KEY (`parent`,`child`),
   KEY `child` (`child`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `auth_items_childs`
 --
 
 INSERT INTO `auth_items_childs` (`parent`, `child`) VALUES
-('user', 'content'),
 ('content', 'MenuAdmin_delete'),
 ('content', 'MenuAdmin_manage'),
 ('content', 'MenuAdmin_update'),
@@ -162,7 +159,8 @@ INSERT INTO `auth_items_childs` (`parent`, `child`) VALUES
 ('content', 'SidebarAdmin_Delete'),
 ('content', 'SidebarAdmin_Manage'),
 ('content', 'SidebarAdmin_Update'),
-('content', 'SidebarAdmin_View');
+('content', 'SidebarAdmin_View'),
+('user', 'content');
 
 -- --------------------------------------------------------
 
@@ -170,6 +168,7 @@ INSERT INTO `auth_items_childs` (`parent`, `child`) VALUES
 -- Структура таблицы `auth_objects`
 --
 
+DROP TABLE IF EXISTS `auth_objects`;
 CREATE TABLE IF NOT EXISTS `auth_objects` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `object_id` int(11) unsigned NOT NULL COMMENT 'Объект',
@@ -177,7 +176,90 @@ CREATE TABLE IF NOT EXISTS `auth_objects` (
   `role` varchar(64) NOT NULL COMMENT 'Роль',
   PRIMARY KEY (`id`),
   KEY `role` (`role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `inherit_templates` tinyint(1) DEFAULT '1',
+  `inherit_settings` tinyint(1) DEFAULT '1',
+  `meta_title` varchar(255) DEFAULT NULL,
+  `meta_keywords` text,
+  `meta_descr` text,
+  `is_empty` tinyint(1) DEFAULT '0',
+  `alias` varchar(50) DEFAULT NULL,
+  `published` tinyint(1) DEFAULT '0',
+  `type` varchar(255) DEFAULT NULL,
+  `lft` int(10) unsigned NOT NULL,
+  `rgt` int(10) unsigned NOT NULL,
+  `level` smallint(5) unsigned NOT NULL,
+  `updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `lft` (`lft`),
+  KEY `rgt` (`rgt`),
+  KEY `level` (`level`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=141 ;
+
+--
+-- Дамп данных таблицы `categories`
+--
+
+INSERT INTO `categories` (`id`, `title`, `inherit_templates`, `inherit_settings`, `meta_title`, `meta_keywords`, `meta_descr`, `is_empty`, `alias`, `published`, `type`, `lft`, `rgt`, `level`, `updated`) VALUES
+(1, 'root', 0, 0, NULL, NULL, NULL, 0, 'root', 1, NULL, 1, 54, 1, '2011-08-10 12:31:53'),
+(2, 'Создание и продвижение сайта', 1, 1, NULL, NULL, NULL, 0, 'create', 1, 'Page', 12, 13, 4, '2011-08-14 02:44:50'),
+(5, 'Хостинг для сайта и регистрация доменного имени', 1, 1, NULL, NULL, NULL, 0, 'hosting', 1, 'Page', 16, 17, 4, '2011-08-14 02:44:51'),
+(6, 'Создание мультимедия презентации', 1, 1, NULL, NULL, NULL, 0, 'multimedia', 1, 'Page', 14, 15, 4, '2011-08-14 10:39:10'),
+(59, 'Главная', 1, 1, NULL, NULL, NULL, 0, 'index', 1, 'Page', 3, 4, 3, '2011-08-14 02:44:52'),
+(22, 'Партнеры', 1, 1, NULL, NULL, NULL, 0, 'partners', 0, 'Record', 33, 34, 3, '2011-08-14 02:45:10'),
+(21, 'Портфолио', 1, 1, NULL, NULL, NULL, 1, 'portfolio', 1, 'Record', 23, 30, 3, '2011-08-14 02:45:10'),
+(77, 'main', 1, 1, NULL, NULL, NULL, 0, 'main', 0, 'Page', 2, 41, 2, '2011-08-14 02:44:53'),
+(78, 'errors', 1, 1, NULL, NULL, NULL, 0, 'errors', 1, 'Page', 42, 45, 2, '2011-08-14 02:44:53'),
+(79, 'not_found', 1, 1, NULL, NULL, NULL, 0, 'not_found', 1, 'Page', 43, 44, 3, '2011-08-14 02:44:54'),
+(80, 'Услуги', 1, 1, NULL, NULL, NULL, 1, 'services', 0, 'Page', 11, 22, 3, '2011-08-14 02:44:55'),
+(81, 'Новости', 1, 1, NULL, NULL, NULL, 0, 'news', 1, 'Record', 31, 32, 3, '2011-08-14 02:45:09'),
+(84, 'Текст на индексе', 1, 1, NULL, NULL, NULL, 0, 'index_text', 0, 'Page', 46, 47, 2, '2011-08-14 02:44:55'),
+(88, 'Клиенты', 1, 1, NULL, NULL, NULL, 0, 'clients', 0, 'Record', 35, 36, 3, '2011-08-14 02:45:07'),
+(89, 'Публикации', 1, 1, NULL, NULL, NULL, 0, 'publics', 0, 'Record', 37, 38, 3, '2011-08-14 02:45:07'),
+(128, 'Контакты', 1, 1, NULL, NULL, NULL, 0, 'contacts', 0, 'Page', 39, 40, 3, '2011-08-14 02:44:56'),
+(129, 'О компании', 1, 1, NULL, NULL, NULL, 0, 'about', 0, 'Page', 5, 10, 3, '2011-08-14 02:44:57'),
+(130, 'История, деятельность и команда', 1, 1, NULL, NULL, NULL, 0, 'history-work-and-team', 1, 'Page', 6, 7, 4, '2011-08-14 02:44:57'),
+(131, 'Вакансии', 1, 1, NULL, NULL, NULL, 0, 'vacancy', 1, 'Page', 8, 9, 4, '2011-08-14 02:44:57'),
+(132, 'Дизайн и верстка полиграфической продукции', 1, 1, NULL, NULL, NULL, 0, 'polygraph-design-and-makeup', 1, 'Page', 18, 19, 4, '2011-08-14 02:44:57'),
+(133, 'Создание фирменного стиля', 1, 1, NULL, NULL, NULL, 0, 'corporate-identity', 1, 'Page', 20, 21, 4, '2011-08-14 02:44:58'),
+(135, 'Дизайны и интерфейсы', 1, 1, NULL, NULL, NULL, 0, 'design-and-interfaces', 1, 'Record', 24, 25, 4, '2011-08-14 02:45:03'),
+(136, 'Мультимедия презентации', 1, 1, NULL, NULL, NULL, 0, 'multimedia-presentations', 1, 'Record', 26, 27, 4, '2011-08-14 02:45:05'),
+(137, 'Графический дизайн и печатная продукция', 1, 1, NULL, NULL, NULL, 0, 'graphic-design-and-printed', 1, 'Record', 28, 29, 4, '2011-08-14 02:45:05'),
+(138, 'Карта сайта', 1, 1, NULL, NULL, NULL, 0, 'map', 1, 'Page', 49, 50, 3, '2011-08-14 02:44:59'),
+(139, 'Другое ', 1, 1, NULL, NULL, NULL, 1, 'other', 1, 'Page', 48, 51, 2, '2011-08-14 02:45:00'),
+(140, 'Модуль Users', 1, 1, NULL, NULL, NULL, 0, 'users', 1, 'Page', 52, 53, 2, '2011-08-14 02:45:00');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `cities`
+--
+
+DROP TABLE IF EXISTS `cities`;
+CREATE TABLE IF NOT EXISTS `cities` (
+  `city_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`city_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `cities`
+--
+
+INSERT INTO `cities` (`city_id`, `name`) VALUES
+(1, 'Астана'),
+(3, 'Актау');
 
 -- --------------------------------------------------------
 
@@ -185,6 +267,7 @@ CREATE TABLE IF NOT EXISTS `auth_objects` (
 -- Структура таблицы `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Пользователь',
   `user_id` int(11) unsigned NOT NULL COMMENT 'Пользователь',
@@ -203,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   KEY `right` (`right`),
   KEY `user_id` (`user_id`),
   KEY `object_id_model_id` (`object_id`,`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Дамп данных таблицы `comments`
@@ -223,9 +306,37 @@ INSERT INTO `comments` (`id`, `user_id`, `object_id`, `model_id`, `root`, `left`
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `config`
+--
+
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE IF NOT EXISTS `config` (
+  `key` varchar(100) COLLATE utf8_bin NOT NULL,
+  `value` text COLLATE utf8_bin,
+  PRIMARY KEY (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `config`
+--
+
+INSERT INTO `config` (`key`, `value`) VALUES
+('emailToRegistraiton', 'support@daso.ir'),
+('siteTitle', 'daso.ir'),
+('recentCommentCount', '5'),
+('recentPostCount', '5'),
+('recentQuestionsCount', '5'),
+('siteDescr', 'daso.ir'),
+('rssImgUrl', 'images/rss_img.png'),
+('baseUrl', 'http://daso.ir/');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `faq`
 --
 
+DROP TABLE IF EXISTS `faq`;
 CREATE TABLE IF NOT EXISTS `faq` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
@@ -245,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
   KEY `section_id` (`section_id`),
   KEY `date` (`date_create`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -253,6 +364,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
 -- Структура таблицы `faq_sections`
 --
 
+DROP TABLE IF EXISTS `faq_sections`;
 CREATE TABLE IF NOT EXISTS `faq_sections` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
@@ -261,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `faq_sections` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -269,6 +381,7 @@ CREATE TABLE IF NOT EXISTS `faq_sections` (
 -- Структура таблицы `feedback`
 --
 
+DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE IF NOT EXISTS `feedback` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) unsigned NOT NULL COMMENT 'Тема',
@@ -286,6 +399,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 -- Структура таблицы `file_manager`
 --
 
+DROP TABLE IF EXISTS `file_manager`;
 CREATE TABLE IF NOT EXISTS `file_manager` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `object_id` varchar(100) DEFAULT NULL COMMENT 'ID объекта',
@@ -297,7 +411,7 @@ CREATE TABLE IF NOT EXISTS `file_manager` (
   `order` int(11) unsigned NOT NULL COMMENT 'Порядок',
   `path` varchar(250) NOT NULL COMMENT 'Путь к файлу',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
 -- Дамп данных таблицы `file_manager`
@@ -340,15 +454,55 @@ INSERT INTO `file_manager` (`id`, `object_id`, `model_id`, `name`, `tag`, `title
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `image_gallery`
+--
+
+DROP TABLE IF EXISTS `image_gallery`;
+CREATE TABLE IF NOT EXISTS `image_gallery` (
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `model_id` int(11) DEFAULT NULL,
+  `type_id` varchar(50) DEFAULT NULL,
+  `src` varchar(255) DEFAULT NULL,
+  `title` text,
+  `descr` text,
+  `created` timestamp NULL DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`image_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
+
+--
+-- Дамп данных таблицы `image_gallery`
+--
+
+INSERT INTO `image_gallery` (`image_id`, `model_id`, `type_id`, `src`, `title`, `descr`, `created`, `sort`) VALUES
+(62, 13, NULL, '5566_def_58.jpg', NULL, 'Сиськи', '2011-06-22 06:32:56', 18),
+(59, 13, NULL, 'pr172.jpg', NULL, NULL, '2011-06-22 06:30:28', 15),
+(49, 14, NULL, '6c15006e391e0410712d86a2f965a8b0.jpg', NULL, NULL, '2011-06-21 10:40:12', 5),
+(50, 14, NULL, '7a92ee791c8d093fdca93b7e02093a67.jpg', NULL, NULL, '2011-06-21 10:40:17', 6),
+(51, 14, NULL, '12c69b44e1cdb67fa025df540a4e6894_full.jpg', NULL, NULL, '2011-06-21 10:40:25', 7),
+(52, 14, NULL, '4690b5661378af0afd3fe65569255006_full.jpg', NULL, NULL, '2011-06-21 10:40:34', 8),
+(60, 13, NULL, 'b272.jpg', NULL, NULL, '2011-06-22 06:30:33', 16),
+(61, 13, NULL, '120429424830_7.jpg', NULL, NULL, '2011-06-22 06:32:16', 17),
+(55, 13, NULL, 'b2.jpg', NULL, 'sdfsdf', '2011-06-22 05:41:01', 11),
+(56, 13, NULL, 'img169.jpg', NULL, NULL, '2011-06-22 05:43:57', 12),
+(57, 13, NULL, 'img147.jpg', NULL, NULL, '2011-06-22 05:49:34', 13),
+(64, 13, NULL, 'a_e062f811f.jpg', NULL, NULL, '2011-06-22 06:34:55', 20),
+(65, 13, NULL, 'a_e062f8f67.jpg', NULL, NULL, '2011-06-22 06:36:52', 21),
+(68, 13, NULL, 'a_e062f8f34.jpg', NULL, NULL, '2011-06-22 06:42:14', 23);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `languages`
 --
 
+DROP TABLE IF EXISTS `languages`;
 CREATE TABLE IF NOT EXISTS `languages` (
   `id` char(2) NOT NULL COMMENT 'ID',
   `name` varchar(15) NOT NULL COMMENT 'Название',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `languages`
@@ -364,12 +518,13 @@ INSERT INTO `languages` (`id`, `name`) VALUES
 -- Структура таблицы `languages_messages`
 --
 
+DROP TABLE IF EXISTS `languages_messages`;
 CREATE TABLE IF NOT EXISTS `languages_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category` varchar(32) NOT NULL COMMENT 'Категория',
   `message` text NOT NULL COMMENT 'Сообщение',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=211 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=211 ;
 
 --
 -- Дамп данных таблицы `languages_messages`
@@ -439,13 +594,14 @@ INSERT INTO `languages_messages` (`id`, `category`, `message`) VALUES
 -- Структура таблицы `languages_translations`
 --
 
+DROP TABLE IF EXISTS `languages_translations`;
 CREATE TABLE IF NOT EXISTS `languages_translations` (
   `id` int(11) NOT NULL,
   `language` char(2) NOT NULL DEFAULT '' COMMENT 'Язык',
   `translation` text COMMENT 'Перевод',
   PRIMARY KEY (`id`,`language`),
   KEY `language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `languages_translations`
@@ -474,9 +630,22 @@ INSERT INTO `languages_translations` (`id`, `language`, `translation`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `lll`
+--
+
+DROP TABLE IF EXISTS `lll`;
+CREATE TABLE IF NOT EXISTS `lll` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `log`
 --
 
+DROP TABLE IF EXISTS `log`;
 CREATE TABLE IF NOT EXISTS `log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `level` varchar(128) DEFAULT NULL COMMENT 'Тип',
@@ -484,7 +653,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `logtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Время',
   `message` text COMMENT 'Сообщение',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Дамп данных таблицы `log`
@@ -501,9 +670,45 @@ INSERT INTO `log` (`id`, `level`, `category`, `logtime`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `lookup`
+--
+
+DROP TABLE IF EXISTS `lookup`;
+CREATE TABLE IF NOT EXISTS `lookup` (
+  `lookup_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `position` int(11) NOT NULL,
+  PRIMARY KEY (`lookup_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+
+--
+-- Дамп данных таблицы `lookup`
+--
+
+INSERT INTO `lookup` (`lookup_id`, `type`, `code`, `name`, `position`) VALUES
+(18, 'deleteCategoryVariant', '1', 'Скопировать в другую категорию', 0),
+(19, 'deleteCategoryVariant', '0', 'Удалить', 1),
+(7, 'gender', '0', 'Женский', 0),
+(8, 'gender', '1', 'Мужской', 1),
+(12, 'role', 'admin', 'Администратор', 3),
+(13, 'MPublished', '0', 'Не Опубликован', 0),
+(14, 'MPublished', '1', 'Опубликован', 1),
+(40, 'FPublished', '0', 'Не Опубликована', 0),
+(41, 'FPublished', '1', 'Опубликована', 1),
+(42, 'NPublished', '0', 'Не Опубликовано', 0),
+(43, 'NPublished', '1', 'Опубликовано', 1),
+(38, 'YesNo', '0', 'Нет', 0),
+(39, 'YesNo', '1', 'Да', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `mailer_outbox`
 --
 
+DROP TABLE IF EXISTS `mailer_outbox`;
 CREATE TABLE IF NOT EXISTS `mailer_outbox` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL COMMENT 'Получатель',
@@ -518,7 +723,7 @@ CREATE TABLE IF NOT EXISTS `mailer_outbox` (
   PRIMARY KEY (`id`),
   KEY `template_id` (`template_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `mailer_outbox`
@@ -533,6 +738,7 @@ INSERT INTO `mailer_outbox` (`id`, `user_id`, `template_id`, `email`, `subject`,
 -- Структура таблицы `mailer_templates`
 --
 
+DROP TABLE IF EXISTS `mailer_templates`;
 CREATE TABLE IF NOT EXISTS `mailer_templates` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(70) NOT NULL COMMENT 'Код',
@@ -542,7 +748,7 @@ CREATE TABLE IF NOT EXISTS `mailer_templates` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `mailer_templates`
@@ -559,6 +765,7 @@ INSERT INTO `mailer_templates` (`id`, `code`, `name`, `subject`, `date_create`) 
 -- Структура таблицы `menu`
 --
 
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE IF NOT EXISTS `menu` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `language` char(2) DEFAULT 'ru' COMMENT 'Язык',
@@ -569,7 +776,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`),
   KEY `menu_language_fk` (`language`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Дамп данных таблицы `menu`
@@ -584,6 +791,7 @@ INSERT INTO `menu` (`id`, `language`, `name`, `code`, `is_published`, `lang`) VA
 -- Структура таблицы `menu_sections`
 --
 
+DROP TABLE IF EXISTS `menu_sections`;
 CREATE TABLE IF NOT EXISTS `menu_sections` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
@@ -602,7 +810,7 @@ CREATE TABLE IF NOT EXISTS `menu_sections` (
   KEY `page_id` (`page_id`),
   KEY `menu_id` (`menu_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
 
 --
 -- Дамп данных таблицы `menu_sections`
@@ -620,6 +828,7 @@ INSERT INTO `menu_sections` (`id`, `lang`, `page_id`, `menu_id`, `root`, `left`,
 -- Структура таблицы `meta_tags`
 --
 
+DROP TABLE IF EXISTS `meta_tags`;
 CREATE TABLE IF NOT EXISTS `meta_tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `object_id` int(11) unsigned DEFAULT NULL COMMENT 'ID объекта',
@@ -631,7 +840,7 @@ CREATE TABLE IF NOT EXISTS `meta_tags` (
   `date_update` datetime DEFAULT NULL COMMENT 'Отредактирован',
   PRIMARY KEY (`id`),
   UNIQUE KEY `object_id` (`object_id`,`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Дамп данных таблицы `meta_tags`
@@ -658,6 +867,7 @@ INSERT INTO `meta_tags` (`id`, `object_id`, `model_id`, `title`, `keywords`, `de
 -- Структура таблицы `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `lang` char(2) DEFAULT 'ru' COMMENT 'Язык',
@@ -671,7 +881,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `lang` (`lang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- Дамп данных таблицы `news`
@@ -707,6 +917,7 @@ INSERT INTO `news` (`id`, `lang`, `user_id`, `title`, `text`, `photo`, `is_publi
 -- Структура таблицы `pages`
 --
 
+DROP TABLE IF EXISTS `pages`;
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL COMMENT 'Автор',
@@ -720,7 +931,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   PRIMARY KEY (`id`),
   KEY `pages_language_fk` (`language`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=259 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=259 ;
 
 --
 -- Дамп данных таблицы `pages`
@@ -756,6 +967,7 @@ INSERT INTO `pages` (`id`, `user_id`, `language`, `title`, `url`, `text`, `statu
 -- Структура таблицы `pages_sections`
 --
 
+DROP TABLE IF EXISTS `pages_sections`;
 CREATE TABLE IF NOT EXISTS `pages_sections` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) unsigned DEFAULT NULL COMMENT 'Родитель',
@@ -765,7 +977,7 @@ CREATE TABLE IF NOT EXISTS `pages_sections` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `parent_id` (`parent_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `pages_sections`
@@ -786,13 +998,14 @@ INSERT INTO `pages_sections` (`id`, `parent_id`, `name`, `order`, `date_create`)
 -- Структура таблицы `pages_sections_rels`
 --
 
+DROP TABLE IF EXISTS `pages_sections_rels`;
 CREATE TABLE IF NOT EXISTS `pages_sections_rels` (
   `id` int(11) unsigned NOT NULL,
   `page_id` int(11) unsigned NOT NULL,
   `section_id` int(11) unsigned NOT NULL,
   KEY `page_id` (`page_id`),
   KEY `section_id` (`section_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `pages_sections_rels`
@@ -953,6 +1166,7 @@ INSERT INTO `pages_sections_rels` (`id`, `page_id`, `section_id`) VALUES
 -- Структура таблицы `params`
 --
 
+DROP TABLE IF EXISTS `params`;
 CREATE TABLE IF NOT EXISTS `params` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `module_id` varchar(50) NOT NULL COMMENT 'Модуль',
@@ -964,7 +1178,7 @@ CREATE TABLE IF NOT EXISTS `params` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `const` (`code`),
   UNIQUE KEY `title` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Дамп данных таблицы `params`
@@ -986,16 +1200,112 @@ INSERT INTO `params` (`id`, `module_id`, `code`, `name`, `value`, `element`, `op
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `plugins`
+--
+
+DROP TABLE IF EXISTS `plugins`;
+CREATE TABLE IF NOT EXISTS `plugins` (
+  `plugin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `json_settings` text,
+  `published` tinyint(1) DEFAULT '0',
+  `class` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `load_level` int(11) DEFAULT NULL,
+  PRIMARY KEY (`plugin_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `profiles`
+--
+
+DROP TABLE IF EXISTS `profiles`;
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `raiting` int(11) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `icq` int(11) DEFAULT NULL,
+  `skype` varchar(255) DEFAULT NULL,
+  `blog_id` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `family` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `site` varchar(255) DEFAULT NULL,
+  `about` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+
+--
+-- Дамп данных таблицы `profiles`
+--
+
+INSERT INTO `profiles` (`id`, `user_id`, `raiting`, `company`, `gender`, `birthday`, `icq`, `skype`, `blog_id`, `name`, `family`, `phone`, `site`, `about`) VALUES
+(12, 12, NULL, '2', 1, '2011-07-30', NULL, 'двыо', NULL, 'Alexey', 'Sharov', '', '', ''),
+(53, 53, NULL, '', 1, '0000-00-00', NULL, '', NULL, 'ir  Имя', 'ir Фамилия', '', '', ''),
+(55, 56, NULL, '', 1, '0000-00-00', NULL, '', NULL, 'admin', 'admin', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `profiles_fields`
+--
+
+DROP TABLE IF EXISTS `profiles_fields`;
+CREATE TABLE IF NOT EXISTS `profiles_fields` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `required` tinyint(2) NOT NULL,
+  `position` tinyint(5) NOT NULL,
+  `visible` tinyint(1) NOT NULL,
+  `varname` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `field_type` varchar(255) DEFAULT NULL,
+  `field_size` tinyint(5) DEFAULT NULL,
+  `field_size_min` tinyint(5) DEFAULT NULL,
+  `error_message` varchar(255) DEFAULT NULL,
+  `default` varchar(255) DEFAULT NULL,
+  `widget` varchar(255) DEFAULT NULL,
+  `widgetparams` text,
+  `range` text,
+  `other_validator` varchar(255) DEFAULT NULL,
+  `match` varchar(255) DEFAULT NULL,
+  `hidden_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Дамп данных таблицы `profiles_fields`
+--
+
+INSERT INTO `profiles_fields` (`id`, `required`, `position`, `visible`, `varname`, `title`, `field_type`, `field_size`, `field_size_min`, `error_message`, `default`, `widget`, `widgetparams`, `range`, `other_validator`, `match`, `hidden_value`) VALUES
+(1, 0, 0, 1, 'company', 'Компания', NULL, 100, 0, 'company_error', '', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 0, 1, 1, 'gender', 'Пол', NULL, 1, 0, 'gender_error', '0', NULL, NULL, '1==мужской;0==женский', NULL, NULL, NULL),
+(3, 0, 2, 1, 'birthday', 'День рождения', 'DATE', NULL, NULL, 'birthday_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 0, 3, 1, 'icq', 'icq', NULL, 50, NULL, 'icq_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 0, 4, 1, 'skype', 'skype', NULL, 50, NULL, 'skype_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 1, 5, 1, 'name', 'Имя', NULL, 50, NULL, 'name_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 1, 6, 1, 'family', 'Фамилия', NULL, 50, NULL, 'family_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 0, 7, 1, 'phone', 'Телефон', NULL, 50, NULL, 'phone_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 0, 8, 1, 'site', 'Сайт', NULL, 50, NULL, 'site_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 0, 9, 1, 'about', 'О себе', 'TEXT', NULL, NULL, 'about_error', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `quiz`
 --
 
+DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE IF NOT EXISTS `quiz` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL COMMENT 'Название',
   `date_create` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создано',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `quiz`
@@ -1010,6 +1320,7 @@ INSERT INTO `quiz` (`id`, `name`, `date_create`) VALUES
 -- Структура таблицы `quiz_answers`
 --
 
+DROP TABLE IF EXISTS `quiz_answers`;
 CREATE TABLE IF NOT EXISTS `quiz_answers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `question_id` int(11) unsigned NOT NULL COMMENT 'Вопрос',
@@ -1019,7 +1330,7 @@ CREATE TABLE IF NOT EXISTS `quiz_answers` (
   `points` tinyint(10) unsigned NOT NULL DEFAULT '1' COMMENT 'Кол-во баллов',
   PRIMARY KEY (`id`),
   KEY `question_id` (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4243 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4243 ;
 
 --
 -- Дамп данных таблицы `quiz_answers`
@@ -1919,6 +2230,7 @@ INSERT INTO `quiz_answers` (`id`, `question_id`, `text`, `is_right`, `is_free`, 
 -- Структура таблицы `quiz_choices`
 --
 
+DROP TABLE IF EXISTS `quiz_choices`;
 CREATE TABLE IF NOT EXISTS `quiz_choices` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `result_id` int(11) unsigned NOT NULL,
@@ -1929,7 +2241,7 @@ CREATE TABLE IF NOT EXISTS `quiz_choices` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `result_id_question_id` (`result_id`,`question_id`),
   KEY `question` (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- Дамп данных таблицы `quiz_choices`
@@ -1993,6 +2305,7 @@ INSERT INTO `quiz_choices` (`id`, `result_id`, `question_id`, `inner_choice`, `f
 -- Структура таблицы `quiz_questions`
 --
 
+DROP TABLE IF EXISTS `quiz_questions`;
 CREATE TABLE IF NOT EXISTS `quiz_questions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) unsigned NOT NULL COMMENT 'Тематика',
@@ -2000,7 +2313,7 @@ CREATE TABLE IF NOT EXISTS `quiz_questions` (
   `date_create` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создано',
   PRIMARY KEY (`id`),
   KEY `topic` (`topic_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=823 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=823 ;
 
 --
 -- Дамп данных таблицы `quiz_questions`
@@ -2216,6 +2529,7 @@ INSERT INTO `quiz_questions` (`id`, `topic_id`, `text`, `date_create`) VALUES
 -- Структура таблицы `quiz_results`
 --
 
+DROP TABLE IF EXISTS `quiz_results`;
 CREATE TABLE IF NOT EXISTS `quiz_results` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL COMMENT 'Пользователь',
@@ -2226,7 +2540,7 @@ CREATE TABLE IF NOT EXISTS `quiz_results` (
   PRIMARY KEY (`id`),
   KEY `quiz` (`quiz_id`),
   KEY `user` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Дамп данных таблицы `quiz_results`
@@ -2241,6 +2555,7 @@ INSERT INTO `quiz_results` (`id`, `user_id`, `quiz_id`, `date_start`, `date_fini
 -- Структура таблицы `quiz_topics`
 --
 
+DROP TABLE IF EXISTS `quiz_topics`;
 CREATE TABLE IF NOT EXISTS `quiz_topics` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) unsigned DEFAULT NULL COMMENT 'Родитель',
@@ -2249,7 +2564,7 @@ CREATE TABLE IF NOT EXISTS `quiz_topics` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `parent_id_name` (`parent_id`,`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
 
 --
 -- Дамп данных таблицы `quiz_topics`
@@ -2279,6 +2594,7 @@ INSERT INTO `quiz_topics` (`id`, `parent_id`, `name`, `date_create`) VALUES
 -- Структура таблицы `quiz_topics_rels`
 --
 
+DROP TABLE IF EXISTS `quiz_topics_rels`;
 CREATE TABLE IF NOT EXISTS `quiz_topics_rels` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `quiz_id` int(11) unsigned NOT NULL,
@@ -2287,7 +2603,7 @@ CREATE TABLE IF NOT EXISTS `quiz_topics_rels` (
   UNIQUE KEY `quiz_id_topic_id` (`quiz_id`,`topic_id`),
   KEY `quiz_id` (`quiz_id`),
   KEY `topic_id` (`topic_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
 
 --
 -- Дамп данных таблицы `quiz_topics_rels`
@@ -2304,6 +2620,7 @@ INSERT INTO `quiz_topics_rels` (`id`, `quiz_id`, `topic_id`) VALUES
 -- Структура таблицы `ratings`
 --
 
+DROP TABLE IF EXISTS `ratings`;
 CREATE TABLE IF NOT EXISTS `ratings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -2315,7 +2632,7 @@ CREATE TABLE IF NOT EXISTS `ratings` (
   UNIQUE KEY `user_id_2` (`user_id`,`object_id`,`model_id`),
   KEY `object_id_model_id` (`object_id`,`model_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- Дамп данных таблицы `ratings`
@@ -2335,9 +2652,54 @@ INSERT INTO `ratings` (`id`, `user_id`, `object_id`, `model_id`, `value`, `date_
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `records`
+--
+
+DROP TABLE IF EXISTS `records`;
+CREATE TABLE IF NOT EXISTS `records` (
+  `record_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sort` int(11) DEFAULT NULL,
+  `alias` varchar(50) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `descr` text,
+  `month` int(11) DEFAULT NULL,
+  `year` int(11) DEFAULT NULL,
+  `published` tinyint(1) DEFAULT '0',
+  `index_text` text,
+  `second_title` text,
+  `title` text,
+  `sidebar_text` text,
+  `portfolio_work_type_id` int(11) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `activity` int(11) DEFAULT NULL,
+  `text` text,
+  `result_url` varchar(255) DEFAULT NULL,
+  `result_title` varchar(255) DEFAULT NULL,
+  `service` text,
+  `icon` varchar(255) DEFAULT NULL,
+  `icon_big` varchar(255) DEFAULT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  `updaetd` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`record_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+--
+-- Дамп данных таблицы `records`
+--
+
+INSERT INTO `records` (`record_id`, `sort`, `alias`, `category_id`, `descr`, `month`, `year`, `published`, `index_text`, `second_title`, `title`, `sidebar_text`, `portfolio_work_type_id`, `city_id`, `activity`, `text`, `result_url`, `result_title`, `service`, `icon`, `icon_big`, `img`, `updaetd`, `created`) VALUES
+(1, 2, 'companyPi', 135, NULL, 9, 2011, 1, '<p>Мы писали, рисовали и верстали, забивали - наши пальчики устали!</p>', 'Сайт зафигачили для ПиКомпании!', 'Сайт "{more}Компании Пи...{/more}"', '<p>xxx: ТИИИИИИИИИХА В ЛЕСУ<br />xxx: только не спииииит совааааааа<br />xxx: ставит сова на видюху дрова, вот и не спииит соваааа</p>', NULL, 1, NULL, '<p>Узнаете места? Верно, теперь Панорамы улиц добрались до Кирова, Иркутска, Курска, Ярославля и даже известного в Украине туристического центра &ndash; Каменца-Подольского.<img style="display: block; margin-left: auto; margin-right: auto;" src="../../images/imgdat/04a0ff12ef2caa6df46cb1d8282_prev.jpg" alt="" width="590" height="425" /><br /><br />Теперь можно разглядеть со всех сторон церковь Иоанна Предтечи в Ярославле (известную не только благодаря своей красоте, но и изображению на тысячерублевой купюре) и пройтись мимо церкви св.Георгия или Триумфальной арки в Курске. Погрузиться в атмосферу позапрошлого века на перекрестке улиц Дрелевского и Большевиков в Кирове, а после прогуляться по пешеходной улице в Иркутске, совмещающей архитектуру 19 века и современные магазины. И даже заглянуть внутрь старинной крепости в Каменце-Подольском!<br /><br />Куда отправиться дальше &ndash; решать вам. Выбирайте интересные места для прогулок с помощью списка городов.</p>', 'pi.ru', 'www.pi.ru', NULL, 'b153.jpg', 'pr1.jpg', NULL, '2011-07-09 07:36:08', '0000-00-00 00:00:00'),
+(14, 3, 'weqwe', 135, NULL, 11, 2009, 1, '<p>sdfsdfs</p>', 'asdsad', 'sdfdsfsdf', '<p>sdfsdfsdfsdf</p>', 1, 1, NULL, '<p>sdfdsf</p>', 'fsdfsd', '342423', NULL, NULL, NULL, NULL, '2011-08-13 15:35:07', '2011-06-21 16:19:26'),
+(15, 4, NULL, 135, NULL, 10, 2005, 1, '<p>Я рад рассказать о том, что Microsoft в сотрудничестве с Joyent предоставит ресурсы для портирования Node на Windows. Как вы уже могли слышать ранее в этом году, мы начали работу над нативным портом на Windows &mdash; с целью использовать высокопроизводительный IOCP API.<br /><br /> Эта работа требует в значительной степени модифицировать базовую структуру и мы очень рады тому, что теперь получаем официальное руководство и инженерные ресурсы от Microsoft. От Rackspace так же выделено время Bert Belder для выполнения этой работы.<br /><br /> Результатом будет официальный бинарный релиз node.exe опубликованный на nodejs.org, который будет работать на Windows Azure и других версиях Windows начиная с Windows Server 2003.</p>', 'Сайт для финпола', 'Сайт (линк)Финпола(/линк)', '<p>Перевод статьи Влада Савова (Vlad Savov) из блога Engadget. Это его авторская колонка и подразумевает личное мнение журналиста.</p>', 2, 1, NULL, '<p>После ивента Google Inside Search на прошлой неделе старший вице-президент Google по поиску Алан Юстас немного рассказал о том, что главный исполнительный директор Ларри Пейдж думает о поиске.<br /><br /> Вот некоторые долгосрочные цели:<br />Ответы, а не просто результаты. Пейдж недоволен тем, что Google по запросу предоставляет только набор разрозненных ссылок, и хочет, чтобы поисковая система предоставляла более организованные и последовательные результаты. Например, по запросу &laquo;какой лучший способ создать скафандр?&raquo; Google могла бы показывать набор обучающих видео, а затем компании, которые могут предоставить материалы, инженерные ресурсы и так далее для выполнения задачи.</p>', 'finpol.kz', 'finpol.kz', NULL, 'b1.jpg', 'shit.jpg', 'IMG_116664.JPG', '2011-07-05 11:43:27', '2011-06-24 10:55:38');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `site_actions`
 --
 
+DROP TABLE IF EXISTS `site_actions`;
 CREATE TABLE IF NOT EXISTS `site_actions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned DEFAULT NULL COMMENT 'Пользователь',
@@ -2348,21 +2710,33 @@ CREATE TABLE IF NOT EXISTS `site_actions` (
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
 
+--
+-- Дублирующая структура для представления `sphinx_view_content`
+--
+DROP VIEW IF EXISTS `sphinx_view_content`;
+CREATE TABLE IF NOT EXISTS `sphinx_view_content` (
+`id` varbinary(16)
+,`title` varchar(200)
+,`user_id` int(11)
+,`text` text
+);
 -- --------------------------------------------------------
 
 --
 -- Структура таблицы `tags`
 --
 
+DROP TABLE IF EXISTS `tags`;
 CREATE TABLE IF NOT EXISTS `tags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tag` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
 
 --
 -- Дамп данных таблицы `tags`
@@ -2419,6 +2793,7 @@ INSERT INTO `tags` (`id`, `name`) VALUES
 -- Структура таблицы `tags_rels`
 --
 
+DROP TABLE IF EXISTS `tags_rels`;
 CREATE TABLE IF NOT EXISTS `tags_rels` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `tag_id` int(11) unsigned NOT NULL,
@@ -2426,7 +2801,7 @@ CREATE TABLE IF NOT EXISTS `tags_rels` (
   `model_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `tag_id` (`tag_id`,`object_id`,`model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=400 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=400 ;
 
 --
 -- Дамп данных таблицы `tags_rels`
@@ -2479,10 +2854,12 @@ INSERT INTO `tags_rels` (`id`, `tag_id`, `object_id`, `model_id`) VALUES
 (399, 42, 258, 'Page');
 
 -- --------------------------------------------------------
+
 --
 -- Структура таблицы `tbl_migration`
 --
 
+DROP TABLE IF EXISTS `tbl_migration`;
 CREATE TABLE IF NOT EXISTS `tbl_migration` (
   `version` varchar(255) NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
@@ -2527,7 +2904,82 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`, `module`) VALUES
 ('m120701_005441_users_create', 1342857853, 'users'),
 ('m120710_232834_friends_create', 1342857853, 'social'),
 ('m120711_215433_labels_create', 1342857853, 'social'),
-('m120711_215440_labels_rels_create', 1342857853, 'social');
+('m120711_215440_labels_rels_create', 1342857853, 'social'),
+('m120808_103857_longer_password', 1345290956, 'users');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `templates_blocks_widgets_relations`
+--
+
+DROP TABLE IF EXISTS `templates_blocks_widgets_relations`;
+CREATE TABLE IF NOT EXISTS `templates_blocks_widgets_relations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `block_id` int(11) DEFAULT NULL,
+  `widget_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `templates_blocks_widgets_relations`
+--
+
+INSERT INTO `templates_blocks_widgets_relations` (`id`, `block_id`, `widget_id`) VALUES
+(1, 2, 1),
+(2, 3, 2),
+(3, 2, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `template_blocks`
+--
+
+DROP TABLE IF EXISTS `template_blocks`;
+CREATE TABLE IF NOT EXISTS `template_blocks` (
+  `block_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alias` varchar(50) DEFAULT NULL,
+  `json_settings` text,
+  `published` tinyint(1) DEFAULT '0',
+  `category_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`block_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+
+--
+-- Дамп данных таблицы `template_blocks`
+--
+
+INSERT INTO `template_blocks` (`block_id`, `alias`, `json_settings`, `published`, `category_id`) VALUES
+(1, 'header', '{}', 0, 1),
+(2, 'content', '{}', 0, 1),
+(3, 'left', NULL, 0, 1),
+(33, 'header', NULL, 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `template_widgets`
+--
+
+DROP TABLE IF EXISTS `template_widgets`;
+CREATE TABLE IF NOT EXISTS `template_widgets` (
+  `widget_id` int(11) NOT NULL AUTO_INCREMENT,
+  `json_settings` text,
+  `published` tinyint(1) DEFAULT '0',
+  `class` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`widget_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Дамп данных таблицы `template_widgets`
+--
+
+INSERT INTO `template_widgets` (`widget_id`, `json_settings`, `published`, `class`, `title`) VALUES
+(1, '{}', 1, 'MainContent', 'Главный контент'),
+(2, '{"alias":"main","title":"Главное меню"}', 1, 'Menu', 'Менюшка'),
+(10, '{}', 1, 'Dummy', 'Текст');
 
 -- --------------------------------------------------------
 
@@ -2535,11 +2987,12 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`, `module`) VALUES
 -- Структура таблицы `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL COMMENT 'Имя',
   `email` varchar(200) NOT NULL COMMENT 'Email',
-  `password` varchar(32) NOT NULL COMMENT 'Пароль',
+  `password` varchar(60) NOT NULL COMMENT 'Пароль',
   `birthdate` date DEFAULT NULL COMMENT 'Дата рождения',
   `gender` enum('man','woman') DEFAULT NULL COMMENT 'Пол',
   `status` enum('active','new','blocked') DEFAULT 'new' COMMENT 'Статус',
@@ -2551,7 +3004,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Зарегистрирован',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `users`
@@ -2560,156 +3013,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `birthdate`, `gender`, `status`, `photo`, `activate_code`, `activate_date`, `password_recover_code`, `password_recover_date`, `date_create`) VALUES
 (1, 'Иван', 'admin@ya.ru', 'e10adc3949ba59abbe56e057f20f883e', '2003-05-20', 'man', 'active', NULL, '070a63ae33af0eb7986992e774dc53e8', '2011-05-21 09:18:39', NULL, NULL, '2011-05-19 00:25:50'),
 (2, 'artos1', 'artem-moscow@yandex.ru', 'ce75287f5b0f666d015f6cd86003bcc6', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2012-05-19 16:05:24'),
-(3, '', 'www.pismeco@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL, NULL, 'active', NULL, NULL, NULL, NULL, NULL, '2012-05-19 16:05:24');
+(3, '', 'www.pismeco@gmail.com', '$2a$12$I02MSYzrOlTmNR5ts1kVa.bP9MupSk7j.QaVZrXc4asJZ23pmw7AK', NULL, NULL, 'active', NULL, NULL, '2012-08-18 11:55:09', NULL, NULL, '2012-05-19 16:05:24');
+
+-- --------------------------------------------------------
 
 --
--- Ограничения внешнего ключа сохраненных таблиц
+-- Структура для представления `sphinx_view_content`
 --
+DROP TABLE IF EXISTS `sphinx_view_content`;
 
---
--- Ограничения внешнего ключа таблицы `actions`
---
-ALTER TABLE `actions`
-  ADD CONSTRAINT `actions_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `auth_assignments`
---
-ALTER TABLE `auth_assignments`
-  ADD CONSTRAINT `auth_assignments_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `auth_assignments_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `auth_items_childs`
---
-ALTER TABLE `auth_items_childs`
-  ADD CONSTRAINT `auth_items_childs_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `auth_items_childs_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `auth_objects`
---
-ALTER TABLE `auth_objects`
-  ADD CONSTRAINT `auth_objects_ibfk_1` FOREIGN KEY (`role`) REFERENCES `auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `faq`
---
-ALTER TABLE `faq`
-  ADD CONSTRAINT `faq_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `faq_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `faq_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `faq_sections`
---
-ALTER TABLE `faq_sections`
-  ADD CONSTRAINT `faq_sections_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `languages_translations`
---
-ALTER TABLE `languages_translations`
-  ADD CONSTRAINT `languages_translations_ibfk_1` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id`) REFERENCES `languages_messages` (`id`) ON DELETE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `mailer_outbox`
---
-ALTER TABLE `mailer_outbox`
-  ADD CONSTRAINT `mailer_outbox_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `mailer_templates` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mailer_outbox_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `menu`
---
-ALTER TABLE `menu`
-  ADD CONSTRAINT `menu_language_fk` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `menu_sections`
---
-ALTER TABLE `menu_sections`
-  ADD CONSTRAINT `menu_sections_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `menu_sections_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `news`
---
-ALTER TABLE `news`
-  ADD CONSTRAINT `news_ibfk_1` FOREIGN KEY (`lang`) REFERENCES `languages` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `news_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `pages`
---
-ALTER TABLE `pages`
-  ADD CONSTRAINT `pages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pages_language_fk` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `pages_sections`
---
-ALTER TABLE `pages_sections`
-  ADD CONSTRAINT `pages_sections_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `pages_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `pages_sections_rels`
---
-ALTER TABLE `pages_sections_rels`
-  ADD CONSTRAINT `pages_sections_rels_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pages_sections_rels_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `pages_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `quiz_answers`
---
-ALTER TABLE `quiz_answers`
-  ADD CONSTRAINT `question_id` FOREIGN KEY (`question_id`) REFERENCES `quiz_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `quiz_choices`
---
-ALTER TABLE `quiz_choices`
-  ADD CONSTRAINT `question` FOREIGN KEY (`question_id`) REFERENCES `quiz_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `result` FOREIGN KEY (`result_id`) REFERENCES `quiz_results` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `quiz_questions`
---
-ALTER TABLE `quiz_questions`
-  ADD CONSTRAINT `topic` FOREIGN KEY (`topic_id`) REFERENCES `quiz_topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `quiz_results`
---
-ALTER TABLE `quiz_results`
-  ADD CONSTRAINT `quiz` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `quiz_topics_rels`
---
-ALTER TABLE `quiz_topics_rels`
-  ADD CONSTRAINT `quiz_id` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `topic_id` FOREIGN KEY (`topic_id`) REFERENCES `quiz_topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `ratings`
---
-ALTER TABLE `ratings`
-  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `site_actions`
---
-ALTER TABLE `site_actions`
-  ADD CONSTRAINT `site_actions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sphinx_view_content` AS (select concat('page_',`t`.`id`) AS `id`,`t`.`title` AS `title`,NULL AS `user_id`,`t`.`text` AS `text` from `pages` `t`) union (select concat('page_',`t`.`id`) AS `id`,`t`.`title` AS `title`,`t`.`user_id` AS `user_id`,`t`.`text` AS `text` from `pages` `t`);
