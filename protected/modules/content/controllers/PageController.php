@@ -29,8 +29,8 @@ class PageController extends Controller
             array(
                 'actions'  => array('index'),
                 'sidebars' => array(
-                    'widget' => 'application.modules.content.portlets.NavigatorSidebar',
-                    'widget' => 'application.modules.comments.portlets.CommentsSidebar'
+//                    'widget' => 'application.modules.content.portlets.NavigatorSidebar',
+//                    'widget' => 'application.modules.comments.portlets.CommentsSidebar'
                 )
             ),
             array(

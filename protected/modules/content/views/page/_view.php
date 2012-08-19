@@ -42,11 +42,11 @@
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
-        <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
+<!--        --><?// $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
-            <a href="<?= $data->user->href ?>" title="Автор текста"><?= $data->user->name ?></a>
-            <span title="рейтинг пользователя" class="rating"><?= $data->user->rating ?></span>
+<!--            <a href="--><?//= $data->user->href ?><!--" title="Автор текста">--><?//= $data->user->name ?><!--</a>-->
+<!--            <span title="рейтинг пользователя" class="rating">--><?//= $data->user->rating ?><!--</span>-->
         </div>
 
         <div class="comments">
@@ -57,7 +57,7 @@
 <br clear="all"/>
 
 <? if (!$preview): ?>
-    <? $this->widget('CommentsPortlet', array('model' => $data)); ?>
+<!--    --><?// $this->widget('CommentsPortlet', array('model' => $data)); ?>
 <? endif ?>
 
 

@@ -12,13 +12,15 @@ return CMap::mergeArray(require('main.php'), array(
         'log'=>array(
             'class'=>'CLogRouter',
             'routes'=>array(
-                array(
+                /*
+                 array(
                     // направляем результаты профайлинга в ProfileLogRoute (отображается
                     // внизу страницы)
                     'class'=>'CProfileLogRoute',
                     'levels'=>'profile',
                     'enabled'=>true,
                 ),
+                /**/
 //                array(
 //                    'class'=>'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
 //                    'ipFilters'=>array('127.0.0.1'),
