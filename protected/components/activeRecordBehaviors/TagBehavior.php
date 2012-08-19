@@ -2,7 +2,7 @@
 
 class TagBehavior extends ActiveRecordBehavior
 {
-    public function afterSave()
+    public function afterSave($event)
     {
         $this->_deleteRels();
 

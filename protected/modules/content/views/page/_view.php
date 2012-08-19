@@ -19,7 +19,10 @@
     <? endif ?>
 
     <? if (isset($preview) && $preview): ?>
-        <?= array_shift(explode('{{cut}}', $data->text)); ?>
+        <?php
+        $parts = explode('{{cut}}', $data->text);
+        echo array_shift($parts);
+        ?>
         <p><?= CHtml::link('читать далее →', $data->href, array('class' => 'read-more')) ?></p>
     <? else: ?>
         <?= $data->text ?>
