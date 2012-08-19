@@ -31,6 +31,14 @@ class MarkController extends CController
         $this->renderDocViewFile($viewFile);
     }
 
+
+    /**
+     * Find view file in module, or return std view file
+     *
+     * @param string $view
+     *
+     * @return string
+     */
     public function getViewFile($view)
     {
         $viewFile = '';

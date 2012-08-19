@@ -49,14 +49,22 @@
         'ActiveRecordModel' => '/mainThemes/activeRecordModel',
         'GridView'          => '/mainThemes/gridView',
     );
-    $modules      = array(
-        'main'                           => '/main',
-        'content - Контент'              => '/content',
+    $all_config = array();
+    foreach (Yii::app()->getModules() as $id => $config)
+    {
+        $config_file = Yii::app()->getModule($id)->getBasePath() . '/docs/config.php';
+        if (is_file($config_file))
+        {
+            $all_config = CMap::mergeArray($all_config, require $config_file);
+        }
+    }
+    $modules = $all_config['menu'];
+/*    $modules      = array(
 //        'products - Каталог продуктов'   => '/products',
 //        'orders - Заказы'                => '/orders',
-        'fileManager - Файловый менеджер'=> '/fileManager',
         'glossary'                       => '/glossary',
     );
+*/
     ksort($modules);
     $behaviors = array(
         'componentInModule' => '/behaviors/componentInModule',
