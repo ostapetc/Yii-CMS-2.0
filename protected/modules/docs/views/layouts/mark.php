@@ -52,8 +52,8 @@
     $modules      = array(
         'main'                           => '/main',
         'content - Контент'              => '/content',
-        'products - Каталог продуктов'   => '/products',
-        'orders - Заказы'                => '/orders',
+//        'products - Каталог продуктов'   => '/products',
+//        'orders - Заказы'                => '/orders',
         'fileManager - Файловый менеджер'=> '/fileManager',
         'glossary'                       => '/glossary',
     );
