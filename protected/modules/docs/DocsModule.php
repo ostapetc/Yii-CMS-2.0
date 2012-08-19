@@ -35,6 +35,7 @@ class DocsModule extends WebModule
         return array(
             '/docs/module/<module:.*>/<view:.*>' => '/docs/mark/module',
             '/docs/<view:.*>' => '/docs/mark/index',
+            '/docs/base/<view:.*>' => '/docs/mark/index',
             '/docs/base/<folder:\w*>/<view:\w*>' => '/docs/mark/index',
         );
     }
