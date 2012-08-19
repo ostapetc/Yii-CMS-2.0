@@ -172,7 +172,7 @@ class TextComponent extends CApplicationComponent
      *
      * @return string
      */
-    function antimat($string)
+    function antimat($string, $replaces = "<font color=red>цетзура</font> ")
     {
         //setlocale (LC_ALL, "ru_RU.UTF8");
 
@@ -233,7 +233,7 @@ class TextComponent extends CApplicationComponent
                 {
                     if (ereg("^" . $bad_words[$k], $str_rep))
                     {
-                        $elems[$i] = "<font color=red>цетзура</font> "; //можно рандомные замены напихать сюда
+                        $elems[$i] = array_rand((array)$replaces); //можно рандомные замены напихать сюда
                         $blocked   = 1;
                         $counter++;
                         break;
