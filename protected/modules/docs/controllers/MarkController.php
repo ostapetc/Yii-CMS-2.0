@@ -31,6 +31,24 @@ class MarkController extends CController
         $this->renderDocViewFile($viewFile);
     }
 
+    public function getViewFile($view)
+    {
+        $viewFile = '';
+        $data = explode('/', $view);
+        $moduleId = array_shift($data);
+        if (empty($data)) {
+            $data[] = 'index';
+        }
+        $module = Yii::app()->getModule($moduleId);
+        if ($module) {
+            $viewFile = $module->getBasePath() . '/docs/' . implode('/', $data) . '.php';
+        }
+        if (!is_file($viewFile)) {
+            $viewFile = parent::getViewFile($view);
+        }
+        return $viewFile;
+    }
+
     public function renderDocViewFile($viewFile)
     {
         $md = new CMarkdown;
