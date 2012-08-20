@@ -12,18 +12,7 @@ class MetaTagsFilter extends CFilter
         if ($id = Yii::app()->request->getParam("id"))
         {
             $class = $controller->getModelClass();
-
-            $meta_tag = MetaTag::model()->findByAttributes(array(
-                'model_id'  => $class,
-                'object_id' => $id
-            ));
-
-            if ($meta_tag)
-            {
-                $controller->meta_title       = $meta_tag->title;
-                $controller->meta_keywords    = $meta_tag->keywords;
-                $controller->meta_description = $meta_tag->description;
-            }
+            $controller->setMetaTags(CActiveRecord::model($class)->findByPk($id));
         }
         return true;
     }

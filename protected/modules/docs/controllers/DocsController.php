@@ -1,5 +1,5 @@
 <?php
-class MarkController extends CController
+class DocsController extends CController
 {
     public $layout = '/layouts/mark';
 
@@ -54,6 +54,7 @@ class MarkController extends CController
         if (!is_file($viewFile)) {
             $viewFile = parent::getViewFile($view);
         }
+
         return $viewFile;
     }
 

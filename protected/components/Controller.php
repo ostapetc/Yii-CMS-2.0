@@ -141,6 +141,37 @@ abstract class Controller extends CController implements ControllerInterface
         }
     }
 
+    public function setMetaTags($modelOrConfig)
+    {
+        if ($modelOrConfig instanceof CActiveRecord)
+        {
+            $meta_tag = MetaTag::model()->findByAttributes(array(
+                'model_id'  => get_class($modelOrConfig),
+                'object_id' => $modelOrConfig->id
+            ));
+            if ($meta_tag)
+            {
+                $meta_tag = array(
+                    'title' => $meta_tag->title,
+                    'description' => $meta_tag->description,
+                    'keywords' => $meta_tag->keywords
+                );
+            }
+        }
+        else
+        {
+            $meta_tag = $modelOrConfig;
+        }
+
+        foreach ((array)$meta_tag as $key => $val)
+        {
+            if (is_string($val))
+            {
+                Yii::app()->clientScript->registerMetaTag($val, $key);
+            }
+        }
+    }
+
     /**
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,
      * или выбрасывает 404
