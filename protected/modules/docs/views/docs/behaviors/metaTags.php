@@ -26,3 +26,10 @@
 
 `setMetaTags` - не поддерживает 3 и 4 параметры `CClientScript::registerMetaTag`,
 для более сложного поведения используйте `CClientScript::registerMetaTag` напрямую
+
+##MetaTagsFilter
+Так же обратите внимание на `MetaTagsFilter` который старается выставить метатеги автоматически,
+он довольно глуп и поэтому использовать его нужно с осторожностью.
+
+Он имеет 2 параметра: `findAttribute` и `getParam` пытаясь найти модель по `findByAttributes(array($this->findAttribute => request->getParam($this->getParam)))`
+и применяет метатеги связанные с этой моделью
