@@ -147,7 +147,7 @@ abstract class Controller extends CController implements ControllerInterface
         {
             $meta_tag = MetaTag::model()->findByAttributes(array(
                 'model_id'  => get_class($modelOrConfig),
-                'object_id' => $modelOrConfig->id
+                'object_id' => $modelOrConfig->getPrimaryKey()
             ));
             if ($meta_tag)
             {
@@ -162,7 +162,6 @@ abstract class Controller extends CController implements ControllerInterface
         {
             $meta_tag = $modelOrConfig;
         }
-
         foreach ((array)$meta_tag as $key => $val)
         {
             if (is_string($val))
