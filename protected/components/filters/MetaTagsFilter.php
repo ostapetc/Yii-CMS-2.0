@@ -1,6 +1,9 @@
 <?
 class MetaTagsFilter extends CFilter
 {
+    public $findAttribute = 'id';
+    public $getParam = 'id';
+
     protected function preFilter($filterChain)
     {
         $controller = $filterChain->controller;
@@ -9,20 +12,13 @@ class MetaTagsFilter extends CFilter
             return true;
         }
 
-        if ($id = Yii::app()->request->getParam("id"))
+        if ($val = Yii::app()->request->getParam($this->getParam))
         {
             $class = $controller->getModelClass();
-
-            $meta_tag = MetaTag::model()->findByAttributes(array(
-                'model_id'  => $class,
-                'object_id' => $id
-            ));
-
-            if ($meta_tag)
+            $model = CActiveRecord::model($class)->findByAttributes(array($this->findAttribute => $val));
+            if ($model)
             {
-                $controller->meta_title       = $meta_tag->title;
-                $controller->meta_keywords    = $meta_tag->keywords;
-                $controller->meta_description = $meta_tag->description;
+                $controller->setMetaTags($model);
             }
         }
         return true;

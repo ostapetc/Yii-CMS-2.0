@@ -1,12 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><? echo $this->meta_title ?></title>
-    <meta name="description" content="<? echo $this->meta_description ?>">
-    <meta name="keywords" content="<? echo $this->meta_keywords ?>">
-    <meta name="author" content="">
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
