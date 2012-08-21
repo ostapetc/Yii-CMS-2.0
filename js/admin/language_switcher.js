@@ -50,15 +50,10 @@ function createDropDown() {
     var selected = source.find("option:selected");
     var options = $("option", source);
     $("#country-select").append('<dl id="target" class="dropdown"></dl>')
-    $("#target").append('<dt class="' + selected.val() + '"><a href="#"><span class="flag" lang="' + selected.val() + '"></span><em>' + selected.text() + '</em></a></dt>')
+    $("#target").append('<dt class="' + selected.val() + '"><a href="#"><span class="flag-' + selected.val() + '"></span><em>' + selected.text() + '</em></a></dt>')
     $("#target").append('<dd><ul></ul></dd>')
     options.each(function() {
-        $("#target dd ul").append('<li class="' + $(this).val() + '"><a href="' + $(this).attr("title") + '"><span class="flag" lang="' + $(this).val() + '"></span><em>' + $(this).text() + '</em></a></li>');
-    });
-
-    $(".flag").each(function() {
-        var icon= $(this).attr('lang') + '.png';
-        $(this).attr('style', 'background-image: url(/img/icons/flags/' + icon + ')');
+        $("#target dd ul").append('<li class="' + $(this).val() + '"><a href="' + $(this).attr("title") + '"><span class="flag-' + $(this).val() + '"></span><em>' + $(this).text() + '</em></a></li>');
     });
 }
 
