@@ -170,7 +170,7 @@ class AppManager
         $module = Yii::app()->getModule($id);
         if ($module)
         {
-            return $module->name();
+            return $module->getName();
         }
     }
 
