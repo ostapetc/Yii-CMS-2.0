@@ -17,6 +17,10 @@
         background: #CFCFCF;
         text-decoration: none;
     }
+    .accordion-head a i{
+        margin: 0;
+    }
+
     .accordion-body {
         background: #FAFAFA;
         border-top: 1px solid #CCC;
