@@ -12,13 +12,23 @@ class ImageHolder //Класс Image занять под расширение
     private $_size;
     private $_crop;
 
+    public function crop()
+    {
+        $this->_crop = true;
+        return $this;
+    }
 
-    public function __construct($dir, $file, array $size, $crop = false)
+
+    public function setSize(array $size)
+    {
+        $this->_size = $size;
+        return $this;
+    }
+
+    public function load($dir, $file)
     {
         $this->_dir  = $dir;
         $this->_file = $file;
-        $this->_size = $size;
-        $this->_crop = $crop;
         return $this;
     }
 
@@ -75,7 +85,12 @@ class ImageHelper
 
     public static function thumb($dir, $file, array $size, $crop = false)
     {
-        return new ImageHolder($dir, $file, $size, $crop);
+        $img = new ImageHolder();
+        $img->load($dir, $file)->setSize($size);
+        if ($crop) {
+            $img->crop();
+        }
+        return $img;
     }
 
 
