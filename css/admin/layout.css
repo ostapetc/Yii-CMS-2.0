@@ -299,13 +299,13 @@ aside#sidebar {
     margin: 0;
     padding: 0;
 }
+/*
 
 #sidebar li {
     list-style: none;
     margin: 0 0 0 12%;
     padding: 0;
 }
-
 #sidebar li a {
     color: #666666;
     padding-left: 25px;
@@ -316,7 +316,7 @@ aside#sidebar {
     text-shadow: 0 1px 0 #fff;
     margin: 2px 0;
 }
-
+*/
 #sidebar li a:hover {
     color: #444444;
 }
@@ -385,16 +385,12 @@ aside#sidebar {
     text-shadow: 0 1px 0 #fff;
     margin: 10px 0 0 0;
 }
-
+/*
 #sidebar a {
     color: #666666;
     text-decoration: none;
 }
-
-#sidebar a:hover {
-    text-decoration: underline;
-}
-
+*/
 #sidebar footer {
     margin-top: 20%;
 }
