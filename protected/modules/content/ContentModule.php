@@ -1,6 +1,9 @@
 <?
 class ContentModule extends WebModule
 {
+
+    public $icon = 'file';
+
     public function getName()
     {
         return 'Контент';

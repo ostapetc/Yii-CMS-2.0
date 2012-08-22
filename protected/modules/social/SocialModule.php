@@ -4,6 +4,7 @@ class SocialModule extends WebModule
 {
 	public static $active = true;
 
+    public $icon = 'user';
 
     public function getName()
     {
