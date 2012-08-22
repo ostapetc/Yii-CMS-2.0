@@ -42,9 +42,10 @@ class AppManager
             }
 
             $moduleInfo = array(
-                'description' => $module->getDescription(),
-                'version'     => $module->getVersion(),
-                'name'        => $module->getName(),
+                'description' => $module->description(),
+                'version'     => $module->version(),
+                'name'        => $module->name(),
+                'icon'        => $module->icon,
                 'class'       => $module_class,
                 'dir'         => $module_id
             );
