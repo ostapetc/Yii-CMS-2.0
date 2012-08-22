@@ -21,12 +21,12 @@ class UrlManager extends CUrlManager
 
         if (Yii::app()->params['collect_routes_from_modules'])
         {
-            $modules = AppManager::getModulesData(true);
-            foreach ($modules as $class => $data)
+            foreach (Yii::app()->getModules() as $id => $config)
             {
-                if (method_exists($class, 'routes'))
+                $module = Yii::app()->getModule($id);
+                if (method_exists($module, 'routes'))
                 {
-                    $routes = array_merge($routes, call_user_func(array($class, 'routes')));
+                    $routes = array_merge($routes, $module->routes());
                 }
             }
         }

@@ -11,32 +11,32 @@ class FileManagerModule extends WebModule
         ));
     }
 
-    public static function name()
+    public function getName()
     {
         return 'Файловый менеджер';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Добавляет возможность использования HTML5 загрузчика. Используется для создания своих модулей.';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '2.1';
     }
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             "Все файлы" => "/fileManager/fileManagerAdmin/manage",
         );
     }
 
-    public static function routes()
+    public function routes()
     {
         return array(
             '/userAlbums/<userId:\d*>' => '/fileManager/fileAlbum/userAlbums',

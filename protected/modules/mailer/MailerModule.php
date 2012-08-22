@@ -14,19 +14,19 @@ class MailerModule extends WebModule
 	public static $active = true;
 
 
-    public static function name()
+    public function getName()
     {
         return 'Рассылка';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Email рассылка';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -53,7 +53,7 @@ class MailerModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             'Исходящие письма' => Yii::app()->createUrl('/mailer/mailerOutboxAdmin/manage'),

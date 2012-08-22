@@ -1,9 +1,7 @@
 <?php
 interface WebModuleInterface
 {
-    public static function name();
+    public function getName();
 
-    public static function description();
-
-    public static function version();
+    public function getDescription();
 }

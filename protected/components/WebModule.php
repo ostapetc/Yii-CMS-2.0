@@ -20,7 +20,7 @@ abstract class WebModule extends CWebModule implements WebModuleInterface
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array();
     }
