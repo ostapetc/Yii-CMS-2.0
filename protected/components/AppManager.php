@@ -82,7 +82,7 @@ class AppManager
 
                         if (!RbacModule::isAllow($auth_item))
                         {
-                            unset($module['admin_menu'][$title]);
+                            unset($moduleInfo['admin_menu'][$title]);
                         }
                     }
                 }

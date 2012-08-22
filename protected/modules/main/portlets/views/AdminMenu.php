@@ -1,4 +1,7 @@
 <style type="text/css">
+    body{
+        overflow-y: scroll;
+    }
     .acc-group{
         margin: 0;
         border: none;
