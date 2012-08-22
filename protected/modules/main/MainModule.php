@@ -4,12 +4,10 @@ class MainModule extends WebModule
 {
     public static $base_module = true;
 
-
     public static function description()
     {
         return 'Главный модуль';
     }
-
 
     public static function version()
     {

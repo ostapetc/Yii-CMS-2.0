@@ -3,6 +3,7 @@
 class BannersModule extends WebModule
 {
     public static $active = true;
+    public $icon = 'th-large';
 
 
     public static function name()
@@ -59,6 +60,8 @@ class BannersModule extends WebModule
             'Добавить (вертикаль.)' => '/banners/bannerAdmin/create/is_big/0',
         );
     }
+
+
 
 
 }
