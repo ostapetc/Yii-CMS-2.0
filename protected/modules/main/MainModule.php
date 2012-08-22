@@ -84,7 +84,7 @@ class MainModule extends WebModule
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array(
             'off'        => 'main/main/off',
