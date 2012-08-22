@@ -4,6 +4,7 @@ class CommentsModule extends WebModule
 {
 	public static $active = true;
 
+    public $icon = 'comment';
 
     public function getName()
     {

@@ -12,6 +12,8 @@ class UsersModule extends WebModule
 
     public static $base_module = true;
 
+//    public $icon = ;
+
 
     public function getName()
     {

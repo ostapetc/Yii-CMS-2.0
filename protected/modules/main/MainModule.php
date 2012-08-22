@@ -4,6 +4,7 @@ class MainModule extends WebModule
 {
     public static $base_module = true;
 
+    public $icon = 'flag';
 
     public function getDescription()
     {

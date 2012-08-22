@@ -4,6 +4,7 @@ class RbacModule extends WebModule
 {	
 	public static $active = true;
 
+    public $icon = 'eye-open';
 
     public function getName()
     {

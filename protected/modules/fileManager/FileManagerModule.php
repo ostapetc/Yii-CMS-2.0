@@ -3,6 +3,8 @@ class FileManagerModule extends WebModule
 {
     public static $active = true;
 
+    public $icon = 'random';
+
     public function init()
     {
         $this->setImport(array(
