@@ -56,18 +56,17 @@ class AppManager
                 }
             }
 
-            $moduleInfo = array(
-                'description' => $module->getDescription(),
-                'version'     => $module->getVersion(),
-                'name'        => $module->getName(),
-                'icon'        => $module->icon,
+            $module = array(
+                'description' => call_user_func(array($module_class, 'description')),
+                'version'     => call_user_func(array($module_class, 'version')),
+                'name'        => call_user_func(array($module_class, 'name')),
                 'class'       => $module_class,
-                'dir'         => $module_id
+                'dir'         => $module_dir
             );
 
-            if (method_exists($module, 'adminMenu'))
+            if (method_exists($module_class, 'adminMenu'))
             {
-                $moduleInfo['admin_menu'] = $module->adminMenu();
+                $module['admin_menu'] = call_user_func(array($module_class, 'adminMenu'));
 
 //                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
 //                if ($settins_count)
@@ -77,7 +76,7 @@ class AppManager
 
                 if ($check_allowed_links)
                 {
-                    foreach ($moduleInfo['admin_menu'] as $title => $url)
+                    foreach ($module['admin_menu'] as $title => $url)
                     {
                         $url = explode('/', trim($url, '/'));
 
@@ -92,13 +91,13 @@ class AppManager
 
                         if (!RbacModule::isAllow($auth_item))
                         {
-                            unset($moduleInfo['admin_menu'][$title]);
+                            unset($module['admin_menu'][$title]);
                         }
                     }
                 }
             }
 
-            $modules[$module_class] = $moduleInfo;
+            $modules[$module_class] = $module;
         }
 
         return $modules;
