@@ -10,7 +10,7 @@
         <hgroup>
             <h1 class="site_title" ><a href="/admin" style="margin-left: 20px"><?= Param::get('project_name'); ?></a></h1>
 
-            <h2 class="section_title" style="padding-left: 24px;"><? echo t($this->module->name()); ?></h2>
+            <h2 class="section_title" style="padding-left: 24px;"><? echo t($this->module->getName()); ?></h2>
 
             <div class="btn_view_site"><a href="/"><? echo t('На сайт'); ?></a></div>
 

@@ -210,7 +210,7 @@ aside#sidebar {
     width: 17%;
     background: #E0E0E3 url(/img/admin/sidebar.png) repeat;
     float: left;
-    min-height: 500px;
+    height: 100%;
     margin-top: -4px;
 }
 
