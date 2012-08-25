@@ -6,8 +6,6 @@
 
     <?= $this->renderPartial('application.views.layouts.admin._modal'); ?>
 
-    <? $this->widget('main.portlets.Console') ?>
-
     <header id="header">
         <hgroup>
             <h1 class="site_title" ><a href="/admin" style="margin-left: 20px"><?= Param::get('project_name'); ?></a></h1>
