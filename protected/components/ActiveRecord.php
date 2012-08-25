@@ -12,13 +12,6 @@ abstract class ActiveRecord extends CActiveRecord
 
     abstract public function name();
 
-
-    public static function model($className = __CLASS__)
-    {
-        return parent::model($className);
-    }
-
-
     public function behaviors()
     {
         return array(
