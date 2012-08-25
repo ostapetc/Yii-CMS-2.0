@@ -48,7 +48,29 @@
     {
     	continue;
     }
+//    dump($modules);
+//    Yii::app()->controller->widget('Boot');
     ?>
+
+    <div class="acc-group accordion-group">
+        <div class="accordion-head">
+            <a href="#menu_module_<?= $module['dir'] ?>" data-toggle="collapse" data-parent="#admin_menu">
+                <i class="icon-<?= $module['icon'] ?>"></i>
+                <?= $module['name'] ?>
+            </a>
+        </div>
+        <div id="menu_module_<?= $module['dir'] ?>" class="collapse accordion-body">
+            <ul>
+            <? foreach ($module['admin_menu'] as $title => $url): ?>
+                <li><?= CHtml::link($title, $url) ?></li>
+            <? endforeach ?>
+            </ul>
+        </div>
+    </div>
+<? endforeach ?>
+</div>
+
+<?php return true; ?>
 
     <h3><? echo t($module['name']); ?></h3>
     <ul class="toggle">

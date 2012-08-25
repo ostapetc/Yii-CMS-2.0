@@ -85,15 +85,15 @@ class ImageHelper
     }
 
     public static function thumb($dir, $file, array $size, $crop = false)
-    {
-        $img = new ImageHolder();
-        $img->load($dir, $file)->setSize($size);
-        if ($crop) {
-            $img->crop();
-        }
-        return $img;
-    }
-
+     {
+         $img = new ImageHolder();
+         $img->load($dir, $file)->setSize($size);
+         if ($crop) {
+             $img->crop();
+         }
+         return $img;
+     }
+ 
 
     public static function process($dir, $file, array $size, $crop = false)
     {
