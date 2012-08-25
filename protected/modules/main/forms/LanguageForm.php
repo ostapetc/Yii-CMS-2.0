@@ -23,8 +23,7 @@ foreach ($files as $file)
 $id_disabled = false;
 if (!$this->model->isNewRecord)
 {
-    $config = AppManager::getConfig();
-    if ($config['language'] == $this->model->id)
+    if (Yii::app()->language == $this->model->id)
     {
         $id_disabled = true;
     }

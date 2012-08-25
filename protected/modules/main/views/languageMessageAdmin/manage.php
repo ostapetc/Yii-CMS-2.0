@@ -6,12 +6,11 @@ $this->tabs = array(
     'Добавить перевод' => $this->createUrl('create')
 );
 
-$config  = AppManager::getConfig();
 $columns = array('message');
 
 foreach ($languages as $id => $language)
 {
-    if ($config['language'] == $id)
+    if (Yii::app()->language == $id)
     {
         continue;
     }

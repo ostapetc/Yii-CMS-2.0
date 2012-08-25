@@ -10,22 +10,20 @@ class AppManager
     );
 
 
-    public static function initPathOfAliaces()
+    public static function init()
     {
+        //init PathOfAliaces
         foreach (self::$pathAliaces as $short => $full)
         {
             Yii::setPathOfAlias($short, Yii::getPathOfAlias($full));
         }
-    }
 
-
-    public static function init()
-    {
-        self::initPathOfAliaces();
+        //init modules
         foreach (Yii::app()->getModules() as $module => $config)
         {
             Yii::app()->getModule($module);
         }
+
         Yii::app()->urlManager->collectRules();
     }
 
@@ -38,22 +36,9 @@ class AppManager
             $module = Yii::app()->getModule($module_id);
             $module_class = get_class($module);
             $vars = get_class_vars($module_class);
-            if (!$vars)
+            if (!$vars || !$active || !isset($vars['active']) || !$vars['active'])
             {
                 continue;
-            }
-
-            if ($active !== null)
-            {
-                if (!array_key_exists('active', $vars))
-                {
-                    continue;
-                }
-
-                if ($active && !$vars['active'])
-                {
-                    continue;
-                }
             }
 
             $moduleInfo = array(
@@ -78,6 +63,11 @@ class AppManager
                 {
                     foreach ($moduleInfo['admin_menu'] as $title => $url)
                     {
+                        if (!is_string($url))
+                        {
+                            continue;
+                        }
+
                         $url = explode('/', trim($url, '/'));
 
                         if (count($url) < 3)
@@ -269,12 +259,6 @@ class AppManager
     }
 
 
-    public static function getConfig()
-    {
-        return include APP_PATH . 'config/main.php';
-    }
-
-
     public static function getModelModule($model_class)
     {
         $file = $model_class . '.php';
@@ -292,10 +276,9 @@ class AppManager
     public static function getModulesNames()
     {
         $names = array();
-
-        foreach (array_keys(Yii::app()->getModules()) as $module)
+        foreach (Yii::app()->getModules() as $id => $config)
         {
-            $names[$module] = Yii::app()->getModule($module)->name();
+            $names[$module] = Yii::app()->getModule($id)->name();
         }
 
         return $names;
