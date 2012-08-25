@@ -80,69 +80,78 @@ class AssetManager extends CAssetManager {
 
 	public function publish($path,$hashByName=false,$level=-1,$forceCopy=false)
     {
-		if(isset($this->_published[$path]))
+        if($forceCopy===null)
+            $forceCopy=$this->forceCopy;
+        if(isset($this->_published[$path]))
+            return $this->_published[$path];
+        else if(($src=realpath($path))!==false)
         {
-			return $this->_published[$path];
-		}
-		else if(($src=realpath($path))!==false)
-        {
-			if(is_file($src))
+            if(is_file($src))
             {
-				$dir=$this->hash($hashByName ? basename($src) : dirname($src));
-				$fileName=basename($src);
-				$suffix=substr(strrchr($fileName, '.'), 1);
-				$dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
+                $dir=$this->hash($hashByName ? basename($src) : dirname($src).filemtime($src));
+                $fileName=basename($src);
+                $dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
+                $dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
 
-				if (array_key_exists($suffix, $this->parsers))
+                if ($this->linkAssets)
                 {
-					$fileName=basename($src, $suffix).$this->parsers[$suffix]['output'];
-				}
-				$dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
-
-				if($this->force || @filemtime($dstFile)<@filemtime($src))
+                    if(!is_file($dstFile))
+                    {
+                        if(!is_dir($dstDir))
+                        {
+                            mkdir($dstDir);
+                            @chmod($dstDir, $this->newDirMode);
+                        }
+                        symlink($src,$dstFile);
+                    }
+                }
+                else if(@filemtime($dstFile)<@filemtime($src))
                 {
-					if(!is_dir($dstDir))
+                    if(!is_dir($dstDir))
                     {
-						mkdir($dstDir);
-						@chmod($dstDir,0777);
-					}
+                        mkdir($dstDir);
+                        @chmod($dstDir, $this->newDirMode);
+                    }
+                    if (array_key_exists($suffix, $this->parsers))
+                    {
+                        $parserClass = Yii::import($this->parsers[$suffix]['class']);
+                        $parser = new $parserClass($this->parsers[$suffix]['options']);
+                        file_put_contents($dstFile, $parser->parse($src));
+                    }
+                    else
+                    {
+                        copy($src,$dstFile);
+                    }
+                    @chmod($dstFile, $this->newFileMode);
+                }
 
-					if (array_key_exists($suffix, $this->parsers))
-                    {
-						$parserClass = Yii::import($this->parsers[$suffix]['class']);
-						$parser = new $parserClass($this->parsers[$suffix]['options']);
-						file_put_contents($dstFile, $parser->parse($src));
-					}
-					else
-                    {
-						copy($src,$dstFile);
-					}
-				}
-
-				return $this->_published[$path]=$this->getBaseUrl()."/$dir/$fileName";
-			}
-			else if(is_dir($src))
+                return $this->_published[$path]=$this->getBaseUrl()."/$dir/$fileName";
+            }
+            else if(is_dir($src))
             {
-				$dir=$this->hash($hashByName ? basename($src) : $src);
-				$dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
+                $dir=$this->hash($hashByName ? basename($src) : $src.filemtime($src));
+                $dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
 
                 if($this->linkAssets)
                 {
                     if(!is_dir($dstDir))
-                    symlink($src,$dstDir);
+                        symlink($src,$dstDir);
                 }
                 else if(!is_dir($dstDir) || $forceCopy)
                 {
-					CFileHelper::copyDirectory($src,$dstDir,array(
+                    CFileHelper::copyDirectory($src,$dstDir,array(
                         'exclude'=>$this->excludeFiles,
                         'level'=>$level,
                         'newDirMode'=>$this->newDirMode,
-                        'newFileMode'=>$this->newFileMode
+                        'newFileMode'=>$this->newFileMode,
                     ));
-				}
-				return $this->_published[$path]=$this->getBaseUrl().'/'.$dir;
-			}
-		}
+                }
+
+                return $this->_published[$path]=$this->getBaseUrl().'/'.$dir;
+            }
+        }
+        throw new CException(Yii::t('yii','The asset "{asset}" to be published does not exist.',
+            array('{asset}'=>$path)));
 	}
 
 }

@@ -1,4 +1,7 @@
 <?
+/**
+ * @param activeFormWidget CActiveForm
+ */
 class Form extends CForm
 {
     public $back_button_show;
