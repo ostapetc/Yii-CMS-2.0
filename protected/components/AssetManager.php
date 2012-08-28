@@ -90,12 +90,13 @@ class AssetManager extends CAssetManager {
             {
 				$dir=$this->hash($hashByName ? basename($src) : dirname($src));
 				$fileName=basename($src);
-				$suffix=substr(strrchr($fileName, '.'), 1);
+                //get extension for checking of exist format parsers
+                $extension=pathinfo($fileName, PATHINFO_EXTENSION);
 				$dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
 
-				if (array_key_exists($suffix, $this->parsers))
+				if (array_key_exists($extension, $this->parsers))
                 {
-					$fileName=basename($src, $suffix).$this->parsers[$suffix]['output'];
+					$fileName=basename($src, $extension).$this->parsers[$extension]['output'];
 				}
 				$dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
 
@@ -107,10 +108,11 @@ class AssetManager extends CAssetManager {
 						@chmod($dstDir,0777);
 					}
 
-					if (array_key_exists($suffix, $this->parsers))
+                    //if exist parser for this format than - parse it!
+					if (array_key_exists($extension, $this->parsers))
                     {
-						$parserClass = Yii::import($this->parsers[$suffix]['class']);
-						$parser = new $parserClass($this->parsers[$suffix]['options']);
+						$parserClass = Yii::import($this->parsers[$extension]['class']);
+						$parser = new $parserClass($this->parsers[$extension]['options']);
 						file_put_contents($dstFile, $parser->parse($src));
 					}
 					else
