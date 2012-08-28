@@ -45,6 +45,7 @@ class AppManager
                 'description' => $module->getDescription(),
                 'version'     => $module->getVersion(),
                 'name'        => $module->getName(),
+                'icon'        => $module->icon,
                 'class'       => $module_class,
                 'dir'         => $module_id
             );

@@ -88,37 +88,34 @@ class AssetManager extends CAssetManager {
         {
             if(is_file($src))
             {
-                $dir=$this->hash($hashByName ? basename($src) : dirname($src).filemtime($src));
-                $fileName=basename($src);
-                $dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
-                $dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
+				$dir=$this->hash($hashByName ? basename($src) : dirname($src));
+				$fileName=basename($src);
+                //get extension for checking of exist format parsers
+                $extension=pathinfo($fileName, PATHINFO_EXTENSION);
+				$dstDir=$this->getBasePath().DIRECTORY_SEPARATOR.$dir;
 
-                if ($this->linkAssets)
+				if (array_key_exists($extension, $this->parsers))
                 {
-                    if(!is_file($dstFile))
-                    {
-                        if(!is_dir($dstDir))
-                        {
-                            mkdir($dstDir);
-                            @chmod($dstDir, $this->newDirMode);
-                        }
-                        symlink($src,$dstFile);
-                    }
-                }
-                else if(@filemtime($dstFile)<@filemtime($src))
+					$fileName=basename($src, $extension).$this->parsers[$extension]['output'];
+				}
+				$dstFile=$dstDir.DIRECTORY_SEPARATOR.$fileName;
+
+				if($this->force || @filemtime($dstFile)<@filemtime($src))
                 {
                     if(!is_dir($dstDir))
                     {
-                        mkdir($dstDir);
-                        @chmod($dstDir, $this->newDirMode);
-                    }
-                    if (array_key_exists($suffix, $this->parsers))
+						mkdir($dstDir);
+						@chmod($dstDir,0777);
+					}
+
+                    //if exist parser for this format than - parse it!
+					if (array_key_exists($extension, $this->parsers))
                     {
-                        $parserClass = Yii::import($this->parsers[$suffix]['class']);
-                        $parser = new $parserClass($this->parsers[$suffix]['options']);
-                        file_put_contents($dstFile, $parser->parse($src));
-                    }
-                    else
+						$parserClass = Yii::import($this->parsers[$extension]['class']);
+						$parser = new $parserClass($this->parsers[$extension]['options']);
+						file_put_contents($dstFile, $parser->parse($src));
+					}
+					else
                     {
                         copy($src,$dstFile);
                     }

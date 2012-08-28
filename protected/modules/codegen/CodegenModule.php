@@ -3,6 +3,7 @@ class CodegenModule extends WebModule
 {
     public static $active = true;
 
+    public $icon = 'fire';
 
     public function getName()
     {

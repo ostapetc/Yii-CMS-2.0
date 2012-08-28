@@ -4,6 +4,7 @@ class MainModule extends WebModule
 {
     public static $base_module = true;
 
+    public $icon = 'flag';
 
     public function getDescription()
     {
@@ -33,7 +34,7 @@ class MainModule extends WebModule
     }
 
 
-    public function adminMenu()
+    public static function adminMenu()
     {
         return array(
             //'Мета-теги'                       => '/main/MetaTagAdmin/manage',

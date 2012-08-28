@@ -13,6 +13,8 @@ class MailerModule extends WebModule
 
 	public static $active = true;
 
+    public $icon = 'envelope';
+
 
     public function getName()
     {

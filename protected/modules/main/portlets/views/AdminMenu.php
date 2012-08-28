@@ -1,3 +1,46 @@
+<style type="text/css">
+    body{
+        overflow-y: scroll;
+    }
+    .acc-group{
+        margin: 0;
+        border: none;
+    }
+    .accordion-head{
+        text-shadow: 1px 1px 0 #EFEFEF;
+        border-top: 1px solid #F0F0F0;
+    }
+    .accordion-head a{
+        padding: 8px 24px;
+        color: #333;
+        display: block;
+        background: #EEEEEE;
+    }
+    .accordion-head a:hover{
+        background: #CFCFCF;
+        text-decoration: none;
+    }
+    .accordion-head a i{
+        margin: 0;
+    }
+
+    .accordion-body {
+        background: #FAFAFA;
+        border-top: 1px solid #CCC;
+    }
+    .accordion-body ul li{
+        margin: 0 2% 0 14%;
+    }
+    .accordion-body li a{
+        display: block;
+        padding: 4px;
+        color: #333;
+    }
+    .accordion-body li a:hover{
+        background: #E0E0E0;
+        text-decoration: none;
+    }
+</style>
 <div id="admin_menu">
 <? foreach ($modules as $module): ?>
     <?
@@ -5,7 +48,29 @@
     {
     	continue;
     }
+//    dump($modules);
+//    Yii::app()->controller->widget('Boot');
     ?>
+
+    <div class="acc-group accordion-group">
+        <div class="accordion-head">
+            <a href="#menu_module_<?= $module['dir'] ?>" data-toggle="collapse" data-parent="#admin_menu">
+                <i class="icon-<?= $module['icon'] ?>"></i>
+                <?= $module['name'] ?>
+            </a>
+        </div>
+        <div id="menu_module_<?= $module['dir'] ?>" class="collapse accordion-body">
+            <ul>
+            <? foreach ($module['admin_menu'] as $title => $url): ?>
+                <li><?= CHtml::link($title, $url) ?></li>
+            <? endforeach ?>
+            </ul>
+        </div>
+    </div>
+<? endforeach ?>
+</div>
+
+<?php return true; ?>
 
     <h3><? echo t($module['name']); ?></h3>
     <ul class="toggle">
@@ -59,5 +124,5 @@
             </li>
         <? endforeach ?>
     </ul>
-<? endforeach ?>
+<?// endforeach ?>
 </div>

@@ -3,6 +3,7 @@ class DocsModule extends WebModule
 {
     public static $active = true;
 
+    public $icon = 'leaf';
 
     public function getName()
     {
