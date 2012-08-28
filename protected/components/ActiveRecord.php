@@ -260,17 +260,6 @@ abstract class ActiveRecord extends CActiveRecord
         return $result;
     }
 
-
-    public function authObject()
-    {
-        $object_ids = AuthObject::model()->getObjectsIds(get_class($this), Yii::app()->user->role);
-
-        $criteria = $this->getDbCriteria();
-        $criteria->addInCondition('id', $object_ids);
-        return $this;
-    }
-
-
     /**
      * @param CModelEvent $event
      */
@@ -317,19 +306,6 @@ abstract class ActiveRecord extends CActiveRecord
     public function onAfterGridInitColumns($event)
     {
         $this->raiseEvent('onAfterGridInitColumns', $event);
-    }
-
-
-    public function getErrorsArray()
-    {
-        $array = array();
-
-        foreach ($this->errors as $attr => $errors)
-        {
-            $array = array_merge($array, $errors);
-        }
-
-        return $array;
     }
 
 

@@ -1,19 +1,22 @@
 <?
 class ContentModule extends WebModule
 {
-    public static function name()
+
+    public $icon = 'file';
+
+    public function getName()
     {
         return 'Контент';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Свободно редактируемые страницы, контентные блоки, меню сайта';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -29,7 +32,7 @@ class ContentModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
@@ -42,7 +45,7 @@ class ContentModule extends WebModule
     }
 
 
-    public static function routes()
+    public function routes()
     {
         $routes = array(
             '/'                          => 'content/page/index',

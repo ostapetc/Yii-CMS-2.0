@@ -3,20 +3,21 @@ class CodegenModule extends WebModule
 {
     public static $active = true;
 
+    public $icon = 'fire';
 
-    public static function name()
+    public function getName()
     {
         return 'Генератор кода';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Генератор кода';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -32,7 +33,7 @@ class CodegenModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             'Создать модуль' => Yii::app()->createUrl('/codegen/moduleAdmin/create'),

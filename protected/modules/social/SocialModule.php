@@ -4,20 +4,21 @@ class SocialModule extends WebModule
 {
 	public static $active = true;
 
+    public $icon = 'user';
 
-    public static function name()
+    public function getName()
     {
         return '';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return '';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '0.0';
     }
@@ -31,14 +32,14 @@ class SocialModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
         );
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array(
         );

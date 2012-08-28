@@ -12,20 +12,22 @@ class UsersModule extends WebModule
 
     public static $base_module = true;
 
+//    public $icon = ;
 
-    public static function name()
+
+    public function getName()
     {
         return 'Пользователи';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Пользователи, права доступа';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -40,7 +42,7 @@ class UsersModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             'Все пользователи '     => '/users/userAdmin/manage',
@@ -49,7 +51,7 @@ class UsersModule extends WebModule
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array(
             '/admin/login/*'             => 'users/userAdmin/login',

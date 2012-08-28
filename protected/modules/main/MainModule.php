@@ -4,14 +4,15 @@ class MainModule extends WebModule
 {
     public static $base_module = true;
 
+    public $icon = 'flag';
 
-    public static function description()
+    public function getDescription()
     {
         return 'Главный модуль';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -83,7 +84,7 @@ class MainModule extends WebModule
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array(
             'off'        => 'main/main/off',

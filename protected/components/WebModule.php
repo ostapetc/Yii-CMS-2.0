@@ -8,6 +8,7 @@ abstract class WebModule extends CWebModule implements WebModuleInterface
 
     protected $_assetsUrl;
 
+    public $icon = 'folder-open';
 
     public function assetsUrl()
     {
@@ -20,7 +21,7 @@ abstract class WebModule extends CWebModule implements WebModuleInterface
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array();
     }

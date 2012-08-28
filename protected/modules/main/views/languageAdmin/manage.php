@@ -1,8 +1,6 @@
 <?
 $this->page_title = 'Управление';
 
-$config = AppManager::getConfig();
-
 $this->widget('AdminGridView', array(
 	'id' => 'language-grid',
 	'dataProvider' => $model->search(),
@@ -16,8 +14,7 @@ $this->widget('AdminGridView', array(
             'buttons'  => array(
                 'delete' => array(
                     'visible' => function($i, $data) {
-                        $config = AppManager::getConfig();
-                        return $config["language"] != $data->id;
+                        return Yii::app()->language != $data->id;
                     }
                 )
             )

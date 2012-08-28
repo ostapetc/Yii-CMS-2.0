@@ -10,12 +10,10 @@ $elements = array(
     'message' => array('type' => 'textarea')
 );
 
-$config = AppManager::getConfig();
-
 $languages = Language::getList();
 foreach ($languages as $id => $language)
 {
-    if ($config['language'] == $id)
+    if (Yii::app()->language == $id)
     {
         continue;
     }

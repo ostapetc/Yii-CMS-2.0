@@ -4,19 +4,19 @@ class InstallModule extends WebModule
 {
     public static $base_module = true;
 
-    public static function description()
+    public function getDescription()
     {
         return 'Модуль установки';
     }
 
 
-    public static function version()
+    public function getVversion()
     {
         return '0.0.1';
     }
 
 
-    public static function name()
+    public function getName()
     {
         return 'Установочный';
     }
@@ -29,7 +29,7 @@ class InstallModule extends WebModule
         ));
     }
 
-    public static function routes()
+    public function routes()
     {
         return array(
             '/install' => 'install/install/index',

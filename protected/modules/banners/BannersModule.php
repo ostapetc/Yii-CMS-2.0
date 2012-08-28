@@ -3,21 +3,22 @@
 class BannersModule extends WebModule
 {
     public static $active = true;
+    public $icon = 'th-large';
 
 
-    public static function name()
+    public function getName()
     {
         return 'Баннеры';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'баннеры';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -50,7 +51,7 @@ class BannersModule extends WebModule
     }
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             'Баннеры (горизонт.)'   => '/banners/bannerAdmin/manage/is_big/1',
@@ -59,6 +60,8 @@ class BannersModule extends WebModule
             'Добавить (вертикаль.)' => '/banners/bannerAdmin/create/is_big/0',
         );
     }
+
+
 
 
 }

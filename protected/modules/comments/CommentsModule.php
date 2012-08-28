@@ -4,20 +4,21 @@ class CommentsModule extends WebModule
 {
 	public static $active = true;
 
+    public $icon = 'comment';
 
-    public static function name()
+    public function getName()
     {
         return 'Комментарии';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Комментарии';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -32,14 +33,14 @@ class CommentsModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
         );
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array(
         );

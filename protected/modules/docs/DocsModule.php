@@ -3,20 +3,21 @@ class DocsModule extends WebModule
 {
     public static $active = true;
 
+    public $icon = 'leaf';
 
-    public static function name()
+    public function getName()
     {
         return 'Документациякода';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Документация';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -30,7 +31,7 @@ class DocsModule extends WebModule
 		));
 	}
 
-    public static function routes()
+    public function routes()
     {
         return array(
             '/docs/module/<module:.*>/<view:.*>' => '/docs/docs/module',
@@ -41,7 +42,7 @@ class DocsModule extends WebModule
     }
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
         );

@@ -68,15 +68,6 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    public function afterAction($action)
-    {
-        if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
-        {
-            MainModule::saveSiteAction();
-        }
-    }
-
-
     public function getModelClass()
     {
         return ucfirst(str_replace('Admin', '', $this->id));

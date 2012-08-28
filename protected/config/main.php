@@ -11,7 +11,6 @@ foreach ($modules_dirs as $module)
 
     $modules[] = $module;
 }
-unset($modules[9]);
 return array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',

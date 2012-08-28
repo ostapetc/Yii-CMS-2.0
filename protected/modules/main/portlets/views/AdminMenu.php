@@ -1,6 +1,10 @@
 <style type="text/css">
+    body{
+        overflow-y: scroll;
+    }
     .acc-group{
         margin: 0;
+        border: none;
     }
     .accordion-head{
         text-shadow: 1px 1px 0 #EFEFEF;
@@ -16,12 +20,16 @@
         background: #CFCFCF;
         text-decoration: none;
     }
+    .accordion-head a i{
+        margin: 0;
+    }
+
     .accordion-body {
         background: #FAFAFA;
         border-top: 1px solid #CCC;
     }
     .accordion-body ul li{
-        margin: 0 2% 0 10%;
+        margin: 0 2% 0 14%;
     }
     .accordion-body li a{
         display: block;
@@ -41,13 +49,15 @@
     	continue;
     }
 //    dump($modules);
-
 //    Yii::app()->controller->widget('Boot');
     ?>
 
-    <div class="acc-group">
+    <div class="acc-group accordion-group">
         <div class="accordion-head">
-            <a href="#" data-toggle="collapse" data-target="#menu_module_<?= $module['dir'] ?>"><?= $module['name'] ?></a>
+            <a href="#menu_module_<?= $module['dir'] ?>" data-toggle="collapse" data-parent="#admin_menu">
+                <i class="icon-<?= $module['icon'] ?>"></i>
+                <?= $module['name'] ?>
+            </a>
         </div>
         <div id="menu_module_<?= $module['dir'] ?>" class="collapse accordion-body">
             <ul>

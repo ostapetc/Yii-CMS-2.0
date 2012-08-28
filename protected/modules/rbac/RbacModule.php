@@ -4,20 +4,21 @@ class RbacModule extends WebModule
 {	
 	public static $active = true;
 
+    public $icon = 'eye-open';
 
-    public static function name()
+    public function getName()
     {
         return 'Контроль доступа';
     }
 
 
-    public static function description()
+    public function getDescription()
     {
         return 'Система контроля доступа на основе ролей';
     }
 
 
-    public static function version()
+    public function getVersion()
     {
         return '1.0';
     }
@@ -33,7 +34,7 @@ class RbacModule extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             'Роли'              => '/rbac/RoleAdmin/manage',

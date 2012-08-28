@@ -1,6 +1,5 @@
 <?
 return array(
-    'inputElementClass' => 'AdminFormInputElement',
     'activeForm' => array(
         'id' => 'step1',
     ),
