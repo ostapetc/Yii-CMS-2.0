@@ -17,7 +17,7 @@ class PageController extends Controller
     }
 
 
-    public function topMenuItems()
+    public function topSubMenuItems()
     {
         return array(
             array(

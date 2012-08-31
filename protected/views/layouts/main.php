@@ -60,13 +60,13 @@
 
                 <div class="nav-collapse">
                     <? $this->widget('TopMenu'); ?>
-<!--                    --><?// $this->widget('TopRightMenu'); ?>
+                    <? $this->widget('TopRightMenu'); ?>
                 </div>
             </div>
         </div>
 
         <div class="subnav">
-            <? //$this->widget('TopSubMenu'); ?>
+            <? $this->widget('TopSubMenu'); ?>
         </div>
 
         <br clear="all" />
@@ -76,7 +76,7 @@
         <div class="row-fluid">
             <div class="span8 well">
                 <? if ($this->page_title): ?>
-                <h1><?= $this->page_title ?></h1>
+                    <h1><?= $this->page_title ?></h1>
                 <? endif ?>
 
                 <?= $content ?>
