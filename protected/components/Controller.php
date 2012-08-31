@@ -28,6 +28,7 @@ abstract class Controller extends CController implements ControllerInterface
     public function filters()
     {
         return array(
+            array('application.components.filters.RbacFilter'),
             array('application.components.filters.LanguageFilter'),
             array('application.components.filters.SiteEnableFilter'),
             array('application.components.filters.HttpsFilter'),
@@ -58,6 +59,35 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
+    public function topMenuItems()
+    {
+        return array(
+            array(
+                'label' => t('Страницы'),
+                'url'   => array('content/page/index')
+            ),
+            array(
+                'label' => t('Разделы'),
+                'url'   => array('content/pageSection/index')
+            ),
+            array(
+                'label' => t('Люди'),
+                'url'   => ''
+            ),
+            array(
+                'label' => t('Активность'),
+                'url'   => ''
+            ),
+        );
+    }
+
+
+    public function topSubMenuItems()
+    {
+        return array();
+    }
+
+
     public function beforeAction($action)
     {
         $action_name = lcfirst($action->id);
@@ -65,6 +95,15 @@ abstract class Controller extends CController implements ControllerInterface
         $this->setTitle($action_name);
 
         return true;
+    }
+
+
+    public function afterAction($action)
+    {
+        if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
+        {
+            MainModule::saveSiteAction();
+        }
     }
 
 
@@ -93,12 +132,11 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    protected function forbidden($auth_item = null)
+    public function forbidden($msg = null)
     {
-        $msg = t('Запрещено!');
-        if (YII_DEBUG && $auth_item)
+        if (!$msg)
         {
-            $msg.= ' AuthItem : ' .$auth_item;
+            $msg = t('Запрещено!');
         }
     
         throw new CHttpException(403, $msg);
