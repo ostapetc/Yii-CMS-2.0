@@ -2,6 +2,7 @@
 
 class LanguagesBehavior extends ActiveRecordBehavior
 {
+    public function setInfo(){}
 
     private function defineLanguage()
     {

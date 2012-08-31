@@ -1,5 +1,4 @@
 <?
-
 class Page extends ActiveRecord
 {
     const PAGE_SIZE = 20;
