@@ -1,0 +1,24 @@
+.profile-head img {
+    float: left;
+    margin-right: 10px;
+}
+
+.profile-head h1 {
+    /*border: 1px solid red;*/
+    padding-top: 8px !important;
+    float: left !important;
+    font-size: 48px;
+    color: gray !important;
+}
+
+.profile-head .label {
+    float: right;
+    font-size: 15px !important;
+    padding: 5px;
+    margin-top: 8px !important;
+}
+
+.update-link {
+    text-decoration: underline;
+    margin-bottom: 100px !important;
+}
