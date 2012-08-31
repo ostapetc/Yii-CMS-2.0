@@ -15,7 +15,7 @@ class CommandExecutor extends CApplicationComponent
         {
             $this->addCommands($id.'.commands');
         }
-        $this->runner->commands['migrate'] = Yii::getPathOfAlias('application.commands.ExtendMigrateCommand').'.php';
+        $this->runner->commands['migrate'] = Yii::getPathOfAlias('ext.migrate.EMigrateCommand').'.php';
 
         parent::init();
     }
