@@ -51,7 +51,7 @@ class Generator extends CComponent
         {
             $result[$prop] = $this->populateProperty($model,$prop);
         }
-        $dockBlock = $this->getDockBlock($result);
+        $docBlock = $this->getDockBlock($result);
         $file = $fileInfo->getFileName().'/'.$fileInfo->getFileName();
         $content = file_get_contents($file);
         $fileContent = substr($content, strpos($content, 'class '));
@@ -125,8 +125,8 @@ class Generator extends CComponent
 
     public function getDockBlock($props)
     {
-        $dockBlock = "/** Autogeneratable \n";
-        $dockBlock .= " * \n";
+        $docBlock = "/** Autogeneratable \n";
+        $docBlock .= " * \n";
 
         foreach ($props as $prop => $data)
         {
@@ -147,10 +147,10 @@ class Generator extends CComponent
             }
             if ($propertyType)
             {
-                $dockBlock .= " * @$propertyType {$data['type']} $name {$data['comment']} \n";
+                $docBlock .= " * @$propertyType {$data['type']} $name {$data['comment']} \n";
             }
         }
-        $dockBlock .= " */\n";
-        return $dockBlock;
+        $docBlock .= " */\n";
+        return $docBlock;
     }
 }
