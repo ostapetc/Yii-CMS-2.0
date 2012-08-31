@@ -28,8 +28,8 @@
     <br/>
     <? foreach ($comments as $comment): ?>
         <div class="s-comment">
-            <?= $comment->user->photo_link ?>
-            <?= $comment->user->link ?> →
+<!--            --><?//= $comment->user->photo_link ?>
+<!--            --><?//= $comment->user->link ?><!-- →-->
             <?= CHtml::link(Yii::app()->text->cut($comment->text, 130), "/", array('class' => 'l-comment')); ?>
         </div>
         <br clear="all" />
