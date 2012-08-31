@@ -4,28 +4,7 @@ class UserController extends Controller
 {
     const ERROR_PASSWORD_RECOVER_AUTH = 'Вы не можете восстановить пароль будучи авторизованным!';
 
-    public $layout = '//layouts/middle';
-
-
-    public function filters()
-    {
-        return CMap::mergeArray(parent::filters(), array('accessControl'));
-    }
-
-
-    public function accessRules()
-    {
-        return array(
-            array(
-                'deny',
-                'actions' => array(
-                    'ActivateAccountRequest', 'ChangePasswordRequest', 'ActivateAccount', 'Registration',
-                    'ChangePassword', 'Login'
-                ),
-                'users'   => array('@')
-            )
-        );
-    }
+    public $user;
 
 
     public static function actionsTitles()
@@ -40,6 +19,26 @@ class UserController extends Controller
             "activateAccountRequest" => "Запрос на активацию аккаунта",
             "changePassword"         => "Смена пароля",
             "changePasswordRequest"  => "Запрос на смену пароля",
+        );
+    }
+
+
+    public function sidebars()
+    {
+        return array(
+            array(
+                'actions'  => array('view'),
+                'sidebars' => array(
+                    array(
+                        'widget',
+                        'application.modules.users.portlets.UserPageSidebar'
+                    ),
+                    array(
+                        'widget',
+                        'application.modules.users.portlets.OwnerPageSidebar'
+                    )
+                )
+            )
         );
     }
 
@@ -61,7 +60,7 @@ class UserController extends Controller
                 $identity = new UserIdentity($model->email, $model->password);
                 if ($identity->authenticate())
                 {
-                    $this->redirect(isset($_GET['redirect']) ? $_GET['redirect'] : '/');
+                    $this->redirect((isset($_GET['redirect']) && !empty($_GET['redirect'])) ? $_GET['redirect'] : '/');
                 }
                 else
                 {
@@ -113,7 +112,7 @@ class UserController extends Controller
             $user->attributes = $_POST['User'];
             if ($user->validate())
             {
-                $user->password = UserIdentity::crypt($user->password);
+                $user->password = md5($user->password);
                 $user->generateActivateCode();
                 $user->activate_date = new CDbExpression('NOW()');
 
@@ -302,7 +301,7 @@ class UserController extends Controller
                     {
                         $user->password_recover_code = null;
                         $user->password_recover_date = null;
-                        $user->password              = UserIdentity::crypt($_POST['User']['password']);
+                        $user->password              = md5($_POST['User']['password']);
                         $user->save();
 
                         Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
@@ -326,10 +325,15 @@ class UserController extends Controller
 
     public function actionView($id)
     {
-        $this->layout = '//layouts/main';
-        $user = $this->loadModel($id);
-        $form = new Form('FileManager.AlbumForm', $user->getNewAttachedModel('FileAlbum'));
-        $this->render('view', array('model' => $user, 'form' => $form));
+        $this->page_title = '';
+
+        $model = $this->loadModel($id);
+
+        $this->user = $model;
+
+        $this->render('view', array(
+            'model' => $model
+        ));
     }
 
     public function actionEdit($userId)

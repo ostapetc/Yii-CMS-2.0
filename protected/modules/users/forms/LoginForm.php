@@ -1,25 +1,32 @@
 <?
-$form = include "UserForm.php";
-$form['activeForm'] = array(
-    'id'                   => 'login-form',
-    'enableAjaxValidation' => true,
-    'clientOptions'        => array(
-        'validateOnSubmit' => true,
-        'validateOnChange' => true
-    )
-);
-
-$form['elements'] = array(
-    'email'    => array(
-        'type' => 'text',
-        'id'   => 'login_email_input'
+return array(
+    'activeForm' => array(
+        'id'                   => 'login-form',
+        'enableAjaxValidation' => true,
+        'clientOptions'        => array(
+            'validateOnSubmit' => true,
+            'validateOnChange' => true
+        )
     ),
-    'password' => array(
-        'type' => 'password',
-        'id'   => 'login_password_input'
+    'elements' => array(
+        'email' => array(
+            'type' => 'text',
+            'id'   => 'login_email_input'
+        ),
+        'password' => array(
+            'type' => 'password',
+            'id'   => 'login_password_input'
+        ),
+        'remember_me' => array(
+            'type' => 'checkbox'
+        )
+    ),
+    'buttons' => array(
+        'submit' => array(
+            'type'  => 'submit',
+            'value' => t('Войти')
+        )
     )
 );
 
-$form['buttons']['submit']['value'] = t('Войти');
 
-return $form;

@@ -1,9 +1,9 @@
 <?
-class m120701_005441_users_create extends DbMigration
+class m120701_005441_users_create extends EDbMigration
 {
-    public function safeUp()
+    public function up()
     {
-        $this->execute("DROP TABLE `users`");
+        $this->execute("DROP TABLE IF EXISTS `users`");
 
         $this->execute("
             CREATE TABLE `users` (
@@ -28,7 +28,7 @@ class m120701_005441_users_create extends DbMigration
     }
 
 
-    public function safeDown()
+    public function down()
     {
         return false;
     }
