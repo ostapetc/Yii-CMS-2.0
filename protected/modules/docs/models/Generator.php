@@ -8,7 +8,7 @@ class Generator extends CComponent
         foreach (Yii::app()->getModules() as $id => $data)
         {
             $modelsDir = Yii::app()->getModule($id)->getBasePath() . '/models';
-            if (!is_dir($modelsDir))
+            if (!is_dir($modelsDir) || $id == 'docs')
             {
                 continue;
             }
@@ -52,9 +52,9 @@ class Generator extends CComponent
             $result[$prop] = $this->populateProperty($model,$prop);
         }
         $docBlock = $this->getDockBlock($result);
-        $file = $fileInfo->getFileName().'/'.$fileInfo->getFileName();
+        $file = $fileInfo->getPath().'/'.$fileInfo->getFileName();
         $content = file_get_contents($file);
-        $fileContent = substr($content, strpos($content, 'class '));
+        $fileContent = substr($content, strpos($content, "class $class"));
         file_put_contents($file,'<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
     }
 
@@ -147,7 +147,7 @@ class Generator extends CComponent
             }
             if ($propertyType)
             {
-                $docBlock .= " * @$propertyType {$data['type']} $name {$data['comment']} \n";
+                $docBlock .= " * @$propertyType {$data['type']} \$$name {$data['comment']} \n";
             }
         }
         $docBlock .= " */\n";
