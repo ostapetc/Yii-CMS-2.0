@@ -158,9 +158,9 @@ class FileManager extends ActiveRecord
     }
 
 
-    public function save()
+    public function save($runValidation=true,$attributes=null)
     {
-        if (!parent::save())
+        if (!parent::save($runValidation=true,$attributes=null))
         {
             $this->error = Yii::t('FileManagerModule.main', 'Не удалось сохранить изменения');
             return false;
