@@ -12,6 +12,27 @@ class PageController extends Controller
             'index'        => 'Список страниц',
             'userPages'    => 'Страницы пользователя',
             'sectionPages' => 'Страницы раздела',
+            'tagPages'     => 'Страница тега'
+        );
+    }
+
+
+    public function topMenuItems()
+    {
+        return array(
+            array(
+                'label' => 'Все',
+                'url'   => array('content/page/index')
+            ),
+            array(
+                'label' => 'Лучшие',
+                'url'   => array('content/page/top')
+            ),
+            array(
+                'label'   => Yii::app()->user->isGuest ?: t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
+                'url'     => array('/page/user/' . Yii::app()->user->id),
+                'visible' => !Yii::app()->user->isGuest
+            )
         );
     }
 
@@ -22,21 +43,44 @@ class PageController extends Controller
             array(
                 'actions'  => array('create', 'update'),
                 'sidebars' => array(
-                    'widget'  => 'application.modules.content.portlets.SectionCreateSidebar',
-                    'partial' => 'application.modules.content.views.page._sidebarFormNotices',
+                    array(
+                        'widget',
+                        'application.modules.content.portlets.SectionCreateSidebar',
+                    ),
+                    array(
+                        'partial',
+                        'application.modules.content.views.page._sidebarFormNotices'
+                    )
                 )
             ),
             array(
                 'actions'  => array('index'),
                 'sidebars' => array(
-//                    'widget' => 'application.modules.content.portlets.NavigatorSidebar',
-//                    'widget' => 'application.modules.comments.portlets.CommentsSidebar'
+                    array(
+                        'widget',
+                        'application.modules.content.portlets.PageSectionsSidebar'
+                    ),
+                    array(
+                        'widget',
+                        'application.modules.tags.portlets.TagsSidebar'
+                    ),
+                    array(
+                        'widget',
+                        'application.modules.comments.portlets.CommentsSidebar',
+                    ),
+                    array(
+                        'widget',
+                        'application.modules.content.portlets.NavigatorSidebar',
+                    ),
                 )
             ),
             array(
                 'actions'  => array('userPages'),
                 'sidebars' => array(
-                    'widget' => 'application.modules.content.portlets.userPagesSidebar'
+                    array(
+                        'widget',
+                        'application.modules.content.portlets.userPagesSidebar'
+                    )
                 )
             ),
         );
@@ -103,6 +147,8 @@ class PageController extends Controller
 
     public function actionIndex()
     {
+        $this->page_title = '';
+
         $data_provider = new CActiveDataProvider('Page', array(
             'criteria' => array(
                 'condition' => "status = '" . Page::STATUS_PUBLISHED . "'",
@@ -128,23 +174,63 @@ class PageController extends Controller
             $this->pageNotFound();
         }
 
+        $this->page_title = $section->name;
+
+        $section_rel_table = PageSectionRel::model()->tableName();
+
         $criteria = new CDbCriteria();
-        $criteria->compare('t.status', Page::STATUS_PUBLISHED);
-        $criteria->order = 't.date_create DESC';
-        $criteria->with  = array('tags', 'sections_rels');
-        $criteria->together = true;
-
-        $criteria->compare('sections_rels.sections_id', $section->id);
-
+//        $criteria->compare('t.status', Page::STATUS_PUBLISHED);
+//        $criteria->with  = array('tags', 'sections');
+//        $criteria->order = 't.date_create DESC';
+//        $criteria->join  = "INNER JOIN {$section_rel_table}
+//                                ON  {$section_rel_table}.section_id = {$section_id}";
+//
         $data_provider = new CActiveDataProvider('Page', array(
             'criteria'   => $criteria,
             'pagination' => array(
               'pageSize' => '10'
             )
         ));
+        //count($data_provider->getTotalItemCount()); die;
+        $this->render('index', array(
+            'data_provider' => $data_provider,
+            'section'       => $section
+        ));
+    }
+
+
+    public function actionTagPages($tag_name)
+    {
+        $tag = Tag::model()->findByAttributes(array('name' => $tag_name));
+        if (!$tag)
+        {
+            $this->pageNotFound();
+        }
+
+        $this->page_title = t('Страницы с тегом') . ' ' . $tag->name;
+
+        $tag_rel_table = TagRel::model()->tableName();
+
+        $criteria = new CDbCriteria();
+        $criteria->compare('t.status', Page::STATUS_PUBLISHED);
+        $criteria->with = array('tags', 'sections');
+
+        $criteria->addCondition("t.id IN (
+            SELECT object_id FROM {$tag_rel_table}
+                WHERE tag_id = {$tag->id} AND
+                       model_id  = 'Page'
+        )");
+
+        $data_provider = new CActiveDataProvider('Page', array(
+            'criteria'   => $criteria,
+            'pagination' => array(
+                'pageSize' => '10'
+            )
+        ));
 
         $this->render('index', array(
             'data_provider' => $data_provider,
+            'tag'           => $tag
         ));
     }
 

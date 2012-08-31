@@ -91,7 +91,7 @@
                 $icon = $model . '_' . $action . '.png';
 
                 $assets_url = Yii::app()->getModule($url_parts[1])->assetsUrl();
-                //echo $_SERVER['DOCUMENT_ROOT'] . $assets_url . '/actions_icons/' . $icon . "<br/>";
+
                 if (file_exists($_SERVER['DOCUMENT_ROOT'] . $assets_url . '/img/actions_icons/' . $icon))
                 {
                     $icon_url = $assets_url . '/img/actions_icons/' . $icon;

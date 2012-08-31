@@ -1,6 +1,7 @@
-<? foreach ($sidebars as $type => $path): ?>
-
+<? foreach ($sidebars as $sidebar): ?>
     <?
+    list($type, $path) = $sidebar;
+
     try
     {
         if ($type == 'partial')
