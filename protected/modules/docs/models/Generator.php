@@ -1,10 +1,13 @@
 <?php
+require 'DocBlockParser.php';
+
 class Generator extends CComponent
 {
+    public $baseClass = 'CModel';
+
 
     public function generate()
     {
-        //        $dock_block = new Zend_CodeGenerator_Php_Docblock();
         foreach (Yii::app()->getModules() as $id => $data)
         {
             $modelsDir = Yii::app()->getModule($id)->getBasePath() . '/models';
@@ -26,46 +29,49 @@ class Generator extends CComponent
         }
     }
 
+
     public function addDocBlockFile($fileInfo)
     {
         try
         {
             $class = pathinfo($fileInfo->getFilename(), PATHINFO_FILENAME);
             $model = new $class;
-            if (!$model instanceof CModel)
+            if (!$model instanceof $this->baseClass)
             {
                 return false;
             }
-        }
-        catch (Exception $e)
+        } catch (Exception $e)
         {
             return false;
         }
 
         $attributes = $this->getObjectAttributes($model);
-        $setters = $this->getSettableProperties($model);
-        $events = $this->getEvents($model);
-        $props = array_keys(array_merge($attributes, $setters, $events));
-        $result = array();
+        $setters    = $this->getSettableProperties($model);
+        $events     = $this->getEvents($model);
+        $props      = array_keys(array_merge($attributes, $setters, $events));
+        $result     = array();
         foreach ($props as $prop)
         {
-            $result[$prop] = $this->populateProperty($model,$prop);
+            $result[$prop] = $this->populateProperty($model, $prop);
         }
-        $docBlock = $this->getDockBlock($result);
-        $file = $fileInfo->getPath().'/'.$fileInfo->getFileName();
-        $content = file_get_contents($file);
+        $parser = DocBlockParser::parseClass($class);
+        $docBlock    = $this->getDockBlock($parser, $result);
+        $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
+        $content     = file_get_contents($file);
         $fileContent = substr($content, strpos($content, "class $class"));
-        file_put_contents($file,'<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
+        file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
     }
+
 
     public function getObjectAttributes($object)
     {
         return $object->getAttributes();
     }
 
+
     public function getSettableProperties($object)
     {
-        $setters    = array();
+        $setters = array();
         foreach (get_class_methods($object) as $method)
         {
             if (strncasecmp($method, 'set', 3) === 0)
@@ -84,6 +90,7 @@ class Generator extends CComponent
         return $setters;
     }
 
+
     public function getEvents($object)
     {
         $events = array();
@@ -97,13 +104,14 @@ class Generator extends CComponent
         return $events;
     }
 
+
     public function populateProperty($object, $prop)
     {
         $res = array(
             'settable' => property_exists($object, $prop) || $object->canSetProperty($prop),
             'gettable' => property_exists($object, $prop) || $object->canGetProperty($prop),
-            'type' => null,
-            'comment' => null
+            'type'     => null,
+            'comment'  => null
         );
 
         if (method_exists($object, 'behaviors'))
@@ -111,11 +119,11 @@ class Generator extends CComponent
             foreach ($object->behaviors() as $id => $data)
             {
                 $data = $this->populateProperty($object->asa($id), $prop);
-                $res = array(
+                $res  = array(
                     'settable' => $res['settable'] || $data['settable'],
                     'gettable' => $res['gettable'] || $data['gettable'],
-                    'type' => $res['type'] ? $res['type'] : $data['type'],
-                    'comment' => $res['comment'] ? $res['comment'] : $data['comment'],
+                    'type'     => $res['type'] ? $res['type'] : $data['type'],
+                    'comment'  => $res['comment'] ? $res['comment'] : $data['comment'],
                 );
             }
         }
@@ -123,14 +131,29 @@ class Generator extends CComponent
     }
 
 
-    public function getDockBlock($props)
+    public function getDockBlock(DocBlockParser $parser, $props)
     {
-        $docBlock = "/** Autogeneratable \n";
-        $docBlock .= " * \n";
+        $docBlock = "/** \n";
+        if ($parser->shortDescription)
+        {
+            foreach (explode("\n", $parser->shortDescription) as $line)
+            {
+                $docBlock .= " * $line\n";
+            }
+            $docBlock .= " * \n";
+        }
+        if ($parser->longDescription)
+        {
+            foreach (explode("\n", $parser->longDescription) as $line)
+            {
+                $docBlock .= " * $line\n";
+            }
+            $docBlock .= " * \n";
+        }
 
         foreach ($props as $prop => $data)
         {
-            $name = Yii::app()->text->camelCaseToUnderscore($prop);
+            $name         = Yii::app()->text->camelCaseToUnderscore($prop);
             $propertyType = false;
 
             if ($data['settable'] && $data['gettable'])
@@ -147,9 +170,22 @@ class Generator extends CComponent
             }
             if ($propertyType)
             {
-                $docBlock .= " * @$propertyType {$data['type']} \$$name {$data['comment']} \n";
+                $comment = $data['comment'] ? $data['comment'] : $parser->properties[$name]['comment'];
+                $type = $data['type'] ? $data['type'] : $parser->properties[$name]['type'];
+                $docBlock .= " * @$propertyType $type \$$name $comment\n";
             }
         }
+        $docBlock .= " * \n";
+
+        if ($parser->authors)
+        {
+            foreach (explode("\n", $parser->authors) as $line)
+            {
+                $docBlock .= " * @author $line\n";
+            }
+            $docBlock .= " * \n";
+        }
+
         $docBlock .= " */\n";
         return $docBlock;
     }
