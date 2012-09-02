@@ -5,7 +5,7 @@ require_once 'ModelInModuleFilesIterator.php';
 
 class Generator extends CComponent
 {
-    public $baseClass = 'CModel';
+    public $baseClass = 'CComponent';
     public $toUndercore = false;
     public $readWriteDifferentiate = false; //phpstorm no support @property-write and @property-read specification
 
@@ -15,16 +15,30 @@ class Generator extends CComponent
     public $typeVerticalAlignment = true;
     public $parameterVerticalAlignment = true;
 
-    public function getFilesIterator()
+
+    protected function getFilesIterator()
     {
         return new $this->filesIterator;
     }
 
 
-    public function getPropertyIterator($object)
+    protected function getPropertyIterator($object)
     {
         $class = $this->propertyIterator;
         return new $class($object);
+    }
+
+
+    /**
+     * Proxy method for external component
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    protected function camelCaseToUnderscore($str)
+    {
+        return Yii::app()->text->camelCaseToUnderscore($str);
     }
 
 
@@ -134,7 +148,7 @@ class Generator extends CComponent
         //properties
         foreach ($props as $prop => $data)
         {
-            $parameter = $this->toUndercore ? Yii::app()->text->camelCaseToUnderscore($prop) : $prop;
+            $parameter = $this->toUndercore ? $this->camelCaseToUnderscore($prop) : $prop;
 
             //not use @property-write/@property-read
             if (!$this->readWriteDifferentiate)
@@ -167,6 +181,7 @@ class Generator extends CComponent
         return $docBlock;
     }
 
+
     public function getOneLine(Iterator $props, $parameter, $mode = null)
     {
         $data = $props[$parameter];
@@ -175,8 +190,8 @@ class Generator extends CComponent
         $typeKey      = $mode ? $mode . "Type" : 'readType';
         $propertyType = $mode ? 'property-' . $mode : "property";
 
-        $comment    = $data[$commentKey] ? $data[$commentKey] : $data['oldComment'];
-        $type       = $data[$typeKey] ? $data[$typeKey] : $data['oldType'];
+        $comment = $data[$commentKey] ? $data[$commentKey] : $data['oldComment'];
+        $type    = $data[$typeKey] ? $data[$typeKey] : $data['oldType'];
 
 
         if ($this->typeVerticalAlignment)

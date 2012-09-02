@@ -50,6 +50,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
         while ($class = get_parent_class($class))
         {
             $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
+            $props       = array_diff($props, $parentProps);
             array_map(function ($item)
             {
                 return strtr($item, array(
@@ -211,6 +212,11 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
+    /**
+     * Max of 'type' fields
+     *
+     * @return int
+     */
     public function getMaxLenOfType()
     {
         if ($this->_maxLenOfType === null)
@@ -223,13 +229,19 @@ class YiiComponentPropertyIterator extends ArrayIterator
                 $max = $max < strlen($item['writeType']) ? strlen($item['writeType']) : $max;
                 $max = $max < strlen($item['readType']) ? strlen($item['readType']) : $max;
             }
-            $max = $max < strlen($item['oldType']) ? strlen($item['oldType']) : $max;
+            $max                 = $max < strlen($item['oldType']) ? strlen($item['oldType']) : $max;
             $this->_maxLenOfType = $max;
         }
 
         return $this->_maxLenOfType;
     }
 
+
+    /**
+     * Max of 'parameter' fields
+     *
+     * @return int
+     */
     public function getMaxLenOfParameter()
     {
         if ($this->_maxLenOfParameter === null)

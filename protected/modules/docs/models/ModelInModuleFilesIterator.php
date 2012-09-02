@@ -11,7 +11,9 @@ class ModelInModuleFilesIterator extends AppendIterator
             {
                 continue;
             }
-            $this->append(new RecursiveDirectoryIterator($modelsDir, FilesystemIterator::SKIP_DOTS));
+
+            $flags = FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS;
+            $this->append(new RecursiveDirectoryIterator($modelsDir, $flags));
         }
     }
 }
