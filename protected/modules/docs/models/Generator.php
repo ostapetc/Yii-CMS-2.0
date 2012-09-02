@@ -118,7 +118,7 @@ class Generator extends CComponent
         {
             if (strncasecmp($method, 'on', 2) === 0)
             {
-                $events[lcfirst(substr($method, 2))] = true;
+                $events[$method] = true;
             }
         }
         return $events;
@@ -187,10 +187,8 @@ class Generator extends CComponent
         if (method_exists($object, 'on' . $prop))
         {
             $parser               = DocBlockParser::parseMethod($object, 'on' . $prop);
-            $info['writeType']    = "callback";
-            $info['readType']     = "CList";
-            $info['writeComment'] = $parser->getShortDescription();
-            $info['readComment']  = 'return list of events';
+            $info['writeType']    = $info['readType'] = "CList";
+            $info['writeComment'] = $info['readComment']  = $parser->getShortDescription();
         }
         return $info;
     }
