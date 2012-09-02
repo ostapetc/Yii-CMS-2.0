@@ -1,26 +1,29 @@
 <?php
 require_once 'DocBlockParser.php';
 require_once 'YiiComponentPropertyIterator.php';
-require_once 'ModelFilesIterator.php';
+require_once 'ModelInModuleFilesIterator.php';
 
 class Generator extends CComponent
 {
     public $baseClass = 'CModel';
     public $toUndercore = false;
 
-    public $filesIterator = 'ModelFilesIterator';
+    public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
+
 
     public function getFilesIterator()
     {
         return new $this->filesIterator;
     }
 
+
     public function getPropertyIterator($object)
     {
         $class = $this->propertyIterator;
         return new $class($object);
     }
+
 
     public function generate()
     {
@@ -36,11 +39,11 @@ class Generator extends CComponent
     }
 
 
-    public function addDocBlockFile($fileInfo)
+    public function getInstanceByFile(SplFileInfo $fileInfo)
     {
         try
         {
-            $class = pathinfo($fileInfo->getFilename(), PATHINFO_FILENAME);
+            $class  = pathinfo($fileInfo->getFilename(), PATHINFO_FILENAME);
             $object = new $class;
             if (!$object instanceof $this->baseClass)
             {
@@ -50,7 +53,21 @@ class Generator extends CComponent
         {
             return false;
         }
+        return array(
+            $class,
+            $object
+        );
+    }
 
+
+    public function addDocBlockFile(SplFileInfo $fileInfo)
+    {
+        $data = $this->getInstanceByFile($fileInfo);
+        if (!$data)
+        {
+            return false;
+        }
+        list($class, $object) = $data;
         $parser   = DocBlockParser::parseClass($class);
         $docBlock = $this->getDockBlock($parser, $this->getPropertyIterator($object));
         dump($docBlock);
@@ -63,6 +80,35 @@ class Generator extends CComponent
 
     public function getDockBlock(DocBlockParser $parser, Iterator $props)
     {
+        $docBlock = $this->getDescription() . $this->getParameters() .$this->getAuthors();
+
+        //add commets and stars :-)
+        $result = "/** \n";
+        foreach (explode("\n", $docBlock) as $line)
+        {
+            $result .= " * " . trim($line) . "\n";
+        }
+        return $result . " */\n";
+    }
+
+
+    protected function getAuthors()
+    {
+        $docBlock = "";
+        //authors
+        if ($parser->authors)
+        {
+            foreach (explode("\n", $parser->authors) as $line)
+            {
+                $docBlock .= "@author $line\n";
+            }
+        }
+        return $docBlock;
+    }
+
+
+    protected function getDescription()
+    {
         $docBlock = "";
         //description
         if ($parser->shortDescription)
@@ -73,7 +119,13 @@ class Generator extends CComponent
         {
             $docBlock .= $parser->longDescription . "\n\n";
         }
+        return $docBlock;
+    }
 
+
+    protected function getParameters()
+    {
+        $docBlock = "";
         //properties
         foreach ($props as $prop => $data)
         {
@@ -98,23 +150,7 @@ class Generator extends CComponent
             }
         }
         $docBlock .= "\n";
-
-        //authors
-        if ($parser->authors)
-        {
-            foreach (explode("\n", $parser->authors) as $line)
-            {
-                $docBlock .= "@author $line\n";
-            }
-        }
-
-        //add commets and stars :-)
-        $result = "/** \n";
-        foreach (explode("\n", $docBlock) as $line)
-        {
-            $result .= " * " . trim($line) . "\n";
-        }
-        return $result . " */\n";
+        return $docBlock;
     }
 
 

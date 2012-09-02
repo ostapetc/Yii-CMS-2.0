@@ -32,7 +32,11 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
     public function getObjectAttributes($object)
     {
-        return $object->getAttributes();
+        if (method_exists($object, 'getAttributes'))
+        {
+            return $object->getAttributes();
+        }
+        return array();
     }
 
     public function getSettersAndGetters($object)

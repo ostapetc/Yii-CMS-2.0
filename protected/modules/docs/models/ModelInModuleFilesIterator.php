@@ -1,5 +1,5 @@
 <?php
-class ModelFilesIterator extends AppendIterator
+class ModelInModuleFilesIterator extends AppendIterator
 {
     public function __construct()
     {
