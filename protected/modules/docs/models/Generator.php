@@ -1,31 +1,30 @@
 <?php
-require 'DocBlockParser.php';
+require_once 'DocBlockParser.php';
+require_once 'YiiComponentPropertyIterator.php';
+require_once 'ModelFilesIterator.php';
 
 class Generator extends CComponent
 {
     public $baseClass = 'CModel';
     public $toUndercore = false;
 
+    public $filesIterator = 'ModelFilesIterator';
+    public $propertyIterator = 'YiiComponentPropertyIterator';
 
-    public function getIterator()
+    public function getFilesIterator()
     {
-        $iterator = new AppendIterator();
-        foreach (Yii::app()->getModules() as $id => $data)
-        {
-            $modelsDir = Yii::app()->getModule($id)->getBasePath() . '/models';
-            if (!is_dir($modelsDir) || $id == 'docs')
-            {
-                continue;
-            }
-            $iterator->append(new RecursiveDirectoryIterator($modelsDir, FilesystemIterator::SKIP_DOTS));
-        }
-        return $iterator;
+        return new $this->filesIterator;
     }
 
+    public function getPropertyIterator($object)
+    {
+        $class = $this->propertyIterator;
+        return new $class($object);
+    }
 
     public function generate()
     {
-        foreach ($this->getIterator() as $fileInfo)
+        foreach ($this->getFilesIterator() as $fileInfo)
         {
             if (!$fileInfo->isFile())
             {
@@ -42,8 +41,8 @@ class Generator extends CComponent
         try
         {
             $class = pathinfo($fileInfo->getFilename(), PATHINFO_FILENAME);
-            $model = new $class;
-            if (!$model instanceof $this->baseClass)
+            $object = new $class;
+            if (!$object instanceof $this->baseClass)
             {
                 return false;
             }
@@ -52,182 +51,17 @@ class Generator extends CComponent
             return false;
         }
 
-        $attributes = $this->getObjectAttributes($model);
-        $setters    = $this->getSettersAndGetters($model);
-        $events     = $this->getEvents($model);
-        $props      = array_keys(array_merge($attributes, $setters, $events));
-        $props      = $this->filter($model, $props);
-        $result     = array();
-        foreach ($props as $prop)
-        {
-            $result[$prop] = $this->populateProperty($model, $prop);
-        }
         $parser   = DocBlockParser::parseClass($class);
-        $docBlock = $this->getDockBlock($parser, $result);
+        $docBlock = $this->getDockBlock($parser, $this->getPropertyIterator($object));
+        dump($docBlock);
         $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
         $content     = file_get_contents($file);
         $fileContent = substr($content, strpos($content, "class $class"));
         file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
     }
 
-    public function filter($class, $props)
-    {
-        while($class = get_parent_class($class))
-        {
-            $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
-            array_map(function($item) {
-                return strtr($item, array('-write'=>'', '-read'=>''));
-            }, $parentProps);
-            $props = array_diff($props, $parentProps);
-        }
-        return $props;
-    }
 
-    public function getObjectAttributes($object)
-    {
-        return $object->getAttributes();
-    }
-
-
-    public function getSettersAndGetters($object)
-    {
-        $props = array();
-        foreach (get_class_methods($object) as $method)
-        {
-            if (strncasecmp($method, 'set', 3) === 0 || strncasecmp($method, 'get', 3) === 0)
-            {
-                $props[lcfirst(substr($method, 3))] = true;
-            }
-        }
-
-        if (method_exists($object, 'behaviors'))
-        {
-            foreach ($object->behaviors() as $id => $data)
-            {
-                $props = array_merge($props, $this->getSettersAndGetters($object->asa($id)));
-            }
-        }
-        return $props;
-    }
-
-
-    public function getEvents($object)
-    {
-        $events = array();
-        foreach (get_class_methods($object) as $method)
-        {
-            if (strncasecmp($method, 'on', 2) === 0)
-            {
-                $events[$method] = true;
-            }
-        }
-        return $events;
-    }
-
-
-    public function isSettable($object, $prop)
-    {
-        $settable = property_exists($object, $prop);
-        if (!$settable && method_exists($object, 'set' . $prop))
-        {
-            $m        = new ReflectionMethod($object, 'set' . $prop);
-            $settable = $m->getNumberOfRequiredParameters() <= 1;
-        }
-        if (!$settable && strncasecmp($prop,'on',2) === 0 && method_exists($object, $prop))
-        {
-            $settable = true;
-        }
-        return $settable;
-    }
-
-
-    public function isGettable($object, $prop)
-    {
-        $gettable = property_exists($object, $prop);
-        if (!$gettable && method_exists($object, 'get' . $prop))
-        {
-            $m        = new ReflectionMethod($object, 'get' . $prop);
-            $gettable = $m->getNumberOfRequiredParameters() == 0;
-        }
-        if (!$gettable && strncasecmp($prop,'on',2) === 0 && method_exists($object, $prop))
-        {
-            $gettable = true;
-        }
-        return $gettable;
-    }
-
-
-    public function getTypeAndComment($object, $prop)
-    {
-        $info = array(
-            'readType'     => false,
-            'writeType'    => false,
-            'readComment'  => false,
-            'writeComment' => false,
-        );
-        if (property_exists($object, $prop))
-        {
-            $data                = DocBlockParser::parseProperty($object, $prop)->var;
-            $info['readType']    = $info['writeType'] = $data['type'];
-            $info['readComment'] = $info['writeComment'] = $data['comment'];
-        }
-        if (method_exists($object, 'set' . $prop))
-        {
-            $data                 = DocBlockParser::parseMethod($object, 'set' . $prop)->params;
-            $first                = array_shift($data); //get first param of setter
-            $info['writeType']    = $first['type'];
-            $info['writeComment'] = $first['comment'];
-        }
-        if (method_exists($object, 'get' . $prop))
-        {
-            $data                = DocBlockParser::parseMethod($object, 'get' . $prop)->return;
-            $info['readType']    = $data['type'];
-            $info['readComment'] = $data['comment'];
-        }
-        if (strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
-        {
-            $parser               = DocBlockParser::parseMethod($object, $prop);
-            $info['writeType']    = $info['readType'] = "CList";
-            $info['writeComment'] = $info['readComment']  = $parser->getShortDescription();
-        }
-        return $info;
-    }
-
-
-    public function populateProperty($object, $prop)
-    {
-        $res = array(
-            'settable'      => $this->isSettable($object, $prop),
-            'gettable'      => $this->isGettable($object, $prop),
-        );
-        $res = CMap::mergeArray($res, $this->getTypeAndComment($object, $prop));
-
-        if (method_exists($object, 'behaviors'))
-        {
-            foreach ($object->behaviors() as $id => $data)
-            {
-                $data = $this->populateProperty($object->asa($id), $prop);
-                $res['settable'] = $res['settable'] || $data['settable'];
-                $res['gettable'] = $res['gettable'] || $data['gettable'];
-                $keys = array(
-                    'writeType',
-                    'readType',
-                    'writeComment',
-                    'readComment'
-                );
-                foreach ($keys as $key)
-                {
-                    $res [$key] =
-                        $res[$key] ? $res[$key] :
-                            $data[$key];
-                }
-            }
-        }
-        return $res;
-    }
-
-
-    public function getDockBlock(DocBlockParser $parser, $props)
+    public function getDockBlock(DocBlockParser $parser, Iterator $props)
     {
         $docBlock = "";
         //description
