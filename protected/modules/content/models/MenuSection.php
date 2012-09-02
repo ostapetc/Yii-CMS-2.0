@@ -170,7 +170,7 @@ class MenuSection extends ActiveRecord
     }
 
 
-    public function optionsTree($id = null, $menu_id, $result = array(), $spaces = 0)
+    public function optionsTree($name = 'name', $id = null, $result = array(), $value = 'id', $spaces = 0, $parent_id = null)
     {
         //        $objects = $this->findAllByAttributes(array(
         //            'menu_id'   => $menu_id
