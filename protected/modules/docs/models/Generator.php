@@ -137,7 +137,7 @@ class Generator extends CComponent
             //not use @property-write/@property-read
             if (!$this->readWriteDifferentiate)
             {
-                $docBlock .= $this->getOneLine($parser, $parameter, $data);
+                $docBlock .= $this->getOneLine($props, $parameter);
                 continue;
             }
 
@@ -147,17 +147,17 @@ class Generator extends CComponent
             $sameDescribe = $data['writeComment'] == $data['readComment'];
             if ($fullAccess && $sameType && $sameDescribe)
             {
-                $docBlock .= $this->getOneLine($parser, $parameter, $data);
+                $docBlock .= $this->getOneLine($props, $parameter);
             }
             else
             {
                 if ($data['settable'])
                 {
-                    $docBlock .= $this->getOneLine($parser, $parameter, $data, 'write');
+                    $docBlock .= $this->getOneLine($props, $parameter, 'write');
                 }
                 if ($data['gettable'])
                 {
-                    $docBlock .= $this->getOneLine($parser, $parameter, $data, 'read');
+                    $docBlock .= $this->getOneLine($props, $parameter, 'read');
                 }
             }
         }
@@ -165,18 +165,26 @@ class Generator extends CComponent
         return $docBlock;
     }
 
-
-    public function getOneLine(DocBlockParser $parser, $parameter, $data, $mode = null)
+    protected function getMaxLenOfType()
     {
+
+    }
+
+    public function getOneLine(Iterator $props, $parameter, $mode = null)
+    {
+        $data = $props[$parameter];
+
         $commentKey   = $mode ? $mode . "Comment" : 'readComment';
         $typeKey      = $mode ? $mode . "Type" : 'readType';
-        $nameKey      = $mode ? $parameter . '-' . $mode : $parameter;
         $propertyType = $mode ? 'property-' . $mode : "property";
 
-        $oldComment = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey]['comment'] : '';
-        $comment    = $data[$commentKey] ? $data[$commentKey] : $oldComment;
-        $oldType    = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey]['type'] : '';
-        $type       = $data[$typeKey] ? $data[$typeKey] : $oldType;
+        $comment    = $data[$commentKey] ? $data[$commentKey] : $data['oldComment'];
+        $type       = $data[$typeKey] ? $data[$typeKey] : $data['oldType'];
+
+        if (strlen($type) < $props->getMaxLenOfType())
+        {
+            $type = $type . str_repeat(' ', $props->getMaxLenOfType() - strlen($type));
+        }
         return "@$propertyType $type \$$parameter $comment\n";
     }
 }

@@ -1,19 +1,31 @@
 <?php
 class YiiComponentPropertyIterator extends ArrayIterator
 {
+    /**
+     * Need for automatical align of strings
+     *
+     * @var
+     */
+    protected $_maxLenOfType;
+
+
     public function __construct(CComponent $object)
     {
         $attributes = $this->getObjectAttributes($object);
-        $setters    = $this->getSettersAndGetters($object);
+        $accessors  = $this->getAccessors($object);
         $events     = $this->getEvents($object);
-        $props      = array_keys(array_merge($attributes, $setters, $events));
+        $props      = array_keys(array_merge($accessors, $attributes, $events));
         $props      = $this->filter($object, $props);
         $result     = array();
+
+        $parser = DocBlockParser::parseClass($object);
         foreach ($props as $prop)
         {
-            $result[$prop] = $this->populateProperty($object, $prop);
+            $info               = $this->populateProperty($object, $prop);
+            $info['oldType']    = isset($parser->properties[$prop]) ? $parser->properties[$prop]['type'] : '';
+            $info['oldComment'] = isset($parser->properties[$prop]) ? $parser->properties[$prop]['comment'] : '';
+            $result[$prop]      = $info;
         }
-
         parent::__construct($result);
     }
 
@@ -54,7 +66,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-    public function getSettersAndGetters(CComponent $object)
+    public function getAccessors(CComponent $object)
     {
         $props = array();
         foreach (get_class_methods($object) as $method)
@@ -69,7 +81,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
         {
             foreach ($object->behaviors() as $id => $data)
             {
-                $props = array_merge($props, $this->getSettersAndGetters($object->asa($id)));
+                $props = array_merge($props, $this->getAccessors($object->asa($id)));
             }
         }
         return $props;
@@ -130,6 +142,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
             'readComment'  => false,
             'writeComment' => false,
         );
+
         if (property_exists($object, $prop))
         {
             $data                = DocBlockParser::parseProperty($object, $prop)->var;
@@ -155,6 +168,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $info['writeType']    = $info['readType'] = "CList";
             $info['writeComment'] = $info['readComment'] = $parser->getShortDescription();
         }
+
         return $info;
     }
 
@@ -189,4 +203,23 @@ class YiiComponentPropertyIterator extends ArrayIterator
         return $res;
     }
 
+
+    public function getMaxLenOfType()
+    {
+        if ($this->_maxLenOfType === null)
+        {
+            $clone = clone $this;
+            $clone->rewind();
+            $max = 0;
+            foreach ($clone as $item)
+            {
+                $max = $max < strlen($item['writeType']) ? strlen($item['writeType']) : $max;
+                $max = $max < strlen($item['readType']) ? strlen($item['readType']) : $max;
+            }
+            $max = $max < strlen($item['oldType']) ? strlen($item['oldType']) : $max;
+            $this->_maxLenOfType = $max;
+        }
+
+        return $this->_maxLenOfType;
+    }
 }
