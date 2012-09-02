@@ -184,9 +184,9 @@ class Generator extends CComponent
             $info['readType']    = $data['type'];
             $info['readComment'] = $data['comment'];
         }
-        if (method_exists($object, 'on' . $prop))
+        if (strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
         {
-            $parser               = DocBlockParser::parseMethod($object, 'on' . $prop);
+            $parser               = DocBlockParser::parseMethod($object, $prop);
             $info['writeType']    = $info['readType'] = "CList";
             $info['writeComment'] = $info['readComment']  = $parser->getShortDescription();
         }
