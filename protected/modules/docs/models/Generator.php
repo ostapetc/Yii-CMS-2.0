@@ -133,7 +133,7 @@ class Generator extends CComponent
             $m        = new ReflectionMethod($object, 'set' . $prop);
             $settable = $m->getNumberOfRequiredParameters() <= 1;
         }
-        if (!$settable && method_exists($object, 'on' . $prop))
+        if (!$settable && strncasecmp($prop,'on',2) === 0 && method_exists($object, $prop))
         {
             $settable = true;
         }
@@ -149,7 +149,7 @@ class Generator extends CComponent
             $m        = new ReflectionMethod($object, 'get' . $prop);
             $gettable = $m->getNumberOfRequiredParameters() == 0;
         }
-        if (!$gettable && method_exists($object, 'on' . $prop))
+        if (!$gettable && strncasecmp($prop,'on',2) === 0 && method_exists($object, $prop))
         {
             $gettable = true;
         }
