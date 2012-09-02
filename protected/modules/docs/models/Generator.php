@@ -4,6 +4,7 @@ require 'DocBlockParser.php';
 class Generator extends CComponent
 {
     public $baseClass = 'CModel';
+    public $toUndercore = false;
 
 
     public function getIterator()
@@ -244,7 +245,7 @@ class Generator extends CComponent
         //properties
         foreach ($props as $prop => $data)
         {
-            $name = Yii::app()->text->camelCaseToUnderscore($prop);
+            $name = $this->toUndercore ? Yii::app()->text->camelCaseToUnderscore($prop) : $prop;
 
             if ($data['settable'] && $data['gettable'] && ($data['writeType'] == $data['readType']) &&
                 ($data['writeComment'] == $data['readComment'])
