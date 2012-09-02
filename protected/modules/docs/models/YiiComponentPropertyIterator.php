@@ -1,6 +1,8 @@
 <?php
 class YiiComponentPropertyIterator extends ArrayIterator
 {
+    public $propertyClass = 'YiiComponentProperty';
+
     /**
      * Need for automatical align of strings
      *
@@ -23,7 +25,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     protected $_maxLenOfTag;
 
 
-    public function __construct(CComponent $object)
+    public function __construct(CComponent $object, $propertyOptions = array())
     {
         $attributes = $this->getObjectAttributes($object);
         $accessors  = $this->getAccessors($object);
@@ -35,15 +37,19 @@ class YiiComponentPropertyIterator extends ArrayIterator
         $parser = DocBlockParser::parseClass($object);
         foreach ($props as $prop)
         {
-            $result[$prop] = $this->createPropertyInstance($parser, $object, $prop);
+            $result[$prop] = $this->createPropertyInstance($parser, $object, $prop, $propertyOptions);
         }
         parent::__construct($result);
     }
 
 
-    protected function createPropertyInstance($parser, $object, $prop)
+    protected function createPropertyInstance($parser, $object, $prop, $propertyOptions)
     {
-        $property       = new YiiComponentProperty();
+        if (!isset($propertyOptions['class']))
+        {
+            $propertyOptions['class'] = $this->propertyClass;
+        };
+        $property       = Yii::createComponent($propertyOptions);
         $property->name = $prop;
         $property->populate($object);
         $property->setOldValues($parser->properties);

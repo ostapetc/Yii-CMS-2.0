@@ -11,6 +11,14 @@ class Generator extends CComponent
 
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
+    public $propertyOptions = array(
+        'class'                     => 'YiiComponentProperty',
+        'toUndercore'               => false,
+        'readWriteDifferentiate'    => false,
+        'tagVerticalAlignment'      => true,
+        'typeVerticalAlignment'     => true,
+        'propertyVerticalAlignment' => true
+    );
 
 
     protected function getFilesIterator()
@@ -22,7 +30,7 @@ class Generator extends CComponent
     protected function getPropertyIterator($object)
     {
         $class = $this->propertyIterator;
-        return new $class($object);
+        return new $class($object, $this->propertyOptions);
     }
 
 
@@ -41,8 +49,8 @@ class Generator extends CComponent
                 continue;
             }
             list($class, $object) = $data;
-            $docBlock    = $this->getDockBlock($class, $object);
-            dump($docBlock  );
+            $docBlock = $this->getDockBlock($class, $object);
+            dump($docBlock);
             $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
             $content     = file_get_contents($file);
             $fileContent = substr($content, strpos($content, "class $class"));
@@ -74,7 +82,7 @@ class Generator extends CComponent
 
     public function getDockBlock($class, CComponent $object)
     {
-        $props = $this->getPropertyIterator($object);
+        $props  = $this->getPropertyIterator($object);
         $parser = DocBlockParser::parseClass($class);
 
         //add commets and stars :-)
@@ -85,6 +93,7 @@ class Generator extends CComponent
         }
         return $result . " */\n";
     }
+
 
     protected function getRawDockBlock(DocBlockParser $parser, Iterator $props)
     {
