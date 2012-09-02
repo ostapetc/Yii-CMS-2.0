@@ -55,6 +55,7 @@ class Generator extends CComponent
         $setters    = $this->getSettersAndGetters($model);
         $events     = $this->getEvents($model);
         $props      = array_keys(array_merge($attributes, $setters, $events));
+        $props      = $this->filter($model, $props);
         $result     = array();
         foreach ($props as $prop)
         {
@@ -62,13 +63,24 @@ class Generator extends CComponent
         }
         $parser   = DocBlockParser::parseClass($class);
         $docBlock = $this->getDockBlock($parser, $result);
-//        dump($docBlock);
         $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
         $content     = file_get_contents($file);
         $fileContent = substr($content, strpos($content, "class $class"));
         file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
     }
 
+    public function filter($class, $props)
+    {
+        while($class = get_parent_class($class))
+        {
+            $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
+            array_map(function($item) {
+                return strtr($item, array('-write'=>'', '-read'=>''));
+            }, $parentProps);
+            $props = array_diff($props, $parentProps);
+        }
+        return $props;
+    }
 
     public function getObjectAttributes($object)
     {
@@ -83,7 +95,7 @@ class Generator extends CComponent
         {
             if (strncasecmp($method, 'set', 3) === 0 || strncasecmp($method, 'get', 3) === 0)
             {
-                $props[substr($method, 3)] = true;
+                $props[lcfirst(substr($method, 3))] = true;
             }
         }
 
@@ -105,7 +117,7 @@ class Generator extends CComponent
         {
             if (strncasecmp($method, 'on', 2) === 0)
             {
-                $events[substr($method, 2)] = true;
+                $events[lcfirst(substr($method, 2))] = true;
             }
         }
         return $events;
@@ -280,9 +292,9 @@ class Generator extends CComponent
         $nameKey      = $mode ? $name . '-' . $mode : $name;
         $propertyType = $mode ? 'property-' . $mode : "property";
 
-        $oldComment = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$commentKey] : '';
+        $oldComment = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey]['comment'] : '';
         $comment    = $data[$commentKey] ? $data[$commentKey] : $oldComment;
-        $oldType    = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$typeKey] : '';
+        $oldType    = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey]['type'] : '';
         $type       = $data[$typeKey] ? $data[$typeKey] : $oldType;
         return "@$propertyType $type \$$name $comment\n";
     }
