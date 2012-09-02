@@ -43,7 +43,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
     protected function createPropertyInstance($parser, $object, $prop)
     {
-        $property = new YiiComponentProperty();
+        $property       = new YiiComponentProperty();
         $property->name = $prop;
         $property->populate($object);
         $property->setOldValues($parser->properties);
@@ -138,10 +138,8 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $max = 0;
             foreach ($clone as $item)
             {
-                $max = $max < strlen($item->writeType) ? strlen($item->writeType) : $max;
-                $max = $max < strlen($item->readType) ? strlen($item->readType) : $max;
+                $max = max($max, strlen($item->writeType), strlen($item->readType));
             }
-            $max                 = $max < strlen($item->oldType) ? strlen($item->oldType) : $max;
             $this->_maxLenOfType = $max;
         }
 
@@ -163,7 +161,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $max = 0;
             foreach ($clone as $key => $item)
             {
-                $max = $max < strlen($key) ? strlen($key) : $max;
+                $max = max($max, strlen($key));
             }
             $this->_maxLenOfProperty = $max;
         }
@@ -186,16 +184,8 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $max = 0;
             foreach ($clone as $item)
             {
-                if ($item->getIsFullMode())
-                {
-                    $len = $item->gettable ? strlen('property-read') : $len;
-                    $len = $item->settable ? strlen('property-write') : $len;
-                }
-                else
-                {
-                    $len = strlen('property');
-                }
-                $max = $max < $len ? $len : $max;
+                $tag = $item->getIsFullMode() ? ($item->gettable ? 'property-read' : 'property-write') : 'property';
+                $max = max($max, strlen($tag));
             }
             $this->_maxLenOfTag = $max;
         }
