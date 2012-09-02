@@ -57,10 +57,17 @@ class DocBlockParser extends CComponent
             {
                 continue;
             }
-            elseif (preg_match('/@param(|-read|-write)\s+([^ ]+)?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
+            elseif (preg_match('/@property(|-read|-write)\s+([^ ]+)?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
             {
                 $this->params[$match[2] . $match[1]] = array(
                     'type'    => $match[3],
+                    'comment' => isset($match[5]) ? $match[5] : '',
+                );
+            }
+            elseif (preg_match('/@param(\s+([^ ]+))?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
+            {
+                $this->params[$match[3]] = array(
+                    'type'        => $match[2],
                     'comment' => isset($match[5]) ? $match[5] : '',
                 );
             }

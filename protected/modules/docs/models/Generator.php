@@ -54,7 +54,7 @@ class Generator extends CComponent
         {
             $result[$prop] = $this->populateProperty($model, $prop);
         }
-        $parser = DocBlockParser::parseClass($class);
+        $parser   = DocBlockParser::parseClass($class);
         $docBlock = $this->getDockBlock($parser, $result);
         dump($docBlock);
         $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
@@ -75,7 +75,7 @@ class Generator extends CComponent
         $props = array();
         foreach (get_class_methods($object) as $method)
         {
-            if (strncasecmp($method, 'set', 3) === 0 && strncasecmp($method, 'get', 3) === 0)
+            if (strncasecmp($method, 'set', 3) === 0 || strncasecmp($method, 'get', 3) === 0)
             {
                 $props[substr($method, 3)] = true;
             }
@@ -91,6 +91,7 @@ class Generator extends CComponent
         return $props;
     }
 
+
     public function getEvents($object)
     {
         $events = array();
@@ -104,92 +105,91 @@ class Generator extends CComponent
         return $events;
     }
 
+
     public function isSettable($object, $prop)
     {
         $settable = property_exists($object, $prop);
-        if (!$settable && method_exists($object,'set'.$prop))
+        if (!$settable && method_exists($object, 'set' . $prop))
         {
-            $m = new ReflectionMethod($object, 'set'.$prop);
+            $m        = new ReflectionMethod($object, 'set' . $prop);
             $settable = $m->getNumberOfRequiredParameters() <= 1;
         }
-        if (!$settable && method_exists($object,'on'.$prop))
+        if (!$settable && method_exists($object, 'on' . $prop))
         {
             $settable = true;
         }
         return $settable;
     }
 
+
     public function isGettable($object, $prop)
     {
         $gettable = property_exists($object, $prop);
-        if (!$gettable && method_exists($object,'get'.$prop))
+        if (!$gettable && method_exists($object, 'get' . $prop))
         {
-            $m = new ReflectionMethod($object, 'get'.$prop);
+            $m        = new ReflectionMethod($object, 'get' . $prop);
             $gettable = $m->getNumberOfRequiredParameters() == 0;
         }
-        if (!$gettable && method_exists($object,'on'.$prop))
+        if (!$gettable && method_exists($object, 'on' . $prop))
         {
             $gettable = true;
         }
         return $gettable;
     }
 
+
     public function getTypeAndComment($object, $prop)
     {
         $info = array(
-            'getterType' => false,
-            'setterType' => false,
-            'getterComment' => false,
-            'setterComment' => false,
+            'readType'     => false,
+            'writeType'    => false,
+            'readComment'  => false,
+            'writeComment' => false,
         );
         if (property_exists($object, $prop))
         {
-            $data = DocBlockParser::parseProperty($object, $prop)->var;
-            $info['getterType'] = $info['setterType'] = $data['type'];
-            $info['getterComment'] = $info['setterComment'] = $data['comment'];
+            $data                = DocBlockParser::parseProperty($object, $prop)->var;
+            $info['readType']    = $info['writeType'] = $data['type'];
+            $info['readComment'] = $info['writeComment'] = $data['comment'];
         }
-        if (method_exists($object, 'set'.$prop))
+        if (method_exists($object, 'set' . $prop))
         {
-            //no return - just first param
-            $data = DocBlockParser::parseMethod($object, 'set'.$prop)->return;
-            $info['setterType'] = $data['type'];
-            $info['setterComment'] = $data['comment'];
+            $data                 = DocBlockParser::parseMethod($object, 'set' . $prop)->params;
+            $first = array_shift($data); //get first param of setter
+            $info['writeType']    = $first['type'];
+            $info['writeComment'] = $first['comment'];
         }
-        if (method_exists($object, 'get'.$prop))
+        if (method_exists($object, 'get' . $prop))
         {
-            $data = DocBlockParser::parseMethod($object, 'get'.$prop)->return;
-            $info['getterType'] = $data['type'];
-            $info['getterComment'] = $data['comment'];
+            $data                = DocBlockParser::parseMethod($object, 'get' . $prop)->return;
+            $info['readType']    = $data['type'];
+            $info['readComment'] = $data['comment'];
         }
-        if (method_exists($object, 'on'.$prop))
+        if (method_exists($object, 'on' . $prop))
         {
-            $parser = DocBlockParser::parseMethod($object, 'on'.$prop);
-            if (!$info['setterType'])
+            $parser = DocBlockParser::parseMethod($object, 'on' . $prop);
+            if (!$info['writeType'])
             {
-                $info['type'] = "callback";
+                $info['writeType'] = "callback";
             }
-            if (!$info['getterType'])
+            if (!$info['readType'])
             {
-                $info['type'] = "CList";
+                $info['readType'] = "CList";
             }
-            $info['setterComment'] = $parser->getShortDescription();
-//            it add describe of getter, but increce size of DocBlock
-//            $info['getterComment'] = 'return list of events';
+            $info['writeComment'] = $parser->getShortDescription();
+            $info['readComment'] = 'return list of events';
         }
         return $info;
     }
 
+
     public function populateProperty($object, $prop)
     {
-        $tmp = $this->getTypeAndComment($object, $prop);
         $res = array(
-            'settable' => $this->isSettable($object, $prop),
-            'gettable' => $this->isGettable($object, $prop),
-            'setterType'     => $tmp['setterType'],
-            'getterType'     => $tmp['getterType'],
-            'setterComment'  => $tmp['setterComment'],
-            'getterComment'  => $tmp['getterComment']
+            'settable'      => $this->isSettable($object, $prop),
+            'gettable'      => $this->isGettable($object, $prop),
         );
+        $res = CMap::mergeArray($res, $this->getTypeAndComment($object, $prop));
 
         if (method_exists($object, 'behaviors'))
         {
@@ -200,7 +200,13 @@ class Generator extends CComponent
                     'settable' => $res['settable'] || $data['settable'],
                     'gettable' => $res['gettable'] || $data['gettable'],
                 );
-                foreach (array('setterType', 'getterType', 'setterComment', 'getterComment') as $key)
+                $keys = array(
+                    'writeType',
+                    'readType',
+                    'writeComment',
+                    'readComment'
+                );
+                foreach ($keys as $key)
                 {
                     $res[$key] = $res[$key] ? $res[$key] : $data[$key];
                 }
@@ -209,6 +215,7 @@ class Generator extends CComponent
         return $res;
     }
 
+
     public function getDescr(DocBlockParser $parser)
     {
         $docBlock = '';
@@ -216,7 +223,7 @@ class Generator extends CComponent
         {
             foreach (explode("\n", $parser->shortDescription) as $line)
             {
-                $docBlock .= " * ".trim($line, "\r")."\n";
+                $docBlock .= " * " . trim($line, "\r") . "\n";
             }
             $docBlock .= " * \n";
         }
@@ -224,13 +231,14 @@ class Generator extends CComponent
         {
             foreach (explode("\n", $parser->longDescription) as $line)
             {
-                $docBlock .= " * ".trim($line, "\r")."\n";
+                $docBlock .= " * " . trim($line, "\r") . "\n";
             }
             $docBlock .= " * \n";
         }
 
         return $docBlock;
     }
+
 
     public function getDockBlock(DocBlockParser $parser, $props)
     {
@@ -239,9 +247,11 @@ class Generator extends CComponent
 
         foreach ($props as $prop => $data)
         {
-            $name         = Yii::app()->text->camelCaseToUnderscore($prop);
+            $name = Yii::app()->text->camelCaseToUnderscore($prop);
 
-            if ($data['settable'] && $data['gettable'] && ($data['setterType'] == $data['getterType']) && ($data['setterComment'] == $data['getterComment']))
+            if ($data['settable'] && $data['gettable'] && ($data['writeType'] == $data['readType']) &&
+                ($data['writeComment'] == $data['readComment'])
+            )
             {
                 $docBlock .= $this->getOneLine($parser, $name, null, $data);
             }
@@ -272,33 +282,28 @@ class Generator extends CComponent
         return $docBlock;
     }
 
+
     public function getOneLine(DocBlockParser $parser, $name, $mode, $data)
     {
-        switch($mode)
+        if ($mode)
         {
-            case 'write':
-                $propertyType = "property-write";
-                $commentKey = 'setterComment';
-                $typeKey = 'setterType';
-                $nameKey = $name.'-write';
-                break;
-            case 'read':
-                $propertyType = "property-read";
-                $commentKey = 'getterComment';
-                $typeKey = 'getterType';
-                $nameKey = $name.'-read';
-                break;
-            default:
-                $propertyType = "property";
-                $commentKey = 'getterComment';
-                $typeKey = 'getterType';
-                $nameKey = $name;
-                break;
+            $commentKey   = $mode . "Comment";
+            $typeKey      = $mode . "Type";
+            $nameKey      = $name . '-' . $mode;
+            $propertyType = 'property-' . $mode;
         }
+        else
+        {
+            $propertyType = "property";
+            $commentKey   = 'writeComment';
+            $typeKey      = 'writeType';
+            $nameKey      = $name;
+        }
+
         $oldComment = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$commentKey] : '';
-        $comment = $data[$commentKey] ? $data[$commentKey] : $oldComment;
-        $oldType =  isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$typeKey] : '';
-        $type = $data[$typeKey] ? $data[$typeKey] : $oldType;
+        $comment    = $data[$commentKey] ? $data[$commentKey] : $oldComment;
+        $oldType    = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$typeKey] : '';
+        $type       = $data[$typeKey] ? $data[$typeKey] : $oldType;
         return " * @$propertyType $type \$$name $comment\n";
     }
 }

@@ -53,6 +53,14 @@ class Crud extends FormModel
         );
     }
 
+
+    /**
+     * @param $val
+     */
+    public function setNono($val)
+    {
+
+    }
 }
 
 
