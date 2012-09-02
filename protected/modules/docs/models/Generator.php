@@ -7,6 +7,7 @@ class Generator extends CComponent
 {
     public $baseClass = 'CModel';
     public $toUndercore = false;
+    public $readWriteDifferentiate = false; //phpstorm no support @property-write and @property-read specification
 
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
@@ -34,7 +35,7 @@ class Generator extends CComponent
                 continue;
             }
 
-            $this->addDocBlockFile($fileInfo);
+            $this->addDocBlock($fileInfo);
         }
     }
 
@@ -60,7 +61,7 @@ class Generator extends CComponent
     }
 
 
-    public function addDocBlockFile(SplFileInfo $fileInfo)
+    public function addDocBlock(SplFileInfo $fileInfo)
     {
         $data = $this->getInstanceByFile($fileInfo);
         if (!$data)
@@ -131,23 +132,32 @@ class Generator extends CComponent
         //properties
         foreach ($props as $prop => $data)
         {
-            $name = $this->toUndercore ? Yii::app()->text->camelCaseToUnderscore($prop) : $prop;
+            $parameter = $this->toUndercore ? Yii::app()->text->camelCaseToUnderscore($prop) : $prop;
 
-            if ($data['settable'] && $data['gettable'] && ($data['writeType'] == $data['readType']) &&
-                ($data['writeComment'] == $data['readComment'])
-            )
+            //not use @property-write/@property-read
+            if (!$this->readWriteDifferentiate)
             {
-                $docBlock .= $this->getOneLine($parser, $name, null, $data);
+                $docBlock .= $this->getOneLine($parser, $parameter, $data);
+                continue;
+            }
+
+            //use it
+            $fullAccess   = $data['settable'] && $data['gettable'];
+            $sameType     = $data['writeType'] == $data['readType'];
+            $sameDescribe = $data['writeComment'] == $data['readComment'];
+            if ($fullAccess && $sameType && $sameDescribe)
+            {
+                $docBlock .= $this->getOneLine($parser, $parameter, $data);
             }
             else
             {
                 if ($data['settable'])
                 {
-                    $docBlock .= $this->getOneLine($parser, $name, 'write', $data);
+                    $docBlock .= $this->getOneLine($parser, $parameter, $data, 'write');
                 }
                 if ($data['gettable'])
                 {
-                    $docBlock .= $this->getOneLine($parser, $name, 'read', $data);
+                    $docBlock .= $this->getOneLine($parser, $parameter, $data, 'read');
                 }
             }
         }
@@ -156,17 +166,17 @@ class Generator extends CComponent
     }
 
 
-    public function getOneLine(DocBlockParser $parser, $name, $mode, $data)
+    public function getOneLine(DocBlockParser $parser, $parameter, $data, $mode = null)
     {
-        $commentKey   = $mode ? $mode . "Comment" : 'writeComment';
-        $typeKey      = $mode ? $mode . "Type" : 'writeType';
-        $nameKey      = $mode ? $name . '-' . $mode : $name;
+        $commentKey   = $mode ? $mode . "Comment" : 'readComment';
+        $typeKey      = $mode ? $mode . "Type" : 'readType';
+        $nameKey      = $mode ? $parameter . '-' . $mode : $parameter;
         $propertyType = $mode ? 'property-' . $mode : "property";
 
         $oldComment = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey]['comment'] : '';
         $comment    = $data[$commentKey] ? $data[$commentKey] : $oldComment;
         $oldType    = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey]['type'] : '';
         $type       = $data[$typeKey] ? $data[$typeKey] : $oldType;
-        return "@$propertyType $type \$$name $comment\n";
+        return "@$propertyType $type \$$parameter $comment\n";
     }
 }
