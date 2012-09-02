@@ -1,11 +1,11 @@
 <?php
 /**
- * @property-read string $other
+ * @property-read array $other
  * @property-read string $shortDescription
  * @property-read string $longDescription
- * @property-read string $params
+ * @property-read array $params
  * @property-read string $return
- * @property-read string $properties
+ * @property-read array $properties
  */
 class DocBlockParser extends CComponent
 {

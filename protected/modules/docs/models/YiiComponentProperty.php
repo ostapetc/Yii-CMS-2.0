@@ -27,7 +27,7 @@ class YiiComponentProperty extends CComponent
     public $oldReadComment;
 
 
-    protected function __construct()
+    public function __construct()
     {
     }
 
@@ -62,6 +62,7 @@ class YiiComponentProperty extends CComponent
 
     /**
      * use or not
+     *
      * @property-read/@property-write mode
      *
      * @return bool
@@ -144,24 +145,7 @@ class YiiComponentProperty extends CComponent
     }
 
 
-    public static function getInstance(CComponent $object, $prop)
-    {
-        $property       = new static;
-        $property->name = $prop;
-        $property->populateProperty($object);
-
-        if (method_exists($object, 'behaviors'))
-        {
-            foreach ($object->behaviors() as $id => $data)
-            {
-                $property->populateProperty($object->asa($id));
-            }
-        }
-        return $property;
-    }
-
-
-    public function populateProperty(CComponent $object)
+    public function populate(CComponent $object)
     {
         $this->settable = $this->isSettable($object);
         $this->gettable = $this->isGettable($object);
@@ -171,7 +155,7 @@ class YiiComponentProperty extends CComponent
         {
             foreach ($object->behaviors() as $id => $data)
             {
-                $this->populateProperty($object->asa($id));
+                $this->populate($object->asa($id));
             }
         }
     }

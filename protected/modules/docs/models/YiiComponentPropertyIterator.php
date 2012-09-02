@@ -43,7 +43,9 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
     protected function createPropertyInstance($parser, $object, $prop)
     {
-        $property = YiiComponentProperty::getInstance($object, $prop);
+        $property = new YiiComponentProperty();
+        $property->name = $prop;
+        $property->populate($object);
         $property->setOldValues($parser->properties);
         $property->iterator = $this;
         return $property;

@@ -35,7 +35,18 @@ class Generator extends CComponent
                 continue;
             }
 
-            $this->addDocBlock($fileInfo);
+            $data = $this->getInstanceByFile($fileInfo);
+            if (!$data)
+            {
+                continue;
+            }
+            list($class, $object) = $data;
+            $docBlock    = $this->getDockBlock($class, $object);
+            dump($docBlock  );
+            $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
+            $content     = file_get_contents($file);
+            $fileContent = substr($content, strpos($content, "class $class"));
+            file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
         }
     }
 
@@ -61,56 +72,24 @@ class Generator extends CComponent
     }
 
 
-    public function addDocBlock(SplFileInfo $fileInfo)
+    public function getDockBlock($class, CComponent $object)
     {
-        $data = $this->getInstanceByFile($fileInfo);
-        if (!$data)
-        {
-            return false;
-        }
-        list($class, $object) = $data;
-        $parser      = DocBlockParser::parseClass($class);
-        $docBlock    = $this->getDockBlock($parser, $this->getPropertyIterator($object));
-        $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
-        $content     = file_get_contents($file);
-        $fileContent = substr($content, strpos($content, "class $class"));
-        file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
-        dump($docBlock);
-    }
-
-
-    public function getDockBlock(DocBlockParser $parser, Iterator $props)
-    {
-        $docBlock = $this->getDescription($parser, $props);
-        $docBlock .= $this->getParameters($parser, $props);
-        $docBlock .= $this->getOther($parser, $props);
+        $props = $this->getPropertyIterator($object);
+        $parser = DocBlockParser::parseClass($class);
 
         //add commets and stars :-)
         $result = "/** \n";
-        foreach (explode("\n", $docBlock) as $line)
+        foreach (explode("\n", $this->getRawDockBlock($parser, $props)) as $line)
         {
             $result .= " * " . trim($line) . "\n";
         }
         return $result . " */\n";
     }
 
-
-    protected function getOther(DocBlockParser $parser, $data)
-    {
-        $docBlock = "\n";
-        if ($data)
-        {
-            foreach ($parser->other as $type => $line)
-            {
-                $docBlock .= "@$type $line\n";
-            }
-        }
-        return $docBlock;
-    }
-
-    protected function getDescription(DocBlockParser $parser, Iterator $props)
+    protected function getRawDockBlock(DocBlockParser $parser, Iterator $props)
     {
         $docBlock = "";
+
         //description
         if ($parser->shortDescription)
         {
@@ -120,20 +99,18 @@ class Generator extends CComponent
         {
             $docBlock .= $parser->longDescription . "\n\n";
         }
-        return $docBlock;
-    }
 
-
-    protected function getParameters(DocBlockParser $parser, Iterator $props)
-    {
-        $docBlock = "";
         //properties
         foreach ($props as $prop)
         {
             $docBlock .= $prop;
         }
+
+        //other
+        foreach ($parser->other as $type => $line)
+        {
+            $docBlock .= "@$type $line\n";
+        }
         return $docBlock;
     }
-
-
 }
