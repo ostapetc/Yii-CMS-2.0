@@ -5,6 +5,7 @@ class Generator extends CComponent
 {
     public $baseClass = 'CModel';
 
+
     public function getIterator()
     {
         $iterator = new AppendIterator();
@@ -19,6 +20,7 @@ class Generator extends CComponent
         }
         return $iterator;
     }
+
 
     public function generate()
     {
@@ -60,7 +62,7 @@ class Generator extends CComponent
         }
         $parser   = DocBlockParser::parseClass($class);
         $docBlock = $this->getDockBlock($parser, $result);
-        dump($docBlock);
+//        dump($docBlock);
         $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
         $content     = file_get_contents($file);
         $fileContent = substr($content, strpos($content, "class $class"));
@@ -89,7 +91,7 @@ class Generator extends CComponent
         {
             foreach ($object->behaviors() as $id => $data)
             {
-                $props = array_merge($setters, $this->getSettersAndGetters($object->asa($id)));
+                $props = array_merge($props, $this->getSettersAndGetters($object->asa($id)));
             }
         }
         return $props;
@@ -194,10 +196,8 @@ class Generator extends CComponent
             foreach ($object->behaviors() as $id => $data)
             {
                 $data = $this->populateProperty($object->asa($id), $prop);
-                $res  = array(
-                    'settable' => $res['settable'] || $data['settable'],
-                    'gettable' => $res['gettable'] || $data['gettable'],
-                );
+                $res['settable'] = $res['settable'] || $data['settable'];
+                $res['gettable'] = $res['gettable'] || $data['gettable'];
                 $keys = array(
                     'writeType',
                     'readType',
@@ -206,7 +206,9 @@ class Generator extends CComponent
                 );
                 foreach ($keys as $key)
                 {
-                    $res[$key] = $res[$key] ? $res[$key] : $data[$key];
+                    $res [$key] =
+                        $res[$key] ? $res[$key] :
+                            $data[$key];
                 }
             }
         }
@@ -220,11 +222,11 @@ class Generator extends CComponent
         //description
         if ($parser->shortDescription)
         {
-            $docBlock .= $parser->shortDescription . "\n";
+            $docBlock .= $parser->shortDescription . "\n\n";
         }
         if ($parser->longDescription)
         {
-            $docBlock .= $parser->shortDescription . "\n";
+            $docBlock .= $parser->longDescription . "\n\n";
         }
 
         //properties
@@ -257,7 +259,7 @@ class Generator extends CComponent
         {
             foreach (explode("\n", $parser->authors) as $line)
             {
-                $docBlock .= "@author " . trim($line) . "\n";
+                $docBlock .= "@author $line\n";
             }
         }
 
@@ -265,7 +267,7 @@ class Generator extends CComponent
         $result = "/** \n";
         foreach (explode("\n", $docBlock) as $line)
         {
-            $result .= " * $line";
+            $result .= " * " . trim($line) . "\n";
         }
         return $result . " */\n";
     }
