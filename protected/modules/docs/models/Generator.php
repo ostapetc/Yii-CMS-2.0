@@ -7,7 +7,7 @@ class Generator extends CComponent
 {
     public $baseClass = 'CComponent';
     public $toUndercore = false;
-    public $readWriteDifferentiate = false; //phpstorm no support @property-write and @property-read specification
+    public $readWriteDifferentiate = true; //phpstorm no support @property-write and @property-read specification
 
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
@@ -187,9 +187,8 @@ class Generator extends CComponent
         $typeKey      = $mode ? $mode . "Type" : 'readType';
         $propertyType = $mode ? 'property-' . $mode : "property";
 
-        $comment = $data[$commentKey] ? $data[$commentKey] : $data['oldComment'];
-        $type    = $data[$typeKey] ? $data[$typeKey] : $data['oldType'];
-
+        $comment = $data[$commentKey] ? $data[$commentKey] : $data['old'.ucfirst($mode).'Comment'];
+        $type    = $data[$typeKey] ? $data[$typeKey] : $data['old'.ucfirst($mode).'Type'];
 
         if ($this->typeVerticalAlignment)
         {

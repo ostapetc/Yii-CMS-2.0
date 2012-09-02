@@ -28,10 +28,22 @@ class YiiComponentPropertyIterator extends ArrayIterator
         $parser = DocBlockParser::parseClass($object);
         foreach ($props as $prop)
         {
-            $info               = $this->populateProperty($object, $prop);
-            $info['oldType']    = isset($parser->properties[$prop]) ? $parser->properties[$prop]['type'] : '';
-            $info['oldComment'] = isset($parser->properties[$prop]) ? $parser->properties[$prop]['comment'] : '';
-            $result[$prop]      = $info;
+            $info = $this->populateProperty($object, $prop);
+            if (!isset($parser->properties[$prop]))
+            {
+                $key                     = $prop . '-write';
+                $info['oldWriteType']    = isset($parser->properties[$key]) ? $parser->properties[$key]['type'] : '';
+                $info['oldWriteComment'] = isset($parser->properties[$key]) ? $parser->properties[$key]['comment'] : '';
+                $key                     = $prop . '-read';
+                $info['oldReadType']     = isset($parser->properties[$key]) ? $parser->properties[$key]['type'] : '';
+                $info['oldReadComment']  = isset($parser->properties[$key]) ? $parser->properties[$key]['comment'] : '';
+            }
+            else
+            {
+                $info['oldType']    = $info['oldWriteType'] = $parser->properties[$prop]['type'];
+                $info['oldComment'] = $info['oldWriteComment'] = $parser->properties[$prop]['comment'];
+            }
+            $result[$prop] = $info;
         }
         parent::__construct($result);
     }
