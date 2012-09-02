@@ -85,13 +85,13 @@ class Generator extends CComponent
             return false;
         }
         list($class, $object) = $data;
-        $parser   = DocBlockParser::parseClass($class);
-        $docBlock = $this->getDockBlock($parser, $this->getPropertyIterator($object));
-        dump($docBlock);
+        $parser      = DocBlockParser::parseClass($class);
+        $docBlock    = $this->getDockBlock($parser, $this->getPropertyIterator($object));
         $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
         $content     = file_get_contents($file);
         $fileContent = substr($content, strpos($content, "class $class"));
         file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
+        dump($docBlock);
     }
 
 
@@ -99,7 +99,7 @@ class Generator extends CComponent
     {
         $docBlock = $this->getDescription($parser, $props);
         $docBlock .= $this->getParameters($parser, $props);
-        $docBlock .= $this->getAuthors($parser, $props);
+        $docBlock .= $this->getOther($parser, $props);
 
         //add commets and stars :-)
         $result = "/** \n";
@@ -111,20 +111,18 @@ class Generator extends CComponent
     }
 
 
-    protected function getAuthors(DocBlockParser $parser, Iterator $props)
+    protected function getOther(DocBlockParser $parser, $data)
     {
-        $docBlock = "";
-        //authors
-        if ($parser->authors)
+        $docBlock = "\n";
+        if ($data)
         {
-            foreach (explode("\n", $parser->authors) as $line)
+            foreach ($parser->other as $type => $line)
             {
-                $docBlock .= "@author $line\n";
+                $docBlock .= "@$type $line\n";
             }
         }
         return $docBlock;
     }
-
 
     protected function getDescription(DocBlockParser $parser, Iterator $props)
     {
@@ -177,7 +175,6 @@ class Generator extends CComponent
                 }
             }
         }
-        $docBlock .= "\n";
         return $docBlock;
     }
 

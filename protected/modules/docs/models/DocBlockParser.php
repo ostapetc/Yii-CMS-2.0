@@ -1,6 +1,6 @@
 <?php
 /**
- * @property-read string $authors
+ * @property-read string $other
  * @property-read string $shortDescription
  * @property-read string $longDescription
  * @property-read string $params
@@ -9,7 +9,7 @@
  */
 class DocBlockParser extends CComponent
 {
-    protected $shortDescription, $longDescription, $var, $params = array(), $properties = array(), $authors = array(), $return, $licence, $link, $todo;
+    protected $shortDescription, $longDescription, $var, $params = array(), $properties = array(), $other = array(), $return, $licence, $link, $todo;
 
 
     private function __construct($docBlock)
@@ -86,9 +86,9 @@ class DocBlockParser extends CComponent
                     'comment' => $match[2]
                 );
             }
-            elseif (preg_match('/@author\s+(.*)/', $line, $match))
+            elseif (preg_match('/@(author|api|category|deprecated|example|filesource|ignore|internal|license|link|package|see|since|subpackage|todo|version|uses|used-by)\s+(.*)/', $line, $match))
             {
-                $this->authors[] = $match[1];
+                $this->other[$match[1]] = $match[2];
             }
             elseif (!preg_match('/@\w+/', $line))
             {
@@ -190,13 +190,13 @@ class DocBlockParser extends CComponent
 
 
     /**
-     * Returns the authors
+     * Returns the other tags
      *
      * @return array
      */
-    public function getAuthors()
+    public function getOther()
     {
-        return $this->authors;
+        return $this->other;
     }
 
 
