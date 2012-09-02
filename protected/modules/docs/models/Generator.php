@@ -2,18 +2,15 @@
 require_once 'DocBlockParser.php';
 require_once 'YiiComponentPropertyIterator.php';
 require_once 'ModelInModuleFilesIterator.php';
+require_once 'YiiComponentProperty.php';
 
 class Generator extends CComponent
 {
     public $baseClass = 'CComponent';
-    public $toUndercore = false;
     public $readWriteDifferentiate = true; //phpstorm no support @property-write and @property-read specification
 
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
-
-    public $typeVerticalAlignment = true;
-    public $parameterVerticalAlignment = true;
 
 
     protected function getFilesIterator()
@@ -26,19 +23,6 @@ class Generator extends CComponent
     {
         $class = $this->propertyIterator;
         return new $class($object);
-    }
-
-
-    /**
-     * Proxy method for external component
-     *
-     * @param string $str
-     *
-     * @return string
-     */
-    protected function camelCaseToUnderscore($str)
-    {
-        return Yii::app()->text->camelCaseToUnderscore($str);
     }
 
 
@@ -144,60 +128,12 @@ class Generator extends CComponent
     {
         $docBlock = "";
         //properties
-        foreach ($props as $prop => $data)
+        foreach ($props as $prop)
         {
-            $parameter = $this->toUndercore ? $this->camelCaseToUnderscore($prop) : $prop;
-
-            //not use @property-write/@property-read
-            if (!$this->readWriteDifferentiate)
-            {
-                $docBlock .= $this->getOneLine($props, $parameter);
-                continue;
-            }
-
-            //use it
-            $fullAccess   = $data['settable'] && $data['gettable'];
-            $sameType     = $data['writeType'] == $data['readType'];
-            $sameDescribe = $data['writeComment'] == $data['readComment'];
-            if ($fullAccess && $sameType && $sameDescribe)
-            {
-                $docBlock .= $this->getOneLine($props, $parameter);
-            }
-            else
-            {
-                if ($data['settable'])
-                {
-                    $docBlock .= $this->getOneLine($props, $parameter, 'write');
-                }
-                if ($data['gettable'])
-                {
-                    $docBlock .= $this->getOneLine($props, $parameter, 'read');
-                }
-            }
+            $docBlock .= $prop;
         }
         return $docBlock;
     }
 
 
-    public function getOneLine(Iterator $props, $parameter, $mode = null)
-    {
-        $data = $props[$parameter];
-
-        $commentKey   = $mode ? $mode . "Comment" : 'readComment';
-        $typeKey      = $mode ? $mode . "Type" : 'readType';
-        $propertyType = $mode ? 'property-' . $mode : "property";
-
-        $comment = $data[$commentKey] ? $data[$commentKey] : $data['old'.ucfirst($mode).'Comment'];
-        $type    = $data[$typeKey] ? $data[$typeKey] : $data['old'.ucfirst($mode).'Type'];
-
-        if ($this->typeVerticalAlignment)
-        {
-            $type = $type . str_repeat(' ', $props->getMaxLenOfType() - strlen($type));
-        }
-        if ($this->parameterVerticalAlignment)
-        {
-            $parameter = $parameter . str_repeat(' ', $props->getMaxLenOfParameter() - strlen($parameter));
-        }
-        return "@$propertyType $type \$$parameter $comment\n";
-    }
 }

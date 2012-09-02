@@ -13,7 +13,14 @@ class YiiComponentPropertyIterator extends ArrayIterator
      *
      * @var int
      */
-    protected $_maxLenOfParameter;
+    protected $_maxLenOfProperty;
+
+    /**
+     * Need for automatical align of strings
+     *
+     * @var int
+     */
+    protected $_maxLenOfTag;
 
 
     public function __construct(CComponent $object)
@@ -28,24 +35,18 @@ class YiiComponentPropertyIterator extends ArrayIterator
         $parser = DocBlockParser::parseClass($object);
         foreach ($props as $prop)
         {
-            $info = $this->populateProperty($object, $prop);
-            if (!isset($parser->properties[$prop]))
-            {
-                $key                     = $prop . '-write';
-                $info['oldWriteType']    = isset($parser->properties[$key]) ? $parser->properties[$key]['type'] : '';
-                $info['oldWriteComment'] = isset($parser->properties[$key]) ? $parser->properties[$key]['comment'] : '';
-                $key                     = $prop . '-read';
-                $info['oldReadType']     = isset($parser->properties[$key]) ? $parser->properties[$key]['type'] : '';
-                $info['oldReadComment']  = isset($parser->properties[$key]) ? $parser->properties[$key]['comment'] : '';
-            }
-            else
-            {
-                $info['oldType']    = $info['oldWriteType'] = $parser->properties[$prop]['type'];
-                $info['oldComment'] = $info['oldWriteComment'] = $parser->properties[$prop]['comment'];
-            }
-            $result[$prop] = $info;
+            $result[$prop] = $this->createPropertyInstance($parser, $object, $prop);
         }
         parent::__construct($result);
+    }
+
+
+    protected function createPropertyInstance($parser, $object, $prop)
+    {
+        $property = YiiComponentProperty::getInstance($object, $prop);
+        $property->setOldValues($parser->properties);
+        $property->iterator = $this;
+        return $property;
     }
 
 
@@ -62,7 +63,6 @@ class YiiComponentPropertyIterator extends ArrayIterator
         while ($class = get_parent_class($class))
         {
             $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
-            $props       = array_diff($props, $parentProps);
             array_map(function ($item)
             {
                 return strtr($item, array(
@@ -122,108 +122,6 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-    public function isSettable(CComponent $object, $prop)
-    {
-        $settable = property_exists($object, $prop);
-        if (!$settable && $object->canSetProperty($prop))
-        {
-            $m        = new ReflectionMethod($object, 'set' . $prop);
-            $settable = $m->getNumberOfRequiredParameters() <= 1;
-        }
-        if (!$settable && strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
-        {
-            $settable = true;
-        }
-        return $settable;
-    }
-
-
-    public function isGettable(CComponent $object, $prop)
-    {
-        $gettable = property_exists($object, $prop);
-        if (!$gettable && $object->canGetProperty($prop))
-        {
-            $m        = new ReflectionMethod($object, 'get' . $prop);
-            $gettable = $m->getNumberOfRequiredParameters() == 0;
-        }
-        if (!$gettable && strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
-        {
-            $gettable = true;
-        }
-        return $gettable;
-    }
-
-
-    public function getTypeAndComment(CComponent $object, $prop)
-    {
-        $info = array(
-            'readType'     => false,
-            'writeType'    => false,
-            'readComment'  => false,
-            'writeComment' => false,
-        );
-
-        if (property_exists($object, $prop))
-        {
-            $data                = DocBlockParser::parseProperty($object, $prop)->var;
-            $info['readType']    = $info['writeType'] = $data['type'];
-            $info['readComment'] = $info['writeComment'] = $data['comment'];
-        }
-        if (method_exists($object, 'set' . $prop))
-        {
-            $data                 = DocBlockParser::parseMethod($object, 'set' . $prop)->params;
-            $first                = array_shift($data); //get first param of setter
-            $info['writeType']    = $first['type'];
-            $info['writeComment'] = $first['comment'];
-        }
-        if (method_exists($object, 'get' . $prop))
-        {
-            $data                = DocBlockParser::parseMethod($object, 'get' . $prop)->return;
-            $info['readType']    = $data['type'];
-            $info['readComment'] = $data['comment'];
-        }
-        if (strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
-        {
-            $parser               = DocBlockParser::parseMethod($object, $prop);
-            $info['writeType']    = $info['readType'] = "CList";
-            $info['writeComment'] = $info['readComment'] = $parser->getShortDescription();
-        }
-
-        return $info;
-    }
-
-
-    public function populateProperty(CComponent $object, $prop)
-    {
-        $res = array(
-            'settable'      => $this->isSettable($object, $prop),
-            'gettable'      => $this->isGettable($object, $prop),
-        );
-        $res = CMap::mergeArray($res, $this->getTypeAndComment($object, $prop));
-
-        if (method_exists($object, 'behaviors'))
-        {
-            foreach ($object->behaviors() as $id => $data)
-            {
-                $data            = $this->populateProperty($object->asa($id), $prop);
-                $res['settable'] = $res['settable'] || $data['settable'];
-                $res['gettable'] = $res['gettable'] || $data['gettable'];
-                $keys            = array(
-                    'writeType',
-                    'readType',
-                    'writeComment',
-                    'readComment'
-                );
-                foreach ($keys as $key)
-                {
-                    $res [$key] = $res[$key] ? $res[$key] : $data[$key];
-                }
-            }
-        }
-        return $res;
-    }
-
-
     /**
      * Max of 'type' fields
      *
@@ -238,10 +136,10 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $max = 0;
             foreach ($clone as $item)
             {
-                $max = $max < strlen($item['writeType']) ? strlen($item['writeType']) : $max;
-                $max = $max < strlen($item['readType']) ? strlen($item['readType']) : $max;
+                $max = $max < strlen($item->writeType) ? strlen($item->writeType) : $max;
+                $max = $max < strlen($item->readType) ? strlen($item->readType) : $max;
             }
-            $max                 = $max < strlen($item['oldType']) ? strlen($item['oldType']) : $max;
+            $max                 = $max < strlen($item->oldType) ? strlen($item->oldType) : $max;
             $this->_maxLenOfType = $max;
         }
 
@@ -250,13 +148,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
 
     /**
-     * Max of 'parameter' fields
+     * Max of 'property' fields
      *
      * @return int
      */
-    public function getMaxLenOfParameter()
+    public function getMaxLenOfProperty()
     {
-        if ($this->_maxLenOfParameter === null)
+        if ($this->_maxLenOfProperty === null)
         {
             $clone = clone $this;
             $clone->rewind();
@@ -265,9 +163,41 @@ class YiiComponentPropertyIterator extends ArrayIterator
             {
                 $max = $max < strlen($key) ? strlen($key) : $max;
             }
-            $this->_maxLenOfParameter = $max;
+            $this->_maxLenOfProperty = $max;
         }
 
-        return $this->_maxLenOfParameter;
+        return $this->_maxLenOfProperty;
     }
+
+
+    /**
+     * Max of 'tag' fields
+     *
+     * @return int
+     */
+    public function getMaxLenOfTag()
+    {
+        if ($this->_maxLenOfTag === null)
+        {
+            $clone = clone $this;
+            $clone->rewind();
+            $max = 0;
+            foreach ($clone as $item)
+            {
+                if ($item->getIsFullMode())
+                {
+                    $len = $item->gettable ? strlen('property-read') : $len;
+                    $len = $item->settable ? strlen('property-write') : $len;
+                }
+                else
+                {
+                    $len = strlen('property');
+                }
+                $max = $max < $len ? $len : $max;
+            }
+            $this->_maxLenOfTag = $max;
+        }
+        return $this->_maxLenOfTag;
+    }
+
 }
