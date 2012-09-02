@@ -80,7 +80,9 @@ class Generator extends CComponent
 
     public function getDockBlock(DocBlockParser $parser, Iterator $props)
     {
-        $docBlock = $this->getDescription() . $this->getParameters() .$this->getAuthors();
+        $docBlock = $this->getDescription($parser, $props);
+        $docBlock .= $this->getParameters($parser, $props);
+        $docBlock .= $this->getAuthors($parser, $props);
 
         //add commets and stars :-)
         $result = "/** \n";
@@ -92,7 +94,7 @@ class Generator extends CComponent
     }
 
 
-    protected function getAuthors()
+    protected function getAuthors(DocBlockParser $parser, Iterator $props)
     {
         $docBlock = "";
         //authors
@@ -107,7 +109,7 @@ class Generator extends CComponent
     }
 
 
-    protected function getDescription()
+    protected function getDescription(DocBlockParser $parser, Iterator $props)
     {
         $docBlock = "";
         //description
@@ -123,7 +125,7 @@ class Generator extends CComponent
     }
 
 
-    protected function getParameters()
+    protected function getParameters(DocBlockParser $parser, Iterator $props)
     {
         $docBlock = "";
         //properties

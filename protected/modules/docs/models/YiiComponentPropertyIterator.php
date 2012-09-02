@@ -1,7 +1,7 @@
 <?php
 class YiiComponentPropertyIterator extends ArrayIterator
 {
-    public function __construct($object)
+    public function __construct(CComponent $object)
     {
         $attributes = $this->getObjectAttributes($object);
         $setters    = $this->getSettersAndGetters($object);
@@ -17,20 +17,34 @@ class YiiComponentPropertyIterator extends ArrayIterator
         parent::__construct($result);
     }
 
+
+    /**
+     * Delete all properties that described in DocBlock of any parent class
+     *
+     * @param $class
+     * @param $props
+     *
+     * @return array
+     */
     public function filter($class, $props)
     {
-        while($class = get_parent_class($class))
+        while ($class = get_parent_class($class))
         {
             $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
-            array_map(function($item) {
-                return strtr($item, array('-write'=>'', '-read'=>''));
+            array_map(function ($item)
+            {
+                return strtr($item, array(
+                    '-write'=> '',
+                    '-read' => ''
+                ));
             }, $parentProps);
             $props = array_diff($props, $parentProps);
         }
         return $props;
     }
 
-    public function getObjectAttributes($object)
+
+    public function getObjectAttributes(CComponent $object)
     {
         if (method_exists($object, 'getAttributes'))
         {
@@ -39,7 +53,8 @@ class YiiComponentPropertyIterator extends ArrayIterator
         return array();
     }
 
-    public function getSettersAndGetters($object)
+
+    public function getSettersAndGetters(CComponent $object)
     {
         $props = array();
         foreach (get_class_methods($object) as $method)
@@ -61,7 +76,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-    public function getEvents($object)
+    public function getEvents(CComponent $object)
     {
         $events = array();
         foreach (get_class_methods($object) as $method)
@@ -75,15 +90,15 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-    public function isSettable($object, $prop)
+    public function isSettable(CComponent $object, $prop)
     {
         $settable = property_exists($object, $prop);
-        if (!$settable && method_exists($object, 'set' . $prop))
+        if (!$settable && $object->canSetProperty($prop))
         {
             $m        = new ReflectionMethod($object, 'set' . $prop);
             $settable = $m->getNumberOfRequiredParameters() <= 1;
         }
-        if (!$settable && strncasecmp($prop,'on',2) === 0 && method_exists($object, $prop))
+        if (!$settable && strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
         {
             $settable = true;
         }
@@ -91,15 +106,15 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-    public function isGettable($object, $prop)
+    public function isGettable(CComponent $object, $prop)
     {
         $gettable = property_exists($object, $prop);
-        if (!$gettable && method_exists($object, 'get' . $prop))
+        if (!$gettable && $object->canGetProperty($prop))
         {
             $m        = new ReflectionMethod($object, 'get' . $prop);
             $gettable = $m->getNumberOfRequiredParameters() == 0;
         }
-        if (!$gettable && strncasecmp($prop,'on',2) === 0 && method_exists($object, $prop))
+        if (!$gettable && strncasecmp($prop, 'on', 2) === 0 && method_exists($object, $prop))
         {
             $gettable = true;
         }
@@ -107,9 +122,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-
-
-    public function getTypeAndComment($object, $prop)
+    public function getTypeAndComment(CComponent $object, $prop)
     {
         $info = array(
             'readType'     => false,
@@ -140,13 +153,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
         {
             $parser               = DocBlockParser::parseMethod($object, $prop);
             $info['writeType']    = $info['readType'] = "CList";
-            $info['writeComment'] = $info['readComment']  = $parser->getShortDescription();
+            $info['writeComment'] = $info['readComment'] = $parser->getShortDescription();
         }
         return $info;
     }
 
 
-    public function populateProperty($object, $prop)
+    public function populateProperty(CComponent $object, $prop)
     {
         $res = array(
             'settable'      => $this->isSettable($object, $prop),
@@ -158,10 +171,10 @@ class YiiComponentPropertyIterator extends ArrayIterator
         {
             foreach ($object->behaviors() as $id => $data)
             {
-                $data = $this->populateProperty($object->asa($id), $prop);
+                $data            = $this->populateProperty($object->asa($id), $prop);
                 $res['settable'] = $res['settable'] || $data['settable'];
                 $res['gettable'] = $res['gettable'] || $data['gettable'];
-                $keys = array(
+                $keys            = array(
                     'writeType',
                     'readType',
                     'writeComment',
@@ -169,9 +182,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
                 );
                 foreach ($keys as $key)
                 {
-                    $res [$key] =
-                        $res[$key] ? $res[$key] :
-                            $data[$key];
+                    $res [$key] = $res[$key] ? $res[$key] : $data[$key];
                 }
             }
         }
