@@ -6,9 +6,9 @@
  * @property-read string $params
  * @property-read string $return
  */
-class DocBlockParser extends CComponent
+class DocBlock extends CComponent
 {
-    protected $shortDescription, $longDescription, $var, $params = array(), $properties = array(), $authors = array(), $return, $licence, $link, $todo;
+    protected $shortDescription, $longDescription, $params = array(), $authors = array(), $return, $licence, $link, $todo;
 
 
     private function __construct($docBlock)
@@ -16,13 +16,11 @@ class DocBlockParser extends CComponent
         $this->parse($docBlock);
     }
 
-
     public static function parseClass($class)
     {
         $ref = new ReflectionClass($class);
         return new static($ref->getDocComment());
     }
-
 
     public static function parseMethod($class, $method)
     {
@@ -57,25 +55,32 @@ class DocBlockParser extends CComponent
             {
                 continue;
             }
-            elseif (preg_match('/@param(|-read|-write)\s+([^ ]+)?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
+            elseif (preg_match('/@param\s+([^ ]+)\s+\$([^ ]+)\s+(.*)/', $line, $match))
             {
-                $this->params[$match[2] . $match[1]] = array(
-                    'type'    => $match[3],
-                    'comment' => isset($match[5]) ? $match[5] : '',
+                $this->params[$match[2]] = array(
+                    'type'        => $match[1],
+                    'description' => $match[3],
                 );
             }
-            elseif (preg_match('/@var(\s+([^ ]+))?(\s+(.*))?/', $line, $match))
+            elseif (preg_match('/@param\s+([^ ]+)\s+\$([^ ]+)/', $line, $match))
             {
-                $this->var = array(
-                    'type'    => isset($match[2]) ? $match[2] : '',
-                    'comment' => isset($match[4]) ? $match[4] : '',
+                $this->params[$match[2]] = array(
+                    'type'        => $match[1],
+                    'description' => '',
+                );
+            }
+            elseif (preg_match('/@param\s+\$([^ ]+)/', $line, $match))
+            {
+                $this->params[$match[1]] = array(
+                    'type'        => '',
+                    'description' => '',
                 );
             }
             elseif (preg_match('/@return\s+([^ ]+)\s*(.*)/', $line, $match))
             {
                 $this->return = array(
-                    'type'    => $match[1],
-                    'comment' => $match[2]
+                    'type'        => $match[1],
+                    'description' => $match[2]
                 );
             }
             elseif (preg_match('/@author\s+(.*)/', $line, $match))
@@ -105,12 +110,6 @@ class DocBlockParser extends CComponent
     public function getShortDescription()
     {
         return $this->shortDescription;
-    }
-
-
-    public function getVar()
-    {
-        return $this->var;
     }
 
 
@@ -152,19 +151,6 @@ class DocBlockParser extends CComponent
         }
 
         return $this->params;
-    }
-
-
-    /**
-     * Returns the function or method parameters
-     *
-     * @param  array $params Array of ReflectionParameters
-     *
-     * @return array Array of parameters
-     */
-    public function getProperties($props = array())
-    {
-        return $this->properties;
     }
 
 
