@@ -5,9 +5,9 @@ class Generator extends CComponent
 {
     public $baseClass = 'CModel';
 
-
-    public function generate()
+    public function getIterator()
     {
+        $iterator = new AppendIterator();
         foreach (Yii::app()->getModules() as $id => $data)
         {
             $modelsDir = Yii::app()->getModule($id)->getBasePath() . '/models';
@@ -15,17 +15,21 @@ class Generator extends CComponent
             {
                 continue;
             }
+            $iterator->append(new RecursiveDirectoryIterator($modelsDir, FilesystemIterator::SKIP_DOTS));
+        }
+        return $iterator;
+    }
 
-            $models = new RecursiveDirectoryIterator($modelsDir, FilesystemIterator::SKIP_DOTS);
-            foreach ($models as $fileInfo)
+    public function generate()
+    {
+        foreach ($this->getIterator() as $fileInfo)
+        {
+            if (!$fileInfo->isFile())
             {
-                if (!$fileInfo->isFile())
-                {
-                    continue;
-                }
-
-                $this->addDocBlockFile($fileInfo);
+                continue;
             }
+
+            $this->addDocBlockFile($fileInfo);
         }
     }
 
@@ -46,7 +50,7 @@ class Generator extends CComponent
         }
 
         $attributes = $this->getObjectAttributes($model);
-        $setters    = $this->getSettableAndGettableProperties($model);
+        $setters    = $this->getSettersAndGetters($model);
         $events     = $this->getEvents($model);
         $props      = array_keys(array_merge($attributes, $setters, $events));
         $result     = array();
@@ -70,7 +74,7 @@ class Generator extends CComponent
     }
 
 
-    public function getSettableAndGettableProperties($object)
+    public function getSettersAndGetters($object)
     {
         $props = array();
         foreach (get_class_methods($object) as $method)
@@ -85,7 +89,7 @@ class Generator extends CComponent
         {
             foreach ($object->behaviors() as $id => $data)
             {
-                $props = array_merge($setters, $this->getSettableAndGettableProperties($object->asa($id)));
+                $props = array_merge($setters, $this->getSettersAndGetters($object->asa($id)));
             }
         }
         return $props;
@@ -167,9 +171,9 @@ class Generator extends CComponent
         }
         if (method_exists($object, 'on' . $prop))
         {
-            $parser = DocBlockParser::parseMethod($object, 'on' . $prop);
-            $info['writeType'] = "callback";
-            $info['readType'] = "CList";
+            $parser               = DocBlockParser::parseMethod($object, 'on' . $prop);
+            $info['writeType']    = "callback";
+            $info['readType']     = "CList";
             $info['writeComment'] = $parser->getShortDescription();
             $info['readComment']  = 'return list of events';
         }
@@ -210,35 +214,20 @@ class Generator extends CComponent
     }
 
 
-    public function getDescr(DocBlockParser $parser)
+    public function getDockBlock(DocBlockParser $parser, $props)
     {
-        $docBlock = '';
+        $docBlock = "";
+        //description
         if ($parser->shortDescription)
         {
-            foreach (explode("\n", $parser->shortDescription) as $line)
-            {
-                $docBlock .= " * " . trim($line, "\r") . "\n";
-            }
-            $docBlock .= " * \n";
+            $docBlock .= $parser->shortDescription . "\n";
         }
         if ($parser->longDescription)
         {
-            foreach (explode("\n", $parser->longDescription) as $line)
-            {
-                $docBlock .= " * " . trim($line, "\r") . "\n";
-            }
-            $docBlock .= " * \n";
+            $docBlock .= $parser->shortDescription . "\n";
         }
 
-        return $docBlock;
-    }
-
-
-    public function getDockBlock(DocBlockParser $parser, $props)
-    {
-        $docBlock = "/** \n";
-        $docBlock .= $this->getDescr($parser);
-
+        //properties
         foreach ($props as $prop => $data)
         {
             $name = Yii::app()->text->camelCaseToUnderscore($prop);
@@ -261,43 +250,38 @@ class Generator extends CComponent
                 }
             }
         }
-        $docBlock .= " * \n";
+        $docBlock .= "\n";
 
+        //authors
         if ($parser->authors)
         {
             foreach (explode("\n", $parser->authors) as $line)
             {
-                $docBlock .= " * @author $line\n";
+                $docBlock .= "@author " . trim($line) . "\n";
             }
-            $docBlock .= " * \n";
         }
 
-        $docBlock .= " */\n";
-        return $docBlock;
+        //add commets and stars :-)
+        $result = "/** \n";
+        foreach (explode("\n", $docBlock) as $line)
+        {
+            $result .= " * $line";
+        }
+        return $result . " */\n";
     }
 
 
     public function getOneLine(DocBlockParser $parser, $name, $mode, $data)
     {
-        if ($mode)
-        {
-            $commentKey   = $mode . "Comment";
-            $typeKey      = $mode . "Type";
-            $nameKey      = $name . '-' . $mode;
-            $propertyType = 'property-' . $mode;
-        }
-        else
-        {
-            $propertyType = "property";
-            $commentKey   = 'writeComment';
-            $typeKey      = 'writeType';
-            $nameKey      = $name;
-        }
+        $commentKey   = $mode ? $mode . "Comment" : 'writeComment';
+        $typeKey      = $mode ? $mode . "Type" : 'writeType';
+        $nameKey      = $mode ? $name . '-' . $mode : $name;
+        $propertyType = $mode ? 'property-' . $mode : "property";
 
         $oldComment = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$commentKey] : '';
         $comment    = $data[$commentKey] ? $data[$commentKey] : $oldComment;
         $oldType    = isset($parser->properties[$nameKey]) ? $parser->properties[$nameKey][$typeKey] : '';
         $type       = $data[$typeKey] ? $data[$typeKey] : $oldType;
-        return " * @$propertyType $type \$$name $comment\n";
+        return "@$propertyType $type \$$name $comment\n";
     }
 }
