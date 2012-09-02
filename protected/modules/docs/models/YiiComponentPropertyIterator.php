@@ -4,9 +4,16 @@ class YiiComponentPropertyIterator extends ArrayIterator
     /**
      * Need for automatical align of strings
      *
-     * @var
+     * @var int
      */
     protected $_maxLenOfType;
+
+    /**
+     * Need for automatical align of strings
+     *
+     * @var int
+     */
+    protected $_maxLenOfParameter;
 
 
     public function __construct(CComponent $object)
@@ -221,5 +228,22 @@ class YiiComponentPropertyIterator extends ArrayIterator
         }
 
         return $this->_maxLenOfType;
+    }
+
+    public function getMaxLenOfParameter()
+    {
+        if ($this->_maxLenOfParameter === null)
+        {
+            $clone = clone $this;
+            $clone->rewind();
+            $max = 0;
+            foreach ($clone as $key => $item)
+            {
+                $max = $max < strlen($key) ? strlen($key) : $max;
+            }
+            $this->_maxLenOfParameter = $max;
+        }
+
+        return $this->_maxLenOfParameter;
     }
 }

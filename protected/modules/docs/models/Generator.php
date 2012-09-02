@@ -12,6 +12,8 @@ class Generator extends CComponent
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
 
+    public $typeVerticalAlignment = true;
+    public $parameterVerticalAlignment = true;
 
     public function getFilesIterator()
     {
@@ -165,11 +167,6 @@ class Generator extends CComponent
         return $docBlock;
     }
 
-    protected function getMaxLenOfType()
-    {
-
-    }
-
     public function getOneLine(Iterator $props, $parameter, $mode = null)
     {
         $data = $props[$parameter];
@@ -181,9 +178,14 @@ class Generator extends CComponent
         $comment    = $data[$commentKey] ? $data[$commentKey] : $data['oldComment'];
         $type       = $data[$typeKey] ? $data[$typeKey] : $data['oldType'];
 
-        if (strlen($type) < $props->getMaxLenOfType())
+
+        if ($this->typeVerticalAlignment)
         {
             $type = $type . str_repeat(' ', $props->getMaxLenOfType() - strlen($type));
+        }
+        if ($this->parameterVerticalAlignment)
+        {
+            $parameter = $parameter . str_repeat(' ', $props->getMaxLenOfParameter() - strlen($parameter));
         }
         return "@$propertyType $type \$$parameter $comment\n";
     }
