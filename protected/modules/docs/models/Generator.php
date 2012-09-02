@@ -155,7 +155,7 @@ class Generator extends CComponent
         if (method_exists($object, 'set' . $prop))
         {
             $data                 = DocBlockParser::parseMethod($object, 'set' . $prop)->params;
-            $first = array_shift($data); //get first param of setter
+            $first                = array_shift($data); //get first param of setter
             $info['writeType']    = $first['type'];
             $info['writeComment'] = $first['comment'];
         }
@@ -168,16 +168,10 @@ class Generator extends CComponent
         if (method_exists($object, 'on' . $prop))
         {
             $parser = DocBlockParser::parseMethod($object, 'on' . $prop);
-            if (!$info['writeType'])
-            {
-                $info['writeType'] = "callback";
-            }
-            if (!$info['readType'])
-            {
-                $info['readType'] = "CList";
-            }
+            $info['writeType'] = "callback";
+            $info['readType'] = "CList";
             $info['writeComment'] = $parser->getShortDescription();
-            $info['readComment'] = 'return list of events';
+            $info['readComment']  = 'return list of events';
         }
         return $info;
     }
