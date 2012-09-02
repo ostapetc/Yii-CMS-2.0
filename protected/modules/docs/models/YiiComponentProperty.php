@@ -18,8 +18,6 @@ class YiiComponentProperty extends CComponent
     public $readComment;
     public $writeComment;
 
-    public $oldType;
-    public $oldComment;
 
     public $oldWriteType;
     public $oldWriteComment;
@@ -55,7 +53,7 @@ class YiiComponentProperty extends CComponent
             }
         } catch (Exception $e)
         {
-            dump($e);
+            print_r($e->__toString());die;
         }
     }
 
@@ -78,23 +76,17 @@ class YiiComponentProperty extends CComponent
             $fullAccess   = $this->settable && $this->gettable;
             $sameType     = $this->writeType == $this->readType;
             $sameDescribe = $this->writeComment == $this->readComment;
-            if ($fullAccess && $sameType && $sameDescribe)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !$fullAccess || !$sameType || !$sameDescribe;
         }
     }
 
 
     protected function getLine($mode = null)
     {
-        $commentKey = $mode ? $mode . "Comment" : 'readComment';
-        $typeKey    = $mode ? $mode . "Type" : 'readType';
         $tag        = $mode ? 'property-' . $mode : "property";
+        $mode       = $mode ? $mode : 'read'; //read by default
+        $commentKey = $mode . "Comment";
+        $typeKey    = $mode . "Type";
 
         $comment = $this->$commentKey ? $this->$commentKey : $this->{'old' . ucfirst($mode) . 'Comment'};
         $type    = $this->$typeKey ? $this->$typeKey : $this->{'old' . ucfirst($mode) . 'Type'};
@@ -121,11 +113,6 @@ class YiiComponentProperty extends CComponent
             $property =
                 $property . str_repeat(' ', $this->iterator->getMaxLenOfProperty() - strlen($property));
         }
-        return array(
-            $tag,
-            $type,
-            $property
-        );
     }
 
 
@@ -147,8 +134,8 @@ class YiiComponentProperty extends CComponent
 
     public function populate(CComponent $object)
     {
-        $this->settable = $this->isSettable($object);
-        $this->gettable = $this->isGettable($object);
+        $this->settable = $this->settable || $this->isAccessor($object, 'set');
+        $this->gettable = $this->gettable || $this->isAccessor($object, 'get');
         $this->setTypeAndComment($object);
 
         if (method_exists($object, 'behaviors'))
@@ -161,53 +148,43 @@ class YiiComponentProperty extends CComponent
     }
 
 
-    public function isSettable(CComponent $object)
+    public function isAccessor(CComponent $object, $type)
     {
-        $settable = property_exists($object, $this->name);
-        if (!$settable && $object->canSetProperty($this->name))
+        $accessor = property_exists($object, $this->name);
+        if (!$accessor && $object->{'can' . ucfirst($type) . 'Property'}($this->name))
         {
-            $m        = new ReflectionMethod($object, 'set' . $this->name);
-            $settable = $m->getNumberOfRequiredParameters() <= 1;
+            $m        = new ReflectionMethod($object, $type . $this->name);
+            $accessor = $m->getNumberOfRequiredParameters() <= ($type == 'set' ? 1 : 0);
         }
-        if (!$settable && strncasecmp($this->name, 'on', 2) === 0 && method_exists($object, $this->name))
+        if (!$accessor && $object->hasEvent($this->name))
         {
-            $settable = true;
+            $accessor = true;
         }
-        return $settable;
-    }
-
-
-    public function isGettable(CComponent $object)
-    {
-        $gettable = property_exists($object, $this->name);
-        if (!$gettable && $object->canGetProperty($this->name))
-        {
-            $m        = new ReflectionMethod($object, 'get' . $this->name);
-            $gettable = $m->getNumberOfRequiredParameters() == 0;
-        }
-        if (!$gettable && strncasecmp($this->name, 'on', 2) === 0 && method_exists($object, $this->name))
-        {
-            $gettable = true;
-        }
-        return $gettable;
+        return $accessor;
     }
 
 
     public function setOldValues($properties)
     {
-        if (!isset($properties[$this->name]))
+        if (isset($properties[$this->name]))
         {
-            $key                   = $this->name . '-write';
-            $this->oldWriteType    = isset($properties[$key]) ? $properties[$key]['type'] : '';
-            $this->oldWriteComment = isset($properties[$key]) ? $properties[$key]['comment'] : '';
-            $key                   = $this->name . '-read';
-            $this->oldReadType     = isset($properties[$key]) ? $properties[$key]['type'] : '';
-            $this->oldReadComment  = isset($properties[$key]) ? $properties[$key]['comment'] : '';
+            $this->oldReadType    = $properties[$this->name]['type'];
+            $this->oldReadComment = $properties[$this->name]['comment'];
         }
         else
         {
-            $this->oldType    = $properties[$this->name]['type'];
-            $this->oldComment = $properties[$this->name]['comment'];
+            $key = $this->name . '-write';
+            if (isset($properties[$key]))
+            {
+                $this->oldWriteType    = $properties[$key]['type'];
+                $this->oldWriteComment = $properties[$key]['comment'];
+            }
+            $key = $this->name . '-read';
+            if (isset($properties[$key]))
+            {
+                $this->oldReadType    = $properties[$key]['type'];
+                $this->oldReadComment = $properties[$key]['comment'];
+            }
         }
     }
 
@@ -220,20 +197,20 @@ class YiiComponentProperty extends CComponent
             $this->readType    = $this->writeType = $data['type'];
             $this->readComment = $this->writeComment = $data['comment'];
         }
-        if (method_exists($object, 'set' . $this->name))
+        if ($object->canSetProperty($this->name))
         {
             $data               = DocBlockParser::parseMethod($object, 'set' . $this->name)->params;
             $first              = array_shift($data); //get first param of setter
             $this->writeType    = $first['type'];
             $this->writeComment = $first['comment'];
         }
-        if (method_exists($object, 'get' . $this->name))
+        if ($object->canGetProperty($this->name))
         {
             $data              = DocBlockParser::parseMethod($object, 'get' . $this->name)->return;
             $this->readType    = $data['type'];
             $this->readComment = $data['comment'];
         }
-        if (strncasecmp($this->name, 'on', 2) === 0 && method_exists($object, $this->name))
+        if ($object->hasEvent($this->name))
         {
             $parser             = DocBlockParser::parseMethod($object, $this->name);
             $this->writeType    = $this->readType = "CList";
