@@ -14,7 +14,7 @@ class PageSectionsSidebar extends Portlet
         foreach ($sections as $id => $name)
         {
             $sections[$id] = array(
-                'label' => preg_replace('|^[\.]+|', '&nbsp;', $name),
+                'label' => preg_replace('|^[\.]+|', '- ', $name),
                 'url'   => 'e',
                 'type'  => 'raw'
             );

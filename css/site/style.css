@@ -131,6 +131,14 @@ h1 {
 }
 
 #sections-menu li a{
-    line-height: 25px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+.well h4 {
     font-size: 14px;
+    color: #333333;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
