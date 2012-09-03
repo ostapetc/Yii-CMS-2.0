@@ -16,23 +16,7 @@
     margin-left: 4px;
 }
 
-.rating-vote.plus-na {
-    background: url(/img/icons/plus_minus.gif) left top;
-    cursor: help;
-}
-
-.rating-vote.minus-na {
-    background: url(/img/icons/plus_minus.gif) left bottom;
-    cursor: help;
-}
-
-.rating-vote.plus {
-    background: url(/img/icons/plus_minus.gif) right top;
-    cursor: pointer;
-}
-
-.rating-vote.minus {
-    background: url(/img/icons/plus_minus.gif) right bottom;
+.rating-vote.plus, .rating-vote.minus {
     cursor: pointer;
 }
 

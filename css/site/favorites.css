@@ -12,24 +12,12 @@
     margin-top: 1px;
 }
 
-.favorite a.guest {
+.favorite a.guest, .favorite a.guest {
     cursor: help;
-    background: url("/img/icons/favs.gif") no-repeat left bottom;
 }
 
-.favorite a.guest {
-    cursor: help;
-    background: url("/img/icons/favs.gif") no-repeat left top;
-}
-
-.favorite a.user {
+.favorite a.user, .favorite a.added {
     cursor: pointer;
-    background: url("/img/icons/favs.gif") no-repeat left bottom;
-}
-
-.favorite a.added {
-    cursor: help;
-    background: url("/img/icons/favs.gif") no-repeat left top;
 }
 
 .favs_count {

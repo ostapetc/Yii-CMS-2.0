@@ -25,11 +25,6 @@ class YiiComponentProperty extends CComponent
     protected $_oldReadComment;
 
 
-    public function __construct()
-    {
-    }
-
-
     public function __get($name)
     {
         return $this->{'_' . $name} ? $this->{'_' . $name} : $this->{'_old' . ucfirst($name)};

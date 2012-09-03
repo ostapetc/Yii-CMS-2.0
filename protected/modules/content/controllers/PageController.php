@@ -62,10 +62,6 @@ class PageController extends Controller
                     ),
                     array(
                         'widget',
-                        'application.modules.tags.portlets.TagsSidebar'
-                    ),
-                    array(
-                        'widget',
                         'application.modules.comments.portlets.CommentsSidebar',
                     ),
                     array(

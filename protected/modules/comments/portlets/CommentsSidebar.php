@@ -11,10 +11,7 @@ class CommentsSidebar extends Portlet
     public function renderContent()
     {
         $this->render('CommentsSidebar', array(
-            'comments_list' => array(
-                t('Свежие комментарии')   => Comment::model()->last()->limit(7)->findAll(),
-                t('Рейтовые комментарии') => Comment::model()->last()->limit(7)->findAll()
-            )
+            'comments' => Comment::model()->last()->limit(7)->findAll()
         ));
     }
 }

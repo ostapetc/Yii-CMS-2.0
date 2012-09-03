@@ -9,10 +9,10 @@
 /*}*/
 
 body {
-    background-image: url(/img/site/bg.png);
+    background-image: url(/img/site/bg2.jpg);
     background-attachment: fixed;
     background-color: #C0DEED;
-    background-position: left top;
+    background-position: -100px top;
     background-repeat: no-repeat;
 }
 
@@ -131,6 +131,14 @@ h1 {
 }
 
 #sections-menu li a{
-    line-height: 25px;
+    line-height: 24px;
+    font-size: 12px;
+}
+
+.well h4 {
     font-size: 14px;
+    color: #333333;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
