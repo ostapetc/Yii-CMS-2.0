@@ -6,7 +6,19 @@
  * Time: 14:24
  * To change this template use File | Settings | File Templates.
  */
-class Navbar
+class Navbar extends Portlet
 {
+    public function renderContent()
+    {
+        $query = "";
+        if (isset($_GET['query']))
+        {
+            $query = trim(strip_tags($_GET['query']));
+        }
 
+        $this->render('Navbar', array(
+            'items' => Yii::app()->controller->topMenuItems(),
+            'query' => $query
+        ));
+    }
 }

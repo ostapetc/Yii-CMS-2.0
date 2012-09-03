@@ -47,36 +47,43 @@
 
 <body>
 
+<? $this->renderPartial('application.views.layouts._modal'); ?>
+
 <div id='main-wrapper'>
-    <div class="navbar navbar-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="/">Project Name</a>
 
-                <div class="nav-collapse">
-                    <? $this->widget('TopMenu'); ?>
-                    <? $this->widget('TopRightMenu'); ?>
-                </div>
-            </div>
-        </div>
+    <? $this->widget('Navbar'); ?>
 
-        <div class="subnav">
-            <? $this->widget('TopSubMenu'); ?>
-        </div>
 
-        <br clear="all" />
-    </div>
+
+<!--    <div class="navbar navbar-top">-->
+<!--        <div class="navbar-inner">-->
+<!--            <div class="container">-->
+<!--                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                    <span class="icon-bar"></span>-->
+<!--                </a>-->
+<!--                <a class="brand" href="/">Project Name</a>-->
+<!---->
+<!--                <div class="nav-collapse">-->
+<!--                    --><?// $this->widget('TopMenu'); ?>
+                    <? //$this->widget('TopRightMenu'); ?>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--        <div class="subnav">-->
+<!--            --><?// $this->widget('TopSubMenu'); ?>
+<!--        </div>-->
+<!---->
+<!--        <br clear="all" />-->
+<!--    </div>-->
 
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span8 well">
                 <? if ($this->page_title): ?>
-                    <h1><?= $this->page_title ?></h1>
+                <h1><?= $this->page_title ?></h1>
                 <? endif ?>
 
                 <?= $content ?>

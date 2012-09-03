@@ -279,4 +279,13 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
+    public function render($route, $params = array(), $return = false)
+    {
+        if (Yii::app()->request->getParam('modal'))
+        {
+            $this->layout = false;
+        }
+
+        return parent::render($route, $params, $return);
+    }
 }

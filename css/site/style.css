@@ -9,10 +9,10 @@
 /*}*/
 
 body {
-    background-image: url(/img/site/bg.png);
+    background-image: url(/img/site/bg2.jpg);
     background-attachment: fixed;
     background-color: #C0DEED;
-    background-position: left top;
+    background-position: -100px top;
     background-repeat: no-repeat;
 }
 
