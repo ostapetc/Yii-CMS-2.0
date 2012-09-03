@@ -34,16 +34,15 @@ class YiiComponentPropertyIterator extends ArrayIterator
         $props      = $this->filter($object, $props);
         $result     = array();
 
-        $parser = DocBlockParser::parseClass($object);
         foreach ($props as $prop)
         {
-            $result[$prop] = $this->createPropertyInstance($parser, $object, $prop, $propertyOptions);
+            $result[$prop] = $this->createPropertyInstance($object, $prop, $propertyOptions);
         }
         parent::__construct($result);
     }
 
 
-    protected function createPropertyInstance($parser, $object, $prop, $propertyOptions)
+    protected function createPropertyInstance($object, $prop, $propertyOptions)
     {
         if (!isset($propertyOptions['class']))
         {
@@ -51,9 +50,9 @@ class YiiComponentPropertyIterator extends ArrayIterator
         };
         $property       = Yii::createComponent($propertyOptions);
         $property->name = $prop;
-        $property->populate($object);
-        $property->setOldValues($parser->properties);
         $property->iterator = $this;
+        $property->populate($object);
+        $property->setOldValues(DocBlockParser::parseClass($object)->properties);
         return $property;
     }
 
