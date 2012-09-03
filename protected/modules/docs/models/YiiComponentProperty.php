@@ -57,10 +57,10 @@ class YiiComponentProperty extends CComponent
             {
                 return $this->getLine();
             }
-        } catch (Exception $e)
+        }
+        catch (Exception $e)
         {
-            print_r($e->__toString());
-            die;
+            Yii::app()->handleException($e);
         }
     }
 
