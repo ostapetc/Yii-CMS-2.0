@@ -115,7 +115,7 @@ class User extends ActiveRecord
             array(
                 'name',
                 'length',
-                'max' => 40
+                'max' => 16
             ),
             array(
                 'photo', 'safe', 'on' => array(
