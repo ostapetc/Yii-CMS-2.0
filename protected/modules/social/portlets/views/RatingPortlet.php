@@ -12,18 +12,18 @@ $labels = array(
     <?= $rating ?>
 
     <? if (Yii::app()->user->isGuest): ?>
-        <div title="<?= $labels['not_guest'] ?>" class="rating-vote minus-na"></div>
-        <div title="<?= $labels['not_guest'] ?>" class="rating-vote plus-na"></div>
+        <div title="<?= $labels['not_guest'] ?>" class="rating-vote minus-na glyphicon-thumbs-down ="></div>
+        <div title="<?= $labels['not_guest'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></div>
     <? elseif ($exists): ?>
-        <div title="<?= $labels['exists'] ?>" class="rating-vote minus-na"></div>
-        <div title="<?= $labels['exists'] ?>" class="rating-vote plus-na"></div>
+        <div title="<?= $labels['exists'] ?>" class="rating-vote minus-na glyphicon-thumbs-down"></div>
+        <div title="<?= $labels['exists'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></div>
     <? else: ?>
         <? if ($user_id != Yii::app()->user->id): ?>
-            <div title="<?= $labels['minus'] ?>" class="rating-vote minus" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
-            <div title="<?= $labels['plus'] ?>" class="rating-vote plus" value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
+            <div title="<?= $labels['minus'] ?>" class="rating-vote minus glyphicon-thumbs-down" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
+            <div title="<?= $labels['plus'] ?>" class="rating-vote plus glyphicon-thumbs-up " value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
         <? else: ?>
-            <div title="<?= $labels['not_owner'] ?>" class="rating-vote minus-na"></div>
-            <div title="<?= $labels['not_owner'] ?>" class="rating-vote plus-na"></div>
+            <div title="<?= $labels['not_owner'] ?>" class="rating-vote minus-na glyphicon-thumbs-down"></div>
+            <div title="<?= $labels['not_owner'] ?>" class="rating-vote plus-na glyphicon-thumbs-up "></div>
         <? endif ?>
     <? endif ?>
 </div>

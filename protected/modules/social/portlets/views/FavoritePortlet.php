@@ -1,11 +1,11 @@
 <div class="favorite">
     <? if (Yii::app()->user->isGuest): ?>
-        <a title="<?= $guest_msg ?>" onclick="return false;" href="#" class="guest"></a>
+        <a title="<?= $guest_msg ?>" onclick="return false;" href="#" class="guest glyphicon-star"></a>
     <? else: ?>
         <? if ($added): ?>
-            <a title="<?= $added_msg ?>" onclick="return false;" href="#" class="added"></a>
+            <a title="<?= $added_msg ?>" onclick="return false;" href="#" class="added glyphicon-star"></a>
         <? else: ?>
-            <a title="<?= $user_msg ?>" added_msg="<?= $added_msg ?>" model_id="<?= $model_id ?>" object_id="<?= $object_id ?>" href="" class="user"></a>
+            <a title="<?= $user_msg ?>" added_msg="<?= $added_msg ?>" model_id="<?= $model_id ?>" object_id="<?= $object_id ?>" href="" class="user glyphicon-star "></a>
         <? endif ?>
     <? endif ?>
 </div>

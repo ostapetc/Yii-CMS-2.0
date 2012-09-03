@@ -28,7 +28,6 @@ class FavoritePortlet extends Portlet
 
     public function renderContent()
     {
-        return; //no table favourites
         $object_id = $this->model->id;
         $model_id  = get_class($this->model);
 

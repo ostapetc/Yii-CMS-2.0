@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<link rel="stylesheet" type="text/css" href="/css/icons.css" />
 
-</body>
-</html>
+
+<?
+$c = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/css/icons.css');
+preg_match_all('/\.(glyphicon-.*){/', $c, $classes);
+?>
+
+<? foreach ($classes[1] as $class): ?>
+    <span class="<?= $class ?>"></span>
+    <?= $class ?>
+    <br/>
+<? endforeach ?>

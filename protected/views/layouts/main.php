@@ -14,9 +14,9 @@
     <?
     $cs = Yii::app()->clientScript;
     $cs->registerCoreScript('jquery');
-//    $cs->registerCoreScript('jquery.ui');
     Yii::app()->bootstrap->registerScripts();
 
+    $cs->registerCssFile('/css/icons.css');
     $cs->registerCssFile('/css/site/form.css');
     $cs->registerCssFile('/css/site/style.css');
     $cs->registerCssFile('/css/site/menu.css');
