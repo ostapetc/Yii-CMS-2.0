@@ -110,10 +110,7 @@ class Generator extends CComponent
         }
 
         //properties
-        foreach ($props as $prop)
-        {
-            $docBlock .= $prop;
-        }
+        $docBlock .= implode(iterator_to_array($props));
 
         //other
         foreach ($parser->other as $type => $line)
