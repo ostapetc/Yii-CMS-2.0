@@ -1,8 +1,7 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: artem.ostapetc
- * Date: 03.09.12
- * Time: 15:40
- * To change this template use File | Settings | File Templates.
- */
+<?php //check short_open_tag php.ini directive is set
+if (ini_get('short_open_tag') != '1')
+{
+    echo 'Please set short_open_tag directive';
+    die;
+}
+?>

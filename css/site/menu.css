@@ -47,3 +47,16 @@
     /*height: 10px !important;*/
     /*color: #808080 !important;*/
 /*}*/
+
+
+a.user-menu {
+    background-image: url(/img/glyphicons/glyphicons_003_user.png);
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding-left: 36px !important;
+}
+
+small.grey {
+    color:#999999;
+    font-size: 11px;
+}
