@@ -4,13 +4,13 @@ $modules_dirs     = scandir(MODULES_PATH);
 
 foreach ($modules_dirs as $module)
 {
-    if ($module[0] == ".")
-    {
+    if ($module[0] == ".") {
         continue;
     }
 
     $modules[] = $module;
 }
+
 return array(
     'language' => 'ru',
     'basePath' => dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -77,7 +77,7 @@ return array(
             'class'    => 'CClientScript',
         ),
         'session'      => array(
-//            'autoStart'=> true
+            'autoStart'=> true
         ),
         'user'         => array(
             'allowAutoLogin' => true,
@@ -112,28 +112,30 @@ return array(
         ),
 
         'errorHandler' => array(
-//            'class' => 'application.components.ErrorHandler',
+            'class' => 'application.components.ErrorHandler',
             'errorAction' => 'main/main/error',
         ),
 
         'authManager'  => array(
-            'class' => 'DbAuthManager'
+            'class'           => 'CDbAuthManager',
+            'connectionID'    => 'db',
+            'itemTable'       => 'auth_items',
+            'assignmentTable' => 'auth_assignments',
+            'itemChildTable'  => 'auth_items_childs',
+            'defaultRoles'    => array('guest')
         ),
+
         'cache' => array(
             'class'=>'system.caching.CFileCache',
-        ),
-        'log'=>array(
-            'class'=>'CLogRouter',
-            'routes'=>array(),
         ),
     ),
 
     'onBeginRequest' => array('AppManager', 'init'),
-    'params' => array(
-        'save_site_actions'           => true,
-        'multilanguage_support'       => false,
+
+    'params'         => array(
+        'save_site_actions' => true,
+        'multilanguage_support' => true,
         'collect_routes_from_modules' => true,
-        'themes_enabled'              => false,
-        'salt'                        => 'some_secret_key', // substr(str_replace('+', '.', base64_encode(sha1(microtime(true), true))), 0, 22)
+        'themes_enabled' => false
     )
 );
