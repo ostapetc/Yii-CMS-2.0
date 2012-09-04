@@ -133,7 +133,7 @@ class Rating extends ActiveRecord
         }
 
         $sql = "SELECT SUM(`value`)
-                       FROM " . self::tableName() . "
+                       FROM " . self::model()->tableName() . "
                        WHERE object_id = '{$object_id}' AND
                              model_id  = '" . $model_id . "'";
 
