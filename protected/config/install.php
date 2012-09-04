@@ -1,5 +1,6 @@
 <?
 $conf = CMap::mergeArray(require ('main.php'), array(
+    'preload'  => array('bootstrap'),
     'components' => array(
         'installer' => array(
             'class' => 'install.components.SimpleCmsInstaller'

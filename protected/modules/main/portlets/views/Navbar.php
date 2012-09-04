@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a href="#" class="brand">SiteName</a>
+            <a href="/" class="brand">SiteName</a>
             <div class="nav-collapse">
                 <?
                 $this->widget('BootMenu', array(
@@ -16,25 +16,12 @@
                 <form action="" class="navbar-search pull-left">
                     <input type="text" placeholder="Поиск" value="<?= $query ?>" class="search-query span2">
                 </form>
-                <ul class="nav pull-right">
+                <ul class="nav pull-right" style="margin-right: 0;">
                     <? if (Yii::app()->user->isGuest): ?>
                         <li><?= CHtml::link(t('Войти'), array('/users/user/login'), array('class' => 'modal-link', 'data-title' => 'Авторизация')); ?></li>
                         <li class="divider-vertical"></li>
-                        <li><?= CHtml::link(t('Регистрация'), array('/users/user/register')); ?></li>
+                        <li><?= CHtml::link(t('Регистрация'), array('/users/user/registration')); ?></li>
                     <? else: ?>
-<!--                        <li><a href="#">Link</a></li>-->
-<!--                        <li class="divider-vertical"></li>-->
-<!--                        <li class="dropdown">-->
-<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>-->
-<!--                            <ul class="dropdown-menu">-->
-<!--                                <li><a href="#">Action</a></li>-->
-<!--                                <li><a href="#">Another action</a></li>-->
-<!--                                <li><a href="#">Something else here</a></li>-->
-<!--                                <li class="divider"></li>-->
-<!--                                <li><a href="#">Separated link</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#"><b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -59,9 +46,24 @@
                                 <li><?= CHtml::link(t('Выйти'), array('/users/user/logout')) ?></li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle create-menu" href="#"><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <?= CHtml::link(t('Создать топик'), array('/content/page/create')) ?>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <?= CHtml::link(t('Добавить видео'), array('/video/video/create')) ?>
+                                </li>
+                            </ul>
+                        </li>
                     <? endif ?>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
+

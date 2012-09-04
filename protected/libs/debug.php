@@ -23,9 +23,10 @@ function dump($var, $skipCount = 0, $depth = 2)
     {
         $startSkipCount = 0;
 
-        echo '<pre>';
-        CVarDumper::dump($var, $depth, true);
-        echo '</pre>';
+        $isNotConsole = !defined('STDIN');
+        echo $isNotConsole ? '<pre>' : '';
+        CVarDumper::dump($var, $depth, $isNotConsole);
+        echo $isNotConsole ? '</pre>' : '';
 
         exit();
     }

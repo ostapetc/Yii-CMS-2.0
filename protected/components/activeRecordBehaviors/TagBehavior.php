@@ -8,20 +8,18 @@ class TagBehavior extends ActiveRecordBehavior
 
         $model_id = get_class($this->owner);
 
-        if (isset($_POST[$model_id]['tags']))
+        if (isset($_POST[$model_id]['tags']) && is_array($_POST[$model_id]['tags']))
         {
-            foreach (explode(',', $_POST[$model_id]['tags']) as $tag_name)
+            foreach ($_POST[$model_id]['tags'] as $tag_id)
             {
-                $tag = Tag::model()->find("name = '{$tag_name}'");
+                $tag = Tag::model()->findByPk($tag_id);
                 if (!$tag)
                 {
-                    $tag = new Tag();
-                    $tag->name = $tag_name;
-                    $tag->save();
+                    continue;
                 }
 
                 $tag_rel = new TagRel();
-                $tag_rel->tag_id    = $tag->id;
+                $tag_rel->tag_id    = $tag_id;
                 $tag_rel->object_id = $this->owner->id;
                 $tag_rel->model_id  = $model_id;
                 $tag_rel->save();

@@ -1,6 +1,37 @@
-<?
+<?php
+/** 
+ * @property                  $language
+ * @property                  $status
+ * @property                  $id
+ * @property                  $user_id
+ * @property                  $title
+ * @property                  $url
+ * @property                  $text
+ * @property                  $date_create
+ * @property                  $order
+ * @property                  $href
+ * @property                  $content
+ * @property                  $newAttachedModel
+ * @property mixed            $related          the related object(s).
+ * @property string           $attributeLabel   the attribute label
+ * @property CActiveRelation  $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
+ * @property mixed            $attribute        the attribute value. Null if the attribute is not set or does not exist.
+ * @property string           $error            the error message. Null is returned if no error.
+ * @property CList            $eventHandlers    list of attached event handlers for the event
+ * @property Language         $language_model
+ * @property TagRel[]         $tags_rels
+ * @property Tag[]            $tags
+ * @property int|null         $comments_count
+ * @property User             $user
+ * @property PageSectionRel[] $sections_rels
+ * @property PageSection[]    $sections
+ * 
+ */
+
 class Page extends ActiveRecord
 {
+    //public $tags_names;
+
     const PAGE_SIZE = 20;
 
     const STATUS_UNPUBLISHED = 'unpublished';
@@ -40,7 +71,7 @@ class Page extends ActiveRecord
             parent::behaviors(),
             array(
                  'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 'FileManager' => array(
+                 /*'FileManager' => array(
                      'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
                      'tags' => array(
                          'gallery' => array(
@@ -48,7 +79,7 @@ class Page extends ActiveRecord
                              'data_type' => 'image'
                          )
                      )
-                 ),
+                 ),*/
             )
         );
     }
@@ -88,7 +119,7 @@ class Page extends ActiveRecord
                 'integerOnly' => true
             ),
             array(
-                'sections_ids',
+                'sections_ids, tags',
                 'safe',
                 'on' => array(
                     self::SCENARIO_CREATE,
@@ -175,7 +206,8 @@ class Page extends ActiveRecord
         return array_merge(
             parent::attributeLabels(),
             array(
-                 'sections_ids' => t('Разделы')
+                'sections_ids' => t('Разделы'),
+                'tags'         => t('Теги')
             )
         );
     }

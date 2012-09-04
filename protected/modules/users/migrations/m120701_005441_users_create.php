@@ -1,5 +1,5 @@
 <?
-class m120701_005441_users_create extends EDbMigration
+class m120701_005441_users_create extends DbMigration
 {
     public function up()
     {
@@ -10,7 +10,7 @@ class m120701_005441_users_create extends EDbMigration
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `name` varchar(40) NOT NULL COMMENT 'Имя',
                 `email` varchar(200) NOT NULL COMMENT 'Email',
-                `password` varchar(32) NOT NULL COMMENT 'Пароль',
+                `password` varchar(60) NOT NULL COMMENT 'Пароль',
                 `birthdate` date DEFAULT NULL COMMENT 'Дата рождения',
                 `gender` enum('man','woman') DEFAULT NULL COMMENT 'Пол',
                 `status` enum('active','new','blocked') DEFAULT 'new' COMMENT 'Статус',

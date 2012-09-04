@@ -56,7 +56,45 @@ a.user-menu {
     padding-left: 36px !important;
 }
 
+a.create-menu {
+    background-image: url(/img/glyphicons/glyphicons_151_edit.png);
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding-left: 36px !important;
+}
+
 small.grey {
     color:#999999;
     font-size: 11px;
+}
+
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-inner {
+    border-radius: 4px 4px 0 0;
+}
+
+
+.breadcrumb {
+    border-radius: 0 0 4px 4px;
+}
+
+.breadcrumb li > a {
+    text-decoration: none !important;
+    padding: 4px 6px;
+    font-size: 13px;
+}
+
+.breadcrumb li {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.breadcrumb li.active > a, .breadcrumb li > a:hover {
+    background-color: #0088CC;
+    color: #FFFFFF;
+    border-radius: 5px 5px 5px 5px;
 }

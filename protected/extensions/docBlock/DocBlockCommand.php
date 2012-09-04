@@ -1,16 +1,19 @@
 <?php
-require_once 'DocBlockParser.php';
-require_once 'YiiComponentPropertyIterator.php';
-require_once 'ModelInModuleFilesIterator.php';
-require_once 'YiiComponentProperty.php';
-
-class Generator extends CComponent
+class DocBlockCommand extends CConsoleCommand
 {
     public $baseClass = 'CComponent';
     public $readWriteDifferentiate = true; //phpstorm no support @property-write and @property-read specification
 
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
+
+    public $propertyIteratorOptions = array(
+        'includeAttributes' => true,
+        'includeEvents'     => false,
+        'includeAccessors'  => true,
+        'includeRelations'  => true
+    );
+
     public $propertyOptions = array(
         'class'                     => 'YiiComponentProperty',
         'toUndercore'               => false,
@@ -21,20 +24,48 @@ class Generator extends CComponent
     );
 
 
+    /**
+     * Import all needed classes
+     */
+    public function init()
+    {
+        $alias = md5(__DIR__);
+        Yii::setPathOfAlias($alias, __DIR__);
+        Yii::import($alias . '.DocBlockParser');
+        Yii::import($alias . '.DocBlockProperty');
+        Yii::import($alias . '.' . $this->filesIterator);
+        Yii::import($alias . '.' . $this->propertyIterator);
+        Yii::import($alias . '.' . $this->propertyOptions['class']);
+
+        parent::init();
+    }
+
+
+    /**
+     * @return Iterator by Files for processing
+     */
     protected function getFilesIterator()
     {
         return new $this->filesIterator;
     }
 
 
+    /**
+     * @param $object
+     *
+     * @return Iterator by property of file
+     */
     protected function getPropertyIterator($object)
     {
         $class = $this->propertyIterator;
-        return new $class($object, $this->propertyOptions);
+        return new $class($this->propertyIteratorOptions, $object, $this->propertyOptions);
     }
 
 
-    public function generate()
+    /**
+     * Run processing of all files
+     */
+    public function actionGenerate()
     {
         foreach ($this->getFilesIterator() as $fileInfo)
         {
@@ -49,8 +80,7 @@ class Generator extends CComponent
                 continue;
             }
             list($class, $object) = $data;
-            $docBlock = $this->getDockBlock($class, $object);
-            dump($docBlock);
+            $docBlock    = $this->getDockBlock($class, $object);
             $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
             $content     = file_get_contents($file);
             $fileContent = substr($content, strpos($content, "class $class"));
@@ -59,7 +89,12 @@ class Generator extends CComponent
     }
 
 
-    public function getInstanceByFile(SplFileInfo $fileInfo)
+    /**
+     * @param SplFileInfo $fileInfo
+     *
+     * @return array()|bool return class and instance by SplFileInfo or false if can't instanciate it
+     */
+    protected function getInstanceByFile(SplFileInfo $fileInfo)
     {
         try
         {
@@ -80,7 +115,13 @@ class Generator extends CComponent
     }
 
 
-    public function getDockBlock($class, CComponent $object)
+    /**
+     * @param $class
+     * @param $object
+     *
+     * @return string final dockBlock
+     */
+    protected function getDockBlock($class, $object)
     {
         $props  = $this->getPropertyIterator($object);
         $parser = DocBlockParser::parseClass($class);
@@ -95,6 +136,12 @@ class Generator extends CComponent
     }
 
 
+    /**
+     * @param DocBlockParser $parser
+     * @param Iterator       $props
+     *
+     * @return string docBlock without stars, only text
+     */
     protected function getRawDockBlock(DocBlockParser $parser, Iterator $props)
     {
         $docBlock = "";

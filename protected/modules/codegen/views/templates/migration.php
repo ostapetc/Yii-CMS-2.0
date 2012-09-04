@@ -1,10 +1,9 @@
 <? echo "<?\n"; ?>
-class <?= $name ?> extends EDbMigration
+
+class <?= $name ?> extends DbMigration
 {
     public function up()
     {
-        $this->execute("DROP TABLE IF EXISTS `<?= $table ?>`");
-
         $this->execute("
             <?= $sql . "\n" ?>
         ");
@@ -13,6 +12,6 @@ class <?= $name ?> extends EDbMigration
 
     public function down()
     {
-        return false;
+        $this->execute("DROP TABLE `<?= $table ?>`");
     }
 }

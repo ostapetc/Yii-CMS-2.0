@@ -5,14 +5,14 @@ class PageController extends Controller
     public static function actionsTitles()
     {
         return array(
-            'view'         => 'Просмотр страницы',
+            'view'         => 'Просмотр топика',
             'main'         => 'Главная страница',
-            'create'       => 'Новая страница',
-            'update'       => 'Редактирование страницы',
-            'index'        => 'Список страниц',
-            'userPages'    => 'Страницы пользователя',
-            'sectionPages' => 'Страницы раздела',
-            'tagPages'     => 'Страница тега'
+            'create'       => 'Новый топик',
+            'update'       => 'Редактирование топика',
+            'index'        => 'Все топики',
+            'userPages'    => 'Топики пользователя',
+            'sectionPages' => 'Топики раздела',
+            'tagPages'     => 'Топики тега'
         );
     }
 
@@ -21,11 +21,11 @@ class PageController extends Controller
     {
         return array(
             array(
-                'label' => 'Все',
+                'label' => t('Все'),
                 'url'   => array('content/page/index')
             ),
             array(
-                'label' => 'Лучшие',
+                'label' => t('Лучшие'),
                 'url'   => array('content/page/top')
             ),
             array(
@@ -64,10 +64,10 @@ class PageController extends Controller
                         'widget',
                         'application.modules.comments.portlets.CommentsSidebar',
                     ),
-                    array(
+                    /*array(
                         'widget',
                         'application.modules.content.portlets.NavigatorSidebar',
-                    ),
+                    ),*/
                 )
             ),
             array(

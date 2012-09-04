@@ -279,7 +279,7 @@ class AppManager
         $names = array();
         foreach (Yii::app()->getModules() as $id => $config)
         {
-            $names[$module] = Yii::app()->getModule($id)->name();
+            $names[$id] = Yii::app()->getModule($id)->name;
         }
 
         return $names;

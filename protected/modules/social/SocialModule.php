@@ -8,7 +8,7 @@ class SocialModule extends WebModule
 
     public function getName()
     {
-        return '';
+        return 'Социальность';
     }
 
 

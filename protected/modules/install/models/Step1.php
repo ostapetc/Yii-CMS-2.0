@@ -1,4 +1,14 @@
 <?php
+/** 
+ * @property  $db_host
+ * @property  $db_login
+ * @property  $db_pass
+ * @property  $db_name
+ * @property  $dbPatterns
+ * @property  $configs
+ * 
+ */
+
 class Step1 extends AbstractInstallModel
 {
     public $db_host = 'localhost';

@@ -1,6 +1,21 @@
 <?php
-class Step2 extends AbstractInstallModel
-{
+/** 
+ * @property  $admin_login
+ * @property  $admin_pass
+ * @property  $admin_pass_confirm
+ * @property  $modules
+ * @property  $save_site_actions
+ * @property  $multilanguage_support
+ * @property  $collect_routes_from_modules
+ * @property  $themes_enabled
+ * @property  $availableModules
+ * @property  $mainConfigPatterns
+ * @property  $configs
+ * 
+ */
+
+class Step2 extends AbstractInstallModel {
+
     public $admin_login;
     public $admin_pass;
     public $admin_pass_confirm;
@@ -12,21 +27,23 @@ class Step2 extends AbstractInstallModel
     public $collect_routes_from_modules = true;
     public $themes_enabled = false;
 
-    public static $available_modules
-        = array(
-            'content'     => 'content',
-            'codegen'    => 'condegen',
-            'fileManager' => 'fileManager',
-            'mailer'      => 'mailer',
-        );
+    public static function getAvailableModules()
+    {
+        foreach (Yii::app()->getModules() as $id => $config) {
+            $res[$id] = $id;
+        }
+        return $res;
+    }
 
     public function rules()
     {
         return array(
             array('admin_login', 'required'),
             array('admin_pass', 'required'),
-            array('admin_pass_confirm', 'compare',
-                  'compareAttribute'=> 'admin_pass'),
+            array(
+                'admin_pass_confirm', 'compare',
+                'compareAttribute'=> 'admin_pass'
+            ),
             array('modules', 'safe')
         );
     }
@@ -49,12 +66,11 @@ class Step2 extends AbstractInstallModel
     public function getMainConfigPatterns()
     {
         $modules = array();
-        foreach (array_merge($this->modules, array('main', 'users', 'rbac')) as $module)
-        {
+        foreach (array_merge($this->modules, array('main', 'users', 'rbac')) as $module) {
             $modules[] = $module;
         }
         return array(
-            'MODULES'                     => implode('", "',$modules),
+            'MODULES'                     => implode('", "', $modules),
             'SAVE_SITE_ACTIONS'           => $this->save_site_actions ? 'true' : 'false',
             'MULTILANGUAGE_SUPPORT'       => $this->multilanguage_support ? 'true' : 'false',
             'COLLECT_ROUTES_FROM_MODULES' => $this->collect_routes_from_modules ? 'true' : 'false',
