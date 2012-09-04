@@ -52,32 +52,7 @@
 <div id='main-wrapper'>
 
     <? $this->widget('Navbar'); ?>
-
-
-
-<!--    <div class="navbar navbar-top">-->
-<!--        <div class="navbar-inner">-->
-<!--            <div class="container">-->
-<!--                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                    <span class="icon-bar"></span>-->
-<!--                </a>-->
-<!--                <a class="brand" href="/">Project Name</a>-->
-<!---->
-<!--                <div class="nav-collapse">-->
-<!--                    --><?// $this->widget('TopMenu'); ?>
-                    <? //$this->widget('TopRightMenu'); ?>
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="subnav">-->
-<!--            --><?// $this->widget('TopSubMenu'); ?>
-<!--        </div>-->
-<!---->
-<!--        <br clear="all" />-->
-<!--    </div>-->
+    <? $this->widget('SubNavbar'); ?>
 
     <div class="container-fluid">
         <div class="row-fluid">
