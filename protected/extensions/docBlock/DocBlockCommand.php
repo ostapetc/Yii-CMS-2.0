@@ -6,6 +6,14 @@ class DocBlockCommand extends CConsoleCommand
 
     public $filesIterator = 'ModelInModuleFilesIterator';
     public $propertyIterator = 'YiiComponentPropertyIterator';
+
+    public $propertyIteratorOptions = array(
+        'includeAttributes' => true,
+        'includeEvents'     => false,
+        'includeAccessors'  => true,
+        'includeRelations'  => true
+    );
+
     public $propertyOptions = array(
         'class'                     => 'YiiComponentProperty',
         'toUndercore'               => false,
@@ -50,7 +58,7 @@ class DocBlockCommand extends CConsoleCommand
     protected function getPropertyIterator($object)
     {
         $class = $this->propertyIterator;
-        return new $class($object, $this->propertyOptions);
+        return new $class($this->propertyIteratorOptions, $object, $this->propertyOptions);
     }
 
 

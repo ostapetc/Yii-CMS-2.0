@@ -22,25 +22,38 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     protected $_maxLenOfTag;
 
+    public $includeAttributes = true;
+    public $includeEvents = true;
+    public $includeAccessors = true;
+    public $includeRelations = true;
+
 
     /**
+     * @param array      $initOptions
      * @param CComponent $object
      * @param array      $propertyOptions
      */
-    public function __construct(CComponent $object, $propertyOptions = array())
+    public function __construct($initOptions, CComponent $object, $propertyOptions = array())
     {
-        $attributes = $this->getObjectAttributes($object);
-        $accessors  = $this->getAccessors($object);
-        $events     = $this->getEvents($object);
-        $props      = array_keys(array_merge($accessors, $attributes, $events));
-        $props      = $this->filter($object, $props);
-        $result     = array();
-
+        foreach ($initOptions as $key => $val)
+        {
+            $this->$key = $val;
+        }
+        $this->object = $object;
+        $props        = array_merge($this->attributes, $this->accessors, $this->events, $this->relations);
+        $props        = $this->filter(array_keys($props));
+        $result       = array();
         foreach ($props as $prop)
         {
-            $result[$prop] = $this->createPropertyInstance($object, $prop, $propertyOptions);
+            $result[$prop] = $this->createPropertyInstance($prop, $propertyOptions);
         }
         parent::__construct($result);
+    }
+
+
+    public function __get($name)
+    {
+        return $this->{'include' . ucfirst($name)} ? $this->{'get' . ucfirst($name)}($this->object) : array();
     }
 
 
@@ -53,13 +66,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
      *
      * @return mixed
      */
-    protected function createPropertyInstance($object, $prop, $propertyOptions)
+    protected function createPropertyInstance($prop, $propertyOptions)
     {
-        $property       = Yii::createComponent($propertyOptions);
-        $property->name = $prop;
+        $property           = Yii::createComponent($propertyOptions);
+        $property->name     = $prop;
         $property->iterator = $this;
-        $property->populate($object);
-        $property->setOldValues(DocBlockParser::parseClass($object)->properties);
+        $property->populate($this->object);
+        $property->setOldValues(DocBlockParser::parseClass($this->object)->properties);
         return $property;
     }
 
@@ -67,13 +80,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
     /**
      * Delete all properties that described in DocBlock of any parent class
      *
-     * @param $class
      * @param $props
      *
      * @return array
      */
-    public function filter($class, $props)
+    public function filter($props)
     {
+        $class = get_class($this->object);
         while ($class = get_parent_class($class))
         {
             $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
@@ -93,31 +106,23 @@ class YiiComponentPropertyIterator extends ArrayIterator
     /**
      * try to get attributes for object
      *
-     * @param CComponent $object
-     *
      * @return array
      */
-    public function getObjectAttributes(CComponent $object)
+    public function getAttributes($object)
     {
-        if (method_exists($object, 'getAttributes'))
-        {
-            return $object->getAttributes();
-        }
-        return array();
+        return method_exists($object, 'getAttributes') ? $object->getAttributes() : array();
     }
 
 
     /**
      * Get all accessors for object
      *
-     * @param CComponent $object
-     *
      * @return array
      */
-    public function getAccessors(CComponent $object)
+    public function getAccessors($object)
     {
         $props = array();
-        foreach (get_class_methods($object) as $method)
+        foreach (get_class_methods($this->object) as $method)
         {
             if (strncasecmp($method, 'set', 3) === 0 || strncasecmp($method, 'get', 3) === 0)
             {
@@ -127,9 +132,10 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
         if (method_exists($object, 'behaviors'))
         {
-            foreach ($object->behaviors() as $id => $data)
+            foreach ($this->object->behaviors() as $id => $data)
             {
-                $props = array_merge($props, $this->getAccessors($object->asa($id)));
+
+                $props = array_merge($props, $this->getAccessors($this->object->asa($id)));
             }
         }
         return $props;
@@ -139,11 +145,9 @@ class YiiComponentPropertyIterator extends ArrayIterator
     /**
      * Get all events for object
      *
-     * @param CComponent $object
-     *
      * @return array
      */
-    public function getEvents(CComponent $object)
+    public function getEvents($object)
     {
         $events = array();
         foreach (get_class_methods($object) as $method)
@@ -154,6 +158,17 @@ class YiiComponentPropertyIterator extends ArrayIterator
             }
         }
         return $events;
+    }
+
+
+    /**
+     * Get all relations for AR
+     *
+     * @return array
+     */
+    public function getRelations($object)
+    {
+        return $object instanceof CActiveRecord ? $object->relations() : array();
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Know all about CComponent, CModel and etc.
+ * Know all about CComponent, CModel, CActiveRecord and etc.
  */
 class YiiComponentProperty extends DocBlockProperty
 {
@@ -41,9 +41,13 @@ class YiiComponentProperty extends DocBlockProperty
             $m        = new ReflectionMethod($object, $type . $this->name);
             $accessor = $m->getNumberOfRequiredParameters() <= ($type == 'set' ? 1 : 0);
         }
-        if (!$accessor && $object->hasEvent($this->name))
+        if (!$accessor)
         {
-            $accessor = true;
+            $accessor = $object->hasEvent($this->name);
+        }
+        if (!$accessor && $object instanceof CActiveRecord)
+        {
+            $accessor = $object->hasRelated($this->name);
         }
         return $accessor;
     }
@@ -80,6 +84,27 @@ class YiiComponentProperty extends DocBlockProperty
             $parser              = DocBlockParser::parseMethod($object, $this->name);
             $this->_writeType    = $this->_readType = "CList";
             $this->_writeComment = $this->_readComment = $parser->getShortDescription();
+        }
+        if ($object instanceof CActiveRecord)
+        {
+            $rels = $object->relations();
+            if (isset($rels[$this->name]))
+            {
+                list ($relType, $type) = $rels[$this->name];
+                $returnArrayTypes = array(
+                    CActiveRecord::HAS_MANY,
+                    CActiveRecord::MANY_MANY
+                );
+                if (in_array($relType, $returnArrayTypes))
+                {
+                    $type = $type . '[]';
+                }
+                if ($relType == CActiveRecord::STAT)
+                {
+                    $type = 'int|null';
+                }
+                $this->_writeType = $this->_readType = $type;
+            }
         }
     }
 }
