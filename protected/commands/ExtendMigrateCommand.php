@@ -18,7 +18,7 @@ class ExtendMigrateCommand extends EMigrateCommand
             SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
             SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
         ")->execute();
-        parent::migrateUp($args);
+        parent::actionUp($args);
         $this->getDbConnection()->createCommand("
             SET SQL_MODE=@OLD_SQL_MODE;
             SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
