@@ -1,5 +1,8 @@
 <?php
-class YiiComponentProperty extends CComponent
+/**
+ * Incapsulate property drawing logic
+ */
+abstract class DocBlockProperty extends CComponent
 {
     public $name;
     public $iterator;
@@ -25,12 +28,22 @@ class YiiComponentProperty extends CComponent
     protected $_oldReadComment;
 
 
+    /**
+     * Get _property or him _oldProperty variant
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
     public function __get($name)
     {
         return $this->{'_' . $name} ? $this->{'_' . $name} : $this->{'_old' . ucfirst($name)};
     }
 
 
+    /**
+     * @return string combined doc string
+     */
     public function __toString()
     {
         try
@@ -52,8 +65,7 @@ class YiiComponentProperty extends CComponent
             {
                 return $this->getLine();
             }
-        }
-        catch (Exception $e)
+        } catch (Exception $e)
         {
             Yii::app()->handleException($e);
         }
@@ -118,38 +130,6 @@ class YiiComponentProperty extends CComponent
     }
 
 
-    public function populate(CComponent $object)
-    {
-        $this->_settable = $this->_settable || $this->isAccessor($object, 'set');
-        $this->_gettable = $this->_gettable || $this->isAccessor($object, 'get');
-        $this->setTypeAndComment($object);
-
-        if (method_exists($object, 'behaviors'))
-        {
-            foreach ($object->behaviors() as $id => $data)
-            {
-                $this->populate($object->asa($id));
-            }
-        }
-    }
-
-
-    public function isAccessor(CComponent $object, $type)
-    {
-        $accessor = property_exists($object, $this->name);
-        if (!$accessor && $object->{'can' . ucfirst($type) . 'Property'}($this->name))
-        {
-            $m        = new ReflectionMethod($object, $type . $this->name);
-            $accessor = $m->getNumberOfRequiredParameters() <= ($type == 'set' ? 1 : 0);
-        }
-        if (!$accessor && $object->hasEvent($this->name))
-        {
-            $accessor = true;
-        }
-        return $accessor;
-    }
-
-
     public function setOldValues($properties)
     {
         if (isset($properties[$this->name]))
@@ -175,34 +155,12 @@ class YiiComponentProperty extends CComponent
     }
 
 
-    public function setTypeAndComment(CComponent $object)
-    {
-        if (property_exists($object, $this->name))
-        {
-            $data               = DocBlockParser::parseProperty($object, $this->name)->var;
-            $this->_readType    = $this->_writeType = $data['type'];
-            $this->_readComment = $this->_writeComment = $data['comment'];
-        }
-        if ($object->canSetProperty($this->name))
-        {
-            $data                = DocBlockParser::parseMethod($object, 'set' . $this->name)->params;
-            $first               = array_shift($data); //get first param of setter
-            $this->_writeType    = $first['type'];
-            $this->_writeComment = $first['comment'];
-        }
-        if ($object->canGetProperty($this->name))
-        {
-            $data               = DocBlockParser::parseMethod($object, 'get' . $this->name)->return;
-            $this->_readType    = $data['type'];
-            $this->_readComment = $data['comment'];
-        }
-        if ($object->hasEvent($this->name))
-        {
-            $parser              = DocBlockParser::parseMethod($object, $this->name);
-            $this->_writeType    = $this->_readType = "CList";
-            $this->_writeComment = $this->_readComment = $parser->getShortDescription();
-        }
-    }
+    /**
+     * Fill himself by $object properties
+     *
+     * @param $object
+     */
+    abstract public function populate($object);
 
 
     /**

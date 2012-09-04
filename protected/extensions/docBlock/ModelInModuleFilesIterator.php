@@ -1,4 +1,8 @@
 <?php
+/**
+ * Iterator by moduleId.models.* directories for all modules(Yii::app()->getModules())
+ * recursive
+ */
 class ModelInModuleFilesIterator extends AppendIterator
 {
     public function __construct()
