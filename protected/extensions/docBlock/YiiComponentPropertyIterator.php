@@ -1,8 +1,6 @@
 <?php
 class YiiComponentPropertyIterator extends ArrayIterator
 {
-    public $propertyClass = 'YiiComponentProperty';
-
     /**
      * Need for automatical align of strings
      *
@@ -25,6 +23,10 @@ class YiiComponentPropertyIterator extends ArrayIterator
     protected $_maxLenOfTag;
 
 
+    /**
+     * @param CComponent $object
+     * @param array      $propertyOptions
+     */
     public function __construct(CComponent $object, $propertyOptions = array())
     {
         $attributes = $this->getObjectAttributes($object);
@@ -42,12 +44,17 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
+    /**
+     * Instanciate property by $propertyOptions
+     *
+     * @param $object
+     * @param $prop
+     * @param $propertyOptions
+     *
+     * @return mixed
+     */
     protected function createPropertyInstance($object, $prop, $propertyOptions)
     {
-        if (!isset($propertyOptions['class']))
-        {
-            $propertyOptions['class'] = $this->propertyClass;
-        };
         $property       = Yii::createComponent($propertyOptions);
         $property->name = $prop;
         $property->iterator = $this;
@@ -83,6 +90,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
+    /**
+     * try to get attributes for object
+     *
+     * @param CComponent $object
+     *
+     * @return array
+     */
     public function getObjectAttributes(CComponent $object)
     {
         if (method_exists($object, 'getAttributes'))
@@ -93,6 +107,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
+    /**
+     * Get all accessors for object
+     *
+     * @param CComponent $object
+     *
+     * @return array
+     */
     public function getAccessors(CComponent $object)
     {
         $props = array();
@@ -115,6 +136,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
+    /**
+     * Get all events for object
+     *
+     * @param CComponent $object
+     *
+     * @return array
+     */
     public function getEvents(CComponent $object)
     {
         $events = array();
