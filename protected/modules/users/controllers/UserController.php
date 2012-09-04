@@ -43,6 +43,21 @@ class UserController extends Controller
     }
 
 
+    public function topSubMenuItems()
+    {
+        return array(
+            array(
+                'label' => t('Активировать аккаунт'),
+                'url'   => array('/users/user/activateAccountRequest')
+            ),
+            array(
+                'label' => t('Забыли пароль?'),
+                'url'   => array('/users/user/ChangePasswordRequest')
+            )
+        );
+    }
+
+
     public function actionLogin()
     {
         $model = new User(User::SCENARIO_LOGIN);
@@ -60,6 +75,8 @@ class UserController extends Controller
                 $identity = new UserIdentity($model->email, $model->password);
                 if ($identity->authenticate())
                 {
+                    Yii::app()->user->setFlash('success', t('Вы успешно авторизованы'));
+
                     $this->redirect((isset($_GET['redirect']) && !empty($_GET['redirect'])) ? $_GET['redirect'] : '/');
                 }
                 else
@@ -75,6 +92,8 @@ class UserController extends Controller
                     }
 
                     Yii::app()->user->setFlash('error', $auth_error);
+
+                    $this->redirect('/login');
                 }
             }
         }

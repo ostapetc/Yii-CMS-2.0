@@ -58,8 +58,12 @@
         <div class="row-fluid">
             <div class="span8 well">
                 <? if ($this->page_title): ?>
-                <h1><?= $this->page_title ?></h1>
+                    <h1><?= $this->page_title ?></h1>
                 <? endif ?>
+
+                <? foreach (Yii::app()->user->getFlashes() as $type => $msg): ?>
+                    <div class="alert alert-<?= $type ?>"><?= $msg ?></div>
+                <? endforeach ?>
 
                 <?= $content ?>
             </div>

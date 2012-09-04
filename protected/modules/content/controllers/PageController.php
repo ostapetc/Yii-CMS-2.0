@@ -21,11 +21,11 @@ class PageController extends Controller
     {
         return array(
             array(
-                'label' => 'Все',
+                'label' => t('Все'),
                 'url'   => array('content/page/index')
             ),
             array(
-                'label' => 'Лучшие',
+                'label' => t('Лучшие'),
                 'url'   => array('content/page/top')
             ),
             array(
@@ -64,10 +64,10 @@ class PageController extends Controller
                         'widget',
                         'application.modules.comments.portlets.CommentsSidebar',
                     ),
-                    array(
+                    /*array(
                         'widget',
                         'application.modules.content.portlets.NavigatorSidebar',
-                    ),
+                    ),*/
                 )
             ),
             array(
