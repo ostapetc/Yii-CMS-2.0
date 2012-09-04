@@ -142,3 +142,8 @@ h1 {
     margin-top: 0;
     margin-bottom: 5px;
 }
+
+span.italic-12 {
+    font-style: italic;
+    font-size: 12px;
+}
