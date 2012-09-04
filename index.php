@@ -25,5 +25,3 @@ defined('CONFIG') || define('CONFIG', $env);
 $config = APP_PATH . 'config' . DS . CONFIG .'.php';
 
 Yii::createWebApplication($config)->run();
-
-echo UserIdentity::crypt('mazanka');

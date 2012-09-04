@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a href="#" class="brand">SiteName</a>
+            <a href="/" class="brand">SiteName</a>
             <div class="nav-collapse">
                 <?
                 $this->widget('BootMenu', array(
