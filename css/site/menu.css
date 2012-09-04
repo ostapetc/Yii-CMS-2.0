@@ -56,6 +56,13 @@ a.user-menu {
     padding-left: 36px !important;
 }
 
+a.create-menu {
+    background-image: url(/img/glyphicons/glyphicons_151_edit.png);
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding-left: 36px !important;
+}
+
 small.grey {
     color:#999999;
     font-size: 11px;

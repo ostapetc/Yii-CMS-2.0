@@ -16,7 +16,7 @@
                 <form action="" class="navbar-search pull-left">
                     <input type="text" placeholder="Поиск" value="<?= $query ?>" class="search-query span2">
                 </form>
-                <ul class="nav pull-right">
+                <ul class="nav pull-right" style="margin-right: 0;">
                     <? if (Yii::app()->user->isGuest): ?>
                         <li><?= CHtml::link(t('Войти'), array('/users/user/login'), array('class' => 'modal-link', 'data-title' => 'Авторизация')); ?></li>
                         <li class="divider-vertical"></li>
@@ -59,9 +59,24 @@
                                 <li><?= CHtml::link(t('Выйти'), array('/users/user/logout')) ?></li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle create-menu" href="#"><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <?= CHtml::link(t('Создать топик'), array('/content/page/create')) ?>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <?= CHtml::link(t('Добавить видео'), array('/video/video/create')) ?>
+                                </li>
+                            </ul>
+                        </li>
                     <? endif ?>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+
+
