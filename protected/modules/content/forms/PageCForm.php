@@ -23,18 +23,25 @@ return array(
             'type'  => 'dropdownlist',
             'items' => Page::$status_options
         ),
+        'sections_ids' => array(
+            'type'        => 'application.components.formElements.Chosen.Chosen',
+            'options'     => CHtml::listData(PageSection::model()->findAll(), 'id', 'name'),
+            'htmlOptions' => array(
+                'multiple'    => true,
+                'placeholder' => 'Кликните чтобы выбрать (автодополнение)'
+            )
+        ),
+        'tags' => array(
+            'type'  => 'application.components.formElements.Chosen.Chosen',
+            'options'     => CHtml::listData(Tag::model()->findAll(), 'id', 'name'),
+            'htmlOptions' => array(
+                'multiple'    => true,
+                'placeholder' => 'Кликните чтобы выбрать (автодополнение)'
+            )
+        ),
         'text' => array(
             'type'      => 'application.extensions.pageCEditor.elRTE',
             'attribute' => 'text'
-        ),
-        'sections_ids' => array(
-            'type'     => 'dropdownlist',
-            'multiple' => true,
-            'items'    => PageSection::model()->optionsTree(),
-        ),
-        'tags' => array(
-            'type'  => 'TagsInput',
-            'label' => 'Теги'
         ),
     ),
     'buttons'              => array(

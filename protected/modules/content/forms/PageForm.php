@@ -17,12 +17,12 @@ return array(
             'type'  => 'dropdownlist',
             'items' => Page::$status_options
         ),
-        'text' => array(
-            'type' => 'editor'
-        ),
         'tags' => array(
             'type'  => 'TagsInput',
             'label' => 'Теги'
+        ),
+        'text' => array(
+            'type' => 'editor'
         ),
     ),
     'buttons'              => array(
