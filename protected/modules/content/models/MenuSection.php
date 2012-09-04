@@ -1,4 +1,35 @@
-<?
+<?php
+/** 
+ * @property                 $lang
+ * @property                 $is_published
+ * @property                 $id
+ * @property                 $page_id
+ * @property                 $menu_id
+ * @property                 $root
+ * @property                 $left
+ * @property                 $right
+ * @property                 $level
+ * @property                 $title
+ * @property                 $url
+ * @property                 $module_url
+ * @property                 $module_id
+ * @property                 $href
+ * @property                 $path
+ * @property                 $nbspTitle
+ * @property                 $spaceTitle
+ * @property                 $htmlTree
+ * @property                 $newAttachedModel
+ * @property mixed           $related          the related object(s).
+ * @property string          $attributeLabel   the attribute label
+ * @property CActiveRelation $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
+ * @property mixed           $attribute        the attribute value. Null if the attribute is not set or does not exist.
+ * @property string          $error            the error message. Null is returned if no error.
+ * @property CList           $eventHandlers    list of attached event handlers for the event
+ * @property Menu            $menu
+ * @property Page            $page
+ * 
+ */
+
 class MenuSection extends ActiveRecord
 {
     const PAGE_SIZE = 100;

@@ -2,8 +2,6 @@
 class FormModel extends CFormModel
 {
     /**
-     * sdfasdf
-     *
      * @param CModelEvent $event
      */
     public function onBeforeFormInit($event)

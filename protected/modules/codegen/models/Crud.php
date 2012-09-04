@@ -1,9 +1,17 @@
 <?php
+/** 
+ * @property        $class
+ * @property        $genetive
+ * @property        $instrumental
+ * @property        $accusative
+ * @property string $attributeLabel the attribute label
+ * @property string $error          the error message. Null is returned if no error.
+ * @property CList  $eventHandlers  list of attached event handlers for the event
+ * 
+ */
+
 class Crud extends FormModel
 {
-    /**
-     * @var string sd
-     */
     public $class;
 
     public $genetive;
@@ -21,34 +29,6 @@ class Crud extends FormModel
     }
 
 
-    /**
-     * @param $val
-     */
-    public function setNono($val)
-    {
-
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

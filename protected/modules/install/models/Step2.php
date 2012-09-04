@@ -1,4 +1,19 @@
 <?php
+/** 
+ * @property  $admin_login
+ * @property  $admin_pass
+ * @property  $admin_pass_confirm
+ * @property  $modules
+ * @property  $save_site_actions
+ * @property  $multilanguage_support
+ * @property  $collect_routes_from_modules
+ * @property  $themes_enabled
+ * @property  $availableModules
+ * @property  $mainConfigPatterns
+ * @property  $configs
+ * 
+ */
+
 class Step2 extends AbstractInstallModel {
 
     public $admin_login;
