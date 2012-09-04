@@ -6,14 +6,17 @@ class Chosen extends InputWidget
     public $htmlOptions;
     public $onchange = 'js:function() {}';
     public $empty = '';
+    public $options;
 
 
     public function init()
     {
         parent::init();
+
         $options = CJavaScript::encode(array(
             'no_results_text'      => "Выберите один из вариантов",
             'allow_single_deselect'=> true,
+            'default_text_default' => 'eee',
             'onChange'             => $this->onchange
         ));
 
@@ -34,6 +37,13 @@ class Chosen extends InputWidget
             $this->htmlOptions['empty'] = $this->empty;
         }
 
-        echo CHtml::dropDownList($this->name, $this->current, $this->input_element->items, $this->input_element->attributes);
+        if ($this->model)
+        {
+            echo CHtml::activeDropDownList($this->model, $this->attribute, $this->options, $this->htmlOptions);
+        }
+        else
+        {
+            echo CHtml::dropDownList($this->name, $this->current, $this->input_element->items, $this->input_element->attributes);
+        }
     }
 }

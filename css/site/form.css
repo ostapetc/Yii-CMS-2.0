@@ -57,7 +57,11 @@ textarea {
     color: red !important;
 }
 
-.wide-from input[type=text], .wide-from select, .wide-from textarea {
+.wide-from input[type=text], .wide-from textarea {
     /*width: 100% !important;*/
-    width: 790px !important;
+    width: 590px !important;
+}
+
+.wide-from select {
+    width: 604px !important;
 }

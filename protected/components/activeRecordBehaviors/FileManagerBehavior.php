@@ -43,6 +43,12 @@ class FileManagerBehavior extends ActiveRecordBehavior
     {
         $model     = $this->getOwner();
         $object_id = $model->isNewRecord ? $this->_tmpPrefix() : $model->id;
+
+        ActiveRecord::model(get_class($this->getOwner()))->findAllByAttributes(array(
+            'object_id' => $object_id,
+            'model_id'  => get_class($model)
+        ));
+
         return ActiveRecord::model(get_class($this->getOwner()))->findAllByAttributes(array(
             'object_id' => $object_id,
             'model_id'  => get_class($model)

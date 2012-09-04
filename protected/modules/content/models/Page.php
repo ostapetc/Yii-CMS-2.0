@@ -1,6 +1,9 @@
 <?
+
 class Page extends ActiveRecord
 {
+    //public $tags_names;
+
     const PAGE_SIZE = 20;
 
     const STATUS_UNPUBLISHED = 'unpublished';
@@ -40,7 +43,7 @@ class Page extends ActiveRecord
             parent::behaviors(),
             array(
                  'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 'FileManager' => array(
+                 /*'FileManager' => array(
                      'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
                      'tags' => array(
                          'gallery' => array(
@@ -48,7 +51,7 @@ class Page extends ActiveRecord
                              'data_type' => 'image'
                          )
                      )
-                 ),
+                 ),*/
             )
         );
     }
@@ -88,7 +91,7 @@ class Page extends ActiveRecord
                 'integerOnly' => true
             ),
             array(
-                'sections_ids',
+                'sections_ids, tags',
                 'safe',
                 'on' => array(
                     self::SCENARIO_CREATE,
@@ -175,7 +178,8 @@ class Page extends ActiveRecord
         return array_merge(
             parent::attributeLabels(),
             array(
-                 'sections_ids' => t('Разделы')
+                'sections_ids' => t('Разделы'),
+                'tags'         => t('Теги')
             )
         );
     }

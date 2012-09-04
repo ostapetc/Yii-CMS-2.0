@@ -109,7 +109,7 @@ class elRTE extends CInputWidget
     public function run()
     {
         $this->initEditor();
-        echo CHtml::activeTextarea($this->model, $this->attribute);
+        echo CHtml::activeTextarea($this->model, $this->attribute, array('style' => 'width: 200px'));
     }
 }
 
