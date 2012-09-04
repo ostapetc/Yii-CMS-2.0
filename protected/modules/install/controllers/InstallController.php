@@ -76,12 +76,11 @@ class InstallController extends Controller
             $step1->dbInit(Yii::app()->getModules());
 
             //migrate
-            Yii::app()->executor->migrate('up --module=install');
-            foreach (Yii::app()->getModules() as $module)
+            foreach (Yii::app()->getModules() as $id => $data)
             {
-                if (is_dir(Yii::getPathOfAlias($module.'.migrations')))
+                if (is_dir(Yii::getPathOfAlias($id.'.migrations')))
                 {
-                    Yii::app()->executor->migrate('up --module='.$module);
+                    Yii::app()->executor->migrate('up --module='.$id);
                 }
             }
 
