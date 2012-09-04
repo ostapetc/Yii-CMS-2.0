@@ -43,7 +43,7 @@ class Page extends ActiveRecord
             parent::behaviors(),
             array(
                  'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 'FileManager' => array(
+                 /*'FileManager' => array(
                      'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
                      'tags' => array(
                          'gallery' => array(
@@ -51,7 +51,7 @@ class Page extends ActiveRecord
                              'data_type' => 'image'
                          )
                      )
-                 ),
+                 ),*/
             )
         );
     }
