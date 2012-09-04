@@ -1,5 +1,5 @@
 <?
-class m120711_215440_labels_rels_create extends EDbMigration
+class m120711_215440_labels_rels_create extends DbMigration
 {
     public function up()
     {

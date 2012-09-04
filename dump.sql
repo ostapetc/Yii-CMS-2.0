@@ -3018,8 +3018,4 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `birthdate`, `gender`, `
 -- --------------------------------------------------------
 
 --
--- Структура для представления `sphinx_view_content`
---
-DROP TABLE IF EXISTS `sphinx_view_content`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sphinx_view_content` AS (select concat('page_',`t`.`id`) AS `id`,`t`.`title` AS `title`,NULL AS `user_id`,`t`.`text` AS `text` from `pages` `t`) union (select concat('page_',`t`.`id`) AS `id`,`t`.`title` AS `title`,`t`.`user_id` AS `user_id`,`t`.`text` AS `text` from `pages` `t`);

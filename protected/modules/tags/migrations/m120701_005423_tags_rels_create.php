@@ -1,5 +1,5 @@
 <?
-class m120701_005423_tags_rels_create extends EDbMigration
+class m120701_005423_tags_rels_create extends DbMigration
 {
     public function up()
     {

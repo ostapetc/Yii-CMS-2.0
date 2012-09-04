@@ -1,5 +1,5 @@
 <?
-class m120701_004620_pages_sections_create extends EDbMigration
+class m120701_004620_pages_sections_create extends DbMigration
 {
     public function up()
     {

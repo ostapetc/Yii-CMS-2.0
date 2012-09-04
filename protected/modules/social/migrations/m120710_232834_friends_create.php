@@ -1,5 +1,5 @@
 <?
-class m120710_232834_friends_create extends EDbMigration
+class m120710_232834_friends_create extends DbMigration
 {
     public function up()
     {

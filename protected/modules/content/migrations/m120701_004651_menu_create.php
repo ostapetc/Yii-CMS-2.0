@@ -1,5 +1,5 @@
 <?
-class m120701_004651_menu_create extends EDbMigration
+class m120701_004651_menu_create extends DbMigration
 {
     public function up()
     {

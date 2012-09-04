@@ -1,5 +1,5 @@
 <?
-class m120701_005357_ratings_create extends EDbMigration
+class m120701_005357_ratings_create extends DbMigration
 {
     public function up()
     {

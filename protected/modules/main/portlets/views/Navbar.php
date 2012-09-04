@@ -20,21 +20,8 @@
                     <? if (Yii::app()->user->isGuest): ?>
                         <li><?= CHtml::link(t('Войти'), array('/users/user/login'), array('class' => 'modal-link', 'data-title' => 'Авторизация')); ?></li>
                         <li class="divider-vertical"></li>
-                        <li><?= CHtml::link(t('Регистрация'), array('/users/user/register')); ?></li>
+                        <li><?= CHtml::link(t('Регистрация'), array('/users/user/registration')); ?></li>
                     <? else: ?>
-<!--                        <li><a href="#">Link</a></li>-->
-<!--                        <li class="divider-vertical"></li>-->
-<!--                        <li class="dropdown">-->
-<!--                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>-->
-<!--                            <ul class="dropdown-menu">-->
-<!--                                <li><a href="#">Action</a></li>-->
-<!--                                <li><a href="#">Another action</a></li>-->
-<!--                                <li><a href="#">Something else here</a></li>-->
-<!--                                <li class="divider"></li>-->
-<!--                                <li><a href="#">Separated link</a></li>-->
-<!--                            </ul>-->
-<!--                        </li>-->
-
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#"><b class="caret"></b></a>
                             <ul class="dropdown-menu">
