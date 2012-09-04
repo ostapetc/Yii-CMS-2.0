@@ -30,10 +30,16 @@ class MailerOutbox extends ActiveRecord
     const STATUS_PROCESS = 'process';
     const STATUS_ERROR   = 'error';
 
-    const PAGE_SIZE = 10;
+    const PARAM_FROM_EMAIL  = 'from_email';
+    const PARAM_FROM_NAME   = 'from_name';
+    const PARAM_REPLY_EMAIL = 'reply_email';
+    const PARAM_HOST        = 'host';
+    const PARAM_PORT        = 'port';
+    const PARAM_LOGIN       = 'login';
+    const PARAM_PASSWORD    = 'password';
 
     const MAILS_PACKET_SIZE = 20;
-
+    const PAGE_SIZE         = 10;
 
     public static $status_list = array(
         self::STATUS_SENT    => 'Отправлено',
@@ -155,6 +161,16 @@ class MailerOutbox extends ActiveRecord
 
     public static function sendMail($email_to, $subject, $body)
     {
+        Param::checkRequired(array(
+            self::PARAM_FROM_EMAIL,
+            self::PARAM_FROM_NAME,
+            self::PARAM_REPLY_EMAIL,
+            self::PARAM_HOST,
+            self::PARAM_PORT,
+            self::PARAM_LOGIN,
+            self::PARAM_PASSWORD
+        ));
+
         require_once LIBRARIES_PATH . 'PHPMailer/class.phpmailer.php';
 
         $settings = Param::model()->findCodesValues('mailer');
@@ -163,20 +179,20 @@ class MailerOutbox extends ActiveRecord
         $hidden_copy = true;
 
         $subject     = iconv($encoding, "{$encoding}//IGNORE", $subject);
-        $from_name   = iconv($encoding, "{$encoding}//IGNORE", $settings["from_name"]);
-        $from_email  = iconv($encoding, "{$encoding}//IGNORE", $settings["from_email"]);
-        $reply_email = iconv($encoding, "{$encoding}//IGNORE", $settings["reply_email"]);
+        $from_name   = iconv($encoding, "{$encoding}//IGNORE", $settings[self::PARAM_FROM_NAME]);
+        $from_email  = iconv($encoding, "{$encoding}//IGNORE", $settings[self::PARAM_FROM_EMAIL]);
+        $reply_email = iconv($encoding, "{$encoding}//IGNORE", $settings[self::PARAM_REPLY_EMAIL]);
 
         $mail = new PHPMailer(true);
         $mail->IsSMTP();
         $mail->CharSet       = $encoding;
         $mail->SMTPDebug     = 1;
-        $mail->Host          = $settings["host"];
+        $mail->Host          = $settings[self::PARAM_HOST];
         $mail->SMTPAuth      = true;
         $mail->SMTPKeepAlive = true;
-        $mail->Port          = $settings["port"];
-        $mail->Username      = $settings["login"];
-        $mail->Password      = $settings["password"];
+        $mail->Port          = $settings[self::PARAM_PORT];
+        $mail->Username      = $settings[self::PARAM_LOGIN];
+        $mail->Password      = $settings[self::PARAM_PASSWORD];
 
         $mail->AddReplyTo($reply_email, $from_name);
 
@@ -198,7 +214,6 @@ class MailerOutbox extends ActiveRecord
         $mail->Subject = $subject;
         $mail->MsgHTML(iconv($encoding,"{$encoding}//IGNORE", $body));
         $mail->Send();
-
         $mail->ClearAttachments();
         $mail->ClearBCCs();
         $mail->ClearAddresses();
