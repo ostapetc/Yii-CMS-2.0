@@ -43,7 +43,7 @@ class InstallController extends Controller
             {
                 Yii::app()->user->setState('install_configs', $model->getConfigs());
                 $model->saveInSession();
-                $this->redirect('/install.php/install/install/step2');
+                $this->redirect('step2');
             }
             else if (is_string($db_create_status))
             {
@@ -96,7 +96,7 @@ class InstallController extends Controller
             //$step1->deleteDisableModules();
             $model->saveInSession();
             //install base modules
-            $this->redirect('/install.php/install/install/step3');
+            $this->redirect('step3');
         }
 
         $this->render('step2', array('form' => $form));
