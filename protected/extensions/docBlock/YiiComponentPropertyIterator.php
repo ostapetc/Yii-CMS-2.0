@@ -1,6 +1,13 @@
 <?php
-class YiiComponentPropertyIterator extends ArrayIterator
-{
+/**
+ * @property $attributes
+ * @property $events
+ * @property $accessors
+ * @property $relations
+ * @property $scopes
+ */
+class YiiComponentPropertyIterator extends ArrayIterator {
+
     /**
      * Need for automatical align of strings
      *
@@ -26,6 +33,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     public $includeEvents = true;
     public $includeAccessors = true;
     public $includeRelations = true;
+    public $includeScopes = true;
 
 
     /**
@@ -35,16 +43,14 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function __construct($initOptions, CComponent $object, $propertyOptions = array())
     {
-        foreach ($initOptions as $key => $val)
-        {
+        foreach ($initOptions as $key => $val) {
             $this->$key = $val;
         }
         $this->object = $object;
-        $props        = array_merge($this->attributes, $this->accessors, $this->events, $this->relations);
-        $props        = $this->filter(array_keys($props));
-        $result       = array();
-        foreach ($props as $prop)
-        {
+        $props = array_merge($this->attributes, $this->accessors, $this->events, $this->relations);
+        $props = $this->filterProperties(array_keys($props));
+        $result = array();
+        foreach ($props as $prop) {
             $result[$prop] = $this->createPropertyInstance($prop, $propertyOptions);
         }
         parent::__construct($result);
@@ -63,15 +69,15 @@ class YiiComponentPropertyIterator extends ArrayIterator
      * @param $object
      * @param $prop
      * @param $propertyOptions
-     *
      * @return mixed
      */
     protected function createPropertyInstance($prop, $propertyOptions)
     {
-        $property           = Yii::createComponent($propertyOptions);
-        $property->name     = $prop;
+        $property = Yii::createComponent($propertyOptions);
+        $property->name = $prop;
         $property->iterator = $this;
         $property->populate($this->object);
+        $property->afterPopulate();
         $property->setOldValues(DocBlockParser::parseClass($this->object)->properties);
         return $property;
     }
@@ -81,17 +87,14 @@ class YiiComponentPropertyIterator extends ArrayIterator
      * Delete all properties that described in DocBlock of any parent class
      *
      * @param $props
-     *
      * @return array
      */
-    public function filter($props)
+    public function filterProperties($props)
     {
         $class = get_class($this->object);
-        while ($class = get_parent_class($class))
-        {
+        while ($class = get_parent_class($class)) {
             $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
-            array_map(function ($item)
-            {
+            array_map(function ($item) {
                 return strtr($item, array(
                     '-write'=> '',
                     '-read' => ''
@@ -115,6 +118,17 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
 
     /**
+     * try to get scopes for AR
+     *
+     * @return array
+     */
+    public function getScopes($object)
+    {
+        return $object instanceof CActiveRecord ? $object->scopes() : array();
+    }
+
+
+    /**
      * Get all accessors for object
      *
      * @return array
@@ -122,20 +136,16 @@ class YiiComponentPropertyIterator extends ArrayIterator
     public function getAccessors($object)
     {
         $props = array();
-        foreach (get_class_methods($this->object) as $method)
-        {
-            if (strncasecmp($method, 'set', 3) === 0 || strncasecmp($method, 'get', 3) === 0)
-            {
+        foreach (get_class_methods($object) as $method) {
+            if (strncasecmp($method, 'set', 3) === 0 || strncasecmp($method, 'get', 3) === 0) {
                 $props[lcfirst(substr($method, 3))] = true;
             }
         }
 
-        if (method_exists($object, 'behaviors'))
-        {
-            foreach ($this->object->behaviors() as $id => $data)
-            {
+        if (method_exists($object, 'behaviors')) {
+            foreach ($object->behaviors() as $id => $data) {
 
-                $props = array_merge($props, $this->getAccessors($this->object->asa($id)));
+                $props = array_merge($props, $this->getAccessors($object->asa($id)));
             }
         }
         return $props;
@@ -150,10 +160,8 @@ class YiiComponentPropertyIterator extends ArrayIterator
     public function getEvents($object)
     {
         $events = array();
-        foreach (get_class_methods($object) as $method)
-        {
-            if (strncasecmp($method, 'on', 2) === 0)
-            {
+        foreach (get_class_methods($object) as $method) {
+            if (strncasecmp($method, 'on', 2) === 0) {
                 $events[$method] = true;
             }
         }
@@ -179,15 +187,14 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function getMaxLenOfType()
     {
-        if ($this->_maxLenOfType === null)
-        {
+        if ($this->_maxLenOfType === null) {
             $clone = clone $this;
             $clone->rewind();
             $max = 0;
-            foreach ($clone as $item)
-            {
-                $max = max($max, strlen($item->writeType), strlen($item->readType));
+            foreach ($clone as $item) {
+                $max = max($max, strlen($item->type));
             }
+
             $this->_maxLenOfType = $max;
         }
 
@@ -202,13 +209,11 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function getMaxLenOfProperty()
     {
-        if ($this->_maxLenOfProperty === null)
-        {
+        if ($this->_maxLenOfProperty === null) {
             $clone = clone $this;
             $clone->rewind();
             $max = 0;
-            foreach ($clone as $key => $item)
-            {
+            foreach ($clone as $key => $item) {
                 $max = max($max, strlen($key));
             }
             $this->_maxLenOfProperty = $max;
@@ -225,15 +230,12 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function getMaxLenOfTag()
     {
-        if ($this->_maxLenOfTag === null)
-        {
+        if ($this->_maxLenOfTag === null) {
             $clone = clone $this;
             $clone->rewind();
             $max = 0;
-            foreach ($clone as $item)
-            {
-                $tag = $item->getIsFullMode() ? ($item->gettable ? 'property-read' : 'property-write') : 'property';
-                $max = max($max, strlen($tag));
+            foreach ($clone as $item) {
+                $max = max($max, $item->getTagLen());
             }
             $this->_maxLenOfTag = $max;
         }
