@@ -1,7 +1,8 @@
 <h4>Комментарии</h4>
 
-<ul class="comments-ul">
-    <? foreach ($comments as $comment): ?>
+<? if ($comments): ?>
+    <ul class="comments-ul">
+        <? foreach ($comments as $comment): ?>
         <li>
             <table>
                 <tr  valign="top">
@@ -19,5 +20,9 @@
                 </tr>
             </table>
         </li>
-    <? endforeach ?>
-</ul>
+        <? endforeach ?>
+    </ul>
+<? else: ?>
+    <span class="italic-12">Никто еще не оставлял комментарий</span>
+<? endif ?>
+

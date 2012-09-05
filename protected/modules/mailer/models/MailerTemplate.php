@@ -122,7 +122,7 @@ class MailerTemplate extends ActiveRecord
 
     public function getFilePath()
     {
-        return self::getDir() . $this->id . '.html';
+        return self::getDir() . $this->code . '.html';
     }
 
 

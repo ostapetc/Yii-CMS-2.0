@@ -25,10 +25,3 @@ defined('CONFIG') || define('CONFIG', $env);
 $config = APP_PATH . 'config' . DS . CONFIG .'.php';
 
 Yii::createWebApplication($config)->run();
-
-/*$u = new User();
-$u->email = 'admin@admin.ru';
-$u->password = UserIdentity::crypt('admin');
-$u->status = 'active';
-$u->name = 'admin';
-$u->save(false);*/
