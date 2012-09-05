@@ -20,7 +20,7 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      *
      * @var int
      */
-    protected $_maxLenOfProperty;
+    protected $_maxLenOfName;
 
     /**
      * Need for automatical align of strings
@@ -41,7 +41,7 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      * @param CComponent $object
      * @param array      $propertyOptions
      */
-    public function __construct($initOptions, CComponent $object, $propertyOptions = array())
+    public function __construct($initOptions, CComponent $object, $propertyOptions = array(), $methodOptions = array())
     {
         foreach ($initOptions as $key => $val) {
             $this->$key = $val;
@@ -51,8 +51,17 @@ class YiiComponentPropertyIterator extends ArrayIterator {
         $props = $this->filterProperties(array_keys($props));
         $result = array();
         foreach ($props as $prop) {
-            $result[$prop] = $this->createPropertyInstance($prop, $propertyOptions);
+            $result[$prop] = $this->createLineInstance($prop, $propertyOptions);
         }
+
+        $methods = array_merge($this->scopes);
+        $methods = $this->filterMethods(array_keys($methods));
+
+        foreach ($methods as $prop) {
+            $result[$prop] = $this->createLineInstance($prop, $methodOptions);
+        }
+
+
         parent::__construct($result);
     }
 
@@ -71,9 +80,9 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      * @param $propertyOptions
      * @return mixed
      */
-    protected function createPropertyInstance($prop, $propertyOptions)
+    protected function createLineInstance($prop, $lineOptions)
     {
-        $property = Yii::createComponent($propertyOptions);
+        $property = Yii::createComponent($lineOptions);
         $property->name = $prop;
         $property->iterator = $this;
         $property->populate($this->object);
@@ -105,7 +114,10 @@ class YiiComponentPropertyIterator extends ArrayIterator {
         return $props;
     }
 
-
+    public function filterMethods($props)
+    {
+        return $props;
+    }
     /**
      * try to get attributes for object
      *
@@ -207,19 +219,19 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      *
      * @return int
      */
-    public function getMaxLenOfProperty()
+    public function getMaxLenOfName()
     {
-        if ($this->_maxLenOfProperty === null) {
+        if ($this->_maxLenOfName === null) {
             $clone = clone $this;
             $clone->rewind();
             $max = 0;
-            foreach ($clone as $key => $item) {
-                $max = max($max, strlen($key));
+            foreach ($clone as $item) {
+                $max = max($max, $item->getNameLen());
             }
-            $this->_maxLenOfProperty = $max;
+            $this->_maxLenOfName = $max;
         }
 
-        return $this->_maxLenOfProperty;
+        return $this->_maxLenOfName;
     }
 
 

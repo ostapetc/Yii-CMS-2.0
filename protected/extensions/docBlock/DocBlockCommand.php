@@ -23,6 +23,13 @@ class DocBlockCommand extends CConsoleCommand
         'propertyVerticalAlignment' => true
     );
 
+    public $methodOptions = array(
+        'class'                     => 'YiiComponentMethod',
+        'toUndercore'               => false,
+        'tagVerticalAlignment'      => true,
+        'typeVerticalAlignment'     => true,
+        'propertyVerticalAlignment' => true
+    );
 
     /**
      * Import all needed classes
@@ -36,6 +43,7 @@ class DocBlockCommand extends CConsoleCommand
         Yii::import($alias . '.' . $this->filesIterator);
         Yii::import($alias . '.' . $this->propertyIterator);
         Yii::import($alias . '.' . $this->propertyOptions['class']);
+        Yii::import($alias . '.' . $this->methodOptions['class']);
 
         parent::init();
     }
@@ -58,7 +66,7 @@ class DocBlockCommand extends CConsoleCommand
     protected function getPropertyIterator($object)
     {
         $class = $this->propertyIterator;
-        return new $class($this->propertyIteratorOptions, $object, $this->propertyOptions);
+        return new $class($this->propertyIteratorOptions, $object, $this->propertyOptions, $this->methodOptions);
     }
 
 

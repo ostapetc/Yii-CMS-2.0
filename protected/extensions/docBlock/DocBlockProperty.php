@@ -32,29 +32,12 @@ abstract class DocBlockProperty extends CComponent {
     }
 
 
-    /**
-     * @return string combined doc string
-     */
-    public function __toString()
+    protected function getLine($tag, $type, $property, $comment)
     {
-        try {
-            return $this->getLine();
-        } catch (Exception $e) {
-            Yii::app()->handleException($e);
-        }
-    }
-
-
-    protected function getLine()
-    {
-        $tag = $this->tag;
-        $comment = $this->comment;
-        $type = $this->type;
-
-        $property = $this->toUndercore ? $this->camelCaseToUnderscore($this->name) : $this->name;
+        $property = $this->toUndercore ? $this->camelCaseToUnderscore($property) : $property;
         $this->align($tag, $type, $property);
 
-        return "@$tag $type \$$property $comment\n";
+        return "@$tag $type $property $comment\n";
     }
 
 
@@ -68,7 +51,7 @@ abstract class DocBlockProperty extends CComponent {
         }
         if ($this->propertyVerticalAlignment) {
             $property
-                = $property . str_repeat(' ', $this->iterator->getMaxLenOfProperty() - strlen($property));
+                = $property . str_repeat(' ', $this->iterator->getMaxLenOfName() - strlen($property));
         }
     }
 
@@ -79,7 +62,10 @@ abstract class DocBlockProperty extends CComponent {
      * @param $object
      */
     abstract public function populate($object);
+
     abstract public function afterPopulate();
+
+    abstract public function getTagLen();
 
 
     public function setOldValues($properties)
