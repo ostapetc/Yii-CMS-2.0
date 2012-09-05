@@ -44,15 +44,30 @@ abstract class DocBlockLine extends CComponent {
     public function align(&$tag, &$type, &$property)
     {
         if ($this->tagVerticalAlignment) {
-            $tag = $tag . str_repeat(' ', $this->iterator->getMaxLenOfTag() - strlen($tag));
+            $tag = $tag . str_repeat(' ', $this->iterator->getTagLen() - $this->getTagLen());
         }
         if ($this->typeVerticalAlignment) {
-            $type = $type . str_repeat(' ', $this->iterator->getMaxLenOfType() - strlen($type));
+            $type = $type . str_repeat(' ', $this->iterator->getTypeLen() - $this->getTypeLen());
         }
         if ($this->propertyVerticalAlignment) {
-            $property
-                = $property . str_repeat(' ', $this->iterator->getMaxLenOfName() - strlen($property));
+            $property = $property . str_repeat(' ', $this->iterator->getNameLen() - $this->getNameLen());
         }
+    }
+
+    public function getTagLen()
+    {
+        return strlen($this->tag);
+    }
+
+
+    public function getTypeLen()
+    {
+        return strlen($this->type);
+    }
+
+    public function getNameLen()
+    {
+        return strlen($this->name);
     }
 
 
@@ -64,8 +79,6 @@ abstract class DocBlockLine extends CComponent {
     abstract public function populate($object);
 
     abstract public function afterPopulate();
-
-    abstract public function getTagLen();
 
 
     public function setOldValues($properties)
