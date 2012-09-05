@@ -2,7 +2,7 @@
 /**
  * Incapsulate property drawing logic
  */
-abstract class DocBlockProperty extends CComponent {
+abstract class DocBlockLine extends CComponent {
 
     public $name;
     public $iterator;

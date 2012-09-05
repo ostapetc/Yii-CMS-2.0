@@ -61,7 +61,6 @@ class YiiComponentPropertyIterator extends ArrayIterator {
             $result[$prop] = $this->createLineInstance($prop, $methodOptions);
         }
 
-
         parent::__construct($result);
     }
 

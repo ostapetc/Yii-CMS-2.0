@@ -2,7 +2,7 @@
 /**
  * Know all about CComponent, CModel, CActiveRecord and etc.
  */
-class YiiComponentMethod extends DocBlockProperty {
+class YiiComponentMethod extends DocBlockLine {
 
     public $tag = 'method';
 

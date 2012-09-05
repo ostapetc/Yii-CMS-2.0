@@ -2,7 +2,7 @@
 /**
  * Know all about CComponent, CModel, CActiveRecord and etc.
  */
-class YiiComponentProperty extends DocBlockProperty {
+class YiiComponentProperty extends DocBlockLine  {
 
     public $readWriteDifferentiate = false; // not supported yet
 
