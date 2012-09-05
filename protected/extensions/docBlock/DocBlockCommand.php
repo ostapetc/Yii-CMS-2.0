@@ -39,7 +39,7 @@ class DocBlockCommand extends CConsoleCommand
         $alias = md5(__DIR__);
         Yii::setPathOfAlias($alias, __DIR__);
         Yii::import($alias . '.DocBlockParser');
-        Yii::import($alias . '.DocBlockline');
+        Yii::import($alias . '.DocBlockLine');
         Yii::import($alias . '.' . $this->filesIterator);
         Yii::import($alias . '.' . $this->propertyIterator);
         Yii::import($alias . '.' . $this->propertyOptions['class']);
