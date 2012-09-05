@@ -1,25 +1,16 @@
 <?php
 /** 
- * @property                 $status
- * @property                 $id
- * @property                 $user_id
- * @property                 $template_id
- * @property                 $email
- * @property                 $subject
- * @property                 $body
- * @property                 $log
- * @property                 $date_create
- * @property                 $date_send
  * @property                 $statusCaption
- * @property                 $newAttachedModel
- * @property mixed           $related          the related object(s).
- * @property string          $attributeLabel   the attribute label
- * @property CActiveRelation $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
- * @property mixed           $attribute        the attribute value. Null if the attribute is not set or does not exist.
- * @property string          $error            the error message. Null is returned if no error.
- * @property CList           $eventHandlers    list of attached event handlers for the event
+ * @property                 $info
+ * @property                 $languageName
+ * @property CComponent      $owner            the owner component that this behavior is attached to.
+ * @property boolean         $enabled          whether this behavior is enabled
  * @property User            $user
  * @property MailerTemplate  $template
+ * @method   MailerOutbox    published()
+ * @method   MailerOutbox    sitemap()
+ * @method   MailerOutbox    ordered()
+ * @method   MailerOutbox    last()
  * 
  */
 
