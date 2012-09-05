@@ -2,7 +2,7 @@
 /**
  * Incapsulate property drawing logic
  */
-abstract class DocBlockProperty extends CComponent {
+abstract class DocBlockLine extends CComponent {
 
     public $name;
     public $iterator;
@@ -32,44 +32,42 @@ abstract class DocBlockProperty extends CComponent {
     }
 
 
-    /**
-     * @return string combined doc string
-     */
-    public function __toString()
+    protected function getLine($tag, $type, $property, $comment)
     {
-        try {
-            return $this->getLine();
-        } catch (Exception $e) {
-            Yii::app()->handleException($e);
-        }
-    }
-
-
-    protected function getLine()
-    {
-        $tag = $this->tag;
-        $comment = $this->comment;
-        $type = $this->type;
-
-        $property = $this->toUndercore ? $this->camelCaseToUnderscore($this->name) : $this->name;
+        $property = $this->toUndercore ? $this->camelCaseToUnderscore($property) : $property;
         $this->align($tag, $type, $property);
 
-        return "@$tag $type \$$property $comment\n";
+        return "@$tag $type $property $comment\n";
     }
 
 
     public function align(&$tag, &$type, &$property)
     {
         if ($this->tagVerticalAlignment) {
-            $tag = $tag . str_repeat(' ', $this->iterator->getMaxLenOfTag() - strlen($tag));
+            $tag = $tag . str_repeat(' ', $this->iterator->getTagLen() - $this->getTagLen());
         }
         if ($this->typeVerticalAlignment) {
-            $type = $type . str_repeat(' ', $this->iterator->getMaxLenOfType() - strlen($type));
+            $type = $type . str_repeat(' ', $this->iterator->getTypeLen() - $this->getTypeLen());
         }
         if ($this->propertyVerticalAlignment) {
-            $property
-                = $property . str_repeat(' ', $this->iterator->getMaxLenOfProperty() - strlen($property));
+            $property = $property . str_repeat(' ', $this->iterator->getNameLen() - $this->getNameLen());
         }
+    }
+
+    public function getTagLen()
+    {
+        return strlen($this->tag);
+    }
+
+
+    public function getTypeLen()
+    {
+        return strlen($this->type);
+    }
+
+    public function getNameLen()
+    {
+        return strlen($this->name);
     }
 
 
@@ -79,6 +77,7 @@ abstract class DocBlockProperty extends CComponent {
      * @param $object
      */
     abstract public function populate($object);
+
     abstract public function afterPopulate();
 
 

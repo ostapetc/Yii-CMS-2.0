@@ -2,7 +2,7 @@
 /**
  * Know all about CComponent, CModel, CActiveRecord and etc.
  */
-class YiiComponentProperty extends DocBlockProperty {
+class YiiComponentProperty extends DocBlockLine  {
 
     public $readWriteDifferentiate = false; // not supported yet
 
@@ -35,13 +35,14 @@ class YiiComponentProperty extends DocBlockProperty {
     {
         try {
             if ($this->_settable || $this->_gettable) {
-                return $this->getLine();
+                return $this->getLine($this->tag, $this->type, "\$".$this->name, $this->comment);
             }
             return '';
         } catch (Exception $e) {
             Yii::app()->handleException($e);
         }
     }
+
 
     /**
      * use or not
@@ -78,6 +79,13 @@ class YiiComponentProperty extends DocBlockProperty {
             }
         }
     }
+
+
+    public function getNameLen()
+    {
+        return strlen("\$".$this->name);
+    }
+
 
     public function getTagLen()
     {
