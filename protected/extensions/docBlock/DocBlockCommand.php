@@ -11,14 +11,13 @@ class DocBlockCommand extends CConsoleCommand
         'includeAttributes' => true,
         'includeEvents'     => false,
         'includeAccessors'  => true,
-        'includeRelations'  => true,
-        'includeScopes'     => true,
+        'includeRelations'  => true
     );
 
     public $propertyOptions = array(
         'class'                     => 'YiiComponentProperty',
         'toUndercore'               => false,
-        'readWriteDifferentiate'    => true,
+        'readWriteDifferentiate'    => false,
         'tagVerticalAlignment'      => true,
         'typeVerticalAlignment'     => true,
         'propertyVerticalAlignment' => true
@@ -33,7 +32,7 @@ class DocBlockCommand extends CConsoleCommand
         $alias = md5(__DIR__);
         Yii::setPathOfAlias($alias, __DIR__);
         Yii::import($alias . '.DocBlockParser');
-        Yii::import($alias . '.DocBlockLine');
+        Yii::import($alias . '.DocBlockProperty');
         Yii::import($alias . '.' . $this->filesIterator);
         Yii::import($alias . '.' . $this->propertyIterator);
         Yii::import($alias . '.' . $this->propertyOptions['class']);
@@ -82,7 +81,6 @@ class DocBlockCommand extends CConsoleCommand
             }
             list($class, $object) = $data;
             $docBlock    = $this->getDockBlock($class, $object);
-//            dump($docBlock);
             $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
             $content     = file_get_contents($file);
             $fileContent = substr($content, strpos($content, "class $class"));
