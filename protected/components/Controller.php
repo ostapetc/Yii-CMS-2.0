@@ -82,7 +82,7 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    public function topSubMenuItems()
+    public function subMenuItems()
     {
         return array();
     }

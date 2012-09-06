@@ -6,13 +6,13 @@
  * Time: 22:02
  * To change this template use File | Settings | File Templates.
  */
-class SubNavbar extends Portlet
+class SubMenu extends Portlet
 {
     public function renderContent()
     {
-        $items = Yii::app()->controller->topSubMenuItems();
+        $items = Yii::app()->controller->subMenuItems();
 
-        $this->render('SubNavbar', array(
+        $this->render('SubMenu', array(
             'items' => $items
         ));
     }

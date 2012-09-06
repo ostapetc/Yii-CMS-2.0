@@ -51,8 +51,8 @@
 
 <div id='main-wrapper'>
 
-    <? $this->widget('Navbar'); ?>
-    <? $this->widget('SubNavbar'); ?>
+    <? $this->widget('Menu'); ?>
+    <? $this->widget('SubMenu'); ?>
 
     <div class="container-fluid">
         <div class="row-fluid">

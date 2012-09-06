@@ -6,7 +6,7 @@
  * Time: 14:24
  * To change this template use File | Settings | File Templates.
  */
-class Navbar extends Portlet
+class Menu extends Portlet
 {
     public function renderContent()
     {
@@ -16,7 +16,7 @@ class Navbar extends Portlet
             $query = trim(strip_tags($_GET['query']));
         }
 
-        $this->render('Navbar', array(
+        $this->render('Menu', array(
             'items' => Yii::app()->controller->topMenuItems(),
             'query' => $query
         ));
