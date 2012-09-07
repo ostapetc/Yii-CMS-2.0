@@ -14,21 +14,7 @@ class DocBlockCommand extends CConsoleCommand
     protected $propertyOptions;
     protected $methodOptions;
 
-    protected $_config;
     protected $_alias;
-
-
-    public function getConfig()
-    {
-        Yii::setPathOfAlias($this->_alias, __DIR__);
-
-        if (!$this->_config)
-        {
-            $this->_config = require
-                Yii::getPathOfAlias($this->_alias . '.configs.' . $this->config) . '.php';
-        }
-        return $this->_config;
-    }
 
 
     /**
@@ -36,7 +22,9 @@ class DocBlockCommand extends CConsoleCommand
      */
     public function init()
     {
-        foreach ($this->getConfig() as $key => $val)
+        Yii::setPathOfAlias($this->_alias, __DIR__);
+        $config = require Yii::getPathOfAlias($this->_alias . '.configs.' . $this->config) . '.php';
+        foreach ($config as $key => $val)
         {
             $this->$key = $val;
         }
@@ -44,7 +32,6 @@ class DocBlockCommand extends CConsoleCommand
             'DocBlockLine',
             'DocBlockParser',
             'DocBlockComment',
-            'messages.DocBlockMessageSource',
             'iterators.' . $this->propertyIteratorOptions['class'],
             'iterators.' . $this->filesIterator,
             $this->propertyOptions['class'],
@@ -59,7 +46,10 @@ class DocBlockCommand extends CConsoleCommand
             Yii::import($this->_alias . '.' . $class, true);
         }
 
-        Yii::app()->setComponent('docBlockMessage', new DocBlockMessageSource());
+        //set translaitor
+        $messageSource           = new CPhpMessageSource();
+        $messageSource->basePath = Yii::getPathOfAlias($this->_alias . '.messages');
+        Yii::app()->setComponent('docBlockMessage', $messageSource);
         parent::init();
     }
 
