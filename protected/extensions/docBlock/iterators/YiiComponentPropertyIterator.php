@@ -31,6 +31,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     protected $_maxLenOfTag;
 
     public $commentLanguage;
+    public $addIllustrationCommetns = false;
 
     public $includeAttributes = true;
     public $includeEvents = true;
@@ -307,7 +308,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
     public function addComment(&$array, $message)
     {
-        if ($array)
+        if ($this->addIllustrationCommetns && $array)
         {
             $message = Yii::t('core', $message, null, 'docBlockMessage', $this->commentLanguage);
             array_unshift($array, new DocBlockComment($message));

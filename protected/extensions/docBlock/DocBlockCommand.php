@@ -9,6 +9,7 @@ class DocBlockCommand extends CConsoleCommand
 
     public $propertyIteratorOptions = array(
         'commentLanguage'   => 'ru',
+        'addIllustrationCommetns' => true,
         'includeAttributes' => true,
         'includeEvents'     => false,
         'includeAccessors'  => true,
