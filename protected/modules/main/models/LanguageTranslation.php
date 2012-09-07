@@ -1,7 +1,18 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                     $id
+ * @property                     $language
+ * @property                     $translation
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                     $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property LanguagesMessages   $id0
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   LanguageTranslation published()
  * @method   LanguageTranslation sitemap()
  * @method   LanguageTranslation ordered()

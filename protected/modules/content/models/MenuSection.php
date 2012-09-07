@@ -1,12 +1,33 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $lang
+ * @property                 $is_published
+ * @property                 $id
+ * @property                 $page_id
+ * @property                 $menu_id
+ * @property                 $root
+ * @property                 $left
+ * @property                 $right
+ * @property                 $level
+ * @property                 $title
+ * @property                 $url
+ * @property                 $module_url
+ * @property                 $module_id
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
  * @property                 $path
  * @property                 $nbspTitle
  * @property                 $spaceTitle
  * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property Menu            $menu
  * @property Page            $page
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MenuSection     published()
  * @method   MenuSection     sitemap()
  * @method   MenuSection     ordered()

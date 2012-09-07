@@ -1,6 +1,10 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property        $model
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * 
  */
 

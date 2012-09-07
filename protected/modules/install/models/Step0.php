@@ -1,5 +1,7 @@
 <?php
 /** 
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property       $requirements
  * @property       $mustWritableDirectories
  * @property       $isWritableDirectories

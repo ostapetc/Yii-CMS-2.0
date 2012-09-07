@@ -9,6 +9,8 @@
  * 
  * 
  * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * 
  */
 
 class Menu extends ActiveRecord

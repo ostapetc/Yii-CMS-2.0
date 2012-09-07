@@ -3,6 +3,8 @@
  * Base model for Install module.
  * 
  * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * 
  */
 
 class AbstractInstallModel extends FormModel

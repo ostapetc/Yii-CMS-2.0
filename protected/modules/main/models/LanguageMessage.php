@@ -1,7 +1,16 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $category
+ * @property                 $message
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $list
  * @property                 $errorsFlatArray
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   LanguageMessage published()
  * @method   LanguageMessage sitemap()
  * @method   LanguageMessage ordered()

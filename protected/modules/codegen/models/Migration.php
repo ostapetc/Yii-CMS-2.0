@@ -8,8 +8,12 @@
  * To change this template use File | Settings | File Templates.
  * 
  * 
+ * 
+ * !Attributes - атрибуты БД
  * @property        $table
  * @property        $module
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * 
  */
 

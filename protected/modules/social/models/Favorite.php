@@ -1,10 +1,18 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $user_id
+ * @property                 $object_id
+ * @property                 $model_id
+ * @property                 $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
+ * @property                 $errorsFlatArray
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   Favorite        published()
  * @method   Favorite        sitemap()
  * @method   Favorite        ordered()

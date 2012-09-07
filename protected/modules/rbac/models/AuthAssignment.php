@@ -1,7 +1,19 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $itemname
+ * @property                 $userid
+ * @property                 $bizrule
+ * @property                 $data
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property AuthItem        $role
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   AuthAssignment  published()
  * @method   AuthAssignment  sitemap()
  * @method   AuthAssignment  ordered()

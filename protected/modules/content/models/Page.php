@@ -1,8 +1,23 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                  $language
+ * @property                  $status
+ * @property                  $id
+ * @property                  $user_id
+ * @property                  $title
+ * @property                  $url
+ * @property                  $text
+ * @property                  $date_create
+ * @property                  $order
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                  $href
  * @property                  $content
  * @property                  $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property Language         $language_model
  * @property TagRel[]         $tags_rels
  * @property Tag[]            $tags
@@ -10,6 +25,8 @@
  * @property User             $user
  * @property PageSectionRel[] $sections_rels
  * @property PageSection[]    $sections
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   Page             published()
  * @method   Page             sitemap()
  * @method   Page             ordered()

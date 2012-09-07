@@ -1,9 +1,13 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property        $db_host
  * @property        $db_login
  * @property        $db_pass
  * @property        $db_name
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property        $dbPatterns
  * @property        $configs
  * 

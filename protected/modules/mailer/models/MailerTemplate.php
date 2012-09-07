@@ -1,9 +1,20 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $code
+ * @property                 $name
+ * @property                 $subject
+ * @property                 $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
  * @property                 $dir
  * @property                 $filePath
  * @property                 $errorsFlatArray
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MailerTemplate  published()
  * @method   MailerTemplate  sitemap()
  * @method   MailerTemplate  ordered()

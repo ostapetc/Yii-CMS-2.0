@@ -1,6 +1,16 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $tag_id
+ * @property                 $object_id
+ * @property                 $model_id
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $errorsFlatArray
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   TagRel          published()
  * @method   TagRel          sitemap()
  * @method   TagRel          ordered()

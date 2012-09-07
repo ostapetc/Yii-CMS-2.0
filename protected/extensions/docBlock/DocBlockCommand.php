@@ -1,37 +1,34 @@
 <?php
 class DocBlockCommand extends CConsoleCommand
 {
-    public $baseClass = 'CComponent';
-    public $readWriteDifferentiate = true; //phpstorm no support @property-write and @property-read specification
+    /**
+     * Name of config, you can add to configs folder your config, and use it trought parameter
+     *
+     * @var string
+     */
+    public $config = 'stdConfig';
 
-    public $filesIterator = 'ModelInModuleFilesIterator';
-    public $propertyIterator = 'YiiComponentPropertyIterator';
+    protected $baseClass = 'CComponent';
+    protected $filesIterator;
+    protected $propertyIteratorOptions;
+    protected $propertyOptions;
+    protected $methodOptions;
 
-    public $propertyIteratorOptions = array(
-        'commentLanguage'   => 'ru',
-        'addIllustrationCommetns' => true,
-        'includeAttributes' => true,
-        'includeEvents'     => false,
-        'includeAccessors'  => true,
-        'includeRelations'  => true
-    );
+    protected $_config;
+    protected $_alias;
 
-    public $propertyOptions = array(
-        'class'                     => 'YiiComponentProperty',
-        'toUndercore'               => false,
-        'readWriteDifferentiate'    => false,
-        'tagVerticalAlignment'      => true,
-        'typeVerticalAlignment'     => true,
-        'propertyVerticalAlignment' => true
-    );
 
-    public $methodOptions = array(
-        'class'                     => 'YiiComponentMethod',
-        'toUndercore'               => false,
-        'tagVerticalAlignment'      => true,
-        'typeVerticalAlignment'     => true,
-        'propertyVerticalAlignment' => true
-    );
+    public function getConfig()
+    {
+        Yii::setPathOfAlias($this->_alias, __DIR__);
+
+        if (!$this->_config)
+        {
+            $this->_config = require
+                Yii::getPathOfAlias($this->_alias . '.configs.' . $this->config) . '.php';
+        }
+        return $this->_config;
+    }
 
 
     /**
@@ -39,23 +36,27 @@ class DocBlockCommand extends CConsoleCommand
      */
     public function init()
     {
+        foreach ($this->getConfig() as $key => $val)
+        {
+            $this->$key = $val;
+        }
         $importClasses = array(
             'DocBlockLine',
             'DocBlockParser',
             'DocBlockComment',
             'messages.DocBlockMessageSource',
-            'iterators.' . $this->propertyIterator,
+            'iterators.' . $this->propertyIteratorOptions['class'],
             'iterators.' . $this->filesIterator,
             $this->propertyOptions['class'],
             $this->methodOptions['class']
         );
 
         //do import
-        $alias = md5(__DIR__);
-        Yii::setPathOfAlias($alias, __DIR__);
+        $this->_alias = md5(__DIR__);
+        Yii::setPathOfAlias($this->_alias, __DIR__);
         foreach ($importClasses as $class)
         {
-            Yii::import($alias . '.' . $class, true);
+            Yii::import($this->_alias . '.' . $class, true);
         }
 
         Yii::app()->setComponent('docBlockMessage', new DocBlockMessageSource());
@@ -79,7 +80,7 @@ class DocBlockCommand extends CConsoleCommand
      */
     protected function getPropertyIterator($object)
     {
-        $class = $this->propertyIterator;
+        $class = $this->propertyIteratorOptions['class'];
         return new $class($this->propertyIteratorOptions, $object, $this->propertyOptions, $this->methodOptions);
     }
 

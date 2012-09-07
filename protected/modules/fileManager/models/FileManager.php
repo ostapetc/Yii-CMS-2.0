@@ -1,5 +1,18 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $object_id
+ * @property                 $model_id
+ * @property                 $name
+ * @property                 $tag
+ * @property                 $title
+ * @property                 $descr
+ * @property                 $order
+ * @property                 $path
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $deleteUrl
  * @property                 $isImage
  * @property                 $isSound
@@ -20,6 +33,8 @@
  * @property                 $serverPath
  * @property                 $errorsFlatArray
  * @property string          $error            the error message. Null is returned if no error.
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   FileManager     published()
  * @method   FileManager     sitemap()
  * @method   FileManager     ordered()

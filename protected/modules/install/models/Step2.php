@@ -1,5 +1,7 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property        $admin_login
  * @property        $admin_pass
  * @property        $admin_pass_confirm
@@ -8,6 +10,8 @@
  * @property        $multilanguage_support
  * @property        $collect_routes_from_modules
  * @property        $themes_enabled
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property        $availableModules
  * @property        $mainConfigPatterns
  * @property        $configs

@@ -1,9 +1,22 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $module_id
+ * @property                 $code
+ * @property                 $name
+ * @property                 $value
+ * @property                 $element
+ * @property                 $options
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $values
  * @property                 $formatedValue
  * @property                 $filePath
  * @property                 $errorsFlatArray
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   Param           published()
  * @method   Param           sitemap()
  * @method   Param           ordered()

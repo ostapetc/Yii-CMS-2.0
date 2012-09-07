@@ -1,9 +1,22 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $parent_id
+ * @property                 $name
+ * @property                 $order
+ * @property                 $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
  * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property PageSection     $parent
  * @property PageSection[]   $childs
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   PageSection     published()
  * @method   PageSection     sitemap()
  * @method   PageSection     ordered()

@@ -1,7 +1,22 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $id
+ * @property                 $user_id
+ * @property                 $title
+ * @property                 $module
+ * @property                 $controller
+ * @property                 $action
+ * @property                 $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property User            $user
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   SiteAction      published()
  * @method   SiteAction      sitemap()
  * @method   SiteAction      ordered()

@@ -1,6 +1,23 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $status
+ * @property                 $id
+ * @property                 $name
+ * @property                 $email
+ * @property                 $password
+ * @property                 $birthdate
+ * @property                 $gender
+ * @property                 $photo
  * @property                 $activate_code
+ * @property                 $activate_date
+ * @property                 $password_recover_code
+ * @property                 $password_recover_date
+ * @property                 $rating
+ * @property                 $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $userDir
  * @property AuthItem        $role
  * @property                 $photoHtml
@@ -11,12 +28,16 @@
  * @property                 $dateCreateValue
  * @property                 $genderValue
  * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property FileAlbum[]     $file_albums
  * @property int|null        $file_albums_count
  * @property AuthAssignment  $assignment
  * @property int|null        $pages_count
  * @property int|null        $favorites_count
  * @property int|null        $comments_count
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   User            published()
  * @method   User            sitemap()
  * @method   User            ordered()

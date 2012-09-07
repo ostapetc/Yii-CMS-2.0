@@ -1,9 +1,27 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $object_id
+ * @property                 $model_id
+ * @property                 $id
+ * @property                 $user_id
+ * @property                 $root
+ * @property                 $left
+ * @property                 $right
+ * @property                 $level
+ * @property                 $text
+ * @property                 $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
  * @property                 $model
  * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property User            $user
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   Comment         published()
  * @method   Comment         sitemap()
  * @method   Comment         ordered()

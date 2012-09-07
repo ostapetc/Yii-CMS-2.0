@@ -1,6 +1,14 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                 $parent
+ * @property                 $child
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $errorsFlatArray
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
  * @method   AuthItemChild   published()
  * @method   AuthItemChild   sitemap()
  * @method   AuthItemChild   ordered()

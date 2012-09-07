@@ -1,9 +1,13 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property        $class
  * @property        $genetive
  * @property        $instrumental
  * @property        $accusative
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * 
  */
 
