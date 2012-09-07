@@ -18,8 +18,9 @@ return array(
     //some settings for @property annotation
     'propertyOptions'         => array(
         'class'                     => 'YiiComponentProperty',
-        'toUndercore'               => false,
-        'readWriteDifferentiate'    => false, //use or not @property-write/@property-read annotations
+        'toUnderscore'              => false,
+        //use or not @property-write/@property-read annotations
+        'readWriteDifferentiate'    => false,
         'tagVerticalAlignment'      => true,
         'typeVerticalAlignment'     => true,
         'propertyVerticalAlignment' => true
@@ -27,7 +28,7 @@ return array(
     //some settings for @method annotation
     'methodOptions'           => array(
         'class'                     => 'YiiComponentMethod',
-        'toUndercore'               => false,
+        'toUnderscore'              => false,
         'tagVerticalAlignment'      => true,
         'typeVerticalAlignment'     => true,
         'propertyVerticalAlignment' => true

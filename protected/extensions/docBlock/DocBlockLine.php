@@ -7,7 +7,7 @@ abstract class DocBlockLine extends CComponent
 
     public $name;
     public $iterator;
-    public $toUndercore = false;
+    public $toUnderscore = false;
 
     public $tagVerticalAlignment = true;
     public $typeVerticalAlignment = true;
@@ -37,7 +37,7 @@ abstract class DocBlockLine extends CComponent
 
     protected function getLine($tag, $type, $property, $comment)
     {
-        $property = $this->toUndercore ? $this->camelCaseToUnderscore($property) : $property;
+        $property = $this->toUnderscore ? $this->camelCaseToUnderscore($property) : $property;
         $this->align($tag, $type, $property);
 
         return "@$tag $type $property $comment\n";
