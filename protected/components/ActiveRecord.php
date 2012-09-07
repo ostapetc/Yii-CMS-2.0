@@ -335,18 +335,15 @@ abstract class ActiveRecord extends CActiveRecord
     {
         $result = array();
 
-        if ($this->errors)
+        foreach ((array)$this->errors as $attribute => $errors)
         {
-            foreach ($this->errors as $attribute => $errors)
+            foreach ($errors as $error)
             {
-                foreach ($errors as $error)
-                {
-                    $result[] = array(
-                        'attribute' => $attribute,
-                        'label'     => $this->getAttributeLabel($attribute),
-                        'error'     => $error
-                    );
-                }
+                $result[] = array(
+                    'attribute' => $attribute,
+                    'label'     => $this->getAttributeLabel($attribute),
+                    'error'     => $error
+                );
             }
         }
 

@@ -1,10 +1,7 @@
 <?php
 /** 
  * @property                 $list
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
+ * @property                 $errorsFlatArray
  * @method   LanguageMessage published()
  * @method   LanguageMessage sitemap()
  * @method   LanguageMessage ordered()

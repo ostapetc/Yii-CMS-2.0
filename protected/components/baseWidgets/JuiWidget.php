@@ -3,17 +3,16 @@ Yii::import('zii.widgets.jui.CJuiWidget');
 abstract class JuiWidget extends CJuiWidget
 {
 
-    public function init()
+    public function __construct()
     {
-        $this->cache_id = get_class($this);
         $this->attachBehaviors($this->behaviors());
-        parent::init();
+        parent::__construct();
     }
 
     public function behaviors()
     {
         return array(
-            'CoomponentInModule' => array(
+            'ComponentInModule' => array(
                 'class' => 'application.components.behaviors.ComponentInModuleBehavior'
             )
         );

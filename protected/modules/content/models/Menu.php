@@ -1,16 +1,13 @@
 <?php
 /** 
- * @property                 $sections
- * @property                 $currentSection
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
- * @property MenuSection[]   $links
- * @method   Menu            published()
- * @method   Menu            sitemap()
- * @method   Menu            ordered()
- * @method   Menu            last()
+ * Created by JetBrains PhpStorm.
+ * 
+ * User: artem.ostapetc
+ * Date: 03.09.12
+ * Time: 14:24
+ * To change this template use File | Settings | File Templates.
+ * 
+ * 
  * 
  */
 

@@ -4,11 +4,7 @@
  * @property                 $path
  * @property                 $nbspTitle
  * @property                 $spaceTitle
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
- * @property boolean         $isDeletedRecord  whether the node is deleted.
+ * @property                 $errorsFlatArray
  * @property Menu            $menu
  * @property Page            $page
  * @method   MenuSection     published()

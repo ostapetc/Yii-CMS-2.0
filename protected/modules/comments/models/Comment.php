@@ -2,11 +2,7 @@
 /** 
  * @property                 $href
  * @property                 $model
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
- * @property boolean         $isDeletedRecord  whether the node is deleted.
+ * @property                 $errorsFlatArray
  * @property User            $user
  * @method   Comment         published()
  * @method   Comment         sitemap()

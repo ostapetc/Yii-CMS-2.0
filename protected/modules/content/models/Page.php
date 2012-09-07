@@ -2,10 +2,7 @@
 /** 
  * @property                  $href
  * @property                  $content
- * @property                  $info
- * @property                  $languageName
- * @property CComponent       $owner            the owner component that this behavior is attached to.
- * @property boolean          $enabled          whether this behavior is enabled
+ * @property                  $errorsFlatArray
  * @property Language         $language_model
  * @property TagRel[]         $tags_rels
  * @property Tag[]            $tags

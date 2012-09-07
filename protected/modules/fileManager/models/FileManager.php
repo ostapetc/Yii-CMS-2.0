@@ -18,11 +18,8 @@
  * @property                 $href
  * @property                 $serverDir
  * @property                 $serverPath
+ * @property                 $errorsFlatArray
  * @property string          $error            the error message. Null is returned if no error.
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
  * @method   FileManager     published()
  * @method   FileManager     sitemap()
  * @method   FileManager     ordered()

@@ -6,17 +6,17 @@ Yii::import('zii.widgets.CPortlet');
  */
 class Portlet extends CPortlet
 {
-    public function init()
+    public function __construct()
     {
         $this->attachBehaviors($this->behaviors());
-        parent::init();
+        parent::__construct();
     }
 
 
     public function behaviors()
     {
         return array(
-            'CoomponentInModule' => array(
+            'ComponentInModule' => array(
                 'class' => 'application.components.behaviors.ComponentInModuleBehavior'
             )
         );

@@ -1,9 +1,6 @@
 <?php
 /** 
- * @property                 $info
- * @property                 $languageName
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property boolean         $enabled          whether this behavior is enabled
+ * @property                 $errorsFlatArray
  * @method   Feedback        published()
  * @method   Feedback        sitemap()
  * @method   Feedback        ordered()
