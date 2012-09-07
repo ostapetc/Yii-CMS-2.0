@@ -155,7 +155,11 @@ class YiiComponentPropertyIterator extends ArrayIterator {
 
         if (method_exists($object, 'behaviors')) {
             foreach ($object->behaviors() as $id => $data) {
-
+                if ($object->asa($id)) {
+                    Yii::log('If your components, implement "behaviors" method, than it must attach in constructor',
+                        CLogger::LEVEL_WARNING, 'DocBlockCommand');
+                    continue;
+                }
                 $props = array_merge($props, $this->getAccessors($object->asa($id)));
             }
         }
