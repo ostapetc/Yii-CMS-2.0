@@ -48,6 +48,10 @@ class PageController extends Controller
                         'application.modules.content.portlets.SectionCreateSidebar',
                     ),
                     array(
+                        'widget',
+                        'application.modules.tags.portlets.TagCreateSidebar',
+                    ),
+                    array(
                         'partial',
                         'application.modules.content.views.page._sidebarFormNotices'
                     )

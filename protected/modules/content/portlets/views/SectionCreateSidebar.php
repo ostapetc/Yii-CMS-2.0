@@ -23,6 +23,9 @@
                         $sections_ids.trigger("liszt:updated");
                     }
 
+                    $('#PageSection_name').val('');
+                    $('#PageSection_parent_id').val('')
+
                     alert('Раздел добавлен');
                 }
                 else {
@@ -40,8 +43,7 @@
     });
 </script>
 
-<h3>Добавить раздел</h3>
-<br/>
+<h4>Добавить раздел</h4>
 
 <?= CHtml::textField('name', null, array('placeholder' => 'Название', 'style' => 'width: 250px', 'id' => 'PageSection_name')); ?>
 <?= CHtml::dropdownList('parent_id', null, PageSection::model()->optionsTree(), array('empty' => 'родительский раздел', 'style' => 'width: 260px !important', 'id' => 'PageSection_parent_id')); ?>
