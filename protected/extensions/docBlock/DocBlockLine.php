@@ -2,7 +2,8 @@
 /**
  * Incapsulate property drawing logic
  */
-abstract class DocBlockLine extends CComponent {
+abstract class DocBlockLine extends CComponent
+{
 
     public $name;
     public $iterator;
@@ -20,10 +21,12 @@ abstract class DocBlockLine extends CComponent {
     public $oldType;
     public $oldComment;
 
+
     /**
      * Get _property or him _oldProperty variant
      *
      * @param string $name
+     *
      * @return mixed
      */
     public function __get($name)
@@ -43,15 +46,17 @@ abstract class DocBlockLine extends CComponent {
 
     public function align(&$tag, &$type, &$property)
     {
-        if ($this->tagVerticalAlignment) {
+        if ($this->tagVerticalAlignment)
+        {
             $tag = $tag . str_repeat(' ', $this->iterator->getMaxLenOfTag() - strlen($tag));
         }
-        if ($this->typeVerticalAlignment) {
+        if ($this->typeVerticalAlignment)
+        {
             $type = $type . str_repeat(' ', $this->iterator->getMaxLenOfType() - strlen($type));
         }
-        if ($this->propertyVerticalAlignment) {
-            $property
-                = $property . str_repeat(' ', $this->iterator->getMaxLenOfName() - strlen($property));
+        if ($this->propertyVerticalAlignment)
+        {
+            $property = $property . str_repeat(' ', $this->iterator->getMaxLenOfName() - strlen($property));
         }
     }
 
@@ -63,23 +68,34 @@ abstract class DocBlockLine extends CComponent {
      */
     abstract public function populate($object);
 
+
     abstract public function afterPopulate();
+
 
     abstract public function getTagLen();
 
 
+    abstract public function getNameLen();
+
+
+    abstract public function getTypeLen();
+
+
     public function setOldValues($properties)
     {
-        if (isset($properties[$this->name])) {
-            $this->oldType = $properties[$this->name]['type'];
+        if (isset($properties[$this->name]))
+        {
+            $this->oldType    = $properties[$this->name]['type'];
             $this->oldComment = $properties[$this->name]['comment'];
         }
     }
+
 
     /**
      * Proxy method for external component
      *
      * @param string $str
+     *
      * @return string
      */
     protected function camelCaseToUnderscore($str)

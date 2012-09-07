@@ -8,6 +8,7 @@ class DocBlockCommand extends CConsoleCommand
     public $propertyIterator = 'YiiComponentPropertyIterator';
 
     public $propertyIteratorOptions = array(
+        'commentLanguage'   => 'ru',
         'includeAttributes' => true,
         'includeEvents'     => false,
         'includeAccessors'  => true,
@@ -31,20 +32,32 @@ class DocBlockCommand extends CConsoleCommand
         'propertyVerticalAlignment' => true
     );
 
+
     /**
      * Import all needed classes
      */
     public function init()
     {
+        $importClasses = array(
+            'DocBlockLine',
+            'DocBlockParser',
+            'DocBlockComment',
+            'messages.DocBlockMessageSource',
+            'iterators.' . $this->propertyIterator,
+            'iterators.' . $this->filesIterator,
+            $this->propertyOptions['class'],
+            $this->methodOptions['class']
+        );
+
+        //do import
         $alias = md5(__DIR__);
         Yii::setPathOfAlias($alias, __DIR__);
-        Yii::import($alias . '.DocBlockParser');
-        Yii::import($alias . '.DocBlockLine');
-        Yii::import($alias . '.' . $this->filesIterator);
-        Yii::import($alias . '.' . $this->propertyIterator);
-        Yii::import($alias . '.' . $this->propertyOptions['class']);
-        Yii::import($alias . '.' . $this->methodOptions['class']);
+        foreach ($importClasses as $class)
+        {
+            Yii::import($alias . '.' . $class, true);
+        }
 
+        Yii::app()->setComponent('docBlockMessage', new DocBlockMessageSource());
         parent::init();
     }
 

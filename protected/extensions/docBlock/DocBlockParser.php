@@ -68,6 +68,10 @@ class DocBlockParser extends CComponent
     {
         if (!preg_match('/@\w+/', $line))
         {
+            if (isset($line[0]) && $line[0] == '!')
+            {
+                return true;
+            }
             if (is_null($this->shortDescription))
             {
                 $this->shortDescription = $line;

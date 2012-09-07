@@ -52,6 +52,11 @@ class YiiComponentMethod extends DocBlockLine {
         return strlen($this->name);
     }
 
+    public function getTypeLen()
+    {
+        return strlen($this->type);
+    }
+
     /**
      * Parse existing comments for searching types or comments for property
      *
