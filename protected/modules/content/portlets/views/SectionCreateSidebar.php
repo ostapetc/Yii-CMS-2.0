@@ -2,16 +2,38 @@
     $(function() {
         $('#PageSection_submit').click(function() {
             var params = {
-                'PageSection[name]'      : $('#PageSection_name').val(),
-                'PageSection[parent_id]' : $('#PageSection_parent_id').val()
+                'PageSection[name]'       : $('#PageSection_name').val(),
+                'PageSection[parent_id]' : $('#PageSection_parent_id').val(),
+                'ajax'                      : 1
             }
 
             $.post('/content/PageSection/create', params, function(res) {
                 if (res.done) {
+                    $sections_ids = $('#Page_sections_ids');
+                    if ($sections_ids.length)
+                    {
+                        var options = "";
+
+                        for (var id in res.sections)
+                        {
+                            options+= "<option value='" + id + "'>" + res.sections[id] + "</option>";
+                        }
+
+                        $sections_ids.html(options);
+                        $sections_ids.trigger("liszt:updated");
+                    }
+
                     alert('Раздел добавлен');
                 }
                 else {
-                    alert(res.errors.join("\n"));
+                    var errors_msg = '';
+
+                    for (var i in res.errors)
+                    {
+                        errors_msg+= res.errors[i].error + " \n";
+                    }
+
+                    alert(errors_msg);
                 }
             }, 'json');
         });

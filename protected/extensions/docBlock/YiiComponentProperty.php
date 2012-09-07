@@ -43,6 +43,10 @@ class YiiComponentProperty extends DocBlockLine  {
         }
     }
 
+    public function getNameLen()
+    {
+        return strlen("\$".$this->name);
+    }
 
     /**
      * use or not
@@ -79,13 +83,6 @@ class YiiComponentProperty extends DocBlockLine  {
             }
         }
     }
-
-
-    public function getNameLen()
-    {
-        return strlen("\$".$this->name);
-    }
-
 
     public function getTagLen()
     {

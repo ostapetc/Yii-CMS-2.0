@@ -41,6 +41,7 @@ publish
 #my adds
 assets/*
 upload/fileManager/*
+upload/photo/*
 protected/config/development.php
 protected/runtime/*
 

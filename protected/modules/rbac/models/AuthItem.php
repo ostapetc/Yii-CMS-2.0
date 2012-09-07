@@ -1,20 +1,15 @@
 <?php
 /** 
- * @property                 $allow_for_all
- * @property                 $name
- * @property                 $type
- * @property                 $description
- * @property                 $bizrule
- * @property                 $data
- * @property                 $newAttachedModel
- * @property mixed           $related          the related object(s).
- * @property string          $attributeLabel   the attribute label
- * @property CActiveRelation $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
- * @property mixed           $attribute        the attribute value. Null if the attribute is not set or does not exist.
- * @property string          $error            the error message. Null is returned if no error.
- * @property CList           $eventHandlers    list of attached event handlers for the event
+ * @property                 $info
+ * @property                 $languageName
+ * @property CComponent      $owner            the owner component that this behavior is attached to.
+ * @property boolean         $enabled          whether this behavior is enabled
  * @property AuthItemChild[] $childs
  * @property AuthItem[]      $operations
+ * @method   AuthItem        published()
+ * @method   AuthItem        sitemap()
+ * @method   AuthItem        ordered()
+ * @method   AuthItem        last()
  * 
  */
 

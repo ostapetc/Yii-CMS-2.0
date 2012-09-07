@@ -116,14 +116,13 @@
       }
       iOSCheckbox.currentlyClicking = null;
       iOSCheckbox.dragging = null;
-      return this.elem.change();
+      return this.didChange();
     };
     iOSCheckbox.prototype.refresh = function() {
       return this.didChange();
     };
     iOSCheckbox.prototype.didChange = function() {
       var new_left;
-
       if (typeof this.onChange === "function") {
         this.onChange(this.elem, this.elem.prop('checked'));
       }
@@ -159,7 +158,7 @@
         return $(document).unbind('mouseup touchend', localMouseUp);
       };
       this.elem.change(function() {
-          return self.refresh();
+        return self.refresh();
       });
       return this.container.bind('mousedown touchstart', function(event) {
         self.onMouseDown.apply(self, arguments);

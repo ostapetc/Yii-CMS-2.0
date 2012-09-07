@@ -7,6 +7,6 @@ $this->widget('ListView', array(
     'summaryText'  => '',
     'itemView'     => '_view',
     'viewData'     => array('preview' => true),
-    //'itemCssClass' => 'page',
+    'emptyText'    => t('Топики еще не были добавлены')
 ));
 ?>

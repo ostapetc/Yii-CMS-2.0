@@ -43,7 +43,7 @@ class UserController extends Controller
     }
 
 
-    public function topSubMenuItems()
+    public function subMenuItems()
     {
         return array(
             array(
@@ -149,7 +149,7 @@ class UserController extends Controller
 
                     Yii::app()->user->setFlash('success', Param::model()->getValue(UsersModule::PARAM_REGISTRATION_DONE_MESSAGE));
 
-                    $this->redirect($_SERVER['REQUEST_URI']);
+                    $this->redirect('/');
                 }
             }
         }

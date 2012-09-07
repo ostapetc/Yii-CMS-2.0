@@ -196,7 +196,7 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      *
      * @return int
      */
-    public function getTypeLen()
+    public function getMaxLenOfType()
     {
         if ($this->_maxLenOfType === null) {
             $clone = clone $this;
@@ -218,7 +218,7 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      *
      * @return int
      */
-    public function getNameLen()
+    public function getMaxLenOfName()
     {
         if ($this->_maxLenOfName === null) {
             $clone = clone $this;
@@ -239,7 +239,7 @@ class YiiComponentPropertyIterator extends ArrayIterator {
      *
      * @return int
      */
-    public function getTagLen()
+    public function getMaxLenOfTag()
     {
         if ($this->_maxLenOfTag === null) {
             $clone = clone $this;
