@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by JetBrains PhpStorm.
- * User: os
- * Date: 01.07.12
- * Time: 0:56
+ * User: artem.ostapetc
+ * Date: 07.09.12
+ * Time: 18:55
  * To change this template use File | Settings | File Templates.
  */
-class TagsSidebar extends CPortlet
+class TagCreateSidebar extends Portlet
 {
     public function renderContent()
     {
-        $this->render('TagsSidebar');
+        $this->render('TagCreateSidebar');
     }
 }

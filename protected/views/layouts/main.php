@@ -68,7 +68,7 @@
                 <?= $content ?>
             </div>
             <!--/span-->
-            <div class="span4">
+            <div class="span4 sidebar-manager">
                 <?= $this->widget('SidebarManager') ?>
             </div>
         </div>
