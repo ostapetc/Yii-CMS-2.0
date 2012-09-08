@@ -15,7 +15,7 @@ class FileManagerBehavior extends ActiveRecordBehavior
         $model = $this->getOwner();
         foreach ($this->tags as $tag => $data)
         {
-            $storage_class = isset($data['class']) ? $data['class'] : 'FileManager';
+            $storage_class = isset($data['class']) ? $data['class'] : 'MediaFile';
             $model->getMetaData()->addRelation($tag, array(
                 CActiveRecord::HAS_MANY,
                 $storage_class,

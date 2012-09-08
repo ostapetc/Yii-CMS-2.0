@@ -40,7 +40,7 @@ publish
 
 #my adds
 assets/*
-upload/fileManager/*
+upload/media/*
 upload/photo/*
 protected/config/development.php
 protected/runtime/*

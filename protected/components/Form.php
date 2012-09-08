@@ -129,23 +129,20 @@ class Form extends CForm
             }
         }
 
-        if ($element->visible)
+        if ($element instanceof CFormInputElement)
         {
-            if ($element instanceof CFormInputElement)
-            {
-                if($element->type==='hidden')
-                    return "<div style=\"visibility:hidden\">\n".$element->render()."</div>\n";
-                else
-                    return "<dl class='{$element->type} control-group'><dd>\n".$element->render()."</dd></dl>\n";
-            }
-            else if ($element instanceof CFormButtonElement)
-            {
-                return $element->render() . "\n";
-            }
+            if($element->type==='hidden')
+                return "<div style=\"visibility:hidden\">\n".$element->render()."</div>\n";
             else
-            {
-                return $element->render();
-            }
+                return "<dl class='{$element->type} control-group'><dd>\n".$element->render()."</dd></dl>\n";
+        }
+        else if ($element instanceof CFormButtonElement)
+        {
+            return $element->render() . "\n";
+        }
+        else
+        {
+            return $element->render();
         }
     }
 

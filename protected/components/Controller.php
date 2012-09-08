@@ -214,6 +214,45 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
+    /**
+     * Возвращает модель по атрибуту и удовлетворяющую скоупам,
+     * или выбрасывает 404
+     *
+     * @param string     $class  имя класса модели
+     * @param int|string $value  значение атрибута
+     * @param array      $scopes массив скоупов
+     * @param string     $attribute
+     *
+     * @return CActiveRecord
+     */
+    public function loadModel($value, $scopes = array(), $attribute = null)
+    {
+        $model = CActiveRecord::model($this->getModelClass());
+
+        foreach ($scopes as $scope)
+        {
+            $model->$scope();
+        }
+
+        if ($attribute === null)
+        {
+            $model = $model->findByPk($value);
+        }
+        else
+        {
+            $model = $model->findByAttributes(array(
+                $attribute => $value
+            ));
+        }
+
+        if ($model === null)
+        {
+            $this->pageNotFound();
+        }
+
+        return $model;
+    }
+
     public function isRootUrl($url = null)
     {
         if (!$url)

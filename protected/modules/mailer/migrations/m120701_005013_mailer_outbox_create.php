@@ -1,5 +1,5 @@
 <?
-class m120701_005013_mailer_outbox_create extends EDbMigration
+class m120701_005013_mailer_outbox_create extends DbMigration
 {
     public function up()
     {
