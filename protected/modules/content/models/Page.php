@@ -4,6 +4,7 @@
  * !Attributes - атрибуты БД
  * @property                  $language
  * @property                  $status
+ * @property                  $comments_denied
  * @property                  $id
  * @property                  $user_id
  * @property                  $title

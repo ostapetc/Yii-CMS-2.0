@@ -3,6 +3,7 @@
  * 
  * !Attributes - атрибуты БД
  * @property                 $status
+ * @property                 $rating
  * @property                 $id
  * @property                 $name
  * @property                 $email
@@ -14,7 +15,6 @@
  * @property                 $activate_date
  * @property                 $password_recover_code
  * @property                 $password_recover_date
- * @property                 $rating
  * @property                 $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений

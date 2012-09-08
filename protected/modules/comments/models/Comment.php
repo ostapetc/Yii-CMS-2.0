@@ -2,10 +2,10 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $object_id
  * @property                 $model_id
  * @property                 $id
  * @property                 $user_id
+ * @property                 $object_id
  * @property                 $root
  * @property                 $left
  * @property                 $right

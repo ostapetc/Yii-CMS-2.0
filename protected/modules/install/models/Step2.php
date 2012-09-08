@@ -2,7 +2,7 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property        $admin_login
+ * @property        $admin_email
  * @property        $admin_pass
  * @property        $admin_pass_confirm
  * @property        $modules
