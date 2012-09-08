@@ -2,30 +2,24 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $status
- * @property                 $id
- * @property                 $user_id
- * @property                 $template_id
- * @property                 $email
- * @property                 $subject
- * @property                 $body
- * @property                 $log
- * @property                 $date_create
- * @property                 $date_send
+ * @property string         $status
+ * @property string         $id
+ * @property string         $user_id
+ * @property string         $template_id
+ * @property string         $email
+ * @property string         $subject
+ * @property string         $body
+ * @property string         $log
+ * @property string         $date_create
+ * @property string         $date_send
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $statusCaption
- * @property                 $errorsFlatArray
+ * @property                $statusCaption
+ * @property                $errorsFlatArray
  * 
  * !Relations - связи
- * @property User            $user
- * @property MailerTemplate  $template
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MailerOutbox    published()
- * @method   MailerOutbox    sitemap()
- * @method   MailerOutbox    ordered()
- * @method   MailerOutbox    last()
+ * @property User           $user
+ * @property MailerTemplate $template
  * 
  */
 

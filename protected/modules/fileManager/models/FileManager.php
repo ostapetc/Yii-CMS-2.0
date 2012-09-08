@@ -2,43 +2,37 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $object_id
- * @property                 $model_id
- * @property                 $name
- * @property                 $tag
- * @property                 $title
- * @property                 $descr
- * @property                 $order
- * @property                 $path
+ * @property string $id
+ * @property string $object_id
+ * @property string $model_id
+ * @property string $name
+ * @property string $tag
+ * @property string $title
+ * @property string $descr
+ * @property string $order
+ * @property string $path
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $deleteUrl
- * @property                 $isImage
- * @property                 $isSound
- * @property                 $isExcel
- * @property                 $isWord
- * @property                 $isFileExist
- * @property                 $isArchive
- * @property                 $icon
- * @property                 $handler
- * @property string          $size             formatted file size
- * @property                 $extension
- * @property                 $nameWithoutExt
- * @property                 $content
- * @property                 $downloadUrl
- * @property                 $hash
- * @property                 $href
- * @property                 $serverDir
- * @property                 $serverPath
- * @property                 $errorsFlatArray
- * @property string          $error            the error message. Null is returned if no error.
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   FileManager     published()
- * @method   FileManager     sitemap()
- * @method   FileManager     ordered()
- * @method   FileManager     last()
+ * @property        $deleteUrl
+ * @property        $isImage
+ * @property        $isSound
+ * @property        $isExcel
+ * @property        $isWord
+ * @property        $isFileExist
+ * @property        $isArchive
+ * @property        $icon
+ * @property        $handler
+ * @property string $size            formatted file size
+ * @property        $extension
+ * @property        $nameWithoutExt
+ * @property        $content
+ * @property        $downloadUrl
+ * @property        $hash
+ * @property        $href
+ * @property        $serverDir
+ * @property        $serverPath
+ * @property        $errorsFlatArray
+ * @property string $error           the error message. Null is returned if no error.
  * 
  */
 

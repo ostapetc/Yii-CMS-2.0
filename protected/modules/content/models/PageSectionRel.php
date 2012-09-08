@@ -2,19 +2,13 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $page_id
- * @property                 $section_id
+ * @property string $id
+ * @property string $page_id
+ * @property string $section_id
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   PageSectionRel  published()
- * @method   PageSectionRel  sitemap()
- * @method   PageSectionRel  ordered()
- * @method   PageSectionRel  last()
+ * @property        $href
+ * @property        $errorsFlatArray
  * 
  */
 

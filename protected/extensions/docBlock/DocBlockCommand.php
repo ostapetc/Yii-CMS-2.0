@@ -13,6 +13,7 @@ class DocBlockCommand extends CConsoleCommand
     protected $propertyIteratorOptions;
     protected $propertyOptions;
     protected $methodOptions;
+    protected $messageSource;
 
     protected $_alias;
 
@@ -22,44 +23,23 @@ class DocBlockCommand extends CConsoleCommand
      */
     public function init()
     {
+        $this->_alias = md5(__DIR__);
         Yii::setPathOfAlias($this->_alias, __DIR__);
+
+        //configuring
         $config = require Yii::getPathOfAlias($this->_alias . '.configs.' . $this->config) . '.php';
         foreach ($config as $key => $val)
         {
             $this->$key = $val;
         }
-        $importClasses = array(
-            'DocBlockLine',
-            'DocBlockParser',
-            'DocBlockComment',
-            'iterators.' . $this->propertyIteratorOptions['class'],
-            'iterators.' . $this->filesIterator,
-            $this->propertyOptions['class'],
-            $this->methodOptions['class']
-        );
 
         //do import
-        $this->_alias = md5(__DIR__);
-        Yii::setPathOfAlias($this->_alias, __DIR__);
-        foreach ($importClasses as $class)
-        {
-            Yii::import($this->_alias . '.' . $class, true);
-        }
+        Yii::import($this->_alias . '.*', true);
+        Yii::import($this->_alias . '.iterators.*', true);
 
         //set translaitor
-        $messageSource           = new CPhpMessageSource();
-        $messageSource->basePath = Yii::getPathOfAlias($this->_alias . '.messages');
-        Yii::app()->setComponent('docBlockMessage', $messageSource);
+        Yii::app()->setComponent('docBlockMessage', Yii::createComponent($this->messageSource));
         parent::init();
-    }
-
-
-    /**
-     * @return Iterator by Files for processing
-     */
-    protected function getFilesIterator()
-    {
-        return new $this->filesIterator;
     }
 
 
@@ -71,28 +51,28 @@ class DocBlockCommand extends CConsoleCommand
     protected function getPropertyIterator($object)
     {
         $class = $this->propertyIteratorOptions['class'];
-        return new $class($this->propertyIteratorOptions, $object, $this->propertyOptions, $this->methodOptions);
+        $this->propertyIteratorOptions['object'] = $object;
+        return new $class($this->propertyIteratorOptions);
     }
 
 
     /**
      * Run processing of all files
      */
-    public function actionGenerate()
+    public function actionIndex()
     {
-        foreach ($this->getFilesIterator() as $fileInfo)
+        foreach (new $this->filesIterator as $fileInfo)
         {
             if (!$fileInfo->isFile())
             {
                 continue;
             }
-
-            $data = $this->getInstanceByFile($fileInfo);
-            if (!$data)
+            $class = $this->getClassByFile($fileInfo);
+            $object = $this->getClassInstance($class);
+            if (!$object)
             {
                 continue;
             }
-            list($class, $object) = $data;
             $docBlock    = $this->getDockBlock($class, $object);
             $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
             $content     = file_get_contents($file);
@@ -107,11 +87,16 @@ class DocBlockCommand extends CConsoleCommand
      *
      * @return array()|bool return class and instance by SplFileInfo or false if can't instanciate it
      */
-    protected function getInstanceByFile(SplFileInfo $fileInfo)
+    protected function getClassByFile(SplFileInfo $fileInfo)
+    {
+        return pathinfo($fileInfo->getFilename(), PATHINFO_FILENAME);
+    }
+
+
+    protected function getClassInstance($class)
     {
         try
         {
-            $class  = pathinfo($fileInfo->getFilename(), PATHINFO_FILENAME);
             $object = new $class;
             if (!$object instanceof $this->baseClass)
             {
@@ -121,10 +106,7 @@ class DocBlockCommand extends CConsoleCommand
         {
             return false;
         }
-        return array(
-            $class,
-            $object
-        );
+        return $object;
     }
 
 

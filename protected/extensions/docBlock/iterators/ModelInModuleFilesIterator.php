@@ -11,7 +11,7 @@ class ModelInModuleFilesIterator extends AppendIterator
         foreach (Yii::app()->getModules() as $id => $data)
         {
             $modelsDir = Yii::app()->getModule($id)->getBasePath() . '/models';
-            if (!is_dir($modelsDir) || $id == 'docs')
+            if (!is_dir($modelsDir))
             {
                 continue;
             }

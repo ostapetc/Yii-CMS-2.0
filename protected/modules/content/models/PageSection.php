@@ -2,25 +2,19 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $parent_id
- * @property                 $name
- * @property                 $order
- * @property                 $date_create
+ * @property string        $id
+ * @property string        $parent_id
+ * @property string        $name
+ * @property integer       $order
+ * @property string        $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $errorsFlatArray
+ * @property               $href
+ * @property               $errorsFlatArray
  * 
  * !Relations - связи
- * @property PageSection     $parent
- * @property PageSection[]   $childs
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   PageSection     published()
- * @method   PageSection     sitemap()
- * @method   PageSection     ordered()
- * @method   PageSection     last()
+ * @property PageSection   $parent
+ * @property PageSection[] $childs
  * 
  */
 

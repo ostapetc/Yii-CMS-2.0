@@ -2,30 +2,24 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $model_id
- * @property                 $id
- * @property                 $user_id
- * @property                 $object_id
- * @property                 $root
- * @property                 $left
- * @property                 $right
- * @property                 $level
- * @property                 $text
- * @property                 $date_create
+ * @property string  $object_id
+ * @property string  $model_id
+ * @property string  $id
+ * @property string  $user_id
+ * @property string  $root
+ * @property string  $left
+ * @property string  $right
+ * @property integer $level
+ * @property string  $text
+ * @property string  $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $model
- * @property                 $errorsFlatArray
+ * @property         $href
+ * @property         $model
+ * @property         $errorsFlatArray
  * 
  * !Relations - связи
- * @property User            $user
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Comment         published()
- * @method   Comment         sitemap()
- * @method   Comment         ordered()
- * @method   Comment         last()
+ * @property User    $user
  * 
  */
 

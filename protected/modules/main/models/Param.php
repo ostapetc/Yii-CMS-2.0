@@ -2,25 +2,19 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $module_id
- * @property                 $code
- * @property                 $name
- * @property                 $value
- * @property                 $element
- * @property                 $options
+ * @property string $id
+ * @property string $module_id
+ * @property string $code
+ * @property string $name
+ * @property string $value
+ * @property string $element
+ * @property string $options
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $values
- * @property                 $formatedValue
- * @property                 $filePath
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Param           published()
- * @method   Param           sitemap()
- * @method   Param           ordered()
- * @method   Param           last()
+ * @property        $values
+ * @property        $formatedValue
+ * @property        $filePath
+ * @property        $errorsFlatArray
  * 
  */
 

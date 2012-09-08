@@ -2,46 +2,40 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $status
- * @property                 $rating
- * @property                 $id
- * @property                 $name
- * @property                 $email
- * @property                 $password
- * @property                 $birthdate
- * @property                 $gender
- * @property                 $photo
- * @property                 $activate_code
- * @property                 $activate_date
- * @property                 $password_recover_code
- * @property                 $password_recover_date
- * @property                 $date_create
+ * @property string         $status
+ * @property string         $id
+ * @property string         $name
+ * @property string         $email
+ * @property string         $password
+ * @property string         $birthdate
+ * @property string         $gender
+ * @property string         $photo
+ * @property string         $activate_code
+ * @property string         $activate_date
+ * @property string         $password_recover_code
+ * @property string         $password_recover_date
+ * @property integer        $rating
+ * @property string         $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $userDir
- * @property AuthItem        $role
- * @property                 $photoHtml
- * @property                 $photoLink
- * @property                 $link
- * @property                 $href
- * @property                 $birthdateValue
- * @property                 $dateCreateValue
- * @property                 $genderValue
- * @property                 $errorsFlatArray
+ * @property                $userDir
+ * @property AuthItem       $role
+ * @property                $photoHtml
+ * @property                $photoLink
+ * @property                $link
+ * @property                $href
+ * @property                $birthdateValue
+ * @property                $dateCreateValue
+ * @property                $genderValue
+ * @property                $errorsFlatArray
  * 
  * !Relations - связи
- * @property FileAlbum[]     $file_albums
- * @property int|null        $file_albums_count
- * @property AuthAssignment  $assignment
- * @property int|null        $pages_count
- * @property int|null        $favorites_count
- * @property int|null        $comments_count
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   User            published()
- * @method   User            sitemap()
- * @method   User            ordered()
- * @method   User            last()
+ * @property FileAlbum[]    $file_albums
+ * @property int|null       $file_albums_count
+ * @property AuthAssignment $assignment
+ * @property int|null       $pages_count
+ * @property int|null       $favorites_count
+ * @property int|null       $comments_count
  * 
  */
 

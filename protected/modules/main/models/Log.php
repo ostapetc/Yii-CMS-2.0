@@ -2,20 +2,14 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $level
- * @property                 $category
- * @property                 $logtime
- * @property                 $message
+ * @property integer $id
+ * @property string  $level
+ * @property string  $category
+ * @property string  $logtime
+ * @property string  $message
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Log             published()
- * @method   Log             sitemap()
- * @method   Log             ordered()
- * @method   Log             last()
+ * @property         $errorsFlatArray
  * 
  */
 

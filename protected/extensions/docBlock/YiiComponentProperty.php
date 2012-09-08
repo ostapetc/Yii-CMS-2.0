@@ -31,6 +31,12 @@ class YiiComponentProperty extends DocBlockLine
     }
 
 
+    public function canDraw()
+    {
+        return $this->_settable || $this->_gettable;
+    }
+
+
     /**
      * @return string combined doc string
      */
@@ -38,9 +44,11 @@ class YiiComponentProperty extends DocBlockLine
     {
         try
         {
-            if ($this->_settable || $this->_gettable)
+            if ($this->canDraw())
             {
-                return $this->getLine($this->tag, $this->type, "\$" . $this->name, $this->comment);
+                $type    = $this->type ? $this->type : $this->_oldReadType;
+                $comment = $this->comment ? $this->comment : $this->_oldReadComment;
+                return $this->getLine($this->tag, $type, "\$" . $this->name, $comment);
             }
             return '';
         } catch (Exception $e)
@@ -209,8 +217,9 @@ class YiiComponentProperty extends DocBlockLine
         }
         if ($object instanceof CActiveRecord)
         {
+            //from relations
             $rels = $object->relations();
-            if (isset($rels[$this->name]))
+            if (array_key_exists($this->name,$rels))
             {
                 list ($relType, $type) = $rels[$this->name];
                 $returnArrayTypes = array(
@@ -226,6 +235,14 @@ class YiiComponentProperty extends DocBlockLine
                     $type = 'int|null';
                 }
                 $this->_writeType = $this->_readType = $type;
+            }
+
+            //from attrubutes
+            $attrs = $object->getAttributes();
+            if (array_key_exists($this->name, $attrs))
+            {
+                $metaData = $object->getMetaData();
+                $this->_writeType = $this->_readType = $metaData->columns[$this->name]->type;
             }
         }
     }

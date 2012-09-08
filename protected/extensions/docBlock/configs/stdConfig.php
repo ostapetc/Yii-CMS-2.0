@@ -10,27 +10,37 @@ return array(
         'commentLanguage'         => 'ru',
         'commentCategory'         => 'core',
         'addIllustrationCommetns' => true,
-        'includeAttributes'       => true,
-        'includeEvents'           => false,
-        'includeAccessors'        => true,
-        'includeRelations'        => true
+        //allow values: 'attributes', 'events', 'accessors', 'relations'
+        'generatePropertiesFor'   => array(
+            'attributes',
+            'accessors',
+            'relations'
+        ),
+        //allow values: 'scopes'
+        'generateMethodsFor'      => array(
+            'scopes'
+        ),
+        //some settings for @property annotation
+        'propertyOptions'         => array(
+            'class'                     => 'YiiComponentProperty',
+            'toUnderscore'              => false,
+            //use or not @property-write/@property-read annotations
+            'readWriteDifferentiate'    => false,
+            'tagVerticalAlignment'      => true,
+            'typeVerticalAlignment'     => true,
+            'propertyVerticalAlignment' => true
+        ),
+        //some settings for @method annotation
+        'methodOptions'           => array(
+            'class'                     => 'YiiComponentMethod',
+            'toUnderscore'              => false,
+            'tagVerticalAlignment'      => true,
+            'typeVerticalAlignment'     => true,
+            'propertyVerticalAlignment' => true
+        ),
     ),
-    //some settings for @property annotation
-    'propertyOptions'         => array(
-        'class'                     => 'YiiComponentProperty',
-        'toUnderscore'              => false,
-        //use or not @property-write/@property-read annotations
-        'readWriteDifferentiate'    => false,
-        'tagVerticalAlignment'      => true,
-        'typeVerticalAlignment'     => true,
-        'propertyVerticalAlignment' => true
-    ),
-    //some settings for @method annotation
-    'methodOptions'           => array(
-        'class'                     => 'YiiComponentMethod',
-        'toUnderscore'              => false,
-        'tagVerticalAlignment'      => true,
-        'typeVerticalAlignment'     => true,
-        'propertyVerticalAlignment' => true
+    'messageSource'           => array(
+        'class'    => 'CPhpMessageSource',
+        'basePath' => Yii::getPathOfAlias($this->_alias . '.messages')
     )
 );

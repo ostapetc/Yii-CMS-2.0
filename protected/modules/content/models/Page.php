@@ -2,16 +2,15 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                  $language
- * @property                  $status
- * @property                  $comments_denied
- * @property                  $id
- * @property                  $user_id
- * @property                  $title
- * @property                  $url
- * @property                  $text
- * @property                  $date_create
- * @property                  $order
+ * @property string           $language
+ * @property string           $status
+ * @property string           $id
+ * @property string           $user_id
+ * @property string           $title
+ * @property string           $url
+ * @property string           $text
+ * @property string           $date_create
+ * @property integer          $order
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                  $href
@@ -26,12 +25,6 @@
  * @property User             $user
  * @property PageSectionRel[] $sections_rels
  * @property PageSection[]    $sections
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Page             published()
- * @method   Page             sitemap()
- * @method   Page             ordered()
- * @method   Page             last()
  * 
  */
 

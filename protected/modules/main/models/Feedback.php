@@ -2,21 +2,15 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $topic_id
- * @property                 $name
- * @property                 $email
- * @property                 $text
- * @property                 $date_create
+ * @property string $id
+ * @property string $topic_id
+ * @property string $name
+ * @property string $email
+ * @property string $text
+ * @property string $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Feedback        published()
- * @method   Feedback        sitemap()
- * @method   Feedback        ordered()
- * @method   Feedback        last()
+ * @property        $errorsFlatArray
  * 
  */
 
