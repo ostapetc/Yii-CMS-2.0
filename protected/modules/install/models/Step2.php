@@ -20,14 +20,14 @@
 
 class Step2 extends AbstractInstallModel {
 
-    public $admin_login;
+    public $admin_email;
     public $admin_pass;
     public $admin_pass_confirm;
 
     public $modules;
 
     public $save_site_actions = true;
-    public $multilanguage_support = true;
+    public $multilanguage_support = false;
     public $collect_routes_from_modules = true;
     public $themes_enabled = false;
 
@@ -42,7 +42,8 @@ class Step2 extends AbstractInstallModel {
     public function rules()
     {
         return array(
-            array('admin_login', 'required'),
+            array('admin_email', 'required'),
+            array('admin_email', 'email'),
             array('admin_pass', 'required'),
             array(
                 'admin_pass_confirm', 'compare',

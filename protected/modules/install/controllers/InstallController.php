@@ -84,6 +84,21 @@ class InstallController extends Controller
                 }
             }
 
+            //create admin user
+            $user = new User;
+            $user->email = $model->admin_email;
+            $user->password = UserIdentity::crypt($model->admin_pass);
+            $user->status = User::STATUS_ACTIVE;
+            $user->save(false);
+
+            //set admin
+            $auth = Yii::app()->authManager;
+
+            $auth->clearAll();
+            $auth->createRole('Admin');
+            $auth->assign('Admin', $user->id);
+
+
             //commands collect
             Yii::app()->executor->addCommandsFromModules(Yii::app()->getModules());
 
