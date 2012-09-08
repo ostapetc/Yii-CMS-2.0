@@ -268,6 +268,12 @@ class Page extends ActiveRecord
     }
 
 
+    public function afterSave()
+    {
+        $this->updateSectionsRels();
+    }
+
+
     public function updateSectionsRels()
     {
         if (!is_array($this->sections_ids)) return;

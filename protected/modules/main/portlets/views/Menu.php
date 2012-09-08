@@ -41,9 +41,11 @@
                                     </a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><?= CHtml::link(t('Личные сообщения'), '') ?></li>
+                                <li>
+                                    <?= CHtml::link('<span class="glyphicon-message-plus"></span> &nbsp;' . t('Личные сообщения'), '') ?>
+                                </li>
                                 <li class="divider"></li>
-                                <li><?= CHtml::link(t('Выйти'), array('/users/user/logout')) ?></li>
+                                <li><?= CHtml::link('<span class="glyphicon-new-window"></span> &nbsp;' . t('Выйти'), array('/users/user/logout')) ?></li>
                             </ul>
                         </li>
 
@@ -51,11 +53,11 @@
                             <a data-toggle="dropdown" class="dropdown-toggle create-menu" href="#"><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <?= CHtml::link(t('Создать топик'), array('/content/page/create')) ?>
+                                    <?= CHtml::link('<span class="glyphicon-file"></span> &nbsp;' . t('Создать топик'), array('/content/page/create')) ?>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <?= CHtml::link(t('Добавить видео'), array('/video/video/create')) ?>
+                                    <?= CHtml::link('<span class="glyphicon-facetime-video"></span> &nbsp;' . t('Добавить видео'), array('/video/video/create')) ?>
                                 </li>
                             </ul>
                         </li>
