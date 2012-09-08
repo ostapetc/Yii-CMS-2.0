@@ -5,7 +5,7 @@ return array(
     ),
     'elements'   => array(
         '<b>Настройки администратора:</b>',
-        'admin_login'                 => array('type' => 'text',
+        'admin_email'                 => array('type' => 'text',
                                                'hint' => 'Автоматически создаст пользователя с правами SuperAdmin'),
         'admin_pass'                  => array('type' => 'password'),
         'admin_pass_confirm'          => array('type' => 'password'),

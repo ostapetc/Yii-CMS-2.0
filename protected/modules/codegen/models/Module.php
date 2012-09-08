@@ -1,11 +1,12 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property        $id
  * @property        $name
  * @property        $description
- * @property string $attributeLabel the attribute label
- * @property string $error          the error message. Null is returned if no error.
- * @property CList  $eventHandlers  list of attached event handlers for the event
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * 
  */
 

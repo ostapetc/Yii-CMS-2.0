@@ -1,5 +1,7 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property                 $lang
  * @property                 $is_published
  * @property                 $id
@@ -13,20 +15,23 @@
  * @property                 $url
  * @property                 $module_url
  * @property                 $module_id
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
  * @property                 $path
  * @property                 $nbspTitle
  * @property                 $spaceTitle
- * @property                 $htmlTree
- * @property                 $newAttachedModel
- * @property mixed           $related          the related object(s).
- * @property string          $attributeLabel   the attribute label
- * @property CActiveRelation $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
- * @property mixed           $attribute        the attribute value. Null if the attribute is not set or does not exist.
- * @property string          $error            the error message. Null is returned if no error.
- * @property CList           $eventHandlers    list of attached event handlers for the event
+ * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property Menu            $menu
  * @property Page            $page
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MenuSection     published()
+ * @method   MenuSection     sitemap()
+ * @method   MenuSection     ordered()
+ * @method   MenuSection     last()
  * 
  */
 

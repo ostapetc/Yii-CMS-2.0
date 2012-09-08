@@ -1,16 +1,22 @@
 <?php
 /** 
- * @property                   $id
- * @property                   $language
- * @property                   $translation
- * @property                   $newAttachedModel
- * @property mixed             $related          the related object(s).
- * @property string            $attributeLabel   the attribute label
- * @property CActiveRelation   $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
- * @property mixed             $attribute        the attribute value. Null if the attribute is not set or does not exist.
- * @property string            $error            the error message. Null is returned if no error.
- * @property CList             $eventHandlers    list of attached event handlers for the event
- * @property LanguagesMessages $id0
+ * 
+ * !Attributes - атрибуты БД
+ * @property                     $id
+ * @property                     $language
+ * @property                     $translation
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property                     $errorsFlatArray
+ * 
+ * !Relations - связи
+ * @property LanguagesMessages   $id0
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   LanguageTranslation published()
+ * @method   LanguageTranslation sitemap()
+ * @method   LanguageTranslation ordered()
+ * @method   LanguageTranslation last()
  * 
  */
 

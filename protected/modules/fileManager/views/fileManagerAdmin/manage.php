@@ -2,18 +2,24 @@
 
 function getObjectUpdateUrl($object_id, $model)
 {
-    if (!is_numeric($object_id) || !method_exists($model, 'updateUrl'))
+    try
     {
-        return;
-    }
+        if (!is_numeric($object_id) || !method_exists($model, 'updateUrl'))
+        {
+            return;
+        }
 
-    $object = ActiveRecord::model($model)->findByPk($object_id);
-    if (!$object)
+        $object = ActiveRecord::model($model)->findByPk($object_id);
+        if (!$object)
+        {
+            return;
+        }
+
+        return CHtml::link('перейти', $object->updateUrl());
+    } catch (Exception $e)
     {
-        return;
+        return 'Удален';
     }
-
-    return CHtml::link('перейти', $object->updateUrl());
 }
 
 
@@ -21,20 +27,14 @@ function getFileLink($data)
 {
     if (file_exists($data->path))
     {
-         if ($data->is_image)
-         {
-             $basename = pathinfo($data->path, PATHINFO_BASENAME);
+        if ($data->is_image)
+        {
+            $basename = pathinfo($data->path, PATHINFO_BASENAME);
 
 //             $path = str_replace($basename, '100x0_' . $basename, $data->path);
 
-             $content = ImageHelper::thumb(
-                FileManager::UPLOAD_PATH,
-                $data->name,
-                50,
-                null,
-                false
-            );
-         }
+            $content = ImageHelper::thumb(FileManager::UPLOAD_PATH, $data->name, 50, null, false);
+        }
         else
         {
             $content = $data->title;
@@ -49,10 +49,10 @@ function getFileLink($data)
 
 
 $this->widget('AdminGridView', array(
-    'id' => 'fileManager-grid',
+    'id'           => 'fileManager-grid',
     'dataProvider' => $model->search(),
-    'filter' => $model,
-    'columns' => array(
+    'filter'       => $model,
+    'columns'      => array(
         array(
             'name'   => 'title',
             'value'  => 'getFileLink($data);',
@@ -70,19 +70,20 @@ $this->widget('AdminGridView', array(
         ),
         array(
             'header' => 'Объект',
-            'value'  => 'getObjectUpdateUrl($data->object_id, $data->model_id);',
+//            'value'  => 'getObjectUpdateUrl($data->object_id, $data->model_id)',
+            'value'  => '',
             'type'   => 'raw',
             'filter' => false
         ),
+//        array(
+//            'header' => 'Адрес',
+//            'value'  => 'CHtml::textField("name", $data->url, array("style"=>"width:100%;"));',
+//            'type'   => 'raw',
+//            'filter' => false
+//        ),
         array(
-            'header' => 'Адрес',
-            'value'  => 'CHtml::textField("name", $data->url, array("style"=>"width:100%;"));',
-            'type'   => 'raw',
-            'filter' => false
-        ),
-		array(
-			'class'    => 'CButtonColumn',
+            'class'    => 'CButtonColumn',
             'template' => '{delete}'
-		),
+        ),
     )
 ));

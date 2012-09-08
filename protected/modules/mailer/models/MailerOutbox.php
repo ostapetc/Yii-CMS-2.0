@@ -1,5 +1,7 @@
 <?php
 /** 
+ * 
+ * !Attributes - атрибуты БД
  * @property                 $status
  * @property                 $id
  * @property                 $user_id
@@ -10,16 +12,20 @@
  * @property                 $log
  * @property                 $date_create
  * @property                 $date_send
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $statusCaption
- * @property                 $newAttachedModel
- * @property mixed           $related          the related object(s).
- * @property string          $attributeLabel   the attribute label
- * @property CActiveRelation $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
- * @property mixed           $attribute        the attribute value. Null if the attribute is not set or does not exist.
- * @property string          $error            the error message. Null is returned if no error.
- * @property CList           $eventHandlers    list of attached event handlers for the event
+ * @property                 $errorsFlatArray
+ * 
+ * !Relations - связи
  * @property User            $user
  * @property MailerTemplate  $template
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MailerOutbox    published()
+ * @method   MailerOutbox    sitemap()
+ * @method   MailerOutbox    ordered()
+ * @method   MailerOutbox    last()
  * 
  */
 

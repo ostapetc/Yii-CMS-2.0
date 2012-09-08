@@ -21,11 +21,17 @@ class PageSectionController extends Controller
         $model->attributes = $_POST['PageSection'];
         if ($model->save())
         {
-            echo CJSON::encode(array('done' => true));
+            $params = array('done' => true);
+            if (isset($_POST['ajax']))
+            {
+                $params['sections'] = CHtml::listData(PageSection::model()->findAll(array('order' => 'name')), 'id', 'name');
+            }
         }
         else
         {
-            echo CJSON::encode(array('errors' => $model->errors_array));
+            $params = array('errors' => $model->errors_flat_array);
         }
+
+        echo CJSON::encode($params);
     }
 }

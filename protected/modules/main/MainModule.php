@@ -34,7 +34,7 @@ class MainModule extends WebModule
     }
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
             //'Мета-теги'                       => '/main/MetaTagAdmin/manage',

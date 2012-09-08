@@ -43,7 +43,7 @@ class InstallController extends Controller
             {
                 Yii::app()->user->setState('install_configs', $model->getConfigs());
                 $model->saveInSession();
-                $this->redirect('/install.php/install/install/step2');
+                $this->redirect('step2');
             }
             else if (is_string($db_create_status))
             {
@@ -84,6 +84,21 @@ class InstallController extends Controller
                 }
             }
 
+            //create admin user
+            $user = new User;
+            $user->email = $model->admin_email;
+            $user->password = UserIdentity::crypt($model->admin_pass);
+            $user->status = User::STATUS_ACTIVE;
+            $user->save(false);
+
+            //set admin
+            $auth = Yii::app()->authManager;
+
+            $auth->clearAll();
+            $auth->createRole('Admin');
+            $auth->assign('Admin', $user->id);
+
+
             //commands collect
             Yii::app()->executor->addCommandsFromModules(Yii::app()->getModules());
 
@@ -96,7 +111,7 @@ class InstallController extends Controller
             //$step1->deleteDisableModules();
             $model->saveInSession();
             //install base modules
-            $this->redirect('/install.php/install/install/step3');
+            $this->redirect('step3');
         }
 
         $this->render('step2', array('form' => $form));

@@ -1,29 +1,33 @@
 <?php
 /** 
- * @property  $admin_login
- * @property  $admin_pass
- * @property  $admin_pass_confirm
- * @property  $modules
- * @property  $save_site_actions
- * @property  $multilanguage_support
- * @property  $collect_routes_from_modules
- * @property  $themes_enabled
- * @property  $availableModules
- * @property  $mainConfigPatterns
- * @property  $configs
+ * 
+ * !Attributes - атрибуты БД
+ * @property        $admin_email
+ * @property        $admin_pass
+ * @property        $admin_pass_confirm
+ * @property        $modules
+ * @property        $save_site_actions
+ * @property        $multilanguage_support
+ * @property        $collect_routes_from_modules
+ * @property        $themes_enabled
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property        $availableModules
+ * @property        $mainConfigPatterns
+ * @property        $configs
  * 
  */
 
 class Step2 extends AbstractInstallModel {
 
-    public $admin_login;
+    public $admin_email;
     public $admin_pass;
     public $admin_pass_confirm;
 
     public $modules;
 
     public $save_site_actions = true;
-    public $multilanguage_support = true;
+    public $multilanguage_support = false;
     public $collect_routes_from_modules = true;
     public $themes_enabled = false;
 
@@ -38,7 +42,8 @@ class Step2 extends AbstractInstallModel {
     public function rules()
     {
         return array(
-            array('admin_login', 'required'),
+            array('admin_email', 'required'),
+            array('admin_email', 'email'),
             array('admin_pass', 'required'),
             array(
                 'admin_pass_confirm', 'compare',

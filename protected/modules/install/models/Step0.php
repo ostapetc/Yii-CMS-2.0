@@ -1,9 +1,10 @@
 <?php
 /** 
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property       $requirements
  * @property       $mustWritableDirectories
  * @property       $isWritableDirectories
- * @property CList $eventHandlers           list of attached event handlers for the event
  * 
  */
 

@@ -15,6 +15,8 @@ class IphoneCheckbox extends InputWidget
             'checkedLabel'   => $this->checkedLabel,
             'uncheckedLabel' => $this->uncheckedLabel,
             'onChange'       => $this->onChange,
+            'resizeContainer' => true,
+            'resizeHandle' => true
         ));
 
         Yii::app()->clientScript

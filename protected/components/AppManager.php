@@ -33,10 +33,11 @@ class AppManager
         $modules = array();
         foreach (Yii::app()->getModules() as $module_id => $module_config)
         {
-            $module = Yii::app()->getModule($module_id);
+            $module       = Yii::app()->getModule($module_id);
             $module_class = get_class($module);
-            $vars = get_class_vars($module_class);
-            if (!$vars || !$active || !isset($vars['active']) || !$vars['active'])
+            $vars         = get_class_vars($module_class);
+
+            if (!$vars || !isset($vars['active']) || !$vars['active'])
             {
                 continue;
             }
@@ -50,9 +51,10 @@ class AppManager
                 'dir'         => $module_id
             );
 
-            if (method_exists($module, 'adminMenu'))
-            {
-                $moduleInfo['admin_menu'] = $module->adminMenu();
+            //че за фигня?
+            //if (method_exists($module, 'adminMenu'))
+            //{
+            $moduleInfo['admin_menu'] = $module->adminMenu();
 
 //                $settins_count = Param::model()->count("module_id = '{$module_dir}'");
 //                if ($settins_count)
@@ -60,33 +62,33 @@ class AppManager
 //                    $module['admin_menu'][t('Параметры')] = Yii::app()->createUrl('/main/ParamAdmin/manage/',array('module_id' => $module_dir));
 //                }
 
-                if ($check_allowed_links)
+            if ($check_allowed_links)
+            {
+                foreach ($moduleInfo['admin_menu'] as $title => $url)
                 {
-                    foreach ($moduleInfo['admin_menu'] as $title => $url)
+                    if (!is_string($url))
                     {
-                        if (!is_string($url))
-                        {
-                            continue;
-                        }
+                        continue;
+                    }
 
-                        $url = explode('/', trim($url, '/'));
+                    $url = explode('/', trim($url, '/'));
 
-                        if (count($url) < 3)
-                        {
-                            continue;
-                        }
+                    if (count($url) < 3)
+                    {
+                        continue;
+                    }
 
-                        list($module_name, $controller, $action) = $url;
+                    list($module_name, $controller, $action) = $url;
 
-                        $auth_item = ucfirst($controller) . '_' . $action;
+                    $auth_item = ucfirst($controller) . '_' . $action;
 
-                        if (!RbacModule::isAllow($auth_item))
-                        {
-                            unset($moduleInfo['admin_menu'][$title]);
-                        }
+                    if (!RbacModule::isAllow($auth_item))
+                    {
+                        unset($moduleInfo['admin_menu'][$title]);
                     }
                 }
             }
+            //}
 
             $modules[$module_class] = $moduleInfo;
         }

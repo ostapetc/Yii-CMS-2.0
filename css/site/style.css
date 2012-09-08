@@ -9,10 +9,10 @@
 /*}*/
 
 body {
-    background-image: url(/img/site/bg2.jpg);
+    background-image: url(/img/site/stretched-179041.jpg);
     background-attachment: fixed;
-    background-color: #C0DEED;
-    background-position: -100px top;
+    background-color: black;
+    background-position: center top;
     background-repeat: no-repeat;
 }
 
@@ -141,6 +141,7 @@ h1 {
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 span.italic-12 {
