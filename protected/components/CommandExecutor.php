@@ -58,9 +58,9 @@ class CommandExecutor extends CApplicationComponent
 
     public function addCommandsFromModules($modules)
     {
-        foreach ($modules as $id => $data)
+        foreach ($modules as $module)
         {
-            Yii::app()->executor->addCommands($id.'.commands');
+            Yii::app()->executor->addCommands($module.'.commands');
         }
     }
 }

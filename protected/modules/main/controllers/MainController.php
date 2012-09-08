@@ -11,18 +11,6 @@ class MainController extends Controller
             "changeLanguage" => "Смена языка"
         );
     }
-
-
-    public function subMenuItems()
-    {
-        return array(
-            array(
-                'label'   => 'Сообщить об ошибке',
-                'url'     => array('/'),
-                'visible' => Yii::app()->controller->action->id == 'error'
-            )
-        );
-    }
     
 
 	public function actionSearch($query) 

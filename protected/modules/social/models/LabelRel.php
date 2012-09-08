@@ -1,24 +1,10 @@
-<?php
-/** 
- * 
- * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $label_id
- * @property                 $object_id
- * @property                 $model_id
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   LabelRel        published()
- * @method   LabelRel        sitemap()
- * @method   LabelRel        ordered()
- * @method   LabelRel        last()
- * 
+<?
+/**
+ * @property $id
+ * @property $label_id
+ * @property $object_id
+ * @property $model_id
  */
-
 class LabelRel extends ActiveRecord
 {
     const PAGE_SIZE = 20;

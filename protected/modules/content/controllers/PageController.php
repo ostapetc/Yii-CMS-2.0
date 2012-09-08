@@ -17,7 +17,7 @@ class PageController extends Controller
     }
 
 
-    public function subMenuItems()
+    public function topSubMenuItems()
     {
         return array(
             array(
@@ -46,10 +46,6 @@ class PageController extends Controller
                     array(
                         'widget',
                         'application.modules.content.portlets.SectionCreateSidebar',
-                    ),
-                    array(
-                        'widget',
-                        'application.modules.tags.portlets.TagCreateSidebar',
                     ),
                     array(
                         'partial',

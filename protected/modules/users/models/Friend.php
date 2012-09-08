@@ -1,24 +1,11 @@
-<?php
-/** 
- * 
- * !Attributes - атрибуты БД
- * @property                 $is_confirmed
- * @property                 $id
- * @property                 $user_a_id
- * @property                 $user_b_id
- * @property                 $date_create
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Friend          published()
- * @method   Friend          sitemap()
- * @method   Friend          ordered()
- * @method   Friend          last()
- * 
+<?
+/**
+ * @property $id
+ * @property $user_a_id
+ * @property $user_b_id
+ * @property $is_confirmed
+ * @property $date_create
  */
-
 class Friend extends ActiveRecord
 {
     const PAGE_SIZE = 20;

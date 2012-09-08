@@ -1,7 +1,5 @@
 <?php
 /** 
- * 
- * !Attributes - атрибуты БД
  * @property                 $id
  * @property                 $object_id
  * @property                 $model_id
@@ -11,8 +9,6 @@
  * @property                 $descr
  * @property                 $order
  * @property                 $path
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $deleteUrl
  * @property                 $isImage
  * @property                 $isSound
@@ -22,6 +18,7 @@
  * @property                 $isArchive
  * @property                 $icon
  * @property                 $handler
+ * @property                 $extraProperties
  * @property string          $size             formatted file size
  * @property                 $extension
  * @property                 $nameWithoutExt
@@ -31,14 +28,13 @@
  * @property                 $href
  * @property                 $serverDir
  * @property                 $serverPath
- * @property                 $errorsFlatArray
+ * @property                 $newAttachedModel
+ * @property mixed           $related          the related object(s).
+ * @property string          $attributeLabel   the attribute label
+ * @property CActiveRelation $activeRelation   the named relation declared for this AR class. Null if the relation does not exist.
+ * @property mixed           $attribute        the attribute value. Null if the attribute is not set or does not exist.
  * @property string          $error            the error message. Null is returned if no error.
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   FileManager     published()
- * @method   FileManager     sitemap()
- * @method   FileManager     ordered()
- * @method   FileManager     last()
+ * @property CList           $eventHandlers    list of attached event handlers for the event
  * 
  */
 

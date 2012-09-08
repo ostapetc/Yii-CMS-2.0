@@ -3,17 +3,16 @@ Yii::import('system.web.widgets.CWidget');
 
 abstract class Widget extends CWidget
 {
-    public function __construct()
+    public function init()
     {
         $this->attachBehaviors($this->behaviors());
-        parent::__construct();
+        parent::init();
     }
-
 
     public function behaviors()
     {
         return array(
-            'ComponentInModule' => array(
+            'CoomponentInModule' => array(
                 'class' => 'application.components.behaviors.ComponentInModuleBehavior'
             )
         );

@@ -194,7 +194,7 @@ class AdminGridView extends BootGridView
                             'name'  => $attribute,
                             'value' => '$data->value("' . $attribute . '")',
                             'type'  => 'raw',
-                            'filter' => $model->search($attribute),
+                            'filter' => $model->filter($attribute),
                         ),
                         $i
                     );

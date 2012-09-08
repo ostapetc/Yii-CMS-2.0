@@ -43,7 +43,7 @@ class UserController extends Controller
     }
 
 
-    public function subMenuItems()
+    public function topSubMenuItems()
     {
         return array(
             array(

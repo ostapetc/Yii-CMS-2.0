@@ -329,24 +329,4 @@ abstract class ActiveRecord extends CActiveRecord
 
         return $this->exists($criteria);
     }
-
-
-    public function getErrorsFlatArray()
-    {
-        $result = array();
-
-        foreach ((array)$this->errors as $attribute => $errors)
-        {
-            foreach ($errors as $error)
-            {
-                $result[] = array(
-                    'attribute' => $attribute,
-                    'label'     => $this->getAttributeLabel($attribute),
-                    'error'     => $error
-                );
-            }
-        }
-
-        return $result;
-    }
 }

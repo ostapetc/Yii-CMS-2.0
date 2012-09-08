@@ -51,8 +51,8 @@
 
 <div id='main-wrapper'>
 
-    <? $this->widget('Menu'); ?>
-    <? $this->widget('SubMenu'); ?>
+    <? $this->widget('Navbar'); ?>
+    <? $this->widget('SubNavbar'); ?>
 
     <div class="container-fluid">
         <div class="row-fluid">
@@ -68,7 +68,7 @@
                 <?= $content ?>
             </div>
             <!--/span-->
-            <div class="span4 sidebar-manager">
+            <div class="span4">
                 <?= $this->widget('SidebarManager') ?>
             </div>
         </div>

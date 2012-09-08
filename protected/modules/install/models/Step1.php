@@ -1,15 +1,11 @@
 <?php
 /** 
- * 
- * !Attributes - атрибуты БД
- * @property        $db_host
- * @property        $db_login
- * @property        $db_pass
- * @property        $db_name
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $dbPatterns
- * @property        $configs
+ * @property  $db_host
+ * @property  $db_login
+ * @property  $db_pass
+ * @property  $db_name
+ * @property  $dbPatterns
+ * @property  $configs
  * 
  */
 
@@ -132,9 +128,9 @@ class Step1 extends AbstractInstallModel
      */
     public function dbInit($modules)
     {
-        foreach ($modules as $id => $data)
+        foreach ($modules as $module)
         {
-            $file = Yii::getPathOfAlias($id.'.migrations').'/install.sql';
+            $file = Yii::getPathOfAlias($module.'.migrations').'/install.sql';
             if (is_file($file))
             {
                 $this->executeDbDump($file);

@@ -12,7 +12,7 @@ class ClientMenu extends CMenu
     public function behaviors()
     {
         return array(
-            'ComponentInModule' => array(
+            'CoomponentInModule' => array(
                 'class' => 'application.components.behaviors.ComponentInModuleBehavior'
             )
         );

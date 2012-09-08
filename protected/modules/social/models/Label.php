@@ -1,23 +1,9 @@
-<?php
-/** 
- * 
- * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $desc
- * @property                 $icon
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Label           published()
- * @method   Label           sitemap()
- * @method   Label           ordered()
- * @method   Label           last()
- * 
+<?
+/**
+ * @property $id
+ * @property $desc
+ * @property $icon
  */
-
 class Label extends ActiveRecord
 {
     const PAGE_SIZE = 20;

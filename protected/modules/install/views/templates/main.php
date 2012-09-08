@@ -133,9 +133,9 @@ return array(
     'onBeginRequest' => array('AppManager', 'init'),
 
     'params'         => array(
-        'save_site_actions' => true,
-        'multilanguage_support' => true,
-        'collect_routes_from_modules' => true,
-        'themes_enabled' => false
+        'save_site_actions' => {{SAVE_SITE_ACTIONS}},
+        'multilanguage_support' => {{MULTILANGUAGE_SUPPORT}},
+        'collect_routes_from_modules' => {{COLLECT_ROUTES_FROM_MODULES}},
+        'themes_enabled' => {{THEMES_ENABLED}}
     )
 );
