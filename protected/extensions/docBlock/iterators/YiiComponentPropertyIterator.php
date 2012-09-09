@@ -149,7 +149,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
         while ($class = get_parent_class($class))
         {
             $parentMethods = array_keys(DocBlockParser::parseClass($class)->methods);
-            $methods = array_diff($methods, $parentMethods);
+            $methods       = array_diff($methods, $parentMethods);
         }
         return $methods;
     }
@@ -257,12 +257,9 @@ class YiiComponentPropertyIterator extends ArrayIterator
     {
         if ($this->_maxLenOfType === null)
         {
-            $clone = clone $this;
-            $clone->rewind();
-            $max = 0;
-            foreach ($clone as $item)
+            for ($max = 0, $it = clone $this, $it->rewind(); $it->valid(); $it->next())
             {
-                $max = max($max, strlen($item->type));
+                $max = max($max, strlen($it->current()->type));
             }
 
             $this->_maxLenOfType = $max;
@@ -281,12 +278,9 @@ class YiiComponentPropertyIterator extends ArrayIterator
     {
         if ($this->_maxLenOfName === null)
         {
-            $clone = clone $this;
-            $clone->rewind();
-            $max = 0;
-            foreach ($clone as $item)
+            for ($max = 0, $it = clone $this, $it->rewind(); $it->valid(); $it->next())
             {
-                $max = max($max, $item->getNameLen());
+                $max = max($max, $it->current()->getNameLen());
             }
             $this->_maxLenOfName = $max;
         }
@@ -304,12 +298,9 @@ class YiiComponentPropertyIterator extends ArrayIterator
     {
         if ($this->_maxLenOfTag === null)
         {
-            $clone = clone $this;
-            $clone->rewind();
-            $max = 0;
-            foreach ($clone as $item)
+            for ($max = 0, $it = clone $this, $it->rewind(); $it->valid(); $it->next())
             {
-                $max = max($max, $item->getTagLen());
+                $max = max($max, $it->current()->getTagLen());
             }
             $this->_maxLenOfTag = $max;
         }

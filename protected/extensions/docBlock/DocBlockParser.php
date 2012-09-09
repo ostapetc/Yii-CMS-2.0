@@ -10,7 +10,7 @@
  */
 class DocBlockParser extends CComponent
 {
-    protected $shortDescription, $longDescription, $var, $params = array(), $properties = array(), $other = array(), $return, $licence, $link, $todo;
+    protected $shortDescription, $longDescription, $var, $params = array(), $properties = array(), $methods = array(), $other = array(), $return, $licence, $link, $todo;
 
 
     private function __construct($docBlock)
@@ -105,7 +105,7 @@ class DocBlockParser extends CComponent
     {
         if (preg_match('/@method(\s+([^ ]+))?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
         {
-            $this->params[$match[3]] = array(
+            $this->methods[$match[3]] = array(
                 'type'        => $match[2],
                 'comment'     => isset($match[5]) ? $match[5] : '',
             );
@@ -235,9 +235,14 @@ class DocBlockParser extends CComponent
      *
      * @return array Array of parameters
      */
-    public function getProperties($props = array())
+    public function getProperties()
     {
         return $this->properties;
+    }
+
+    public function getMethods()
+    {
+        return $this->methods;
     }
 
 
