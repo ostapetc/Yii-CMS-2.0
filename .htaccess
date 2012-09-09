@@ -2,7 +2,7 @@ AddDefaultCharset utf-8
 AddCharset utf-8 .html .css .js .xml .json .rss .atom
 
 
-# for FileManager module
+# for Media module
 # XSendFile on
 # XSendFileAllowAbove on
 

@@ -67,11 +67,11 @@ class Page extends ActiveRecord
 
     public function behaviors()
     {
-        return array_merge(
+        return CMap::mergeArray(
             parent::behaviors(),
             array(
                  'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 /*'FileManager' => array(
+                 'FileManager' => array(
                      'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
                      'tags' => array(
                          'gallery' => array(
@@ -79,7 +79,7 @@ class Page extends ActiveRecord
                              'data_type' => 'image'
                          )
                      )
-                 ),*/
+                 ),
             )
         );
     }

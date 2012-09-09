@@ -1,5 +1,5 @@
 <?
-class m120701_005105_mailer_templates_create extends EDbMigration
+class m120701_005105_mailer_templates_create extends DbMigration
 {
     public function up()
     {

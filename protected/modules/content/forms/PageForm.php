@@ -1,11 +1,11 @@
 <?
 return array(
-    'enctype'    => 'multipart/form-data',
-    'activeForm' => array(
+    'enctype'              => 'multipart/form-data',
+    'activeForm'           => array(
         'id'            => 'page-form',
         'clientOptions' => array('validateOnSubmit' => true),
     ),
-    'elements' => array(
+    'elements'             => array(
         'title'    => array(
             'type' => 'text'
         ),
@@ -13,15 +13,22 @@ return array(
 //            'type'   => 'alias',
 //            'source' => 'title'
 //        ),
-        'status' => array(
+        'files'    => array(
+            'type'      => 'file_uploader',
+            'data_type' => 'image',
+            'title'     => 'Файлы'
+        ),
+
+
+        'status'   => array(
             'type'  => 'dropdownlist',
             'items' => Page::$status_options
         ),
-        'tags' => array(
+        'tags'     => array(
             'type'  => 'TagsInput',
             'label' => 'Теги'
         ),
-        'text' => array(
+        'text'     => array(
             'type' => 'editor'
         ),
     ),

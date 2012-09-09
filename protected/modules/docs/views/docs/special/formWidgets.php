@@ -18,7 +18,7 @@
 `editor`                   | `TinyMCE`
 `autocomplete`             | `zii.widgets.jui.CAutoComplete`
 `meta_tags`                | `main.portlets.MetaTags`
-`file_manager`             | `fileManager.portlets.Uploader`
+`file_uploader`             | `media.portlets.Uploader`
 
 
 ##Общий список виджетов
@@ -33,7 +33,7 @@
 `date`                              | `jQuery.UI.DatePicker` с возможностью задания диапазона дат.
 `editor`                            | Редактор текста
 `autocomplete`                      | `jQuery.UI.Autocomplete`
-`file_manager`                      | Загрузка серии файлов
+`file_uploader`                     | Загрузка серии файлов
 `all_in_one_input`                  | Редактирование текстовой информации с разделителями(например ';')
 `main.portlets.MetaTags`            | Добавление метатегов к записям
 
@@ -57,9 +57,9 @@
 'url'   => array('type' => 'alias', 'source' => 'title'),
 ~~~
 
-- **file_manager**
+- **file_uploader**
 
-Подробное описание находится в модуле [fileManager](/index.php/fileManager)
+Подробное описание находится в модуле [media](/index.php/media)
 
 - **chosen**
 
