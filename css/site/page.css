@@ -345,13 +345,6 @@
     clear: both !important;
 }
 
-
-.page-update, .page-update:hover {
-    color: #B94A48;
-    font-size: 14px;
-    text-decoration: underline;
-}
-
 ul.page-info-sidebar {
     width: 100%;
     margin: 0 0 0 0 !important;
@@ -363,4 +356,11 @@ ul.page-info-sidebar {
 
 .page-info-sidebar span.badge {
     float: right;
+}
+
+.page-img {
+    float:left;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border: 0;
 }

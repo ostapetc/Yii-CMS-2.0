@@ -262,20 +262,6 @@ class AppManager
     }
 
 
-    public static function getModelModule($model_class)
-    {
-        $file = $model_class . '.php';
-
-        foreach (glob(MODULES_PATH . '*') as $module_dir)
-        {
-            if (file_exists($module_dir . DS . 'models' . DS . $file))
-            {
-                return pathinfo($module_dir, PATHINFO_BASENAME);
-            }
-        }
-    }
-
-
     public static function getModulesNames()
     {
         $names = array();
@@ -285,6 +271,14 @@ class AppManager
         }
 
         return $names;
+    }
+
+
+    public static function getModelModule($model_class)
+    {
+        $model_dir = glob(implode(DS, array($_SERVER['DOCUMENT_ROOT'] . 'protected', 'modules', '*', 'models', $model_class . '.php')));
+        preg_match('|modules' . DS . DS . '(.*?)' . DS . DS . '|', $model_dir[0], $module);
+        return $module[1];
     }
 }
 

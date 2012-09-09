@@ -4,7 +4,16 @@
             <?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?>
 
             <? if (Yii::app()->user->checkAccess('Page_update')): ?>
-            <?= CHtml::link(t('редактировать'), $this->createUrl('update', array('id' => $data->id)), array('class' => 'page-update')); ?>
+                <?=
+                $link = CHtml::link(
+                    "",
+                    $data->update_url,
+                    array(
+                        'class' => 'page-update  glyphicon-pencil',
+                        'title' => 'редактировать'
+                    )
+                );
+                ?>
             <? endif ?>
         </h1>
     <? endif ?>

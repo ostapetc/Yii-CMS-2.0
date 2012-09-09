@@ -11,3 +11,14 @@ preg_match_all('/\.(glyphicon-.*){/', $c, $classes);
     <?= $class ?>
     <br/>
 <? endforeach ?>
+
+<?
+$icons = scandir($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'glyphicons');
+?>
+
+<? foreach ($icons as $icon): ?>
+    <img src="/img/glyphicons/<?= $icon ?>"/>
+    <br/>
+    <?= $icon ?>
+    <br/>
+<? endforeach ?>

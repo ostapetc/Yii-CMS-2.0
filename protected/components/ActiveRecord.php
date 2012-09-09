@@ -349,4 +349,40 @@ abstract class ActiveRecord extends CActiveRecord
 
         return $result;
     }
+
+
+    public function getUrl()
+    {
+        return $this->getActionUrl("view", array('id' => $this->id));
+    }
+
+
+    public function getUpdateUrl()
+    {
+
+        return $this->getActionUrl("update", array('id' => $this->id));
+    }
+
+
+    public function getCreateUrl()
+    {
+
+        return $this->getActionUrl("create");
+    }
+
+
+    public function getDeleteUrl()
+    {
+
+        return $this->getActionUrl("delete");
+    }
+
+
+    public function getActionUrl($action, $params = array())
+    {
+        $model  = get_class($this);
+        $module = AppManager::getModelModule($model);
+
+        return Yii::app()->createUrl("/$module/$model/$action", $params);
+    }
 }

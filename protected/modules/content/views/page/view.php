@@ -2,12 +2,18 @@
 $this->page_title = $page->title;
 if (Yii::app()->user->checkAccess('Page_update'))
 {
-    $link = CHtml::link(t('редактировать'), $this->createUrl('update', array('id' => $page->id)), array('class' => 'page-update'));
-    $this->page_title.= '&nbsp;&nbsp;' . $link;
+    $link = CHtml::link(
+        "",
+        $this->createUrl('update', array('id' => $page->id)),
+        array(
+            'class' => 'page-update  glyphicon-pencil',
+            'title' => 'редактировать'
+        )
+    );
+
+    $this->page_title.= "&nbsp;&nbsp;" . $link;
 }
 ?>
-
-<br/>
 
 <? if (Yii::app()->user->hasFlash('success')): ?>
     <? echo $this->msg(t(Yii::app()->user->getFlash('success')), 'success'); ?>
