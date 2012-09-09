@@ -2,13 +2,20 @@
 /**
  * Know all about CComponent, CModel, CActiveRecord and etc.
  */
-class YiiComponentMethod extends DocBlockLine {
+class YiiComponentMethod extends DocBlockLine
+{
 
     public $tag = 'method';
 
+
     public function afterPopulate()
     {
-        $this->name = $this->name.'()';
+        $this->name = $this->name . '()';
+    }
+
+    public function canDraw()
+    {
+        return true;
     }
 
     /**
@@ -16,13 +23,17 @@ class YiiComponentMethod extends DocBlockLine {
      */
     public function __toString()
     {
-        try {
-            return $this->getLine($this->tag, $this->type, $this->name, $this->comment);
-        } catch (Exception $e) {
+        try
+        {
+            if ($this->canDraw())
+            {
+                return $this->getLine($this->tag, $this->type, $this->name, $this->comment);
+            }
+        } catch (Exception $e)
+        {
             Yii::app()->handleException($e);
         }
     }
-
 
 
     /**
@@ -34,12 +45,15 @@ class YiiComponentMethod extends DocBlockLine {
     {
         $this->setTypeAndComment($object);
 
-        if (method_exists($object, 'behaviors')) {
-            foreach ($object->behaviors() as $id => $data) {
+        if (method_exists($object, 'behaviors'))
+        {
+            foreach ($object->behaviors() as $id => $data)
+            {
                 $this->populate($object->asa($id));
             }
         }
     }
+
 
     public function getTagLen()
     {
@@ -52,10 +66,12 @@ class YiiComponentMethod extends DocBlockLine {
         return strlen($this->name);
     }
 
+
     public function getTypeLen()
     {
         return strlen($this->type);
     }
+
 
     /**
      * Parse existing comments for searching types or comments for property
@@ -64,9 +80,11 @@ class YiiComponentMethod extends DocBlockLine {
      */
     public function setTypeAndComment(CComponent $object)
     {
-        if ($object instanceof CActiveRecord) {
+        if ($object instanceof CActiveRecord)
+        {
             $scopes = $object->scopes();
-            if (isset($scopes[$this->name])) {
+            if (isset($scopes[$this->name]))
+            {
                 $this->type = get_class($object);
             }
         }

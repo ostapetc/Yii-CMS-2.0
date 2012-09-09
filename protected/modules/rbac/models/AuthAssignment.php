@@ -2,22 +2,16 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $itemname
- * @property                 $userid
- * @property                 $bizrule
- * @property                 $data
+ * @property string   $itemname
+ * @property string   $userid
+ * @property string   $bizrule
+ * @property string   $data
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $errorsFlatArray
+ * @property          $errorsFlatArray
  * 
  * !Relations - связи
- * @property AuthItem        $role
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   AuthAssignment  published()
- * @method   AuthAssignment  sitemap()
- * @method   AuthAssignment  ordered()
- * @method   AuthAssignment  last()
+ * @property AuthItem $role
  * 
  */
 

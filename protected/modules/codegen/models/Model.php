@@ -2,14 +2,14 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property        $name
- * @property        $table
- * @property        $class
- * @property        $module
- * @property        $behaviors
+ * @property  $name
+ * @property  $table
+ * @property  $class
+ * @property  $module
+ * @property  $behaviors
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $path
+ * @property  $path
  * 
  */
 

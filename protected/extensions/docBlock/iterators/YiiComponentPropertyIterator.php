@@ -8,7 +8,7 @@
  */
 class YiiComponentPropertyIterator extends ArrayIterator
 {
-    protected $object;
+    public  $object;
 
     /**
      * Need for automatical align of strings
@@ -95,12 +95,22 @@ class YiiComponentPropertyIterator extends ArrayIterator
            }, $parentProps);*/
             $props = array_diff($props, $parentProps);
         }
+
+        //instant it
         $result = $this->instantAll($props, $this->propertyOptions);
-        if ($result)
+
+        $filteredResult = array();
+        foreach($result as $key => $val)
         {
-            $this->addComment($result, $name);
+            if ($val->canDraw())
+            {
+                $filteredResult[$key] = $val;
+            }
         }
-        return $result;
+
+        //add comment if need
+        $this->addComment($filteredResult, $name);
+        return $filteredResult;
     }
 
 

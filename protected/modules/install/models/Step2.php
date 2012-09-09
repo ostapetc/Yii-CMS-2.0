@@ -2,19 +2,19 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property        $admin_email
- * @property        $admin_pass
- * @property        $admin_pass_confirm
- * @property        $modules
- * @property        $save_site_actions
- * @property        $multilanguage_support
- * @property        $collect_routes_from_modules
- * @property        $themes_enabled
+ * @property  $admin_email
+ * @property  $admin_pass
+ * @property  $admin_pass_confirm
+ * @property  $modules
+ * @property  $save_site_actions
+ * @property  $multilanguage_support
+ * @property  $collect_routes_from_modules
+ * @property  $themes_enabled
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $availableModules
- * @property        $mainConfigPatterns
- * @property        $configs
+ * @property  $availableModules
+ * @property  $mainConfigPatterns
+ * @property  $configs
  * 
  */
 

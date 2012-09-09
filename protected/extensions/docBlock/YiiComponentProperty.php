@@ -31,6 +31,12 @@ class YiiComponentProperty extends DocBlockLine
     }
 
 
+    public function canDraw()
+    {
+        return $this->_settable || $this->_gettable;
+    }
+
+
     /**
      * @return string combined doc string
      */
@@ -38,9 +44,9 @@ class YiiComponentProperty extends DocBlockLine
     {
         try
         {
-            if ($this->_settable || $this->_gettable)
+            if ($this->canDraw())
             {
-                $type = $this->type ? $this->type : $this->_oldReadType;
+                $type    = $this->type ? $this->type : $this->_oldReadType;
                 $comment = $this->comment ? $this->comment : $this->_oldReadComment;
                 return $this->getLine($this->tag, $type, "\$" . $this->name, $comment);
             }
@@ -213,7 +219,7 @@ class YiiComponentProperty extends DocBlockLine
         {
             //from relations
             $rels = $object->relations();
-            if (isset($rels[$this->name]))
+            if (array_key_exists($this->name,$rels))
             {
                 list ($relType, $type) = $rels[$this->name];
                 $returnArrayTypes = array(
@@ -233,13 +239,10 @@ class YiiComponentProperty extends DocBlockLine
 
             //from attrubutes
             $attrs = $object->getAttributes();
-            if (isset($attrs[$this->name]))
+            if (array_key_exists($this->name, $attrs))
             {
                 $metaData = $object->getMetaData();
-                if (isset($metaData->columns[$this->name]))
-                {
-                    $this->_writeType = $this->_readType = $metaData->columns[$this->name]->type;
-                }
+                $this->_writeType = $this->_readType = $metaData->columns[$this->name]->type;
             }
         }
     }

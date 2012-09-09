@@ -2,11 +2,9 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property        $id
- * @property        $name
- * @property        $description
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property  $id
+ * @property  $name
+ * @property  $description
  * 
  */
 

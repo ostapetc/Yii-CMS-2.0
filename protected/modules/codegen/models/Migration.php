@@ -10,10 +10,8 @@
  * 
  * 
  * !Attributes - атрибуты БД
- * @property        $table
- * @property        $module
- * 
- * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property  $table
+ * @property  $module
  * 
  */
 

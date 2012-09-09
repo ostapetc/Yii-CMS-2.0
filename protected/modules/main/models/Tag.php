@@ -2,17 +2,11 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $name
+ * @property string $id
+ * @property string $name
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $errorsFlatArray
- * 
- * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Tag             published()
- * @method   Tag             sitemap()
- * @method   Tag             ordered()
- * @method   Tag             last()
+ * @property        $errorsFlatArray
  * 
  */
 
