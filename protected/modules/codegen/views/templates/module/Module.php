@@ -32,14 +32,14 @@ class <?= ucfirst($id); ?>Module extends WebModule
 	}
 
 
-    public static function adminMenu()
+    public function adminMenu()
     {
         return array(
         );
     }
 
 
-    public static function routes()
+    public function routes()
     {
         return array(
         );

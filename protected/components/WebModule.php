@@ -31,4 +31,10 @@ abstract class WebModule extends CWebModule implements WebModuleInterface
 
 
     public function uninstall(){}
+
+
+    public function adminMenu()
+    {
+        return array();
+    }
 }

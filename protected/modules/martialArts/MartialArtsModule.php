@@ -1,23 +1,23 @@
 <?
 
-class VideoModule extends WebModule
+class MartialArtsModule extends WebModule
 {
 	public static $active = true;
 
 
-    public function getName()
+    public static function name()
     {
-        return 'Видео';
+        return 'Единоборства';
     }
 
 
-    public function getDescription()
+    public static function description()
     {
-        return 'Видео хостинг агрегатор';
+        return 'Единоборства';
     }
 
 
-    public function getVersion()
+    public static function version()
     {
         return '1.0';
     }
@@ -26,7 +26,8 @@ class VideoModule extends WebModule
 	public function init()
 	{
 		$this->setImport(array(
-			'video.models.*',
+			'martialArts.models.*',
+			'martialArts.portlets.*',
 		));
 	}
 
