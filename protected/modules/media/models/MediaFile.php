@@ -289,7 +289,7 @@ class MediaFile extends ActiveRecord
         {
             if ($this->isNewRecord)
             {
-                $model = Media::model()->parent($this->model_id, $this->object_id)->find();
+                $model = MediaFile::model()->parent($this->model_id, $this->object_id)->find();
                 $this->order = $model ? $model->order + 1 : 1;
                 $this->title;
             }

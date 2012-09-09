@@ -1,5 +1,5 @@
 <?
-class MediaController extends Controller
+class MediaFileController extends Controller
 {
     public static function actionsTitles()
     {
