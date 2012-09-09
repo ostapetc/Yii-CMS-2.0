@@ -35,7 +35,8 @@ class YiiComponentPropertyIterator extends ArrayIterator
     public $commentCategory;
     public $addIllustrationCommetns = false;
 
-    public $generateFor;
+    public $generatePropertiesFor;
+    public $generateMethodsFor;
 
     public $propertyOptions = array();
     public $methodOptions = array();
@@ -53,7 +54,11 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $this->$key = $val;
         }
         $props = array();
-        foreach ($this->generateFor as $item)
+        foreach ($this->generatePropertiesFor as $item)
+        {
+            $props = array_merge($props, $this->$item);
+        }
+        foreach ($this->generateMethodsFor as $item)
         {
             $props = array_merge($props, $this->$item);
         }
@@ -63,7 +68,39 @@ class YiiComponentPropertyIterator extends ArrayIterator
 
     public function __get($name)
     {
-        return $this->{'get' . ucfirst($name)}($this->object);
+        $props = $this->{'get' . ucfirst($name)}($this->object);
+        //filter it
+        $class = get_class($this->object);
+        while ($class = get_parent_class($class))
+        {
+            $parser = DocBlockParser::parseClass($class);
+            if (in_array($name, $this->generatePropertiesFor))
+            {
+                $parentProps = array_keys($parser->properties);
+            }
+            elseif (in_array($name, $this->generateMethodsFor))
+            {
+                $parentProps = array_keys($parser->methods);
+            }
+            else
+            {
+                throw new CException("Allowed types values is 'attributes', 'events', 'accessors', 'relations', 'scopes'");
+            }
+            /*array_map(function ($item)
+           {
+               return strtr($item, array(
+                   '-write'=> '',
+                   '-read' => ''
+               ));
+           }, $parentProps);*/
+            $props = array_diff($props, $parentProps);
+        }
+        $result = $this->instantAll($props, $this->propertyOptions);
+        if ($result)
+        {
+            $this->addComment($result, $name);
+        }
+        return $result;
     }
 
 
@@ -88,44 +125,6 @@ class YiiComponentPropertyIterator extends ArrayIterator
     }
 
 
-    /**
-     * Delete all properties that described in DocBlock of any parent class
-     *
-     * @param $props
-     *
-     * @return array
-     */
-    public function filterProperties($props)
-    {
-        $class  = get_class($this->object);
-        while ($class = get_parent_class($class))
-        {
-            $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
-            /*array_map(function ($item)
-            {
-                return strtr($item, array(
-                    '-write'=> '',
-                    '-read' => ''
-                ));
-            }, $parentProps);*/
-            $props = array_diff($props, $parentProps);
-        }
-        return $props;
-    }
-
-
-    public function filterMethods($methods)
-    {
-        $class = get_class($this->object);
-        while ($class = get_parent_class($class))
-        {
-            $parentMethods = array_keys(DocBlockParser::parseClass($class)->methods);
-            $methods = array_diff($methods, $parentMethods);
-        }
-        return $methods;
-    }
-
-
     public function instantAll($props, $optioins)
     {
         $result = array();
@@ -144,13 +143,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function getAttributes($object)
     {
-        $result = method_exists($object, 'getAttributes') ? array_keys($object->getAttributes()) : array();
-        $result = $this->instantAll($this->filterProperties($result), $this->propertyOptions);
-        if ($result)
-        {
-            $this->addComment($result, 'Attributes');
-        }
-        return $result;
+        return method_exists($object, 'getAttributes') ? array_keys($object->getAttributes()) : array();
     }
 
 
@@ -161,13 +154,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function getScopes($object)
     {
-        $result = $object instanceof CActiveRecord ? array_keys($object->scopes()) : array();
-        $result = $this->instantAll($this->filterMethods($result), $this->methodOptions);
-        if ($result)
-        {
-            $this->addComment($result, 'Scopes');
-        }
-        return $result;
+        return $object instanceof CActiveRecord ? array_keys($object->scopes()) : array();
     }
 
 
@@ -200,11 +187,6 @@ class YiiComponentPropertyIterator extends ArrayIterator
                 $props = array_merge($props, $this->getAccessors($object->asa($id)));
             }
         }
-        $props = $this->instantAll($this->filterProperties($props), $this->propertyOptions);
-        if ($props)
-        {
-            $this->addComment($props, 'Accessors');
-        }
         return $props;
     }
 
@@ -224,11 +206,6 @@ class YiiComponentPropertyIterator extends ArrayIterator
                 $events[] = $method;
             }
         }
-        $events = $this->instantAll($this->filterProperties($events), $this->propertyOptions);
-        if ($events)
-        {
-            $this->addComment($events, 'Events');
-        }
         return $events;
     }
 
@@ -240,13 +217,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
      */
     public function getRelations($object)
     {
-        $result = $object instanceof CActiveRecord ? array_keys($object->relations()) : array();
-        $result = $this->instantAll($this->filterProperties($result), $this->propertyOptions);
-        if ($result)
-        {
-            $this->addComment($result, 'Relations');
-        }
-        return $result;
+        return $object instanceof CActiveRecord ? array_keys($object->relations()) : array();
     }
 
 

@@ -10,11 +10,14 @@ return array(
         'commentLanguage'         => 'ru',
         'commentCategory'         => 'core',
         'addIllustrationCommetns' => true,
-        //allow values: 'attributes', 'events', 'accessors', 'relations', 'scopes'
-        'generateFor' => array(
+        //allow values: 'attributes', 'events', 'accessors', 'relations'
+        'generatePropertiesFor'   => array(
             'attributes',
             'accessors',
-            'relations',
+            'relations'
+        ),
+        //allow values: 'scopes'
+        'generateMethodsFor'      => array(
             'scopes'
         ),
         //some settings for @property annotation

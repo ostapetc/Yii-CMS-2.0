@@ -1,8 +1,8 @@
 <?php
 return array(
-    'Attributes' => '!Attributes',
-    'Scopes'     => '!Scopes',
-    'Accessors'  => '!Accessors',
-    'Events'     => '!Events',
-    'Relations'  => '!Relations',
+    'attributes' => '!Attributes',
+    'scopes'     => '!Scopes',
+    'accessors'  => '!Accessors',
+    'events'     => '!Events',
+    'relations'  => '!Relations',
 );
