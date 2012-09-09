@@ -61,7 +61,20 @@ abstract class Controller extends CController implements ControllerInterface
 
     public function topMenuItems()
     {
+        $sports = Sport::model()->findAll();
+        foreach ($sports as $i => $sport)
+        {
+            $sports[$i] = array(
+                'label' => $sport->name,
+                'url'   => '/' . $sport->caption,
+            );
+        }
+
         return array(
+            array(
+                'label' => 'Виды спорта',
+                'items' => $sports
+            ),
             array(
                 'label' => t('Страницы'),
                 'url'   => array('content/page/index')

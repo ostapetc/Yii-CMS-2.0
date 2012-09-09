@@ -75,6 +75,15 @@ class PageController extends Controller
                 )
             ),
             array(
+                'actions'  => array('view'),
+                'sidebars' => array(
+                    array(
+                        'widget',
+                        'application.modules.content.portlets.PageInfoSidebar'
+                    )
+                )
+            ),
+            array(
                 'actions'  => array('userPages'),
                 'sidebars' => array(
                     array(
