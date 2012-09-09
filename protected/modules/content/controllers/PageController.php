@@ -2,6 +2,21 @@
 
 class PageController extends Controller
 {
+    public function filters()
+    {
+        return array_merge(
+            parent::filters(),
+            array(
+                array(
+                    'application.modules.tags.components.filters.ViewsSaveFilter',
+                    'model_id' => 'Page'
+                )
+            )
+        );
+    }
+
+
+
     public static function actionsTitles()
     {
         return array(

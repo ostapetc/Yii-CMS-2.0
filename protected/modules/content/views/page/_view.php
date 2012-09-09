@@ -37,14 +37,17 @@
     <? else: ?>
         <?= $data->text ?>
     <? endif ?>
-    <ul class="tags">
-        <li><span class="glyphicon-tags"></span></li>
 
-        <? foreach ($data->tags as $i => $tag): ?>
+    <? if ($data->tags): ?>
+        <ul class="tags">
+            <li><span class="glyphicon-tags"></span></li>
+
+            <? foreach ($data->tags as $i => $tag): ?>
             <? if ($i > 0): ?>, <? endif ?>
             <li><a rel="tag" href="<?= $this->createUrl("/pages/tag/{$tag->name}"); ?>"><?= $tag->name ?></a></li>
-        <? endforeach ?>
-    </ul>
+            <? endforeach ?>
+        </ul>
+    <? endif ?>
 
     <div class="infopanel">
         <div class="voting">
