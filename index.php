@@ -1,7 +1,9 @@
 <?
+
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 ini_set('xdebug.max_nesting_level', 1000);
+
 date_default_timezone_set('Europe/Moscow');
 
 define('DS', DIRECTORY_SEPARATOR);

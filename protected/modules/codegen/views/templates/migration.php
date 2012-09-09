@@ -12,6 +12,6 @@ class <?= $name ?> extends DbMigration
 
     public function down()
     {
-        $this->execute("DROP TABLE `<?= $table ?>`");
+        $this->dropTable('<?= $table ?>');
     }
 }

@@ -5,7 +5,7 @@ Yii::app()->clientScript->registerScriptFile('/js/content/page/form.js');
 if (!$this->model->isNewRecord)
 {
     $this->model->sections_ids = PageSectionRel::model()->getSectionsIds($this->model->id);
-
+    $this->model->sports_ids   = SportRel::model()->getSportsIds($this->model);
 }
 
 return array(
@@ -22,6 +22,14 @@ return array(
         'status' => array(
             'type'  => 'dropdownlist',
             'items' => Page::$status_options
+        ),
+        'sports_ids' => array(
+            'type'        => 'application.components.formElements.Chosen.Chosen',
+            'options'     => CHtml::listData(Sport::model()->findAll(), 'id', 'name'),
+            'htmlOptions' => array(
+                'multiple'    => true,
+                'placeholder' => 'Кликните чтобы выбрать (автодополнение)'
+            )
         ),
         'sections_ids' => array(
             'type'        => 'application.components.formElements.Chosen.Chosen',

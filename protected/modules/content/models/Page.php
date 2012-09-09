@@ -38,13 +38,15 @@ class Page extends ActiveRecord
     const STATUS_PUBLISHED   = 'published';
     const STATUS_DRAFT       = 'draft';
 
+    public $sections_ids;
+
+    public $sports_ids;
+
     public static $status_options = array(
         self::STATUS_UNPUBLISHED => 'неопубликовано',
         self::STATUS_PUBLISHED   => 'опубликовано',
         self::STATUS_DRAFT       => 'черновик'
     );
-
-    public $sections_ids;
 
 
     public function name()
@@ -80,6 +82,9 @@ class Page extends ActiveRecord
                          )
                      )
                  ),
+                'SportRel' => array(
+                    'class' => 'application.modules.content.components.activeRecordBehaviors.SportRelBehavior'
+                )
             )
         );
     }
@@ -119,7 +124,7 @@ class Page extends ActiveRecord
                 'integerOnly' => true
             ),
             array(
-                'sections_ids, tags',
+                'sections_ids, tags, sports_ids',
                 'safe',
                 'on' => array(
                     self::SCENARIO_CREATE,
@@ -207,7 +212,8 @@ class Page extends ActiveRecord
             parent::attributeLabels(),
             array(
                 'sections_ids' => t('Разделы'),
-                'tags'         => t('Теги')
+                'tags'         => t('Теги'),
+                'sports_ids'   => t('Вид спорта')
             )
         );
     }
@@ -271,6 +277,7 @@ class Page extends ActiveRecord
     public function afterSave()
     {
         $this->updateSectionsRels();
+        return parent::afterSave();
     }
 
 
