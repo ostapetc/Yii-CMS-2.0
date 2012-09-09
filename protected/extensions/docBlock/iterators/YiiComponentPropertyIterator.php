@@ -8,6 +8,7 @@
  */
 class YiiComponentPropertyIterator extends ArrayIterator
 {
+    protected $object;
 
     /**
      * Need for automatical align of strings
@@ -40,22 +41,24 @@ class YiiComponentPropertyIterator extends ArrayIterator
     public $includeRelations = true;
     public $includeScopes = true;
 
+    public $propertyOptions = array();
+    public $methodOptions = array();
+
 
     /**
      * @param array      $initOptions
      * @param CComponent $object
      * @param array      $propertyOptions
      */
-    public function __construct($initOptions, CComponent $object, $propertyOptions = array(), $methodOptions = array())
+    public function __construct($initOptions)
     {
         foreach ($initOptions as $key => $val)
         {
             $this->$key = $val;
         }
-        $this->object = $object;
-        $props        = array_merge($this->attributes, $this->accessors, $this->events, $this->relations);
-        $props        = $this->filterProperties($props);
-        $result       = array();
+        $props  = array_merge($this->attributes, $this->accessors, $this->events, $this->relations);
+        $props  = $this->filterProperties($props);
+        $result = array();
         foreach ($props as $prop)
         {
             if (is_object($prop))
@@ -64,7 +67,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
             }
             else
             {
-                $result[$prop] = $this->createLineInstance($prop, $propertyOptions);
+                $result[$prop] = $this->createLineInstance($prop, $this->propertyOptions);
             }
         }
 
@@ -79,7 +82,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
             }
             else
             {
-                $result[$prop] = $this->createLineInstance($prop, $methodOptions);
+                $result[$prop] = $this->createLineInstance($prop, $this->methodOptions);
             }
         }
 
@@ -127,22 +130,28 @@ class YiiComponentPropertyIterator extends ArrayIterator
         while ($class = get_parent_class($class))
         {
             $parentProps = array_keys(DocBlockParser::parseClass($class)->properties);
-            array_map(function ($item)
+            /*array_map(function ($item)
             {
                 return strtr($item, array(
                     '-write'=> '',
                     '-read' => ''
                 ));
-            }, $parentProps);
+            }, $parentProps);*/
             $props = array_diff($props, $parentProps);
         }
         return $props;
     }
 
 
-    public function filterMethods($props)
+    public function filterMethods($methods)
     {
-        return $props;
+        $class = get_class($this->object);
+        while ($class = get_parent_class($class))
+        {
+            $parentMethods = array_keys(DocBlockParser::parseClass($class)->methods);
+            $methods = array_diff($methods, $parentMethods);
+        }
+        return $methods;
     }
 
 
@@ -307,11 +316,13 @@ class YiiComponentPropertyIterator extends ArrayIterator
         return $this->_maxLenOfTag;
     }
 
+
     public function addComment(&$array, $message)
     {
         if ($this->addIllustrationCommetns && $array)
         {
-            $message = Yii::t($this->commentCategory, $message, null, 'docBlockMessage', $this->commentLanguage);
+            $message = Yii::t($this->commentCategory, $message, null, 'docBlockMessage',
+                $this->commentLanguage);
             array_unshift($array, new DocBlockComment($message));
         }
     }

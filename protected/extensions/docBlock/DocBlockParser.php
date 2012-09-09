@@ -57,8 +57,9 @@ class DocBlockParser extends CComponent
         {
             if ($line)
             {
-                $this->tryProperties($line) || $this->tryParams($line) || $this->tryVar($line) ||
-                    $this->tryReturn($line) || $this->tryOther($line) || $this->tryDescr($line);
+                $this->tryProperties($line) || $this->tryMethods($line) || $this->tryParams($line) ||
+                    $this->tryVar($line) || $this->tryReturn($line) || $this->tryOther($line) ||
+                    $this->tryDescr($line);
             }
         }
     }
@@ -89,6 +90,20 @@ class DocBlockParser extends CComponent
     protected function tryParams($line)
     {
         if (preg_match('/@param(\s+([^ ]+))?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
+        {
+            $this->params[$match[3]] = array(
+                'type'        => $match[2],
+                'comment'     => isset($match[5]) ? $match[5] : '',
+            );
+            return true;
+        }
+        return false;
+    }
+
+
+    protected function tryMethods($line)
+    {
+        if (preg_match('/@method(\s+([^ ]+))?\s+\$([^ ]+)(\s+(.*))?/', $line, $match))
         {
             $this->params[$match[3]] = array(
                 'type'        => $match[2],
