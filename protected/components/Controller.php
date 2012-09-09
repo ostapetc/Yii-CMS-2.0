@@ -178,7 +178,7 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    protected function performAjaxValidation($model)
+    public function performAjaxValidation($model)
     {
         if (isset($_POST['ajax']))
         {

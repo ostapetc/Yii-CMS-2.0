@@ -1,5 +1,5 @@
 <?php
-class SavePriorityAction extends BaseFilesApiAction
+class SavePriorityAction extends CAction
 {
     public function run()
     {
