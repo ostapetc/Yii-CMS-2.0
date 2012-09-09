@@ -1,5 +1,5 @@
 <?php
-class UpdateAttrAction extends BaseFilesApiAction
+class UpdateAttrAction extends CAction
 {
     public $attributes = array();
     public $model;
