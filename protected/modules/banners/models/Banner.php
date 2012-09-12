@@ -119,7 +119,7 @@ class Banner extends ActiveRecord
     }
 
 
-    public function search($is_big)
+    public function search()
     {
         $criteria = $this->model()->getDbCriteria();
         $criteria->compare('id', $this->id, true);
@@ -130,7 +130,6 @@ class Banner extends ActiveRecord
         $criteria->compare('date_start', $this->date_start, true);
         $criteria->compare('date_end', $this->date_end, true);
         $criteria->order = '`order` DESC';
-        $criteria->addCondition('is_big = ' . $is_big);
 
         return new ActiveDataProvider(get_class($this), array(
             'criteria' => $criteria

@@ -10,13 +10,12 @@ else
 }
 
 $this->tabs = array(
-    'добавить вертикальный баннер'   => $this->createUrl('create', array('is_big' => 0)),
-    'добавить горизонтальный баннер' => $this->createUrl('create', array('is_big' => 1))
+    'добавить вертикальный баннер'   => $this->createUrl('create'),
 );
 
 $this->widget('AdminGridView', array(
 	'id' => 'banner-grid',
-	'dataProvider' => $model->search($is_big),
+	'dataProvider' => $model->search(),
 	'filter'   => $model,
     'sortable' =>true,
 	'columns' => array(

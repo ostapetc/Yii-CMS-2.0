@@ -1730,7 +1730,7 @@
 
 		beforeShow : function(opts, obj) {
 
-            var overlay = this.overlay.unbind('.fb').width('auto').height('auto').css( opts.css ? opts.css : []);
+            var overlay = this.overlay.unbind('.fb').width('auto').height('auto').css( opts.css );
 
 			if (opts.closeClick) {
 				overlay.bind('click.fb', function(e) {

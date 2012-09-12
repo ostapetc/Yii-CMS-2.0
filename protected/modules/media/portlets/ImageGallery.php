@@ -21,8 +21,7 @@ class ImageGallery extends BaseFileListView
             'overlay'	=> array(
                 'closeClick' => true,
                 'speedOut'   => 200,
-                'showEarly'  => true,
-                'css'        => array()
+                'showEarly'  => true
             ),
             'media' => array(),
             'vkstyle' => array()

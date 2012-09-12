@@ -118,7 +118,6 @@ class PageController extends Controller
         {
             $this->pageNotFound();
         }
-
         $this->render("view", array(
             "page" => $page
         ));
