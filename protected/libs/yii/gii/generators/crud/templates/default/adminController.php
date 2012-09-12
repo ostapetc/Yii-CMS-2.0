@@ -112,13 +112,4 @@ class <?php echo str_replace("Controller", "AdminController", $this->controllerC
 		return $model;
 	}
 
-
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax'] === '<?php echo $this->class2id($this->modelClass); ?>-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
 }

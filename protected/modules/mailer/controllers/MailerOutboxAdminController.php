@@ -97,16 +97,6 @@ class MailerOutboxAdminController extends AdminController
 	}
 
 
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'outbox-email-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
-
-
     public function actionBodyView($id)
     {
         $this->layout = false;

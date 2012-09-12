@@ -105,13 +105,4 @@ class SidebarAdminController extends AdminController
 		return $model;
 	}
 
-
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'sidebar-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
 }
