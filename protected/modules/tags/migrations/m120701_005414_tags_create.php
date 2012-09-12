@@ -11,7 +11,7 @@ class m120701_005414_tags_create extends DbMigration
                 `name` varchar(50) DEFAULT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `tag` (`name`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

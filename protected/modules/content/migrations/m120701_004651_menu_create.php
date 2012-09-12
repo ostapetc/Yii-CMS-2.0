@@ -15,7 +15,7 @@ class m120701_004651_menu_create extends DbMigration
                 UNIQUE KEY `code` (`code`),
                 KEY `language` (`language`),
                 CONSTRAINT `language` FOREIGN KEY (`language`) REFERENCES `languages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-              ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

@@ -18,7 +18,7 @@ class m120701_005357_ratings_create extends DbMigration
                 KEY `object_id_model_id` (`object_id`,`model_id`),
                 KEY `user_id` (`user_id`),
                 CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-              ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

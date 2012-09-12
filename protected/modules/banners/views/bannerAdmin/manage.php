@@ -14,7 +14,7 @@ $this->tabs = array(
     'добавить горизонтальный баннер' => $this->createUrl('create', array('is_big' => 1))
 );
 
-$this->widget('AdminGrid', array(
+$this->widget('AdminGridView', array(
 	'id' => 'banner-grid',
 	'dataProvider' => $model->search($is_big),
 	'filter'   => $model,

@@ -11,7 +11,7 @@ class m120701_005225_languages_messages_create extends DbMigration
                 `category` varchar(32) NOT NULL COMMENT 'Категория',
                 `message` text NOT NULL COMMENT 'Сообщение',
                 PRIMARY KEY (`id`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

@@ -84,7 +84,6 @@ class MailerOutboxAdminController extends AdminController
 		));
 	}
 
-
     public function actionBodyView($id)
     {
         $this->layout = false;

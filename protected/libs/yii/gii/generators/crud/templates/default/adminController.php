@@ -99,5 +99,4 @@ class <?php echo str_replace("Controller", "AdminController", $this->controllerC
 			'model' => $model,
 		));
 	}
-
 }

@@ -17,7 +17,7 @@ class m120701_005251_meta_tags_create extends DbMigration
                 `date_update` datetime DEFAULT NULL COMMENT 'Отредактирован',
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `object_id` (`object_id`,`model_id`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

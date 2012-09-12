@@ -25,7 +25,7 @@ class m120701_004346_comments_create extends EDbMigration
                 KEY `user_id` (`user_id`),
                 KEY `object_model` (`object_id`,`model_id`),
                 CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-              ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

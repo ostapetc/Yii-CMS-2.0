@@ -93,7 +93,4 @@ class SidebarAdminController extends AdminController
 		));
 	}
 
-
-
-
 }

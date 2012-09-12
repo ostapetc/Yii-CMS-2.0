@@ -1,8 +1,7 @@
 <?php
-/**
- *
+/** 
+ * 
  * !Attributes - атрибуты БД
- *
  * @property string           $language
  * @property string           $status
  * @property string           $id
@@ -12,12 +11,12 @@
  * @property string           $text
  * @property string           $date_create
  * @property integer          $order
- *
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                  $href
  * @property                  $content
  * @property                  $errorsFlatArray
- *
+ * 
  * !Relations - связи
  * @property Language         $language_model
  * @property TagRel[]         $tags_rels
@@ -26,7 +25,7 @@
  * @property User             $user
  * @property PageSectionRel[] $sections_rels
  * @property PageSection[]    $sections
- *
+ * 
  */
 
 class Page extends ActiveRecord
@@ -70,61 +69,48 @@ class Page extends ActiveRecord
 
     public function behaviors()
     {
-        return CMap::mergeArray(parent::behaviors(), array(
-                'Tag'         => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                'FileManager' => array(
-                    'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
-                    'tags'  => array(
-                        'gallery' => array(
-                            'title'     => 'Галерея',
-                            'data_type' => 'image'
-                        )
-                    )
-                ),
-//                'SportRel' => array(
-//                    'class' => 'application.modules.content.components.activeRecordBehaviors.SportRelBehavior'
-//                )
-            ));
+        return CMap::mergeArray(
+            parent::behaviors(),
+            array(
+                 'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
+                 'FileManager' => array(
+                     'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
+                     'tags' => array(
+                         'gallery' => array(
+                             'title' => 'Галерея',
+                             'data_type' => 'image'
+                         )
+                     )
+                 ),
+                'SportRel' => array(
+                    'class' => 'application.modules.content.components.activeRecordBehaviors.SportRelBehavior'
+                )
+            )
+        );
     }
 
 
     public function rules()
     {
         return array(
+            array('title, language', 'required'),
+            array('language', 'safe'),
             array(
-                'title, language',
-                'required'
-            ),
-            array(
-                'language',
-                'safe'
-            ),
-            array(
-                'url',
-                'length',
+                'url', 'length',
                 'max' => 250
             ),
             array(
-                'title',
-                'length',
+                'title', 'length',
                 'max'=> 200
             ),
+            array('text, short_text', 'safe'),
+            array('meta_tags, god', 'safe'),
             array(
-                'text, short_text',
-                'safe'
-            ),
-            array(
-                'meta_tags, god',
-                'safe'
-            ),
-            array(
-                'title, url',
-                'filter',
+                'title, url', 'filter',
                 'filter' => 'strip_tags'
             ),
             array(
-                'id, title, url, text, status, date_create',
-                'safe',
+                'id, title, url, text, status, date_create', 'safe',
                 'on'=> 'search'
             ),
             array(
@@ -148,10 +134,7 @@ class Page extends ActiveRecord
             array(
                 'comments_denied',
                 'in',
-                'range' => array(
-                    0,
-                    1
-                )
+                'range' => array(0, 1)
             )
         );
     }
@@ -165,13 +148,13 @@ class Page extends ActiveRecord
                 'Language',
                 'language'
             ),
-            'tags_rels'      => array(
-                self::HAS_MANY,
+            'tags_rels' => array(
+                self::HAS_MANY ,
                 'TagRel',
                 'object_id',
                 'condition' => "model_id = 'Page'"
             ),
-            'tags'           => array(
+            'tags' => array(
                 self::HAS_MANY,
                 'Tag',
                 'tag_id',
@@ -183,22 +166,22 @@ class Page extends ActiveRecord
                 'object_id',
                 'condition' => 'model_id = "Page"'
             ),
-            'user'           => array(
+            'user' => array(
                 self::BELONGS_TO,
                 'User',
                 'user_id'
             ),
-            'sections_rels'  => array(
+            'sections_rels' => array(
                 self::HAS_MANY,
                 'PageSectionRel',
                 'page_id'
             ),
-            'sections'       => array(
+            'sections' => array(
                 self::HAS_MANY,
                 'PageSection',
                 'section_id',
                 'through' => 'sections_rels'
-            ),
+            )
         );
     }
 
@@ -215,21 +198,24 @@ class Page extends ActiveRecord
         $criteria->compare('language', $this->language, true);
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria'   => $criteria,
-            'pagination' => array(
-                'pageSize' => self::PAGE_SIZE
-            )
+             'criteria'   => $criteria,
+             'pagination' => array(
+                 'pageSize' => self::PAGE_SIZE
+             )
         ));
     }
 
 
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
+        return array_merge(
+            parent::attributeLabels(),
+            array(
                 'sections_ids' => t('Разделы'),
                 'tags'         => t('Теги'),
                 'sports_ids'   => t('Вид спорта')
-            ));
+            )
+        );
     }
 
 
@@ -272,10 +258,7 @@ class Page extends ActiveRecord
 
         if (RbacModule::isAllow('PageAdmin_Update'))
         {
-            $content .= "<br/>" . CHtml::link(t('Редактировать'), array(
-                '/content/pageAdmin/update/',
-                'id'=> $this->id
-            ), array('class'=> 'btn btn-danger'));
+            $content .= "<br/>" . CHtml::link(t('Редактировать'), array('/content/pageAdmin/update/','id'=> $this->id), array('class'=> 'btn btn-danger'));
         }
 
         return $content;
@@ -300,10 +283,7 @@ class Page extends ActiveRecord
 
     public function updateSectionsRels()
     {
-        if (!is_array($this->sections_ids))
-        {
-            return;
-        }
+        if (!is_array($this->sections_ids)) return;
 
         PageSectionRel::model()->deleteAll('page_id = ' . $this->id);
 
@@ -311,7 +291,7 @@ class Page extends ActiveRecord
         {
             $rel = new PageSectionRel();
             $rel->section_id = $section_id;
-            $rel->page_id = $this->id;
+            $rel->page_id    = $this->id;
             $rel->save();
         }
     }
