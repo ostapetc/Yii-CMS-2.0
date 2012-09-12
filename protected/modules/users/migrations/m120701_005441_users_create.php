@@ -23,7 +23,7 @@ class m120701_005441_users_create extends DbMigration
                 `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Зарегистрирован',
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `email` (`email`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

@@ -18,7 +18,7 @@ class m120701_004612_pages_create extends DbMigration
                 PRIMARY KEY (`id`),
                 KEY `pages_language_fk` (`language`),
                 KEY `user_id` (`user_id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
         ");
     }
 

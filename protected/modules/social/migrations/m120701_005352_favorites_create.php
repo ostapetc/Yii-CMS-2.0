@@ -17,7 +17,7 @@ class m120701_005352_favorites_create extends DbMigration
                 KEY `user_id` (`user_id`),
                 KEY `object_id_model_id` (`object_id`,`model_id`),
                 CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-              ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

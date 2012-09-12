@@ -17,7 +17,7 @@ class m120701_005259_params_create extends DbMigration
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `const` (`code`),
                 UNIQUE KEY `title` (`name`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

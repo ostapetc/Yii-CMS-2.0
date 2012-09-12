@@ -20,7 +20,7 @@ class m120701_005013_mailer_outbox_create extends DbMigration
                 KEY `user_id` (`user_id`),
                 CONSTRAINT `mailer_outbox_ibfk_1` FOREIGN KEY (`template_id`) REFERENCES `mailer_templates` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
                 CONSTRAINT `mailer_outbox_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-              ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 
