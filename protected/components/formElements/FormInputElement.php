@@ -20,6 +20,7 @@ class FormInputElement extends CFormInputElement
         'autocomplete'      => 'zii.widgets.jui.CAutoComplete',
         'meta_tags'         => 'main.portlets.MetaTags',
         'file_uploader'     => 'media.portlets.Uploader',
+        'tags'              => 'TagsInput',
     );
 
     public $widgets_path = 'application.components.formElements';

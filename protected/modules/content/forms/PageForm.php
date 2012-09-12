@@ -25,7 +25,7 @@ return array(
             'items' => Page::$status_options
         ),
         'tags'     => array(
-            'type'  => 'TagsInput',
+            'type'  => 'tags',
             'label' => 'Теги'
         ),
         'text'     => array(
