@@ -72,9 +72,6 @@ class InstallController extends Controller
             //install modules
             Yii::app()->setModules($model->modules);
 
-            //base db init
-            $step1->dbInit(Yii::app()->getModules());
-
             //migrate
             foreach (Yii::app()->getModules() as $id => $data)
             {
