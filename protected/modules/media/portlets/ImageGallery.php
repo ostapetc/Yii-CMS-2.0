@@ -8,6 +8,7 @@ class ImageGallery extends BaseFileListView
     public $defaultFancyboxOptions = array(
         'openEffect'  => 'fade',
         'closeEffect' => 'fade',
+        'closeSpeed' => 0,
         'prevEffect' => 'fade',
         'nextEffect' => 'fade',
         'minWidth' => '800px',

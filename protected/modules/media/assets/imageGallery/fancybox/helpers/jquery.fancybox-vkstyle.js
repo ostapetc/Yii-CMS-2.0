@@ -25,12 +25,14 @@
         },
         beforeShow: function(opts)
         {
-            var overlay = $('.fancybox-overlay').css('overflow-y', 'auto');
+            var overlay = $('.fancybox-overlay').css('overflow-y', 'scroll');
 
-            $('body').css('overflow', 'hidden');
+            $('body').css({
+                'overflow-y' : 'hidden',
+                'margin-right': '15px'
+            });
 
-            var layer_margin = $('#layer-margin').length ? $('#layer-margin') : $('<div id="layer-margin">').css('height',
-                '100px');
+            var layer_margin = $('#layer-margin').length ? $('#layer-margin') : $('<div id="layer-margin">').css('height', '100px');
             $('.fancybox-wrap').prependTo(overlay).append(layer_margin);
 
 //            var widget = opts.additionalWidget;
@@ -41,10 +43,16 @@
 //                $('.fancybox-skin').append($('<br/>'));
 //            }
         },
-        afterClose: function()
+        beforeClose: function()
         {
-            $('body').css('overflow', 'auto');
-            $('.layer-overlay').remove();
+            $('.fancybox-overlay').css('overflow-y', 'hidden');
+        },
+        afterClose: function ()
+        {
+            $('body').css({
+                'overflow-y': 'auto',
+                'margin-right': '0'
+            });
         }
     };
 
