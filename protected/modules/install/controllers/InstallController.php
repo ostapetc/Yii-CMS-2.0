@@ -72,6 +72,8 @@ class InstallController extends Controller
             //install modules
             Yii::app()->setModules($model->modules);
 
+            //$step1->deleteDisableModules();
+
             //migrate
             foreach (Yii::app()->getModules() as $id => $data)
             {
@@ -105,7 +107,6 @@ class InstallController extends Controller
                 Yii::app()->getModule($module)->install();
             }
 
-            //$step1->deleteDisableModules();
             $model->saveInSession();
             //install base modules
             $this->redirect('step3');
