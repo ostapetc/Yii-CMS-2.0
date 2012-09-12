@@ -33,7 +33,7 @@ function getFileLink($data)
 
 //             $path = str_replace($basename, '100x0_' . $basename, $data->path);
 
-            $content = ImageHelper::thumb(MediaFile::UPLOAD_PATH, $data->name, 50, null, false);
+            $content = ImageHelper::thumb(MediaFile::UPLOAD_PATH, $data->name, array('width'=>50, 'height' =>null), false);
         }
         else
         {

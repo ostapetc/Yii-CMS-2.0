@@ -100,25 +100,4 @@ class <?php echo str_replace("Controller", "AdminController", $this->controllerC
 		));
 	}
 
-
-	public function loadModel($id)
-	{
-		$model = <?php echo $this->modelClass; ?>::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
-
-
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax'] === '<?php echo $this->class2id($this->modelClass); ?>-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
 }

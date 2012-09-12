@@ -90,14 +90,4 @@ class PageSectionAdminController extends AdminController
 	}
 
 
-	public function loadModel($id)
-	{
-		$model = PageSection::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
 }

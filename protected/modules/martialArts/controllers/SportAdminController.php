@@ -85,14 +85,4 @@ class SportAdminController extends AdminController
 	}
 
 
-	public function loadModel($id)
-	{
-		$model = Sport::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
 }

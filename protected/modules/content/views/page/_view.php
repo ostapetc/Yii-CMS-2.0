@@ -35,7 +35,7 @@
         ?>
         <p><?= CHtml::link('читать далее →', $data->href, array('class' => 'read-more')) ?></p>
     <? else: ?>
-        <?= $data->text ?>
+        <?= Yii::app()->text->parseTemplate($data->text, array('cut' => ''), $data)?>
     <? endif ?>
 
     <? if ($data->tags): ?>
@@ -59,8 +59,8 @@
         <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
-<!--            <a href="--><?//= $data->user->href ?><!--" title="Автор текста">--><?//= $data->user->name ?><!--</a>-->
-<!--            <span title="рейтинг пользователя" class="rating">--><?//= $data->user->rating ?><!--</span>-->
+            <a href="<?= $data->user->href ?>" title="Автор текста"><?= $data->user->name ?></a>
+            <span title="рейтинг пользователя" class="rating"><?= $data->user->rating ?></span>
         </div>
 
         <div class="comments">
@@ -72,7 +72,7 @@
 <br clear="all"/>
 
 <? if (!$preview): ?>
-<!--    --><?// $this->widget('CommentsPortlet', array('model' => $data)); ?>
+    <? $this->widget('CommentsPortlet', array('model' => $data)); ?>
 <? endif ?>
 
 

@@ -29,14 +29,4 @@ class <?= $class ?>Controller extends Controller
 	}
 
 
-	public function loadModel($id)
-	{
-		$model = <?= $class ?>::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
 }

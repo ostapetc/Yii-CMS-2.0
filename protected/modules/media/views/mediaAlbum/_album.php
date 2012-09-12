@@ -3,11 +3,11 @@
         <?
         if ($file = $data->files_first)
         {
-            echo ImageHelper::thumb($file->path, $file->name, FileAlbum::$album_size, true);
+            echo ImageHelper::thumb($file->path, $file->name, MediaAlbum::$album_size, true);
         }
         else
         {
-            echo ImageHelper::placeholder(FileAlbum::$album_size, 'Empty album');
+            echo ImageHelper::placeholder(MediaAlbum::$album_size, 'Empty album');
         }
         ?>
         <div class="caption" style="">

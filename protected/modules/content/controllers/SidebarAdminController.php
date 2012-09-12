@@ -94,24 +94,6 @@ class SidebarAdminController extends AdminController
 	}
 
 
-	public function loadModel($id)
-	{
-		$model = Sidebar::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
 
 
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax'] === 'sidebar-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
 }

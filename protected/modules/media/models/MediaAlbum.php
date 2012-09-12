@@ -1,6 +1,6 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
  * @property                 $id
  * @property                 $title
@@ -10,22 +10,22 @@
  * @property                 $object_id
  * @property                 $order
  * @property                 $date_create
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $href
  * @property CComponent      $owner            the owner component that this behavior is attached to.
  * @property                 $errorsFlatArray
- * 
+ *
  * !Relations - связи
  * @property TagRel[]        $tags_rels
  * @property                 $tags
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   FileAlbum       published()
  * @method   FileAlbum       sitemap()
  * @method   FileAlbum       ordered()
  * @method   FileAlbum       last()
- * 
+ *
  */
 
 class MediaAlbum extends ActiveRecord

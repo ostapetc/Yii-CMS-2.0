@@ -285,13 +285,13 @@ class User extends ActiveRecord
         return array(
             'file_albums' => array(
                 self::HAS_MANY ,
-                'FileAlbum',
+                'MediaAlbum',
                 'object_id',
                 'condition' => "file_albums.model_id = '".get_class($this)."'"
             ),
             'file_albums_count' => array(
                 self::STAT ,
-                'FileAlbum',
+                'MediaAlbum',
                 'object_id',
                 'condition' => "t.model_id = '".get_class($this)."'"
             ),

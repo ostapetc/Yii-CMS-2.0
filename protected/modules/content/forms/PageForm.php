@@ -13,7 +13,7 @@ return array(
 //            'type'   => 'alias',
 //            'source' => 'title'
 //        ),
-        'files'    => array(
+        'gallery'    => array(
             'type'      => 'file_uploader',
             'data_type' => 'image',
             'title'     => 'Файлы'
