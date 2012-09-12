@@ -56,7 +56,7 @@
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
-        <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
+<!--        --><?// $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
 <!--            <a href="--><?//= $data->user->href ?><!--" title="Автор текста">--><?//= $data->user->name ?><!--</a>-->
