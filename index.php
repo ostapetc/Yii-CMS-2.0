@@ -14,8 +14,8 @@ if (substr($_SERVER['DOCUMENT_ROOT'], -1) != DS)
 {
     $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . DS;
 }
-
-require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'constants.php';
+$_SERVER['DOCUMENT_ROOT'] = __DIR__ .'/';
+require_once $_SERVER['DOCUMENT_ROOT'] .'/' . 'protected' . DS . 'config' . DS . 'constants.php';
 require_once LIBRARIES_PATH . 'yii' . DS . 'yii.php';
 require_once LIBRARIES_PATH . 'functions.php';
 require_once LIBRARIES_PATH . 'debug.php';

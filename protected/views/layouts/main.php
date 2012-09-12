@@ -12,19 +12,21 @@
     <![endif]-->
 
     <?
+    $base = Yii::app()->baseUrl;
+
     $cs = Yii::app()->clientScript;
     $cs->registerCoreScript('jquery');
     Yii::app()->bootstrap->registerScripts();
 
-    $cs->registerCssFile('/css/icons.css');
-    $cs->registerCssFile('/css/site/form.css');
-    $cs->registerCssFile('/css/site/style.css');
-    $cs->registerCssFile('/css/site/menu.css');
-    $cs->registerCssFile('/css/site/page.css');
-    $cs->registerCssFile('/css/site/comments.css');
-    $cs->registerCssFile('/css/site/favorites.css');
-    $cs->registerCssFile('/css/site/rating.css');
-    $cs->registerScriptFile('/js/site/modal-windows.js');
+    $cs->registerCssFile($base.'/css/icons.css');
+    $cs->registerCssFile($base.'/css/site/form.css');
+    $cs->registerCssFile($base.'/css/site/style.css');
+    $cs->registerCssFile($base.'/css/site/menu.css');
+    $cs->registerCssFile($base.'/css/site/page.css');
+    $cs->registerCssFile($base.'/css/site/comments.css');
+    $cs->registerCssFile($base.'/css/site/favorites.css');
+    $cs->registerCssFile($base.'/css/site/rating.css');
+    $cs->registerScriptFile($base.'/js/site/modal-windows.js');
 
 //    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));
 //    $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));

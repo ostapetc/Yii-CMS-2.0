@@ -3,7 +3,7 @@ Yii::import('media.portlets.BaseFileListView');
 class ImageGallery extends BaseFileListView
 {
     public $emptyText = '';
-    public $template = "{items}";
+    public $template = "{items}{comments}";
     public $fancyboxOptions = array();
     public $defaultFancyboxOptions = array(
         'openEffect'  => 'fade',
@@ -17,8 +17,14 @@ class ImageGallery extends BaseFileListView
 			'title'	=> array(
 				'type' => 'over'
 			),
-            'overlay'	=> null,
+            'overlay'	=> array(
+                'closeClick' => true,
+                'speedOut'   => 200,
+                'showEarly'  => true,
+                'css'        => array()
+            ),
             'media' => array(),
+            'vkstyle' => array()
         ),
     );
 

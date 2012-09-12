@@ -36,6 +36,7 @@
         <p><?= CHtml::link('читать далее →', $data->href, array('class' => 'read-more')) ?></p>
     <? else: ?>
         <?= $data->text ?>
+        <? $this->widget('media.portlets.ImageGallery', array('model' => $data, 'tag' => 'gallery')); ?>
     <? endif ?>
 
     <? if ($data->tags): ?>
