@@ -1,0 +1,9 @@
+.am-wrapper .items{
+	float:left;
+	position:relative;
+	overflow:hidden;
+}
+.am-wrapper .items img{
+	position:absolute;
+	outline:none;
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Automatic Image Montage with jQuery</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Automatic Image Montage with jQuery" />
+        <meta name="keywords" content="jquery, images, montage, fullscreen, floating, grid, automatic" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+		<div class="container">
+			<div class="header">
+				<a href="http://tympanus.net/Development/ImageZoomTour/"><span>&laquo; Previous Demo: </span>Image Zoom Tour</a>
+				<span class="right_ab">
+					<a href="http://www.behance.net/AndrewLili" title="Behance Profile of Andrey Yakovlev & Lili Aleeva" target="_blank">Images by Andrey & Lili</a>
+					<a href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank" title="Images licensed under CC BY-NC 3.0">CC BY-NC 3.0</a>
+					<a href="http://tympanus.net/codrops/2011/08/30/automatic-image-montage/"><strong>back to the Codrops post</strong></a>
+				</span>
+			</div>
+			<div id="overlay" class="content">
+				<div class="inner">
+					<h1>Automatic Image Montage <span>with jQuery</span></h1>
+					<h2>Liquid container example with fixed height for images. Resize the browser to see the change.</h2>
+					<div class="snippet">
+						<span id="showcode" class="down">View the options for this example</span>
+						<pre>
+fixedHeight : 60
+
+&lt;div class="am-container" id="am-container" style="width:40%;margin:0px auto;"/&gt;
+						</pre>
+					</div>
+					<div class="more">
+						<ul>
+							<li>More examples:</li>
+							<li><a href="index.html">Example 1</a></li>
+							<li><a href="index2.html">Example 2</a></li>
+							<li><a href="index3.html">Example 3</a></li>
+							<li><a href="index4.html">Example 4</a></li>
+							<li><a href="index5.html">Example 5</a></li>
+							<li><a href="index6.html">Example 6</a></li>
+							<li class="selected"><a href="index7.html">Example 7</a></li>
+							<li><a href="index8.html">Example 8</a></li>
+						</ul>
+					</div>
+					<div class="clr"></div>
+					<div id="panel" class="panel hide"></div>
+				</div>
+			</div>
+			<div class="am-container" id="am-container" style="width:40%;margin:0px auto;">
+				<a href="#"><img src="images/1.jpg"></img></a>
+				<a href="#"><img src="images/2.jpg"></img></a>
+				<a href="#"><img src="images/3.jpg"></img></a>
+				<a href="#"><img src="images/4.jpg"></img></a>
+				<a href="#"><img src="images/5.jpg"></img></a>
+				<a href="#"><img src="images/6.jpg"></img></a>
+				<a href="#"><img src="images/7.jpg"></img></a>
+				<a href="#"><img src="images/8.jpg"></img></a>
+				<a href="#"><img src="images/9.jpg"></img></a>
+				<a href="#"><img src="images/10.jpg"></img></a>
+				<a href="#"><img src="images/11.jpg"></img></a>
+				<a href="#"><img src="images/12.jpg"></img></a>
+				<a href="#"><img src="images/13.jpg"></img></a>
+				<a href="#"><img src="images/14.jpg"></img></a>
+				<a href="#"><img src="images/15.jpg"></img></a>
+				<a href="#"><img src="images/16.jpg"></img></a>
+				<a href="#"><img src="images/17.jpg"></img></a>
+				<a href="#"><img src="images/18.jpg"></img></a>
+				<a href="#"><img src="images/19.jpg"></img></a>
+				<a href="#"><img src="images/20.jpg"></img></a>
+				<a href="#"><img src="images/21.jpg"></img></a>
+				<a href="#"><img src="images/22.jpg"></img></a>
+				<a href="#"><img src="images/23.jpg"></img></a>
+				<a href="#"><img src="images/24.jpg"></img></a>
+				<a href="#"><img src="images/25.jpg"></img></a>
+				<a href="#"><img src="images/26.jpg"></img></a>
+				<a href="#"><img src="images/27.jpg"></img></a>
+				<a href="#"><img src="images/28.jpg"></img></a>
+				<a href="#"><img src="images/29.jpg"></img></a>
+				<a href="#"><img src="images/30.jpg"></img></a>
+				<a href="#"><img src="images/31.jpg"></img></a>
+				<a href="#"><img src="images/32.jpg"></img></a>
+				<a href="#"><img src="images/33.jpg"></img></a>
+				<a href="#"><img src="images/34.jpg"></img></a>
+				<a href="#"><img src="images/35.jpg"></img></a>
+				<a href="#"><img src="images/36.jpg"></img></a>
+				<a href="#"><img src="images/37.jpg"></img></a>
+				<a href="#"><img src="images/38.jpg"></img></a>
+				<a href="#"><img src="images/39.jpg"></img></a>
+				<a href="#"><img src="images/40.jpg"></img></a>
+				<a href="#"><img src="images/41.jpg"></img></a>
+				<a href="#"><img src="images/42.jpg"></img></a>
+				<a href="#"><img src="images/43.jpg"></img></a>
+				<a href="#"><img src="images/44.jpg"></img></a>
+				<a href="#"><img src="images/45.jpg"></img></a>
+				<a href="#"><img src="images/46.jpg"></img></a>
+				<a href="#"><img src="images/47.jpg"></img></a>
+				<a href="#"><img src="images/48.jpg"></img></a>
+				<a href="#"><img src="images/49.jpg"></img></a>
+				<a href="#"><img src="images/50.jpg"></img></a>
+				<a href="#"><img src="images/51.jpg"></img></a>
+				<a href="#"><img src="images/52.jpg"></img></a>
+				<a href="#"><img src="images/53.jpg"></img></a>
+				<a href="#"><img src="images/54.jpg"></img></a>
+				<a href="#"><img src="images/55.jpg"></img></a>
+				<a href="#"><img src="images/56.jpg"></img></a>
+				<a href="#"><img src="images/57.jpg"></img></a>
+				<a href="#"><img src="images/58.jpg"></img></a>
+				<a href="#"><img src="images/59.jpg"></img></a>
+				<a href="#"><img src="images/60.jpg"></img></a>
+				<a href="#"><img src="images/61.jpg"></img></a>
+				<a href="#"><img src="images/62.jpg"></img></a>
+				<a href="#"><img src="images/63.jpg"></img></a>
+				<a href="#"><img src="images/64.jpg"></img></a>
+				<a href="#"><img src="images/65.jpg"></img></a>
+				<a href="#"><img src="images/66.jpg"></img></a>
+				<a href="#"><img src="images/67.jpg"></img></a>
+				<a href="#"><img src="images/68.jpg"></img></a>
+				<a href="#"><img src="images/69.jpg"></img></a>
+				<a href="#"><img src="images/70.jpg"></img></a>
+				<a href="#"><img src="images/71.jpg"></img></a>
+				<a href="#"><img src="images/72.jpg"></img></a>
+				<a href="#"><img src="images/73.jpg"></img></a>
+			</div>
+		</div>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.montage.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				/* 
+				 * just for this demo:
+				 */
+				$('#showcode').toggle(
+					function() {
+						$(this).addClass('up').removeClass('down').next().slideDown();
+					},
+					function() {
+						$(this).addClass('down').removeClass('up').next().slideUp();
+					}
+				);
+				$('#panel').toggle(
+					function() {
+						$(this).addClass('show').removeClass('hide');
+						$('#overlay').stop().animate( { left : - $('#overlay').width() + 20 + 'px' }, 300 );
+					},
+					function() {
+						$(this).addClass('hide').removeClass('show');
+						$('#overlay').stop().animate( { left : '0px' }, 300 );
+					}
+				);
+				
+				var $container 	= $('#am-container'),
+					$imgs		= $container.find('img').hide(),
+					totalImgs	= $imgs.length,
+					cnt			= 0;
+				
+				$imgs.each(function(i) {
+					var $img	= $(this);
+					$('<img/>').load(function() {
+						++cnt;
+						if( cnt === totalImgs ) {
+							$imgs.show();
+							$container.montage({
+								fixedHeight : 60
+							});
+							
+							/* 
+							 * just for this demo:
+							 */
+							$('#overlay').fadeIn(500);
+						}
+					}).attr('src',$img.attr('src'));
+				});	
+			});
+		</script>
+    </body>
+</html>

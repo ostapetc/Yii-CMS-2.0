@@ -19,8 +19,8 @@ class TagsInput extends InputWidget
 						   INNER JOIN tags_rels ON tags_rels.tag_id = tags.id
 						   WHERE tags_rels.object_id = {$this->model->id} AND
 								 tags_rels.model_id  = '{$model_class}'";
-			
-			$tags = Yii::app()->db->createCommand($sql)->queryScalar();		
+
+			$tags = Yii::app()->db->createCommand($sql)->queryScalar();
 		}
 
         $this->registerScripts($model_class);
