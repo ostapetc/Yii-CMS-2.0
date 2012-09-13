@@ -10,24 +10,34 @@ DST= ..
 CSS=  ${DST}/css
 JS=   ${DST}/js
 I18N= ${DST}/js/i18n
-CONN= ${DST}/connectors
 IMG=  ${DST}/images
 
-# used as ${COMPRESSOR} OUT IN
-COMPRESSOR=    java -jar ../../../_old/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar \
-					--charset utf8 -o
+# YUI Compressor
+COMPRESSOR=	1
+COMPRESSOR_JS=	java -jar ../../../_old/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar \
+			--charset utf8 --type js --line-break 500 \
+			-o ${elrte_js_min} ${elrte_js}
+COMPRESSOR_CSS=	java -jar ../../../_old/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar \
+			--charset utf8 --type css --line-break 1 \
+			-o ${elrte_css_min} ${elrte_css}
+
+# Closure Compiler
+# ADVANCED_OPTIMIZATIONS maybe someday
+#COMPRESSOR= java -jar ../../../compiler.jar \
+			--charset UTF-8 --compilation_level SIMPLE_OPTIMIZATIONS \
+			--js_output_file ${elrte_js_min} --js ${elrte_js}
 
 PHONY:     help
-all:       elfinder elfinder-install
-clean:     clean-elfinder
-install:   elfinder-install
-uninstall: elfinder-uninstall connectors-uninstall
+all:       elrte elrte-install
+clean:     clean-elrte
+install:   elrte-install
+uninstall: ellib-uninstall elrte-uninstall
 distclean: uninstall clean
 
 help:
 	@echo 'Makefile for release build automation'
 	@echo ' Packages:'
-	@echo '   elfinder      - elFinder file manager for web'
+	@echo '   elrte         - elRTE WYSIWYG html editor'
 	@echo ''
 	@echo ' MAKE targets:'
 	@echo '   all           - build and install all packages'
@@ -45,71 +55,88 @@ help:
 	@echo '   clean-PACKAGE'
 
 
-
-
-
 # define objects
 
-# elFinder
-elfinder_css=		elfinder.css
-elfinder_css_obj=	${SRC}/css/elfinder.css
-
-elfinder_js=		elfinder.full.js
-elfinder_js_min=	elfinder.min.js
-elfinder_js_obj=	${SRC}/js/elFinder.js \
-					${SRC}/js/elFinder.view.js \
-					${SRC}/js/elFinder.ui.js \
-					${SRC}/js/elFinder.quickLook.js \
-					${SRC}/js/elFinder.eventsManager.js
+# elLib
+ellib_img_obj=		${SRC}/ellib/images/loading.gif
+ellib_img_obj_dst=	${IMG}/loading.gif
 
 
-# elFinder
-elfinder: ${elfinder_css} ${elfinder_js}
+# elRTE
+elrte_css=			elrte.full.css
+elrte_css_min=		elrte.min.css
+elrte_css_obj=		${SRC}/about.txt \
+			${SRC}/ellib/css/elcommon.css \
+			${SRC}/ellib/css/elcolorpicker.css \
+			${SRC}/ellib/css/eldialogform.css \
+			${SRC}/ellib/css/elpaddinginput.css \
+			${SRC}/ellib/css/elselect.css \
+			${SRC}/elrte/css/elrte.css
 
-elfinder-install: elfinder connectors-install
-	${CP} ${elfinder_css} ${CSS}/
-	${CP} ${elfinder_js}  ${JS}/
-	${CP} ${SRC}/js/i18n/elfinder.??.js ${I18N}/
-	${CP} ${SRC}/images/*      ${IMG}/
-
-${elfinder_css}:
-	${CAT} ${elfinder_css_obj} > $@
-
-${elfinder_js}:
-	${CAT} ${elfinder_js_obj} > $@
-
-elfinder-uninstall:
-	${RM} -f ${CSS}/${elfinder_css} ${JS}/${elfinder_js} ${JS}/${elfinder_js_min} \
-	         ${I18N}/elfinder.??.js ${IMG}/*
-
-clean-elfinder:
-	${RM} -f ${elfinder_css} ${elfinder_js} ${elfinder_js_min}
-
-
-# connectors
-connectors-install:
-	${CP} -R ${SRC}/connectors/* ${CONN}/
-	${CP} ${CONN}/php/connector.php ${CONN}/php/connector.php.tmp
-	${CAT} ${CONN}/php/connector.php.tmp \
-		| sed -e s_../../../files_../../files_ \
-		> ${CONN}/php/connector.php
-	${RM} ${CONN}/php/connector.php.tmp
+elrte_js=			elrte.full.js
+elrte_js_min=		elrte.min.js
+elrte_js_obj=		\
+			${SRC}/ellib/js/eli18n.js \
+			${SRC}/ellib/js/eldialogform.js \
+			${SRC}/ellib/js/jquery.elcolorpicker.js \
+			${SRC}/ellib/js/jquery.elborderselect.js \
+			${SRC}/ellib/js/jquery.elpaddinginput.js \
+			${SRC}/ellib/js/jquery.elselect.js \
+			${SRC}/elrte/js/elRTE.js \
+			${SRC}/elrte/js/elRTE.*.js \
+			${SRC}/elrte/js/ui/*.js
 
 
-connectors-uninstall:
-	${RM} -rf ${CONN}/*
+# elLib
+ellib-install:
+	${CP} ${ellib_img_obj} ${IMG}/
+
+ellib-uninstall:
+	${RM} -f ${ellib_img_obj_dst}
+
+
+# elRTE
+elrte: ${elrte_css} ${elrte_js}
+
+elrte-install: elrte ellib-install
+	${CP} ${elrte_css} ${SRC}/elrte/css/elrte-inner.css ${CSS}/
+	${CP} ${elrte_js}  ${JS}/
+	${CP} ${SRC}/elrte/js/i18n/elrte.??.js        ${I18N}/
+	${CP} ${SRC}/elrte/js/i18n/elrte.??_??.js     ${I18N}/
+	${CP} ${SRC}/elrte/js/i18n/elrte.YOUR_LANG.js ${I18N}/
+	${CP} ${SRC}/elrte/images/*.png               ${IMG}/
+	${CP} ${SRC}/elrte/images/*.gif               ${IMG}/
+	${CP} -R ${SRC}/elrte/images/smileys          ${IMG}/
+
+${elrte_css}:
+	${CAT} ${elrte_css_obj} > $@
+
+${elrte_js}:
+	${CAT} ${elrte_js_obj} > $@
+
+elrte-uninstall:
+	${RM} -f ${CSS}/${elrte_css} ${CSS}/${elrte_css_min} ${CSS}/elrte-inner.css \
+	${JS}/${elrte_js} ${JS}/${elrte_js_min} \
+	${I18N}/elrte.??.js ${I18N}/elrte.??_??.js ${I18N}/elrte.YOUR_LANG.js \
+	${IMG}/*.png ${IMG}/*.gif
+	${RM} -rf ${IMG}/smileys
+
+clean-elrte:
+	${RM} -f ${elrte_css} ${elrte_css_min} ${elrte_js} ${elrte_js_min} 
 
 
 # compressor
+elrte-compress:
+	${COMPRESSOR_JS}
+	${COMPRESSOR_CSS}
 
-elfinder-compress:
-	${COMPRESSOR} ${elfinder_js_min} ${elfinder_js}
+elrte-compress-install:
+	${CP} ${SRC}/${elrte_js_min} ${JS}/
+	${CP} ${SRC}/${elrte_css_min} ${CSS}/
 
-elfinder-compress-install:
-	${CP} ${SRC}/${elfinder_js_min} ${JS}/
 
 ifdef COMPRESSOR
-elfinder:             elfinder-compress
-elfinder-install:     elfinder-compress-install
+elrte:                elrte-compress
+elrte-install:        elrte-compress-install
 endif
 

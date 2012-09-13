@@ -95,4 +95,30 @@ span.italic-12 {
 }
 
 
-/*image list*/
+/*for editor*/
+table, tbody, tr{
+    display: block;
+}
+.el-dialogform-content tr td:first-child{
+    width: 90px;
+    font-size: 11px;
+}
+
+.el-dialogform-content select{
+    width:auto;
+    height: auto;
+    line-height: inherit;
+    margin-bottom: 5px;
+}
+.el-dialogform-content input{
+    margin-bottom: 7px;
+    width:auto;
+    padding: 2px 3px;
+    font-size: 12px;
+    line-height: 16px;
+    height: 16px;
+}
+.el-dialogform-content legend{
+    line-height: inherit;
+    width: auto;
+}
