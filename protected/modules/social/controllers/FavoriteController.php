@@ -11,28 +11,50 @@ class FavoriteController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            'create' => 'Добавление в избранное'
+            'createOrDelete' => 'Добавление в избранное или удаление из избранного'
         );
     }
 
 
-    public function actionCreate()
+    public function actionCreateOrDelete()
     {
         if (!isset($_POST['Favorite']))
         {
             $this->badRequest();
         }
 
-        $favorite = new Favorite();
-        $favorite->attributes = $_POST['Favorite'];
-        if ($favorite->save())
-        {
-            $count = Favorite::model()->countByAttributes(array(
-                'object_id' => $favorite->object_id,
-                'model_id'  => $favorite->model_id
-            ));
+        $response = array();
 
-            echo CJSON::encode(array('count' => $count));
+        $attributes = array(
+            'user_id'   => Yii::app()->user->id,
+            'object_id' => $_POST['Favorite']['object_id'],
+            'model_id'  => $_POST['Favorite']['model_id'],
+        );
+
+        $favorite = Favorite::model()->findByAttributes($attributes);
+
+        if ($favorite)
+        {
+            $response['action'] = 'delete';
+            Favorite::model()->deleteAllByAttributes($attributes);
         }
+        else
+        {
+            $response['action'] = 'create';
+
+            $favorite = new Favorite();
+            $favorite->attributes = $attributes;
+            if (!$favorite->save())
+            {
+                $response['errors'] = $favorite->errors_flat_array;
+            }
+        }
+
+        $response['count'] = Favorite::model()->countByAttributes(array(
+            'object_id' => $favorite->object_id,
+            'model_id'  => $favorite->model_id
+        ));
+
+        echo CJSON::encode($response);
     }
 }

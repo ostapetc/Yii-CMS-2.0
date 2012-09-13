@@ -6,7 +6,7 @@
  * Time: 19:21
  * To change this template use File | Settings | File Templates.
  */
-class ModelExistsValidator extends CValidator
+class ObjectExistsValidator extends CValidator
 {
     protected function validateAttribute($object, $attribute)
     {

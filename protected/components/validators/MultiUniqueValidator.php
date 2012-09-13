@@ -24,10 +24,10 @@ class MultiUniqueValidator extends CValidator
             $this->unique_attributes[$unique_attribute] = $object->$unique_attribute;
         }
 
-        $exists = $object->existsByAttributes($this->unique_attributes);
-        if ($exists)
+        $model = $object->findByAttributes($this->unique_attributes);
+        if ($model && ($model->id != $object->id))
         {
-            $this->addError($object, $attribute, t('не уникально по полям ') . implode(', ', $this->unique_attributes));
+            $this->addError($object, $attribute, t('не уникально по полям ') . implode(', ', array_keys($this->unique_attributes)));
         }
     }
 }

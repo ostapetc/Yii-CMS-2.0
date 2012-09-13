@@ -3,8 +3,8 @@ $(function() {
         var that = $(this);
 
         that.parent().find('.rating-vote').each(function() {
-            $(this).attr('class', $(this).attr('class').replace('minus', 'minus-na').replace('plus', 'plus-na'));
-            $(this).unbind('click');
+//            $(this).attr('class', $(this).attr('class').replace('minus', 'minus-na').replace('plus', 'plus-na'));
+//            $(this).unbind('click');
         });
 
         var params = {

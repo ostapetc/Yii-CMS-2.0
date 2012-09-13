@@ -1,5 +1,8 @@
 <?
 
+/**
+ * @property string errors_flat_array
+ */
 abstract class ActiveRecord extends CActiveRecord
 {
     const SCENARIO_CREATE = 'create';

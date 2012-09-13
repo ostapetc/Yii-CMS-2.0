@@ -58,16 +58,15 @@
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
-<!--        --><?// $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
+        <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
-        <div class="author">
-<!--            <a href="--><?//= $data->user->href ?><!--" title="Автор текста">--><?//= $data->user->name ?><!--</a>-->
-<!--            <span title="рейтинг пользователя" class="rating">--><?//= $data->user->rating ?><!--</span>-->
+        <div class="author" >
+            <a href="<?= $data->user->href ?>" title="Автор текста"><span class="glyphicon-user"></span><?= $data->user->name ?></a>
+            <span title="рейтинг пользователя" class="rating"><?= $data->user->rating ?></span>
         </div>
 
         <div class="comments">
-            <span class="glyphicon-comments"></span>
-            <a href="<?= $data->href ?>#comments" title="Читать комментарии"><span class="all"><?= $data->comments_count ?></span> </a>
+            <a href="<?= $data->href ?>#comments" title="Читать комментарии"><span class="glyphicon-comments"></span>&nbsp;<span class="all"><?= $data->comments_count ?></span> </a>
         </div>
     </div>
 </div>

@@ -23,13 +23,27 @@ class RatingController extends ClientController
             $this->badRequest();
         }
 
-        $rating = new Rating();
+        $rating = Rating::model()->findByAttributes(array(
+            'user_id'   => Yii::app()->user->id,
+            'object_id' => $_POST['Rating']['object_id'],
+            'model_id'  => $_POST['Rating']['model_id']
+        ));
+
+        if (!$rating)
+        {
+            $rating = new Rating();
+        }
+
         $rating->attributes = $_POST['Rating'];
 
         if ($rating->save())
         {
             $rating = Rating::getValue($rating->model_id, $rating->object_id);
             echo Rating::getHtml($rating);
+        }
+        else
+        {
+            echo CJSON::encode(array('errors' => $rating->errors_flat_array));
         }
     }
 }

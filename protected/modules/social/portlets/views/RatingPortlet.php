@@ -14,9 +14,6 @@ $labels = array(
     <? if (Yii::app()->user->isGuest): ?>
         <div title="<?= $labels['not_guest'] ?>" class="rating-vote minus-na glyphicon-thumbs-down ="></div>
         <div title="<?= $labels['not_guest'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></div>
-    <? elseif ($exists): ?>
-        <div title="<?= $labels['exists'] ?>" class="rating-vote minus-na glyphicon-thumbs-down"></div>
-        <div title="<?= $labels['exists'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></div>
     <? else: ?>
         <? if ($user_id != Yii::app()->user->id): ?>
             <div title="<?= $labels['minus'] ?>" class="rating-vote minus glyphicon-thumbs-down" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>

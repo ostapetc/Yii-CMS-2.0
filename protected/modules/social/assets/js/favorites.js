@@ -9,14 +9,19 @@ $(function() {
             'Favorite[model_id]'  : model_id
         }
 
-        $.post('/social/favorite/create', params, function(res) {
+        $.post('/social/favorite/createOrDelete', params, function(res) {
             $('#favs_count_' + object_id + '_' + model_id).html(res.count);
 
-            link.attr({
-                'title'   : link.attr('added_msg'),
-                'class'   : 'added',
-                'onclick' : 'return false;'
-            });
+            if (res.action == 'create')
+            {
+                link.removeClass('glyphicon-dislikes').addClass('glyphicon-star');
+                showMessage('success', 'добавлено в избранное');
+            }
+            else
+            {
+                link.removeClass('glyphicon-star').addClass('glyphicon-dislikes');
+                showMessage('success', 'удалено из избранного');
+            }
         }, 'json');
 
         return false;

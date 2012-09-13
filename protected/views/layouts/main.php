@@ -18,6 +18,8 @@
     $cs->registerCoreScript('jquery');
     Yii::app()->bootstrap->registerScripts();
 
+    $cs->registerScriptFile('/js/coreFunctions.js');
+
     $cs->registerCssFile($base.'/css/icons.css');
     $cs->registerCssFile($base.'/css/site/form.css');
     $cs->registerCssFile($base.'/css/site/style.css');
@@ -27,6 +29,12 @@
     $cs->registerCssFile($base.'/css/site/favorites.css');
     $cs->registerCssFile($base.'/css/site/rating.css');
     $cs->registerScriptFile($base.'/js/site/modal-windows.js');
+
+    #toasmessage plugin, message notifier
+    $cs->registerScriptFile('/js/plugins/toastmessage/javascript/jquery.toastmessage.js');
+    $cs->registerCssFile('/js/plugins/toastmessage/resources/css/jquery.toastmessage.css');
+
+    $cs->registerScriptFile('/js/plugins/errorsNotifier.js');
 
 //    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));
 //    $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
@@ -44,7 +52,6 @@
     ?>
 
     <link rel="shortcut icon" href="/favicon.ico">
-
 </head>
 
 <body>

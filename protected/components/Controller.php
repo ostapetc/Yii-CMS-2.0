@@ -1,4 +1,5 @@
 <?
+
 /**
  * TODO: убить интерфес он тут не нужен
  */
@@ -8,6 +9,8 @@ abstract class Controller extends CController implements ControllerInterface
     const MSG_DANGER  = 'danger';
     const MSG_ERROR   = 'error';
     const MSG_INFO    = 'info';
+
+    public $layout = '//layouts/main';
 
     public $page_title;
 
@@ -36,6 +39,31 @@ abstract class Controller extends CController implements ControllerInterface
             array('application.components.filters.ReturnUrlFilter'),
         );
     }
+
+
+    public function actions()
+    {
+        return array(
+            'captcha' => array(
+                'class'     => 'CCaptchaAction',
+                'testLimit' => 6,
+                'minLength' => 4,
+                'maxLength' => 5,
+                'offset'    => 1,
+                'width'     => 68,
+                'height'    => 30,
+                'backColor' => 0xBBBBBB,
+                'foreColor' => 0x222222
+            )
+        );
+    }
+
+
+    public function subMenuItems()
+    {
+        return array();
+    }
+
 
     public function beforeAction($action)
     {
