@@ -1,6 +1,6 @@
 <?php
 
-class m120912_095808_create_media_file extends DbMigration
+class m120913_090932_create_media_albums2 extends DbMigration
 {
 	public function up()
 	{
@@ -19,12 +19,11 @@ class m120912_095808_create_media_file extends DbMigration
               PRIMARY KEY (`image_id`)
             ) ENGINE=InnoDb DEFAULT CHARSET=utf8;
         ");
-
 	}
 
 	public function down()
 	{
-		echo "m120912_095808_create_media_file does not support migration down.\n";
+		echo "m120913_090932_create_media_albums2 does not support migration down.\n";
 		return false;
 	}
 
