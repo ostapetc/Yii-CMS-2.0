@@ -3,7 +3,7 @@ Yii::import('media.portlets.BaseFileListView');
 class ImageGallery extends BaseFileListView
 {
     public $emptyText = '';
-    public $template = "{items}<div class='clear'></div> ";
+    public $template = "{items}";
     public $fancyboxOptions = array();
     public $defaultFancyboxOptions = array(
         'openEffect'  => 'fade',
@@ -24,25 +24,27 @@ class ImageGallery extends BaseFileListView
                 'showEarly'  => true
             ),
             'media'      => array(),
-            'vkstyle'    => array()
+            'vkstyle'    => array(),
+            'thumbs' => array(
+                'width' => 100,
+//                'height' => 50,
+                'position' => 'top'
+            )
         ),
     );
 
     public $montageOptions = array();
     public $defaultMontageOptions = array(
-        'margin' => 5,
-//        'minsize'	=> true,
-//        'liquid' => true,
-        'fixedHeight' => 130,
+        'margin' => 4,
+        'minsize'	=> true,
+        'liquid' => false,
+//        'fixedHeight' => 130,
 //        'fillLastRow'          => true,
-        'minw' => 70,
-        'minh' => 90,
-        'maxh' => 150,	// the maximum height that a picture should have.
-//        'alternateHeight'      => true,
-//        'alternateHeightRange' => array(
-//            'min'    => 90,
-//            'max'    => 150
-//        ),
+        'alternateHeight'      => true,
+        'alternateHeightRange' => array(
+            'min'    => 50,
+            'max'    => 100
+        ),
     );
     public $itemView = 'media.portlets.views.imageGalleryItem';
     public $itemsTagName = 'div';
@@ -51,8 +53,8 @@ class ImageGallery extends BaseFileListView
     public $sortableAction = '/media/mediaFileAdmin/savePriority';
 
     public $size = array(
-        'width'  => null,
-        'height' => 130
+        'width'  => 100,
+        'height' => null
     );
 
     public $htmlOptions = array(
@@ -79,18 +81,22 @@ class ImageGallery extends BaseFileListView
             $this->fancyboxOptions));
         $montageOptions = CJavaScript::encode(CMap::mergeArray($this->defaultMontageOptions,
             $this->montageOptions));
-        Yii::app()->clientScript->registerCssFile($assets . 'imageGallery.css')->registerScriptFile(
-            $assets . 'fancybox/jquery.fancybox.js')->registerCssFile(
-            $assets . 'fancybox/jquery.fancybox.css')->registerScriptFile(
-            $assets . 'fancybox/helpers/jquery.fancybox-media.js')->registerCssFile(
-            $assets . 'fancybox/helpers/jquery.fancybox-vkstyle.css')->registerScriptFile(
-            $assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')->registerCssFile(
-            $assets . 'montage/css/style.css')->registerScriptFile($assets . 'montage/js/jquery.montage.js')
+        Yii::app()->clientScript
+            ->registerCssFile($assets . 'imageGallery.css')
+            ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
+            ->registerCssFile($assets . 'fancybox/jquery.fancybox.css')
+            ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-thumbs.js')
+            ->registerCssFile($assets . 'fancybox/helpers/jquery.fancybox-thumbs.css')
+            ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-media.js')
+            ->registerCssFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.css')
+            ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')
+            ->registerCssFile($assets . 'montage/css/style.css')
+            ->registerScriptFile($assets . 'montage/js/jquery.montage.js')
             ->registerScript($id, <<<JS
                 $('#$id a').fancybox($options);
 
                 var container 	= $('#$id'),
-                    imgs		= container.find('img').hide(),
+                    imgs		= container.find('img').hide(0),
                     totalImgs	= imgs.length,
                     cnt			= 0;
 
@@ -99,13 +105,8 @@ class ImageGallery extends BaseFileListView
                         $('<img/>').load(function() {
                             ++cnt;
                             if( cnt === totalImgs ) {
-                                imgs.show();
+                                imgs.show(0);
                                 container.find('.items').montage({$montageOptions})
-
-                                /*
-                                 * just for this demo:
-                                 */
-                                $('#overlay').fadeIn(500);
                             }
                         }).attr('src',img.attr('src'));
                     });

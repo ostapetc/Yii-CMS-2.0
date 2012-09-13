@@ -23,7 +23,9 @@ body {
 .modal {
     display: none;
 }
-
+.clear{
+    clear: both;
+}
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
