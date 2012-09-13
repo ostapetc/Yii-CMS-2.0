@@ -34,8 +34,7 @@ class ComponentInModuleBehavior extends CBehavior
             $this->_module_id = $last_segment;
         }
 
-        return Yii::app()
-            ->getModule($this->_module_id);
+        return Yii::app()->getModule($this->_module_id);
     }
 
     /**

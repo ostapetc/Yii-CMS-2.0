@@ -34,7 +34,7 @@ abstract class ClientController extends Controller
 
         return array(
             array(
-                'label' => t('Раздел спорта'),
+                'label' => t('Спорт'),
                 'items' => $sports
             ),
             array(

@@ -11,3 +11,11 @@ String.prototype.underscoreToCamel = function() {
 String.prototype.toCamel = function() {
     return this.replace('&', 'and').toLowerCase().replace(/( [a-z0-9])/g, function($1){return $1.toUpperCase().replace(' ','');});
 };
+
+
+/**
+ * remove all tags
+ */
+String.prototype.stripTags  = function() {
+    return this.replace(/<\/?[^>]+>/gi, '');
+}

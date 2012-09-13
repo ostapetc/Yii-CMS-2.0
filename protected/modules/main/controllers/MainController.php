@@ -118,6 +118,6 @@ class MainController extends ClientController
 
     public function actionOff()
     {
-        echo "site off";
+        die("site off");
     }
 }

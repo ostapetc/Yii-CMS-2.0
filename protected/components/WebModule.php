@@ -14,7 +14,7 @@ abstract class WebModule extends CWebModule implements WebModuleInterface
     {
         if ($this->_assetsUrl === null)
         {
-            $this->_assetsUrl = Yii::app()->getAssetManager()->publish($this->basePath . '/assets', false, -1, YII_DEBUG);
+            $this->_assetsUrl = Yii::app()->getAssetManager()->publish($this->basePath . '/assets');
         }
 
         return $this->_assetsUrl;

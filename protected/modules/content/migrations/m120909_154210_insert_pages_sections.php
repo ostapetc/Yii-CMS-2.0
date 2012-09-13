@@ -4,6 +4,8 @@ class m120909_154210_insert_pages_sections extends DbMigration
 {
 	public function up()
 	{
+        $this->execute("DELETE FROM `pages_sections`");
+
 	    $this->execute("
             INSERT INTO `pages_sections` (`id`, `parent_id`, `name`, `order`, `date_create`) VALUES
             (1, NULL, 'Новости', 0, '2012-09-08 20:20:23'),

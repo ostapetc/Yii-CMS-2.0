@@ -229,7 +229,6 @@
     margin-left: 10px;
     margin-right: 25px;
     font-weight: 700;
-    background: url("/img/icons/bg-user2.gif") no-repeat scroll 0 7px transparent;
     padding-left: 17px;
 }
 
@@ -363,4 +362,8 @@ ul.page-info-sidebar {
     margin-right: 10px;
     margin-bottom: 5px;
     border: 0;
+}
+
+.infopanel div {
+    float:left;
 }
