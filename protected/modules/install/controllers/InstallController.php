@@ -1,5 +1,5 @@
 <?
-class InstallController extends Controller
+class InstallController extends ClientController
 {
     public function filters()
     {

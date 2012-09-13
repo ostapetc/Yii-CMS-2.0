@@ -1,6 +1,6 @@
 <?php
 
-class TagController extends Controller
+class TagController extends ClientController
 {
     public static function actionsTitles()
     {

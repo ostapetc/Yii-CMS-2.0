@@ -1,6 +1,6 @@
 <?
 
-class PageSectionController extends Controller
+class PageSectionController extends ClientController
 {
     public static function actionsTitles()
     {

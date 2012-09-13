@@ -41,7 +41,7 @@ And, update your URL rules to include a redirect for sitemap.xml:
 
 The importListMethod allows you to use a custom method on your controller to import a list of non-dynamic page arrays which you wish to include in the sitemap, like so:
 
-class SiteController extends Controller
+class SiteController extends ClientController
 {
     ....
  

@@ -1,6 +1,6 @@
 <? echo "<?\n"; ?>
 
-class <?= $class ?>Controller extends Controller
+class <?= $class ?>Controller extends ClientController
 {
     public static function actionsTitles()
     {

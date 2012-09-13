@@ -1,6 +1,6 @@
 <?
 
-class PageController extends Controller
+class PageController extends ClientController
 {
     public function filters()
     {

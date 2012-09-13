@@ -6,7 +6,7 @@
  * Time: 20:58
  * To change this template use File | Settings | File Templates.
  */
-class CommentController extends Controller
+class CommentController extends ClientController
 {
     public static function actionsTitles()
     {

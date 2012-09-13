@@ -1,6 +1,6 @@
 <?
 
-class SportController extends Controller
+class SportController extends ClientController
 {
     public static function actionsTitles()
     {
