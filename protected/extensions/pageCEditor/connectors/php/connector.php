@@ -27,8 +27,15 @@ class elFinderLogger implements elFinderILogger {
 	
 }
 
+$root = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'/content';
+if (!is_dir($root))
+{
+    mkdir($root, 0777);
+    chmod($root, 0777);
+}
+
 $opts = array(
-	'root'            => $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'/content',  // path to root directory
+	'root'            => $root,  // path to root directory
 	'URL'             => 'content/', // root directory URL
 	'rootAlias'       => 'Media',       // display this instead of root directory name
 	//'uploadAllow'   => array('images/*'),

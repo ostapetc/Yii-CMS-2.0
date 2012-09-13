@@ -15,7 +15,7 @@
     width: 420px;
 }
 
-select {
+.form-vertical select {
     width: 425px;
 }
 
@@ -23,7 +23,7 @@ select {
     width: 419px;
 }
 
-textarea {
+.form-vertical textarea {
     min-height: 180px;
     max-width: 98%;
 }

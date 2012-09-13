@@ -72,7 +72,7 @@ abstract class Controller extends CController implements ControllerInterface
 
         return array(
             array(
-                'label' => t('Раздел спорта'),
+                'label' => t('Спорт'),
                 'items' => $sports
             ),
             array(
