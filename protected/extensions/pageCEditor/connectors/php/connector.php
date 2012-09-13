@@ -27,7 +27,7 @@ class elFinderLogger implements elFinderILogger {
 	
 }
 
-$root = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'/content';
+$root = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'/upload/elrte';
 if (!is_dir($root))
 {
     mkdir($root, 0777);
@@ -36,7 +36,7 @@ if (!is_dir($root))
 
 $opts = array(
 	'root'            => $root,  // path to root directory
-	'URL'             => 'content/', // root directory URL
+	'URL'             => '/upload/elrte/', // root directory URL
 	'rootAlias'       => 'Media',       // display this instead of root directory name
 	//'uploadAllow'   => array('images/*'),
 	//'uploadDeny'    => array('all'),

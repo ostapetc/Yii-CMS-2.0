@@ -95,7 +95,7 @@ span.italic-12 {
 }
 
 
-/*for editor*/
+/*elrte editor fix START*/
 table, tbody, tr{
     display: block;
 }
@@ -122,3 +122,4 @@ table, tbody, tr{
     line-height: inherit;
     width: auto;
 }
+/*elrte editor fix END*/
