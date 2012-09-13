@@ -23,8 +23,6 @@ class m120913_090927_create_media_files2 extends DbMigration
         COLLATE='utf8_general_ci'
         ENGINE=InnoDb
         ");
-
-
 	}
 
 	public function down()
