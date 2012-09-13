@@ -109,7 +109,7 @@ class Banner extends ActiveRecord
 
     public function behaviors()
     {
-        $behaviors = array_merge(parent::behaviors(), array(
+        $behaviors = CMap::mergeArray(parent::behaviors(), array(
             'sortable'       => array(
                 'class' => 'ext.sortable.SortableBehavior'
             ),

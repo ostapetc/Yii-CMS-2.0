@@ -315,7 +315,7 @@ class User extends ActiveRecord
 
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
+        return CMap::mergeArray(parent::attributeLabels(), array(
                 'password_c'   => t('Повторите пароль'),
                 'remember_me'  => t('Запомнить меня'),
                 'role'         => t('Роль')
