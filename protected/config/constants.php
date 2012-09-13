@@ -2,7 +2,7 @@
 
 define('DS', DIRECTORY_SEPARATOR);
 define('CONFIG', 'development');
-define('YII_DEBUG', false);
+define('YII_DEBUG', true);
 define('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS);
 define('RUNTIME_PATH', APP_PATH . 'runtime' . DS);
 define('MODULES_PATH', APP_PATH . 'modules' . DS);

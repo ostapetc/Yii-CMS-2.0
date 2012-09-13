@@ -36,7 +36,7 @@ class ImageGallery extends BaseFileListView
     public $montageOptions = array();
     public $defaultMontageOptions = array(
         'margin' => 4,
-        'minsize'	=> true,
+//        'minsize'	=> true,
         'liquid' => false,
 //        'fixedHeight' => 130,
 //        'fillLastRow'          => true,
@@ -53,8 +53,8 @@ class ImageGallery extends BaseFileListView
     public $sortableAction = '/media/mediaFileAdmin/savePriority';
 
     public $size = array(
-        'width'  => 100,
-        'height' => null
+        'width'  => 112,
+        'height' => 50
     );
 
     public $htmlOptions = array(
@@ -94,7 +94,7 @@ class ImageGallery extends BaseFileListView
             ->registerScriptFile($assets . 'montage/js/jquery.montage.js')
             ->registerScript($id, <<<JS
                 $('#$id a').fancybox($options);
-
+/*
                 var container 	= $('#$id'),
                     imgs		= container.find('img').hide(0),
                     totalImgs	= imgs.length,
@@ -110,6 +110,7 @@ class ImageGallery extends BaseFileListView
                             }
                         }).attr('src',img.attr('src'));
                     });
+                    */
 JS
 );
     }
