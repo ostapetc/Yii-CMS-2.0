@@ -68,7 +68,7 @@ class FileManagerBehavior extends ActiveRecordBehavior
             }
         }
 
-        return parent::afterSave($event);
+        parent::afterSave($event);
     }
 
     public function beforeDelete($event)
@@ -78,41 +78,7 @@ class FileManagerBehavior extends ActiveRecordBehavior
             $attach->delete();
         }
 
-        return parent::beforeDelete($event);
-    }
-
-
-    public function beforeFormInit($event)
-    {
-        if (!$event->sender->add_elements_from_behaviors)
-        {
-            return true;
-        }
-
-        $elements = $event->sender->getElements();
-        foreach ($this->tags as $tag => $data)
-        {
-            if (is_string($data))
-            {
-                $elements['file_manager_'.$data] = array(
-                    'type'      => 'file_manager',
-                    'tag'       => $tag,
-                    'data_type' => 'image',
-                    'title'     => $data
-                );
-            }
-            elseif (is_array($data))
-            {
-                $elements['file_manager_'.$data['title']] = array(
-                    'type'      => 'file_manager',
-                    'tag'       => $tag,
-                    'data_type' => $data['data_type'],
-                    'title'     => $data['title']
-                );
-            }
-        }
-
-        $event->sender->setElements($elements);
+        parent::beforeDelete($event);
     }
 
 }

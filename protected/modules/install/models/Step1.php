@@ -100,48 +100,6 @@ class Step1 extends AbstractInstallModel
         );
     }
 
-    /**
-     * execute file with sql dump of db
-     *
-     * @param $file_path
-     */
-    public function executeDbDump($file_path)
-    {
-        $file_content = file($file_path);
-        $query = "";
-        foreach($file_content as $sql_line){
-            $is_good_line = trim($sql_line) != "" && strpos($sql_line, "--") === false;
-            if(!$is_good_line)
-            {
-                continue;
-            }
-
-            $query .= $sql_line;
-            if (substr(rtrim($query), -1) == ';')
-            {
-                Yii::app()->db->createCommand($query)->execute();
-                $query = "";
-            }
-        }
-    }
-
-    /**
-     * db base initialization, run module/migration/install.sql
-     *
-     * @param array $modules
-     */
-    public function dbInit($modules)
-    {
-        foreach ($modules as $id => $data)
-        {
-            $file = Yii::getPathOfAlias($id.'.migrations').'/install.sql';
-            if (is_file($file))
-            {
-                $this->executeDbDump($file);
-            }
-        }
-    }
-
     public function  deleteDisableModules()
     {
         $modules = array_keys(Yii::app()->getModules());

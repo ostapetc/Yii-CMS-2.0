@@ -6,21 +6,23 @@
     <title>Yii CMS Admin Panel</title>
 
     <?
+    $base = Yii::app()->baseUrl;
+
     $cs = Yii::app()->clientScript;
     $cs->registerCoreScript('jquery');
     $cs->registerCoreScript('jquery.ui');
     Yii::app()->bootstrap->registerScripts();
-    $cs->registerCssFile('/css/admin/layout.css');
-    $cs->registerCssFile('/css/admin/form.css');
-    $cs->registerCssFile('/css/icons.css');
-    $cs->registerCssFile('/css/admin/extend.css');
-    $cs->registerScriptFile('/js/admin/hideshow.js');
-    $cs->registerScriptFile('/js/admin/jquery.tablesorter.min.js');
-    $cs->registerScriptFile('/js/admin/jquery.equalHeight.js');
-    $cs->registerScriptFile('/js/admin/jquery.hotkeys.js');
-    $cs->registerScriptFile('/js/admin/jquery.console.js');
-    $cs->registerScriptFile('/js/admin/main.js');
-    $cs->registerScriptFile('/js/plugins/hint.js');
+    $cs->registerCssFile($base.'/css/admin/layout.css');
+    $cs->registerCssFile($base.'/css/admin/form.css');
+    $cs->registerCssFile($base.'/css/icons.css');
+    $cs->registerCssFile($base.'/css/admin/extend.css');
+    $cs->registerScriptFile($base.'/js/admin/hideshow.js');
+    $cs->registerScriptFile($base.'/js/admin/jquery.tablesorter.min.js');
+    $cs->registerScriptFile($base.'/js/admin/jquery.equalHeight.js');
+    $cs->registerScriptFile($base.'/js/admin/jquery.hotkeys.js');
+    $cs->registerScriptFile($base.'/js/admin/jquery.console.js');
+    $cs->registerScriptFile($base.'/js/admin/main.js');
+    $cs->registerScriptFile($base.'/js/plugins/hint.js');
     Yii::app()->bootstrap->registerModal();
     ?>
 

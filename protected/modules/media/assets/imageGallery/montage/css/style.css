@@ -1,0 +1,10 @@
+.am-wrapper {
+    /*padding: 10px;*/
+	float:left;
+	position:relative;
+	overflow:hidden;
+}
+.am-wrapper img{
+	position:absolute;
+	outline:none;
+}

@@ -1,5 +1,5 @@
 <?
-class JsonController extends Controller
+class JsonController extends ClientController
 {
     public static function actionsTitles()
     {

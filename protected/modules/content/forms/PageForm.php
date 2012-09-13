@@ -13,7 +13,7 @@ return array(
 //            'type'   => 'alias',
 //            'source' => 'title'
 //        ),
-        'files'    => array(
+        'gallery'    => array(
             'type'      => 'file_uploader',
             'data_type' => 'image',
             'title'     => 'Файлы'
@@ -25,7 +25,7 @@ return array(
             'items' => Page::$status_options
         ),
         'tags'     => array(
-            'type'  => 'TagsInput',
+            'type'  => 'tags',
             'label' => 'Теги'
         ),
         'text'     => array(

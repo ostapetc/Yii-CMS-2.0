@@ -13,7 +13,7 @@ class m120701_004620_pages_sections_create extends DbMigration
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `name` (`name`),
                 KEY `parent_id` (`parent_id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
         ");
     }
 

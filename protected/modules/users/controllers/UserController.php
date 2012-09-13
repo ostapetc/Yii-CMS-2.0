@@ -1,6 +1,6 @@
 <?
 
-class UserController extends Controller
+class UserController extends ClientController
 {
     const ERROR_PASSWORD_RECOVER_AUTH = 'Вы не можете восстановить пароль будучи авторизованным!';
 

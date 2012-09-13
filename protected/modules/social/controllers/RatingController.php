@@ -6,7 +6,7 @@
  * Time: 19:18
  * To change this template use File | Settings | File Templates.
  */
-class RatingController extends Controller
+class RatingController extends ClientController
 {
     public static function actionsTitles()
     {

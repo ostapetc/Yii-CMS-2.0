@@ -6,7 +6,7 @@
  * Time: 19:56
  * To change this template use File | Settings | File Templates.
  */
-class FavoriteController extends Controller
+class FavoriteController extends ClientController
 {
     public static function actionsTitles()
     {

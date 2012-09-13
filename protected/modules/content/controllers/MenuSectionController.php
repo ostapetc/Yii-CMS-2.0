@@ -1,6 +1,6 @@
 <?
 
-class MenuSectionController extends Controller
+class MenuSectionController extends ClientController
 {
     public static function actionsTitles()
     {

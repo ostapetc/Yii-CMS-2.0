@@ -11,7 +11,7 @@ class m120701_004626_pages_sections_rels_create extends DbMigration
                 PRIMARY KEY (`id`),
                 KEY `page_id` (`page_id`),
                 KEY `section_id` (`section_id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
 
         $this->execute("

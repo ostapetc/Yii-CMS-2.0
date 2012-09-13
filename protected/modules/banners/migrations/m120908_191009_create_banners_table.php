@@ -14,7 +14,7 @@ class m120908_191009_create_banners_table extends DbMigration
               `date_start` date DEFAULT NULL COMMENT 'Дата начала показа',
               `date_end` date DEFAULT NULL COMMENT 'Дата окончания показа',
               PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
         ");
 	}
 

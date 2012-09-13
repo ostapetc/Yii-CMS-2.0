@@ -13,7 +13,7 @@ class m120701_005423_tags_rels_create extends DbMigration
                 `model_id` varchar(50) NOT NULL,
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `tag_id` (`tag_id`,`object_id`,`model_id`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

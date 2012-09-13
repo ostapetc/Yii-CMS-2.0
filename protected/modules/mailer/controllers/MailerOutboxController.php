@@ -1,6 +1,6 @@
 <?
 
-class MailerOutboxController extends Controller
+class MailerOutboxController extends ClientController
 {
     public static function actionsTitles()
     {

@@ -93,17 +93,6 @@ class MailerTemplateAdminController extends AdminController
 	}
 
 
-	public function loadModel($id)
-	{
-		$model = MailerTemplate::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
-
 
     public function actionBodyView($id)
     {

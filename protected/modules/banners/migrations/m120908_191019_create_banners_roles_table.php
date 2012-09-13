@@ -12,7 +12,7 @@ class m120908_191019_create_banners_roles_table extends DbMigration
               PRIMARY KEY (`id`),
               KEY `banner_id` (`banner_id`),
               KEY `role` (`role`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
         ");
 	}
 

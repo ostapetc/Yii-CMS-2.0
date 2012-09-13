@@ -9,7 +9,7 @@ ADDITIONAL CLASSES
 
 .layer-overlay{
     position: absolute;
-    z-index: 8030;
+    z-index: 8029;
     overflow-y: auto;
     width: 100%;
     left: 0;

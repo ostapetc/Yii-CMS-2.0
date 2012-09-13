@@ -6,7 +6,7 @@
  * Time: 15:02
  * To change this template use File | Settings | File Templates.
  */
-class TaskController extends Controller
+class TaskController extends ClientController
 {
     public static function actionsTitles()
     {

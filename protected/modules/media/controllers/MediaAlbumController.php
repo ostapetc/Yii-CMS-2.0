@@ -1,5 +1,5 @@
 <?
-class MediaAlbumController extends Controller
+class MediaAlbumController extends ClientController
 {
     public static function actionsTitles()
     {

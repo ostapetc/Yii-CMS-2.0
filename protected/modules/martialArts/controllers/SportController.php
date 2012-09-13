@@ -1,6 +1,6 @@
 <?
 
-class SportController extends Controller
+class SportController extends ClientController
 {
     public static function actionsTitles()
     {
@@ -28,15 +28,4 @@ class SportController extends Controller
 		));
 	}
 
-
-	public function loadModel($id)
-	{
-		$model = Sport::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
 }

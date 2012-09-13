@@ -1,6 +1,6 @@
 <?
 
-class PageController extends Controller
+class PageController extends ClientController
 {
     public function filters()
     {
@@ -118,7 +118,6 @@ class PageController extends Controller
         {
             $this->pageNotFound();
         }
-
         $this->render("view", array(
             "page" => $page
         ));

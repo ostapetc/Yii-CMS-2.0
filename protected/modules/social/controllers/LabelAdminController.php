@@ -85,14 +85,4 @@ class LabelAdminController extends AdminController
 	}
 
 
-	public function loadModel($id)
-	{
-		$model = Label::model()->findByPk((int) $id);
-		if($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-		return $model;
-	}
 }

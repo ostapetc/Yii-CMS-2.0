@@ -18,7 +18,7 @@ $this->widget('AdminDetailView', array(
             'value' => date('d.m.Y h:i', strtotime($model->date_create))
         ),
         array(
-            'name'  => t('Мета-теги'),
+            'label'  => t('Мета-теги'),
             'value' => MetaTag::model()->html($model->id, get_class($model)),
             'type'  => 'raw'
         ),

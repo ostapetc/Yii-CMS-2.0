@@ -1,6 +1,6 @@
 <?
 
-class MainController extends Controller
+class MainController extends ClientController
 {   
     public static function actionsTitles() 
     {

@@ -36,6 +36,7 @@
         <p><?= CHtml::link('читать далее →', $data->href, array('class' => 'read-more')) ?></p>
     <? else: ?>
         <?= $data->text ?>
+        <? $this->widget('media.portlets.ImageGallery', array('model' => $data, 'tag' => 'gallery')); ?>
     <? endif ?>
 
     <? if ($data->tags): ?>
@@ -56,7 +57,7 @@
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
 
-        <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
+<!--        --><?// $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
         <div class="author">
 <!--            <a href="--><?//= $data->user->href ?><!--" title="Автор текста">--><?//= $data->user->name ?><!--</a>-->

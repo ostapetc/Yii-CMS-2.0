@@ -13,7 +13,7 @@ class m120701_005105_mailer_templates_create extends DbMigration
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `name` (`name`),
                 UNIQUE KEY `code` (`code`)
-              ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ");
     }
 

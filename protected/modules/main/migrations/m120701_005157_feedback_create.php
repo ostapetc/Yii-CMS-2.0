@@ -15,7 +15,7 @@ class m120701_005157_feedback_create extends DbMigration
                 `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 PRIMARY KEY (`id`),
                 KEY `topic_id` (`topic_id`)
-              ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+              ) ENGINE=InnoDb DEFAULT CHARSET=utf8
         ");
     }
 
