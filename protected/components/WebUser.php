@@ -63,4 +63,21 @@ class WebUser extends CWebUser
 
         return parent::checkAccess($auth_item_name, $params, $allow_caching);
     }
+
+
+    public function __get($attribute)
+    {
+        try
+        {
+            return parent::__get($attribute);
+        }
+        catch (CException $e)
+        {
+            $model = $this->getModel();
+            if ($model)
+            {
+                return $model->__get($attribute);
+            }
+        }
+    }
 }

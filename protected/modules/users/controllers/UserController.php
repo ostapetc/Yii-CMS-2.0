@@ -28,7 +28,7 @@ class UserController extends ClientController
     {
         return array(
             array(
-                'actions'  => array('view'),
+                'actions'  => array('view', 'updateSelfData'),
                 'sidebars' => array(
                     array(
                         'widget',
