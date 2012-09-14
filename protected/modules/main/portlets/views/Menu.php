@@ -26,7 +26,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#"><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/">
+                                    <a href="<?= $this->createUrl('/users/user/view', array('id' => Yii::app()->user->id)) ?>">
                                         <table cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-right: 10px;">

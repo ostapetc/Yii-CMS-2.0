@@ -47,12 +47,19 @@ class UserController extends ClientController
     {
         return array(
             array(
-                'label' => t('Активировать аккаунт'),
-                'url'   => array('/users/user/activateAccountRequest')
+                'label'   => t('Активировать аккаунт'),
+                'url'     => array('/users/user/activateAccountRequest'),
+                'visible' => Yii::app()->user->isGuest
             ),
             array(
-                'label' => t('Забыли пароль?'),
-                'url'   => array('/users/user/ChangePasswordRequest')
+                'label'   => t('Забыли пароль?'),
+                'url'     => array('/users/user/ChangePasswordRequest'),
+                'visible' => Yii::app()->user->isGuest,
+            ),
+            array(
+                'label'   => t('Редактировать личные данные'),
+                'url'     => array("/users/user/update", 'id' => Yii::app()->user->id),
+                'visible' => !Yii::app()->user->isGuest
             )
         );
     }

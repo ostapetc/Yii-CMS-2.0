@@ -81,7 +81,8 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = lcfirst(Yii::app()->text->underscoreToCamelcase($attribute)) . 'Value';
+        $method_name = 'get' . ucfirst(Yii::app()->text->underscoreToCamelcase($attribute)) . 'Value';
+
         if (method_exists($this, $method_name))
         {
             return $this->$method_name();

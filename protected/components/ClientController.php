@@ -3,6 +3,7 @@ abstract class ClientController extends Controller
 {
     public $layout = '//layouts/main';
 
+
     public function actions()
     {
         return array(
