@@ -57,7 +57,7 @@ class UsersModule extends WebModule
             '/admin/login/*'             => 'users/userAdmin/login',
             '/login'                     => 'users/user/login',
             '/user/<id:\d*>'             => 'users/user/view',
-            '/user/update/<id:\d*>'      => 'users/user/update',
+            '/user/updateSelfData'       => 'users/user/updateSelfData',
             '/logout'                    => 'users/user/logout',
             '/registration'              => 'users/user/registration',
             '/activateAccount/<code:.*>' => 'users/user/activateAccount',
