@@ -50,7 +50,7 @@ class <?= $class ?> extends ActiveRecord
 
     public function behaviors()
     {
-        return array_merge(
+        return CMap::mergeArray(
             parent::behaviors(),
             array(
 <? foreach ($behaviors as $behavior): ?>

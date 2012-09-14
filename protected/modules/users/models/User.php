@@ -16,13 +16,13 @@ class User extends ActiveRecord
     const GENDER_WOMAN = "woman";
 
     const SCENARIO_CHANGE_PASSWORD_REQUEST = 'ChangePasswordRequest';
-    const SCENARIO_ACTIVATE_REQUEST        = 'ActivateRequest';
-    const SCENARIO_CHANGE_PASSWORD         = 'ChangePassword';
-    const SCENARIO_REGISTRATION            = 'Registration';
-    const SCENARIO_UPDATE                  = 'Update';
-    const SCENARIO_CREATE                  = 'Create';
-    const SCENARIO_LOGIN                   = 'Login';
-    const SCENARIO_CABINET                 = 'Cabinet';
+    const SCENARIO_ACTIVATE_REQUEST         = 'ActivateRequest';
+    const SCENARIO_UPDATE_SELF_DATA         = 'UpdateSelfData';
+    const SCENARIO_CHANGE_PASSWORD          = 'ChangePassword';
+    const SCENARIO_REGISTRATION             = 'Registration';
+    const SCENARIO_UPDATE                    = 'Update';
+    const SCENARIO_CREATE                    = 'Create';
+    const SCENARIO_LOGIN                     = 'Login';
 
 
     public $password_c;
@@ -118,7 +118,7 @@ class User extends ActiveRecord
                 'photo', 'safe', 'on' => array(
                     self::SCENARIO_CREATE,
                     self::SCENARIO_REGISTRATION,
-                    self::SCENARIO_CABINET,
+                    self::SCENARIO_UPDATE_SELF_DATA,
                     self::SCENARIO_UPDATE
                 )
             ),
@@ -315,7 +315,7 @@ class User extends ActiveRecord
 
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
+        return CMap::mergeArray(parent::attributeLabels(), array(
                 'password_c'   => t('Повторите пароль'),
                 'remember_me'  => t('Запомнить меня'),
                 'role'         => t('Роль')

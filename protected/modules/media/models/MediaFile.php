@@ -1,7 +1,8 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
+ *
  * @property string $id
  * @property string $object_id
  * @property string $model_id
@@ -11,11 +12,11 @@
  * @property string $descr
  * @property string $order
  * @property string $path
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property        $deleteUrl
  * @property        $isImage
- * @property        $isSound
+ * @property        $isAudio
  * @property        $isExcel
  * @property        $isWord
  * @property        $isFileExist
@@ -33,13 +34,27 @@
  * @property        $serverPath
  * @property        $errorsFlatArray
  * @property string $error           the error message. Null is returned if no error.
- * 
+ *
  */
 
 class MediaFile extends ActiveRecord
 {
     const UPLOAD_PATH  = 'upload/mediaFiles';
     const FILE_POSTFIX = '';
+
+
+    const TYPE_IMG   = 'img';
+    const TYPE_VIDEO = 'video';
+    const TYPE_AUDIO = 'audio';
+    const TYPE_DOC   = 'doc';
+
+
+    public $types = array(
+        self::TYPE_IMG   => self::TYPE_IMG,
+        self::TYPE_VIDEO => self::TYPE_VIDEO,
+        self::TYPE_AUDIO => self::TYPE_AUDIO,
+        self::TYPE_DOC   => self::TYPE_DOC,
+    );
 
     public $error;
 
@@ -72,10 +87,13 @@ class MediaFile extends ActiveRecord
     {
         return array(
             array(
-                'path', 'length',
+                'path',
+                'length',
                 'min'=> 1
-            ), array(
-                'nameWithoutExt', 'length',
+            ),
+            array(
+                'nameWithoutExt',
+                'length',
                 'min'      => 1,
                 'max'      => 900,
                 'tooShort' => 'Название файла должно быть меньше 1 сим.',
@@ -83,6 +101,7 @@ class MediaFile extends ActiveRecord
             )
         );
     }
+
 
     public function parent($model_id, $id)
     {
@@ -107,52 +126,61 @@ class MediaFile extends ActiveRecord
 
     public function getDeleteUrl()
     {
-        return Yii::app()->controller->createUrl('/media/mediaFileAdmin/delete', array('id' => $this->id));
+        return Yii::app()->createUrl('/media/mediaFileAdmin/delete', array('id' => $this->id));
     }
+
+
+    protected function isType($type)
+    {
+        return in_array($this->extension, MediaFileExtensions::${$type . 'Extensions'});
+    }
+
 
     public function getIsImage()
     {
-        return in_array($this->extension, array(
-            'png', 'jpeg', 'jpg', 'tiff', 'ief', 'gif'
-        ));
+        return $this->isType('image');
     }
 
 
-    public function getIsSound()
+    public function getIsAudio()
     {
-        return in_array($this->extension, array(
-            'wma', 'mp3'
-        ));
+        return $this->isType('audio');
     }
 
 
     public function getIsExcel()
     {
-        return in_array($this->extension, array(
-            'xl', 'xla', 'xlb', 'xlc', 'xld', 'xlk', 'xll', 'xlm', 'xls', 'xlt', 'xlv', 'xlw'
-        ));
+        return $this->isType('excel');
     }
 
 
     public function getIsWord()
     {
-        return in_array($this->extension, array(
-            'doc', 'dot', 'docx'
-        ));
+        return $this->isType('word');
     }
 
-	public function getIsFileExist()
-	{
-		$filename = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
-		return file_exists($filename) && is_file($filename);
-	}
-
-
-	public function getIsArchive()
+    public function getIsVideo()
     {
-        return in_array($this->extension, array(
-            'zip', 'rar', 'tar', 'gz'
-        ));
+        return $this->isType('video');
+    }
+
+
+    public function getIsArchive()
+    {
+        return $this->isType('archive');
+    }
+
+
+    public function getIsDocument()
+    {
+        return $this->isType('readable') || $this->isArchive || $this->isWord || $this->isExcel;
+    }
+
+
+    public function getIsFileExist()
+    {
+        $filename = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
+        return file_exists($filename) && is_file($filename);
     }
 
 
@@ -162,11 +190,14 @@ class MediaFile extends ActiveRecord
         switch (true)
         {
             case $this->isImage:
-                $img = ImageHelper::thumb($this->getServerDir(), $this->name, array('width' => 48, 'height' => 48), true);
+                $img = ImageHelper::thumb($this->getServerDir(), $this->name, array(
+                    'width'  => 48,
+                    'height' => 48
+                ), true);
                 return $img->__toString();
                 break;
-            case $this->isSound:
-                $name = 'sound';
+            case $this->isAudio:
+                $name = 'audio';
                 break;
             case $this->isExcel:
                 $name = 'excel';
@@ -194,15 +225,16 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function save($runValidation=true,$attributes=null)
+    public function save($runValidation = true, $attributes = null)
     {
-        if (!parent::save($runValidation=true,$attributes=null))
+        if (!parent::save($runValidation = true, $attributes = null))
         {
             $this->error = Yii::t('MediaModule.main', 'Не удалось сохранить изменения');
             return false;
         }
         return true;
     }
+
 
     public function setExtraProperties($field, &$handler, $options)
     {
@@ -229,7 +261,8 @@ class MediaFile extends ActiveRecord
         $new_file  = self::UPLOAD_PATH . '/' . $file_name;
         if ($file->saveAs('./' . $new_file))
         {
-            list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH, true);
+            list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH,
+                true);
             $this->title = $file->name;
             return true;
         }
@@ -266,10 +299,12 @@ class MediaFile extends ActiveRecord
         return $ret;
     }
 
+
     public function getExtension()
     {
         return pathinfo($this->name, PATHINFO_EXTENSION);
     }
+
 
     public function getNameWithoutExt()
     {
@@ -283,15 +318,31 @@ class MediaFile extends ActiveRecord
     }
 
 
+    public function detectType()
+    {
+        switch (true)
+        {
+            case $this->isDocument:
+                return self::TYPE_DOC;
+            case $this->isAudio:
+                return self::TYPE_AUDIO;
+            case $this->isVideo:
+                return self::TYPE_VIDEO;
+            case $this->isImage:
+                return self::TYPE_IMG;
+        }
+    }
+
+
     public function beforeSave()
     {
         if (parent::beforeSave())
         {
             if ($this->isNewRecord)
             {
-                $model = MediaFile::model()->parent($this->model_id, $this->object_id)->find();
+                $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->find();
                 $this->order = $model ? $model->order + 1 : 1;
-                $this->title;
+                $this->type  = $this->detectType();
             }
 
             return true;
@@ -349,28 +400,31 @@ class MediaFile extends ActiveRecord
 
 
     public function getDownloadUrl()
-	{
-		$hash = $this->getHash();
-		return Yii::app()->getController()->createUrl('/media/mediaFile/downloadFile', array(
-				'hash' => "{$hash}x{$this->id}",
-			));
-	}
-
-	public function getHash()
-	{
-		return md5($this->object_id . $this->model_id . $this->name . $this->tag);
-	}
+    {
+        $hash = $this->getHash();
+        return Yii::app()->getController()->createUrl('/media/mediaFile/downloadFile', array(
+            'hash' => "{$hash}x{$this->id}",
+        ));
+    }
 
 
-	public function getHref()
-	{
+    public function getHash()
+    {
+        return md5($this->object_id . $this->model_id . $this->name . $this->tag);
+    }
+
+
+    public function getHref()
+    {
         return '/' . $this->path . '/' . $this->name;
-	}
+    }
+
 
     public function getServerDir()
     {
         return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/';
     }
+
 
     public function getServerPath()
     {

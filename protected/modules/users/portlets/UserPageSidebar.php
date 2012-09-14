@@ -12,25 +12,28 @@ class UserPageSidebar extends Portlet
     {
         $items = array(
             array(
-                'label' => t('Страницы') . ' (' . Yii::app()->controller->user->pages_count . ')',
+                'label' => "<span class='glyphicon-file'></span> " . t('Страницы') . ' (' . Yii::app()->controller->user->pages_count . ')',
+                'url'   => $this->createUrl(''),
+            ),
+            array(
+                'label' => "<span class='glyphicon-parents'></span> " . t('Друзья') . ' (' . Friend::userFriendsCount(Yii::app()->controller->user->id) . ')',
                 'url'   => $this->createUrl('')
             ),
             array(
-                'label' => t('Друзья') . ' (' . Friend::userFriendsCount(Yii::app()->controller->user->id) . ')',
+                'label' => "<span class='glyphicon-star'></span> " . t('Избранное') . ' (' . Yii::app()->controller->user->favorites_count . ')',
                 'url'   => $this->createUrl('')
             ),
             array(
-                'label' => t('Избранное') . ' (' . Yii::app()->controller->user->favorites_count . ')',
-                'url'   => $this->createUrl('')
-            ),
-            array(
-                'label' => t('Комментарии') . ' (' . Yii::app()->controller->user->comments_count . ')',
+                'label' => "<span class='glyphicon-comments'></span> " . t('Комментарии') . ' (' . Yii::app()->controller->user->comments_count . ')',
                 'url'   => $this->createUrl('')
             ),
         );
 
+        $title = Yii::app()->request->getParam('id') == Yii::app()->user->id ? t('Ваша инофрмация') : t('Информация о пользователе');
+
         $this->render('UserPageSidebar', array(
-            'items' => $items
+            'items' => $items,
+            'title' => $title
         ));
     }
 }

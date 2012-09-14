@@ -6,7 +6,7 @@ if (function_exists('date_default_timezone_set')) {
 	date_default_timezone_set('Europe/Kiev');
 }
 
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinder.class.php';
+include_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'elFInder.class.php';
 
 /**
  * Simple example how to use logger with elFinder
@@ -27,7 +27,7 @@ class elFinderLogger implements elFinderILogger {
 	
 }
 
-$root = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'/content';
+$root = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'/upload/elrte';
 if (!is_dir($root))
 {
     mkdir($root, 0777);
@@ -36,7 +36,7 @@ if (!is_dir($root))
 
 $opts = array(
 	'root'            => $root,  // path to root directory
-	'URL'             => 'content/', // root directory URL
+	'URL'             => '/upload/elrte/', // root directory URL
 	'rootAlias'       => 'Media',       // display this instead of root directory name
 	//'uploadAllow'   => array('images/*'),
 	//'uploadDeny'    => array('all'),

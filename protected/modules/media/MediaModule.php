@@ -42,6 +42,7 @@ class MediaModule extends WebModule
     {
         return array(
             '/userAlbums/<userId:\d*>' => '/media/mediaAlbum/userAlbums',
+            '/media/mediaAlbum/userAlbums/<id:\d*>' => '/media/mediaAlbum/userAlbums',
         );
     }
 
