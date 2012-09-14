@@ -42,6 +42,10 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
+                                    <?= CHtml::link('<span class="glyphicon-pencil"></span> &nbsp;' . t('Ред. личные данные'), array('/users/user/updateSelfData')) ?>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
                                     <?= CHtml::link('<span class="glyphicon-message-plus"></span> &nbsp;' . t('Личные сообщения'), '') ?>
                                 </li>
                                 <li class="divider"></li>

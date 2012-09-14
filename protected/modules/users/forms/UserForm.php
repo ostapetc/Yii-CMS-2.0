@@ -8,29 +8,42 @@ return array(
         'enableAjaxValidation' => true,
         'clientOptions' => array('validateOnSubmit' => true)
     ),
-    'elements'       => array(
-        'email'      => array('type' => 'text'),
-        'name'       => array('type' => 'text'),
-        'birthdate'  => array('type' => 'date'),
-        'gender'     => array(
+    'elements' => array(
+        'email' => array(
+            'type' => 'text'
+        ),
+        'name' => array(
+            'type' => 'text'
+        ),
+        'birthdate' => array(
+            'type' => 'date'
+        ),
+        'gender' => array(
             'type'  => 'dropdownlist',
             'items' => User::$gender_options
+        ),
+        'about_self'=> array(
+            'type' => 'textarea'
         ),
         'photo' => array(
             'type' => 'file'
         ),
-        'status'     => array(
+        'status' => array(
             'type'  => 'dropdownlist',
             'items' => User::$status_options
         ),
-        'role'       => array(
+        'role' => array(
             'type'  => 'dropdownlist',
             'items' => CHtml::listData($roles, 'name', 'description')
         ),
-        'password'   => array('type' => 'password'),
-        'password_c' => array('type' => 'password'),
+        'password' => array(
+            'type' => 'password'
+        ),
+        'password_c'=> array(
+            'type' => 'password'
+        ),
     ),
-    'buttons'        => array(
+    'buttons' => array(
         'submit' => array(
             'type'  => 'submit',
             'value' => 'сохранить'

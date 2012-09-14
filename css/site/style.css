@@ -96,7 +96,7 @@ span.italic-12 {
 
 
 /*elrte editor fix START*/
-table, tbody, tr{
+.el-dialogform-content table, .el-dialogform-content tbody, .el-dialogform-content tr{
     display: block;
 }
 .el-dialogform-content tr td:first-child{
