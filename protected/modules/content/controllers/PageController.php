@@ -4,7 +4,7 @@ class PageController extends ClientController
 {
     public function filters()
     {
-        return array_merge(
+        return CMap::mergeArray(
             parent::filters(),
             array(
                 array(

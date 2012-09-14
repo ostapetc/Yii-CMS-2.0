@@ -1,2 +1,2 @@
 .image-gallery{ }
-.image-gallery a{ }
+.image-gallery a{ display:inline-block; margin: 2px; }
