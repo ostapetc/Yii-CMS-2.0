@@ -18,20 +18,14 @@ class MediaAlbumController extends ClientController
     {
         $model = new MediaAlbum;
         $form  = new Form('media.AlbumForm', $model);
+        $this->performAjaxValidation($model);
 
         if ($form->submitted('submit') && !$model->validate())
         {
-            $this->performAjaxValidation($model);
-        }
-
-        if ($model->userCanEdit())
-        {
             $model->save(false);
         }
-        else
-        {
-            $this->forbidden();
-        }
+
+        $this->render('create', array('form' => $form));
     }
 
 

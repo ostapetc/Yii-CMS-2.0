@@ -321,20 +321,16 @@ class UserController extends ClientController
         {
             if (strtotime($user->password_recover_date) + 24 * 3600 > time())
             {
-                if (isset($_POST['User']))
+                if ($form->submited())
                 {
-                    $model->attributes = $_POST['User'];
-                    if ($model->validate())
-                    {
-                        $user->password_recover_code = null;
-                        $user->password_recover_date = null;
-                        $user->password              = md5($_POST['User']['password']);
-                        $user->save();
+                    $user->password_recover_code = null;
+                    $user->password_recover_date = null;
+                    $user->password              = md5($_POST['User']['password']);
+                    $user->save();
 
-                        Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
+                    Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
 
-                        $this->redirect('/login');
-                    }
+                    $this->redirect('/login');
                 }
             }
             else

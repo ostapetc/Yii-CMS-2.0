@@ -134,6 +134,7 @@ class PageController extends ClientController
     {
         $model = new Page(ActiveRecord::SCENARIO_CREATE);
         $form  = new Form('content.PageCForm', $model);
+        $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
         {

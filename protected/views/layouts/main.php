@@ -60,8 +60,8 @@
 
 <div id='main-wrapper'>
 
-    <? $this->widget('Menu'); ?>
-    <? $this->widget('SubMenu'); ?>
+    <? $this->widget('content.portlets.Menu'); ?>
+    <? $this->widget('content.portlets.SubMenu'); ?>
 
     <div class="container-fluid">
         <div class="row-fluid">
@@ -78,7 +78,7 @@
             </div>
             <!--/span-->
             <div class="span4 sidebar-manager">
-                <?= $this->widget('SidebarManager') ?>
+                <?= $this->widget('main.portlets.SidebarManager') ?>
             </div>
         </div>
         <hr>
