@@ -15,23 +15,16 @@
 // fix for fcgi
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
 
-defined('YII_DEBUG') or define('YII_DEBUG',true);
-
-define('DS', DIRECTORY_SEPARATOR);
 if (!isset($_SERVER['DOCUMENT_ROOT']) || !$_SERVER['DOCUMENT_ROOT'])
 {
-    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../../') . DS;
+    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../../') . DIRECTORY_SEPARATOR;
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS . 'config' . DS . 'constants.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'constants.php';
+
 require_once(dirname(__FILE__).'/yii.php');
 require_once LIBRARIES_PATH . 'functions.php';
 require_once LIBRARIES_PATH . 'debug.php';
-
-
-$env = YII_DEBUG ? 'development' : 'production';
-defined('ENV') || define('ENV', $env);
-defined('CONFIG') || define('CONFIG', $env);
 
 $config = $_SERVER['DOCUMENT_ROOT'].'/protected/config/console.php';
 
