@@ -51,6 +51,13 @@ TODO: что он тут делает?
     background-image:url("/img/site/glyphicons.png");
     background-repeat:no-repeat;
 }
+
+.glyphicon-na {
+    background-image:url("/img/site/glyphicons_na.png");
+    cursor: not-allowed !important;
+}
+
+
 [class^="glyphicon-"]:last-child,[class*=" glyphicon-"]:last-child {
     *margin-left:0;
 }

@@ -1,4 +1,4 @@
-<a name="comments"></a>
+<a name="comments" xmlns="http://www.w3.org/1999/html"></a>
 
 <div id="comments-div">
 
@@ -16,5 +16,9 @@
 <?= CHtml::endForm() ?>
 
 <? if (Yii::app()->user->isGuest): ?>
-    <?= Controller::msg('Комментировать могут только зарегистрированные пользователи!', 'warning') ?>
+    <blockquote>
+        <p>Только зарегистрированные пользователи могут оставлять комментарии.</p>
+        <p><?= Chtml::link('Войдите', '#', array('class' => 'login-link')) ?>, пожалуйста.</p>
+    </blockquote>
 <? endif ?>
+

@@ -66,14 +66,21 @@
         </div>
 
         <div class="comments">
-            <a href="<?= $data->href ?>#comments" title="Читать комментарии"><span class="glyphicon-comments"></span>&nbsp;<span class="all"><?= $data->comments_count ?></span> </a>
+            <?
+            $title = $data->comments_count ? 'Читать комментарии' : 'Комментировать';
+            ?>
+
+            <a href="<?= $data->href ?>#comments" title="<?= $title ?>">
+                <span class="glyphicon-comments"></span>&nbsp;
+                <span class="all"><?= $data->comments_count ? $data->comments_count : $title ?></span>
+            </a>
         </div>
     </div>
 </div>
 <br clear="all"/>
 
 <? if (!$preview): ?>
-<!--    --><?// $this->widget('CommentsPortlet', array('model' => $data)); ?>
+    <? $this->widget('CommentsPortlet', array('model' => $data)); ?>
 <? endif ?>
 
 

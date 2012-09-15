@@ -19,7 +19,10 @@
 */
 class HttpRequest extends CHttpRequest
 {
+    public $prev_url;
+
     public $noCsrfValidationRoutes = array();
+
 
     protected function normalizeRequest()
     {
@@ -44,5 +47,4 @@ class HttpRequest extends CHttpRequest
             }
         }
     }
-
 }

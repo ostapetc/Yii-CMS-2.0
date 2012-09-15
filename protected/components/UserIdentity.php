@@ -70,6 +70,7 @@ class UserIdentity extends CUserIdentity
                 {
                     Yii::app()->user->login($this);
                 }
+
                 break;
 
             case User::STATUS_BLOCKED:

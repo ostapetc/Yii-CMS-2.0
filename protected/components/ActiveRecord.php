@@ -383,9 +383,20 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function getActionUrl($action, $params = array())
     {
-        $model  = get_class($this);
+        $model  = lcfirst(get_class($this));
         $module = AppManager::getModelModule($model);
 
         return Yii::app()->createUrl("/$module/$model/$action", $params);
     }
+
+
+    public function fetchScalarByAttributes($attributes, $field, $condition='', $params=array())
+    {
+        $model = $this->findByAttributes($attributes, $condition, $params);
+        if ($model)
+        {
+            return $model->$field;
+        }
+    }
+
 }

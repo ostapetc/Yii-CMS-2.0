@@ -21,4 +21,8 @@ $(function() {
 
         return false;
     });
+
+    $('.login-link').click(function() {
+        $('a[href="/login"]').trigger('click');
+    });
 });

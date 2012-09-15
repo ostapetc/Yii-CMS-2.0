@@ -76,8 +76,7 @@ class UserController extends ClientController
                 if ($identity->authenticate())
                 {
                     Yii::app()->user->setFlash('success', t('Вы успешно авторизованы'));
-
-                    $this->redirect((isset($_GET['redirect']) && !empty($_GET['redirect'])) ? $_GET['redirect'] : '/');
+                    $this->redirect(Yii::app()->user->model->url);
                 }
                 else
                 {

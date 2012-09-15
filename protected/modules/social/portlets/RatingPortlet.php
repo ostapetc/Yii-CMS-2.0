@@ -37,18 +37,18 @@ class RatingPortlet extends Portlet
         }
 
         $model_id = get_class($this->model);
+        $value    = null;
 
         if (!Yii::app()->user->isGuest)
         {
-            $exists = Rating::model()->existsByAttributes(array(
-                'user_id'   => Yii::app()->user->id,
-                'object_id' => $this->model->id,
-                'model_id'  => $model_id
-            ));
-        }
-        else
-        {
-            $exists = false;
+            $value = Rating::model()->fetchScalarByAttributes(
+                array(
+                    'user_id'   => Yii::app()->user->id,
+                    'object_id' => $this->model->id,
+                    'model_id'  => $model_id
+                ),
+                'value'
+            );
         }
 
         $this->render('RatingPortlet', array(
@@ -56,7 +56,7 @@ class RatingPortlet extends Portlet
             'user_id'   => $this->model->user_id,
             'model_id'  => $model_id,
             'rating'    => $rating,
-            'exists'    => $exists
+            'value'     => $value
         ));
     }
 }

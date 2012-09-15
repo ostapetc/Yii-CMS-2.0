@@ -7,7 +7,7 @@
         <a class="hash" href="#comment_<?= $comment->id ?>">#</a>
         <a class="answer" href="" comment_id="<?= $comment->id ?>" user_name="<?= $comment->user->name ?>">ответить</a>
 
-        <?= $this->widget('RatingPortlet', array('model' => $comment)); ?>
+        <?= $this->widget('application.modules.social.portlets.RatingPortlet', array('model' => $comment)); ?>
     </div>
 
     <div class="well">

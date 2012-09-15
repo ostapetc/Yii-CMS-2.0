@@ -67,10 +67,7 @@ abstract class Controller extends CController implements ControllerInterface
 
     public function beforeAction($action)
     {
-        $action_name = lcfirst($action->id);
-
-        $this->setTitle($action_name);
-
+        $this->setTitle(lcfirst($action->id));
         return true;
     }
 
@@ -80,6 +77,12 @@ abstract class Controller extends CController implements ControllerInterface
         if (isset(Yii::app()->params->save_site_actions) && Yii::app()->params->save_site_actions)
         {
             MainModule::saveSiteAction();
+        }
+
+        if (!isset($_GET['modal']))
+        {
+            //не работает
+            $this->request->prev_url = $this->request->url;
         }
     }
 
