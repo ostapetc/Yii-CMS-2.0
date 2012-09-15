@@ -96,7 +96,7 @@ span.italic-12 {
 
 
 /*elrte editor fix START*/
-table, tbody, tr{
+.el-dialogform-content table, .el-dialogform-content tbody, .el-dialogform-content tr{
     display: block;
 }
 .el-dialogform-content tr td:first-child{
@@ -123,3 +123,6 @@ table, tbody, tr{
     width: auto;
 }
 /*elrte editor fix END*/
+.light-grey {
+    color: #C0C0C0;
+}

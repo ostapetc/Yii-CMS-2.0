@@ -16,13 +16,13 @@ class User extends ActiveRecord
     const GENDER_WOMAN = "woman";
 
     const SCENARIO_CHANGE_PASSWORD_REQUEST = 'ChangePasswordRequest';
-    const SCENARIO_ACTIVATE_REQUEST        = 'ActivateRequest';
-    const SCENARIO_CHANGE_PASSWORD         = 'ChangePassword';
-    const SCENARIO_REGISTRATION            = 'Registration';
-    const SCENARIO_UPDATE                  = 'Update';
-    const SCENARIO_CREATE                  = 'Create';
-    const SCENARIO_LOGIN                   = 'Login';
-    const SCENARIO_CABINET                 = 'Cabinet';
+    const SCENARIO_ACTIVATE_REQUEST         = 'ActivateRequest';
+    const SCENARIO_UPDATE_SELF_DATA         = 'UpdateSelfData';
+    const SCENARIO_CHANGE_PASSWORD          = 'ChangePassword';
+    const SCENARIO_REGISTRATION             = 'Registration';
+    const SCENARIO_UPDATE                    = 'Update';
+    const SCENARIO_CREATE                    = 'Create';
+    const SCENARIO_LOGIN                     = 'Login';
 
 
     public $password_c;
@@ -104,10 +104,14 @@ class User extends ActiveRecord
                     self::SCENARIO_UPDATE
                 )
             ),
+            //array(),
             array(
                 'name',
                 'required',
-                'on' => array(self::SCENARIO_REGISTRATION)
+                'on' => array(
+                    self::SCENARIO_REGISTRATION,
+                    self::SCENARIO_UPDATE_SELF_DATA
+                )
             ),
             array(
                 'name',
@@ -118,13 +122,15 @@ class User extends ActiveRecord
                 'photo', 'safe', 'on' => array(
                     self::SCENARIO_CREATE,
                     self::SCENARIO_REGISTRATION,
-                    self::SCENARIO_CABINET,
+                    self::SCENARIO_UPDATE_SELF_DATA,
                     self::SCENARIO_UPDATE
                 )
             ),
             array(
                 'name',
-                'RuLatAlphaValidator'
+                'match',
+                'pattern' => '/^[a-zа-я0-9 _]+$/',
+                'message' => t('допустимы русские и латинские буквы, цыфры, пробелы и знак _')
             ),
     //            array(
     //                'gender',
@@ -166,11 +172,13 @@ class User extends ActiveRecord
                 'email'
             ),
             array(
+                'name',
+                'unique'
+            ),
+            array(
                 'email',
                 'unique',
-                'attributeName' => 'email',
-                'className'     => 'User',
-                'on'            => self::SCENARIO_REGISTRATION
+                'on' => self::SCENARIO_REGISTRATION
             ),
             array(
                 'password_c',
@@ -183,13 +191,16 @@ class User extends ActiveRecord
                     self::SCENARIO_CREATE
                 )
             ),
-            //array(
-            //    'birthdate',
-            //    'date',
-            //    'format'  => 'dd.mm.yyyy',
-            //    'message' => 'Верный формат даты (дд.мм.гггг) используйте календарь.',
-            //    'on'      => self::SCENARIO_REGISTRATION
-            //),
+            array(
+                'birthdate',
+                'date',
+                'format'  => 'dd.mm.yyyy',
+                'message' => 'Верный формат даты (дд.мм.гггг) используйте календарь.',
+                'on'      => array(
+                    self::SCENARIO_REGISTRATION,
+                    self::SCENARIO_UPDATE_SELF_DATA
+                )
+            ),
             array(
                 'name',
                 'length',
@@ -236,7 +247,17 @@ class User extends ActiveRecord
                 'remember_me',
                 'safe',
                 'on' => self::SCENARIO_LOGIN
-            )
+            ),
+            array(
+                'name, email, birthdate, gender, status, about_self',
+                'filter',
+                'filter' => 'strip_tags'
+            ),
+//            array(
+//                'about_self',
+//                'safe',
+//                'on' => self::SCENARIO_UPDATE_SELF_DATA
+//            )
         );
     }
 
