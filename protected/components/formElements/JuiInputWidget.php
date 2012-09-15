@@ -8,6 +8,9 @@ abstract class JuiInputWidget extends CJuiInputWidget
 
     public $input_element;
 
+    public $themeUrl = '/css/jqueryUiThemes/';
+    public $theme = 'bootstrap';
+    public $cssFile = 'jquery-ui-1.8.16.custom.css';
 
     public function init()
     {
