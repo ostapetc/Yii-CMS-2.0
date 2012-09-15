@@ -1,6 +1,6 @@
 <?
 
-abstract class WebModule extends CWebModule implements WebModuleInterface
+abstract class WebModule extends CWebModule
 {
     public static $active = true;
 

@@ -78,6 +78,10 @@ class WebUser extends CWebUser
             {
                 return $model->__get($attribute);
             }
+            else
+            {
+                throw $e;
+            }
         }
     }
 }

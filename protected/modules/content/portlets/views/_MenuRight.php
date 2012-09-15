@@ -44,7 +44,7 @@
             <li class="divider"></li>
             <li>
                 <?= CHtml::link('<span class="glyphicon-picture"></span> &nbsp;' . t('Добавить фото-альбом'),
-                array('/media/mediaAlbum/create')) ?>
+                array('/media/mediaAlbum/createUsersAlbum')) ?>
             </li>
             <li class="divider"></li>
             <li>

@@ -18,8 +18,6 @@ return array(
             'data_type' => 'image',
             'title'     => 'Файлы'
         ),
-
-
         'status'   => array(
             'type'  => 'dropdownlist',
             'items' => Page::$status_options

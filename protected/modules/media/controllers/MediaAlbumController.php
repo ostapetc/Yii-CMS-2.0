@@ -4,7 +4,7 @@ class MediaAlbumController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            "create"     => "Создать",
+            "createUsersAlbum" => "Создать",
             "view"       => "Создать",
             "delete"     => "Удалить",
             "update"     => "Редактировать",
@@ -14,15 +14,18 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionCreate()
+    public function actionCreateUsersAlbum()
     {
-        $model = new MediaAlbum;
+        $model = new MediaAlbum(MediaAlbum::SCENARIO_CREATE_USERS);
+        $model->model_id = get_class(Yii::app()->user->model);
+        $model->object_id = Yii::app()->user->model->id;
+
         $form  = new Form('media.AlbumForm', $model);
         $this->performAjaxValidation($model);
 
-        if ($form->submitted('submit') && !$model->validate())
+        if ($form->submitted('submit') && $model->save())
         {
-            $model->save(false);
+
         }
 
         $this->render('create', array('form' => $form));
