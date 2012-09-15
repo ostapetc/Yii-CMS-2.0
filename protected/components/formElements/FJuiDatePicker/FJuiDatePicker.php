@@ -35,15 +35,15 @@ class FJuiDatePicker extends CJuiDatePicker
     
     public function init() {
         parent::init();
-        $this->options = CMap::mergeArray(array(
-                'dateFormat'=>Yii::app()->getLocale()->getDateFormat('short'),
+        $this->options = CMap::mergeArray($this->options, array(
+                'dateFormat'=>'dd-mm-yy',
                 'changeMonth'=>true,
                 'changeYear'=>true,
-        ), $this->options);
+        ));
     }
     
     public function run()
-    {   
+    {
         list($name,$id)=$this->resolveNameID();
 
         if(isset($this->htmlOptions['id']))
@@ -54,7 +54,7 @@ class FJuiDatePicker extends CJuiDatePicker
             $name=$this->htmlOptions['name'];
         else
             $this->htmlOptions['name']=$name;
-            
+
         if ($this->range != '') {
             $this->options['beforeShow'] = <<<EOD
 js:function(input, inst) {
