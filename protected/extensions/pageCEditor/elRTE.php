@@ -34,7 +34,7 @@ class elRTE extends CInputWidget
         $ClientScript->registerCoreScript('jquery');               
         $ClientScript->registerCoreScript("jquery.ui");
         $ClientScript->registerScriptFile("{$this->baseUrl}/js/elrte.min.js");
-        $ClientScript->registerCssFile("{$this->baseUrl}/css/custom-theme/jquery-ui-1.8.16.custom.css");
+        $ClientScript->registerCssFile("/css/jqueryUiBootstrap/jquery-ui-1.8.16.custom.css");
         $ClientScript->registerCssFile("{$this->baseUrl}/css/elrte.min.css");
         $ClientScript->registerCssFile("{$this->baseUrl}/css/elrte-inner.css");       
         $ClientScript->registerCssFile("{$this->baseUrl}/css/elfinder.css");

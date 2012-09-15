@@ -24,6 +24,9 @@ class FJuiDatePicker extends CJuiDatePicker
 {
     public $form_id;
     public $input_element;
+    public $themeUrl = '/css/jqueryUiThemes/';
+    public $theme = 'bootstrap';
+    public $cssFile = 'jquery-ui-1.8.16.custom.css';
 
     /**
     * Range name, specified in case the widget is used with another one
