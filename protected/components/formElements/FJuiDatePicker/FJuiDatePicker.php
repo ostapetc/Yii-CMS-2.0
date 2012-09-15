@@ -39,6 +39,7 @@ class FJuiDatePicker extends CJuiDatePicker
                 'dateFormat'=>'dd.mm.yy',
                 'changeMonth'=>true,
                 'changeYear'=>true,
+                'showMonthAfterYear'=>false
         ));
     }
     
@@ -99,15 +100,23 @@ EOD;
 
         $js = "jQuery('#{$id}').datepicker($options);";
 
-        if (isset($this->language)){
+        if ($this->language!='' && $this->language!='en')
+        {
             $this->registerScriptFile($this->i18nScriptFile);
-            $js = "jQuery('#{$id}').datepicker(jQuery.extend({showMonthAfterYear:false}, jQuery.datepicker.regional['{$this->language}'], {$options}));";
+            $js = "jQuery(function($){
+                jQuery('#{$id}').datepicker(jQuery.extend(jQuery.datepicker.regional['{$this->language}'], {$options}));
+            });";
         }
+
         $js = $js."\n\$('body').ajaxSuccess(function(){".$js."})";
 
         $cs = Yii::app()->getClientScript();
-        $cs->registerScript(__CLASS__,     $this->defaultOptions?'jQuery.datepicker.setDefaults('.CJavaScript::encode($this->defaultOptions).');':'');
-        $cs->registerScript(__CLASS__.'#'.$id, $js);
+        if (isset($this->defaultOptions))
+        {
+            $this->registerScriptFile($this->i18nScriptFile);
+            $cs->registerScript(__CLASS__, 	$this->defaultOptions!==null?'jQuery.datepicker.setDefaults('.CJavaScript::encode($this->defaultOptions).');':'');
+        }
 
+        $cs->registerScript(__CLASS__.'#'.$id, $js);
     }
 }
