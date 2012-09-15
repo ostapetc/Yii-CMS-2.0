@@ -110,6 +110,9 @@ class Page extends ActiveRecord
                 'filter' => 'strip_tags'
             ),
             array(
+                'gallery', 'safe',
+            ),
+            array(
                 'id, title, url, text, status, date_create', 'safe',
                 'on'=> 'search'
             ),

@@ -10,7 +10,7 @@ return array(
     ),
     'elements' => array(
         'files' => array(
-            'type'      => 'file_uploader',
+            'type'      => 'uploader',
             'data_type' => 'image',
             'title'     => 'Файлы'
         ),

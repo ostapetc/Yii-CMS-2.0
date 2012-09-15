@@ -1,17 +1,17 @@
 <?
 return array(
-    'activeForm' => array(
+    'activeForm'           => array(
         'id'            => 'album-form',
     ),
-    'elements' => array(
+    'elements'             => array(
         'title'    => array(
             'type' => 'text'
         ),
-        'descr' => array(
+        'descr'    => array(
             'type'  => 'text',
         ),
-        'files' => array(
-            'type' =>'file_uploader',
+        'files'    => array(
+            'type'      => 'uploader',
             'data_type' => 'image',
             'title'     => 'Файлы'
         )
