@@ -73,7 +73,7 @@ class Page extends ActiveRecord
             parent::behaviors(),
             array(
                  'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 /*'FileManager' => array(
+                 'FileManager' => array(
                      'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
                      'tags' => array(
                          'gallery' => array(
@@ -81,7 +81,7 @@ class Page extends ActiveRecord
                              'data_type' => 'image'
                          )
                      )
-                 ),*/
+                 ),
                 'SportRel' => array(
                     'class' => 'application.modules.content.components.activeRecordBehaviors.SportRelBehavior'
                 )
@@ -108,6 +108,9 @@ class Page extends ActiveRecord
             array(
                 'title, url', 'filter',
                 'filter' => 'strip_tags'
+            ),
+            array(
+                'gallery', 'safe',
             ),
             array(
                 'id, title, url, text, status, date_create', 'safe',
@@ -208,7 +211,7 @@ class Page extends ActiveRecord
 
     public function attributeLabels()
     {
-        return array_merge(
+        return CMap::mergeArray(
             parent::attributeLabels(),
             array(
                 'sections_ids' => t('Разделы'),

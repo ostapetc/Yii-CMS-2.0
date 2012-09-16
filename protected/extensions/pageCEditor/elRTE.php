@@ -32,12 +32,12 @@ class elRTE extends CInputWidget
 
         $ClientScript = Yii::app()->getClientScript();        
         $ClientScript->registerCoreScript('jquery');               
-        $ClientScript->registerScriptFile("{$this->baseUrl}/js/jquery-ui-1.8.13.custom.min.js");
-        $ClientScript->registerScriptFile("{$this->baseUrl}/js/elrte.full.js");             
-        $ClientScript->registerCssFile("{$this->baseUrl}/css/smoothness/jquery-ui-1.8.13.custom.css");
+        $ClientScript->registerCoreScript("jquery.ui");
+        $ClientScript->registerScriptFile("{$this->baseUrl}/js/elrte.min.js");
+        $ClientScript->registerCssFile("/css/jqueryUiBootstrap/jquery-ui-1.8.16.custom.css");
         $ClientScript->registerCssFile("{$this->baseUrl}/css/elrte.min.css");
         $ClientScript->registerCssFile("{$this->baseUrl}/css/elrte-inner.css");       
-        $ClientScript->registerCssFile("{$this->baseUrl}/css/elfinder.css");          
+        $ClientScript->registerCssFile("{$this->baseUrl}/css/elfinder.css");
         $ClientScript->registerScriptFile("{$this->baseUrl}/js/elfinder.full.js");
 
         if ( isset($this->lang) && $this->lang != 'en')

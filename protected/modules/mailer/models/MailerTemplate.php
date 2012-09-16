@@ -72,7 +72,7 @@ class MailerTemplate extends ActiveRecord
 
     public function attributeLabels()
     {
-        return array_merge(
+        return CMap::mergeArray(
             parent::attributeLabels(),
             array(
                 'body' => 'Содержание письма'

@@ -39,7 +39,7 @@
 ~~~
 [php]
 'files' => array(                  //здесь files - имя relaion, которое вы задали в модели
-    'type'      => 'file_uploader',
+    'type'      => 'uploader',
     'data_type' => 'any',           //допустимые форматы файлов для загрузки. any|document|image|sound|video
     'title'     => 'Фото объектов',
     'tag'       => 'files'         //здесь тоже

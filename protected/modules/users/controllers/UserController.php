@@ -10,15 +10,16 @@ class UserController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            "login"                  => "Авторизация",
-            "logout"                 => "Выход",
-            "view"                   => "Страница пользователя",
-            "edit"                   => "Редактирование личных данных",
-            "registration"           => "Регистрация",
-            "activateAccount"        => "Активация аккаунта",
-            "activateAccountRequest" => "Запрос на активацию аккаунта",
-            "changePassword"         => "Смена пароля",
-            "changePasswordRequest"  => "Запрос на смену пароля",
+            "login"                  => t("Авторизация"),
+            "logout"                 => t("Выход"),
+            "view"                   => t("Страница пользователя"),
+            "edit"                   => t("Редактирование личных данных"),
+            "registration"           => t("Регистрация"),
+            "activateAccount"        => t("Активация аккаунта"),
+            "activateAccountRequest" => t("Запрос на активацию аккаунта"),
+            "changePassword"         => t("Смена пароля"),
+            "changePasswordRequest"  => t("Запрос на смену пароля"),
+            "updateSelfData"         => t("Редактирование личных данных")
         );
     }
 
@@ -27,7 +28,7 @@ class UserController extends ClientController
     {
         return array(
             array(
-                'actions'  => array('view'),
+                'actions'  => array('view', 'updateSelfData'),
                 'sidebars' => array(
                     array(
                         'widget',
@@ -47,12 +48,19 @@ class UserController extends ClientController
     {
         return array(
             array(
-                'label' => t('Активировать аккаунт'),
-                'url'   => array('/users/user/activateAccountRequest')
+                'label'   => t('Активировать аккаунт'),
+                'url'     => array('/users/user/activateAccountRequest'),
+                'visible' => Yii::app()->user->isGuest
             ),
             array(
-                'label' => t('Забыли пароль?'),
-                'url'   => array('/users/user/ChangePasswordRequest')
+                'label'   => t('Забыли пароль?'),
+                'url'     => array('/users/user/ChangePasswordRequest'),
+                'visible' => Yii::app()->user->isGuest,
+            ),
+            array(
+                'label'   => t('Редактировать личные данные'),
+                'url'     => array("/users/user/updateSelfData"),
+                'visible' => !Yii::app()->user->isGuest
             )
         );
     }
@@ -312,20 +320,16 @@ class UserController extends ClientController
         {
             if (strtotime($user->password_recover_date) + 24 * 3600 > time())
             {
-                if (isset($_POST['User']))
+                if ($form->submited())
                 {
-                    $model->attributes = $_POST['User'];
-                    if ($model->validate())
-                    {
-                        $user->password_recover_code = null;
-                        $user->password_recover_date = null;
-                        $user->password              = md5($_POST['User']['password']);
-                        $user->save();
+                    $user->password_recover_code = null;
+                    $user->password_recover_date = null;
+                    $user->password              = md5($_POST['User']['password']);
+                    $user->save();
 
-                        Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
+                    Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
 
-                        $this->redirect('/login');
-                    }
+                    $this->redirect('/login');
                 }
             }
             else
@@ -354,19 +358,27 @@ class UserController extends ClientController
         ));
     }
 
-    public function actionEdit($userId)
+    public function actionUpdateSelfData()
     {
-        $this->layout = '//layouts/main';
+        if (Yii::app()->user->isGuest)
+        {
+            $this->redirect(array('/users/user/login'));
+        }
 
-        $user = $this->loadModel($userId);
-        $form = new Form('users.CabinetForm', $user);
-        $user->scenario = User::SCENARIO_CABINET;
+        $user = $this->loadModel(Yii::app()->user->id);
+
+        $form = new Form('users.SelfDataForm', $user);
+        $user->scenario = User::SCENARIO_UPDATE_SELF_DATA;
 
         $this->performAjaxValidation($user);
         if ($form->submitted() && $user->save())
         {
-            $this->redirect($this->createUrl('view', array('id' => $userId)));
+            $this->redirect($user->url);
         }
-        $this->render('edit', array('model' => $user, 'form' => $form));
+
+        $this->render('updateSelfData', array(
+            'model' => $user,
+            'form' => $form
+        ));
     }
 }

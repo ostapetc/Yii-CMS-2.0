@@ -81,7 +81,8 @@ abstract class ActiveRecord extends CActiveRecord
 
     public function value($attribute)
     {
-        $method_name = lcfirst(Yii::app()->text->underscoreToCamelcase($attribute)) . 'Value';
+        $method_name = 'get' . ucfirst(Yii::app()->text->underscoreToCamelcase($attribute)) . 'Value';
+
         if (method_exists($this, $method_name))
         {
             return $this->$method_name();
@@ -388,15 +389,4 @@ abstract class ActiveRecord extends CActiveRecord
 
         return Yii::app()->createUrl("/$module/$model/$action", $params);
     }
-
-
-    public function fetchScalarByAttributes($attributes, $field, $condition='', $params=array())
-    {
-        $model = $this->findByAttributes($attributes, $condition, $params);
-        if ($model)
-        {
-            return $model->$field;
-        }
-    }
-
 }

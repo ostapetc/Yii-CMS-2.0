@@ -1,15 +1,14 @@
 <div class="user_albums">
     <?
-    if ($user->id == Yii::app()->user->id)
+    if ($is_my)
     {
-        echo $form->toModalWindow('Создать новый альбом', array(
-            'callback' => 'function ($form, data) {
-                $.fn.yiiListView.update("albums");
-            }'
+        echo CHtml::link(t('Создать новый альбом'), array('/media/mediaAlbum/createUsers'), array(
+            'class'      => 'modal-link',
+            'data-title' => 'Создание нового фото-альбома'
         ));
     }
     $this->widget('ListView', array(
-        'id'=>'albums',
+        'id'=>'user_albums',
         'template' => "{pager}\n{items}\n{pager}",
         'dataProvider' => Yii::app()->getModule('media')->getAlbumsDataProvider($user, array(
             'criteria' => array(

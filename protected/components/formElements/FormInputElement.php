@@ -19,7 +19,8 @@ class FormInputElement extends CFormInputElement
         'markdown'          => 'EMarkitupWidget',
         'autocomplete'      => 'zii.widgets.jui.CAutoComplete',
         'meta_tags'         => 'main.portlets.MetaTags',
-        'file_uploader'     => 'media.portlets.Uploader',
+        'uploader'          => 'media.portlets.Uploader',
+        'uploader_modal'    => 'media.portlets.Uploader',
         'tags'              => 'TagsInput',
     );
 
@@ -69,14 +70,13 @@ class FormInputElement extends CFormInputElement
     {
         switch ($this->type)
         {
-            case 'file_uploader':
-                $id    = isset($this->attributes['id']) ? $this->attributes['id'] : 'uploader' . $this->name;
-                $title = isset($this->attributes['title']) ? $this->attributes['title'] : 'Файлы';
+            case 'uploader':
+                $id = isset($this->attributes['id']) ? $this->attributes['id'] : 'uploader' . $this->name;
+                return array('id' => $id, 'as_modal' => false);
 
-                return array(
-                    'id'          => $id,
-                    'title'       => $title
-                );
+            case 'uploader_modal':
+                $id = isset($this->attributes['id']) ? $this->attributes['id'] : 'uploader' . $this->name;
+                return array('id' => $id);
 
             case 'date':
                 return array(
@@ -120,7 +120,8 @@ class FormInputElement extends CFormInputElement
     {
         if (in_array($this->type, array(
             'meta_tags',
-            'file_uploader'
+            'uploader',
+            'uploader_modal',
         ))
         )
         {

@@ -24,6 +24,9 @@ class FJuiDatePicker extends CJuiDatePicker
 {
     public $form_id;
     public $input_element;
+    public $themeUrl = '/css/jqueryUiThemes/';
+    public $theme = 'bootstrap';
+    public $cssFile = 'jquery-ui-1.8.16.custom.css';
 
     /**
     * Range name, specified in case the widget is used with another one
@@ -35,15 +38,16 @@ class FJuiDatePicker extends CJuiDatePicker
     
     public function init() {
         parent::init();
-        $this->options = CMap::mergeArray(array(
-                'dateFormat'=>Yii::app()->getLocale()->getDateFormat('short'),
+        $this->options = CMap::mergeArray($this->options, array(
+                'dateFormat'=>'dd.mm.yy',
                 'changeMonth'=>true,
                 'changeYear'=>true,
-        ), $this->options);
+                'showMonthAfterYear'=>false
+        ));
     }
     
     public function run()
-    {   
+    {
         list($name,$id)=$this->resolveNameID();
 
         if(isset($this->htmlOptions['id']))
@@ -54,7 +58,7 @@ class FJuiDatePicker extends CJuiDatePicker
             $name=$this->htmlOptions['name'];
         else
             $this->htmlOptions['name']=$name;
-            
+
         if ($this->range != '') {
             $this->options['beforeShow'] = <<<EOD
 js:function(input, inst) {
@@ -99,15 +103,23 @@ EOD;
 
         $js = "jQuery('#{$id}').datepicker($options);";
 
-        if (isset($this->language)){
+        if ($this->language!='' && $this->language!='en')
+        {
             $this->registerScriptFile($this->i18nScriptFile);
-            $js = "jQuery('#{$id}').datepicker(jQuery.extend({showMonthAfterYear:false}, jQuery.datepicker.regional['{$this->language}'], {$options}));";
+            $js = "jQuery(function($){
+                jQuery('#{$id}').datepicker(jQuery.extend(jQuery.datepicker.regional['{$this->language}'], {$options}));
+            });";
         }
+
         $js = $js."\n\$('body').ajaxSuccess(function(){".$js."})";
 
         $cs = Yii::app()->getClientScript();
-        $cs->registerScript(__CLASS__,     $this->defaultOptions?'jQuery.datepicker.setDefaults('.CJavaScript::encode($this->defaultOptions).');':'');
-        $cs->registerScript(__CLASS__.'#'.$id, $js);
+        if (isset($this->defaultOptions))
+        {
+            $this->registerScriptFile($this->i18nScriptFile);
+            $cs->registerScript(__CLASS__, 	$this->defaultOptions!==null?'jQuery.datepicker.setDefaults('.CJavaScript::encode($this->defaultOptions).');':'');
+        }
 
+        $cs->registerScript(__CLASS__.'#'.$id, $js);
     }
 }

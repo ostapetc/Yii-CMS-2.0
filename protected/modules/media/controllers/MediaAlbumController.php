@@ -4,43 +4,44 @@ class MediaAlbumController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            "create"     => "Создать",
-            "view"       => "Создать",
-            "delete"     => "Удалить",
-            "update"     => "Редактировать",
-            "manage"     => "Управление альбомами",
-            "userAlbums" => "Альбомы пользователя",
+            "createUsers"      => "Создать",
+            "view"             => "Создать",
+            "delete"           => "Удалить",
+            "update"           => "Редактировать",
+            "manage"           => "Управление альбомами",
+            "userAlbums"       => "Альбомы пользователя",
+            "my"               => "Мои Альбомы",
         );
     }
 
 
-    public function actionCreate()
+    public function actionCreateUsers()
     {
-        $model = new MediaAlbum;
-        $form  = new Form('media.AlbumForm', $model);
+        $model            = new MediaAlbum(MediaAlbum::SCENARIO_CREATE_USERS);
+        $user             = Yii::app()->user->model;
+        $model->model_id  = get_class($user);
+        $model->object_id = $user->id;
 
-        if ($form->submitted('submit') && !$model->validate())
+        $form = new Form('media.AlbumForm', $model);
+        $this->performAjaxValidation($model);
+        if ($form->submitted() && $model->save())
         {
-            $this->performAjaxValidation($model);
+            $this->redirect('my');
         }
 
-        if ($model->userCanEdit())
-        {
-            $model->save(false);
-        }
-        else
-        {
-            $this->forbidden();
-        }
+        $this->render('createUsers', array(
+            'user'  => $user,
+            'form'  => $form,
+        ));
     }
 
 
     public function actionView($id)
     {
-        $this->layout = '//layouts/middle';
-        $model = $this->loadModel($id);
-        $this->page_title = 'Альбом: '.$model->title;
-        $form  = new Form('Media.UploadFilesForm', $model);
+//        $this->layout     = '//layouts/middle';
+        $model            = $this->loadModel($id);
+        $this->page_title = 'Альбом: ' . $model->title;
+        $form             = new Form('Media.UploadFilesForm', $model);
         $this->render('view', array(
             'model' => $model,
             'form'  => $form
@@ -73,15 +74,21 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionUserAlbums($userId)
+    public function actionMy()
     {
-        $this->layout = '//layouts/middle';
-        $user         = User::model()->findByPk($userId);
-        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $form         = new Form('media.AlbumForm', $user->getNewAttachedModel('MediaAlbum'));
-        $this->render('userAlbums', array(
-            'user' => $user,
-            'form' => $form
-        ));
+        $user = User::model()->findByPkOr404(Yii::app()->user->model->id);
+        $this->render('userAlbums', array('user' => $user, 'is_my' => true));
     }
+
+    public function actionUserAlbums($user_id = null)
+    {
+        if ($user_id == null || Yii::app()->user->model->id == $user_id)
+        {
+            $this->redirect('my');
+        }
+        $user             = User::model()->findByPkOr404($user_id);
+        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
+        $this->render('userAlbums', array('user' => $user, 'is_my' => false));
+    }
+
 }

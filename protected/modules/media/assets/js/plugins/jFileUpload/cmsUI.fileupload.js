@@ -76,7 +76,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                     type:self.data('editable-type'),
                     rows:3,
 //                    cols:16,
-                    width: '230px',
+                    width: '220px',
                     onblur:'ignore',
                     submit:'<i class="icon-ok-btn"></i>',
                     cancel:'<i class="icon-cancel-btn"></i>',

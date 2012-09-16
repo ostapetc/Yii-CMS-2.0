@@ -7,18 +7,18 @@
 Списоки алиасов ядра прописываются в файлах: `FormInputElement`
 
 Алиас используемый в форме | Реальный виджет
----------------------------|---------------------------------------------
-`checkbox`                 | `IphoneCheckbox`
-`alias`                    | `AliasField`
-`captcha`                  | `Captcha`
-`all_in_one_input`         | `EMultiSelect`
-`multi_select`             | `AllInOneInput`
-`multi_autocomplete`       | `MultiAutocomplete`
-`date`                     | `FJuiDatePicker`
-`editor`                   | `TinyMCE`
-`autocomplete`             | `zii.widgets.jui.CAutoComplete`
-`meta_tags`                | `main.portlets.MetaTags`
-`file_uploader`             | `media.portlets.Uploader`
+------------------------------|---------------------------------------------
+`checkbox`                    | `IphoneCheckbox`
+`alias`                       | `AliasField`
+`captcha`                     | `Captcha`
+`all_in_one_input`            | `EMultiSelect`
+`multi_select`                | `AllInOneInput`
+`multi_autocomplete`          | `MultiAutocomplete`
+`date`                        | `FJuiDatePicker`
+`editor`                      | `TinyMCE`
+`autocomplete`                | `zii.widgets.jui.CAutoComplete`
+`meta_tags`                   | `main.portlets.MetaTags`
+`uploader` - `uploader_modal` | `media.portlets.Uploader`
 
 
 ##Общий список виджетов

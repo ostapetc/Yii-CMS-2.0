@@ -4,7 +4,7 @@ class PageController extends ClientController
 {
     public function filters()
     {
-        return array_merge(
+        return CMap::mergeArray(
             parent::filters(),
             array(
                 array(
@@ -134,6 +134,7 @@ class PageController extends ClientController
     {
         $model = new Page(ActiveRecord::SCENARIO_CREATE);
         $form  = new Form('content.PageCForm', $model);
+        $this->performAjaxValidation($model);
 
         if ($form->submitted() && $model->save())
         {

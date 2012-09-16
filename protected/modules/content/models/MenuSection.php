@@ -60,7 +60,7 @@ class MenuSection extends ActiveRecord
 
     public function behaviors()
     {
-        return array_merge(parent::behaviors(), array(
+        return CMap::mergeArray(parent::behaviors(), array(
             'NestedSet'  => array(
                 'class'          => 'application.components.activeRecordBehaviors.NestedSetBehavior',
                 'leftAttribute'  => 'left',

@@ -1,26 +1,21 @@
 <?
 return array(
-    'enctype'    => 'multipart/form-data',
-    'action' => '/media/mediaAlbum/create',
-    'activeForm' => array(
+    'action' => '/media/mediaAlbum/createUsers',
+    'activeForm'           => array(
         'id'            => 'album-form',
-        'clientOptions' => array(
-            'validateOnSubmit' => true,
-        ),
     ),
-    'elements' => array(
+    'elements'             => array(
         'title'    => array(
             'type' => 'text'
         ),
-        'descr' => array(
+        'descr'    => array(
             'type'  => 'text',
         ),
-        'model_id' => array(
-            'type'  => 'hidden',
-        ),
-        'object_id' => array(
-            'type'  => 'hidden',
-        ),
+        'files'    => array(
+            'type'      => 'uploader',
+            'data_type' => 'image',
+            'title'     => 'Файлы'
+        )
     ),
     'buttons'              => array(
         'submit' => array(
