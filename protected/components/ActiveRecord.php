@@ -39,9 +39,6 @@ abstract class ActiveRecord extends CActiveRecord
             'MaxMin'         => array(
                 'class' => 'application.components.activeRecordBehaviors.MaxMinBehavior'
             ),
-            'RawFind'         => array(
-                'class' => 'application.components.activeRecordBehaviors.RawFindBehavior'
-            ),
         );
     }
 
@@ -388,5 +385,26 @@ abstract class ActiveRecord extends CActiveRecord
         $module = AppManager::getModelModule($model);
 
         return Yii::app()->createUrl("/$module/$model/$action", $params);
+    }
+
+
+    public function findByPkOr404($pk,$condition='',$params=array())
+    {
+        $model = $this->findByPk($pk, $condition, $params);
+        return $model ? $model : Yii::app()->controller->pageNotFound();
+    }
+
+
+    public function findByAttributesOr404($attributes,$condition='',$params=array())
+    {
+        $model = $this->findByAttributes($attributes, $condition, $params);
+        return $model ? $model : Yii::app()->controller->pageNotFound();
+    }
+
+
+    public function findBySqlOr404($sql,$params=array())
+    {
+        $model = $this->findBySql($sql,$params);
+        return $model ? $model : Yii::app()->controller->pageNotFound();
     }
 }

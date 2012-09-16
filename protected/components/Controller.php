@@ -103,7 +103,7 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
-    protected function pageNotFound()
+    public function pageNotFound()
     {
         throw new CHttpException(404, t('Страница не найдена!'));
     }
@@ -115,7 +115,7 @@ abstract class Controller extends CController implements ControllerInterface
         {
             $msg = t('Запрещено!');
         }
-    
+
         throw new CHttpException(403, $msg);
     }
 
@@ -134,7 +134,7 @@ abstract class Controller extends CController implements ControllerInterface
 
     public static function msg($msg, $type)
     {
-        return CHtml::tag('div', array('class'=>"alert alert-{$type}"), $msg);
+        return CHtml::tag('div', array('class'=> "alert alert-{$type}"), $msg);
     }
 
 
@@ -147,6 +147,7 @@ abstract class Controller extends CController implements ControllerInterface
         }
     }
 
+
     public function setMetaTags($modelOrConfig)
     {
         if ($modelOrConfig instanceof CActiveRecord)
@@ -158,9 +159,9 @@ abstract class Controller extends CController implements ControllerInterface
             if ($meta_tag)
             {
                 $meta_tag = array(
-                    'title' => $meta_tag->title,
+                    'title'       => $meta_tag->title,
                     'description' => $meta_tag->description,
-                    'keywords' => $meta_tag->keywords
+                    'keywords'    => $meta_tag->keywords
                 );
             }
         }
@@ -182,40 +183,31 @@ abstract class Controller extends CController implements ControllerInterface
      * Возвращает модель по атрибуту и удовлетворяющую скоупам,
      * или выбрасывает 404
      *
-     * @param string     $class  имя класса модели
-     * @param int|string $value  значение атрибута
-     * @param array      $scopes массив скоупов
-     * @param string     $attribute
+     * @param string           $class        имя класса модели
+     * @param int|string|array $valueOrArray значение атрибута
+     * @param array            $scopes       массив скоупов
      *
      * @return CActiveRecord
      */
-    public function loadModel($value, $scopes = array(), $attribute = null)
+    public function loadModel($valueOrArray, $scopes = array())
     {
-        $model = CActiveRecord::model($this->getModelClass());
+        $model = ActiveRecord::model($this->getModelClass());
 
         foreach ($scopes as $scope)
         {
             $model->$scope();
         }
 
-        if ($attribute === null)
+        if (is_array($valueOrArray))
         {
-            $model = $model->findByPk($value);
+            return $model->findByAttributesOr404($valueOrArray);
         }
         else
         {
-            $model = $model->findByAttributes(array(
-                $attribute => $value
-            ));
+            return $model->findByPkOr404($valueOrArray);
         }
-
-        if ($model === null)
-        {
-            $this->pageNotFound();
-        }
-
-        return $model;
     }
+
 
     public function isRootUrl($url = null)
     {
@@ -228,21 +220,23 @@ abstract class Controller extends CController implements ControllerInterface
         return isset($languages[trim($url, "/")]);
     }
 
+
     /**
      * add profile information to std widget call
      *
      * @param string $className
-     * @param array $properties
-     * @param bool $captureOutput
+     * @param array  $properties
+     * @param bool   $captureOutput
+     *
      * @return mixed
      */
-    public function widget($className,$properties=array(),$captureOutput=false)
+    public function widget($className, $properties = array(), $captureOutput = false)
     {
-        $profile_id = 'Widget::'.$className;
+        $profile_id = 'Widget::' . $className;
 
         //profile widget
         Yii::beginProfile($profile_id);
-        $res = parent::widget($className,$properties,true);
+        $res = parent::widget($className, $properties, true);
         Yii::endProfile($profile_id);
 
         if ($captureOutput)
