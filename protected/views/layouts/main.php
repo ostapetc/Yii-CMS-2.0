@@ -78,7 +78,7 @@
             </div>
             <!--/span-->
             <div class="span4 sidebar-manager">
-                <?= $this->widget('main.portlets.SidebarManager') ?>
+                <? $this->widget('main.portlets.SidebarManager') ?>
             </div>
         </div>
         <hr>

@@ -11,6 +11,7 @@
             'sortableAction' => '/media/mediaFile/savePriority',
             'existFilesAction' => '/media/mediaFile/existFiles'
         ));
+
         Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
                 $.fn.yiiListView.update('photos');
         });");

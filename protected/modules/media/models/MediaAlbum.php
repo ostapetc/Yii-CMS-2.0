@@ -42,6 +42,10 @@ class MediaAlbum extends ActiveRecord
         self::STATUS_DELETED => 'удален'
     );
 
+    public static $users_page_size = array(
+        'width' => 135,
+        'height' => 100
+    );
 
     public function name()
     {

@@ -236,27 +236,18 @@ abstract class Controller extends CController implements ControllerInterface
 
         //profile widget
         Yii::beginProfile($profile_id);
-        $res = parent::widget($className, $properties, true);
+        $res = parent::widget($className, $properties, $captureOutput);
         Yii::endProfile($profile_id);
-
-        if ($captureOutput)
-        {
-            return $res;
-        }
-        else
-        {
-            echo $res;
-        }
+        return $res;
     }
 
 
-    public function render($route, $params = array(), $return = false)
+    public function render($view, $data = null, $return = false)
     {
         if (Yii::app()->request->getParam('modal'))
         {
             $this->layout = false;
         }
-
-        return parent::render($route, $params, $return);
+        return parent::render($view, $data, $return);
     }
 }
