@@ -10,16 +10,17 @@ class UserController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            "login"                  => t("Авторизация"),
-            "logout"                 => t("Выход"),
-            "view"                   => t("Страница пользователя"),
-            "edit"                   => t("Редактирование личных данных"),
-            "registration"           => t("Регистрация"),
-            "activateAccount"        => t("Активация аккаунта"),
-            "activateAccountRequest" => t("Запрос на активацию аккаунта"),
-            "changePassword"         => t("Смена пароля"),
-            "changePasswordRequest"  => t("Запрос на смену пароля"),
-            "updateSelfData"         => t("Редактирование личных данных")
+            'login'                  => t('Авторизация'),
+            'logout'                 => t('Выход'),
+            'view'                   => t('Страница пользователя'),
+            'edit'                   => t('Редактирование личных данных'),
+            'registration'           => t('Регистрация'),
+            'activateAccount'        => t('Активация аккаунта'),
+            'activateAccountRequest' => t('Запрос на активацию аккаунта'),
+            'changePassword'         => t('Смена пароля'),
+            'changePasswordRequest'  => t('Запрос на смену пароля'),
+            'updateSelfData'         => t('Редактирование личных данных'),
+            'index'                  => t('Люди')
         );
     }
 
@@ -28,7 +29,10 @@ class UserController extends ClientController
     {
         return array(
             array(
-                'actions'  => array('view', 'updateSelfData'),
+                'actions'  => array(
+                    'view',
+                    'updateSelfData'
+                ),
                 'sidebars' => array(
                     array(
                         'widget',
@@ -37,6 +41,17 @@ class UserController extends ClientController
                     array(
                         'widget',
                         'application.modules.users.portlets.OwnerPageSidebar'
+                    )
+                ),
+            ),
+            array(
+                'actions' => array(
+                    'index'
+                ),
+                'sidebars' => array(
+                    array(
+                        'widget',
+                        'application.modules.users.portlets.UserFilterSidebar'
                     )
                 )
             )
@@ -56,6 +71,11 @@ class UserController extends ClientController
                 'label'   => t('Забыли пароль?'),
                 'url'     => array('/users/user/ChangePasswordRequest'),
                 'visible' => Yii::app()->user->isGuest,
+            ),
+            array(
+                'label'   => t('Мой профиль'),
+                'url'     => array('/users/user/view', 'id' => Yii::app()->user->id),
+                'visible' => !Yii::app()->user->isGuest
             ),
             array(
                 'label'   => t('Редактировать личные данные'),
@@ -379,6 +399,29 @@ class UserController extends ClientController
         $this->render('updateSelfData', array(
             'model' => $user,
             'form' => $form
+        ));
+    }
+
+
+    public function actionIndex()
+    {
+        $model = new User(User::SCENARIO_USER_SEARCH);
+        $model->unsetAttributes();
+
+        if (isset($_GET['User']))
+        {
+            $model->attributes = $_GET['User'];
+        }
+
+        $criteria = new CDbCriteria();
+        $criteria->compare('name', $model->name, true);
+
+        $data_provider = new CActiveDataProvider('User', array(
+            'criteria' => $criteria
+        ));
+
+        $this->render('index', array(
+            'data_provider' => $data_provider
         ));
     }
 }

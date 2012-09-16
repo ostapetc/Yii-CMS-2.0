@@ -43,7 +43,7 @@
             </li>
             <li class="divider"></li>
             <li>
-                <?= CHtml::link('<span class="glyphicon-picture"></span> &nbsp;' . t('Добавить фото-альбом'),
+                <?= CHtml::link('<span class="glyphicon-picture"></span> &nbsp;' . t('Фото-альбомы'),
                 array('/media/mediaAlbum/userAlbums')) ?>
             </li>
             <li class="divider"></li>

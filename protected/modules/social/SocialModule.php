@@ -42,6 +42,8 @@ class SocialModule extends WebModule
     public function routes()
     {
         return array(
+            '/friends/<user_id:\d+>' => '/social/friend/index',
+            '/friends/<user_id:\d+>/<type:in|out>' => '/social/friend/index'
         );
     }
 }

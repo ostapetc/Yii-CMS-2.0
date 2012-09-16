@@ -43,8 +43,13 @@ class MediaAlbum extends ActiveRecord
     );
 
     public static $users_page_size = array(
-        'width' => 135,
+        'width' => 204,
         'height' => 100
+    );
+
+    public static $image_size = array(
+        'width'  => 118,
+        'height' => 50
     );
 
     public function name()

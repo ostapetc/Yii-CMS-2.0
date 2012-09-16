@@ -128,9 +128,15 @@ span.italic-12 {
 }
 
 /*MediaAlbums */
-#user_albums {
-    margin: 10px 0 0 0;
+.image-gallery {
+    margin: 10px 0 0 -10px;
 }
-#user_albums .thumbnails > li{
-    margin-left: 20px;
+.image-gallery li{
+    margin: 0 0 10px 10px;
+}
+
+.devider {
+    border-top: 1px solid #f1f1f1;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

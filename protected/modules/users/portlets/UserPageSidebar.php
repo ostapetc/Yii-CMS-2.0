@@ -10,14 +10,27 @@ class UserPageSidebar extends Portlet
 {
     public function renderContent()
     {
+        $friends_label = "<span class='glyphicon-parents'></span> " . t('Друзья') . ' (' . Friend::userFriendsCount(Yii::app()->user->id) . ')';
+
+        if ($new_friends_count = Friend::userFriendsCount(Yii::app()->user->id, 0))
+        {
+            $friends_label.= CHtml::link(
+                "<span class='badge badge-success'>+" . $new_friends_count . "</span>",
+                array('/social/friend/index', 'user_id' => Yii::app()->user->id, 'type' => 'in'),
+                array(
+                    'title' => t('новые заявки в друзья')
+                )
+            );
+        }
+
         $items = array(
             array(
                 'label' => "<span class='glyphicon-file'></span> " . t('Страницы') . ' (' . Yii::app()->user->pages_count . ')',
                 'url'   => $this->createUrl(''),
             ),
             array(
-                'label' => "<span class='glyphicon-parents'></span> " . t('Друзья') . ' (' . Friend::userFriendsCount(Yii::app()->user->id) . ')',
-                'url'   => $this->createUrl('')
+                'label' => $friends_label,
+                'url'   => $this->createUrl('/social/friend/index', array('user_id' => Yii::app()->user->id))
             ),
             array(
                 'label' => "<span class='glyphicon-star'></span> " . t('Избранное') . ' (' . Yii::app()->user->favorites_count . ')',

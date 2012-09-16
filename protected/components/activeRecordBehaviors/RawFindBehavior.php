@@ -26,7 +26,8 @@ class RawFindBehavior extends ActiveRecordBehavior
             'condition' => $condition,
             'params' => $params
         ));
-        return $owner->getCommandBuilder()->createFindCommand($owner->tableSchema, $owner->dbCriteria)->queryRow();
+        $result = $owner->getCommandBuilder()->createFindCommand($owner->tableSchema, $owner->dbCriteria)->queryRow();
+        return $result ? $result : null;
     }
 
 

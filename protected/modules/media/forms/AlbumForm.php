@@ -11,11 +11,6 @@ return array(
         'descr'    => array(
             'type'  => 'text',
         ),
-        'files'    => array(
-            'type'      => 'uploader',
-            'data_type' => 'image',
-            'title'     => 'Файлы'
-        )
     ),
     'buttons'              => array(
         'submit' => array(

@@ -13,7 +13,29 @@ abstract class ActiveRecord extends CActiveRecord
 
     private $_meta; //full metadata of model
 
+    /**
+     * set by chain method throw404IfNull()
+     * @var bool
+     */
+    protected $_throw404IfNull = false;
+
+    /**
+     * set by chain method asArray()
+     * @var bool
+     */
+    protected $_asArray = false;
+
     abstract public function name();
+
+    /**
+     * @param string $className
+     * @return self
+     */
+    public static function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
+
 
     public function behaviors()
     {
@@ -165,6 +187,9 @@ abstract class ActiveRecord extends CActiveRecord
 
 
     /*SCOPES_____________________________________________________________________________*/
+    /**
+     * @return self
+     */
     public function scopes()
     {
         $alias = $this->getTableAlias();
@@ -177,6 +202,10 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
+    /**
+     * @param $num
+     * @return self
+     */
     public function limit($num)
     {
         $this->getDbCriteria()->mergeWith(array(
@@ -186,7 +215,10 @@ abstract class ActiveRecord extends CActiveRecord
         return $this;
     }
 
-
+    /**
+     * @param $num
+     * @return self
+     */
     public function offset($num)
     {
         $this->getDbCriteria()->mergeWith(array(
@@ -197,6 +229,12 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
+    /**
+     * @param        $row
+     * @param        $values
+     * @param string $operator
+     * @return self
+     */
     public function in($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
@@ -204,13 +242,23 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
+    /**
+     * @param        $row
+     * @param        $values
+     * @param string $operator
+     * @return self
+     */
     public function notIn($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addNotInCondition($row, $values, $operator);
         return $this;
     }
 
-
+    /**
+     * @param $param
+     * @param $value
+     * @return self
+     */
     public function notEqual($param, $value)
     {
         $alias = $this->getTableAlias();
@@ -306,7 +354,7 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function getNewAttachedModel($model_class)
+    public function getAttachedModel($model_class)
     {
         $attach = new $model_class();
         $attach->model_id = get_class($this);
@@ -389,4 +437,120 @@ abstract class ActiveRecord extends CActiveRecord
 
         return Yii::app()->createUrl("/$module/$model/$action", $params);
     }
+
+
+    public function throw404IfNull()
+    {
+        /*
+        if not clone than expression:
+        User::model()->throw404IfNull()->findByPk(Yii::app()->user->model->id);
+        will not working right, because User::model() is reference on object from AR::model cache and
+        Yii::app()->user->model will do User::model() for finding record already with our flag
+        */
+        $clone = clone $this;
+        $clone->_throw404IfNull = true;
+        return $clone;
+    }
+
+    public function asArray()
+    {
+        $clone = clone $this; // please see comments for self::throw404IfNull() about it
+        $clone->_asArray = true;
+        return $clone;
+    }
+
+    /*___________________________________________________________________________________*/
+
+
+    /*find* methods______________________________________________________________________*/
+
+    /**
+     * @param mixed  $pk
+     * @param string $condition
+     * @param array  $params
+     * @return self
+     */
+    public function findByPk($pk,$condition='',$params=array())
+    {
+        $method = $this->_asArray ? 'findByPkRaw' : 'findByPk';
+        $result = parent::$method($pk, $condition, $params);
+
+        if ($this->_throw404IfNull && $result === null)
+        {
+            Yii::app()->controller->pageNotFound();
+        }
+        return $result;
+    }
+
+    /**
+     * @param array  $attributes
+     * @param string $condition
+     * @param array  $params
+     * @return self
+     */
+    public function findByAttributes($attributes,$condition='',$params=array())
+    {
+        $method = $this->_asArray ? 'findByAttributesRaw' : 'findByAttributes';
+        $result = parent::$method($attributes, $condition, $params);
+
+        if ($this->_throw404IfNull && $result === null)
+        {
+            Yii::app()->controller->pageNotFound();
+        }
+        return $result;
+    }
+
+    /**
+     * @param string $condition
+     * @param array  $params
+     * @return self[]
+     */
+    public function find($condition='',$params=array())
+    {
+        $method = $this->_asArray ? 'findRaw' : 'find';
+        return parent::$method($condition, $params);
+    }
+
+    /**
+     * @param string $condition
+     * @param array  $params
+     * @return self[]
+     */
+    public function findAll($condition='',$params=array())
+    {
+        $method = $this->_asArray ? 'findAllRaw' : 'findAll';
+        return parent::$method($condition, $params);
+    }
+
+    /**
+     * @param mixed  $pk
+     * @param string $condition
+     * @param array  $params
+     * @return self[]
+     */
+    public function findAllByPk($pk,$condition='',$params=array())
+    {
+        $method = $this->_asArray ? 'findAllByPkRaw' : 'findAllByPk';
+        return parent::$method($pk, $condition, $params);
+    }
+
+    /**
+     * @param array  $attributes
+     * @param string $condition
+     * @param array  $params
+     * @return self[]
+     */
+    public function findAllByAttributes($attributes,$condition='',$params=array())
+    {
+        $method = $this->_asArray ? 'findAllByAttributesRaw' : 'findAllByAttributes';
+        return parent::$method($attributes, $condition, $params);
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->_asArray = $this->_throw404IfNull = false;
+    }
+
+
 }

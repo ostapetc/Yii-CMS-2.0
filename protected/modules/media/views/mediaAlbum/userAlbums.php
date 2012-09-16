@@ -17,7 +17,10 @@
         )),
         'itemView' => '_album',
         'itemsTagName' => 'ul',
-        'itemsCssClass' => 'thumbnails'
+        'itemsCssClass' => 'thumbnails',
+        'htmlOptions' => array(
+            'class' => 'image-gallery'
+        )
     ));
     ?>
 </div>

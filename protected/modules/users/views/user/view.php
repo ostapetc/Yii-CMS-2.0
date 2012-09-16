@@ -1,26 +1,11 @@
 <?
 $cs = Yii::app()->clientScript->registerCssFile('/css/site/user.css');
-
-switch (true)
-{
-    case $model->rating == 0:
-        $rating_class = '';
-        break;
-
-    case $model->rating > 0:
-        $rating_class = 'label-success';
-        break;
-
-    case $model->rating < 0:
-        $rating_class = 'label-important';
-        break;
-}
 ?>
 
 <div class='profile-head'>
     <?= $model->getPhotoHtml(User::PHOTO_SIZE_BIG); ?>
     <h1><?= $model->name ?></h1>
-    <div class="label <?= $rating_class ?>">рейтинг <?= $model->rating ?></div>
+    <div class="label <?= $model->rating_css_class ?>">рейтинг <?= $model->rating ?></div>
 </div>
 
 <br clear="all" />

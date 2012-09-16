@@ -38,8 +38,7 @@ class MediaAlbumController extends ClientController
 
     public function actionView($id)
     {
-//        $this->layout     = '//layouts/middle';
-        $model            = $this->loadModel($id);
+        $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
         $this->render('view', array(
@@ -76,7 +75,7 @@ class MediaAlbumController extends ClientController
 
     public function actionMy()
     {
-        $user = User::model()->findByPkOr404(Yii::app()->user->model->id);
+        $user = User::model()->throw404IfNull()->findByPk(Yii::app()->user->model->id);
         $this->render('userAlbums', array('user' => $user, 'is_my' => true));
     }
 
@@ -86,7 +85,7 @@ class MediaAlbumController extends ClientController
         {
             $this->redirect('my');
         }
-        $user             = User::model()->findByPkOr404($user_id);
+        $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $this->render('userAlbums', array('user' => $user, 'is_my' => false));
     }
