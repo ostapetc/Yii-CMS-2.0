@@ -40,6 +40,11 @@ class User extends ActiveRecord
     }
 
 
+    /**
+     * @param string $className
+     *
+     * @return User
+     */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);

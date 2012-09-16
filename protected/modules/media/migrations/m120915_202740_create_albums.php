@@ -1,6 +1,6 @@
 <?php
 
-class m120915_202739_create_albums extends DbMigration
+class m120915_202740_create_albums extends DbMigration
 {
     public function up()
     {
@@ -14,7 +14,7 @@ class m120915_202739_create_albums extends DbMigration
                       `title` varchar(50) DEFAULT NULL COMMENT 'Название',
                       `descr` text COMMENT 'Описание',
                       `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создан',
-                      `sort` int(11) DEFAULT NULL,
+                      `order` int(11) DEFAULT NULL,
                       PRIMARY KEY (`id`)
                     ) ENGINE=InnoDb DEFAULT CHARSET=utf8;
                 ");

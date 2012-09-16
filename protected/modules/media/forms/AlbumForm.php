@@ -1,5 +1,6 @@
 <?
 return array(
+    'action' => '/media/mediaAlbum/createUsers',
     'activeForm'           => array(
         'id'            => 'album-form',
     ),
