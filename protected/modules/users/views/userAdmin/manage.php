@@ -6,4 +6,3 @@ $this->widget('AdminGridView', array(
     'dataProvider' => $model->search(),
     'filter'       => $model
 ));
-?>
