@@ -56,17 +56,17 @@ class Friend extends ActiveRecord
             ),
             array(
                 'user_a_id',
-                'uniqueFriendship'
+                'uniqueFriendshipValidator'
             ),
             array(
                 'user_a_id',
-                'rightFriendship'
+                'rightFriendshipValidator'
             ),
         );
     }
 
 
-    public function uniqueFriendship($attr)
+    public function uniqueFriendshipValidator($attr)
     {
         $status = self::getUsersStatus($this->user_a_id, $this->user_b_id);
         if ($status != self::USERS_STATUS_NOT_FRIENDS)
@@ -76,7 +76,7 @@ class Friend extends ActiveRecord
     }
 
 
-    public function rightFriendship($attr)
+    public function rightFriendshipValidator($attr)
     {
         if ($this->user_a_id == $this->user_b_id)
         {
@@ -110,14 +110,72 @@ class Friend extends ActiveRecord
     }
 
 
-    public static function userFriendsCount($user_id)
+    public static function userFriendsCount($user_id, $is_confirmed = 1)
     {
         $sql = "SELECT COUNT(*)
                        FROM friends
-                       WHERE user_a_id = {$user_id} OR
-                             user_b_id = {$user_id}";
+                       WHERE (
+                                user_a_id = {$user_id} OR
+                                user_b_id = {$user_id}
+                              ) AND
+                              is_confirmed = {$is_confirmed}";
 
         return Yii::app()->db->createCommand($sql)->queryScalar();
+    }
+
+
+    public static function getIncomingFriendsIds($user_id, $is_confirmed = 0)
+    {
+        $sql = "SELECT user_a_id
+                       FROM " . self::model()->tableName() . "
+                       WHERE user_b_id = {$user_id} AND
+                       is_confirmed = {$is_confirmed}";
+
+        $friends_ids = Yii::app()->db->createCommand($sql)->queryAll();
+        return ArrayHelper::extract($friends_ids, 'user_a_id');
+    }
+
+
+    public static function getOutcomingFriendsIds($user_id, $is_confirmed = 0)
+    {
+        $sql = "SELECT user_b_id
+                       FROM " . self::model()->tableName() . "
+                       WHERE user_a_id = {$user_id} AND
+                       is_confirmed = {$is_confirmed}";
+
+        $friends_ids = Yii::app()->db->createCommand($sql)->queryAll();
+        return ArrayHelper::extract($friends_ids, 'user_b_id');
+    }
+
+
+    public static function userFriendsIds($user_id, $is_confirmed = 1)
+    {
+        $friends_ids = array();
+
+        $sql = "SELECT user_a_id,
+                        user_b_id
+                       FROM friends
+                       WHERE (
+                                user_a_id = {$user_id} OR
+                                user_b_id = {$user_id}
+                              ) AND
+                              is_confirmed = {$is_confirmed}";
+
+        $result = Yii::app()->db->createCommand($sql)->queryAll();
+        foreach ($result as $data)
+        {
+            if ($data['user_a_id'] != $user_id)
+            {
+                $friends_ids[] = $data['user_a_id'];
+            }
+
+            if ($data['user_b_id'] != $user_id)
+            {
+                $friends_ids[] = $data['user_b_id'];
+            }
+        }
+
+        return $friends_ids;
     }
 
 

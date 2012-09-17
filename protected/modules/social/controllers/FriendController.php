@@ -11,7 +11,61 @@ class FriendController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            'create' => t('Заявка в друзья')
+            'create' => t('Заявка в друзья'),
+            'index'  => t('Просмотр друзей')
+        );
+    }
+
+
+    public function sidebars()
+    {
+        return array(
+            array(
+                'actions'  => array(
+                    'index',
+                ),
+                'sidebars' => array(
+                    array(
+                        'widget',
+                        'application.modules.users.portlets.UserPageSidebar'
+                    ),
+                ),
+            ),
+            array(
+                'actions' => array(
+                    'index'
+                ),
+                'sidebars' => array(
+                    array(
+                        'widget',
+                        'application.modules.users.portlets.UserFilterSidebar'
+                    )
+                )
+            )
+        );
+    }
+
+
+    public function subMenuItems()
+    {
+        $user_id = Yii::app()->user->id;
+
+        return array(
+            array(
+                'label'   => t('Друзья'),
+                'url'     => array('/social/friend/index', 'user_id' => $user_id),
+                'visible' => Yii::app()->controller->action->id == 'index'
+            ),
+            array(
+                'label'   => t('Входящие заявки'),
+                'url'     => array('/social/friend/index', 'user_id' => $user_id, 'type' => 'in'),
+                'visible' => Yii::app()->controller->action->id == 'index'
+            ),
+            array(
+                'label'   => t('Исходящие заявки'),
+                'url'     => array('/social/friend/index', 'user_id' => $user_id, 'type' => 'out'),
+                'visible' => Yii::app()->controller->action->id == 'index'
+            )
         );
     }
 
@@ -41,5 +95,39 @@ class FriendController extends ClientController
         {
             echo CJSON::encode(array('errors' => $friend->errors_flat_array));
         }
+    }
+
+
+    public function actionIndex($user_id, $type = null)
+    {
+        $user = User::model()->throw404IfNull()->findByPk($user_id);
+
+        switch ($type)
+        {
+            case null:
+                $friends_ids = Friend::userFriendsIds($user->id);
+                break;
+
+            case 'in':
+                $friends_ids = Friend::getIncomingFriendsIds($user_id);
+                break;
+
+            case 'out':
+                $friends_ids = Friend::getOutcomingFriendsIds($user_id);
+                break;
+        }
+
+        $criteria = new CDbCriteria();
+        $criteria->addInCondition('id', $friends_ids);
+
+        $data_provider = new CActiveDataProvider('User', array(
+            'criteria' => $criteria
+        ));
+
+        $this->render('index', array(
+            'data_provider' => $data_provider,
+            'user'          => $user,
+            'type'          => $type
+        ));
     }
 }
