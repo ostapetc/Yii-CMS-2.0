@@ -64,6 +64,7 @@ class UsersModule extends WebModule
             '/activateAccountRequest'    => 'users/user/activateAccountRequest',
             '/changePasswordRequest'     => 'users/user/changePasswordRequest',
             '/changePassword/<code:.*>'  => 'users/user/changePassword',
+            '/users'                      => '/users/user/index'
         );
     }
 }

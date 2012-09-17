@@ -56,7 +56,7 @@ abstract class ClientController extends Controller
             ),
             array(
                 'label' => t('Люди'),
-                'url'   => '/'
+                'url'   => array('/users/user/index')
             ),
         );
     }
