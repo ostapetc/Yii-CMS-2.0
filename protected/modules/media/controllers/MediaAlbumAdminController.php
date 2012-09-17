@@ -80,7 +80,7 @@ class MediaAlbumController extends AdminController
         $this->layout = '//layouts/middle';
         $user         = User::model()->findByPk($userId);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $form         = new Form('media.AlbumForm', $user->getNewAttachedModel('MediaAlbum'));
+        $form         = new Form('media.AlbumForm', $user->getAttachedModel('MediaAlbum'));
         $this->render('userAlbums', array(
             'user' => $user,
             'form' => $form
