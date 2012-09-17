@@ -200,11 +200,11 @@ abstract class Controller extends CController implements ControllerInterface
 
         if (is_array($valueOrArray))
         {
-            return $model->findByAttributesOr404($valueOrArray);
+            return $model->throw404IfNull()->findByAttributes($valueOrArray);
         }
         else
         {
-            return $model->findByPkOr404($valueOrArray);
+            return $model->throw404IfNull()->findByPk($valueOrArray);
         }
     }
 
