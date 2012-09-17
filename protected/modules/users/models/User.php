@@ -6,7 +6,7 @@ class User extends ActiveRecord
 
     const PHOTO_PATH       = 'upload/photo';
     const PHOTO_SIZE_SMALL = 23;
-    const PHOTO_SIZE_BIG   = 48;
+    const PHOTO_SIZE_BIG   = 64;
 
     const STATUS_ACTIVE  = 'active';
     const STATUS_NEW     = 'new';
@@ -20,9 +20,11 @@ class User extends ActiveRecord
     const SCENARIO_UPDATE_SELF_DATA         = 'UpdateSelfData';
     const SCENARIO_CHANGE_PASSWORD          = 'ChangePassword';
     const SCENARIO_REGISTRATION             = 'Registration';
+    const SCENARIO_USER_SEARCH              = 'UserSearch';
     const SCENARIO_UPDATE                    = 'Update';
     const SCENARIO_CREATE                    = 'Create';
     const SCENARIO_LOGIN                     = 'Login';
+
 
 
     public $password_c;
@@ -134,7 +136,7 @@ class User extends ActiveRecord
             array(
                 'name',
                 'match',
-                'pattern' => '/^[a-zа-я0-9 _]+$/',
+                'pattern' => '/^[a-zа-я0-9 _]+$/i',
                 'message' => t('допустимы русские и латинские буквы, цыфры, пробелы и знак _')
             ),
     //            array(
@@ -189,7 +191,7 @@ class User extends ActiveRecord
                 'password_c',
                 'compare',
                 'compareAttribute' => 'password',
-                'on'               => array(
+                'on' => array(
                     self::SCENARIO_REGISTRATION,
                     self::SCENARIO_CHANGE_PASSWORD,
                     self::SCENARIO_UPDATE,
@@ -388,7 +390,8 @@ class User extends ActiveRecord
                 'title'  => $this->name,
                 'border' => 0,
                 'width'  => $size,
-                'height' => $size
+                'height' => $size,
+                'class'  => 'img-rounded'
             )
         );
     }
@@ -398,7 +401,7 @@ class User extends ActiveRecord
     {
         return CHtml::link(
             $this->getPhotoHtml($size),
-            $this->href,
+            $this->url,
             array(
                 'class'  => 'user-photo-link',
                 'width'  => $size,
@@ -421,17 +424,10 @@ class User extends ActiveRecord
     {
         return CHtml::link(
             $this->name,
-            $this->href,
+            $this->url,
             array('class' => 'user-link')
         );
     }
-
-
-    public function getHref()
-    {
-        return Yii::app()->createUrl('/user/' . $this->id);
-    }
-
 
     /**
      * TODO: надо придумать авто преобразование даты
@@ -456,6 +452,29 @@ class User extends ActiveRecord
         if (isset(self::$gender_options[$this->gender]))
         {
             return self::$gender_options[$this->gender];
+        }
+    }
+
+
+    public function getHref()
+    {
+        trigger_error('use prperty "url" instead', E_USER_DEPRECATED);
+        return $this->url;
+    }
+
+
+    public function getRatingCssClass()
+    {
+        switch (true)
+        {
+            case $this->rating == 0:
+                return '';
+
+            case $this->rating > 0:
+                return 'label-success';
+
+            case $this->rating < 0:
+                return 'label-important';
         }
     }
 }
