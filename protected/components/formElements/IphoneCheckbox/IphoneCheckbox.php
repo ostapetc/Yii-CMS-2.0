@@ -28,6 +28,8 @@ class IphoneCheckbox extends InputWidget
 
     public function run()
     {
+        echo '<div style="width: 35px">'; // only for fixing modal error counting width
         echo CHtml::activeCheckBox($this->model, $this->attribute, $this->htmlOptions);
+        echo '</div>';
     }
 }

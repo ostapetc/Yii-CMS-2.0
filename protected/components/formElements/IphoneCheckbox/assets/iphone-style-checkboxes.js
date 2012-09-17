@@ -53,6 +53,7 @@
       if (mode === "container") {
         newWidth = onLabelWidth > offLabelWidth ? onLabelWidth : offLabelWidth;
         newWidth += this._getDimension(this.handle, "width") + this.handleMargin;
+
         return this.container.css({
           width: newWidth
         });

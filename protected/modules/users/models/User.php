@@ -242,9 +242,6 @@ class User extends ActiveRecord
                 'on' => self::SCENARIO_ACTIVATE_REQUEST
             ),
             array(
-                'rating', 'unsafe'
-            ),
-            array(
                 'rating',
                 'numerical'
             ),
