@@ -2,7 +2,7 @@
 $img = ImageHelper::thumb($data->path, $data->name, MediaAlbum::$image_size, true);
 if ($img) {
 ?>
-    <li id="File_<?=$data->id?>" style="width: <?= MediaAlbum::$image_size['width'] ?>px;">
+    <li id="File_<?=$data->id?>" style="width: <?= MediaAlbum::$image_size['width'] ?>px; <?= $index % 4 == 0 ? 'clear:both;' : '' ?>">
         <?
         echo CHtml::link($img, $data->href, array(
             "rel" => "album_photos",
