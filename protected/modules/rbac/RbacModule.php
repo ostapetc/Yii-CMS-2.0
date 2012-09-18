@@ -41,10 +41,4 @@ class RbacModule extends WebModule
             'Операции и задачи' => '/rbac/TaskAdmin/manage'
         );
     }
-
-
-    public static function isAllow($auth_item)
-    {
-        return true;
-    }
 }

@@ -259,7 +259,8 @@ class MediaFile extends ActiveRecord
         $file      = CUploadedFile::getInstanceByName('file');
         $file_name = FileSystemHelper::vaultResolveCollision(self::UPLOAD_PATH, $file->name);
         $new_file  = self::UPLOAD_PATH . '/' . $file_name;
-        if ($file->saveAs('./' . $new_file))
+
+        if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
         {
             list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH,
                 true);
@@ -429,5 +430,13 @@ class MediaFile extends ActiveRecord
     public function getServerPath()
     {
         return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/' . $this->name;
+    }
+
+    public static function getDataProvider($model, $tag)
+    {
+        $file = new static;
+        return new ActiveDataProvider(get_called_class(), array(
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->ordered()->getDbCriteria(),
+        ));
     }
 }

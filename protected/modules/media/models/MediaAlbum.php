@@ -213,4 +213,12 @@ class MediaAlbum extends ActiveRecord
     {
         $this->isAttachedTo($user ? $user : Yii::app()->user->model);
     }
+
+    public static function getDataProvider($model)
+    {
+        $file = new static;
+        return new ActiveDataProvider(get_called_class(), array(
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->last()->getDbCriteria(),
+        ));
+    }
 }

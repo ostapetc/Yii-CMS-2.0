@@ -45,32 +45,4 @@ class MediaModule extends WebModule
             '/media/mediaAlbum/userAlbums/<id:\d*>' => '/media/mediaAlbum/userAlbums',
         );
     }
-
-    public function getFilesDataProvider($model, $tag)
-    {
-        $file = new MediaFile;
-        return new ActiveDataProvider('MediaFile', array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->getDbCriteria(),
-        ));
-    }
-
-
-    public function getAlbumsDataProvider($model)
-    {
-        $file = new MediaFile;
-        return new ActiveDataProvider('MediaAlbum', array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->getDbCriteria(),
-        ));
-    }
-
-
-    public function someFuncName($method, $methodData, $owner = null)
-    {
-        switch($method){
-            case 'album':
-                $methodData['model'] = $owner;
-                return Yii::app()->controller->widget('media.portlets.ImageGallery', $methodData, true);
-                break;
-        }
-    }
 }

@@ -17,11 +17,7 @@
     $this->widget('ListView', array(
         'id'=>'user_albums',
         'template' => "{pager}\n{items}\n{pager}",
-        'dataProvider' => Yii::app()->getModule('media')->getAlbumsDataProvider($user, array(
-            'criteria' => array(
-                'order' => 'date_create DESC'
-            )
-        )),
+        'dataProvider' => $dp,
         'itemView' => '_album',
         'itemsTagName' => 'ul',
         'itemsCssClass' => 'thumbnails',

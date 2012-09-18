@@ -41,8 +41,9 @@ class MediaAlbumController extends ClientController
         $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
-        $dp               = $this->module->getFilesDataProvider($model, 'files');
-        $model->resetScope();
+
+        $dp               = MediaFile::getDataProvider($model, 'files');
+        $dp->pagination   = false;
 
         $this->render('view', array(
             'model' => $model,
@@ -83,7 +84,8 @@ class MediaAlbumController extends ClientController
         {
             $this->pageNotFound();
         }
-        $this->render('userAlbums', array('user' => Yii::app()->user->model, 'is_my' => true));
+        $dp = MediaAlbum::getDataProvider(Yii::app()->user->model);
+        $this->render('userAlbums', array('user' => Yii::app()->user->model, 'is_my' => true, 'dp' => $dp));
     }
 
     public function actionUserAlbums($user_id = null)
@@ -94,7 +96,8 @@ class MediaAlbumController extends ClientController
         }
         $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $this->render('userAlbums', array('user' => $user, 'is_my' => false));
+        $dp               = MediaAlbum::getDataProvider($user);
+        $this->render('userAlbums', array('user' => $user, 'is_my' => false, 'dp' => $dp));
     }
 
 }
