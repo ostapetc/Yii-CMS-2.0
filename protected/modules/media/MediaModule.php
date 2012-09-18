@@ -48,16 +48,18 @@ class MediaModule extends WebModule
 
     public function getFilesDataProvider($model, $tag)
     {
+        $file = new MediaFile;
         return new ActiveDataProvider('MediaFile', array(
-            'criteria' => MediaFile::model()->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->getDbCriteria(),
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->getDbCriteria(),
         ));
     }
 
 
     public function getAlbumsDataProvider($model)
     {
+        $file = new MediaFile;
         return new ActiveDataProvider('MediaAlbum', array(
-            'criteria' => MediaAlbum::model()->parent(get_class($model), $model->getPrimaryKey())->getDbCriteria(),
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->getDbCriteria(),
         ));
     }
 

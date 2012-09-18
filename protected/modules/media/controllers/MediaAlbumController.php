@@ -42,6 +42,8 @@ class MediaAlbumController extends ClientController
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
         $dp               = $this->module->getFilesDataProvider($model, 'files');
+        $model->resetScope();
+
         $this->render('view', array(
             'model' => $model,
             'form'  => $form,
