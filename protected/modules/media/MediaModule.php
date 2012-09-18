@@ -46,37 +46,19 @@ class MediaModule extends WebModule
         );
     }
 
-    public function getFilesDataProvider($model, $tag, $config = array())
+    public function getFilesDataProvider($model, $tag)
     {
-        $manager = new MediaFile();
-        $criteria = $manager->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->getDbCriteria();
-        if (isset($config['criteria']))
-        {
-            $criteria->mergeWith($config['criteria']);
-            unset($config['criteria']);
-        }
-//        $dep = new CExpressionDependency($manager->max('id'));
-//        $dep = new CDbCacheDependency("SELECE MAX(id) FROM file_manager where tag='files' and model_id='FileAlbum' and object_id=18;");
-        return new CActiveDataProvider($manager, CMap::mergeArray(array(
-            'criteria' => $criteria,
-        ), $config));
+        return new ActiveDataProvider('MediaFile', array(
+            'criteria' => MediaFile::model()->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->getDbCriteria(),
+        ));
     }
 
 
-    public function getAlbumsDataProvider($model, $config = array())
+    public function getAlbumsDataProvider($model)
     {
-        $manager = new MediaAlbum();
-        $criteria = $manager->parent(get_class($model), $model->getPrimaryKey())->getDbCriteria();
-        if (isset($config['criteria']))
-        {
-            $criteria->mergeWith($config['criteria']);
-            unset($config['criteria']);
-        }
-//        $dep = new CDbCacheDependency("SELECE MAX(id) FROM file_manager where tag='files' and model_id='FileAlbum' and object_id=18;");
-//        $dep = new CExpressionDependency($manager->max('id'));
-        return new CActiveDataProvider($manager, CMap::mergeArray(array(
-            'criteria' => $criteria,
-        ), $config));
+        return new ActiveDataProvider('MediaAlbum', array(
+            'criteria' => MediaAlbum::model()->parent(get_class($model), $model->getPrimaryKey())->getDbCriteria(),
+        ));
     }
 
 

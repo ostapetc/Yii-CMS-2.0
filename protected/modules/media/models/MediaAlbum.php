@@ -48,8 +48,8 @@ class MediaAlbum extends ActiveRecord
     );
 
     public static $image_size = array(
-        'width'  => 118,
-        'height' => 50
+        'width'  => 151,
+        'height' => 80
     );
 
     public function name()

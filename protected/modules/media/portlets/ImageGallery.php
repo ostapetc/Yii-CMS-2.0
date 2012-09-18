@@ -50,7 +50,11 @@ class ImageGallery extends BaseFileListView
     public $itemsTagName = 'div';
     public $enablePagination = false;
 
-    public $sortableAction = '/media/mediaFileAdmin/savePriority';
+    public $sortableEnable = true;
+    public $sortableOptions = array(
+        'class'  => 'application.components.zii.behaviors.SortableBehavior',
+        'saveUrl'=> '/media/mediaFileAdmin/savePriority'
+    );
 
     public $size = array(
         'width'  => 112,
@@ -64,10 +68,9 @@ class ImageGallery extends BaseFileListView
 
     public function init()
     {
-        $this->attachBehavior('sortable', array(
-            'class'  => 'application.components.zii.behaviors.SortableBehavior',
-            'saveUrl'=> Yii::app()->createUrl($this->sortableAction)
-        ));
+        if ($this->sortableEnable) {
+            $this->attachBehavior('sortable', $this->sortableOptions);
+        }
         parent::init();
         $this->registerScripts();
     }

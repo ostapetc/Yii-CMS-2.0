@@ -35,13 +35,13 @@
             var layer_margin = $('#layer-margin').length ? $('#layer-margin') : $('<div id="layer-margin">').css('height', '100px');
             $('.fancybox-wrap').prependTo(overlay).append(layer_margin);
 
-//            var widget = opts.additionalWidget;
-//            if (widget)
-//            {
-//                $('.fancybox-skin').append($('<br/>'));
-//                $('.fancybox-skin').append($('#' + widget));
-//                $('.fancybox-skin').append($('<br/>'));
-//            }
+            var widget = opts.additionalWidget;
+            if (widget)
+            {
+                $('.fancybox-skin').append($('<br/>'));
+                $('.fancybox-skin').append($('#' + widget));
+                $('.fancybox-skin').append($('<br/>'));
+            }
         },
         beforeClose: function()
         {
