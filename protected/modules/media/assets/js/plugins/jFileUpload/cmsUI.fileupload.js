@@ -10,6 +10,12 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
     _create:function()
     {
         $.blueimpUI.fileupload.prototype._create.call(this); //base constructor
+        //no inherited css styles
+        $('body')
+            .append(this.element)
+            .append(this.options.uploadTemplate)
+            .append(this.options.downloadTemplate);
+
 
         this._loadExistingFiles();
         this._sortableInit();
