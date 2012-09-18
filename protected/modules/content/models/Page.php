@@ -259,7 +259,7 @@ class Page extends ActiveRecord
     {
         $content = $this->text;
 
-        if (RbacModule::isAllow('PageAdmin_Update'))
+        if (Yii::app()->user->checkAccess('PageAdmin_Update'))
         {
             $content .= "<br/>" . CHtml::link(t('Редактировать'), array('/content/pageAdmin/update/','id'=> $this->id), array('class'=> 'btn btn-danger'));
         }

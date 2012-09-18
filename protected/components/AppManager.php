@@ -82,7 +82,7 @@ class AppManager
 
                     $auth_item = ucfirst($controller) . '_' . $action;
 
-                    if (!RbacModule::isAllow($auth_item))
+                    if (!Yii::app()->user->checkAccess($auth_item))
                     {
                         unset($moduleInfo['admin_menu'][$title]);
                     }
