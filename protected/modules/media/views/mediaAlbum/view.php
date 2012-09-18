@@ -1,4 +1,7 @@
 <div class="user_photos">
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <a class="btn" href="<?= $this->createUrl('userAlbums', array('id' => $model->object_id)) ?>"><i class="icon-chevron-left"></i> Назад к Альбомам</a>
     <?
     $isOwner = $model->isAttachedTo(Yii::app()->user->model);
     if ($isOwner)
@@ -15,6 +18,8 @@
         });");
     }
     ?>
+        </div>
+    </div>
 
     <?
     //Вынести action titles в провайдер, воспользоваться функцией CController

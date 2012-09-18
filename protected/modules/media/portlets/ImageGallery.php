@@ -81,7 +81,7 @@ class ImageGallery extends BaseFileListView
         $id             = $this->htmlOptions['id'];
         $assets         = $this->assets . '/imageGallery/';
         $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
-        $montageOptions = CJavaScript::encode(CMap::mergeArray($this->defaultMontageOptions, $this->montageOptions));
+//        $montageOptions = CJavaScript::encode(CMap::mergeArray($this->defaultMontageOptions, $this->montageOptions));
         Yii::app()->clientScript
             ->registerCssFile($assets . 'imageGallery.css')
             ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
@@ -91,11 +91,11 @@ class ImageGallery extends BaseFileListView
             ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-media.js')
             ->registerCssFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.css')
             ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')
-//            ->registerCssFile($assets . 'montage/css/style.css')
-//            ->registerScriptFile($assets . 'montage/js/jquery.montage.js')
-            ->registerScript($id, <<<JS
-                $('#$id a').fancybox($options);
+            ->registerScript($id, "$('#$id a').fancybox($options);");
 /*
+            ->registerCssFile($assets . 'montage/css/style.css')
+            ->registerScriptFile($assets . 'montage/js/jquery.montage.js')
+
                 var container 	= $('#$id'),
                     imgs		= container.find('img').hide(0),
                     totalImgs	= imgs.length,
@@ -112,8 +112,6 @@ class ImageGallery extends BaseFileListView
                         }).attr('src',img.attr('src'));
                     });
                     */
-JS
-);
     }
 
 }

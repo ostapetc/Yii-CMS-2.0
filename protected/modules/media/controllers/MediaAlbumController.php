@@ -26,7 +26,7 @@ class MediaAlbumController extends ClientController
         $this->performAjaxValidation($model);
         if ($form->submitted() && $model->save())
         {
-            $this->redirect('my');
+            $this->redirect(array('my'));
         }
 
         $this->render('createUsers', array(
@@ -90,7 +90,7 @@ class MediaAlbumController extends ClientController
     {
         if ($user_id == null || Yii::app()->user->model->id == $user_id)
         {
-            $this->redirect('my');
+            $this->redirect(array('my'));
         }
         $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
