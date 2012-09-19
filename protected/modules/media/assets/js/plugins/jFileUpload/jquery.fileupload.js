@@ -516,6 +516,7 @@
                     });
                     return jqXHR;
                 };
+
             this._beforeSend(e, options);
             if (this.options.sequentialUploads ||
                     (this.options.limitConcurrentUploads &&

@@ -1,5 +1,5 @@
 <?
-class MediaAlbumController extends AdminController
+class MediaAlbumAdminController extends AdminController
 {
     public static function actionsTitles()
     {
@@ -9,7 +9,6 @@ class MediaAlbumController extends AdminController
             "delete"     => "Удалить",
             "update"     => "Редактировать",
             "manage"     => "Управление альбомами",
-            "userAlbums" => "Альбомы пользователя",
         );
     }
 
@@ -39,10 +38,10 @@ class MediaAlbumController extends AdminController
 
     public function actionView($id)
     {
-        $this->layout = '//layouts/middle';
-        $model = $this->loadModel($id);
-        $this->page_title = 'Альбом: '.$model->title;
-        $form  = new Form('Media.UploadFilesForm', $model);
+        $this->layout     = '//layouts/middle';
+        $model            = $this->loadModel($id);
+        $this->page_title = 'Альбом: ' . $model->title;
+        $form             = new Form('Media.UploadFilesForm', $model);
         $this->render('view', array(
             'model' => $model,
             'form'  => $form
@@ -74,16 +73,4 @@ class MediaAlbumController extends AdminController
         }
     }
 
-
-    public function actionUserAlbums($userId)
-    {
-        $this->layout = '//layouts/middle';
-        $user         = User::model()->findByPk($userId);
-        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $form         = new Form('media.AlbumForm', $user->getAttachedModel('MediaAlbum'));
-        $this->render('userAlbums', array(
-            'user' => $user,
-            'form' => $form
-        ));
-    }
 }
