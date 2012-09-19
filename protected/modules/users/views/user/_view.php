@@ -12,7 +12,7 @@
                 switch (Friend::getUsersStatus(Yii::app()->user->id, $data->id))
                 {
                     case Friend::USERS_STATUS_FRIENDS:
-                        $users_status = "<span class='badge badge-success'>" . t('У Вас в друзьях') . "</span>";
+                        $users_status = "<span class='badge badge-small'>" . t('У Вас в друзьях') . "</span>";
                         break;
 
                     case Friend::USERS_STATUS_NOT_FRIENDS:
@@ -20,16 +20,18 @@
                         break;
 
                     case Friend::USERS_STATUS_USER_A_WAITING:
-                        $users_status = "<span class='badge badge-warning'>" . t('Вы подали заявку в друзья') . "</span>";
+                        $users_status = "<span class='badge badge-small'>" . t('Вы подали заявку в друзья') . "</span>";
                         break;
 
                     case Friend::USERS_STATUS_USER_B_WAITING:
-                        $users_status = "<span class='badge badge-info'>" . t('Подал заявку к вам в друзья') . "</span>";
+                        $users_status = "<span class='badge badge-small'>" . t('Подал заявку к вам в друзья') . "</span>";
                         break;
                 }
                 ?>
 
-                <?= $users_status ?>
+                <span class="badge-small">Email: <a href="mailto:<?= $data->email ?>"><?= $data->email ?></a></span> <br/>
+
+                <?= $users_status ?> <br/>
             <? endif ?>
         </td>
     </tr>

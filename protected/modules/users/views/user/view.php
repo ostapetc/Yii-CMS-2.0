@@ -1,5 +1,7 @@
 <?
 $cs = Yii::app()->clientScript->registerCssFile('/css/site/user.css');
+
+$users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
 ?>
 
 <div class='profile-head'>
@@ -9,6 +11,23 @@ $cs = Yii::app()->clientScript->registerCssFile('/css/site/user.css');
 </div>
 
 <br clear="all" />
+
+<div style="clear:left;margin-top: 10px !important;margin-bottom: 5px;">
+    <?=
+    CHtml::link('Отправить сообщение', '/', array('class' => 'btn btn-mini btn-primary'));
+    ?>
+
+    <? if ($users_status == Friend::USERS_STATUS_FRIENDS): ?>
+        <?=
+        CHtml::link(t('Удалить из друзей'), '/', array('class' => 'btn btn-mini btn-danger'));
+        ?>
+    <? elseif ($users_status == Friend::USERS_STATUS_NOT_FRIENDS): ?>
+        <?=
+        CHtml::link(t('Добавить в друзья'), '/', array('class' => 'btn btn-mini btn-success'));
+        ?>
+    <? endif ?>
+
+</div>
 
 <table class="table table-striped profile-table">
     <tbody>

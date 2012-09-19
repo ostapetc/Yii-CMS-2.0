@@ -140,3 +140,7 @@ span.italic-12 {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.badge-small {
+    font-size: 10px;
+}

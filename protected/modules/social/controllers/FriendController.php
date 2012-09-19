@@ -117,8 +117,18 @@ class FriendController extends ClientController
                 break;
         }
 
+        $model = new User();
+        $model->unsetAttributes();
+
+        if (isset($_GET['User']))
+        {
+            $model->attributes = $_GET['User'];
+        }
+
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $friends_ids);
+        $criteria->compare('name', trim($model->name), true);
+        $criteria->compare('email',$model->email, true);
 
         $data_provider = new CActiveDataProvider('User', array(
             'criteria' => $criteria

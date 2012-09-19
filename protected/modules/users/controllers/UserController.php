@@ -414,7 +414,8 @@ class UserController extends ClientController
         }
 
         $criteria = new CDbCriteria();
-        $criteria->compare('name', $model->name, true);
+        $criteria->compare('name', trim($model->name), true);
+        $criteria->compare('email', trim($model->email), true);
 
         $data_provider = new CActiveDataProvider('User', array(
             'criteria' => $criteria

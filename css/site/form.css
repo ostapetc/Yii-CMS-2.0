@@ -65,3 +65,7 @@
 .wide-from select {
     width: 604px !important;
 }
+
+.sidebar-form input[type=text] {
+    width: 268px;
+}
