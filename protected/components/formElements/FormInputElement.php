@@ -21,6 +21,7 @@ class FormInputElement extends CFormInputElement
         'meta_tags'         => 'main.portlets.MetaTags',
         'uploader'          => 'media.portlets.Uploader',
         'uploader_modal'    => 'media.portlets.Uploader',
+        'multifile'         => 'system.web.widgets.CMultiFileUpload',
         'tags'              => 'TagsInput',
     );
 
@@ -46,7 +47,6 @@ class FormInputElement extends CFormInputElement
         //replace sinonym on full alias
         if (isset($this->widgets[$this->type]))
         {
-            $this->attributes['form_id'] = $this->getParent()->activeFormWidget->id;
             $this->type                  = $this->widgets[$this->type];
             if (strpos($this->type, '.') === false)
             {
@@ -56,7 +56,7 @@ class FormInputElement extends CFormInputElement
             $attributes                  = $this->attributes;
             $attributes['model']         = $this->getParent()->getModel();
             $attributes['attribute']     = $this->name;
-            $attributes['input_element'] = $this;
+//            $attributes['input_element'] = $this;
             ob_start();
             $this->getParent()->getOwner()->widget($this->type, $attributes);
             return ob_get_clean();
