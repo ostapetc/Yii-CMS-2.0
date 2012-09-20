@@ -1,15 +1,25 @@
 <?
-if ($type)
-{
-    $this->page_title = $type == 'in' ? t('Входящие заявки') : t('Исходящие заявки');
-}
-else
-{
-    $this->page_title = Yii::app()->user->id == $user->id  ? t('Ваши друзья') : t('Друзья') . ' ' . $user->name;
-}
-?>
+Yii::app()->clientScript->registerScriptFile('/js/social/friends.js');
 
-<?
+switch (true)
+{
+    case $type == 'in':
+        $this->page_title = t('Входящие заявки');
+        break;
+
+    case $type == 'out':
+        $this->page_title = t('Исходящие заявки');
+        break;
+
+    case Yii::app()->user->id == $user->id:
+        $this->page_title = t('Ваши друзья');
+        break;
+
+    default:
+        $this->page_title = t('Друзья') . ' ' . $user->name;
+        break;
+}
+
 $this->widget('BootListView', array(
     'dataProvider' => $data_provider,
     'itemView'     => 'application.modules.users.views.user._view',
@@ -17,4 +27,3 @@ $this->widget('BootListView', array(
         'count' => $data_provider->itemCount
     )
 ));
-?>

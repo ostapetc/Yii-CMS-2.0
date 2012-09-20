@@ -546,6 +546,7 @@ abstract class ActiveRecord extends CActiveRecord
         return parent::$method($attributes, $condition, $params);
     }
 
+
     public function afterFind()
     {
         parent::afterFind();
@@ -553,4 +554,12 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
+    public function fetchScalarByAttributes(array $attributes, $scalar_attribute)
+    {
+        $model = $this->findByAttributes($attributes);
+        if ($model)
+        {
+            return $model->$scalar_attribute;
+        }
+    }
 }

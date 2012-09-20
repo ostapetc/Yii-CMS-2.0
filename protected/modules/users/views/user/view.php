@@ -14,7 +14,7 @@ $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
 
 <div style="clear:left;margin-top: 10px !important;margin-bottom: 5px;">
     <?=
-    CHtml::link('Отправить сообщение', '/', array('class' => 'btn btn-mini btn-primary'));
+    CHtml::link('Отправить сообщение', array('/social/message/index/', 'user_id' => $model->id), array('class' => 'btn btn-mini btn-primary'));
     ?>
 
     <? if ($users_status == Friend::USERS_STATUS_FRIENDS): ?>

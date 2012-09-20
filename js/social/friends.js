@@ -12,4 +12,17 @@ $(function() {
             $view_item.replaceWith(user_view_item);
         });
     });
+
+    $('.confirm-friend-btn').click(function() {
+        var $view_item = $(this).parents('table:eq(0)');
+
+        var params = {
+            friend_id : $(this).attr('friend_id'),
+            return    : 'user_view_item'
+        };
+
+        $.post('/social/friend/confirm', params, function(user_view_item) {
+            $view_item.replaceWith(user_view_item);
+        });
+    });
 });
