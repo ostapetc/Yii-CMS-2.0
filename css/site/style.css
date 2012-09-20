@@ -1,8 +1,8 @@
 
 body {
-    background-image: url(/img/site/bg1.jpg);
+    /*background-image: url(/img/site/bg1.jpg);*/
     background-attachment: fixed;
-    background-color: black;
+    background-color: #444;
     background-position: center top;
     background-repeat: no-repeat;
 }
@@ -143,4 +143,22 @@ span.italic-12 {
 
 .badge-small {
     font-size: 10px;
+}
+
+.breadcrumb  {
+    margin-bottom: 10px;
+}
+
+
+.row-fluid .span4 {
+    width: 300px;
+    margin-left: 10px;
+}
+
+.row-fluid .span8 {
+    width: 714px;
+}
+
+.well {
+    margin-bottom: 10px;
 }
