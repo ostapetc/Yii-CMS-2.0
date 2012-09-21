@@ -100,8 +100,6 @@ class MediaAlbumController extends ClientController
         $this->render('userAlbums', array('user' => $user, 'is_my' => false, 'dp' => $dp));
     }
 
-    public function actionVk()
-    {
 
-    }
+
 }
