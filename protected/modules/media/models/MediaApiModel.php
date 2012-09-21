@@ -80,5 +80,9 @@ abstract class MediaApiModel extends CModel
     {
     }
 
+
+    public function beforeFind()
+    {
+    }
 }
 

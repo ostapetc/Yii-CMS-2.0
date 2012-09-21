@@ -1,4 +1,11 @@
 <?php
+Yii::import('application.libs.*');
+require_once 'Zend/Loader.php';
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
+Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
+
 class MediaYouTubeApi extends MediaApiModel
 {
     protected $command;
@@ -26,12 +33,6 @@ class MediaYouTubeApi extends MediaApiModel
     {
         if (!$this->api)
         {
-            Yii::import('application.libs.*');
-            require_once 'Zend/Loader.php';
-            Zend_Loader::loadClass('Zend_Gdata_YouTube');
-            Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
-            Zend_Loader::loadClass('Zend_Gdata_AuthSub');
-            Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
             $conf       = Yii::app()->params['youtube'];
             $httpClient = Zend_Gdata_ClientLogin::getHttpClient($conf['user'], $conf['pass'], 'youtube');
@@ -60,9 +61,8 @@ class MediaYouTubeApi extends MediaApiModel
      */
     public function findAll($criteria)
     {
-        $api   = $this->getApi();
+        $this->beforeFind();
         $query = new Zend_Gdata_YouTube_VideoQuery();
-
         $query->setVideoQuery($criteria->select);
         $query->setMaxResults($criteria->limit);
         $query->setStartIndex($criteria->offset);
@@ -70,8 +70,8 @@ class MediaYouTubeApi extends MediaApiModel
         $query->setAuthor($criteria->author);
         $query->setCategory($criteria->category);
 
-        $feed = $api->getVideoFeed($query);
-        return $this->populateRecords($feed);
+        $feed = $this->getApi()->getVideoFeed($query);
+        return $this->populateRecords($feed, true);
     }
 
 
@@ -82,13 +82,13 @@ class MediaYouTubeApi extends MediaApiModel
     {
         $this->id         = $entry->getVideoId();
         $this->title      = $entry->getVideoTitle();
-        $rating            = $entry->getVideoRatingInfo();
+        $rating           = $entry->getVideoRatingInfo();
         $this->average    = $rating['average'];
         $this->raters     = $rating['numRaters'];
         $this->view_count = $entry->getStatistics()->getViewCount();
         $this->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
-        $author             = reset($entry->getAuthor());
+        $author            = reset($entry->getAuthor());
         $this->author_name = $author->getName()->getText();
         $this->author_uri  = "http://www.youtube.com/user/" . $this->author_name;
 
@@ -120,7 +120,7 @@ class MediaYouTubeApi extends MediaApiModel
     public function search()
     {
         $criteria = new YouTubeApiCriteria(array(
-            'select' => $this->title,
+            'select'   => $this->title,
             'category' => $this->category,
         ));
 
@@ -156,6 +156,7 @@ class MediaYouTubeApi extends MediaApiModel
 
     public function findByPk($pk)
     {
+        $this->beforeFind();
         $entry = $this->getApi()->getVideoEntry($pk);
         return $this->populateRecord($entry);
     }
