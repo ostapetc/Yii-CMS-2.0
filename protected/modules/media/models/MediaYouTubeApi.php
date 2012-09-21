@@ -8,8 +8,6 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
 class MediaYouTubeApi extends MediaApiModel
 {
-    protected $command;
-    protected $dbCriteria;
     protected $api;
 
     public $title;
@@ -33,24 +31,11 @@ class MediaYouTubeApi extends MediaApiModel
     {
         if (!$this->api)
         {
-
             $conf       = Yii::app()->params['youtube'];
             $httpClient = Zend_Gdata_ClientLogin::getHttpClient($conf['user'], $conf['pass'], 'youtube');
             $this->api  = new Zend_Gdata_YouTube($httpClient, $conf['app'], $conf['user'], $conf['key']);
         }
         return $this->api;
-    }
-
-
-    public function getDbCriteria()
-    {
-        return $this->dbCriteria;
-    }
-
-
-    public function setDbCriteria($criteria)
-    {
-        $this->dbCriteria = $criteria;
     }
 
 
@@ -122,6 +107,7 @@ class MediaYouTubeApi extends MediaApiModel
         $criteria = new YouTubeApiCriteria(array(
             'select'   => $this->title,
             'category' => $this->category,
+            'author'   => $this->author,
         ));
 
         $dp = new YouTubeDataProvider(new MediaYouTubeApi(), array(
