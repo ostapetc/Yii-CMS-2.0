@@ -16,7 +16,7 @@ class MediaYouTubeApi extends MediaApiModel
 
     public $author_name;
     public $author_uri;
-    public $category = array();
+    public $category;
 
 
     /**
