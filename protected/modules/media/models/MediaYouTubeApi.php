@@ -1,12 +1,6 @@
 <?php
 class MediaYouTubeApi extends MediaApiModel
 {
-    const ORDER_VIEW_COUNT = 'viewCount';
-    const ORDER_LIKE_COUNT = 'likeCount';
-    const ORDER_DISLIKE_COUNT = 'dislikeCount';
-    const ORDER_FAVORITE_COUNT = 'favoriteCount';
-    const ORDER_COMMENT_COUNT = 'commentCount';
-
     protected $command;
     protected $dbCriteria;
     protected $api;
@@ -22,14 +16,16 @@ class MediaYouTubeApi extends MediaApiModel
 
     public $author_name;
     public $author_uri;
-    public $categories = array();
+    public $category = array();
+
 
     /**
      * @return Zend_Gdata_YouTube
      */
     public function getApi()
     {
-        if (!$this->api) {
+        if (!$this->api)
+        {
             Yii::import('application.libs.*');
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass('Zend_Gdata_YouTube');
@@ -39,33 +35,45 @@ class MediaYouTubeApi extends MediaApiModel
 
             $conf       = Yii::app()->params['youtube'];
             $httpClient = Zend_Gdata_ClientLogin::getHttpClient($conf['user'], $conf['pass'], 'youtube');
-            $this->api = new Zend_Gdata_YouTube($httpClient, $conf['app'], $conf['user'], $conf['key']);
+            $this->api  = new Zend_Gdata_YouTube($httpClient, $conf['app'], $conf['user'], $conf['key']);
         }
         return $this->api;
     }
+
 
     public function getDbCriteria()
     {
         return $this->dbCriteria;
     }
 
+
     public function setDbCriteria($criteria)
     {
         $this->dbCriteria = $criteria;
     }
 
-    public function findAll(CDbCriteria $criteria)
-    {
-        $api = $this->getApi();
-        $query = new Zend_Gdata_YouTube_VideoQuery();
-        $query->setVideoQuery($criteria->select);
-        $query->maxResults = $criteria->limit;
-        $query->startIndex = $criteria->offset;
 
-        $query->orderBy = 'viewCount';
+    /**
+     * @param YouTubeApiCriteria $criteria
+     *
+     * @return array
+     */
+    public function findAll($criteria)
+    {
+        $api   = $this->getApi();
+        $query = new Zend_Gdata_YouTube_VideoQuery();
+
+        $query->setVideoQuery($criteria->select);
+        $query->setMaxResults($criteria->limit);
+        $query->setStartIndex($criteria->offset);
+        $query->setOrderBy($criteria->order);
+        $query->setAuthor($criteria->author);
+        $query->setCategory($criteria->category);
+
         $feed = $api->getVideoFeed($query);
         return $this->populateAll($feed);
     }
+
 
     public function populateAll($feed)
     {
@@ -79,51 +87,60 @@ class MediaYouTubeApi extends MediaApiModel
         return $result;
     }
 
+
     public function populate($model, Zend_Gdata_YouTube_VideoEntry $entry)
     {
-        $model->id = $entry->getVideoId();
-        $model->title = $entry->getVideoTitle();
-        $rating = $entry->getVideoRatingInfo();
-        $model->average = $rating['average'];
-        $model->raters = $rating['numRaters'];
+        $model->id         = $entry->getVideoId();
+        $model->title      = $entry->getVideoTitle();
+        $rating            = $entry->getVideoRatingInfo();
+        $model->average    = $rating['average'];
+        $model->raters     = $rating['numRaters'];
         $model->view_count = $entry->getStatistics()->getViewCount();
         $model->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
-        $author = reset($entry->getAuthor());
+        $author             = reset($entry->getAuthor());
         $model->author_name = $author->getName()->getText();
-        $model->author_uri = "http://www.youtube.com/user/" . $model->author_name;
+        $model->author_uri  = "http://www.youtube.com/user/" . $model->author_name;
 
         /** @var $cat Zend_Gdata_App_Extension_Category */
         foreach ($entry->getCategory() as $cat)
         {
             if ($cat->getLabel())
             {
-                $model->categories[] = $cat->getLabel();
+                $model->category = $cat->getLabel();
+                break;
             }
         }
         return $model;
     }
+
+
     /**
      * TODO: how it implementing???
      *
-     * @param CDbCriteria $criteria
+     * @param YouTubeApiCriteria $criteria
+     *
      * @return int
      */
-    public function count(CDbCriteria $criteria)
+    public function count($criteria)
     {
         return 10000;
     }
 
+
     public function search()
     {
-        $criteria = new CDbCriteria();
+        $criteria = new YouTubeApiCriteria(array(
+            'select' => $this->title,
+            'category' => $this->category,
+        ));
 
-        $criteria->select = $this->title;
         $dp = new YouTubeDataProvider(new MediaYouTubeApi(), array(
             'criteria' => $criteria
         ));
         return $dp;
     }
+
 
     public function attributeNames()
     {
@@ -141,10 +158,12 @@ class MediaYouTubeApi extends MediaApiModel
         );
     }
 
+
     public function getPrimaryKey()
     {
         return $this->id;
     }
+
 
     public function findByPk($pk)
     {

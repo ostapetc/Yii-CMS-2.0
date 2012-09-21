@@ -27,8 +27,8 @@ $this->widget('AdminGridView', array(
             'type' => 'raw'
         ),
         array(
-            'header' => 'Категории',
-            'value' => 'implode("\\n", $data->categories)',
+            'header' => 'Категория',
+            'value' => '$data->category',
             'type' => 'raw'
         ),
 	),
