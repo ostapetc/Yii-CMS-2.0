@@ -27,6 +27,7 @@ class Friend extends ActiveRecord
     const USERS_STATUS_NOT_FRIENDS    = 'not_friends';
     const USERS_STATUS_USER_A_WAITING = 'user_a_waiting';
     const USERS_STATUS_USER_B_WAITING = 'user_b_waiting';
+    const USERS_STATUS_NOT_VALID       = 'not_valid';
 
 
     public function name()
@@ -110,17 +111,37 @@ class Friend extends ActiveRecord
     }
 
 
-    public static function userFriendsCount($user_id, $is_confirmed = 1)
+    public static function userFriendsCount($user_id, $is_confirmed = 1, $type = null)
     {
-        $sql = "SELECT COUNT(*)
-                       FROM friends
-                       WHERE (
-                                user_a_id = {$user_id} OR
-                                user_b_id = {$user_id}
-                              ) AND
-                              is_confirmed = {$is_confirmed}";
+        $command = Yii::app()->db->createCommand();
+        $command->select('COUNT(*)');
+        $command->from('friends');
 
-        return Yii::app()->db->createCommand($sql)->queryScalar();
+        switch ($type)
+        {
+            case null:
+                $command->where('(user_a_id = :user_id OR user_b_id = :user_id) AND is_confirmed = :is_confirmed', array(
+                    ':user_id'      => $user_id,
+                    ':is_confirmed' => $is_confirmed
+                ));
+                break;
+
+            case 'in':
+                $command->where('user_b_id = :user_id AND is_confirmed = :is_confirmed', array(
+                    ':user_id'      => $user_id,
+                    ':is_confirmed' => $is_confirmed
+                ));
+                break;
+
+            case 'out':
+                $command->where('user_a_id = :user_id AND is_confirmed = :is_confirmed', array(
+                    ':user_id'      => $user_id,
+                    ':is_confirmed' => $is_confirmed
+                ));
+                break;
+        }
+
+        return $command->queryScalar();
     }
 
 
@@ -181,6 +202,8 @@ class Friend extends ActiveRecord
 
     public static function getUsersStatus($user_a_id, $user_b_id)
     {
+        if ($user_a_id == $user_b_id) return self::USERS_STATUS_NOT_VALID;
+
         $sql = "SELECT is_confirmed,
                        user_a_id,
                        user_b_id
@@ -217,5 +240,35 @@ class Friend extends ActiveRecord
         }
 
         p($friendship);
+    }
+
+
+    public function findByUsersIds($user_a_id, $user_b_id)
+    {
+        $sql = $this->findByUsersIdsSql();
+
+        return $this->findBySql($sql, array(
+            ':user_a_id' => $user_a_id,
+            ':user_b_id' => $user_b_id
+        ));
+    }
+
+
+    private function findByUsersIdsSql()
+    {
+        return "SELECT is_confirmed,
+                       user_a_id,
+                       user_b_id
+                       FROM " . self::model()->tableName() . "
+                       WHERE (
+                                user_a_id = :user_a_id AND
+                                user_b_id = :user_b_id
+                             )
+                             OR
+                             (
+                                user_a_id = :user_b_id AND
+                                user_b_id = :user_a_id
+                             )";
+
     }
 }

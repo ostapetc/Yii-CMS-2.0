@@ -13,6 +13,6 @@
  <br/>
 
 <br/>
-<a href="<?= $data->href ?>">просмотр</a>
+<a href="<?= $data->url ?>">просмотр</a>
 
 <br/><hr/>

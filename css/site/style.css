@@ -162,3 +162,7 @@ span.italic-12 {
 .well {
     margin-bottom: 10px;
 }
+
+.margin-null {
+    margin: 0 0 0 0 !important;
+}

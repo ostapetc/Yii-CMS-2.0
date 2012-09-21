@@ -2,10 +2,19 @@
 
 class MessageController extends ClientController
 {
+    public function filters()
+    {
+        return array(
+            'LoginIfGuest + index,create'
+        );
+    }
+
+
     public static function actionsTitles()
     {
         return array(
-            'index' => 'Список Сообщение',
+            'index'  => t('Список Сообщение'),
+            'create' => t('Отправка сообщения')
         );
     }
 
@@ -50,25 +59,52 @@ class MessageController extends ClientController
     }
 
 
-	public function actionIndex($user_id = null)
+	public function actionIndex($to_user_id = null)
 	{
-        $user = User::model()->throw404IfNull()->findByPk($user_id);
+        $to_user = User::model()->throw404IfNull()->findByPk($to_user_id);
+        $user_id = Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
-        $criteria->addCondition('to_user_id', Yii::app()->user->id);
+        $criteria->order = 'date_create DESC';
+        $criteria->addCondition("to_user_id = {$user_id} OR from_user_id = {$user_id}");
+        //$criteria->addCondition('to_user_id', Yii::app()->user->id);
 
-        if ($user_id)
+        if ($to_user_id)
         {
-            $criteria->addCondition('from_user_id', $user->id);
-            $criteria->order = 'date_create DESC';
+            $criteria->addCondition("to_user_id = {$to_user_id} OR from_user_id = {$to_user_id}");
         }
 
-		$data_provider = new CActiveDataProvider('Message');
+		$data_provider = new CActiveDataProvider('Message', array(
+            'criteria' => $criteria
+        ));
 
 		$this->render('index', array(
 			'data_provider' => $data_provider,
+            'to_user'       => $to_user
 		));
 	}
 
 
+    public function actionCreate()
+    {
+        if (!isset($_POST['Message']))
+        {
+            $this->badRequest();
+        }
+
+        $attributes = $_POST['Message'];
+        $attributes['from_user_id'] = Yii::app()->user->id;
+
+        $message = new Message();
+        $message->attributes = $attributes;
+
+        if ($message->save())
+        {
+
+        }
+        else
+        {
+            echo CJSON::encode(array('errors' => $message->errors_flat_array));
+        }
+    }
 }

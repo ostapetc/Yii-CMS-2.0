@@ -416,10 +416,9 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function getCreateUrl()
+    public static function getCreateUrl()
     {
-
-        return $this->getActionUrl("create");
+        return self::getActionUrl("create");
     }
 
 
@@ -430,9 +429,9 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function getActionUrl($action, $params = array())
+    public static function getActionUrl($action, $params = array())
     {
-        $model  = lcfirst(get_class($this));
+        $model  = lcfirst(get_called_class());
         $module = AppManager::getModelModule($model);
 
         return Yii::app()->createUrl("/$module/$model/$action", $params);

@@ -368,10 +368,7 @@ class UserController extends ClientController
     public function actionView($id)
     {
         $this->page_title = '';
-
         $model = $this->loadModel($id);
-
-        $this->user = $model;
 
         $this->render('view', array(
             'model' => $model

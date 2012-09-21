@@ -54,16 +54,16 @@ class UsersModule extends WebModule
     public function routes()
     {
         return array(
-            '/admin/login/*'             => 'users/userAdmin/login',
-            '/login'                     => 'users/user/login',
-            '/user/<id:\d*>'             => 'users/user/view',
-            '/user/updateSelfData'       => 'users/user/updateSelfData',
-            '/logout'                    => 'users/user/logout',
-            '/registration'              => 'users/user/registration',
-            '/activateAccount/<code:.*>' => 'users/user/activateAccount',
-            '/activateAccountRequest'    => 'users/user/activateAccountRequest',
-            '/changePasswordRequest'     => 'users/user/changePasswordRequest',
-            '/changePassword/<code:.*>'  => 'users/user/changePassword',
+            '/admin/login/*'             => '/users/userAdmin/login',
+            '/login'                     => '/users/user/login',
+            '/user/<id:\d*>'             => '/users/user/view',
+            '/user/updateSelfData'       => '/users/user/updateSelfData',
+            '/logout'                    => '/users/user/logout',
+            '/registration'              => '/users/user/registration',
+            '/activateAccount/<code:.*>' => '/users/user/activateAccount',
+            '/activateAccountRequest'    => '/users/user/activateAccountRequest',
+            '/changePasswordRequest'     => '/users/user/changePasswordRequest',
+            '/changePassword/<code:.*>'  => '/users/user/changePassword',
             '/users'                      => '/users/user/index'
         );
     }

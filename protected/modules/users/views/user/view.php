@@ -1,5 +1,8 @@
 <?
-$cs = Yii::app()->clientScript->registerCssFile('/css/site/user.css');
+$cs = Yii::app()->clientScript;
+$cs->registerScriptFile('/js/social/friends.js');
+$cs->registerCssFile('/css/site/user.css');
+
 
 $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
 ?>
@@ -10,16 +13,21 @@ $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
     <div class="label <?= $model->rating_css_class ?>">рейтинг <?= $model->rating ?></div>
 </div>
 
+
+
 <br clear="all" />
 
 <div style="clear:left;margin-top: 10px !important;margin-bottom: 5px;">
-    <?=
-    CHtml::link('Отправить сообщение', array('/social/message/index/', 'user_id' => $model->id), array('class' => 'btn btn-mini btn-primary'));
-    ?>
+
+    <? if (!Yii::app()->user->isGuest && (Yii::app()->user->id != $model->id)): ?>
+        <?=
+        CHtml::link('Отправить сообщение', array('/social/message/index/', 'user_id' => $model->id), array('class' => 'btn btn-mini btn-primary'));
+        ?>
+    <? endif ?>
 
     <? if ($users_status == Friend::USERS_STATUS_FRIENDS): ?>
         <?=
-        CHtml::link(t('Удалить из друзей'), '/', array('class' => 'btn btn-mini btn-danger'));
+        CHtml::link(t('Удалить из друзей'), '', array('class' => 'btn btn-mini btn-danger delete-friend-btn', 'friend_id' => $model->id));
         ?>
     <? elseif ($users_status == Friend::USERS_STATUS_NOT_FRIENDS): ?>
         <?=

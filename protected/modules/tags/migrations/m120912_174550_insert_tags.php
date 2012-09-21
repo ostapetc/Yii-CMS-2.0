@@ -4,6 +4,8 @@ class m120912_174550_insert_tags extends DbMigration
 {
 	public function up()
 	{
+        $this->execute("DELETE FROM `tags`");
+
 	    $this->execute("
             INSERT INTO `tags` (`id`, `name`) VALUES
             (5, 'Bellator '),

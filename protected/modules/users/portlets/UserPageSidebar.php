@@ -12,7 +12,7 @@ class UserPageSidebar extends Portlet
     {
         $friends_label = "<span class='glyphicon-parents'></span> " . t('Друзья') . ' (' . Friend::userFriendsCount(Yii::app()->user->id) . ')';
 
-        if ($new_friends_count = Friend::userFriendsCount(Yii::app()->user->id, 0))
+        if ($new_friends_count = Friend::userFriendsCount(Yii::app()->user->id, 0, 'in'))
         {
             $friends_label.= CHtml::link(
                 "<span class='badge badge-success'>+" . $new_friends_count . "</span>",

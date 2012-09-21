@@ -68,4 +68,16 @@ abstract class ClientController extends Controller
     }
 
 
+
+    public function filterLoginIfGuest($chain)
+    {
+        if (Yii::app()->user->isGuest)
+        {
+            $this->redirect(array('/users/user/login'));
+        }
+        else
+        {
+            $chain->run();
+        }
+    }
 }

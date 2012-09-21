@@ -11,7 +11,7 @@ class FriendController extends ClientController
     public function filters()
     {
         return array(
-            'NotGuestAndFriendIdExists + create,confirm'
+            'NotGuestAndFriendIdExists + create,confirm,delete'
         );
     }
 
@@ -32,7 +32,8 @@ class FriendController extends ClientController
         return array(
             'create'  => t('Заявка в друзья'),
             'index'   => t('Просмотр друзей'),
-            'confirm' => t('Подтверждение дружбы')
+            'confirm' => t('Подтверждение дружбы'),
+            'delete'  => t('Удаление из друзей')
         );
     }
 
@@ -182,6 +183,19 @@ class FriendController extends ClientController
         else
         {
             echo CJSON::encode(array('errors' => $friend->errors_flat_array));
+        }
+    }
+
+
+    public function actionDelete()
+    {
+        $friend = Friend::model()->findByUsersIds(Yii::app()->user->id, $_POST['friend_id']);
+        if ($friend)
+        {
+        }
+        else
+        {
+            $this->pageNotFound();
         }
     }
 }

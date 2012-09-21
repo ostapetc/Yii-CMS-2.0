@@ -91,12 +91,6 @@ class Message extends ActiveRecord
     }
 
 
-    public function getHref()
-    {
-        return Yii::app()->createUrl('/social/message/view', array('id' => $this->id));
-    }
-
-
     public function uploadFiles()
     {
         return array(

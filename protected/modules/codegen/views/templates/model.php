@@ -93,12 +93,6 @@ class <?= $class ?> extends ActiveRecord
     }
 
 
-    public function getHref()
-    {
-        return Yii::app()->createUrl('/<?= $module ?>/<?= strtolower($class) ?>/view', array('id' => $this->id));
-    }
-
-
     public function uploadFiles()
     {
         return array(

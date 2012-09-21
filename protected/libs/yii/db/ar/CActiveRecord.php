@@ -1152,7 +1152,7 @@ abstract class CActiveRecord extends CModel
 		if(!$this->getIsNewRecord())
 		{
 			Yii::trace(get_class($this).'.delete()','system.db.ar.CActiveRecord');
-			if($this->beforeDelete())
+            if($this->beforeDelete())
 			{
 				$result=$this->deleteByPk($this->getPrimaryKey())>0;
 				$this->afterDelete();

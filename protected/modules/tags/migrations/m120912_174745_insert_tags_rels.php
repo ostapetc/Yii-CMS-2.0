@@ -4,6 +4,8 @@ class m120912_174745_insert_tags_rels extends DbMigration
 {
 	public function up()
 	{
+        $this->execute("DELETE FROM `tags_rels`");
+
 	    $this->execute("
             INSERT INTO `tags_rels` (`id`, `tag_id`, `object_id`, `model_id`) VALUES
             (1, 1, 1, 'Page'),
