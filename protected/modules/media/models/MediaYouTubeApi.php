@@ -71,47 +71,36 @@ class MediaYouTubeApi extends MediaApiModel
         $query->setCategory($criteria->category);
 
         $feed = $api->getVideoFeed($query);
-        return $this->populateAll($feed);
+        return $this->populateRecords($feed);
     }
 
 
-    public function populateAll($feed)
+    /**
+     * @param $entry Zend_Gdata_YouTube_VideoEntry
+     */
+    protected function _populate($entry)
     {
-        $result = array();
-        foreach ($feed as $entry)
-        {
-            $model = new static;
-            $this->populate($model, $entry);
-            $result[] = $model;
-        }
-        return $result;
-    }
-
-
-    public function populate($model, Zend_Gdata_YouTube_VideoEntry $entry)
-    {
-        $model->id         = $entry->getVideoId();
-        $model->title      = $entry->getVideoTitle();
+        $this->id         = $entry->getVideoId();
+        $this->title      = $entry->getVideoTitle();
         $rating            = $entry->getVideoRatingInfo();
-        $model->average    = $rating['average'];
-        $model->raters     = $rating['numRaters'];
-        $model->view_count = $entry->getStatistics()->getViewCount();
-        $model->player_url = $entry->getFlashPlayerUrl();
+        $this->average    = $rating['average'];
+        $this->raters     = $rating['numRaters'];
+        $this->view_count = $entry->getStatistics()->getViewCount();
+        $this->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
         $author             = reset($entry->getAuthor());
-        $model->author_name = $author->getName()->getText();
-        $model->author_uri  = "http://www.youtube.com/user/" . $model->author_name;
+        $this->author_name = $author->getName()->getText();
+        $this->author_uri  = "http://www.youtube.com/user/" . $this->author_name;
 
         /** @var $cat Zend_Gdata_App_Extension_Category */
         foreach ($entry->getCategory() as $cat)
         {
             if ($cat->getLabel())
             {
-                $model->category = $cat->getLabel();
+                $this->category = $cat->getLabel();
                 break;
             }
         }
-        return $model;
     }
 
 
@@ -168,7 +157,6 @@ class MediaYouTubeApi extends MediaApiModel
     public function findByPk($pk)
     {
         $entry = $this->getApi()->getVideoEntry($pk);
-        $model = new static;
-        return $this->populate($model, $entry);
+        return $this->populateRecord($entry);
     }
 }

@@ -9,6 +9,7 @@ class MediaModule extends WebModule
     {
         $this->setImport(array(
             'media.components.*',
+            'media.components.YouTube.*',
             'media.models.*'
         ));
     }
