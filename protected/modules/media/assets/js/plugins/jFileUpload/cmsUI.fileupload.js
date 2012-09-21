@@ -106,5 +106,5 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         {
             this.element.find('.drop-zone').remove();
         }
-    }
+    },
 });

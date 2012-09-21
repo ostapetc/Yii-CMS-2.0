@@ -15,8 +15,9 @@ class ActiveDataProvider extends CActiveDataProvider
      * @param mixed $modelClass
      * @param array $config
      */
-    public function __construct($modelClass, $config = array())
+    public function __construct($model, $config = array())
     {
+        $modelClass = is_string($model) ? $model : get_class($model);
         if (!isset($config['pagination']['pageSize']))
         {
             if (isset(Yii::app()->session[$modelClass . "PerPage"]) &&
@@ -39,6 +40,6 @@ class ActiveDataProvider extends CActiveDataProvider
             $config['pagination']['pageSize'] = $page_size;
         }
 
-        parent::__construct($modelClass, $config);
+        parent::__construct($model, $config);
     }
 }

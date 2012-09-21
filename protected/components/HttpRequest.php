@@ -47,4 +47,23 @@ class HttpRequest extends CHttpRequest
             }
         }
     }
+
+    public function getCurrentUri()
+    {
+        // Get HTTP/HTTPS (the possible values for this vary from server to server)
+        $myUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && !in_array(strtolower($_SERVER['HTTPS']),array('off','no'))) ? 'https' : 'http';
+        // Get domain portion
+        $myUrl .= '://'.$_SERVER['HTTP_HOST'];
+        // Get path to script
+        $myUrl .= $_SERVER['REQUEST_URI'];
+        // Add path info, if any
+//        if (!empty($_SERVER['PATH_INFO'])) $myUrl .= $_SERVER['PATH_INFO'];
+
+        $get = $_GET; // Create a copy of $_GET
+        if (count($get)) { // Only add a query string if there's anything left
+          $myUrl .= '?'.http_build_query($get);
+        }
+
+        return $myUrl;
+    }
 }

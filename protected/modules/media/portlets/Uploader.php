@@ -33,7 +33,7 @@ class Uploader extends JuiInputWidget
     public $params = array();
 
     public $tag;
-    public $maxFileSize = 10000000; //10 * 1000 * 10000
+    public $maxFileSize = 100000000; //100 * 1000 * 10000
 
     public $setWatermark = false;
 
@@ -49,7 +49,7 @@ class Uploader extends JuiInputWidget
         'image'   => 'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
         'sound'   => 'js:/(\.|\/)(mp3|wav)$/i',
         'any'     => 'js:/(\.|\/)(.*)$/i',
-        'video'   => 'js:/(\.|\/)(mp4|flv)$/i'
+        'video'   => 'js:/(\.|\/)(mp4|flv|wmv)$/i'
     );
 
     private static $isTemplatesRender = false;
@@ -105,13 +105,15 @@ class Uploader extends JuiInputWidget
         $this->id     = 'uploader_' . get_class($this->model) . $this->tag;
         $this->assets = Yii::app()->getModule('media')->assetsUrl();
 
-        $this->uploadUrl = Yii::app()->createUrl($this->uploadAction, array(
-            'model_id'  => get_class($this->model),
-            'object_id' => $this->model->id ? $this->model->id : 0,
-            'data_type' => $this->data_type,
-            'tag'       => $this->tag,
-            'options'   => $this->options
-        ));
+        if (!$this->uploadUrl) {
+            $this->uploadUrl = Yii::app()->createUrl($this->uploadAction, array(
+                'model_id'  => get_class($this->model),
+                'object_id' => $this->model->id ? $this->model->id : 0,
+                'data_type' => $this->data_type,
+                'tag'       => $this->tag,
+                'options'   => $this->options
+            ));
+        }
 
         $default      = array(
             'url'                       => $this->uploadUrl,
