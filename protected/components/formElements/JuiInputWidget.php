@@ -4,7 +4,6 @@ abstract class JuiInputWidget extends CJuiInputWidget
 {
     public $name;
 
-    public $form_id;
 
     public $input_element;
 

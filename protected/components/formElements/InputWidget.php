@@ -7,8 +7,6 @@ abstract class InputWidget extends CInputWidget
     public $name;
     public $type = 'text';
 
-    public $form_id;
-
     public $input_element;
 
 

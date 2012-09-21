@@ -8,11 +8,31 @@
  */
 class FriendController extends ClientController
 {
+    public function filters()
+    {
+        return array(
+            'NotGuestAndFriendIdExists + create,confirm'
+        );
+    }
+
+
+    public function filterNotGuestAndFriendIdExists(CFilterChain $chain)
+    {
+        if (!isset($_POST['friend_id']) || Yii::app()->user->isGuest)
+        {
+            $this->badRequest();
+        }
+
+        return $chain->run();
+    }
+
+
     public static function actionsTitles()
     {
         return array(
-            'create' => t('Заявка в друзья'),
-            'index'  => t('Просмотр друзей')
+            'create'  => t('Заявка в друзья'),
+            'index'   => t('Просмотр друзей'),
+            'confirm' => t('Подтверждение дружбы')
         );
     }
 
@@ -72,11 +92,6 @@ class FriendController extends ClientController
 
     public function actionCreate()
     {
-        if (!isset($_POST['friend_id']) || Yii::app()->user->isGuest)
-        {
-            $this->badRequest();
-        }
-
         $user = User::model()->throw404IfNull()->findByPk($_POST['friend_id']);
 
         $friend = new Friend();
@@ -139,5 +154,34 @@ class FriendController extends ClientController
             'user'          => $user,
             'type'          => $type
         ));
+    }
+
+
+    public function actionConfirm()
+    {
+        $user = User::model()->throw404IfNull()->findByPk($_POST['friend_id']);
+
+        $friend = Friend::model()->findByAttributes(array(
+            'user_a_id'    => $user->id,
+            'user_b_id'    => Yii::app()->user->id,
+            'is_confirmed' => 0
+        ));
+
+        if (!$friend)
+        {
+            $this->pageNotFound();
+        }
+
+        $friend->is_confirmed = 1;
+        if ($friend->save())
+        {
+            $this->renderPartial('application.modules.users.views.user._view', array(
+                'data' => $user
+            ));
+        }
+        else
+        {
+            echo CJSON::encode(array('errors' => $friend->errors_flat_array));
+        }
     }
 }

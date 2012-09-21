@@ -7,7 +7,7 @@
 </style>
 
 <?
-Yii::app()->clientScript->registerScriptFile('/js/users/index.js');
+Yii::app()->clientScript->registerScriptFile('/js/social/friends.js');
 
 $this->widget('BootListView', array(
     'dataProvider' => $data_provider,

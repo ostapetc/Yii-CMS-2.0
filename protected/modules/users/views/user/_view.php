@@ -24,7 +24,8 @@
                         break;
 
                     case Friend::USERS_STATUS_USER_B_WAITING:
-                        $users_status = "<span class='badge badge-small'>" . t('Подал заявку к вам в друзья') . "</span>";
+                        $users_status = "<span class='badge badge-small'>" . t('Подал заявку к вам в друзья') . "</span> &nbsp;";
+                        $users_status.= CHtml::button(t('принять'), array('class' => 'btn btn-mini confirm-friend-btn btn-success', 'friend_id' => $data->id));
                         break;
                 }
                 ?>

@@ -69,7 +69,7 @@ class Friend extends ActiveRecord
     public function uniqueFriendshipValidator($attr)
     {
         $status = self::getUsersStatus($this->user_a_id, $this->user_b_id);
-        if ($status != self::USERS_STATUS_NOT_FRIENDS)
+        if ($this->isNewRecord && ($status != self::USERS_STATUS_NOT_FRIENDS))
         {
             $this->addError($attr, t('заявка в друзья уже была подана'));
         }

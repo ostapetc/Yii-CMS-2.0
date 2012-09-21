@@ -22,7 +22,6 @@ the author information below intact.
 Yii::import('zii.widgets.jui.CJuiDatePicker');
 class FJuiDatePicker extends CJuiDatePicker
 {
-    public $form_id;
     public $input_element;
     public $themeUrl = '/css/jqueryUiThemes/';
     public $theme = 'bootstrap';
