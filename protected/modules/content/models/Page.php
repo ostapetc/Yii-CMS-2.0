@@ -208,7 +208,6 @@ class Page extends ActiveRecord
         ));
     }
 
-
     public function attributeLabels()
     {
         return CMap::mergeArray(

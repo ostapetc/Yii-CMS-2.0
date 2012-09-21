@@ -16,7 +16,15 @@ class WidgetManager
             return unserialize(file_get_contents($file_path));
         }
 
-        return ActiveRecord::model($model_id)->attributeNames();
+        if (is_subclass_of($model_id, 'CModel'))
+        {
+            $model = new $model_id;
+            return $model->attributeNames();
+        }
+        else
+        {
+            throw new CException('only instances of CModel allowed');
+        }
     }
 
 
