@@ -7,6 +7,7 @@ class DocBlockCommand extends CConsoleCommand
      * @var string
      */
     public $config = 'stdConfig';
+    public $interactive = false;
 
     protected $baseClass = 'CComponent';
     protected $filesIterator;
@@ -27,11 +28,8 @@ class DocBlockCommand extends CConsoleCommand
         Yii::setPathOfAlias($this->_alias, __DIR__);
 
         //configuring
-        $config = require Yii::getPathOfAlias($this->_alias . '.configs.' . $this->config) . '.php';
-        foreach ($config as $key => $val)
-        {
-            $this->$key = $val;
-        }
+        $config = new CConfiguration(Yii::getPathOfAlias($this->_alias . '.configs.') . '/' . $this->config . '.php');
+        $config->applyTo($this);
 
         //do import
         Yii::import($this->_alias . '.*', true);
@@ -50,7 +48,7 @@ class DocBlockCommand extends CConsoleCommand
      */
     protected function getPropertyIterator($object)
     {
-        $class = $this->propertyIteratorOptions['class'];
+        $class                                   = $this->propertyIteratorOptions['class'];
         $this->propertyIteratorOptions['object'] = $object;
         return new $class($this->propertyIteratorOptions);
     }
@@ -67,7 +65,7 @@ class DocBlockCommand extends CConsoleCommand
             {
                 continue;
             }
-            $class = $this->getClassByFile($fileInfo);
+            $class  = $this->getClassByFile($fileInfo);
             $object = $this->getClassInstance($class);
             if (!$object)
             {

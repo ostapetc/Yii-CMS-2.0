@@ -56,7 +56,7 @@ class FormInputElement extends CFormInputElement
             $attributes                  = $this->attributes;
             $attributes['model']         = $this->getParent()->getModel();
             $attributes['attribute']     = $this->name;
-//            $attributes['input_element'] = $this;
+            $attributes['input_element'] = $this;
             ob_start();
             $this->getParent()->getOwner()->widget($this->type, $attributes);
             return ob_get_clean();

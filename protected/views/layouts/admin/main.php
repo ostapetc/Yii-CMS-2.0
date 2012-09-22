@@ -2,6 +2,8 @@
 
 
 <body>
+
+    <? $this->widget('main.portlets.Console') ?>
     <input type="hidden" id="current_url" value="<?= base64_encode($_SERVER['REQUEST_URI']) ?>">
 
     <?= $this->renderPartial('application.views.layouts.admin._modal'); ?>
