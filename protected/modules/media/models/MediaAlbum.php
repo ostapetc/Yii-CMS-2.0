@@ -3,29 +3,32 @@
  *
  * !Attributes - атрибуты БД
  *
- * @property                 $id
- * @property                 $title
- * @property                 $descr
- * @property                 $status
- * @property                 $model_id
- * @property                 $object_id
- * @property                 $order
- * @property                 $date_create
+ * @property integer    $id
+ * @property string     $model_id
+ * @property integer    $object_id
+ * @property string     $title
+ * @property string     $descr
+ * @property string     $date_create
+ * @property integer    $order
  *
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property                 $errorsFlatArray
+ * @property            $href
+ * @property CComponent $owner           the owner component that this behavior is attached to.
+ * @property            $errorsFlatArray
+ * @property            $url
+ * @property            $updateUrl
+ * @property            $createUrl
+ * @property            $deleteUrl
  *
  * !Relations - связи
- * @property TagRel[]        $tags_rels
- * @property                 $tags
+ * @property TagRel[]   $tags_rels
+ * @property            $tags
  *
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   FileAlbum       published()
- * @method   FileAlbum       sitemap()
- * @method   FileAlbum       ordered()
- * @method   FileAlbum       last()
+ * @method   MediaAlbum published()
+ * @method   MediaAlbum sitemap()
+ * @method   MediaAlbum ordered()
+ * @method   MediaAlbum last()
  *
  */
 
@@ -43,7 +46,7 @@ class MediaAlbum extends ActiveRecord
     );
 
     public static $users_page_size = array(
-        'width' => 204,
+        'width'  => 204,
         'height' => 100
     );
 
@@ -51,6 +54,7 @@ class MediaAlbum extends ActiveRecord
         'width'  => 150,
         'height' => 80
     );
+
 
     public function name()
     {
@@ -213,6 +217,7 @@ class MediaAlbum extends ActiveRecord
     {
         $this->isAttachedTo($user ? $user : Yii::app()->user->model);
     }
+
 
     public static function getDataProvider($model)
     {

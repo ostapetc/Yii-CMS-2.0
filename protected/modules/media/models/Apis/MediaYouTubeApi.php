@@ -6,7 +6,7 @@ Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
 Zend_Loader::loadClass('Zend_Gdata_AuthSub');
 Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
-class MediaYouTubeApi extends MediaApiModel
+class MediaYouTubeApi extends MediaApiAbstract
 {
     protected $api;
 

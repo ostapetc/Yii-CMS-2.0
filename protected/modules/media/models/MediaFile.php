@@ -3,51 +3,60 @@
  *
  * !Attributes - атрибуты БД
  *
- * @property string $id
- * @property string $object_id
- * @property string $model_id
- * @property string $name
- * @property string $tag
- * @property string $title
- * @property string $descr
- * @property string $order
- * @property string $path
+ * @property string    $id
+ * @property string    $object_id
+ * @property string    $model_id
+ * @property string    $name
+ * @property string    $tag
+ * @property string    $title
+ * @property string    $descr
+ * @property string    $order
+ * @property string    $path
+ * @property string    $type
  *
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $deleteUrl
- * @property        $isImage
- * @property        $isAudio
- * @property        $isExcel
- * @property        $isWord
- * @property        $isFileExist
- * @property        $isArchive
- * @property        $icon
- * @property        $handler
- * @property string $size            formatted file size
- * @property        $extension
- * @property        $nameWithoutExt
- * @property        $content
- * @property        $downloadUrl
- * @property        $hash
- * @property        $href
- * @property        $serverDir
- * @property        $serverPath
- * @property        $errorsFlatArray
- * @property string $error           the error message. Null is returned if no error.
+ * @property           $deleteUrl
+ * @property           $isImage
+ * @property           $isAudio
+ * @property           $isExcel
+ * @property           $isWord
+ * @property           $isVideo
+ * @property           $isArchive
+ * @property           $isDocument
+ * @property           $isFileExist
+ * @property           $icon
+ * @property           $handler
+ * @property string    $size            formatted file size
+ * @property           $extension
+ * @property           $nameWithoutExt
+ * @property           $content
+ * @property           $downloadUrl
+ * @property           $hash
+ * @property           $href
+ * @property           $serverDir
+ * @property           $serverPath
+ * @property           $errorsFlatArray
+ * @property           $url
+ * @property           $updateUrl
+ * @property           $createUrl
+ * @property string    $error           the error message. Null is returned if no error.
+ *
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MediaFile published()
+ * @method   MediaFile sitemap()
+ * @method   MediaFile ordered()
+ * @method   MediaFile last()
  *
  */
 
 class MediaFile extends ActiveRecord
 {
-    const UPLOAD_PATH  = 'upload/mediaFiles';
     const FILE_POSTFIX = '';
-
 
     const TYPE_IMG   = 'img';
     const TYPE_VIDEO = 'video';
     const TYPE_AUDIO = 'audio';
     const TYPE_DOC   = 'doc';
-
 
     public $types = array(
         self::TYPE_IMG   => self::TYPE_IMG,
@@ -86,11 +95,6 @@ class MediaFile extends ActiveRecord
     public function rules()
     {
         return array(
-            array(
-                'path',
-                'length',
-                'min'=> 1
-            ),
             array(
                 'nameWithoutExt',
                 'length',
@@ -158,6 +162,7 @@ class MediaFile extends ActiveRecord
     {
         return $this->isType('word');
     }
+
 
     public function getIsVideo()
     {
@@ -234,46 +239,6 @@ class MediaFile extends ActiveRecord
         }
         return true;
     }
-
-
-    public function setExtraProperties($field, &$handler, $options)
-    {
-        $info = getimagesize($_FILES[$field]['tmp_name']);
-
-        if (isset($options['save_y']) && $options['save_y'])
-        {
-            $size             = isset($options['min_y']) ? $options['min_y'] : 0;
-            $handler->image_y = ($info[1] > $size) ? $info[1] : $size;
-        }
-
-        if (isset($options['save_x']) && $options['save_x'])
-        {
-            $size             = isset($options['min_x']) ? $options['min_x'] : 0;
-            $handler->image_x = ($info[0] > $size) ? $info[0] : $size;
-        }
-    }
-
-
-    public function saveFile()
-    {
-        $file      = CUploadedFile::getInstanceByName('file');
-        $file_name = FileSystemHelper::vaultResolveCollision(self::UPLOAD_PATH, $file->name);
-        $new_file  = self::UPLOAD_PATH . '/' . $file_name;
-
-        if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
-        {
-            list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH,
-                true);
-            $this->title = $file->name;
-            return true;
-        }
-        else
-        {
-            $this->error = $file->getError();
-            return false;
-        }
-    }
-
 
     /**
      * @return string formatted file size
@@ -432,11 +397,13 @@ class MediaFile extends ActiveRecord
         return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/' . $this->name;
     }
 
+
     public static function getDataProvider($model, $tag)
     {
         $file = new static;
         return new ActiveDataProvider(get_called_class(), array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->ordered()->getDbCriteria(),
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->ordered()
+                ->getDbCriteria(),
         ));
     }
 }
