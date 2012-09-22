@@ -2,17 +2,27 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string $id
- * @property string $code
- * @property string $name
- * @property string $subject
- * @property string $date_create
+ * @property string         $id
+ * @property string         $code
+ * @property string         $name
+ * @property string         $subject
+ * @property string         $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $href
- * @property        $dir
- * @property        $filePath
- * @property        $errorsFlatArray
+ * @property                $href
+ * @property                $dir
+ * @property                $filePath
+ * @property                $errorsFlatArray
+ * @property                $url
+ * @property                $updateUrl
+ * @property                $createUrl
+ * @property                $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MailerTemplate published()
+ * @method   MailerTemplate sitemap()
+ * @method   MailerTemplate ordered()
+ * @method   MailerTemplate last()
  * 
  */
 

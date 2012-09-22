@@ -2,15 +2,25 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string $id
- * @property string $topic_id
- * @property string $name
- * @property string $email
- * @property string $text
- * @property string $date_create
+ * @property string   $id
+ * @property string   $topic_id
+ * @property string   $name
+ * @property string   $email
+ * @property string   $text
+ * @property string   $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $errorsFlatArray
+ * @property          $errorsFlatArray
+ * @property          $url
+ * @property          $updateUrl
+ * @property          $createUrl
+ * @property          $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Feedback published()
+ * @method   Feedback sitemap()
+ * @method   Feedback ordered()
+ * @method   Feedback last()
  * 
  */
 

@@ -1,4 +1,55 @@
 <?php
+/** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property string         $status
+ * @property integer        $rating
+ * @property string         $id
+ * @property string         $name
+ * @property string         $email
+ * @property string         $password
+ * @property string         $birthdate
+ * @property string         $gender
+ * @property string         $photo
+ * @property string         $about_self
+ * @property string         $activate_code
+ * @property string         $activate_date
+ * @property string         $password_recover_code
+ * @property string         $password_recover_date
+ * @property string         $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property                $userDir
+ * @property AuthItem       $role
+ * @property                $photoHtml
+ * @property                $photoLink
+ * @property                $link
+ * @property                $birthdateValue
+ * @property                $dateCreateValue
+ * @property                $genderValue
+ * @property                $href
+ * @property                $ratingCssClass
+ * @property                $errorsFlatArray
+ * @property                $url
+ * @property                $updateUrl
+ * @property                $createUrl
+ * @property                $deleteUrl
+ * 
+ * !Relations - связи
+ * @property MediaAlbum[]   $file_albums
+ * @property int|null       $file_albums_count
+ * @property AuthAssignment $assignment
+ * @property int|null       $pages_count
+ * @property int|null       $favorites_count
+ * @property int|null       $comments_count
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   User           published()
+ * @method   User           sitemap()
+ * @method   User           ordered()
+ * @method   User           last()
+ * 
+ */
 
 class User extends ActiveRecord
 {

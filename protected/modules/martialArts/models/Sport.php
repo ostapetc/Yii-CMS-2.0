@@ -1,9 +1,27 @@
-<?
-/**
- * @property $id
- * @property $name
- * @property $caption
+<?php
+/** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property string $id
+ * @property string $name
+ * @property string $caption
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property        $href
+ * @property        $errorsFlatArray
+ * @property        $url
+ * @property        $updateUrl
+ * @property        $createUrl
+ * @property        $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Sport  published()
+ * @method   Sport  sitemap()
+ * @method   Sport  ordered()
+ * @method   Sport  last()
+ * 
  */
+
 class Sport extends ActiveRecord
 {
     const PAGE_SIZE = 20;

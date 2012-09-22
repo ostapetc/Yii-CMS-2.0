@@ -1,32 +1,34 @@
 <?php
-/**
- *
+/** 
+ * 
  * !Attributes - атрибуты БД
- *
- * @property                 $id
- * @property                 $title
- * @property                 $descr
- * @property                 $status
- * @property                 $model_id
- * @property                 $object_id
- * @property                 $order
- * @property                 $date_create
- *
+ * @property integer    $id
+ * @property string     $model_id
+ * @property integer    $object_id
+ * @property string     $title
+ * @property string     $descr
+ * @property string     $date_create
+ * @property integer    $order
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property CComponent      $owner            the owner component that this behavior is attached to.
- * @property                 $errorsFlatArray
- *
+ * @property            $href
+ * @property CComponent $owner           the owner component that this behavior is attached to.
+ * @property            $errorsFlatArray
+ * @property            $url
+ * @property            $updateUrl
+ * @property            $createUrl
+ * @property            $deleteUrl
+ * 
  * !Relations - связи
- * @property TagRel[]        $tags_rels
- * @property                 $tags
- *
+ * @property TagRel[]   $tags_rels
+ * @property            $tags
+ * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   FileAlbum       published()
- * @method   FileAlbum       sitemap()
- * @method   FileAlbum       ordered()
- * @method   FileAlbum       last()
- *
+ * @method   MediaAlbum published()
+ * @method   MediaAlbum sitemap()
+ * @method   MediaAlbum ordered()
+ * @method   MediaAlbum last()
+ * 
  */
 
 class MediaAlbum extends ActiveRecord

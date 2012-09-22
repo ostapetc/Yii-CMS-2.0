@@ -2,20 +2,24 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $label_id
- * @property                 $object_id
- * @property                 $model_id
+ * @property string   $id
+ * @property string   $label_id
+ * @property string   $object_id
+ * @property string   $model_id
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $errorsFlatArray
+ * @property          $href
+ * @property          $errorsFlatArray
+ * @property          $url
+ * @property          $updateUrl
+ * @property          $createUrl
+ * @property          $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   LabelRel        published()
- * @method   LabelRel        sitemap()
- * @method   LabelRel        ordered()
- * @method   LabelRel        last()
+ * @method   LabelRel published()
+ * @method   LabelRel sitemap()
+ * @method   LabelRel ordered()
+ * @method   LabelRel last()
  * 
  */
 

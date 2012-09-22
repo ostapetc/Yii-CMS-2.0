@@ -2,19 +2,29 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string $id
- * @property string $object_id
- * @property string $model_id
- * @property string $title
- * @property string $keywords
- * @property string $description
- * @property string $date_create
- * @property string $date_update
+ * @property string  $id
+ * @property string  $object_id
+ * @property string  $model_id
+ * @property string  $title
+ * @property string  $keywords
+ * @property string  $description
+ * @property string  $date_create
+ * @property string  $date_update
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $object
- * @property        $modelName
- * @property        $errorsFlatArray
+ * @property         $object
+ * @property         $modelName
+ * @property         $errorsFlatArray
+ * @property         $url
+ * @property         $updateUrl
+ * @property         $createUrl
+ * @property         $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MetaTag published()
+ * @method   MetaTag sitemap()
+ * @method   MetaTag ordered()
+ * @method   MetaTag last()
  * 
  */
 

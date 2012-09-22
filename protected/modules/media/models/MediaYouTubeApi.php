@@ -1,10 +1,24 @@
 <?php
-Yii::import('application.libs.*');
-require_once 'Zend/Loader.php';
-Zend_Loader::loadClass('Zend_Gdata_YouTube');
-Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
-Zend_Loader::loadClass('Zend_Gdata_AuthSub');
-Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
+/** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property                    $title
+ * @property                    $img
+ * @property                    $size
+ * @property                    $player_url
+ * @property                    $view_count
+ * @property                    $raters
+ * @property                    $average
+ * @property                    $id
+ * @property                    $author_name
+ * @property                    $author_uri
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property Zend_Gdata_YouTube $api
+ * @property                    $primaryKey
+ * @property                    $dbCriteria
+ * 
+ */
 
 class MediaYouTubeApi extends MediaApiModel
 {

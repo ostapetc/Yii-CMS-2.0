@@ -1,40 +1,51 @@
 <?php
-/**
- *
+/** 
+ * 
  * !Attributes - атрибуты БД
- *
- * @property string $id
- * @property string $object_id
- * @property string $model_id
- * @property string $name
- * @property string $tag
- * @property string $title
- * @property string $descr
- * @property string $order
- * @property string $path
- *
+ * @property string    $id
+ * @property string    $object_id
+ * @property string    $model_id
+ * @property string    $name
+ * @property string    $tag
+ * @property string    $title
+ * @property string    $descr
+ * @property string    $order
+ * @property string    $path
+ * @property string    $type
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $deleteUrl
- * @property        $isImage
- * @property        $isAudio
- * @property        $isExcel
- * @property        $isWord
- * @property        $isFileExist
- * @property        $isArchive
- * @property        $icon
- * @property        $handler
- * @property string $size            formatted file size
- * @property        $extension
- * @property        $nameWithoutExt
- * @property        $content
- * @property        $downloadUrl
- * @property        $hash
- * @property        $href
- * @property        $serverDir
- * @property        $serverPath
- * @property        $errorsFlatArray
- * @property string $error           the error message. Null is returned if no error.
- *
+ * @property           $deleteUrl
+ * @property           $isImage
+ * @property           $isAudio
+ * @property           $isExcel
+ * @property           $isWord
+ * @property           $isVideo
+ * @property           $isArchive
+ * @property           $isDocument
+ * @property           $isFileExist
+ * @property           $icon
+ * @property           $handler
+ * @property string    $size            formatted file size
+ * @property           $extension
+ * @property           $nameWithoutExt
+ * @property           $content
+ * @property           $downloadUrl
+ * @property           $hash
+ * @property           $href
+ * @property           $serverDir
+ * @property           $serverPath
+ * @property           $errorsFlatArray
+ * @property           $url
+ * @property           $updateUrl
+ * @property           $createUrl
+ * @property string    $error           the error message. Null is returned if no error.
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MediaFile published()
+ * @method   MediaFile sitemap()
+ * @method   MediaFile ordered()
+ * @method   MediaFile last()
+ * 
  */
 
 class MediaFile extends ActiveRecord

@@ -5,7 +5,6 @@
  * @property $accessors
  * @property $relations
  * @property $scopes
- * @property-read array  $methods
  */
 class YiiComponentPropertyIterator extends ArrayIterator
 {

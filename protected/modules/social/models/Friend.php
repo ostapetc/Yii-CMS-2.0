@@ -2,20 +2,24 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $is_confirmed
- * @property                 $id
- * @property                 $user_a_id
- * @property                 $user_b_id
- * @property                 $date_create
+ * @property integer $is_confirmed
+ * @property string  $id
+ * @property string  $user_a_id
+ * @property string  $user_b_id
+ * @property string  $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $errorsFlatArray
+ * @property         $errorsFlatArray
+ * @property         $url
+ * @property         $updateUrl
+ * @property         $createUrl
+ * @property         $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Friend          published()
- * @method   Friend          sitemap()
- * @method   Friend          ordered()
- * @method   Friend          last()
+ * @method   Friend  published()
+ * @method   Friend  sitemap()
+ * @method   Friend  ordered()
+ * @method   Friend  last()
  * 
  */
 

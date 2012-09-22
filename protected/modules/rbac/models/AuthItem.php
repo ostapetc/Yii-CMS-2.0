@@ -11,10 +11,20 @@
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                 $errorsFlatArray
+ * @property                 $url
+ * @property                 $updateUrl
+ * @property                 $createUrl
+ * @property                 $deleteUrl
  * 
  * !Relations - связи
  * @property AuthItemChild[] $childs
  * @property AuthItem[]      $operations
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   AuthItem        published()
+ * @method   AuthItem        sitemap()
+ * @method   AuthItem        ordered()
+ * @method   AuthItem        last()
  * 
  */
 
