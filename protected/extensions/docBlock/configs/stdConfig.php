@@ -14,7 +14,7 @@ return array(
         'generatePropertiesFor'   => array(
             'attributes',
             'accessors',
-            'relations'
+            'relations',
         ),
         //allow values: 'scopes'
         'generateMethodsFor'      => array(

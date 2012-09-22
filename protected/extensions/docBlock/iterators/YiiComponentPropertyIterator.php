@@ -5,6 +5,7 @@
  * @property $accessors
  * @property $relations
  * @property $scopes
+ * @property-read array  $methods
  */
 class YiiComponentPropertyIterator extends ArrayIterator
 {
@@ -45,7 +46,6 @@ class YiiComponentPropertyIterator extends ArrayIterator
     /**
      * @param array      $initOptions
      * @param CComponent $object
-     * @param array      $propertyOptions
      */
     public function __construct($initOptions)
     {
@@ -58,10 +58,12 @@ class YiiComponentPropertyIterator extends ArrayIterator
         {
             $props = array_merge($props, $this->$item);
         }
+
         foreach ($this->generateMethodsFor as $item)
         {
             $props = array_merge($props, $this->$item);
         }
+
         parent::__construct($props);
     }
 
@@ -69,6 +71,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
     public function __get($name)
     {
         $props = $this->{'get' . ucfirst($name)}($this->object);
+
         //filter it
         $class = get_class($this->object);
         while ($class = get_parent_class($class))
@@ -97,7 +100,14 @@ class YiiComponentPropertyIterator extends ArrayIterator
         }
 
         //instant it
-        $result = $this->instantAll($props, $this->propertyOptions);
+        if (in_array($name, $this->generatePropertiesFor))
+        {
+            $result = $this->instantAll($props, $this->propertyOptions);
+        }
+        elseif (in_array($name, $this->generateMethodsFor))
+        {
+            $result = $this->instantAll($props, $this->methodOptions);
+        }
 
         $filteredResult = array();
         foreach($result as $key => $val)
