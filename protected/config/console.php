@@ -7,6 +7,7 @@ return CMap::mergeArray(require(CONFIG . '.php'), array(
         ),
         'doc-block'    => array(
             'class' => 'ext.docBlock.DocBlockCommand',
+            'config' => '2122'
         ),
     ),
 ));

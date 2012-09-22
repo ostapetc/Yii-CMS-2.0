@@ -41,6 +41,6 @@ return array(
     ),
     'messageSource'           => array(
         'class'    => 'CPhpMessageSource',
-        'basePath' => Yii::getPathOfAlias($this->_alias . '.messages')
+        'basePath' => Yii::getPathOfAlias($this['alias'] . '.messages')
     )
 );

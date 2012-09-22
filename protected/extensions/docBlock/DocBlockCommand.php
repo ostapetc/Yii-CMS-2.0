@@ -9,41 +9,43 @@ class DocBlockCommand extends CConsoleCommand
     public $config;
     public $interactive = false;
 
-    public $baseClass = 'CComponent';
-    public $filesIterator;
-    public $propertyIteratorOptions;
-    public $propertyOptions;
-    public $methodOptions;
-    public $messageSource;
+    protected $baseClass = 'CComponent';
+    protected $filesIterator;
+    protected $propertyIteratorOptions;
+    protected $propertyOptions;
+    protected $methodOptions;
+    protected $messageSource;
+    protected $alias;
 
-    protected $_alias;
 
-
-    /**
-     * Import all needed classes
-     */
-    public function init()
+    public function __construct($name, $runner)
     {
         //non conflicting alias
-        $this->_alias = md5(__DIR__);
-        Yii::setPathOfAlias($this->_alias, __DIR__);
+        $alias = md5(__DIR__);
+        Yii::setPathOfAlias($alias, __DIR__);
 
         //configuring
-        $baseConfigPath = Yii::getPathOfAlias($this->_alias . '.configs.');
-        $baseConfigs = require $baseConfigPath . '/stdConfig.php'; //require in this namespace for access to $this->_alias
-        $config = new CConfiguration($baseConfigs);
-        if ($this->config) {
-            $config->loadFromFile($baseConfigPath . '/' . $this->config . '.php');
+        $configPath = Yii::getPathOfAlias($alias . '.configs');
+        $config     = new CConfiguration(array(
+            'alias' => $alias
+        ));
+        $config->loadFromFile($configPath . '/stdConfig.php'); //base config
+        if ($this->config) //apply additional config if set
+        {
+            $config->loadFromFile($configPath . '/' . $this->config . '.php');
         }
-        $config->applyTo($this);
+        foreach ($config as $key => $val)
+        {
+            $this->$key = $val;
+        }
 
         //do import
-        Yii::import($this->_alias . '.*', true);
-        Yii::import($this->_alias . '.iterators.*', true);
+        Yii::import($alias . '.*', true);
+        Yii::import($alias . '.iterators.*', true);
 
         //set translaitor
         Yii::app()->setComponent('docBlockMessage', Yii::createComponent($this->messageSource));
-        parent::init();
+        parent::__construct($name, $runner);
     }
 
 
