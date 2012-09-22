@@ -6,15 +6,15 @@ class DocBlockCommand extends CConsoleCommand
      *
      * @var string
      */
-    public $config = 'stdConfig';
+    public $config;
     public $interactive = false;
 
-    protected $baseClass = 'CComponent';
-    protected $filesIterator;
-    protected $propertyIteratorOptions;
-    protected $propertyOptions;
-    protected $methodOptions;
-    protected $messageSource;
+    public $baseClass = 'CComponent';
+    public $filesIterator;
+    public $propertyIteratorOptions;
+    public $propertyOptions;
+    public $methodOptions;
+    public $messageSource;
 
     protected $_alias;
 
@@ -24,11 +24,17 @@ class DocBlockCommand extends CConsoleCommand
      */
     public function init()
     {
+        //non conflicting alias
         $this->_alias = md5(__DIR__);
         Yii::setPathOfAlias($this->_alias, __DIR__);
 
         //configuring
-        $config = new CConfiguration(Yii::getPathOfAlias($this->_alias . '.configs.') . '/' . $this->config . '.php');
+        $baseConfigPath = Yii::getPathOfAlias($this->_alias . '.configs.');
+        $baseConfigs = require $baseConfigPath . '/stdConfig.php'; //require in this namespace for access to $this->_alias
+        $config = new CConfiguration($baseConfigs);
+        if ($this->config) {
+            $config->loadFromFile($baseConfigPath . '/' . $this->config . '.php');
+        }
         $config->applyTo($this);
 
         //do import
@@ -95,11 +101,12 @@ class DocBlockCommand extends CConsoleCommand
     {
         try
         {
-            $object = new $class;
-            if (!$object instanceof $this->baseClass)
+            $reflection = new ReflectionClass($class);
+            if (!$reflection->isInstantiable() || !$reflection->isSubclassOf($this->baseClass))
             {
                 return false;
             }
+            $object = new $class;
         } catch (Exception $e)
         {
             return false;
