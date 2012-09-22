@@ -87,7 +87,7 @@ class MediaFileController extends ClientController
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        if ($model->saveFile() && $model->save())
+        if ($model->save())
         {
             $this->sendFilesAsJson(array($model));
         }
@@ -108,7 +108,7 @@ class MediaFileController extends ClientController
         list($hash, $id) = explode('x', $hash);
 
         $model =  MediaFile::model()->findByPk(intval($id));
-        if (!$model || $model->getHash() != $hash || !file_exists($model->path . '/' . $model->name))
+        if (!$model || $model->getHash() != $hash || !$model->getIsFileExist())
         {
             $this->pageNotFound();
         }

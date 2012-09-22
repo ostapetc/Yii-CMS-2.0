@@ -2,9 +2,19 @@
 abstract class MediaApiAbstract extends CModel
 {
     protected $dbCriteria;
+    public $model;
+
+
+    abstract function getHref();
+
+
+    abstract function getUrl();
 
 
     abstract function findAll($criteria);
+
+
+    abstract function save();
 
 
     abstract function findByPk($pk);

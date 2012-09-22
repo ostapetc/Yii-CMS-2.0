@@ -1,5 +1,5 @@
 <?php
-class MediaYouTubeApi extends MediaApiAbstract
+class MediaLocalApi extends MediaApiAbstract
 {
     const UPLOAD_PATH = 'upload/mediaFiles';
 
@@ -18,6 +18,76 @@ class MediaYouTubeApi extends MediaApiAbstract
     }
 
 
+    public function attributeNames()
+    {
+        return array(
+            'title',
+            'img',
+            'size',
+            'player_url',
+            'view_count',
+            'raters',
+            'average',
+            'id',
+            'author_name',
+            'author_uri',
+        );
+    }
+
+
+    public function getThumb()
+    {
+        return ImageHelper::thumb($this->getServerDir(), pathinfo($this->model->remote_id, PATHINFO_BASENAME), array(
+            'width'  => 48,
+            'height' => 48
+        ), true)->__toString();
+    }
+
+
+    public function getServerDir()
+    {
+        return $_SERVER['DOCUMENT_ROOT'] . pathinfo($this->model->remote_id, PATHINFO_DIRNAME) . '/';
+    }
+
+
+    /**
+     * @return string formatted file size
+     */
+    public function getSize()
+    {
+        $file = $this->getServerPath();
+
+        $size = is_file($file) ? filesize($file) : NULL;
+
+        $metrics[0] = 'байт';
+        $metrics[1] = 'кб.';
+        $metrics[2] = 'мб.';
+        $metrics[3] = 'гб.';
+        $metric     = 0;
+
+        while (floor($size / 1024) > 0)
+        {
+            ++$metric;
+            $size /= 1024;
+        }
+
+        $ret = round($size, 1) . " " . (isset($metrics[$metric]) ? $metrics[$metric] : '??');
+        return $ret;
+    }
+
+
+    public function getHref()
+    {
+        return '/' . self::UPLOAD_PATH . '/' . $this->model->remote_id;
+    }
+
+
+    public function getUrl()
+    {
+
+    }
+
+
     public function findByPk($pk)
     {
         $this->beforeFind();
@@ -26,16 +96,15 @@ class MediaYouTubeApi extends MediaApiAbstract
     }
 
 
-    public function saveFile($key = 'file')
+    public function save($key = 'file')
     {
-        $file      = CUploadedFile::getInstanceByName($key);
-        $file_name = $this->vaultResolveCollision($file->name);
-        $new_file  = self::UPLOAD_PATH . '/' . $file_name;
+        $file     = CUploadedFile::getInstanceByName($key);
+        $new_file = self::UPLOAD_PATH . '/' . $file->name;
 
         if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
         {
-            list($this->path, $this->name) = $this->moveToVault($new_file, true);
-            $this->title = $file->name;
+            $this->model->remote_id = $this->moveToVault($new_file);
+            $this->model->title     = $file->name;
             return true;
         }
         else
@@ -44,10 +113,6 @@ class MediaYouTubeApi extends MediaApiAbstract
             return false;
         }
     }
-
-
-    public $path;
-    public $name;
 
 
     /**
@@ -94,7 +159,7 @@ class MediaYouTubeApi extends MediaApiAbstract
             return false;
         }
 
-        list($target_path, $target_file) = self::getVaultPathAndName($src_file, $base_vault_directory);
+        list($target_path, $target_file) = $this->getVaultPathAndName($src_file);
 
         if (!is_dir('./' . $target_path))
         {
@@ -117,7 +182,7 @@ class MediaYouTubeApi extends MediaApiAbstract
     }
 
 
-    public function getVaultPathAndName($src_file, $base_vault_directory, $target_file_name = null)
+    public function getVaultPathAndName($src_file, $target_file_name = null)
     {
         $id = md5(uniqid("", true));
 
@@ -138,8 +203,8 @@ class MediaYouTubeApi extends MediaApiAbstract
             }
         }
 
-        $target_path = $base_vault_directory . '/' . $folder_id;
-        $target_file = self::vaultResolveCollision($target_path, $target_file_name);
+        $target_path = self::UPLOAD_PATH . '/' . $folder_id;
+        $target_file = $this->vaultResolveCollision($target_file_name, $target_path);
 
         return array(
             $target_path,
@@ -148,9 +213,9 @@ class MediaYouTubeApi extends MediaApiAbstract
     }
 
 
-    public function vaultResolveCollision($file)
+    public function vaultResolveCollision($file, $target_path = self::UPLOAD_PATH)
     {
-        while (is_file('./' . self::UPLOAD_PATH . '/' . $file))
+        while (is_file('./' . $target_path . '/' . $file))
         {
             $file = rand(0, 9) . $file;
         }

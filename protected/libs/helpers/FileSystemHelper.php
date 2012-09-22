@@ -88,7 +88,7 @@ class FileSystemHelper
     {
         foreach ($files as $file)
         {
-            $file_path = $dir . '/' . $file; q
+            $file_path = $dir . '/' . $file;
 
             if (file_exists($file_path))
             {

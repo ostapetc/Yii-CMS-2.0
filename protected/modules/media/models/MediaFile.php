@@ -49,6 +49,7 @@
  *
  */
 
+Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
     const FILE_POSTFIX = '';
@@ -64,6 +65,8 @@ class MediaFile extends ActiveRecord
         self::TYPE_AUDIO => self::TYPE_AUDIO,
         self::TYPE_DOC   => self::TYPE_DOC,
     );
+
+    public static $configuration;
 
     public $error;
 
@@ -94,15 +97,14 @@ class MediaFile extends ActiveRecord
 
     public function rules()
     {
-        return array(
-            array(
+        return array( /*            array(
                 'nameWithoutExt',
                 'length',
                 'min'      => 1,
                 'max'      => 900,
                 'tooShort' => 'Название файла должно быть меньше 1 сим.',
                 'tooLong'  => 'Пожалуйста, сократите наименование файла до 900 сим.'
-            )
+            ) */
         );
     }
 
@@ -184,7 +186,7 @@ class MediaFile extends ActiveRecord
 
     public function getIsFileExist()
     {
-        $filename = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
+        $filename = Yii::app()->getBasePath() . '/../' . $this->remote_id;
         return file_exists($filename) && is_file($filename);
     }
 
@@ -195,11 +197,7 @@ class MediaFile extends ActiveRecord
         switch (true)
         {
             case $this->isImage:
-                $img = ImageHelper::thumb($this->getServerDir(), $this->name, array(
-                    'width'  => 48,
-                    'height' => 48
-                ), true);
-                return $img->__toString();
+                return $this->apiFactory('Local')->getThumb();
                 break;
             case $this->isAudio:
                 $name = 'audio';
@@ -240,41 +238,16 @@ class MediaFile extends ActiveRecord
         return true;
     }
 
-    /**
-     * @return string formatted file size
-     */
-    public function getSize()
-    {
-        $file = $this->getServerPath();
-
-        $size = is_file($file) ? filesize($file) : NULL;
-
-        $metrics[0] = 'байт';
-        $metrics[1] = 'кб.';
-        $metrics[2] = 'мб.';
-        $metrics[3] = 'гб.';
-        $metric     = 0;
-
-        while (floor($size / 1024) > 0)
-        {
-            ++$metric;
-            $size /= 1024;
-        }
-
-        $ret = round($size, 1) . " " . (isset($metrics[$metric]) ? $metrics[$metric] : '??');
-        return $ret;
-    }
-
 
     public function getExtension()
     {
-        return pathinfo($this->name, PATHINFO_EXTENSION);
+        return pathinfo($this->remote_id, PATHINFO_EXTENSION);
     }
 
 
     public function getNameWithoutExt()
     {
-        $name   = pathinfo($this->name, PATHINFO_FILENAME);
+        $name   = pathinfo($this->remote_id, PATHINFO_FILENAME);
         $params = array(' ' => '');
         if (self::FILE_POSTFIX)
         {
@@ -306,6 +279,11 @@ class MediaFile extends ActiveRecord
         {
             if ($this->isNewRecord)
             {
+                if (!$this->apiFactory('Local')->save())
+                {
+                    return false;
+                }
+
                 $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->find();
                 $this->order = $model ? $model->order + 1 : 1;
                 $this->type  = $this->detectType();
@@ -356,6 +334,37 @@ class MediaFile extends ActiveRecord
     }
 
 
+    /**
+     * @param $api_name
+     *
+     * @return MediaApiAbstract
+     */
+    public function apiFactory($api_name = null)
+    {
+        if ($api_name === null)
+        {
+            switch (true)
+            {
+                case $this->isDocument || $this->isImage || $this->isAudio:
+                    $api_name = "Local";
+                    break;
+                case $this->isVideo:
+                    $api_name = "YouTube";
+                    break;
+                default:
+                    throw new CException("Can't autodetect api by type");
+            }
+        }
+        if (!self::$configuration)
+        {
+            self::$configuration = new CConfiguration(Yii::getPathOfAlias('media.configs') . '/api.php');
+        }
+        $api        = Yii::createComponent(self::$configuration[$api_name]);
+        $api->model = $this;
+        return $api;
+    }
+
+
     public function getContent()
     {
         if (file_exists($this->path))
@@ -382,13 +391,13 @@ class MediaFile extends ActiveRecord
 
     public function getHref()
     {
-        return '/' . $this->path . '/' . $this->name;
+        return $this->apiFactory('Local')->getHref();
     }
 
 
     public function getServerDir()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/';
+        return $this->apiFactory('Local')->getServerDir();
     }
 
 
