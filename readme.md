@@ -1,10 +1,10 @@
 ###There is Implementation of base functionality(Not release yet!)
 
-You can find Documentation in `docs` module, or by link `/docs/index`
+You can find Documentation in `docs` module, or by link `/install`
 
 ###Это реализация базового функционала(Пока разрабатывается!)
 
-Вы можете найти Документацию в модуле `docs`, или по ссылке `/docs/index`
+Вы можете найти Документацию в модуле `docs`, или по ссылке `/install`
 
 
 Если интересно можете посмотреть первую версию(https://github.com/ostapetc/Yii-CMS)
