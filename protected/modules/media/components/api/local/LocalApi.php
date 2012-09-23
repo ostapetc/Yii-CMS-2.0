@@ -63,13 +63,13 @@ class LocalApi extends ApiAbstract
 
     public function getServerDir()
     {
-        return Yii::getPathOfAlias('webroot') . '/' . pathinfo($this->pk, PATHINFO_DIRNAME) . '/';
+        return $this->basePath() . pathinfo($this->pk, PATHINFO_DIRNAME) . '/';
     }
 
 
     public function getServerPath()
     {
-        return Yii::getPathOfAlias('webroot') . '/' . LocalApi::UPLOAD_PATH . '/' . $this->pk;
+        return $this->basePath() . $this->pk;
     }
 
 
@@ -102,7 +102,7 @@ class LocalApi extends ApiAbstract
     public function findByPk($pk)
     {
         $this->beforeFind();
-        $file = new SplFileInfo(Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/' . $pk);
+        $file = new SplFileInfo($this->basePath() . $pk);
         return $this->populateRecord($file);
     }
 
@@ -110,9 +110,9 @@ class LocalApi extends ApiAbstract
     public function save($key = 'file')
     {
         $file     = CUploadedFile::getInstanceByName($key);
-        $new_file = self::UPLOAD_PATH . '/' . $file->name;
+        $new_file = $this->basePath() . $file->name;
 
-        if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
+        if ($file->saveAs($new_file))
         {
             $this->pk       = $this->moveToVault($new_file);
             $this->old_name = $file->name;
@@ -184,7 +184,7 @@ class LocalApi extends ApiAbstract
             @mkdir(self::basePath() . $target_folder, 0755, true);
         }
 
-        @rename('./' . $src_file, self::basePath() . $target_folder . '/' . $target_file);
+        @rename($src_file, self::basePath() . $target_folder . '/' . $target_file);
 
         if ($as_array)
         {

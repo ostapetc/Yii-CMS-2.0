@@ -18,7 +18,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getThumb($size = null, $crop = true)
     {
-        //todo: check on image, and implement non-image icon-logic
         if (!$size)
         {
             $size = array(
@@ -92,7 +91,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getIcon()
     {
-        $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/fileIcons/';
+        $folder = $this->assets . '/img/fileIcons/';
         switch (true)
         {
             case $this->isImage:
