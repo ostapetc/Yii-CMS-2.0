@@ -19,6 +19,7 @@ $(function()
             action_url += '?modal=1'
         }
 
+//        modal.find('.modal-body').html($('<iframe></iframe>').attr('src', action_url));
         $.get(action_url, function(html)
         {
             modal.find('.modal-body').html(html);
