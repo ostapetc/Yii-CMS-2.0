@@ -10,19 +10,7 @@ class YouTubeApi extends ApiAbstract
 {
     protected $api;
 
-    public $title;
-    public $img;
-    public $size;
-    public $player_url;
-    public $view_count;
-    public $raters;
-    public $average;
-    public $pk;
-
-    public $author_name;
-    public $author_uri;
-    public $category;
-
+    public $entry;
 
     /**
      * @return Zend_Gdata_YouTube
@@ -36,6 +24,81 @@ class YouTubeApi extends ApiAbstract
             $this->api  = new Zend_Gdata_YouTube($httpClient, $conf['app'], $conf['user'], $conf['key']);
         }
         return $this->api;
+    }
+
+
+    public function getTitle()
+    {
+        return $this->entry->getVideoTitle();
+    }
+
+
+    public function getAverage()
+    {
+        $this->entry->getVideoRatingInfo();
+        return $rating['average'];
+    }
+
+
+    public function getNumRaters()
+    {
+        $this->entry->getVideoRatingInfo();
+        return $rating['numRaters'];
+    }
+
+
+    public function getViewCount()
+    {
+        return $this->entry->getStatistics()->getViewCount();
+    }
+
+
+    public function getAuthorName()
+    {
+        $author = reset($this->entry->getAuthor());
+        /** @var $author Zend_Gdata_App_Extension_Author */
+        return $author->getName()->getText();
+    }
+
+
+    public function getAuthorUri()
+    {
+        $author = reset($this->entry->getAuthor());
+        /** @var $author Zend_Gdata_App_Extension_Author */
+
+        return "http://www.youtube.com/user/" . $this->author_name;
+    }
+
+
+    public function getCategory()
+    {
+        /** @var $cat Zend_Gdata_App_Extension_Category */
+        foreach ($this->entry->getCategory() as $cat)
+        {
+            if ($cat->getLabel())
+            {
+                return $cat->getLabel();
+            }
+        }
+        return null;
+    }
+
+
+    public function save()
+    {
+        throw new CException('no implemented yet');
+    }
+
+
+    public function getHref()
+    {
+        throw new CException('no implemented yet');
+    }
+
+
+    public function getUrl()
+    {
+        return $this->player_url;
     }
 
 
@@ -65,27 +128,8 @@ class YouTubeApi extends ApiAbstract
      */
     protected function _populate($entry)
     {
-        $this->pk         = $entry->getVideoId();
-        $this->title      = $entry->getVideoTitle();
-        $rating           = $entry->getVideoRatingInfo();
-        $this->average    = $rating['average'];
-        $this->raters     = $rating['numRaters'];
-        $this->view_count = $entry->getStatistics()->getViewCount();
-        $this->player_url = $entry->getFlashPlayerUrl();
-        /** @var $author Zend_Gdata_App_Extension_Author */
-        $author            = reset($entry->getAuthor());
-        $this->author_name = $author->getName()->getText();
-        $this->author_uri  = "http://www.youtube.com/user/" . $this->author_name;
-
-        /** @var $cat Zend_Gdata_App_Extension_Category */
-        foreach ($entry->getCategory() as $cat)
-        {
-            if ($cat->getLabel())
-            {
-                $this->category = $cat->getLabel();
-                break;
-            }
-        }
+        $this->setPk($entry->getVideoId());
+        $this->entry = $entry;
     }
 
 

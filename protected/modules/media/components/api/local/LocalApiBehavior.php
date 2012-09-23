@@ -22,49 +22,22 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getThumb()
     {
-        return ImageHelper::thumb($this->getServerDir(),
-            pathinfo($this->getOwner()->remote_id, PATHINFO_BASENAME), array(
-                'width'  => 48,
-                'height' => 48
-            ), true)->__toString();
+        return ImageHelper::thumb($this->getServerDir(), pathinfo($this->getPk(), PATHINFO_BASENAME), array(
+            'width'  => 48,
+            'height' => 48
+        ), true)->__toString();
     }
 
 
     public function getServerDir()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . pathinfo($this->getOwner()->remote_id, PATHINFO_DIRNAME) . '/';
-    }
-
-
-    /**
-     * @return string formatted file size
-     */
-    public function getSize()
-    {
-        $file = $this->getServerPath();
-
-        $size = is_file($file) ? filesize($file) : NULL;
-
-        $metrics[0] = 'байт';
-        $metrics[1] = 'кб.';
-        $metrics[2] = 'мб.';
-        $metrics[3] = 'гб.';
-        $metric     = 0;
-
-        while (floor($size / 1024) > 0)
-        {
-            ++$metric;
-            $size /= 1024;
-        }
-
-        $ret = round($size, 1) . " " . (isset($metrics[$metric]) ? $metrics[$metric] : '??');
-        return $ret;
+        return Yii::getPathOfAlias('webroot') . pathinfo($this->getPk(), PATHINFO_DIRNAME) . '/';
     }
 
 
     public function getHref()
     {
-        return '/' . LocalApi::UPLOAD_PATH . '/' . $this->getOwner()->remote_id;
+        return '/' . LocalApi::UPLOAD_PATH . '/' . $this->getPk();
     }
 
 
@@ -128,7 +101,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getExtension()
     {
-        return pathinfo($this->getOwner()->remote_id, PATHINFO_EXTENSION);
+        return pathinfo($this->getPk(), PATHINFO_EXTENSION);
     }
 
 
@@ -176,8 +149,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getIsFileExist()
     {
-        $filename =
-            Yii::getPathOfAlias('webroot') . '/' . LocalApi::UPLOAD_PATH . '/' . $this->getOwner()->remote_id;
+        $filename = Yii::getPathOfAlias('webroot') . '/' . LocalApi::UPLOAD_PATH . '/' . $this->getPk();
         return file_exists($filename) && is_file($filename);
     }
 
@@ -187,7 +159,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
      */
     public function afterFind($event)
     {
-        $this->getOwner()->api_model = $this->getApiModel()->findByPk($event->sender->remote_id);
+        $this->getOwner()->api_model = $this->getApiModel()->findByPk($this->getPk());
     }
 
 
@@ -195,8 +167,8 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         if ($this->getApiModel()->save('file'))
         {
-            $this->getOwner()->remote_id = $this->moveToVault($new_file);
-            $this->getOwner()->title     = $file->name;
+            $this->setPk($this->moveToVault($new_file));
+            $this->getOwner()->title = $file->name;
             return true;
         }
         else

@@ -2,7 +2,7 @@
 Yii::import('media.components.Api.Abstract.ApiBehaviorAbstract', true);
 class LocalApi extends ApiAbstract
 {
-    const UPLOAD_PATH  = 'upload/mediaFiles';
+    const UPLOAD_PATH = 'upload/mediaFiles';
 
     protected $fileInfo;
 
@@ -19,6 +19,32 @@ class LocalApi extends ApiAbstract
     }
 
 
+    /**
+     * @return string formatted file size
+     */
+    public function getFileWeight()
+    {
+        $file = $this->getServerPath();
+
+        $size = is_file($file) ? filesize($file) : NULL;
+
+        $metrics[0] = 'байт';
+        $metrics[1] = 'кб.';
+        $metrics[2] = 'мб.';
+        $metrics[3] = 'гб.';
+        $metric     = 0;
+
+        while (floor($size / 1024) > 0)
+        {
+            ++$metric;
+            $size /= 1024;
+        }
+
+        $ret = round($size, 1) . " " . (isset($metrics[$metric]) ? $metrics[$metric] : '??');
+        return $ret;
+    }
+
+
     public function attributeNames()
     {
         return array(
@@ -30,10 +56,11 @@ class LocalApi extends ApiAbstract
 
     public function getThumb()
     {
-        return ImageHelper::thumb($this->getServerDir(), pathinfo($this->model->remote_id, PATHINFO_BASENAME), array(
-            'width'  => 48,
-            'height' => 48
-        ), true)->__toString();
+        return ImageHelper::thumb($this->getServerDir(), pathinfo($this->model->remote_id, PATHINFO_BASENAME),
+            array(
+                'width'  => 48,
+                'height' => 48
+            ), true)->__toString();
     }
 
 
@@ -96,7 +123,7 @@ class LocalApi extends ApiAbstract
 
         if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
         {
-            $this->pk = $this->moveToVault($new_file);
+            $this->pk    = $this->moveToVault($new_file);
             $this->title = $file->name;
             return true;
         }

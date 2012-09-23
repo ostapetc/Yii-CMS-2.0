@@ -10,6 +10,18 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     abstract function getUrl();
 
 
+    protected function getPk()
+    {
+        return $this->getOwner()->remote_id;
+    }
+
+
+    protected function setPk($pk)
+    {
+        $this->getOwner()->remote_id = $pk;
+    }
+
+
     /**
      * @return ApiAbstract
      */
