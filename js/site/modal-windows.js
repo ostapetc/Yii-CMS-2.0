@@ -46,7 +46,7 @@ $(function()
 
         modal.find('h3').html(title);
         modal.modal('show');
-        modal.find('.modal-body').html($('<iframe width="100%" height="370px"></iframe>').attr('src', action_url));
+        modal.find('.modal-body').html($('<iframe width="99%" height="370px"></iframe>').attr('src', action_url));
 
         return false;
     });
