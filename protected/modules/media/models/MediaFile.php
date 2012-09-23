@@ -52,20 +52,6 @@
 Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
-    const FILE_POSTFIX = '';
-
-    const TYPE_IMG   = 'img';
-    const TYPE_VIDEO = 'video';
-    const TYPE_AUDIO = 'audio';
-    const TYPE_DOC   = 'doc';
-
-    public $types = array(
-        self::TYPE_IMG   => self::TYPE_IMG,
-        self::TYPE_VIDEO => self::TYPE_VIDEO,
-        self::TYPE_AUDIO => self::TYPE_AUDIO,
-        self::TYPE_DOC   => self::TYPE_DOC,
-    );
-
     public static $configuration;
 
     public $api_model;
@@ -138,61 +124,6 @@ class MediaFile extends ActiveRecord
     }
 
 
-    protected function isType($type)
-    {
-        return in_array($this->extension, MediaFileExtensions::${$type . 'Extensions'});
-    }
-
-
-    public function getIsImage()
-    {
-        return $this->isType('image');
-    }
-
-
-    public function getIsAudio()
-    {
-        return $this->isType('audio');
-    }
-
-
-    public function getIsExcel()
-    {
-        return $this->isType('excel');
-    }
-
-
-    public function getIsWord()
-    {
-        return $this->isType('word');
-    }
-
-
-    public function getIsVideo()
-    {
-        return $this->isType('video');
-    }
-
-
-    public function getIsArchive()
-    {
-        return $this->isType('archive');
-    }
-
-
-    public function getIsDocument()
-    {
-        return $this->isType('readable') || $this->isArchive || $this->isWord || $this->isExcel;
-    }
-
-
-    public function getIsFileExist()
-    {
-        $filename = Yii::app()->getBasePath() . '/../' . $this->remote_id;
-        return file_exists($filename) && is_file($filename);
-    }
-
-
     public function setApiName($api_name)
     {
         if (!$api_name)
@@ -208,35 +139,6 @@ class MediaFile extends ActiveRecord
         $this->attachBehavior('api', self::$configuration[$api_name]);
         $this->api_name = $api_name;
         return $this;
-    }
-
-    public function getIcon()
-    {
-        $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/fileIcons/';
-        switch (true)
-        {
-            case $this->isImage:
-
-                return $this->getThumb();
-                break;
-            case $this->isAudio:
-                $name = 'audio';
-                break;
-            case $this->isExcel:
-                $name = 'excel';
-                break;
-            case $this->isWord:
-                $name = 'word';
-                break;
-            case $this->isArchive:
-                $name = 'rar';
-                break;
-            default:
-                $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
-                break;
-        }
-
-        return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
     }
 
 
@@ -259,12 +161,6 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function getExtension()
-    {
-        return pathinfo($this->remote_id, PATHINFO_EXTENSION);
-    }
-
-
     public function getNameWithoutExt()
     {
         $name   = pathinfo($this->remote_id, PATHINFO_FILENAME);
@@ -277,20 +173,6 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function detectType()
-    {
-        switch (true)
-        {
-            case $this->isDocument:
-                return self::TYPE_DOC;
-            case $this->isAudio:
-                return self::TYPE_AUDIO;
-            case $this->isVideo:
-                return self::TYPE_VIDEO;
-            case $this->isImage:
-                return self::TYPE_IMG;
-        }
-    }
 
 
     public function beforeSave()
@@ -306,24 +188,6 @@ class MediaFile extends ActiveRecord
 
             return true;
         }
-        return false;
-    }
-
-
-    public function beforeDelete()
-    {
-        if (parent::beforeDelete())
-        {
-            if (is_file(self::UPLOAD_PATH . $this->name))
-            {
-                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/crop', $this->name);
-                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/watermark', $this->name);
-                @unlink('./' . self::UPLOAD_PATH . $this->name);
-            }
-
-            return true;
-        }
-
         return false;
     }
 
@@ -354,36 +218,6 @@ class MediaFile extends ActiveRecord
     {
         $this->setApiName($this->api_name);
         parent::afterFind();
-    }
-
-    /**
-     * @param $api_name
-     *
-     * @return MediaApiAbstract
-     */
-    public function apiFactory($api_name = null)
-    {
-        if ($api_name === null)
-        {
-            switch (true)
-            {
-                case $this->isDocument || $this->isImage || $this->isAudio:
-                    $api_name = "Local";
-                    break;
-                case $this->isVideo:
-                    $api_name = "YouTube";
-                    break;
-                default:
-                    throw new CException("Can't autodetect api by type");
-            }
-        }
-        if (!self::$configuration)
-        {
-            self::$configuration = new CConfiguration(Yii::getPathOfAlias('media.configs') . '/api.php');
-        }
-        $api        = Yii::createComponent(self::$configuration[$api_name]);
-        $api->model = $this;
-        return $api;
     }
 
 
