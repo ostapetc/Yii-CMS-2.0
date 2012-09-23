@@ -1,5 +1,5 @@
 <?php
-class MediaFileExtensions
+class LocalFileExtensions
 {
 
     public static $archiveExtensions = array(

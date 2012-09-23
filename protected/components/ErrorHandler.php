@@ -1,4 +1,6 @@
 <?php
+Yii::import('system.base.CErrorHandler', true);
+
 class ErrorHandler extends CErrorHandler
 {
     public $maintanance = '/maintanance.php';

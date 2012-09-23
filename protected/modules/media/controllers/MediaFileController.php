@@ -31,17 +31,18 @@ class MediaFileController extends ClientController
     protected function sendFilesAsJson($files)
     {
         $res = array();
+        /** @var $file MediaFile */
         foreach ((array)$files as $file)
         {
             $res[] = array(
-                'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
-                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
-                'url'            => $file['href'],
-                'thumbnail_url'  => $file['icon'],
-                'delete_url'     => $file['deleteUrl'],
+                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'url'            => $file->href,
+                'thumbnail_url'  => $file->getIcon(),
+                'delete_url'     => $file->deleteUrl,
                 'delete_type'    => "post",
                 'edit_url' => $this->createUrl('/media/mediaFile/updateAttr', array(
-                    'id'  => $file['id'],
+                    'id'  => $file->id,
                 )),
                 'id'             => 'File_' . $file->id,
             );
@@ -87,7 +88,7 @@ class MediaFileController extends ClientController
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        if ($model->saveFile() && $model->save())
+        if ($model->save())
         {
             $this->sendFilesAsJson(array($model));
         }
@@ -108,7 +109,7 @@ class MediaFileController extends ClientController
         list($hash, $id) = explode('x', $hash);
 
         $model =  MediaFile::model()->findByPk(intval($id));
-        if (!$model || $model->getHash() != $hash || !file_exists($model->path . '/' . $model->name))
+        if (!$model || $model->getHash() != $hash || !$model->getIsFileExist())
         {
             $this->pageNotFound();
         }

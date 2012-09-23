@@ -91,7 +91,7 @@ class MediaVideoAdminController extends AdminController
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        if ($model->saveFile() && $model->userCanEdit() && $model->save())
+        if ($model->userCanEdit() && $model->save())
         {
             $this->sendFilesAsJson(array($model));
         }
