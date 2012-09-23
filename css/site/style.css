@@ -25,6 +25,9 @@ body {
     width: 700px;
     margin: -350px 0 0 -280px;
 }
+iframe{
+    border:0
+}
 .clear{
     clear: both;
 }
