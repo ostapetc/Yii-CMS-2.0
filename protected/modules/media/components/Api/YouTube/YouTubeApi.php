@@ -17,7 +17,7 @@ class YouTubeApi extends ApiAbstract
     public $view_count;
     public $raters;
     public $average;
-    public $id;
+    public $pk;
 
     public $author_name;
     public $author_uri;
@@ -65,7 +65,7 @@ class YouTubeApi extends ApiAbstract
      */
     protected function _populate($entry)
     {
-        $this->id         = $entry->getVideoId();
+        $this->pk         = $entry->getVideoId();
         $this->title      = $entry->getVideoTitle();
         $rating           = $entry->getVideoRatingInfo();
         $this->average    = $rating['average'];
@@ -127,7 +127,7 @@ class YouTubeApi extends ApiAbstract
             'view_count',
             'raters',
             'average',
-            'id',
+            'pk',
             'author_name',
             'author_uri',
         );
@@ -136,7 +136,7 @@ class YouTubeApi extends ApiAbstract
 
     public function getPrimaryKey()
     {
-        return $this->id;
+        return $this->pk;
     }
 
 

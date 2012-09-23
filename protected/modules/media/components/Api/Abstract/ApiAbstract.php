@@ -2,8 +2,7 @@
 abstract class ApiAbstract extends CModel
 {
     protected $dbCriteria;
-    public $model;
-
+    public $pk;
 
     abstract function getHref();
 
