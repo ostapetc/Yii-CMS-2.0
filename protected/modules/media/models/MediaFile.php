@@ -124,6 +124,14 @@ class MediaFile extends ActiveRecord
     }
 
 
+    /**
+     * @return ApiBehaviorAbstract
+     */
+    public function getApi()
+    {
+        return $this->asa('api');
+    }
+
     public function setApiName($api_name)
     {
         if (!$api_name)
@@ -139,14 +147,6 @@ class MediaFile extends ActiveRecord
         $this->attachBehavior('api', self::$configuration[$api_name]);
         $this->api_name = $api_name;
         return $this;
-    }
-
-
-    public function getHandler($field = false)
-    {
-        Yii::import('upload.extensions.upload.Upload');
-        $param = $field ? $_FILES[$field] : self::UPLOAD_PATH . $this->name;
-        return new Upload($param);
     }
 
 
@@ -247,13 +247,13 @@ class MediaFile extends ActiveRecord
 
     public function getHref()
     {
-        return $this->asa('api')->getHref();
+        return $this->getApi()->getHref();
     }
 
 
     public function getServerDir()
     {
-        return $this->asa('api')->getServerDir();
+        return $this->getApi()->getServerDir();
     }
 
 

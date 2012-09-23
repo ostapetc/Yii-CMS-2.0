@@ -134,12 +134,6 @@ class YouTubeApi extends ApiAbstract
     }
 
 
-    public function getPrimaryKey()
-    {
-        return $this->pk;
-    }
-
-
     public function findByPk($pk)
     {
         $this->beforeFind();

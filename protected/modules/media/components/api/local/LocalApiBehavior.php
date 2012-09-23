@@ -5,10 +5,10 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 {
     const FILE_POSTFIX = '';
 
-    const TYPE_IMG     = 'img';
-    const TYPE_VIDEO   = 'video';
-    const TYPE_AUDIO   = 'audio';
-    const TYPE_DOC     = 'doc';
+    const TYPE_IMG   = 'img';
+    const TYPE_VIDEO = 'video';
+    const TYPE_AUDIO = 'audio';
+    const TYPE_DOC   = 'doc';
 
     public $types = array(
         self::TYPE_IMG   => self::TYPE_IMG,
@@ -18,22 +18,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     );
 
     protected $file_info;
-
-    public $api_model;
-
-
-    /**
-     * @return MediaApiAbstract
-     */
-    public function getApiModel()
-    {
-        $owner = $this->getOwner();
-        if ($owner->api_model === null)
-        {
-            $owner->api_model = Yii::createComponent($this->api_model);
-        }
-        return $owner->api_model;
-    }
 
 
     public function getThumb()

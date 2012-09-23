@@ -4,6 +4,13 @@ abstract class ApiAbstract extends CModel
     protected $dbCriteria;
     public $pk;
 
+
+    public function getPrimaryKey()
+    {
+        return $this->pk;
+    }
+
+
     abstract function getHref();
 
 
