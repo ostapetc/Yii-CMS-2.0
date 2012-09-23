@@ -58,10 +58,17 @@ class MediaFile extends ActiveRecord
 
     public $error;
 
+    private $_api_name;
+
+    public function __construct($scenario='insert', $api_name = 'local')
+    {
+        $this->_api_name = $api_name;
+        parent::__construct($scenario);
+    }
 
     public function init()
     {
-        $this->setApi('local');
+        $this->setApi($this->_api_name);
     }
 
     public function name()

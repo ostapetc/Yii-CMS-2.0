@@ -16,7 +16,6 @@ class MediaVideoAdminController extends AdminController
     public function actionManage()
     {
         $file = new MediaFile('search', 'youTube');
-        $file->setApi('youTube');
         $model = $file->getApi()->getApiModel();
         $model->unsetAttributes();
 
