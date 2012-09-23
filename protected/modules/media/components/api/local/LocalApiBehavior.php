@@ -25,9 +25,11 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 'height' => 48
             );
         }
-        $a = ImageHelper::thumb($this->getServerDir(), pathinfo($this->getPk(), PATHINFO_BASENAME), $size,
-            $crop)->__toString();
-        return $a;
+
+        $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
+        $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
+        return ImageHelper::thumb($dir, $name, $size, $crop)->__toString();
+        ;
     }
 
 
@@ -124,7 +126,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
                 break;
         }
-
         return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
     }
 
@@ -143,17 +144,21 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function beforeSave($event)
     {
-        if ($this->getApiModel()->save('file'))
+        if ($this->getOwner()->getIsNewRecord())
         {
-            $this->setPk($this->getApiModel()->pk);
-            $this->getOwner()->title = $this->getApiModel()->old_name;
-            return true;
+            if ($this->getApiModel()->save('file'))
+            {
+                $this->setPk($this->getApiModel()->pk);
+                $this->getOwner()->title = $this->getApiModel()->old_name;
+                return true;
+            }
+            else
+            {
+                $this->getOwner()->error = $this->getApiModel()->error;
+                return false;
+            }
         }
-        else
-        {
-            $this->getOwner()->error = $this->getApiModel()->error;
-            return false;
-        }
+        return true;
     }
 
 }

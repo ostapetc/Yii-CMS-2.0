@@ -77,7 +77,6 @@ class MediaFileAdminController extends AdminController
         $model->object_id = $object_id;
         $model->model_id  = $model_id;
         $model->tag       = $tag;
-        $model->setApiName('local');
 
         if ($model->save())
         {
