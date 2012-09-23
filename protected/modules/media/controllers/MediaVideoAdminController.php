@@ -15,7 +15,9 @@ class MediaVideoAdminController extends AdminController
 
     public function actionManage()
     {
-        $model = new MediaYouTubeApi('search');
+        $file = new MediaFile('search', 'youTube');
+        $file->setApi('youTube');
+        $model = $file->getApi()->getApiModel();
         $model->unsetAttributes();
 
         if (isset($_GET['MediaYouTubeApi']))
@@ -33,9 +35,6 @@ class MediaVideoAdminController extends AdminController
 
     public function actionCreate()
     {
-//        $model = new MediaVideo;
-//        $form  = new Form('media.AlbumForm', $model);
-
 
         $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
 

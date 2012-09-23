@@ -1,7 +1,8 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
+ *
  * @property string    $id
  * @property string    $object_id
  * @property string    $model_id
@@ -12,7 +13,7 @@
  * @property string    $order
  * @property string    $path
  * @property string    $type
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property           $deleteUrl
  * @property           $isImage
@@ -39,36 +40,29 @@
  * @property           $updateUrl
  * @property           $createUrl
  * @property string    $error           the error message. Null is returned if no error.
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MediaFile published()
  * @method   MediaFile sitemap()
  * @method   MediaFile ordered()
  * @method   MediaFile last()
- * 
+ *
  */
 
+Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
-    const UPLOAD_PATH  = 'upload/mediaFiles';
-    const FILE_POSTFIX = '';
+    public static $configuration;
 
-
-    const TYPE_IMG   = 'img';
-    const TYPE_VIDEO = 'video';
-    const TYPE_AUDIO = 'audio';
-    const TYPE_DOC   = 'doc';
-
-
-    public $types = array(
-        self::TYPE_IMG   => self::TYPE_IMG,
-        self::TYPE_VIDEO => self::TYPE_VIDEO,
-        self::TYPE_AUDIO => self::TYPE_AUDIO,
-        self::TYPE_DOC   => self::TYPE_DOC,
-    );
+    public $api_model;
 
     public $error;
 
+
+    public function init()
+    {
+        $this->setApi('local');
+    }
 
     public function name()
     {
@@ -88,28 +82,16 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function primaryKey()
-    {
-        return 'id';
-    }
-
-
     public function rules()
     {
-        return array(
-            array(
-                'path',
-                'length',
-                'min'=> 1
-            ),
-            array(
+        return array( /*            array(
                 'nameWithoutExt',
                 'length',
                 'min'      => 1,
                 'max'      => 900,
                 'tooShort' => 'Название файла должно быть меньше 1 сим.',
                 'tooLong'  => 'Пожалуйста, сократите наименование файла до 900 сим.'
-            )
+            ) */
         );
     }
 
@@ -141,186 +123,36 @@ class MediaFile extends ActiveRecord
     }
 
 
-    protected function isType($type)
-    {
-        return in_array($this->extension, MediaFileExtensions::${$type . 'Extensions'});
-    }
-
-
-    public function getIsImage()
-    {
-        return $this->isType('image');
-    }
-
-
-    public function getIsAudio()
-    {
-        return $this->isType('audio');
-    }
-
-
-    public function getIsExcel()
-    {
-        return $this->isType('excel');
-    }
-
-
-    public function getIsWord()
-    {
-        return $this->isType('word');
-    }
-
-    public function getIsVideo()
-    {
-        return $this->isType('video');
-    }
-
-
-    public function getIsArchive()
-    {
-        return $this->isType('archive');
-    }
-
-
-    public function getIsDocument()
-    {
-        return $this->isType('readable') || $this->isArchive || $this->isWord || $this->isExcel;
-    }
-
-
-    public function getIsFileExist()
-    {
-        $filename = Yii::app()->getBasePath() . '/../' . $this->path . '/' . $this->name;
-        return file_exists($filename) && is_file($filename);
-    }
-
-
-    public function getIcon()
-    {
-        $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/fileIcons/';
-        switch (true)
-        {
-            case $this->isImage:
-                $img = ImageHelper::thumb($this->getServerDir(), $this->name, array(
-                    'width'  => 48,
-                    'height' => 48
-                ), true);
-                return $img->__toString();
-                break;
-            case $this->isAudio:
-                $name = 'audio';
-                break;
-            case $this->isExcel:
-                $name = 'excel';
-                break;
-            case $this->isWord:
-                $name = 'word';
-                break;
-            case $this->isArchive:
-                $name = 'rar';
-                break;
-            default:
-                $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
-                break;
-        }
-
-        return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
-    }
-
-
-    public function getHandler($field = false)
-    {
-        Yii::import('upload.extensions.upload.Upload');
-        $param = $field ? $_FILES[$field] : self::UPLOAD_PATH . $this->name;
-        return new Upload($param);
-    }
-
-
-    public function save($runValidation = true, $attributes = null)
-    {
-        if (!parent::save($runValidation = true, $attributes = null))
-        {
-            $this->error = Yii::t('MediaModule.main', 'Не удалось сохранить изменения');
-            return false;
-        }
-        return true;
-    }
-
-
-    public function setExtraProperties($field, &$handler, $options)
-    {
-        $info = getimagesize($_FILES[$field]['tmp_name']);
-
-        if (isset($options['save_y']) && $options['save_y'])
-        {
-            $size             = isset($options['min_y']) ? $options['min_y'] : 0;
-            $handler->image_y = ($info[1] > $size) ? $info[1] : $size;
-        }
-
-        if (isset($options['save_x']) && $options['save_x'])
-        {
-            $size             = isset($options['min_x']) ? $options['min_x'] : 0;
-            $handler->image_x = ($info[0] > $size) ? $info[0] : $size;
-        }
-    }
-
-
-    public function saveFile()
-    {
-        $file      = CUploadedFile::getInstanceByName('file');
-        $file_name = FileSystemHelper::vaultResolveCollision(self::UPLOAD_PATH, $file->name);
-        $new_file  = self::UPLOAD_PATH . '/' . $file_name;
-
-        if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
-        {
-            list($this->path, $this->name) = FileSystemHelper::moveToVault($new_file, self::UPLOAD_PATH,
-                true);
-            $this->title = $file->name;
-            return true;
-        }
-        else
-        {
-            $this->error = $file->getError();
-            return false;
-        }
-    }
-
-
     /**
-     * @return string formatted file size
+     * @return ApiBehaviorAbstract
      */
-    public function getSize()
+    public function getApi()
     {
-        $file = $this->getServerPath();
+        return $this->asa('api');
+    }
 
-        $size = is_file($file) ? filesize($file) : NULL;
-
-        $metrics[0] = 'байт';
-        $metrics[1] = 'кб.';
-        $metrics[2] = 'мб.';
-        $metrics[3] = 'гб.';
-        $metric     = 0;
-
-        while (floor($size / 1024) > 0)
+    public function setApi($api_name)
+    {
+        if (!$api_name)
         {
-            ++$metric;
-            $size /= 1024;
+            $api_name = 'local';
+        }
+        $this->detachBehavior('api');
+        if (!self::$configuration)
+        {
+            self::$configuration = new CConfiguration(Yii::getPathOfAlias('media.configs') . '/behaviors.php');
         }
 
-        $ret = round($size, 1) . " " . (isset($metrics[$metric]) ? $metrics[$metric] : '??');
-        return $ret;
+        $this->attachBehavior('api', self::$configuration[$api_name]);
+
+        $this->api_name = $api_name;
+
+        return $this;
     }
-
-
-    public function getExtension()
-    {
-        return pathinfo($this->name, PATHINFO_EXTENSION);
-    }
-
 
     public function getNameWithoutExt()
     {
-        $name   = pathinfo($this->name, PATHINFO_FILENAME);
+        $name   = pathinfo($this->remote_id, PATHINFO_FILENAME);
         $params = array(' ' => '');
         if (self::FILE_POSTFIX)
         {
@@ -330,20 +162,6 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function detectType()
-    {
-        switch (true)
-        {
-            case $this->isDocument:
-                return self::TYPE_DOC;
-            case $this->isAudio:
-                return self::TYPE_AUDIO;
-            case $this->isVideo:
-                return self::TYPE_VIDEO;
-            case $this->isImage:
-                return self::TYPE_IMG;
-        }
-    }
 
 
     public function beforeSave()
@@ -359,24 +177,6 @@ class MediaFile extends ActiveRecord
 
             return true;
         }
-        return false;
-    }
-
-
-    public function beforeDelete()
-    {
-        if (parent::beforeDelete())
-        {
-            if (is_file(self::UPLOAD_PATH . $this->name))
-            {
-                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/crop', $this->name);
-                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/watermark', $this->name);
-                @unlink('./' . self::UPLOAD_PATH . $this->name);
-            }
-
-            return true;
-        }
-
         return false;
     }
 
@@ -399,6 +199,14 @@ class MediaFile extends ActiveRecord
         return new ActiveDataProvider(get_class($this), array(
             'criteria' => $criteria
         ));
+    }
+
+
+
+    public function afterFind()
+    {
+        $this->setApi($this->api_name);
+        parent::afterFind();
     }
 
 
@@ -428,13 +236,13 @@ class MediaFile extends ActiveRecord
 
     public function getHref()
     {
-        return '/' . $this->path . '/' . $this->name;
+        return $this->getApi()->getHref();
     }
 
 
     public function getServerDir()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/';
+        return $this->getApi()->getServerDir();
     }
 
 
@@ -443,11 +251,13 @@ class MediaFile extends ActiveRecord
         return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/' . $this->name;
     }
 
+
     public static function getDataProvider($model, $tag)
     {
         $file = new static;
         return new ActiveDataProvider(get_called_class(), array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->ordered()->getDbCriteria(),
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->ordered()
+                ->getDbCriteria(),
         ));
     }
 }
