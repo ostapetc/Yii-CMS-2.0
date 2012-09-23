@@ -3,8 +3,6 @@ Yii::import('media.components.api.abstract.*');
 Yii::import('media.components.api.local.*');
 class LocalApiBehavior extends ApiBehaviorAbstract
 {
-    const FILE_POSTFIX = '';
-
     const TYPE_IMG   = 'img';
     const TYPE_VIDEO = 'video';
     const TYPE_AUDIO = 'audio';
@@ -17,35 +15,57 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         self::TYPE_DOC   => self::TYPE_DOC,
     );
 
-    protected $file_info;
 
-
-    public function getThumb()
+    public function getThumb($size = null, $crop = true)
     {
-        $a = ImageHelper::thumb($this->getServerDir(), pathinfo($this->getPk(), PATHINFO_BASENAME), array(
-            'width'  => 48,
-            'height' => 48
-        ), true)->__toString();
+        //todo: check on image, and implement non-image icon-logic
+        if (!$size)
+        {
+            $size = array(
+                'width'  => 48,
+                'height' => 48
+            );
+        }
+        $a = ImageHelper::thumb($this->getServerDir(), pathinfo($this->getPk(), PATHINFO_BASENAME), $size,
+            $crop)->__toString();
         return $a;
+    }
+
+
+    public function getServerPath()
+    {
+        return $this->getApiModel()->getServerPath();
     }
 
 
     public function getServerDir()
     {
-        return LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME) . '/';
+        return $this->getApiModel()->getServerDir();
+    }
+
+
+    public function getContent()
+    {
+        if (file_exists($ths->getServerPath()))
+        {
+            return file_get_contents($ths->getServerPath());
+        }
     }
 
 
     public function getHref()
     {
-        return '/' . LocalApi::UPLOAD_PATH . '/' . $this->getPk();
+        return '/' . LocalApi::UPLOAD_PATH . '/' . $this->pk;
     }
 
 
     public function getUrl()
     {
-
+        //todo: see download url
+        throw new CException('not implemented yet');
     }
+
+
 
 
     public function detectType()
@@ -149,17 +169,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getIsFileExist()
     {
-        $filename = Yii::getPathOfAlias('webroot') . '/' . LocalApi::UPLOAD_PATH . '/' . $this->getPk();
-        return file_exists($filename) && is_file($filename);
-    }
-
-
-    /**
-     * @param $event CModelEvent
-     */
-    public function afterFind($event)
-    {
-        $this->getOwner()->api_model = $this->getApiModel()->findByPk($this->getPk());
+        $this->getApiModel()->getIsFileExists();
     }
 
 
@@ -173,7 +183,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         }
         else
         {
-            $this->error = $this->getApiModel()->error;
+            $this->getOwner()->error = $this->getApiModel()->error;
             return false;
         }
     }

@@ -11,13 +11,13 @@ class LocalApi extends ApiAbstract
 
     public function findAll($criteria)
     {
-
+        throw new CException('not implemented yet');
     }
 
 
     function count($criteria)
     {
-
+        throw new CException('not implemented yet');
     }
 
 
@@ -47,6 +47,12 @@ class LocalApi extends ApiAbstract
     }
 
 
+    public function getIsFileExist()
+    {
+        return file_exists($this->getServerPath()) && is_file($this->getServerPath());
+    }
+
+
     public function attributeNames()
     {
         return array(
@@ -55,20 +61,15 @@ class LocalApi extends ApiAbstract
         );
     }
 
-
-    public function getThumb()
+    public function getServerDir()
     {
-        return ImageHelper::thumb($this->getServerDir(), pathinfo($this->model->remote_id, PATHINFO_BASENAME),
-            array(
-                'width'  => 48,
-                'height' => 48
-            ), true)->__toString();
+        return Yii::getPathOfAlias('webroot') . '/' . pathinfo($this->pk, PATHINFO_DIRNAME) . '/';
     }
 
 
-    public function getServerDir()
+    public function getServerPath()
     {
-        return $_SERVER['DOCUMENT_ROOT'] . pathinfo($this->model->remote_id, PATHINFO_DIRNAME) . '/';
+        return Yii::getPathOfAlias('webroot') . '/' . LocalApi::UPLOAD_PATH . '/' . $this->pk;
     }
 
 
@@ -98,18 +99,6 @@ class LocalApi extends ApiAbstract
     }
 
 
-    public function getHref()
-    {
-        return '/' . self::UPLOAD_PATH . '/' . $this->pk;
-    }
-
-
-    public function getUrl()
-    {
-
-    }
-
-
     public function findByPk($pk)
     {
         $this->beforeFind();
@@ -125,7 +114,7 @@ class LocalApi extends ApiAbstract
 
         if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
         {
-            $this->pk = $this->moveToVault($new_file);
+            $this->pk       = $this->moveToVault($new_file);
             $this->old_name = $file->name;
             return true;
         }
@@ -142,13 +131,15 @@ class LocalApi extends ApiAbstract
      */
     protected function _populate($file_info)
     {
-//        $this->pk = $file_info
+        $this->file_info = $file_info;
     }
+
 
     public static function basePath()
     {
         return Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/';
     }
+
 
     /************FileBalance***********/
 
@@ -193,7 +184,7 @@ class LocalApi extends ApiAbstract
             @mkdir(self::basePath() . $target_folder, 0755, true);
         }
 
-        @rename('./' . $src_file, self::basePath() . $target_folder. '/' . $target_file);
+        @rename('./' . $src_file, self::basePath() . $target_folder . '/' . $target_file);
 
         if ($as_array)
         {
@@ -214,7 +205,7 @@ class LocalApi extends ApiAbstract
         $id = md5(uniqid("", true));
 
         //from 4 symbol construct 2 folders
-        $folder_id = substr($id, 0, self::$depth * 2);
+        $folder_id     = substr($id, 0, self::$depth * 2);
         $target_folder = implode('/', str_split($folder_id, 2));
         //new file name
         if ($target_file_name === null)
@@ -241,7 +232,7 @@ class LocalApi extends ApiAbstract
 
     public function vaultResolveCollision($file, $folder)
     {
-        while (is_file(self::basePath() . $folder . '/'. $file))
+        while (is_file(self::basePath() . $folder . '/' . $file))
         {
             $file = rand(0, 9) . $file;
         }

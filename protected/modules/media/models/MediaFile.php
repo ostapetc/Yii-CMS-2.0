@@ -60,16 +60,19 @@ class MediaFile extends ActiveRecord
 
     private $_api_name;
 
-    public function __construct($scenario='insert', $api_name = 'local')
+
+    public function __construct($scenario = 'insert', $api_name = 'local')
     {
         $this->_api_name = $api_name;
         parent::__construct($scenario);
     }
 
+
     public function init()
     {
         $this->setApi($this->_api_name);
     }
+
 
     public function name()
     {
@@ -138,6 +141,7 @@ class MediaFile extends ActiveRecord
         return $this->asa('api');
     }
 
+
     public function setApi($api_name)
     {
         if (!$api_name)
@@ -147,7 +151,8 @@ class MediaFile extends ActiveRecord
         $this->detachBehavior('api');
         if (!self::$configuration)
         {
-            self::$configuration = new CConfiguration(Yii::getPathOfAlias('media.configs') . '/behaviors.php');
+            self::$configuration = new CConfiguration(
+                Yii::getPathOfAlias('media.configs') . '/behaviors.php');
         }
 
         $this->attachBehavior('api', self::$configuration[$api_name]);
@@ -156,6 +161,7 @@ class MediaFile extends ActiveRecord
 
         return $this;
     }
+
 
     public function getNameWithoutExt()
     {
@@ -169,15 +175,14 @@ class MediaFile extends ActiveRecord
     }
 
 
-
-
     public function beforeSave()
     {
         if (parent::beforeSave())
         {
             if ($this->isNewRecord)
             {
-                $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->find();
+                $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->tag($this->tag)
+                    ->find();
                 $this->order = $model ? $model->order + 1 : 1;
                 $this->type  = $this->detectType();
             }
@@ -209,20 +214,10 @@ class MediaFile extends ActiveRecord
     }
 
 
-
     public function afterFind()
     {
         $this->setApi($this->api_name);
         parent::afterFind();
-    }
-
-
-    public function getContent()
-    {
-        if (file_exists($this->path))
-        {
-            return file_get_contents($this->path . '/' . $this->name);
-        }
     }
 
 
@@ -238,24 +233,6 @@ class MediaFile extends ActiveRecord
     public function getHash()
     {
         return md5($this->object_id . $this->model_id . $this->name . $this->tag);
-    }
-
-
-    public function getHref()
-    {
-        return $this->getApi()->getHref();
-    }
-
-
-    public function getServerDir()
-    {
-        return $this->getApi()->getServerDir();
-    }
-
-
-    public function getServerPath()
-    {
-        return $_SERVER['DOCUMENT_ROOT'] . $this->path . '/' . $this->name;
     }
 
 

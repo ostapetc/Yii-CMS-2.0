@@ -10,13 +10,6 @@ abstract class ApiAbstract extends CModel
         return $this->pk;
     }
 
-
-    abstract function getHref();
-
-
-    abstract function getUrl();
-
-
     abstract function findAll($criteria);
 
 
