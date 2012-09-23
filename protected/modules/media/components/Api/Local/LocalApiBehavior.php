@@ -315,7 +315,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function vaultResolveCollision($file, $target_path = self::UPLOAD_PATH)
+    public function vaultResolveCollision($file, $target_path = LocalApi::UPLOAD_PATH)
     {
         while (is_file('./' . $target_path . '/' . $file))
         {
@@ -329,12 +329,12 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         if (parent::beforeDelete($event))
         {
-            if (is_file(self::UPLOAD_PATH . $this->name))
+            if (is_file(LocalApi::UPLOAD_PATH . $this->name))
             {
                 $id = $this->getOwner()->remote_id;
-                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/crop', $id);
-                FileSystemHelper::deleteFileWithSimilarNames(self::UPLOAD_PATH . '/watermark', $id);
-                @unlink(Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/' . $id);
+                FileSystemHelper::deleteFileWithSimilarNames(LocalApi::UPLOAD_PATH . '/crop', $id);
+                FileSystemHelper::deleteFileWithSimilarNames(LocalApi::UPLOAD_PATH . '/watermark', $id);
+                @unlink(Yii::getPathOfAlias('webroot') . '/' . LocalApi::UPLOAD_PATH . '/' . $id);
             }
 
             return true;
