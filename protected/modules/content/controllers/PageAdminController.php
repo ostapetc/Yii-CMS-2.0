@@ -84,8 +84,9 @@ class PageAdminController extends AdminController
     }
 
 
-    public function actionDelete($id)
+    public function actionDelete()
     {
+        die;
         $this->loadModel($id)->delete();
 
         if (!isset($_GET['ajax']))

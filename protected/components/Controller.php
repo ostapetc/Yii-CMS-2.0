@@ -251,6 +251,10 @@ abstract class Controller extends CController implements ControllerInterface
         {
             $this->layout = false;
         }
+        if (Yii::app()->request->getParam('iframe'))
+        {
+            $this->layout = '//layouts/iframe';
+        }
         return parent::render($view, $data, $return);
     }
 }

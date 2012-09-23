@@ -6,7 +6,7 @@ Yii::app()->clientScript->registerScript(
     $("#module-form").after("<div id=\'files_div\'><div>");
 
     $("#Module_id").keyup(function() {
-        $("#files_div").load("/codegen/moduleAdmin/getFiles/id/" + $("#Module_id").val());
+        $("#files_div").load("/codegen/moduleAdmin/getFiles?id=" + $("#Module_id").val());
     });
     ',
     CClientScript::POS_READY

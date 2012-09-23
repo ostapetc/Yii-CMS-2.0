@@ -20,15 +20,15 @@
 
     $cs->registerScriptFile('/js/coreFunctions.js');
 
-    $cs->registerCssFile($base.'/css/icons.css');
-    $cs->registerCssFile($base.'/css/site/form.css');
-    $cs->registerCssFile($base.'/css/site/style.css');
-    $cs->registerCssFile($base.'/css/site/menu.css');
-    $cs->registerCssFile($base.'/css/site/page.css');
-    $cs->registerCssFile($base.'/css/site/comments.css');
-    $cs->registerCssFile($base.'/css/site/favorites.css');
-    $cs->registerCssFile($base.'/css/site/rating.css');
-    $cs->registerScriptFile($base.'/js/site/modal-windows.js');
+    $cs->registerCssFile($base . '/css/icons.css');
+    $cs->registerCssFile($base . '/css/site/form.css');
+    $cs->registerCssFile($base . '/css/site/style.css');
+    $cs->registerCssFile($base . '/css/site/menu.css');
+    $cs->registerCssFile($base . '/css/site/page.css');
+    $cs->registerCssFile($base . '/css/site/comments.css');
+    $cs->registerCssFile($base . '/css/site/favorites.css');
+    $cs->registerCssFile($base . '/css/site/rating.css');
+    $cs->registerScriptFile($base . '/js/site/modal-windows.js');
 
     #toasmessage plugin, message notifier
     $cs->registerScriptFile('/js/plugins/toastmessage/javascript/jquery.toastmessage.js');
@@ -56,36 +56,38 @@
 
 <body>
 
-<? $this->renderPartial('application.views.layouts._modal'); ?>
+    <? $this->renderPartial('application.views.layouts._modal'); ?>
 
-<div id='main-wrapper'>
+    <div id='main-wrapper'>
 
-    <? $this->widget('content.portlets.Menu'); ?>
-    <? $this->widget('content.portlets.SubMenu'); ?>
+        <? $this->widget('content.portlets.Menu'); ?>
+        <? $this->widget('content.portlets.SubMenu'); ?>
 
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span8 well">
-                <? if ($this->page_title): ?>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span8 well">
+                    <? if ($this->page_title): ?>
                     <h1><?= $this->page_title ?></h1>
-                <? endif ?>
+                    <? endif ?>
 
-                <? foreach (Yii::app()->user->getFlashes() as $type => $msg): ?>
+                    <? foreach (Yii::app()->user->getFlashes() as $type => $msg): ?>
                     <div class="alert alert-<?= $type ?>"><?= $msg ?></div>
-                <? endforeach ?>
+                    <? endforeach ?>
 
-                <?= $content ?>
+                    <?= $content ?>
+                </div>
+                <!--/span-->
+                <div class="span4 sidebar-manager">
+                    <? $this->widget('main.portlets.SidebarManager') ?>
+                </div>
             </div>
-            <!--/span-->
-            <div class="span4 sidebar-manager">
-                <? $this->widget('main.portlets.SidebarManager') ?>
-            </div>
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2012</p>
+            </footer>
         </div>
-        <hr>
 
-        <footer>
-            <p>&copy; Company 2012</p>
-        </footer>
     </div>
-
-</div>
+</body>
+</html>
