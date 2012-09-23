@@ -112,6 +112,7 @@ class ImageHelper
         {
             $dir = $doc_root . $dir;
         }
+
         $dir       = rtrim($dir, '/') . '/';
         $path_info = pathinfo($file);
 
@@ -121,6 +122,7 @@ class ImageHelper
         {
             $thumb_name .= "_crop";
         }
+
 
         $thumb_name .= "_" . $path_info["basename"];
         $thumb_path = $dir . $thumb_name;

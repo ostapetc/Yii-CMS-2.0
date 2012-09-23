@@ -31,17 +31,18 @@ class MediaFileController extends ClientController
     protected function sendFilesAsJson($files)
     {
         $res = array();
+        /** @var $file MediaFile */
         foreach ((array)$files as $file)
         {
             $res[] = array(
-                'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
-                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
-                'url'            => $file['href'],
-                'thumbnail_url'  => $file['icon'],
-                'delete_url'     => $file['deleteUrl'],
+                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'url'            => $file->href,
+                'thumbnail_url'  => $file->getIcon(),
+                'delete_url'     => $file->deleteUrl,
                 'delete_type'    => "post",
                 'edit_url' => $this->createUrl('/media/mediaFile/updateAttr', array(
-                    'id'  => $file['id'],
+                    'id'  => $file->id,
                 )),
                 'id'             => 'File_' . $file->id,
             );

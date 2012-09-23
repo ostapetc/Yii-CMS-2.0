@@ -149,18 +149,6 @@ class MediaFile extends ActiveRecord
         return $this;
     }
 
-
-    public function save($runValidation = true, $attributes = null)
-    {
-        if (!parent::save($runValidation = true, $attributes = null))
-        {
-            $this->error = Yii::t('MediaModule.main', 'Не удалось сохранить изменения');
-            return false;
-        }
-        return true;
-    }
-
-
     public function getNameWithoutExt()
     {
         $name   = pathinfo($this->remote_id, PATHINFO_FILENAME);

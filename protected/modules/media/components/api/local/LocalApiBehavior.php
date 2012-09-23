@@ -22,16 +22,17 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getThumb()
     {
-        return ImageHelper::thumb($this->getServerDir(), pathinfo($this->getPk(), PATHINFO_BASENAME), array(
+        $a = ImageHelper::thumb($this->getServerDir(), pathinfo($this->getPk(), PATHINFO_BASENAME), array(
             'width'  => 48,
             'height' => 48
         ), true)->__toString();
+        return $a;
     }
 
 
     public function getServerDir()
     {
-        return Yii::getPathOfAlias('webroot') . pathinfo($this->getPk(), PATHINFO_DIRNAME) . '/';
+        return LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME) . '/';
     }
 
 
@@ -75,7 +76,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         switch (true)
         {
             case $this->isImage:
-
                 return $this->getThumb();
                 break;
             case $this->isAudio:
@@ -167,13 +167,14 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         if ($this->getApiModel()->save('file'))
         {
-            $this->setPk($this->moveToVault($new_file));
-            $this->getOwner()->title = $file->name;
+            $this->setPk($this->getApiModel()->pk);
+            $this->getOwner()->title = $this->getApiModel()->old_name;
             return true;
         }
         else
         {
             $this->error = $this->getApiModel()->error;
+            return false;
         }
     }
 

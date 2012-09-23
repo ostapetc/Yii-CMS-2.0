@@ -4,7 +4,9 @@ class LocalApi extends ApiAbstract
 {
     const UPLOAD_PATH = 'upload/mediaFiles';
 
-    protected $fileInfo;
+    protected $file_info;
+
+    public $old_name;
 
 
     public function findAll($criteria)
@@ -98,7 +100,7 @@ class LocalApi extends ApiAbstract
 
     public function getHref()
     {
-        return '/' . self::UPLOAD_PATH . '/' . $this->model->remote_id;
+        return '/' . self::UPLOAD_PATH . '/' . $this->pk;
     }
 
 
@@ -123,8 +125,8 @@ class LocalApi extends ApiAbstract
 
         if ($file->saveAs(Yii::getPathOfAlias('webroot') . '/' . $new_file))
         {
-            $this->pk    = $this->moveToVault($new_file);
-            $this->title = $file->name;
+            $this->pk = $this->moveToVault($new_file);
+            $this->old_name = $file->name;
             return true;
         }
         else
@@ -138,11 +140,15 @@ class LocalApi extends ApiAbstract
     /**
      * @param $fileInfo SplFileInfo
      */
-    protected function _populate($fileInfo)
+    protected function _populate($file_info)
     {
-//        $this->pk = $fileInfo
+//        $this->pk = $file_info
     }
 
+    public static function basePath()
+    {
+        return Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/';
+    }
 
     /************FileBalance***********/
 
@@ -179,25 +185,26 @@ class LocalApi extends ApiAbstract
             return false;
         }
 
-        list($target_path, $target_file) = $this->getVaultPathAndName($src_file);
 
-        if (!is_dir('./' . $target_path))
+        list($target_folder, $target_file) = $this->getVaultPathAndName($src_file);
+
+        if (!is_dir(self::basePath() . $target_folder))
         {
-            @mkdir('./' . $target_path, 0755, true);
+            @mkdir(self::basePath() . $target_folder, 0755, true);
         }
 
-        @rename('./' . $src_file, './' . $target_path . '/' . $target_file);
+        @rename('./' . $src_file, self::basePath() . $target_folder. '/' . $target_file);
 
         if ($as_array)
         {
             return array(
-                $target_path,
+                $target_folder,
                 $target_file
             );
         }
         else
         {
-            return $target_path . '/' . $target_file;
+            return $target_folder . '/' . $target_file;
         }
     }
 
@@ -208,7 +215,7 @@ class LocalApi extends ApiAbstract
 
         //from 4 symbol construct 2 folders
         $folder_id = substr($id, 0, self::$depth * 2);
-        $folder_id = implode('/', str_split($folder_id, 2));
+        $target_folder = implode('/', str_split($folder_id, 2));
         //new file name
         if ($target_file_name === null)
         {
@@ -223,19 +230,18 @@ class LocalApi extends ApiAbstract
             }
         }
 
-        $target_path = self::UPLOAD_PATH . '/' . $folder_id;
-        $target_file = $this->vaultResolveCollision($target_file_name, $target_path);
+        $target_file = $this->vaultResolveCollision($target_file_name, $target_folder);
 
         return array(
-            $target_path,
+            $target_folder,
             $target_file
         );
     }
 
 
-    public function vaultResolveCollision($file, $target_path = self::UPLOAD_PATH)
+    public function vaultResolveCollision($file, $folder)
     {
-        while (is_file('./' . $target_path . '/' . $file))
+        while (is_file(self::basePath() . $folder . '/'. $file))
         {
             $file = rand(0, 9) . $file;
         }
