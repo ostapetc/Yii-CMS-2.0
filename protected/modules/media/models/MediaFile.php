@@ -68,8 +68,16 @@ class MediaFile extends ActiveRecord
 
     public static $configuration;
 
+    public $api_model;
+
     public $error;
 
+
+    public function __construc($scenario='insert', $api_name = 'local')
+    {
+        $this->setApiName($api_name);
+        parent::__construct($scenario);
+    }
 
     public function name()
     {
@@ -86,12 +94,6 @@ class MediaFile extends ActiveRecord
     public function tableName()
     {
         return 'media_files';
-    }
-
-
-    public function primaryKey()
-    {
-        return 'id';
     }
 
 
@@ -191,13 +193,31 @@ class MediaFile extends ActiveRecord
     }
 
 
+    public function setApiName($api_name)
+    {
+        if (!$api_name)
+        {
+            $api_name = 'local';
+        }
+        $this->detachBehavior('api');
+        if (!self::$configuration)
+        {
+            self::$configuration = new CConfiguration(Yii::getPathOfAlias('media.configs') . '/behaviors.php');
+        }
+
+        $this->attachBehavior('api', self::$configuration[$api_name]);
+        $this->api_name = $api_name;
+        return $this;
+    }
+
     public function getIcon()
     {
         $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/fileIcons/';
         switch (true)
         {
             case $this->isImage:
-                return $this->apiFactory('Local')->getThumb();
+
+                return $this->getThumb();
                 break;
             case $this->isAudio:
                 $name = 'audio';
@@ -279,11 +299,6 @@ class MediaFile extends ActiveRecord
         {
             if ($this->isNewRecord)
             {
-                if (!$this->apiFactory('Local')->save())
-                {
-                    return false;
-                }
-
                 $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->find();
                 $this->order = $model ? $model->order + 1 : 1;
                 $this->type  = $this->detectType();
@@ -333,6 +348,13 @@ class MediaFile extends ActiveRecord
         ));
     }
 
+
+
+    public function afterFind()
+    {
+        $this->setApiName($this->api_name);
+        parent::afterFind();
+    }
 
     /**
      * @param $api_name
@@ -391,13 +413,13 @@ class MediaFile extends ActiveRecord
 
     public function getHref()
     {
-        return $this->apiFactory('Local')->getHref();
+        return $this->asa('api')->getHref();
     }
 
 
     public function getServerDir()
     {
-        return $this->apiFactory('Local')->getServerDir();
+        return $this->asa('api')->getServerDir();
     }
 
 
