@@ -44,7 +44,7 @@ class SocialModule extends WebModule
         return array(
             '/friends/<user_id:\d+>'               => '/social/friend/index',
             '/friends/<user_id:\d+>/<type:in|out>' => '/social/friend/index',
-            '/messages/<to_user_id:\d+>'           => 'social/message/index/'
+            '/messages/<to_user_id:\d+>'           => '/social/message/index'
         );
     }
 }

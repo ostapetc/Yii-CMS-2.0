@@ -21,7 +21,7 @@ $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
 
     <? if (!Yii::app()->user->isGuest && (Yii::app()->user->id != $model->id)): ?>
         <?=
-        CHtml::link('Отправить сообщение', array('/social/message/index/', 'user_id' => $model->id), array('class' => 'btn btn-mini btn-primary'));
+        CHtml::link('Отправить сообщение', array('/social/message/index', 'to_user_id' => $model->id), array('class' => 'btn btn-mini btn-primary'));
         ?>
     <? endif ?>
 

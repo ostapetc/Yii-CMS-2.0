@@ -1,5 +1,10 @@
+<script src="http://localhost:8888/socket.io/socket.io.js"></script>
+
 <?
-Yii::app()->clientScript->registerScriptFile('/js/social/messages.js');
+$cs = Yii::app()->clientScript;
+$cs->registerScriptFile(
+    Yii::app()->assetManager->publish(MODULES_PATH . 'social' . DS . 'components' . DS . 'nodejs' . DS . 'MessageIndexClient.js')
+);
 
 $this->page_title = t('Сообщения') . ' &rarr; ' . $to_user->name;
 

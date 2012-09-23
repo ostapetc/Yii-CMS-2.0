@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://localhost:8888/socket.io/socket.io.js"></script>
+    <script>
+
+        $(function() {
+
+        var socket = io.connect('127.0.0.1:8888');
+        var content = $('#simple-content');
+        socket.on('connect', function() {
+          $('#simple-form').css('display', 'block');
+          content.append($('<p>').text('Connected'));
+        });
+
+        socket.on('message', function(msg) {
+            alert('eeee');
+          content.append($('<p>').text(msg)
+                 .append($('<em>').text(' from server')));
+        });
+
+
+            $('#simple-form').submit(function(e) {
+              e.preventDefault();
+              var textObj = $('#simple-text');
+              var msg = textObj.val();
+              textObj.val('');
+              content.append($('<p>').text(msg)
+                     .append($('<em>').text(' from me')));
+
+              socket.send({'event' : 'message', 'data' : 'daaa'});
+            });
+        });
+    </script>
+</head>
+<body>
+<section id="simple" class="example"><span class="title">Simple Example</span><input type="button" value="connect" id="simple-connect" class="connect">
+
+    <div id="simple-content" class="textbox">
+
+
+    </div>
+    <form id="simple-form" style="display: block; "><input type="text" id="simple-text"><input type="submit" value="Submit"></form>
+</section>
+</body>
+</html>
