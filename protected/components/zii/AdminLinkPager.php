@@ -12,6 +12,8 @@ class AdminLinkPager extends BootPager
     public $prevPageLabel = '←';
     public $nextPageLabel = '→';
 
+    public $no_end = false;
+
     public $header = '';
 
     public $maxButtonCount = 7;
@@ -63,7 +65,6 @@ class AdminLinkPager extends BootPager
                 $i + 1, $i, self::CSS_INTERNAL_PAGE, false, $i == $currentPage);
         }
 
-
         // ... in end
         if ($rangePage[1] + 1 != $this->pages->pageCount)
         {
@@ -71,8 +72,19 @@ class AdminLinkPager extends BootPager
             {
                 $buttons[] = $this->createPageButton('...', $rangePage[1] + 1, 'page disabled', false, false);
             }
+
+            if ($this->no_end)
+            {
+                return $buttons;
+            }
+
             $buttons[] = $this->createPageButton($this->pages->pageCount, $pageCount - 1, self::CSS_LAST_PAGE,
                 $currentPage >= $pageCount - 1, false);
+        }
+
+        if ($this->no_end)
+        {
+            return $buttons;
         }
 
 
