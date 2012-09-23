@@ -3,11 +3,24 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
 {
     public $api_model;
 
+    public $module;
+    public $assets;
+
+
+    public function __construct()
+    {
+        $this->module = Yii::app()->getModule('media');
+        $this->assets = $this->module->assetsUrl();
+    }
+
 
     abstract function getHref();
 
 
     abstract function getUrl();
+
+
+    abstract function getIcon();
 
 
     protected function getPk()
@@ -34,5 +47,16 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         }
         return $owner->api_model;
     }
+
+
+    /**
+     * @param $event CModelEvent
+     */
+    public function afterFind($event)
+    {
+        $this->getOwner()->api_model = $this->getApiModel()->findByPk($this->getPk());
+    }
+
+
 }
 
