@@ -14,7 +14,8 @@ class MessageController extends ClientController
     {
         return array(
             'index'  => t('Список Сообщение'),
-            'create' => t('Отправка сообщения')
+            'create' => t('Отправка сообщения'),
+            'comet'  => 'Comet'
         );
     }
 
@@ -100,11 +101,20 @@ class MessageController extends ClientController
 
         if ($message->save())
         {
-
+            $this->renderPartial('_view', array(
+                'data' => $message
+            ));
         }
         else
         {
             echo CJSON::encode(array('errors' => $message->errors_flat_array));
         }
+    }
+
+
+    public function actionComet()
+    {
+
+
     }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://localhost:8888/socket.io/socket.io.js"></script>
+    <script>
+
+        $(function () {
+            var socket = io.connect('127.0.0.1:8888');
+
+            var content = $('#simple-content');
+
+            socket.on('connect', function () {
+
+            });
+
+            socket.on('evv', function (data) {
+                $('#chat-content').append("<p>" + data.msg + "</p>");
+            });
+
+            $('#send-btn').click(function() {
+                var msg = $('#msg').val();
+
+                $('#msg').val('');
+
+                socket.emit('evv', { 'msg' : msg });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <div id="chat-content" style="border: 1px #696969;">
+
+    </div>
+
+    <textarea id="msg"></textarea> <br/>
+
+    <input type="button" id="send-btn" value="send" />
+</body>
+</html>
