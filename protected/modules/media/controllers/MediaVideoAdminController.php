@@ -19,9 +19,9 @@ class MediaVideoAdminController extends AdminController
         $model = $file->getApi()->getApiModel();
         $model->unsetAttributes();
 
-        if (isset($_GET['MediaYouTubeApi']))
+        if (isset($_GET[get_class($model)]))
         {
-            $model->setAttributes($_GET['MediaYouTubeApi'], false);
+            $model->setAttributes($_GET[get_class($model)], false);
         }
 
         $this->render('manage', array(
