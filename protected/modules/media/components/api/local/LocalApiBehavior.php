@@ -65,27 +65,38 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-
-
     public function detectType()
     {
+        $doc = array(
+            'readable',
+            'archive',
+            'word',
+            'excel'
+        );
         switch (true)
         {
-            case $this->isDocument:
+            case $this->typeIs($doc):
                 return self::TYPE_DOC;
-            case $this->isAudio:
+            case $this->typeIs('audio'):
                 return self::TYPE_AUDIO;
-            case $this->isVideo:
+            case $this->typeIs('video'):
                 return self::TYPE_VIDEO;
-            case $this->isImage:
+            case $this->typeIs('image'):
                 return self::TYPE_IMG;
         }
     }
 
 
-    protected function isType($type)
+    protected function typeIs($types)
     {
-        return in_array($this->extension, LocalFileExtensions::${$type . 'Extensions'});
+        foreach ((array)$types as $type)
+        {
+            if (!in_array($this->extension, LocalFileExtensions::${$type . 'Extensions'}))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -94,19 +105,19 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         $folder = $this->assets . '/img/fileIcons/';
         switch (true)
         {
-            case $this->isImage:
+            case $this->typeIs('image'):
                 return $this->getThumb();
                 break;
-            case $this->isAudio:
+            case $this->typeIs('audio'):
                 $name = 'audio';
                 break;
-            case $this->isExcel:
+            case $this->typeIs('excel'):
                 $name = 'excel';
                 break;
-            case $this->isWord:
+            case $this->typeIs('word'):
                 $name = 'word';
                 break;
-            case $this->isArchive:
+            case $this->typeIs('archive'):
                 $name = 'rar';
                 break;
             default:
@@ -121,48 +132,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public function getExtension()
     {
         return pathinfo($this->getPk(), PATHINFO_EXTENSION);
-    }
-
-
-    public function getIsImage()
-    {
-        return $this->isType('image');
-    }
-
-
-    public function getIsAudio()
-    {
-        return $this->isType('audio');
-    }
-
-
-    public function getIsExcel()
-    {
-        return $this->isType('excel');
-    }
-
-
-    public function getIsWord()
-    {
-        return $this->isType('word');
-    }
-
-
-    public function getIsVideo()
-    {
-        return $this->isType('video');
-    }
-
-
-    public function getIsArchive()
-    {
-        return $this->isType('archive');
-    }
-
-
-    public function getIsDocument()
-    {
-        return $this->isType('readable') || $this->isArchive || $this->isWord || $this->isExcel;
     }
 
 

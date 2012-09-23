@@ -1,5 +1,4 @@
 <?php
-Yii::import('media.components.Api.Abstract.ApiBehaviorAbstract', true);
 class LocalApi extends ApiAbstract
 {
     const UPLOAD_PATH = 'upload/mediaFiles';
@@ -60,6 +59,7 @@ class LocalApi extends ApiAbstract
             'pk',
         );
     }
+
 
     public function getServerDir()
     {
