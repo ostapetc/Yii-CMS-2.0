@@ -4,6 +4,7 @@
  * !Attributes - атрибуты БД
  * @property string           $language
  * @property string           $status
+ * @property integer          $comments_denied
  * @property string           $id
  * @property string           $user_id
  * @property string           $title
@@ -16,6 +17,9 @@
  * @property                  $href
  * @property                  $content
  * @property                  $errorsFlatArray
+ * @property                  $updateUrl
+ * @property                  $createUrl
+ * @property                  $deleteUrl
  * 
  * !Relations - связи
  * @property Language         $language_model
@@ -25,6 +29,12 @@
  * @property User             $user
  * @property PageSectionRel[] $sections_rels
  * @property PageSection[]    $sections
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Page             published()
+ * @method   Page             sitemap()
+ * @method   Page             ordered()
+ * @method   Page             last()
  * 
  */
 

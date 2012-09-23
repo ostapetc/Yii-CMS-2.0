@@ -7,6 +7,7 @@
  * @property-read string $return
  * @property-read string $var
  * @property-read array  $properties
+ * @property-read array  $methods
  */
 class DocBlockParser extends CComponent
 {

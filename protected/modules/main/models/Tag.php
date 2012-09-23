@@ -7,6 +7,16 @@
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property        $errorsFlatArray
+ * @property        $url
+ * @property        $updateUrl
+ * @property        $createUrl
+ * @property        $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Tag    published()
+ * @method   Tag    sitemap()
+ * @method   Tag    ordered()
+ * @method   Tag    last()
  * 
  */
 

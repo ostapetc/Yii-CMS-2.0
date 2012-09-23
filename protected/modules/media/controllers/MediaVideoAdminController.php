@@ -15,12 +15,13 @@ class MediaVideoAdminController extends AdminController
 
     public function actionManage()
     {
-        $model = new MediaYouTubeApi('search');
+        $file = new MediaFile('search', 'youTube');
+        $model = $file->getApi()->getApiModel();
         $model->unsetAttributes();
 
-        if (isset($_GET['MediaYouTubeApi']))
+        if (isset($_GET[get_class($model)]))
         {
-            $model->setAttributes($_GET['MediaYouTubeApi'], false);
+            $model->setAttributes($_GET[get_class($model)], false);
         }
 
         $this->render('manage', array(
@@ -33,9 +34,6 @@ class MediaVideoAdminController extends AdminController
 
     public function actionCreate()
     {
-//        $model = new MediaVideo;
-//        $form  = new Form('media.AlbumForm', $model);
-
 
         $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
 
@@ -91,7 +89,7 @@ class MediaVideoAdminController extends AdminController
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        if ($model->saveFile() && $model->userCanEdit() && $model->save())
+        if ($model->userCanEdit() && $model->save())
         {
             $this->sendFilesAsJson(array($model));
         }

@@ -11,10 +11,20 @@
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property               $href
  * @property               $errorsFlatArray
+ * @property               $url
+ * @property               $updateUrl
+ * @property               $createUrl
+ * @property               $deleteUrl
  * 
  * !Relations - связи
  * @property PageSection   $parent
  * @property PageSection[] $childs
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   PageSection   published()
+ * @method   PageSection   sitemap()
+ * @method   PageSection   ordered()
+ * @method   PageSection   last()
  * 
  */
 

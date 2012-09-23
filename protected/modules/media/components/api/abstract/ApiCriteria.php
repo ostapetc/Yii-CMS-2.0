@@ -5,6 +5,7 @@ class ApiCriteria extends CComponent
 	public $limit=-1;
 	public $offset=-1;
 	public $order='';
+	public $pk='';
 
 	/**
 	 * Constructor.

@@ -15,6 +15,16 @@
  * @property        $formatedValue
  * @property        $filePath
  * @property        $errorsFlatArray
+ * @property        $url
+ * @property        $updateUrl
+ * @property        $createUrl
+ * @property        $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Param  published()
+ * @method   Param  sitemap()
+ * @method   Param  ordered()
+ * @method   Param  last()
  * 
  */
 

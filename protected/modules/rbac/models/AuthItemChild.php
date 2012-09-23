@@ -2,11 +2,21 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string $parent
- * @property string $child
+ * @property string        $parent
+ * @property string        $child
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $errorsFlatArray
+ * @property               $errorsFlatArray
+ * @property               $url
+ * @property               $updateUrl
+ * @property               $createUrl
+ * @property               $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   AuthItemChild published()
+ * @method   AuthItemChild sitemap()
+ * @method   AuthItemChild ordered()
+ * @method   AuthItemChild last()
  * 
  */
 

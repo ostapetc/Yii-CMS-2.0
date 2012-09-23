@@ -2,10 +2,10 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string  $object_id
  * @property string  $model_id
  * @property string  $id
  * @property string  $user_id
+ * @property string  $object_id
  * @property string  $root
  * @property string  $left
  * @property string  $right
@@ -17,9 +17,19 @@
  * @property         $href
  * @property         $model
  * @property         $errorsFlatArray
+ * @property         $url
+ * @property         $updateUrl
+ * @property         $createUrl
+ * @property         $deleteUrl
  * 
  * !Relations - связи
  * @property User    $user
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Comment published()
+ * @method   Comment sitemap()
+ * @method   Comment ordered()
+ * @method   Comment last()
  * 
  */
 

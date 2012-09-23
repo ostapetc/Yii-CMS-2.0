@@ -6,7 +6,7 @@ class DocBlockCommand extends CConsoleCommand
      *
      * @var string
      */
-    public $config = 'stdConfig';
+    public $config;
     public $interactive = false;
 
     protected $baseClass = 'CComponent';
@@ -15,29 +15,37 @@ class DocBlockCommand extends CConsoleCommand
     protected $propertyOptions;
     protected $methodOptions;
     protected $messageSource;
+    protected $alias;
 
-    protected $_alias;
 
-
-    /**
-     * Import all needed classes
-     */
-    public function init()
+    public function __construct($name, $runner)
     {
-        $this->_alias = md5(__DIR__);
-        Yii::setPathOfAlias($this->_alias, __DIR__);
+        //non conflicting alias
+        $alias = md5(__DIR__);
+        Yii::setPathOfAlias($alias, __DIR__);
 
         //configuring
-        $config = new CConfiguration(Yii::getPathOfAlias($this->_alias . '.configs.') . '/' . $this->config . '.php');
-        $config->applyTo($this);
+        $configPath = Yii::getPathOfAlias($alias . '.configs');
+        $config     = new CConfiguration(array(
+            'alias' => $alias
+        ));
+        $config->loadFromFile($configPath . '/stdConfig.php'); //base config
+        if ($this->config) //apply additional config if set
+        {
+            $config->loadFromFile($configPath . '/' . $this->config . '.php');
+        }
+        foreach ($config as $key => $val)
+        {
+            $this->$key = $val;
+        }
 
         //do import
-        Yii::import($this->_alias . '.*', true);
-        Yii::import($this->_alias . '.iterators.*', true);
+        Yii::import($alias . '.*', true);
+        Yii::import($alias . '.iterators.*', true);
 
         //set translaitor
         Yii::app()->setComponent('docBlockMessage', Yii::createComponent($this->messageSource));
-        parent::init();
+        parent::__construct($name, $runner);
     }
 
 
@@ -95,11 +103,12 @@ class DocBlockCommand extends CConsoleCommand
     {
         try
         {
-            $object = new $class;
-            if (!$object instanceof $this->baseClass)
+            $reflection = new ReflectionClass($class);
+            if (!$reflection->isInstantiable() || !$reflection->isSubclassOf($this->baseClass))
             {
                 return false;
             }
+            $object = new $class;
         } catch (Exception $e)
         {
             return false;

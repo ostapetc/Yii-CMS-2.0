@@ -16,10 +16,20 @@
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                $statusCaption
  * @property                $errorsFlatArray
+ * @property                $url
+ * @property                $updateUrl
+ * @property                $createUrl
+ * @property                $deleteUrl
  * 
  * !Relations - связи
  * @property User           $user
  * @property MailerTemplate $template
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   MailerOutbox   published()
+ * @method   MailerOutbox   sitemap()
+ * @method   MailerOutbox   ordered()
+ * @method   MailerOutbox   last()
  * 
  */
 

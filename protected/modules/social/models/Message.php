@@ -1,12 +1,31 @@
-<?
-
-/**
- * @property $id
- * @property $from_user_id
- * @property $to_user_id
- * @property $text
- * @property $is_read
- * @property $date_create
+<?php
+/** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property integer $is_read
+ * @property string  $id
+ * @property string  $from_user_id
+ * @property string  $to_user_id
+ * @property string  $text
+ * @property string  $date_create
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property         $errorsFlatArray
+ * @property         $url
+ * @property         $updateUrl
+ * @property         $createUrl
+ * @property         $deleteUrl
+ * 
+ * !Relations - связи
+ * @property User    $from_user
+ * @property User    $to_user
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Message published()
+ * @method   Message sitemap()
+ * @method   Message ordered()
+ * @method   Message last()
+ * 
  */
 
 class Message extends ActiveRecord

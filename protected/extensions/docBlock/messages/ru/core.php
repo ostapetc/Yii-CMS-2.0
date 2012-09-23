@@ -1,8 +1,8 @@
 <?php
 return array(
-    'Attributes' => '!Attributes - атрибуты БД',
-    'Scopes'     => '!Scopes - именованные группы условий, возвращают этот АР',
-    'Accessors'  => '!Accessors - Геттеры и сеттеры класа и его поведений',
-    'Events'     => '!Events - события',
-    'Relations'  => '!Relations - связи',
+    'attributes' => '!Attributes - атрибуты БД',
+    'scopes'     => '!Scopes - именованные группы условий, возвращают этот АР',
+    'accessors'  => '!Accessors - Геттеры и сеттеры класа и его поведений',
+    'events'     => '!Events - события',
+    'relations'  => '!Relations - связи',
 );

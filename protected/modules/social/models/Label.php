@@ -2,19 +2,23 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property                 $id
- * @property                 $desc
- * @property                 $icon
+ * @property string $id
+ * @property string $desc
+ * @property string $icon
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                 $href
- * @property                 $errorsFlatArray
+ * @property        $href
+ * @property        $errorsFlatArray
+ * @property        $url
+ * @property        $updateUrl
+ * @property        $createUrl
+ * @property        $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Label           published()
- * @method   Label           sitemap()
- * @method   Label           ordered()
- * @method   Label           last()
+ * @method   Label  published()
+ * @method   Label  sitemap()
+ * @method   Label  ordered()
+ * @method   Label  last()
  * 
  */
 

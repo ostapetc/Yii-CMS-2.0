@@ -1,10 +1,28 @@
-<?
-/**
- * @property $id
- * @property $sport_id
- * @property $object_id
- * @property $model_id
+<?php
+/** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property string   $id
+ * @property string   $sport_id
+ * @property string   $object_id
+ * @property string   $model_id
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property          $href
+ * @property          $errorsFlatArray
+ * @property          $url
+ * @property          $updateUrl
+ * @property          $createUrl
+ * @property          $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   SportRel published()
+ * @method   SportRel sitemap()
+ * @method   SportRel ordered()
+ * @method   SportRel last()
+ * 
  */
+
 class SportRel extends ActiveRecord
 {
     const PAGE_SIZE = 20;

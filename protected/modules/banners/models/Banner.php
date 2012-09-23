@@ -1,4 +1,33 @@
 <?php
+/** 
+ * 
+ * !Attributes - атрибуты БД
+ * @property integer $is_active
+ * @property string  $id
+ * @property string  $name
+ * @property string  $image
+ * @property string  $url
+ * @property string  $date_start
+ * @property string  $date_end
+ * @property integer $order
+ * 
+ * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property         $href
+ * @property         $errorsFlatArray
+ * @property         $updateUrl
+ * @property         $createUrl
+ * @property         $deleteUrl
+ * 
+ * !Relations - связи
+ * @property Page    $page
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   Banner  published()
+ * @method   Banner  sitemap()
+ * @method   Banner  ordered()
+ * @method   Banner  last()
+ * 
+ */
 
 class Banner extends ActiveRecord
 {

@@ -1,9 +1,19 @@
 <?php
-abstract class MediaApiModel extends CModel
+abstract class ApiAbstract extends CModel
 {
     protected $dbCriteria;
+    public $pk;
+
+
+    public function getPrimaryKey()
+    {
+        return $this->pk;
+    }
 
     abstract function findAll($criteria);
+
+
+    abstract function save();
 
 
     abstract function findByPk($pk);
@@ -37,6 +47,8 @@ abstract class MediaApiModel extends CModel
     {
         $this->dbCriteria = $criteria;
     }
+
+
     protected function instantiate($attributes)
     {
         $class = get_class($this);

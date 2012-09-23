@@ -6,7 +6,7 @@ Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
 Zend_Loader::loadClass('Zend_Gdata_AuthSub');
 Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
-class MediaYouTubeApi extends MediaApiModel
+class YouTubeApi extends ApiAbstract
 {
     protected $api;
 
@@ -17,7 +17,7 @@ class MediaYouTubeApi extends MediaApiModel
     public $view_count;
     public $raters;
     public $average;
-    public $id;
+    public $pk;
 
     public $author_name;
     public $author_uri;
@@ -31,11 +31,29 @@ class MediaYouTubeApi extends MediaApiModel
     {
         if (!$this->api)
         {
-            $conf       = Yii::app()->params['youtube'];
+            $conf       = Yii::app()->params['youTube'];
             $httpClient = Zend_Gdata_ClientLogin::getHttpClient($conf['user'], $conf['pass'], 'youtube');
             $this->api  = new Zend_Gdata_YouTube($httpClient, $conf['app'], $conf['user'], $conf['key']);
         }
         return $this->api;
+    }
+
+
+    public function save()
+    {
+        throw new CException('no implemented yet');
+    }
+
+
+    public function getUrl()
+    {
+        throw new CException('no implemented yet');
+    }
+
+
+    public function getHref()
+    {
+        throw new CException('no implemented yet');
     }
 
 
@@ -52,7 +70,7 @@ class MediaYouTubeApi extends MediaApiModel
         $query->setMaxResults($criteria->limit);
         $query->setStartIndex($criteria->offset);
         $query->setOrderBy($criteria->order);
-        $query->setAuthor($criteria->author);
+        $query->setAuthor($criteria->author_name);
         $query->setCategory($criteria->category);
 
         $feed = $this->getApi()->getVideoFeed($query);
@@ -65,7 +83,7 @@ class MediaYouTubeApi extends MediaApiModel
      */
     protected function _populate($entry)
     {
-        $this->id         = $entry->getVideoId();
+        $this->pk         = $entry->getVideoId();
         $this->title      = $entry->getVideoTitle();
         $rating           = $entry->getVideoRatingInfo();
         $this->average    = $rating['average'];
@@ -105,12 +123,12 @@ class MediaYouTubeApi extends MediaApiModel
     public function search()
     {
         $criteria = new YouTubeApiCriteria(array(
-            'select'   => $this->title,
-            'category' => $this->category,
-            'author'   => $this->author,
+            'select'        => $this->title,
+            'category'      => $this->category,
+            'author_name'   => $this->author_name,
         ));
 
-        $dp = new YouTubeDataProvider(new MediaYouTubeApi(), array(
+        $dp = new YouTubeApiDataProvider(new YouTubeApi(), array(
             'criteria' => $criteria
         ));
         return $dp;
@@ -127,16 +145,10 @@ class MediaYouTubeApi extends MediaApiModel
             'view_count',
             'raters',
             'average',
-            'id',
+            'pk',
             'author_name',
             'author_uri',
         );
-    }
-
-
-    public function getPrimaryKey()
-    {
-        return $this->id;
     }
 
 

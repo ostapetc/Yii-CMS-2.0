@@ -2,19 +2,29 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string $id
- * @property string $user_id
- * @property string $title
- * @property string $module
- * @property string $controller
- * @property string $action
- * @property string $date_create
+ * @property string     $id
+ * @property string     $user_id
+ * @property string     $title
+ * @property string     $module
+ * @property string     $controller
+ * @property string     $action
+ * @property string     $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property        $errorsFlatArray
+ * @property            $errorsFlatArray
+ * @property            $url
+ * @property            $updateUrl
+ * @property            $createUrl
+ * @property            $deleteUrl
  * 
  * !Relations - связи
- * @property User   $user
+ * @property User       $user
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   SiteAction published()
+ * @method   SiteAction sitemap()
+ * @method   SiteAction ordered()
+ * @method   SiteAction last()
  * 
  */
 

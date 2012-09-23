@@ -2,13 +2,23 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property integer $id
- * @property string  $category
- * @property string  $message
+ * @property integer         $id
+ * @property string          $category
+ * @property string          $message
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property         $list
- * @property         $errorsFlatArray
+ * @property                 $list
+ * @property                 $errorsFlatArray
+ * @property                 $url
+ * @property                 $updateUrl
+ * @property                 $createUrl
+ * @property                 $deleteUrl
+ * 
+ * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   LanguageMessage published()
+ * @method   LanguageMessage sitemap()
+ * @method   LanguageMessage ordered()
+ * @method   LanguageMessage last()
  * 
  */
 

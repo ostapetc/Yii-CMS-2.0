@@ -78,7 +78,7 @@ class MediaFileAdminController extends AdminController
         $model->model_id  = $model_id;
         $model->tag       = $tag;
 
-        if ($model->saveFile() && $model->save())
+        if ($model->save())
         {
             $this->sendFilesAsJson(array($model));
         }
