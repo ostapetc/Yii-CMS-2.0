@@ -13,12 +13,16 @@ $(function () {
 
     $('#message-form').submit(function() {
         var $submit = $(this).find('input[type="submit"]');
+        var message = $.trim($('#Message_text').val().stripTags());
 
-        if ($submit.hasClass('sending')) return;
+        if ($submit.hasClass('sending') || !message.length) {
+            return false;
+        }
+
         $submit.addClass('sending').val('Отправляем...');
 
         var params = {
-            'Message[text]'       : $.trim($('#Message_text').val().stripTags()),
+            'Message[text]'       : message,
             'Message[to_user_id]' : to_user_id
         }
 

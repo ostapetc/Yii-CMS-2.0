@@ -13,7 +13,7 @@ class PageInfoSidebar extends Portlet
     public function renderContent()
     {
         $this->render('PageInfoSidebar', array(
-            'views_count' => View::count('Page', Yii::app()->request->getParam('id'))
+            'views_count' => View::countFor('Page', Yii::app()->request->getParam('id'))
         ));
     }
 }

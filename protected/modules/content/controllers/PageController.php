@@ -8,7 +8,7 @@ class PageController extends ClientController
             parent::filters(),
             array(
                 array(
-                    'application.modules.tags.components.filters.ViewsSaveFilter',
+                    'application.modules.social.components.filters.ViewsSaveFilter',
                     'model_id' => 'Page'
                 )
             )

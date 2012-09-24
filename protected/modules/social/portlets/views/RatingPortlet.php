@@ -22,8 +22,8 @@ $plus_na   = (int) $value > 0 ? 'glyphicon-na' : '';
             <div title="<?= $labels['minus'] ?>" class="rating-vote minus glyphicon-thumbs-down <?= $minus_na ?>" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
             <div title="<?= $labels['plus'] ?>" class="rating-vote plus glyphicon-thumbs-up <?= $plus_na ?>" value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
         <? else: ?>
-            <div title="<?= $labels['not_owner'] ?>" class="rating-vote minus glyphiconzz-thumbs-down"></div>
-            <div title="<?= $labels['not_owner'] ?>" class="rating-vote plus glyphicon-thumbs-up "></div>
+            <div title="<?= $labels['not_owner'] ?>" class="rating-vote minus glyphicon-thumbs-down glyphicon-na"></div>
+            <div title="<?= $labels['not_owner'] ?>" class="rating-vote plus glyphicon-thumbs-up glyphicon-na"></div>
         <? endif ?>
     <? endif ?>
 </div>

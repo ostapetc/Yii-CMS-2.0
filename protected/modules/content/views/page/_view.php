@@ -79,9 +79,7 @@
 </div>
 <br clear="all"/>
 
-<? if (!$preview): ?>
-    <? $this->widget('CommentsPortlet', array('model' => $data)); ?>
-<? endif ?>
+
 
 
 
