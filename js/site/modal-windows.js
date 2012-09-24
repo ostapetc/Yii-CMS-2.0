@@ -27,7 +27,32 @@ $(function()
         return false;
     });
 
-    $('.login-link').click(function() {
+    $('.iframe-link').live('click', function()
+    {
+        var action_url = $(this).attr('href');
+        var modal_id = $(this).data('modal-id') ? (this).data('modal-id') : 'modal-window';
+        var title = $(this).data('title');
+        var modal = $('#' + modal_id).modal({show: false});
+
+
+        if (action_url.indexOf('?') != -1)
+        {
+            action_url += '&iframe=1'
+        }
+        else
+        {
+            action_url += '?iframe=1'
+        }
+
+        modal.find('h3').html(title);
+        modal.modal('show');
+        modal.find('.modal-body').html($('<iframe width="99%" height="370px"></iframe>').attr('src', action_url));
+
+        return false;
+    });
+
+    $('.login-link').click(function()
+    {
         $('a[href="/login"]').trigger('click');
     });
 });

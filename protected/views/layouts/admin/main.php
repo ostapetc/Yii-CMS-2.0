@@ -50,6 +50,7 @@
                 'homeLink'  => '<a href="/content/pageAdmin/manage">' . t("Панель управления") . '</a>'
             ));
             ?>
+            <a href="/media/mediaVideoAdmin/manage" class="iframe-link">youtube</a>
         </div>
     </section>
 

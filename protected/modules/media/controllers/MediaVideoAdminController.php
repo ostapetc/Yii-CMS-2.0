@@ -54,11 +54,11 @@ class MediaVideoAdminController extends AdminController
 
         // build the form
         $form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
-                '" method="post" enctype="multipart/form-data">'.
-                '<input name="file" type="file"/>'.
-                '<input name="token" type="hidden" value="'. $tokenValue .'"/>'.
-                '<input value="Upload Video File" type="submit" />'.
-                '</form>';
+            '" method="post" enctype="multipart/form-data">'.
+            '<input name="file" type="file"/>'.
+            '<input name="token" type="hidden" value="'. $tokenValue .'"/>'.
+            '<input value="Upload Video File" type="submit" />'.
+            '</form>';
 
         $this->render('create', array('postUrl' => $postUrl, 'nextUrl' => $nextUrl, 'tokenValue' => $tokenValue));
     }

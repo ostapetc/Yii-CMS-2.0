@@ -12,11 +12,22 @@ foreach (YouTubeApiCriteria::$order_list as $sort => $label)
     $urls[$key]     = $label;
 }
 $selected = isset($_GET['sort']) ? $_GET['sort'] : YouTubeApiCriteria::ORDER_VIEW_COUNT;
+$filter = CHtml::textField('tyoutube-search');
 $sorter   = 'Сортировать по: ' . CHtml::dropDownList('order', $selected, $urls, array(
     'id' => 'youtube-sorter',
 ));
 
+$widget = $this->widget('AdminListView', array(
+    'itemView' => '_manage',
+    'dataProvider' => $model->search(),
+    'template' => $sorter . "{pager}\n{sorter}\n{items}\n{pager}",
+    'pager' => array(
+        'class' => 'AdminLinkPager',
+        'no_end' => true
+    )
+));
 
+/*
 $widget = $this->widget('AdminGridView', array(
     'id'           => 'youtube-grid',
     'dataProvider' => $model->search(),
@@ -48,6 +59,7 @@ $widget = $this->widget('AdminGridView', array(
         ),
     ),
 ));
+*/
 ?>
 
 
@@ -56,7 +68,7 @@ $widget = $this->widget('AdminGridView', array(
     {
         $('body').delegate('#youtube-sorter', 'change', function()
         {
-            $('#<?=$widget->getId()?>').yiiGridView('update', {url: $(this).val()});
+            $('#<?=$widget->getId()?>').yiiListView('update', {url: $(this).val()});
         });
     });
 

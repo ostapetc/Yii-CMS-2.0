@@ -17,6 +17,9 @@
     $cs->registerCssFile($base.'/css/icons.css');
     $cs->registerCssFile($base.'/css/admin/extend.css');
     $cs->registerScriptFile($base.'/js/admin/hideshow.js');
+    $cs->registerScriptFile($base.'/js/plugins/clip/ZeroClipboard.min.js');
+    $cs->registerScriptFile($base.'/js/site/clip.js');
+    $cs->registerScriptFile($base.'/js/site/modal-windows.js');
     $cs->registerScriptFile($base.'/js/admin/jquery.tablesorter.min.js');
     $cs->registerScriptFile($base.'/js/admin/jquery.equalHeight.js');
     $cs->registerScriptFile($base.'/js/admin/jquery.hotkeys.js');

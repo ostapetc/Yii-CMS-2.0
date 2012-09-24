@@ -71,3 +71,13 @@ span.jquery-console-cursor{
 .grid-view .filters .hasDatepicker{
     display: inline-block !important;
 }
+
+
+.modal
+{
+    width: 700px;
+    margin: -220px 0 0 -350px;
+}
+iframe{
+    border:0
+}

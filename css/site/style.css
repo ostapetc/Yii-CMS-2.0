@@ -22,6 +22,11 @@ body {
 
 .modal {
     display: none;
+    width: 700px;
+    margin: -220px 0 0 -350px;
+}
+iframe{
+    border:0
 }
 .clear{
     clear: both;
