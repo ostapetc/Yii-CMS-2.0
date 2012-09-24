@@ -1,0 +1,47 @@
+.message-date {
+    float: right;
+    color: #999999;
+    font-size: 11px;
+    margin-right: 10px;
+}
+
+.messages-list {
+    overflow-y: scroll;
+    height: 400px;
+}
+
+.messages-list hr {
+    margin: 10px 0 !important;
+}
+
+.message-tbl {
+    width:100%;
+}
+
+.message-avatar {
+    width: 23px;
+    padding-right: 10px;
+}
+
+.message-username a, #message-dialogs-ul a{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#message-dialogs-ul img {
+    margin-right: 5px;
+}
+
+.message-text {
+    font-size: 12px;
+}
+
+#Message-listView {
+    margin-top: 20px;
+}
+
+#Message_text {
+    width: 470px;
+    height: 54px;
+}
+

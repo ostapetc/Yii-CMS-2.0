@@ -66,9 +66,8 @@ class MessageController extends ClientController
         $user_id = Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
-        $criteria->order = 'date_create DESC';
+        $criteria->order = 'date_create ASC';
         $criteria->addCondition("to_user_id = {$user_id} OR from_user_id = {$user_id}");
-        //$criteria->addCondition('to_user_id', Yii::app()->user->id);
 
         if ($to_user_id)
         {
@@ -97,7 +96,8 @@ class MessageController extends ClientController
         $attributes['from_user_id'] = Yii::app()->user->id;
 
         $message = new Message();
-        $message->attributes = $attributes;
+        $message->attributes  = $attributes;
+        $message->date_create = date('Y-m-d H:i:s');
 
         if ($message->save())
         {
@@ -114,7 +114,6 @@ class MessageController extends ClientController
 
     public function actionComet()
     {
-
 
     }
 }

@@ -279,8 +279,9 @@ class AppManager
         $model_class = ucfirst($model_class);
         $model_dir   = glob(implode(DS, array($_SERVER['DOCUMENT_ROOT'] . 'protected', 'modules', '*', 'models', $model_class . '.php')));
 
-        preg_match('|modules' . DS       . '(.*?)' . DS  . '|', $model_dir[0], $module);
-        return $module[1];
+        preg_match('|modules(.*)models|', $model_dir[0], $module);
+
+        return str_replace(DIRECTORY_SEPARATOR, '', $module[1]);
     }
 }
 

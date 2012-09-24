@@ -2,6 +2,7 @@
 
 <?
 $cs = Yii::app()->clientScript;
+$cs->registerCssFile('/css/site/messages.css');
 $cs->registerScriptFile(
     Yii::app()->assetManager->publish(MODULES_PATH . 'social' . DS . 'components' . DS . 'nodejs' . DS . 'MessageIndexClient.js')
 );
@@ -9,10 +10,13 @@ $cs->registerScriptFile(
 $this->page_title = t('Сообщения') . ' &rarr; ' . $to_user->name;
 
 $this->widget('BootListView', array(
-    'id'           => 'Message-listView',
-    'dataProvider' => $data_provider,
-    'itemView'     => '_view',
-    'emptyText'    => t('Сообщения не найдены')
+    'id'               => 'Message-listView',
+    'dataProvider'     => $data_provider,
+    'itemView'         => '_view',
+    'emptyText'        => t('Сообщения не найдены'),
+    'itemsCssClass'    => 'messages-list',
+    'summaryText'      => false,
+    'enablePagination' => false
 ));
 ?>
 
@@ -27,7 +31,7 @@ $this->widget('BootListView', array(
             </td>
             <td>
                 <?= CHtml::hiddenField('Message[to_user_id]', $to_user->id) ?>
-                <?= CHtml::textArea('Message[text]', '', array('style' => 'width: 470px')) ?>
+                <?= CHtml::textArea('Message[text]', '') ?>
             </td>
             <td style="padding-left: 10px;">
                 <?= $to_user->getPhotoHtml(User::PHOTO_SIZE_BIG) ?>

@@ -110,9 +110,8 @@ class Message extends ActiveRecord
     }
 
 
-    public function uploadFiles()
+    public function getDateCreateValue()
     {
-        return array(
-        );
+        return date('m.d.Y H:i', strtotime($this->date_create));
     }
 }
