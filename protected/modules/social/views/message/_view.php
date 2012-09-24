@@ -10,7 +10,6 @@
             <div class="message-text"><?= CHtml::encode($data->text) ?></div>
         </td>
     </tr>
-
 </table>
 
 <hr/>

@@ -6,7 +6,11 @@ $(function () {
     $messages_list.scrollTop($messages_list.prop('scrollHeight'));
 
     var socket = io.connect('127.0.0.1:8888');
-    socket.on('connect', function () {});
+
+    socket.on('request_user_id', function() {
+        socket.emit('response_user_id', {user_id : $('#app_user_id').val()});
+    });
+
     socket.on('new message', function (res) {
         appendListAndScroll(res.view);
     });
@@ -26,22 +30,31 @@ $(function () {
             'Message[to_user_id]' : to_user_id
         }
 
-        if (params['Message[text]']) {
-            $.post('/social/message/create', params, function(view) {
-                appendListAndScroll(view);
+        $.post('/social/message/create', params, function(res) {
+            appendListAndScroll(res.view);
+            $('#Message_text').val('');
 
-                $('#Message_text').val('');
-                socket.emit('new message', { 'view' : view });
-
-                $submit.removeClass('sending').val('Отправить');
+            socket.emit('new message', {
+                'view'         : res.view,
+                'to_user_id'   : res.to_user_id,
+                'from_user_id' : res.from_user_id
             });
-        }
+
+            $submit.removeClass('sending').val('Отправить');
+
+        }, 'json');
+
 
         return false;
     });
 
     function appendListAndScroll(view) {
-        $messages_list.append(view);
-        $messages_list.animate({ scrollTop: $messages_list.prop('scrollHeight') }, 'fast');
+        if ($messages_list.find('.message-tbl').length) {
+            $messages_list.append(view);
+            $messages_list.animate({ scrollTop: $messages_list.prop('scrollHeight') }, 'fast');
+        }
+        else {
+            $messages_list.html(view);
+        }
     }
 });

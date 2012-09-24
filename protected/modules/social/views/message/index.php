@@ -8,17 +8,17 @@ $cs->registerScriptFile(
 );
 
 $this->page_title = t('Сообщения') . ' &rarr; ' . $to_user->name;
-
-$this->widget('BootListView', array(
-    'id'               => 'Message-listView',
-    'dataProvider'     => $data_provider,
-    'itemView'         => '_view',
-    'emptyText'        => t('Сообщения не найдены'),
-    'itemsCssClass'    => 'messages-list',
-    'summaryText'      => false,
-    'enablePagination' => false
-));
 ?>
+
+<div class="messages-list">
+    <? if ($messages): ?>
+        <? foreach ($messages as $message): ?>
+            <? $this->renderPartial('_view', array('data' => $message)) ?>
+        <? endforeach ?>
+    <? else: ?>
+        <?= t('Сообщения не найдены') ?>
+    <? endif ?>
+</div>
 
 <br/>
 

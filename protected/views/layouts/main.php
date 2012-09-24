@@ -55,6 +55,7 @@
 </head>
 
 <body>
+    <?= CHtml::hiddenField('app_user_id', Yii::app()->user->id, array('id' => 'app_user_id')) ?>
 
     <? $this->renderPartial('application.views.layouts._modal'); ?>
 

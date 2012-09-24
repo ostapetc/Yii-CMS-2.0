@@ -66,7 +66,7 @@ class MessageController extends ClientController
         $user_id = Yii::app()->user->id;
 
         $criteria = new CDbCriteria();
-        $criteria->order = 'date_create ASC';
+        $criteria->order = 'date_create DESC';
         $criteria->addCondition("to_user_id = {$user_id} OR from_user_id = {$user_id}");
 
         if ($to_user_id)
@@ -78,9 +78,12 @@ class MessageController extends ClientController
             'criteria' => $criteria
         ));
 
+        $messages = $data_provider->getData();
+        krsort($messages);
+
 		$this->render('index', array(
-			'data_provider' => $data_provider,
-            'to_user'       => $to_user
+			'messages' => $messages,
+            'to_user'  => $to_user
 		));
 	}
 
@@ -101,8 +104,10 @@ class MessageController extends ClientController
 
         if ($message->save())
         {
-            $this->renderPartial('_view', array(
-                'data' => $message
+            echo CJSON::encode(array(
+                'from_user_id' => $message->from_user_id,
+                'to_user_id'   => $message->to_user_id,
+                'view'         => $this->renderPartial('_view', array('data' => $message), true)
             ));
         }
         else
