@@ -11,8 +11,9 @@ class CommentController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            'create' => 'Добавление комментария',
-            'list'   => 'Список комментариев'
+            'create'       => 'Добавление комментария',
+            'list'         => 'Просмотр комментариев',
+            'userComments' => 'Просмотр комментариев пользователя'
         );
     }
 
@@ -60,6 +61,25 @@ class CommentController extends ClientController
 
         $this->render('list', array(
             'comments' => $comments
+        ));
+    }
+
+
+    public function actionUserComments($user_id)
+    {
+        $user = User::model()->throw404IfNull()->findByPk($user_id);
+
+        $criteria = new CDbCriteria();
+        $criteria->compare('user_id', $user_id);
+        $criteria->order = 'date_create DESC';
+
+        $data_provider = new ActiveDataProvider('Comment', array(
+            'criteria' => $criteria
+        ));
+
+        $this->render('userComments', array(
+            'data_provider' => $data_provider,
+            'user'          => $user
         ));
     }
 }

@@ -38,7 +38,7 @@ class UserPageSidebar extends Portlet
             ),
             array(
                 'label' => "<span class='glyphicon-comments'></span> " . t('Комментарии') . ' (' . Yii::app()->user->comments_count . ')',
-                'url'   => $this->createUrl('')
+                'url'   => $this->createUrl('/comments/comment/userComments', array('user_id' => Yii::app()->user->id))
             ),
         );
 

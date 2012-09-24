@@ -171,3 +171,7 @@ span.italic-12 {
 .margin-null {
     margin: 0 0 0 0 !important;
 }
+
+.table {
+    font-size: 12px !important;
+}

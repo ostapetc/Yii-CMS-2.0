@@ -43,6 +43,7 @@ class CommentsModule extends WebModule
     public function routes()
     {
         return array(
+            '/comments/user/<user_id:\d+>' => '/comments/comment/userComments'
         );
     }
 }
