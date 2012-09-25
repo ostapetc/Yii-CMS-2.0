@@ -43,7 +43,12 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         $owner = $this->getOwner();
         if ($owner->api_model === null)
         {
+            try{
             $owner->api_model = Yii::createComponent($this->api_model);
+            } catch (Exception $e)
+            {
+                dump($e);
+            }
         }
         return $owner->api_model;
     }

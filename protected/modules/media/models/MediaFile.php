@@ -134,11 +134,11 @@ class MediaFile extends ActiveRecord
 
 
     /**
-     * @return ApiBehaviorAbstract
+     * @return ApiAbstract
      */
     public function getApi()
     {
-        return $this->asa('api');
+        return $this->asa('api')->getApiModel();
     }
 
 
@@ -159,6 +159,13 @@ class MediaFile extends ActiveRecord
 
         $this->api_name = $api_name;
 
+        $aliace = $this->getTableAlias();
+        $this->dbCriteria->mergeWith(array(
+            'condition' => "$aliace.api_name=:api_name",
+            'params'    => array(
+                'api_name' => $api_name
+            )
+        ));
         return $this;
     }
 
@@ -236,12 +243,12 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public static function getDataProvider($model, $tag)
+    public static function getDataProvider($model, $tag, $api = 'local')
     {
         $file = new static;
         return new ActiveDataProvider(get_called_class(), array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->ordered()
-                ->getDbCriteria(),
+            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->setApi($api)
+                ->ordered()->getDbCriteria(),
         ));
     }
 }
