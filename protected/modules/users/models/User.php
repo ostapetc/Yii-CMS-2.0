@@ -357,6 +357,18 @@ class User extends ActiveRecord
                 self::STAT,
                 'Comment',
                 'user_id'
+            ),
+            'messages_count' => array(
+                self::STAT,
+                'Message',
+                'to_user_id',
+                'condition' => 'is_read = 0'
+            ),
+            'new_messages_count' => array(
+                self::STAT,
+                'Message',
+                'to_user_id',
+                //'condition' => 'read = 0'
             )
         );
     }

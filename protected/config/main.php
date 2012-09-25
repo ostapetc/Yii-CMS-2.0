@@ -141,6 +141,11 @@ return array(
         'save_site_actions' => true,
         'multilanguage_support' => false,
         'collect_routes_from_modules' => true,
-        'themes_enabled' => false
+        'themes_enabled' => false,
+        'nodejs' => array(
+            'port' => 8888,
+            'host' => 'http://localhost',
+            'ip'   => '127.0.0.1'
+        )
     )
 );

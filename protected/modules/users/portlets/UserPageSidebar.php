@@ -23,10 +23,13 @@ class UserPageSidebar extends Portlet
             );
         }
 
+        $messages_label = "<span class='glyphicon-message-plus'></span> " . t('Сообщения') . ' (' . Yii::app()->user->messages_count . ')';
+
+
         $items = array(
             array(
-                'label' => "<span class='glyphicon-file'></span> " . t('Страницы') . ' (' . Yii::app()->user->pages_count . ')',
-                'url'   => $this->createUrl(''),
+                'label' => $messages_label,
+                'url'   => $this->createUrl('/messages/message/index')
             ),
             array(
                 'label' => $friends_label,
@@ -35,6 +38,10 @@ class UserPageSidebar extends Portlet
             array(
                 'label' => "<span class='glyphicon-star'></span> " . t('Избранное') . ' (' . Yii::app()->user->favorites_count . ')',
                 'url'   => $this->createUrl('')
+            ),
+            array(
+                'label' => "<span class='glyphicon-file'></span> " . t('Страницы') . ' (' . Yii::app()->user->pages_count . ')',
+                'url'   => $this->createUrl(''),
             ),
             array(
                 'label' => "<span class='glyphicon-comments'></span> " . t('Комментарии') . ' (' . Yii::app()->user->comments_count . ')',
