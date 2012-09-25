@@ -10,9 +10,9 @@
                         <?= $comment->user->photo_link ?>
                     </td>
                     <td >
-                        <div style="position: relative;width: 250px;">
+                        <div style="position: relative;width: 230px;">
                             <?= $comment->user->link ?>
-                            <div class="date"><?= Yii::app()->dater->readableFormat($comment->date_create); ?></div>
+                            <div class="date"><?= $comment->value('date_create'); ?></div>
                             <br clear="all" />
                             <?= CHtml::link(Yii::app()->text->cut($comment->text, 130), "/", array('class' => 'l-comment')); ?>
                         </div>
