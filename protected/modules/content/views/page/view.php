@@ -32,6 +32,9 @@ if (Yii::app()->user->checkAccess('Page_update'))
         'preview' => false
     ));
     ?>
+
+    <br/>
+    <? $this->widget('CommentsPortlet', array('model' => $page)); ?>
 <? endif ?>
 
 

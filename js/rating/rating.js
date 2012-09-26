@@ -7,14 +7,15 @@ $(function() {
         that.siblings('.rating-vote').removeClass('glyphicon-na');
 
         var params = {
-            'Rating[object_id]' : $(this).attr('object_id'),
-            'Rating[model_id]'  : $(this).attr('model_id'),
+            'Rating[object_id]' : that.attr('object_id'),
+            'Rating[model_id]'  : that.attr('model_id'),
             'Rating[value]'     : value
         };
 
+        console.log(params);
+
         $.post('/social/rating/create', params, function(rating_html) {
             that.parent().find('.rating-value').replaceWith(rating_html);
-
 
             if (parseInt(value)) {
                //that.add

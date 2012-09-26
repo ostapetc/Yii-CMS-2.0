@@ -20,7 +20,8 @@ class UserController extends ClientController
             'changePassword'         => t('Смена пароля'),
             'changePasswordRequest'  => t('Запрос на смену пароля'),
             'updateSelfData'         => t('Редактирование личных данных'),
-            'index'                  => t('Люди')
+            'index'                  => t('Люди'),
+            'getUserId'              => t('Получить User ID')
         );
     }
 
@@ -422,4 +423,15 @@ class UserController extends ClientController
             'data_provider' => $data_provider
         ));
     }
+
+
+    public function actionGetUserId()
+    {
+        if (!Yii::app()->user->isGuest)
+        {
+            echo Yii::app()->user->id;
+        }
+    }
 }
+
+

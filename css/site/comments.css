@@ -22,7 +22,7 @@
 }
 
 .comment .date {
-    color: #666666;
+    color: #999999;
     display: block;
     float: left;
     font-size: 11px;
@@ -86,7 +86,9 @@
     right: 1px;
     top: 0;
     text-align: right;
-    font-size: 12px;
+
+
     color: #999999;
+    font-size: 11px;
 }
 

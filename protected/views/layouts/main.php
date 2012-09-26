@@ -6,15 +6,28 @@
     <meta name="description" content="<? echo $this->meta_description ?>">
     <meta name="keywords" content="<? echo $this->meta_keywords ?>">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <?
-    $base = Yii::app()->baseUrl;
+    $params = Yii::app()->params;
+    $base   = Yii::app()->baseUrl;
+    $cs     = Yii::app()->clientScript;
 
-    $cs = Yii::app()->clientScript;
+    //NodeJS only for loginned users
+    if (!Yii::app()->user->isGuest)
+    {
+        $cs->registerScriptFile(
+            $params['nodejs']['host'] . ':' . $params['nodejs']['port'] . '/socket.io/socket.io.js'
+        );
+        $cs->registerScriptFile(
+            Yii::app()->assetManager->publish(APP_PATH . 'components' . DS . 'nodejs' . DS . 'NodeJSClient.js')
+        );
+    }
+
     $cs->registerCoreScript('jquery');
     Yii::app()->bootstrap->registerScripts();
 
@@ -33,8 +46,8 @@
     #toasmessage plugin, message notifier
     $cs->registerScriptFile('/js/plugins/toastmessage/javascript/jquery.toastmessage.js');
     $cs->registerCssFile('/js/plugins/toastmessage/resources/css/jquery.toastmessage.css');
-
     $cs->registerScriptFile('/js/plugins/errorsNotifier.js');
+
 
 //    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));
 //    $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
@@ -47,15 +60,11 @@
 //    {
 //        $cs->registerScriptFile('/js/plugins/debug.js');
 //    }
-
-
     ?>
-
-    <link rel="shortcut icon" href="/favicon.ico">
 </head>
 
 <body>
-
+    <? $this->renderPartial('application.modules.main.views.main._hiddenFields') ?>
     <? $this->renderPartial('application.views.layouts._modal'); ?>
 
     <div id='main-wrapper'>

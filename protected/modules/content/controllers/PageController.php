@@ -8,7 +8,7 @@ class PageController extends ClientController
             parent::filters(),
             array(
                 array(
-                    'application.modules.tags.components.filters.ViewsSaveFilter',
+                    'application.modules.social.components.filters.ViewsSaveFilter',
                     'model_id' => 'Page'
                 )
             )
@@ -60,15 +60,15 @@ class PageController extends ClientController
                 'sidebars' => array(
                     array(
                         'widget',
-                        'application.modules.content.portlets.SectionCreateSidebar',
+                        'content.portlets.SectionCreateSidebar',
                     ),
                     array(
                         'widget',
-                        'application.modules.tags.portlets.TagCreateSidebar',
+                        'tags.portlets.TagCreateSidebar',
                     ),
                     array(
                         'partial',
-                        'application.modules.content.views.page._sidebarFormNotices'
+                        'content.views.page._sidebarFormNotices'
                     )
                 )
             ),
@@ -77,15 +77,19 @@ class PageController extends ClientController
                 'sidebars' => array(
                     array(
                         'widget',
-                        'application.modules.content.portlets.PageSectionsSidebar'
+                        'content.portlets.PageSectionsSidebar'
                     ),
                     array(
                         'widget',
-                        'application.modules.comments.portlets.CommentsSidebar',
+                        'comments.portlets.CommentsSidebar',
                     ),
+                    array(
+                        'widget',
+                        'media.portlets.YouTubePlayList'
+                    )
                     /*array(
                         'widget',
-                        'application.modules.content.portlets.NavigatorSidebar',
+                        'content.portlets.NavigatorSidebar',
                     ),*/
                 )
             ),
@@ -94,7 +98,7 @@ class PageController extends ClientController
                 'sidebars' => array(
                     array(
                         'widget',
-                        'application.modules.content.portlets.PageInfoSidebar'
+                        'content.portlets.PageInfoSidebar'
                     )
                 )
             ),
@@ -103,7 +107,7 @@ class PageController extends ClientController
                 'sidebars' => array(
                     array(
                         'widget',
-                        'application.modules.content.portlets.userPagesSidebar'
+                        'content.portlets.userPagesSidebar'
                     )
                 )
             ),
