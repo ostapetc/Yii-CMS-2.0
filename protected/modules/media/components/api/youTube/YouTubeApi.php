@@ -68,9 +68,10 @@ class YouTubeApi extends ApiAbstract
      *
      * @return array
      */
-    public function findAll($criteria)
+    public function findAll()
     {
         $this->beforeFind();
+        $criteria = $this->getDbCriteria();
         $cache_key = $criteria->toCacheKey();
         if (!($res = Yii::app()->cache->get($cache_key)))
         {
@@ -142,7 +143,9 @@ class YouTubeApi extends ApiAbstract
         ));
 
         $criteria->mergeWith($props);
-        $dp = new YouTubeApiDataProvider(new YouTubeApi(), array(
+        $model = new static;
+        $model->setDbCriteria($criteria);
+        $dp = new YouTubeApiDataProvider($model, array(
             'criteria' => $criteria
         ));
         return $dp;
