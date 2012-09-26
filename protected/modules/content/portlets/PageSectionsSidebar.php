@@ -10,11 +10,15 @@ class PageSectionsSidebar extends Portlet
 {
     public function renderContent()
     {
-        $sections = PageSection::model()->optionsTree();
+        $sections = PageSection::model()->findAll(
+            'parent_id = ' . PageSection::ROOT_SECTION_ID_PAGES,
+            array('order' => '`order`')
+        );
+
         foreach ($sections as $id => $name)
         {
             $sections[$id] = array(
-                'label' => preg_replace('|^[\.]+|', '- ', $name),
+                'label' => $name,
                 'url'   => 'e',
                 'type'  => 'raw'
             );

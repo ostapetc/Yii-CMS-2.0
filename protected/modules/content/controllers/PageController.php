@@ -20,14 +20,14 @@ class PageController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            'view'         => 'Просмотр топика',
+            'view'         => 'Просмотр поста',
             'main'         => 'Главная страница',
-            'create'       => 'Новый топик',
-            'update'       => 'Редактирование топика',
-            'index'        => 'Все топики',
-            'userPages'    => 'Топики пользователя',
-            'sectionPages' => 'Топики раздела',
-            'tagPages'     => 'Топики тега'
+            'create'       => 'Новый пост',
+            'update'       => 'Редактирование поста',
+            'index'        => 'Все посты',
+            'userPages'    => 'Посты пользователя',
+            'sectionPages' => 'Посты раздела',
+            'tagPages'     => 'Посты тега'
         );
     }
 
@@ -173,12 +173,14 @@ class PageController extends ClientController
     {
         $this->page_title = '';
 
+        $criteria = new CDbCriteria();
+        $criteria->compare('status', Page::STATUS_PUBLISHED);
+        $criteria->compare('type', Page::TYPE_POST);
+        $criteria->with   = array('tags');
+        $criteria->order  = 'date_create DESC';
+
         $data_provider = new CActiveDataProvider('Page', array(
-            'criteria' => array(
-                'condition' => "status = '" . Page::STATUS_PUBLISHED . "'",
-                'order'     => 'date_create DESC',
-                'with'      => array('tags')
-            ),
+            'criteria'   => $criteria,
             'pagination' => array(
                 'pageSize' => '10'
             )

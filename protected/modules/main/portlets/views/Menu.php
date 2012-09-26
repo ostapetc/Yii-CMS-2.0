@@ -55,7 +55,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle create-menu" href="#"><b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <?= CHtml::link('<span class="glyphicon-file"></span> &nbsp;' . t('Создать топик'), array('/content/page/create')) ?>
+                                    <?= CHtml::link('<span class="glyphicon-file"></span> &nbsp;' . t('Создать пост'), array('/content/page/create')) ?>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
