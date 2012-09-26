@@ -1,7 +1,13 @@
+<style type="text/css">
+    .table th {
+        border-top: 0 !important;
+    }
+</style>
+
 <? if ($sections): ?>
-    <table class="table table-bordered">
+    <table class="table table-hover">
         <tr>
-            <th></th>
+            <th width="1"></th>
             <th><?= t('Раздел') ?></th>
             <th><?= t('Последний топик') ?></th>
             <th width="1"><?= t('Топиков') ?></th>
@@ -10,14 +16,23 @@
         <? foreach ($sections as $section): ?>
             <tr>
                 <td>
-
+                    <span class="glyphicon glyphicon-announcement "></span>
                 </td>
                 <td>
                     <?= CHtml::link($section->name, '/') ?>
                 </td>
                 <td>
-                    <?= CHtml::link($section->last_topic->title, $section->last_topic->url) ?>
-                    <?= $section->last_topic->url ?>
+                    <? if ($section->last_topic): ?>
+                        <?= CHtml::link($section->last_topic->title, $section->last_topic->url) ?> <br/>
+
+                        <div style="float:left">
+                            <? $this->renderPartial('application.modules.users.views.user._author', array('user' => $section->last_topic->user)) ?>
+                        </div>
+
+                        <div class="published" style="float:right">26 сентября 2012&nbsp;г., 23:30</div>
+                    <? else: ?>
+                        <span class="span.italic-12">отсутсвует</span>
+                    <? endif ?>
                 </td>
                 <td style="text-align: center;">
                     <?= $section->pages_count ?>

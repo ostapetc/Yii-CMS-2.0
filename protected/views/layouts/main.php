@@ -41,6 +41,7 @@
     $cs->registerCssFile($base . '/css/site/comments.css');
     $cs->registerCssFile($base . '/css/site/favorites.css');
     $cs->registerCssFile($base . '/css/site/rating.css');
+    $cs->registerCssFile($base . '/css/site/user.css');
     $cs->registerScriptFile($base . '/js/site/modal-windows.js');
 
     #toasmessage plugin, message notifier

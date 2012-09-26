@@ -27,3 +27,34 @@
 .profile-table {
     margin-top: 10px !important;
 }
+
+.page .infopanel .author {
+    position: relative;
+    float: left;
+    line-height: 28px;
+    margin-left: 10px;
+    margin-right: 25px;
+    font-weight: 700;
+    padding-left: 17px;
+}
+
+.author a {
+    font-size: 9px;
+    color: #CF0000;
+    text-decoration: none;
+}
+
+.author a:hover {
+    color: #f17d7d;
+}
+
+.author .rating {
+    font-size: 9px;
+    color: #C6C;
+    font-weight: bold;
+    cursor: help;
+    position: absolute;
+    top: -5px;
+    left: 100%;
+    white-space: nowrap;
+}

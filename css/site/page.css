@@ -215,42 +215,11 @@
     color: #FFF;
 }
 
-.page .infopanel .published {
+.published {
     float: left;
     font-size: 9px;
     margin-right: 22px;
     line-height: 28px;
-}
-
-.page .infopanel .author {
-    position: relative;
-    float: left;
-    line-height: 28px;
-    margin-left: 10px;
-    margin-right: 25px;
-    font-weight: 700;
-    padding-left: 17px;
-}
-
-.page .infopanel .author a {
-    font-size: 9px;
-    color: #CF0000;
-    text-decoration: none;
-}
-
-.page .infopanel .author a:hover {
-    color: #f17d7d;
-}
-
-.page .infopanel .author .rating {
-    font-size: 9px;
-    color: #C6C;
-    font-weight: bold;
-    cursor: help;
-    position: absolute;
-    top: -5px;
-    left: 100%;
-    white-space: nowrap;
 }
 
 .page .infopanel .original-author {
