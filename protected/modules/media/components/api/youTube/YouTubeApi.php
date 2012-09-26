@@ -70,24 +70,30 @@ class YouTubeApi extends ApiAbstract
      */
     public function findAll($criteria)
     {
-        $this->beforeFind();
-        $cache_key = $criteria->toCacheKey();
-        if (!($res = Yii::app()->cache->get($cache_key)))
-        {
-            $query = new Zend_Gdata_YouTube_VideoQuery();
-            $query->setVideoQuery($criteria->select);
-            $query->setMaxResults($criteria->limit);
-            $query->setStartIndex($criteria->offset);
-            $query->setOrderBy($criteria->order);
-            $query->setAuthor($criteria->author);
-            $query->setCategory($criteria->category);
+        try{
+            $this->beforeFind();
+            $cache_key = $criteria->toCacheKey();
+            if (!($res = Yii::app()->cache->get($cache_key)))
+            {
+                $query = new Zend_Gdata_YouTube_VideoQuery();
+                $query->setVideoQuery($criteria->select);
+                $query->setMaxResults($criteria->limit);
+                $query->setStartIndex($criteria->offset);
+                $query->setOrderBy($criteria->order);
+                $query->setAuthor($criteria->author);
+                $query->setCategory($criteria->category);
 
 
-            $feed = $this->getApi()->getVideoFeed($query);
-            $res  = $this->populateRecords($feed, true);
-            Yii::app()->cache->set($cache_key, $res, 600);
+                $feed = $this->getApi()->getVideoFeed($query);
+                $res  = $this->populateRecords($feed, true);
+                Yii::app()->cache->set($cache_key, $res, 600);
+            }
+            return (array)$res;
         }
-        return (array)$res;
+        catch (Exception $e)
+        {
+            return array();
+        }
     }
 
 
