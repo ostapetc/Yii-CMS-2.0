@@ -2,32 +2,20 @@
 abstract class ApiDataProviderAbstract extends CActiveDataProvider
 {
     private $_criteria;
-    protected $criteriaClass;
 
     public function __construct($model, $config = array())
     {
         $modelClass       = get_class($model);
         $this->model      = $model;
         $this->modelClass = $modelClass;
+        $this->setCriteria($model->getDbCriteria());
         parent::__construct($model, $config);
     }
 
-
-    public function getCriteria()
-    {
-        if ($this->_criteria === null)
-        {
-            $this->_criteria = new $this->criteriaClass;
-        }
-        return $this->_criteria;
-    }
-
-
     public function setCriteria($value)
     {
-        $this->_criteria = $value instanceof $this->criteriaClass ? $value : new $this->criteriaClass($value);
+        $this->_criteria = $value;
     }
-
 
     public function getSort()
     {
@@ -48,7 +36,8 @@ abstract class ApiDataProviderAbstract extends CActiveDataProvider
         $baseCriteria = $this->model->getDbCriteria(false);
 
         $this->model->setDbCriteria($baseCriteria !== null ? clone $baseCriteria : null);
-        $data = $this->model->findAll($criteria);
+
+        $data = $this->model->findAll();
         $this->model->setDbCriteria($baseCriteria); // restore original criteria
         return $data;
     }

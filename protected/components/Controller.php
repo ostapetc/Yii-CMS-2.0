@@ -238,9 +238,9 @@ abstract class Controller extends CController implements ControllerInterface
         $profile_id = 'Widget::' . $className;
 
         //profile widget
-        Yii::beginProfile($profile_id);
+//        Yii::beginProfile($profile_id);
         $res = parent::widget($className, $properties, $captureOutput);
-        Yii::endProfile($profile_id);
+//        Yii::endProfile($profile_id);
         return $res;
     }
 
