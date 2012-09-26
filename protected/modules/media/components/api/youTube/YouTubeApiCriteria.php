@@ -16,5 +16,6 @@ class YouTubeApiCriteria extends ApiCriteria
     );
 
     public $category = '';
-    public $author_name= '';
+    public $author = '';
+
 }

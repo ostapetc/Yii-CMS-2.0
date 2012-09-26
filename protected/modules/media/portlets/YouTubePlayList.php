@@ -1,0 +1,23 @@
+<?php
+Yii::import('media.portlets.BaseFileListView', true);
+
+class YouTubePlayList extends Widget
+{
+    public $request = 'MMA';
+    public $author;
+
+    public function run()
+    {
+        $file = new MediaFile('search', 'youTube');
+        $api  = $file->getApi();
+        /** @var $api YouTubeApi */
+        $api->title     = $this->request;
+        $api->author    = $this->author;
+        $dp             = $api->search(array(
+            'limit' => 4
+        ));
+        $dp->pagination = false;
+
+        $this->render('_youTubeVideo', array('data' => $dp->getData()));
+    }
+}

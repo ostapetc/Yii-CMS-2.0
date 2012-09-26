@@ -4,13 +4,21 @@ abstract class ApiAbstract extends CModel
     protected $dbCriteria;
     public $pk;
 
-
     public function getPrimaryKey()
     {
         return $this->pk;
     }
 
+
     abstract function findAll($criteria);
+
+
+    /**
+     * @param array $propas
+     *
+     * @return ApiDataProviderAbstract
+     */
+    abstract function search($propas);
 
 
     abstract function save();

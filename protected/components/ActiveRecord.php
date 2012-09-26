@@ -254,22 +254,6 @@ abstract class ActiveRecord extends CActiveRecord
         return $this;
     }
 
-    /**
-     * @param $param
-     * @param $value
-     * @return self
-     */
-    public function notEqual($param, $value)
-    {
-        $alias = $this->getTableAlias();
-        $this->getDbCriteria()->mergeWith(array(
-            'condition' => $alias . ".`{$param}` != '{$value}'",
-        ));
-
-        return $this;
-    }
-
-
     public function meta()
     {
         if ($this->_meta == null);
