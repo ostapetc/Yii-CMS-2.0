@@ -39,12 +39,12 @@ abstract class ClientController extends Controller
                 'items' => $sports
             ),
             array(
-                'label' => t('Топики'),
+                'label' => t('Посты'),
                 'url'   => array('content/page/index')
             ),
             array(
-                'label' => t('Блоги'),
-                'url'   => array('content/pageSection/index')
+                'label' => t('Форум'),
+                'url'   => array('/content/forum/index')
             ),
             array(
                 'label' => t('Видео'),

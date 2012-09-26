@@ -40,23 +40,24 @@
 
 class Page extends ActiveRecord
 {
-    //public $tags_names;
-
     const PAGE_SIZE = 20;
+
+    const TYPE_POST  = 'post';
+    const TYPE_FORUM = 'forum';
 
     const STATUS_UNPUBLISHED = 'unpublished';
     const STATUS_PUBLISHED   = 'published';
     const STATUS_DRAFT       = 'draft';
-
-    public $sections_ids;
-
-    public $sports_ids;
 
     public static $status_options = array(
         self::STATUS_UNPUBLISHED => 'неопубликовано',
         self::STATUS_PUBLISHED   => 'опубликовано',
         self::STATUS_DRAFT       => 'черновик'
     );
+
+    public $sections_ids;
+
+    public $sports_ids;
 
 
     public function name()

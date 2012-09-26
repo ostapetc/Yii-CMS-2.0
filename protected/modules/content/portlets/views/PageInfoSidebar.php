@@ -1,4 +1,4 @@
-<h4>Топик инфо</h4>
+<h4>Пост инфо</h4>
 
 <ul class="page-info-sidebar">
     <li><span class="glyphicon-eye-open mright10"></span>просмотров <span class="badge"><?= $views_count ?></span></li>

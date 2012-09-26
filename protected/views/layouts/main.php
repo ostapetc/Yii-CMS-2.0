@@ -41,6 +41,7 @@
     $cs->registerCssFile($base . '/css/site/comments.css');
     $cs->registerCssFile($base . '/css/site/favorites.css');
     $cs->registerCssFile($base . '/css/site/rating.css');
+    $cs->registerCssFile($base . '/css/site/user.css');
     $cs->registerScriptFile($base . '/js/site/modal-windows.js');
 
     #toasmessage plugin, message notifier
@@ -74,7 +75,12 @@
 
         <div class="container-fluid">
             <div class="row-fluid">
-                <div class="span8 well">
+                <?
+                $sidebars = $this->widget('main.portlets.SidebarManager', array(), true);
+                $class    = $sidebars ? 'span8' : 'span12';
+                ?>
+
+                <div class="<?= $class ?> well">
                     <? if ($this->page_title): ?>
                     <h1><?= $this->page_title ?></h1>
                     <? endif ?>
@@ -85,10 +91,12 @@
 
                     <?= $content ?>
                 </div>
-                <!--/span-->
-                <div class="span4 sidebar-manager">
-                    <? $this->widget('main.portlets.SidebarManager') ?>
-                </div>
+
+                <? if ($sidebars): ?>
+                    <div class="span4 sidebar-manager">
+                        <?= $sidebars  ?>
+                    </div>
+                <? endif ?>
             </div>
             <hr>
 

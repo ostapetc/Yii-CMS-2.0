@@ -1,8 +1,6 @@
 <?
 $cs = Yii::app()->clientScript;
 $cs->registerScriptFile('/js/social/friends.js');
-$cs->registerCssFile('/css/site/user.css');
-
 
 $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
 ?>

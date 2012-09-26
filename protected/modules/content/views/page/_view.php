@@ -60,10 +60,7 @@
 
         <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
-        <div class="author" >
-            <a href="<?= $data->user->url ?>" title="Автор текста"><span class="glyphicon-user"></span><?= $data->user->name ?></a>
-            <span title="рейтинг пользователя" class="rating"><?= $data->user->rating ?></span>
-        </div>
+        <? $this->renderPartial('application.modules.users.views.user._author', array('user' => $data->user)) ?>
 
         <div class="comments">
             <?

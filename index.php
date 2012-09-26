@@ -20,3 +20,22 @@ require_once LIBRARIES_PATH . 'debug.php';
 $config = APP_PATH . 'config' . DS . (defined('ENV') ? ENV : CONFIG) .'.php';
 
 Yii::createWebApplication($config)->run();
+
+//$sections = PageSection::model()->forum()->findAll();
+//foreach ($sections as $i => $section)
+//{
+//    for ($k = 0; $k < 5; $k++)
+//    {
+//        $page = new Page();
+//        $page->user_id = 1;
+//        $page->title   = 'Топик ' . $i . $k;
+//        $page->text    = "Текст топика " . $i . $k;
+//        $page->status  = Page::STATUS_PUBLISHED;
+//        $page->save();
+//
+//        $rel = new PageSectionRel();
+//        $rel->section_id = $section->id;
+//        $rel->page_id    = $page->id;
+//        $rel->save();
+//    }
+//}
