@@ -68,10 +68,11 @@ class YouTubeApi extends ApiAbstract
      *
      * @return array
      */
-    public function findAll($criteria)
+    public function findAll()
     {
         try{
             $this->beforeFind();
+            $criteria = $this->getDbCriteria();
             $cache_key = $criteria->toCacheKey();
             if (!($res = Yii::app()->cache->get($cache_key)))
             {
