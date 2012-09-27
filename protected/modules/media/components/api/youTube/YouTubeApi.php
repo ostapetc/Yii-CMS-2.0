@@ -123,8 +123,8 @@ class YouTubeApi extends ApiAbstract
                 $query->setMaxResults($criteria->limit);
                 $query->setStartIndex($criteria->offset);
                 $query->setOrderBy($criteria->order);
-                $criteria->author && $query->setAuthor($criteria->author);
-                $criteria->category && $query->setCategory($criteria->category);
+                $query->setAuthor($criteria->author);
+                $query->setCategory($criteria->category);
 
 
                 $feed = $this->getApi()->getVideoFeed($query);
