@@ -5,6 +5,7 @@ class YouTubePlayList extends Widget
 {
     public $request = 'MMA';
     public $author;
+    public $items_count = 4;
 
     public function run()
     {
@@ -14,7 +15,7 @@ class YouTubePlayList extends Widget
         $api->title     = $this->request;
         $api->author    = $this->author;
         $dp             = $api->search(array(
-            'limit' => 4
+            'limit' => $this->items_count
         ));
         $dp->pagination = false;
 

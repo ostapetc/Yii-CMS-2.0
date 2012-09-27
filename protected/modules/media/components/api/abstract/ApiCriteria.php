@@ -19,11 +19,15 @@ class ApiCriteria extends CComponent
 
     public function mergeWith($props)
     {
+        if (is_object($props))
+        {
+            $props = $props->toArray();
+        }
         foreach ($props as $key => $val)
         {
             if (is_array($val))
             {
-                $this->$key = CMap::mergeArray((array)$val, $criteria->$key);
+                $this->$key = CMap::mergeArray($this->$key, $val);
             }
             else
             {
@@ -48,6 +52,6 @@ class ApiCriteria extends CComponent
     public function toCacheKey()
     {
         $uniq_str = implode('_', array_keys($this->toArray()));
-        return md5($uniq_str);
+        return get_class($this) . '_' . md5($uniq_str);
     }
 }
