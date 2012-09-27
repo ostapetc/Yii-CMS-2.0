@@ -109,19 +109,6 @@ class Rating extends ActiveRecord
     }
 
 
-    public function getHref()
-    {
-        return Yii::app()->createUrl('/rating/rating/view', array('id' => $this->id));
-    }
-
-
-    public function uploadFiles()
-    {
-        return array(
-        );
-    }
-
-
     public static function getValue($model, $object_id = null)
     {
         if ($model instanceof ActiveRecord)
@@ -156,8 +143,17 @@ class Rating extends ActiveRecord
     }
 
 
-    public static function getHtml($rating_value)
+    /**
+     * @param $rating_value mixed (integer rating value or ActiveRecord model)
+     * @return string
+     */
+    public static function getHtml($rating_value, array $html_options = array())
     {
+        if ($rating_value instanceof ActiveRecord)
+        {
+            $rating_value = self::getValue($rating_value);
+        }
+
         if ($rating_value == 0)
         {
             $rating_value = 0;
@@ -173,6 +169,15 @@ class Rating extends ActiveRecord
             $class = 'red';
         }
 
-        return "<div class='rating-value {$class}'>{$rating_value}</div>";
+        if (isset($html_options['class']))
+        {
+            $html_options['class'].= " rating-value {$class}";
+        }
+        else
+        {
+            $html_options['class'] = "rating-value {$class}";
+        }
+
+        return CHtml::tag('div', $html_options, $rating_value);
     }
 }

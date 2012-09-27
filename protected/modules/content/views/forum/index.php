@@ -19,7 +19,7 @@
                     <span class="glyphicon glyphicon-announcement "></span>
                 </td>
                 <td>
-                    <?= CHtml::link($section->name, '/') ?>
+                    <?= CHtml::link($section->name, $section->forum_url) ?>
                 </td>
                 <td>
                     <? if ($section->last_topic): ?>
@@ -28,8 +28,7 @@
                         <div style="float:left">
                             <? $this->renderPartial('application.modules.users.views.user._author', array('user' => $section->last_topic->user)) ?>
                         </div>
-
-                        <div class="published" style="float:right">26 сентября 2012&nbsp;г., 23:30</div>
+                        <div class="published" style="float:right"><?= $section->last_topic->value('date_create') ?></div>
                     <? else: ?>
                         <span class="span.italic-12">отсутсвует</span>
                     <? endif ?>

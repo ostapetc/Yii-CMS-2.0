@@ -175,3 +175,12 @@ span.italic-12 {
 .table {
     font-size: 12px !important;
 }
+
+.align-center {
+    text-align: center !important;
+}
+
+.pagination ul > li > a, .pagination ul > li > span {
+    line-height: 28px !important;
+    font-size: 12px;
+}
