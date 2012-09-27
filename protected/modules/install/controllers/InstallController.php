@@ -43,7 +43,7 @@ class InstallController extends ClientController
             {
                 Yii::app()->user->setState('install_configs', $model->getConfigs());
                 $model->saveInSession();
-                $this->redirect('step2');
+                $this->redirect('/install.php/install/install/step2');
             }
             else if (is_string($db_create_status))
             {
@@ -75,8 +75,11 @@ class InstallController extends ClientController
             //$step1->deleteDisableModules();
 
             //migrate
+            Yii::app()->getModule('users');
+
             foreach (Yii::app()->getModules() as $id => $data)
             {
+                Yii::app()->getModule($id);
                 if (is_dir(Yii::getPathOfAlias($id.'.migrations')))
                 {
                     Yii::app()->executor->migrate('up --module='.$id);
@@ -84,6 +87,7 @@ class InstallController extends ClientController
             }
 
             //create admin user
+
             $user = new User;
             $user->email = $model->admin_email;
             $user->password = UserIdentity::crypt($model->admin_pass);
@@ -109,7 +113,7 @@ class InstallController extends ClientController
 
             $model->saveInSession();
             //install base modules
-            $this->redirect('step3');
+            $this->redirect('/install.php/install/install/step3');
         }
 
         $this->render('step2', array('form' => $form));
@@ -125,7 +129,7 @@ class InstallController extends ClientController
 
 //        @unlink(Yii::getPathOfAlias('webroot.insall').'.php');
 //        @unlink(Yii::getPathOfAlias('application.config.install').'.php');
-        $this->redirect('end');
+        $this->redirect('/install.php/install/install/end');
     }
 
     public function actionEnd()
