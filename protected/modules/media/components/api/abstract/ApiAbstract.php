@@ -12,7 +12,7 @@ abstract class ApiAbstract extends CModel
     }
 
 
-    abstract function findAll();
+    abstract function findAll($criteria);
 
 
     /**
@@ -46,6 +46,9 @@ abstract class ApiAbstract extends CModel
 
     }
 
+    /**
+     * @return ApiCriteria
+     */
     public function getDbCriteria()
     {
         if ($this->dbCriteria === null)

@@ -68,11 +68,12 @@ class YouTubeApi extends ApiAbstract
      *
      * @return array
      */
-    public function findAll()
+    public function findAll($criteria)
     {
-        try{
+        try
+        {
             $this->beforeFind();
-            $criteria = $this->getDbCriteria();
+            $this->getDbCriteria()->mergeWith($criteria);
             $cache_key = $criteria->toCacheKey();
             if (!($res = Yii::app()->cache->get($cache_key)))
             {
@@ -81,8 +82,8 @@ class YouTubeApi extends ApiAbstract
                 $query->setMaxResults($criteria->limit);
                 $query->setStartIndex($criteria->offset);
                 $query->setOrderBy($criteria->order);
-                $query->setAuthor($criteria->author);
-                $query->setCategory($criteria->category);
+                $criteria->author && $query->setAuthor($criteria->author);
+                $criteria->category && $query->setCategory($criteria->category);
 
 
                 $feed = $this->getApi()->getVideoFeed($query);

@@ -8,7 +8,7 @@ class LocalApi extends ApiAbstract
     public $old_name;
 
 
-    public function findAll()
+    public function findAll($criteria)
     {
         throw new CException('not implemented yet');
     }
