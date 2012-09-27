@@ -1,21 +1,21 @@
 <?php
 class ApiCriteria extends CComponent
 {
-	public $select = null;
-	public $limit  = 1;
-	public $offset = 0;
-	public $order  = null;
-	public $pk     = null;
+    public $select = null;
+    public $limit  = 1;
+    public $offset = 0;
+    public $order  = null;
+    public $pk     = null;
 
-	/**
-	 * Constructor.
-	 * @param array $data criteria initial property values (indexed by property name)
-	 */
-	public function __construct($data=array())
-	{
-		foreach($data as $name=>$value)
-			$this->$name=$value;
-	}
+    /**
+     * Constructor.
+     * @param array $data criteria initial property values (indexed by property name)
+     */
+    public function __construct($data=array())
+    {
+        foreach($data as $name=>$value)
+            $this->$name=$value;
+    }
 
     public function mergeWith($props)
     {
