@@ -2,6 +2,7 @@
 class YouTubeApi extends ApiAbstract
 {
     protected $api;
+    protected $criteriaClass = 'YouTubeApiCriteria';
 
     public $title;
     public $img;

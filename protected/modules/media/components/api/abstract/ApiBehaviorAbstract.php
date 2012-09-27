@@ -6,7 +6,6 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     public $module;
     public $assets;
 
-
     public function __construct()
     {
         $this->module = Yii::app()->getModule('media');
@@ -40,28 +39,12 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
      */
     public function getApiModel()
     {
-        $owner = $this->getOwner();
-        if ($owner->api_model === null)
+        if ($this->api_model === null)
         {
-            try{
-            $owner->api_model = Yii::createComponent($this->api_model);
-            } catch (Exception $e)
-            {
-                dump($e);
-            }
+            $this->api_model = Yii::createComponent($this->api_model)->findByPk($this->getPk());
         }
-        return $owner->api_model;
+        return $this->api_model;
     }
-
-
-    /**
-     * @param $event CModelEvent
-     */
-    public function afterFind($event)
-    {
-        $this->getOwner()->api_model = $this->getApiModel()->findByPk($this->getPk());
-    }
-
 
 }
 

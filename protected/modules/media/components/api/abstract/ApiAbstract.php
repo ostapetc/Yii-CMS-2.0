@@ -1,7 +1,7 @@
 <?php
 abstract class ApiAbstract extends CModel
 {
-    protected $criteriaClass = 'YouTubeApiCriteria';
+    protected $criteriaClass;
 
     protected $dbCriteria;
     public $pk;
