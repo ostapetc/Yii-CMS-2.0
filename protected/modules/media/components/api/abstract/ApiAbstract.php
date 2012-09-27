@@ -20,7 +20,7 @@ abstract class ApiAbstract extends CModel
      *
      * @return ApiDataProviderAbstract
      */
-    abstract function search($propas);
+    abstract function search($props = array());
 
 
     abstract function save();
@@ -123,6 +123,7 @@ abstract class ApiAbstract extends CModel
 
     public function beforeFind()
     {
+        return true;
     }
 }
 

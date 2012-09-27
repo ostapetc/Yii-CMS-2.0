@@ -19,7 +19,7 @@ class LocalApi extends ApiAbstract
         throw new CException('not implemented yet');
     }
 
-    public function search($props)
+    public function search($props = array())
     {
         throw new CException('not implemented yet');
     }

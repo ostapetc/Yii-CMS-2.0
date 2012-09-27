@@ -15,8 +15,8 @@ return array(
 //        ),
         'gallery'    => array(
             'type'      => 'uploader_modal',
-            'data_type' => 'image',
-            'title'     => 'Файлы'
+            'data_type' => 'video',
+            'title'     => 'Файлы',
         ),
         'status'   => array(
             'type'  => 'dropdownlist',

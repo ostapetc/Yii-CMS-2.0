@@ -2,11 +2,12 @@
 $this->widget('media.portlets.Uploader', array(
     'name'      => 'uploader',
     'model'     => new MediaAlbum,
+    'uploadUrl' => $uploadUrl . '?nexturl=' . urlencode($nextUrl),
     'data_type' => 'video',
-    'uploadUrl' => $postUrl . '?nexturl=' . $nextUrl,
-    'options'   => array(
+    'params'   => array(
+        'forceIframeTransport' => true,
         'formData' => array(
-            'token' => $tokenValue
-        ),
-    ),
+            'token' => $token
+        )
+    )
 ));

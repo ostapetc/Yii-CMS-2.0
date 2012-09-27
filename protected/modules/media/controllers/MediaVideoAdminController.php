@@ -9,6 +9,7 @@ class MediaVideoAdminController extends AdminController
             "delete"     => "Удалить",
             "update"     => "Редактировать",
             "manage"     => "Управление альбомами",
+            "youTubeUploadCallback"     => "Управление альбомами",
         );
     }
 
@@ -16,8 +17,8 @@ class MediaVideoAdminController extends AdminController
     public function actionManage()
     {
         $file = new MediaFile('search', 'youTube');
-        $model = $file->getApi()->getApiModel();
-        $model->unsetAttributes();
+        $model = $file->getApi();
+//        $model->unsetAttributes();
 
         if (isset($_GET[get_class($model)]))
         {
@@ -34,35 +35,20 @@ class MediaVideoAdminController extends AdminController
 
     public function actionCreate()
     {
+        $file = new MediaFile('create', 'youTube');
 
-        $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
+        $token = $file->getApi()->getUploadToken();
+        $uploadUrl = $token['url'];
+        $token = $token['token'];
+        $nextUrl = $this->createAbsoluteUrl('youTubeUploadCallback');
 
-        $myVideoEntry->setVideoTitle('My Test Movie');
-        $myVideoEntry->setVideoDescription('My Test Movie');
-        // The category must be a valid YouTube category!
-        $myVideoEntry->setVideoCategory('Autos');
-
-        // Set keywords. Please note that this must be a comma-separated string
-        // and that individual keywords cannot contain whitespace
-        $myVideoEntry->SetVideoTags('cars, funny');
-
-        $tokenHandlerUrl = 'http://gdata.youtube.com/action/GetUploadToken';
-        $tokenArray      = $yt->getFormUploadToken($myVideoEntry, $tokenHandlerUrl);
-        $tokenValue      = $tokenArray['token'];
-        $postUrl         = $tokenArray['url'];
-        $nextUrl = Yii::app()->request->getCurrentUri();
-
-        // build the form
-        $form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
-            '" method="post" enctype="multipart/form-data">'.
-            '<input name="file" type="file"/>'.
-            '<input name="token" type="hidden" value="'. $tokenValue .'"/>'.
-            '<input value="Upload Video File" type="submit" />'.
-            '</form>';
-
-        $this->render('create', array('postUrl' => $postUrl, 'nextUrl' => $nextUrl, 'tokenValue' => $tokenValue));
+        $this->render('create', array('token' => $token, 'uploadUrl' => $uploadUrl, 'nextUrl' => $nextUrl));
     }
 
+    public function actionYouTubeUploadCallback($status, $id)
+    {
+        echo $id;
+    }
 
     public function actionView($id)
     {
