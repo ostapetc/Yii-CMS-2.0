@@ -30,15 +30,6 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         this._sortableInit();
         this._jeditableInit();
         this._adaptationToBrowser();
-
-        // Open download dialogs via iframes,
-        // to prevent  aborting current uploads:
-        //        uploader.find('.files a:not([target^=_blank])').live('click', function (e) {
-        //            e.preventDefault();
-        //            $(\"<iframe style='display:none;'></iframe>\")
-        //                .attr('src', this.href)
-        //                .appendTo('body');
-        //        });
     },
     _renderExtendedProgress: function(data)
     {
