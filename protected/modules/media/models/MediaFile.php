@@ -54,8 +54,6 @@ class MediaFile extends ActiveRecord
 {
     public static $configuration;
 
-    public $api_model;
-
     public $error;
 
     private $_api_name;
