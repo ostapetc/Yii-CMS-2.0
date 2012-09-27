@@ -16,7 +16,7 @@ $filter = CHtml::textField('tyoutube-search');
 $sorter   = 'Сортировать по: ' . CHtml::dropDownList('order', $selected, $urls, array(
     'id' => 'youtube-sorter',
 ));
-
+/*
 $widget = $this->widget('AdminListView', array(
     'itemView' => '_manage',
     'dataProvider' => $model->search(),
@@ -26,8 +26,8 @@ $widget = $this->widget('AdminListView', array(
         'no_end' => true
     )
 ));
+*/
 
-/*
 $widget = $this->widget('AdminGridView', array(
     'id'           => 'youtube-grid',
     'dataProvider' => $model->search(),
@@ -49,17 +49,16 @@ $widget = $this->widget('AdminGridView', array(
         ),
         array(
             'header' => 'Автор',
-            'value'  => 'CHtml::link($data->author_name, $data->author_uri, array("target"=>"_blank"))',
+            'name'   => 'author',
+            'value'  => 'CHtml::link($data->author, $data->author_uri, array("target"=>"_blank"))',
             'type'   => 'raw'
         ),
         array(
             'header' => 'Категория',
-            'value'  => '$data->category',
-            'type'   => 'raw'
+            'name'   => 'category',
         ),
     ),
 ));
-*/
 ?>
 
 

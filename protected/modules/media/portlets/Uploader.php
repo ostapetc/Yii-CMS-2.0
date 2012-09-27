@@ -33,7 +33,7 @@ class Uploader extends JuiInputWidget
     public $params = array();
 
     public $tag;
-    public $maxFileSize = 100000000; //100 * 1000 * 10000
+    public $maxFileSize = 100000000; //100 * 1000 * 1000
 
     public $setWatermark = false;
 
