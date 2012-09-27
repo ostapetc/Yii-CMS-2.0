@@ -1,10 +1,8 @@
 <script id="template-upload" type="text/x-jquery-tmpl">
     <tr class="template-upload{{if error}} ui-state-error{{/if}}">
         <td class="preview"></td>
-        <td class="title">${title}</td>
-        <td class="descr">${text}</td>
         {{if error}}
-        <td class="error" colspan="2">Error:
+        <td class="error" colspan="3">Error:
             {{if error === 'maxFileSize'}}<? echo Yii::t('MediaModule.interface', 'Файл слишком велик') ?>
             {{else error === 'minFileSize'}}<? echo Yii::t('MediaModule.interface', 'Файл слишком мал') ?>
             {{else error === 'acceptFileTypes'}}<? echo Yii::t('MediaModule.interface', 'Запрещенный тип файла') ?>
@@ -14,12 +12,15 @@
         </td>
         {{else}}
         <td class="progress-holder start">
-            <div></div>
-            <button>Start</button>
+            <div class="progress-animated progress"><div class="bar"></div></div>
+            <button class="hidden">Start</button>
+        </td>
+        <td class="fileupload-progress progress-extended" colspan="2">
+            <div class="progress-extended"></div>
         </td>
         {{/if}}
         <td class="cancel">
-            <button class="btn btn-danger">
+            <button class="btn btn-danger btn-small">
                 <i class="icon-remove"></i>
             </button>
         </td>
