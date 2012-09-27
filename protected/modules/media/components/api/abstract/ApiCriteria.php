@@ -25,6 +25,10 @@ class ApiCriteria extends CComponent
         }
         foreach ($props as $key => $val)
         {
+            if ($val === null)
+            {
+                continue;
+            }
             if (is_array($val))
             {
                 $this->$key = CMap::mergeArray($this->$key, $val);
