@@ -138,11 +138,14 @@ class Uploader extends JuiInputWidget
         $plugins = $this->assets . '/js/plugins/';
         $cs      = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery.ui')->registerScriptFile($plugins . 'tmpl/jquery.tmpl.min.js');
-        $cs->registerScriptFile($plugins . 'jFileUpload/jquery.iframe-transport.js');
-        $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload.js');
-        $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-ui.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload3/cors/jquery.postmessage-transport.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload3/cors/jquery.xdr-transport.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload3/jquery.fileupload.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload3/jquery.iframe-transport.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload3/jquery.fileupload-fp.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload3/jquery.fileupload-ui.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/cmsUI.fileupload.js');
-        $cs->registerCssFile($plugins . 'jFileUpload/jquery.fileupload-ui.css');
+        $cs->registerCssFile($plugins . 'jFileUpload3/css/jquery.fileupload-ui.css');
         $cs->registerScriptFile($plugins . 'jEditable/jquery.jeditable.js');
         $cs->registerScriptFile($plugins . 'moderniz/moderniz.js');
 
