@@ -29,7 +29,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
         $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
         return ImageHelper::thumb($dir, $name, $size, $crop)->__toString();
-        ;
     }
 
 

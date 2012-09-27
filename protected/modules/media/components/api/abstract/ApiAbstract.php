@@ -1,6 +1,8 @@
 <?php
 abstract class ApiAbstract extends CModel
 {
+    protected $criteriaClass = 'YouTubeApiCriteria';
+
     protected $dbCriteria;
     public $pk;
 
@@ -44,16 +46,22 @@ abstract class ApiAbstract extends CModel
 
     }
 
-
+    /**
+     * @return ApiCriteria
+     */
     public function getDbCriteria()
     {
+        if ($this->dbCriteria === null)
+        {
+            $this->dbCriteria = new $this->criteriaClass;
+        }
         return $this->dbCriteria;
     }
 
 
-    public function setDbCriteria($criteria)
+    public function setDbCriteria($value)
     {
-        $this->dbCriteria = $criteria;
+        $this->dbCriteria = $value instanceof $this->criteriaClass ? $value : new $this->criteriaClass($value);
     }
 
 

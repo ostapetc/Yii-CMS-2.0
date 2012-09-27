@@ -83,10 +83,10 @@ class PageController extends ClientController
                         'widget',
                         'comments.portlets.CommentsSidebar',
                     ),
-                    //array(
-                    //    'widget',
-                    //    'media.portlets.YouTubePlayList'
-                    //)
+                    array(
+                        'widget',
+                        'media.portlets.YouTubePlayList'
+                    )
                     /*array(
                         'widget',
                         'content.portlets.NavigatorSidebar',

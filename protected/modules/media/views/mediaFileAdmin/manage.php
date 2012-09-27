@@ -25,26 +25,7 @@ function getObjectUpdateUrl($object_id, $model)
 
 function getFileLink($data)
 {
-    if (file_exists($data->path))
-    {
-        if ($data->is_image)
-        {
-            $basename = pathinfo($data->path, PATHINFO_BASENAME);
-
-//             $path = str_replace($basename, '100x0_' . $basename, $data->path);
-
-            $content = ImageHelper::thumb(MediaFile::UPLOAD_PATH, $data->name, array('width'=>50, 'height' =>null), false);
-        }
-        else
-        {
-            $content = $data->title;
-        }
-        return Chtml::link($content, $data->url);
-    }
-    else
-    {
-        return $data->title;
-    }
+    return Chtml::link($data->getThumb(), $data->getUrl());
 }
 
 
@@ -54,10 +35,12 @@ $this->widget('AdminGridView', array(
     'filter'       => $model,
     'columns'      => array(
         array(
-            'name'   => 'title',
             'value'  => 'getFileLink($data);',
             'type'   => 'raw',
             'filter' => false
+        ),
+        array(
+            'name'   => 'title',
         ),
         array(
             'name'   => 'tag',

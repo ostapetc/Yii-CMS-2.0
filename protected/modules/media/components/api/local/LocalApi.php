@@ -19,6 +19,11 @@ class LocalApi extends ApiAbstract
         throw new CException('not implemented yet');
     }
 
+    public function search($props)
+    {
+        throw new CException('not implemented yet');
+    }
+
     /**
      * @return string formatted file size
      */
