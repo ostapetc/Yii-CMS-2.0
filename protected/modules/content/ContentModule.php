@@ -48,14 +48,16 @@ class ContentModule extends WebModule
     public function routes()
     {
         $routes = array(
-            '/'                                     => 'content/page/index',
-            '/page/<id:\d+>'                        => 'content/page/view',
-            '/page/create'                          => 'content/page/create',
-            '/page/update/<id:\d+>'                 => 'content/page/update',
-            '/page/user/<user_id:\d+>/*'            => 'content/page/userPages',
-            '/page/tag/<tag_name:[a-zA-Zа-яА-Я ]+>' => 'content/page/tagPages',
-            '/page/section/<section_id:\d+>/*'      => 'content/page/sectionPages',
-            '/forum'                                => '/content/forum/index'
+            '/'                                     => '/content/page/index',
+            '/page/<id:\d+>'                        => '/content/page/view',
+            '/page/create'                          => '/content/page/create',
+            '/page/update/<id:\d+>'                 => '/content/page/update',
+            '/page/user/<user_id:\d+>/*'            => '/content/page/userPages',
+            '/page/tag/<tag_name:[a-zA-Zа-яА-Я ]+>' => '/content/page/tagPages',
+            '/page/section/<section_id:\d+>/*'      => '/content/page/sectionPages',
+            '/forum'                                => '/content/forum/index',
+            '/forum/section/<section_id:\d+>/*'     => '/content/forum/sectionTopics',
+            '/forum/topic/<topic_id:\d+>/*'         => '/content/forum/viewTopic',
         );
 
         return $routes;

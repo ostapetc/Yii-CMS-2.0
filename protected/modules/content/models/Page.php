@@ -232,25 +232,6 @@ class Page extends ActiveRecord
     }
 
 
-    public function getHref()
-    {
-        $url = trim($this->url);
-        if ($url)
-        {
-            if ($url[0] != "/")
-            {
-                $url = "/page/{$url}";
-            }
-
-            return $url;
-        }
-        else
-        {
-            return "/page/" . $this->id;
-        }
-    }
-
-
     public function beforeSave()
     {
         if (parent::beforeSave())
@@ -307,5 +288,24 @@ class Page extends ActiveRecord
             $rel->page_id    = $this->id;
             $rel->save();
         }
+    }
+
+
+    public function getForumUrl()
+    {
+        return Yii::app()->createUrl('/content/forum/viewTopic', array('topic_id' => $this->id));
+    }
+
+
+    public function getLastComment()
+    {
+        $sql = "SELECT *
+                       FROM comments
+                       WHERE object_id = {$this->id} AND
+                             model_id  = 'Page'
+                       ORDER BY date_create DESC
+                       LIMIT 1";
+
+        return Comment::model()->findBySql($sql);
     }
 }
