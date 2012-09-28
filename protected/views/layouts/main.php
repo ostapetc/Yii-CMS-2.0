@@ -69,7 +69,6 @@
     <? $this->renderPartial('application.views.layouts._modal'); ?>
 
     <div id='main-wrapper'>
-
         <? $this->widget('content.portlets.Menu'); ?>
         <? $this->widget('content.portlets.SubMenu'); ?>
 
