@@ -9,7 +9,8 @@ class MediaVideoAdminController extends AdminController
             "delete"     => "Удалить",
             "update"     => "Редактировать",
             "manage"     => "Управление альбомами",
-            "youTubeUploadCallback"     => "Управление альбомами",
+            "youTubeUploadCallback" => "Управление альбомами",
+            "getYouTubeUploadToken" => "Управление альбомами",
         );
     }
 
@@ -32,17 +33,17 @@ class MediaVideoAdminController extends AdminController
 
 
 
+    public function actionGetYouTubeUploadToken($name)
+    {
+        $file = new MediaFile('create', 'youTube');
+        $data = $file->getApi()->getUploadToken($name);
+        $data['url'] .= '?nexturl=' . urlencode($this->createAbsoluteUrl('youTubeUploadCallback'));
+        echo json_encode($data);
+    }
 
     public function actionCreate()
     {
-        $file = new MediaFile('create', 'youTube');
-
-        $token = $file->getApi()->getUploadToken();
-        $uploadUrl = $token['url'];
-        $token = $token['token'];
-        $nextUrl = $this->createAbsoluteUrl('youTubeUploadCallback');
-
-        $this->render('create', array('token' => $token, 'uploadUrl' => $uploadUrl, 'nextUrl' => $nextUrl));
+        $this->render('create', array('tokenUrl' => $this->createUrl('getYouTubeUploadToken')));
     }
 
     public function actionYouTubeUploadCallback($status, $id)

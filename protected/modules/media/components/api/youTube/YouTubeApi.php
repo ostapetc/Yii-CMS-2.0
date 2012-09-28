@@ -70,12 +70,15 @@ class YouTubeApi extends ApiAbstract
         return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
     }
 
-    public function getUploadToken()
+    public function getUploadToken($name)
     {
         $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
-        $myVideoEntry->setVideoTitle($this->title);
-        $myVideoEntry->setVideoDescription($this->description);
-        $myVideoEntry->setVideoCategory($this->category);
+//        $myVideoEntry->setVideoTitle($this->title);
+//        $myVideoEntry->setVideoDescription($this->description);
+//        $myVideoEntry->setVideoCategory($this->category);
+        $myVideoEntry->setVideoTitle($name);
+//        $myVideoEntry->setVideoDescription('d');
+        $myVideoEntry->setVideoCategory('Autos');
 //        $myVideoEntry->SetVideoTags('cars, funny');
 
         return $this->getApi()->getFormUploadToken($myVideoEntry, 'http://gdata.youtube.com/action/GetUploadToken');
