@@ -232,6 +232,25 @@ class Page extends ActiveRecord
     }
 
 
+    public function getHref()
+    {
+        $url = trim($this->url);
+        if ($url)
+        {
+            if ($url[0] != "/")
+            {
+                $url = "/page/{$url}";
+            }
+
+            return $url;
+        }
+        else
+        {
+            return "/page/" . $this->id;
+        }
+    }
+
+
     public function beforeSave()
     {
         if (parent::beforeSave())
