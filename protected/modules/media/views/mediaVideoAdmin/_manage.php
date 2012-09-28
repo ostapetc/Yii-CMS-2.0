@@ -11,7 +11,7 @@
         <br/>
         Рейтинг: <?= $data->average ?>
         <br/>
-        Автор: <?= CHtml::link($data->author_name, $data->author_uri, array("target"=> "_blank")) ?>
+        Автор: <?= CHtml::link($data->author, $data->author_uri, array("target"=> "_blank")) ?>
         Категория: <?= $data->category ?>
     </div>
 </div>

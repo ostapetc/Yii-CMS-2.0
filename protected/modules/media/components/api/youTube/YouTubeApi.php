@@ -1,9 +1,33 @@
 <?php
+/**
+ * add in configuration
+ * 'params'     => array(
+ *      'youTube' => array(
+ *          'user' => '',
+ *          'pass' => '',
+ *          'app'  => '',
+ *          'key'  => ''
+ *      )
+ * )
+ *
+ */
+
+Yii::import('application.libs.*');
+require_once 'Zend/Loader.php';
+Zend_Loader::loadClass('Zend_Gdata_YouTube');
+Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
+Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
+
 class YouTubeApi extends ApiAbstract
 {
+    const UPLOAD_PATH = 'upload/mediaFiles';
+
     protected $api;
+    protected $criteriaClass = 'YouTubeApiCriteria';
 
     public $title;
+    public $description;
     public $img;
     public $size;
     public $player_url;
@@ -19,16 +43,9 @@ class YouTubeApi extends ApiAbstract
 
     public function beforeFind()
     {
-        Yii::import('application.libs.*');
-        require_once 'Zend/Loader.php';
-        Zend_Loader::loadClass('Zend_Gdata_YouTube');
-        Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
-        Zend_Loader::loadClass('Zend_Gdata_AuthSub');
-        Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
         return parent::beforeFind();
     }
-
 
     /**
      * @return Zend_Gdata_YouTube
@@ -38,16 +55,40 @@ class YouTubeApi extends ApiAbstract
         if (!$this->api)
         {
             $conf       = Yii::app()->params['youTube'];
+            if (!$conf) {
+                throw new CException('Pleas add configuration for youtube api, see comments for YouTubeApi');
+            }
             $httpClient = Zend_Gdata_ClientLogin::getHttpClient($conf['user'], $conf['pass'], 'youtube');
             $this->api  = new Zend_Gdata_YouTube($httpClient, $conf['app'], $conf['user'], $conf['key']);
         }
         return $this->api;
     }
 
+    public function getUploadUrl()
+    {
+        $conf       = Yii::app()->params['youTube'];
+        return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
+    }
+
+    public function getUploadToken($name)
+    {
+        $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
+//        $myVideoEntry->setVideoTitle($this->title);
+//        $myVideoEntry->setVideoDescription($this->description);
+//        $myVideoEntry->setVideoCategory($this->category);
+        $myVideoEntry->setVideoTitle($name);
+//        $myVideoEntry->setVideoDescription('d');
+        $myVideoEntry->setVideoCategory('Autos');
+//        $myVideoEntry->SetVideoTags('cars, funny');
+
+        return $this->getApi()->getFormUploadToken($myVideoEntry, 'http://gdata.youtube.com/action/GetUploadToken');
+    }
+
+
 
     public function save()
     {
-        throw new CException('no implemented yet');
+        return true;
     }
 
 
@@ -82,8 +123,8 @@ class YouTubeApi extends ApiAbstract
                 $query->setMaxResults($criteria->limit);
                 $query->setStartIndex($criteria->offset);
                 $query->setOrderBy($criteria->order);
-                $criteria->author && $query->setAuthor($criteria->author);
-                $criteria->category && $query->setCategory($criteria->category);
+                $query->setAuthor($criteria->author);
+                $query->setCategory($criteria->category);
 
 
                 $feed = $this->getApi()->getVideoFeed($query);
@@ -127,6 +168,10 @@ class YouTubeApi extends ApiAbstract
         }
     }
 
+    public static function basePath()
+    {
+        return Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/';
+    }
 
     /**
      * TODO: how it implementing???
@@ -141,7 +186,7 @@ class YouTubeApi extends ApiAbstract
     }
 
 
-    public function search($props)
+    public function search($props = array())
     {
         $criteria = new YouTubeApiCriteria(array(
             'select'        => $this->title,
@@ -178,6 +223,7 @@ class YouTubeApi extends ApiAbstract
     {
         $this->beforeFind();
         $entry = $this->getApi()->getVideoEntry($pk);
-        return $this->populateRecord($entry);
+        $this->populateRecord($entry);
+        return $this;
     }
 }

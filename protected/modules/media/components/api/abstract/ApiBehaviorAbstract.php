@@ -2,10 +2,10 @@
 abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
 {
     public $api_model;
+    protected $_api_model;
 
     public $module;
     public $assets;
-
 
     public function __construct()
     {
@@ -40,28 +40,16 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
      */
     public function getApiModel()
     {
-        $owner = $this->getOwner();
-        if ($owner->api_model === null)
+        if ($this->_api_model === null)
         {
-            try{
-            $owner->api_model = Yii::createComponent($this->api_model);
-            } catch (Exception $e)
+            $this->_api_model = Yii::createComponent($this->api_model);
+            if ($this->getPk())
             {
-                dump($e);
+                $this->_api_model = $this->_api_model->findByPk($this->getPk());
             }
         }
-        return $owner->api_model;
+        return $this->_api_model;
     }
-
-
-    /**
-     * @param $event CModelEvent
-     */
-    public function afterFind($event)
-    {
-        $this->getOwner()->api_model = $this->getApiModel()->findByPk($this->getPk());
-    }
-
 
 }
 

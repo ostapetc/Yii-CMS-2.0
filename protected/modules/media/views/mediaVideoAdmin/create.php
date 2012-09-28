@@ -2,11 +2,19 @@
 $this->widget('media.portlets.Uploader', array(
     'name'      => 'uploader',
     'model'     => new MediaAlbum,
+    'uploadUrl' => $tokenUrl,
     'data_type' => 'video',
-    'uploadUrl' => $postUrl . '?nexturl=' . $nextUrl,
-    'options'   => array(
-        'formData' => array(
-            'token' => $tokenValue
-        ),
-    ),
+    'params'   => array(
+        'forceIframeTransport' => true,
+        'submit' => "js:function (e, data) {
+            var that = $(this),
+                file = data.files[0];
+            $.get(that.data('fileupload').options.url, { name:file.name }, function (result) {
+                data.url = result.url;
+                data.formData = {token: result.token};
+                that.fileupload('send', data);
+            }, 'json');
+            return false;
+        }"
+    )
 ));

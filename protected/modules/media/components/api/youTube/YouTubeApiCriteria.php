@@ -15,7 +15,7 @@ class YouTubeApiCriteria extends ApiCriteria
         self::ORDER_FAVORITE_COUNT => 'Количеству фаворитов??',
     );
 
-    public $category = '';
-    public $author = '';
+    public $category = null;
+    public $author = null;
 
 }

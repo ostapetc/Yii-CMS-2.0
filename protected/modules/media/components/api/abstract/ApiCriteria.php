@@ -1,21 +1,21 @@
 <?php
 class ApiCriteria extends CComponent
 {
-	public $select='';
-	public $limit=1;
-	public $offset=0;
-	public $order='';
-	public $pk='';
+    public $select = null;
+    public $limit  = 1;
+    public $offset = 0;
+    public $order  = null;
+    public $pk     = null;
 
-	/**
-	 * Constructor.
-	 * @param array $data criteria initial property values (indexed by property name)
-	 */
-	public function __construct($data=array())
-	{
-		foreach($data as $name=>$value)
-			$this->$name=$value;
-	}
+    /**
+     * Constructor.
+     * @param array $data criteria initial property values (indexed by property name)
+     */
+    public function __construct($data=array())
+    {
+        foreach($data as $name=>$value)
+            $this->$name=$value;
+    }
 
     public function mergeWith($props)
     {
@@ -25,6 +25,10 @@ class ApiCriteria extends CComponent
         }
         foreach ($props as $key => $val)
         {
+            if ($val === null)
+            {
+                continue;
+            }
             if (is_array($val))
             {
                 $this->$key = CMap::mergeArray($this->$key, $val);
@@ -51,7 +55,7 @@ class ApiCriteria extends CComponent
 
     public function toCacheKey()
     {
-        $uniq_str = implode('_', array_keys($this->toArray()));
+        $uniq_str = implode('_', $this->toArray());
         return get_class($this) . '_' . md5($uniq_str);
     }
 }
