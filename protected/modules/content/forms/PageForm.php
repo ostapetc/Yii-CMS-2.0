@@ -15,7 +15,7 @@ return array(
 //        ),
         'gallery'    => array(
             'type'      => 'uploader_modal',
-            'data_type' => 'video',
+            'data_type' => 'image',
             'title'     => 'Файлы',
         ),
         'status'   => array(

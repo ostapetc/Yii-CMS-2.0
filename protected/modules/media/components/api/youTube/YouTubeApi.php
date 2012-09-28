@@ -3,10 +3,10 @@
  * add in configuration
  * 'params'     => array(
  *      'youTube' => array(
- *          'user' => 'www.pismeco@gmail.com',
- *          'pass' => 'rich12345',
- *          'app'  => 'yii-cms',
- *          'key'  => 'AI39si6g5OOfOJm14hX5TkcyQtiC51j1mGCuUK2hGBzL_BHjU4bi2Gki4DU076wpe6zfDyrARFsZKGTM7yLhYf8_AK92U4wyww'
+ *          'user' => '',
+ *          'pass' => '',
+ *          'app'  => '',
+ *          'key'  => ''
  *      )
  * )
  *
@@ -27,6 +27,7 @@ class YouTubeApi extends ApiAbstract
     protected $criteriaClass = 'YouTubeApiCriteria';
 
     public $title;
+    public $description;
     public $img;
     public $size;
     public $player_url;
