@@ -1,10 +1,20 @@
 
 body {
-    /*background-image: url(/img/site/bg1.jpg);*/
-    background-attachment: fixed;
+
+    /*background-attachment: fixed;*/
+
     background-color: #444;
-    background-position: center top;
-    background-repeat: no-repeat;
+    background: url(/img/bg/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+
+    /*background: url(/img/logos/index.jpg);*/
+
+    /*background-position: center top;*/
+    /*background-repeat: no-repeat;*/
 }
 
 #main-wrapper {
