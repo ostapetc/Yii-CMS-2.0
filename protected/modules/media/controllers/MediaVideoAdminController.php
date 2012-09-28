@@ -4,11 +4,11 @@ class MediaVideoAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "create"     => "Создать",
-            "view"       => "Создать",
-            "delete"     => "Удалить",
-            "update"     => "Редактировать",
-            "manage"     => "Управление альбомами",
+            "create"                => "Создать",
+            "view"                  => "Создать",
+            "delete"                => "Удалить",
+            "update"                => "Редактировать",
+            "manage"                => "Управление альбомами",
             "youTubeUploadCallback" => "Управление альбомами",
             "getYouTubeUploadToken" => "Управление альбомами",
         );
@@ -17,9 +17,8 @@ class MediaVideoAdminController extends AdminController
 
     public function actionManage()
     {
-        $file = new MediaFile('search', 'youTube');
+        $file  = new MediaFile('search', 'youTube');
         $model = $file->getApi();
-//        $model->unsetAttributes();
 
         if (isset($_GET[get_class($model)]))
         {
@@ -32,7 +31,6 @@ class MediaVideoAdminController extends AdminController
     }
 
 
-
     public function actionGetYouTubeUploadToken($name)
     {
         $file = new MediaFile('create', 'youTube');
@@ -41,15 +39,52 @@ class MediaVideoAdminController extends AdminController
         echo json_encode($data);
     }
 
+
     public function actionCreate()
     {
         $this->render('create', array('tokenUrl' => $this->createUrl('getYouTubeUploadToken')));
     }
 
+
+    protected function sendFilesAsJson($files)
+    {
+        $res = array();
+        $files = is_array($files) ? $files : array($files);
+        foreach ($files as $file)
+        {
+            $res[] = array(
+                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'preview'        => $file->getPreview(),
+                'delete_url'     => $file->deleteUrl,
+                'delete_type'    => "post",
+                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
+                    'id'  => $file->id,
+                )),
+                'id'             => 'File_' . $file->id,
+            );
+        }
+//        echo json_encode($res);die;
+        echo CJSON::encode($res);
+    }
+
+
     public function actionYouTubeUploadCallback($status, $id)
     {
-        echo $id;
+        switch ($status)
+        {
+            case 200:
+                $file = new MediaFile('create', 'youTube');
+                $file->remote_id = $id;
+                $file->save();
+                $this->sendFilesAsJson($file);
+                break;
+            default:
+                throw new CException('what???');
+                break;
+        }
     }
+
 
     public function actionView($id)
     {

@@ -20,7 +20,7 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     abstract function getUrl();
 
 
-    abstract function getIcon();
+    abstract function getPreview();
 
 
     protected function getPk()
@@ -51,5 +51,10 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         return $this->_api_model;
     }
 
+
+    public function setApiModel($model)
+    {
+        $this->_api_model = $model;
+    }
 }
 

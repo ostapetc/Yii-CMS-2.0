@@ -30,21 +30,21 @@ class MediaFileAdminController extends AdminController
         );
     }
 
-
     protected function sendFilesAsJson($files)
     {
         $res = array();
-        foreach ((array)$files as $file)
+        $files = is_array($files) ? $files : array($files);
+        foreach ($files as $file)
         {
             $res[] = array(
-                'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
-                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
-                'url'            => $file['href'],
-                'thumbnail_url'  => $file['icon'],
-                'delete_url'     => $file['deleteUrl'],
+                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'url'            => $file->getHref(),
+                'preview'        => $file->getPreview(),
+                'delete_url'     => $file->deleteUrl,
                 'delete_type'    => "post",
                 'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
-                    'id'  => $file['id'],
+                    'id'  => $file->id,
                 )),
                 'id'             => 'File_' . $file->id,
             );
@@ -52,6 +52,7 @@ class MediaFileAdminController extends AdminController
 
         echo CJSON::encode($res);
     }
+
 
 
     public function actionExistFiles($model_id, $object_id, $tag)

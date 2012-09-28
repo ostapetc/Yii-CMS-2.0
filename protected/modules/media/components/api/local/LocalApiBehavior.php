@@ -101,7 +101,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getIcon()
+    public function getPreview()
     {
         $folder = $this->assets . '/img/fileIcons/';
         switch (true)

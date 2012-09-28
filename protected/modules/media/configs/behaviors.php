@@ -8,7 +8,7 @@ return array(
     ),
     'youTube' => array(
         'class'     => 'media.components.api.youTube.YouTubeApiBehavior',
-        'icon'      => 'img/fileIcons/youtube-32.png',
+        'icon'      => '/img/fileIcons/youtube-32.png',
         'api_model' => array(
             'class' => 'media.components.api.youTube.YouTubeApi'
         )

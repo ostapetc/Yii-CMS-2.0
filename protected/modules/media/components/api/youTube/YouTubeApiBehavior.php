@@ -1,10 +1,14 @@
 <?php
 Yii::import('media.components.api.abstract.*');
 Yii::import('media.components.api.youTube.*');
+
+/**
+ * @method YouTubeApi getApiModel
+ */
 class YouTubeApiBehavior extends ApiBehaviorAbstract
 {
     public $icon;
-
+    public $href;
 
     public function getThumb()
     {
@@ -17,16 +21,36 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         throw new CException('not implemented yet');
     }
 
-
-    public function getHref()
+    public function beforeSave($event)
     {
-        throw new CException('not implemented yet');
+        $model = $this->getApiModel()->findByPk($this->getPk());
+        $this->setApiModel($model);
+        return true;
     }
 
 
-    public function getIcon()
+    public function detectType()
     {
-        return $this->assets . '/' . $this->icon;
+        return 'video';
+    }
+
+    public function getHref()
+    {
+        return $this->href;
+    }
+
+
+    public function getPreview()
+    {
+        $player = $this->getApiModel()->player_url;
+        if ($player)
+        {
+            return "<iframe src='".$player."' width='100%' > </iframe>";
+        }
+        else
+        {
+            return "<img src='".$this->icon."' alt='' width='100%' />";
+        }
     }
 
 

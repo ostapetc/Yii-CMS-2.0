@@ -33,7 +33,6 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
     },
     _renderExtendedProgress: function(data)
     {
-        alert(data.bitrate);
         return this._formatBitrate(data.bitrate) + ' | ' +
             this._formatTime(
                 (data.total - data.loaded) * 8 / data.bitrate

@@ -131,6 +131,11 @@ class MediaFile extends ActiveRecord
     }
 
 
+    public function getApiName()
+    {
+        return $this->_api_name;
+    }
+
     /**
      * @return ApiAbstract
      */

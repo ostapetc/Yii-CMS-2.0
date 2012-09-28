@@ -150,7 +150,9 @@ class YouTubeApi extends ApiAbstract
         $rating           = $entry->getVideoRatingInfo();
         $this->average    = $rating['average'];
         $this->raters     = $rating['numRaters'];
-        $this->view_count = $entry->getStatistics()->getViewCount();
+        if($entry->getStatistics()) {
+            $this->view_count = $entry->getStatistics()->getViewCount();
+        }
         $this->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
         $author           = reset($entry->getAuthor());
@@ -223,7 +225,6 @@ class YouTubeApi extends ApiAbstract
     {
         $this->beforeFind();
         $entry = $this->getApi()->getVideoEntry($pk);
-        $this->populateRecord($entry);
-        return $this;
+        return $this->populateRecord($entry);
     }
 }
