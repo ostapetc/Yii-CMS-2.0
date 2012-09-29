@@ -2,6 +2,7 @@
 $this->widget('media.portlets.Uploader', array(
     'name'      => 'uploader',
     'model'     => new MediaAlbum,
+    'preview_width' => '220px',
     'uploadUrl' => $tokenUrl,
     'data_type' => 'video',
     'params'   => array(

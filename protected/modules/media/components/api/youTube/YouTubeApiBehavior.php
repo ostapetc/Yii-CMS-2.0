@@ -45,11 +45,11 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $player = $this->getApiModel()->player_url;
         if ($player)
         {
-            return "<iframe src='".$player."' width='100%' > </iframe>";
+            return array('type' => 'iframe', 'val' => $player);
         }
         else
         {
-            return "<img src='".$this->icon."' alt='' width='100%' />";
+            return array('type' => 'img', 'val' => $this->icon);
         }
     }
 
