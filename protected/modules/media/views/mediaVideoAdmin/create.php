@@ -3,7 +3,7 @@ $this->widget('media.portlets.Uploader', array(
     'name'      => 'uploader',
     'model'     => new MediaAlbum,
     'preview_width' => '220px',
-    'uploadUrl' => $tokenUrl,
+    'upload_url' => $tokenUrl,
     'data_type' => 'video',
     'params'   => array(
         'forceIframeTransport' => true,

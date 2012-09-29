@@ -25,6 +25,18 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
     {
         $model = $this->getApiModel()->findByPk($this->getPk());
         $this->setApiModel($model);
+        if ($this->getOwner()->getIsNewRecord())
+        {
+
+        }
+        else
+        {
+            $this->getApiModel()->title = $this->getOwner()->title;
+//            $this->getApiModel()->description = $this->getOwner()->description;
+            if (!$this->getApiModel()->save()) {
+                //what to do??
+            }
+        }
         return true;
     }
 

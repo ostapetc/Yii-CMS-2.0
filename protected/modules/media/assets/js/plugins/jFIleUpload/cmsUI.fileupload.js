@@ -9,11 +9,25 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         previewAsCanvas: false,
         uploadTemplate: function(o)
         {
-            return $.tmpl( $('#template-upload'), o.files );
+            return $.tmpl($('#template-upload'), o.files);
         },
         downloadTemplate: function(o)
         {
-            return $.tmpl( $('#template-download'), o.files );
+            if (o.files)
+            {
+                for (var i in o.files)
+                {
+                    if (o.files[i].preview.type == 'iframe')
+                    {
+                        o.files[i].preview = '<iframe src="' + o.files[i].preview.val + '" width="100%"></iframe>';
+                    }
+                    else if (o.files[i].preview.type == 'img')
+                    {
+                        o.files[i].preview = '<img src="' + o.files[i].preview.val + '" width="100%"></img>';
+                    }
+                }
+            }
+            return $.tmpl($('#template-download'), o.files);
         }
     },
     _create: function()
