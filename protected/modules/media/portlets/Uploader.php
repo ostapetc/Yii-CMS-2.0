@@ -33,7 +33,7 @@ class Uploader extends JuiInputWidget
     public $params = array();
 
     public $tag;
-    public $maxFileSize = 100000000; //100 * 1000 * 10000
+    public $maxFileSize = 100000000; //100 * 1000 * 1000
 
     public $setWatermark = false;
 
@@ -105,7 +105,8 @@ class Uploader extends JuiInputWidget
         $this->id     = 'uploader_' . get_class($this->model) . $this->tag;
         $this->assets = Yii::app()->getModule('media')->assetsUrl();
 
-        if (!$this->uploadUrl) {
+        if (!$this->uploadUrl)
+        {
             $this->uploadUrl = Yii::app()->createUrl($this->uploadAction, array(
                 'model_id'  => get_class($this->model),
                 'object_id' => $this->model->id ? $this->model->id : 0,
@@ -138,11 +139,14 @@ class Uploader extends JuiInputWidget
         $plugins = $this->assets . '/js/plugins/';
         $cs      = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery.ui')->registerScriptFile($plugins . 'tmpl/jquery.tmpl.min.js');
-        $cs->registerScriptFile($plugins . 'jFileUpload/jquery.iframe-transport.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload/cors/jquery.postmessage-transport.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload/cors/jquery.xdr-transport.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload/jquery.iframe-transport.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-fp.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-ui.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/cmsUI.fileupload.js');
-        $cs->registerCssFile($plugins . 'jFileUpload/jquery.fileupload-ui.css');
+        $cs->registerCssFile($plugins . 'jFileUpload/css/jquery.fileupload-ui.css');
         $cs->registerScriptFile($plugins . 'jEditable/jquery.jeditable.js');
         $cs->registerScriptFile($plugins . 'moderniz/moderniz.js');
 

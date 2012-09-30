@@ -98,6 +98,8 @@ class AssetManager extends CAssetManager {
 
 	public function publish($path,$hashByName=false,$level=-1,$forceCopy=false)
     {
+        $forceCopy = false;
+
         if($forceCopy===null)
             $forceCopy=$this->forceCopy;
         if(isset($this->_published[$path]))

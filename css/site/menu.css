@@ -52,14 +52,14 @@
 a.user-menu {
     background-image: url(/img/glyphicons/glyphicons_003_user.png);
     background-repeat: no-repeat;
-    background-position: 10px 10px;
+    background-position: 10px 15px;
     padding-left: 36px !important;
 }
 
 a.create-menu {
     background-image: url(/img/glyphicons/glyphicons_151_edit.png);
     background-repeat: no-repeat;
-    background-position: 10px 10px;
+    background-position: 10px 15px;
     padding-left: 36px !important;
 }
 

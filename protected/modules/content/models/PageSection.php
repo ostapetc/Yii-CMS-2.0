@@ -183,4 +183,10 @@ class PageSection extends ActiveRecord
 
         return Page::model()->findBySql($sql);
     }
+
+
+    public function getForumUrl()
+    {
+        return Yii::app()->createUrl('/content/forum/sectionTopics/', array('section_id' => $this->id));
+    }
 }

@@ -1,5 +1,7 @@
 <?
-return CMap::mergeArray(require(CONFIG . '.php'), array(
+$config = defined('ENV') ? ENV : CONFIG;
+$config = $config == 'install' ? 'main' : $config;
+return CMap::mergeArray(require($config . '.php'), array(
     'language'   => 'en',
     'commandMap' => array(
         'migrate'    => array(

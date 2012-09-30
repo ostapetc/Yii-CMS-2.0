@@ -1,7 +1,7 @@
 <div class="page">
     <? if ($preview): ?>
         <h1 class="page-title">
-            <?= CHtml::link(CHtml::encode($data->title), $data->href, array('class' => 'page-title')); ?>
+            <?= CHtml::link(CHtml::encode($data->title), $data->url, array('class' => 'page-title')); ?>
 
             <? if (Yii::app()->user->checkAccess('Page_update')): ?>
                 <?=
@@ -33,7 +33,7 @@
         $parts = explode('{{cut}}', $data->text);
         echo array_shift($parts);
         ?>
-        <p><?= CHtml::link('читать далее →', $data->href, array('class' => 'read-more')) ?></p>
+        <p><?= CHtml::link('читать далее →', $data->url, array('class' => 'read-more')) ?></p>
     <? else: ?>
         <?= $data->text ?>
         <br/>
@@ -60,14 +60,17 @@
 
         <? $this->widget('social.portlets.FavoritePortlet', array('model' => $data)); ?>
 
-        <? $this->renderPartial('application.modules.users.views.user._author', array('user' => $data->user)) ?>
+        <div class="author" >
+            <a href="<?= $data->user->url ?>" title="Автор текста"><span class="glyphicon-user"></span><?= $data->user->name ?></a>
+            <span title="рейтинг пользователя" class="rating"><?= $data->user->rating ?></span>
+        </div>
 
         <div class="comments">
             <?
             $title = $data->comments_count ? 'Читать комментарии' : 'Комментировать';
             ?>
 
-            <a href="<?= $data->href ?>#comments" title="<?= $title ?>">
+            <a href="<?= $data->url ?>#comments" title="<?= $title ?>">
                 <span class="glyphicon-comments"></span>&nbsp;
                 <span class="all"><?= $data->comments_count ? $data->comments_count : $title ?></span>
             </a>
