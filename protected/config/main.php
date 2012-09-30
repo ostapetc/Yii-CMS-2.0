@@ -126,15 +126,21 @@ return array(
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
-//        'log' => array(
-//            'class'  => 'CLogRouter',
-//            'routes' => array(
-//                array(
-//                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-//                    'ipFilters' => array('*'),
-//                )
-//            ),
-//        ),
+        'log' => array(
+            'class'  => 'CLogRouter',
+            'routes' => array(
+                array(
+                    'class'        => 'CDbLogRoute',
+                    'levels'       => 'info, error, warning',
+                    'connectionID' => 'db',
+                    'logTableName' => 'log'
+                )
+                /*array(
+                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+                    'ipFilters' => array('*'),
+                )*/
+            ),
+        ),
     ),
     'onBeginRequest' => array('AppManager', 'init'),
     'params' => array(

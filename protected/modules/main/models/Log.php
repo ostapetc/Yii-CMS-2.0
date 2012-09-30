@@ -73,7 +73,10 @@ class Log extends ActiveRecord
 		$criteria->compare('message',$this->message,true);
 
 		return new ActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria
+			'criteria' => $criteria,
+            'sort'     => array(
+                'defaultOrder' => 'logtime DESC'
+            )
 		));
 	}
 }

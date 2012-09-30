@@ -11,8 +11,8 @@ class DbLogRoute extends CDbLogRoute
 {
 	protected function processLogs($logs)
 	{
-		$sql="INSERT INTO {$this->logTableName} (level, category, message)
-                     VALUES (:level, :category, :message) ";
+		$sql="INSERT INTO {$this->logTableName} (level, category, message, logtime)
+                     VALUES (:level, :category, :message, :logtime) ";
 
 		$command=$this->getDbConnection()->createCommand($sql);
 		foreach($logs as $log)
@@ -20,6 +20,7 @@ class DbLogRoute extends CDbLogRoute
 			$command->bindValue(':level',$log[1]);
 			$command->bindValue(':category',$log[2]);
 			$command->bindValue(':message',$log[0]);
+            $command->bindValue(':logtime', time());
 			$command->execute();
 		}
 	}
