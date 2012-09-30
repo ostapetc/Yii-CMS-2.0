@@ -58,6 +58,7 @@ class MediaFile extends ActiveRecord
 
     private $_api_name;
 
+    const TAG_ON_MODERATE = 'on_moderate';
 
     public function __construct($scenario = 'insert', $api_name = 'local')
     {
@@ -104,12 +105,21 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function parent($model_id, $id)
+    public function parent($model_id, $object_id = null)
     {
         $alias = $this->getTableAlias();
+        $condition = "$alias.model_id=:model_id";
+        $params = array(
+            'model_id' => $model_id
+        );
+        if ($object_id !== null)
+        {
+            $condition .= " AND $alias.object_id=:object_id";
+            $params['object_id'] = $object_id;
+        }
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => "$alias.model_id='$model_id' AND $alias.object_id='$id'",
-            'order'     => "$alias.order DESC"
+            'condition' => $condition,
+            'params' => $params
         ));
         return $this;
     }
@@ -119,7 +129,10 @@ class MediaFile extends ActiveRecord
     {
         $alias = $this->getTableAlias();
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => "$alias.tag='$tag'"
+            'condition' => "$alias.tag=:tag",
+            'params' => array(
+                'tag' => $tag
+            )
         ));
         return $this;
     }
@@ -246,12 +259,21 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public static function getDataProvider($model, $tag, $api = 'local')
+    public function getDataProvider($model = null, $tag = null)
     {
-        $file = new static;
+        $file = clone $this;
+        if ($model instanceof CActiveRecord)
+        {
+            $pk = $model->getIsNewRecord() ? $model->getPrimaryKey() : null;
+            $file->parent(get_class($model), $pk);
+        }
+        if ($tag !== null)
+        {
+            $file->tag($tag);
+        }
+
         return new ActiveDataProvider(get_called_class(), array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->setApi($api)
-                ->ordered()->getDbCriteria(),
+            'criteria' => $file->ordered()->getDbCriteria(),
         ));
     }
 }

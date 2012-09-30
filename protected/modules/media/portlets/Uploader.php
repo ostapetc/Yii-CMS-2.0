@@ -9,6 +9,7 @@ class Uploader extends JuiInputWidget
     public $preview_width = '64px';
     public $data_type; //image, sound, video, document
     public $as_modal = true;
+    public $multiple = true;
 
     public $fields = array(
         'title' => array(

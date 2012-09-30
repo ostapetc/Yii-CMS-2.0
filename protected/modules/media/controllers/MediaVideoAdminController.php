@@ -10,10 +10,20 @@ class MediaVideoAdminController extends AdminController
             "update"                => "Редактировать",
             "manage"                => "Управление альбомами",
             "youTubeUploadCallback" => "Управление альбомами",
+            "localVideos" => "Управление альбомами",
             "getYouTubeUploadToken" => "Управление альбомами",
         );
     }
 
+    public function actionLocalVideos($tag)
+    {
+        $file = new MediaFile('search', 'local');
+        $dp = $file->getDataProvider(new User, $tag);
+
+        $this->render('localVideos', array(
+            'dp' => $dp
+        ));
+    }
 
     public function actionManage()
     {
@@ -31,58 +41,9 @@ class MediaVideoAdminController extends AdminController
     }
 
 
-    public function actionGetYouTubeUploadToken($name)
-    {
-        $file = new MediaFile('create', 'youTube');
-        $data = $file->getApi()->getUploadToken($name);
-        $data['url'] .= '?nexturl=' . urlencode($this->createAbsoluteUrl('youTubeUploadCallback'));
-        echo json_encode($data);
-    }
-
-
     public function actionCreate()
     {
-        $this->render('create', array('tokenUrl' => $this->createUrl('getYouTubeUploadToken')));
-    }
-
-
-    protected function sendFilesAsJson($files)
-    {
-        $res = array();
-        $files = is_array($files) ? $files : array($files);
-        foreach ($files as $file)
-        {
-            $res[] = array(
-                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
-                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
-                'preview'        => $file->getPreview(),
-                'delete_url'     => $file->deleteUrl,
-                'delete_type'    => "post",
-                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
-                    'id'  => $file->id,
-                )),
-                'id'             => 'File_' . $file->id,
-            );
-        }
-//        echo json_encode($res);die;
-        echo CJSON::encode($res);
-    }
-
-
-    public function actionYouTubeUploadCallback($status, $id)
-    {
-        switch ($status)
-        {
-            case 200:
-                $file = new MediaFile('create', 'youTube');
-                $file->remote_id = $id;
-                $file->save();
-                $this->sendFilesAsJson($file);
-                break;
-            default:
-                throw new CException('what???');
-                break;
-        }
+        $this->render('create', array());
     }
 
 

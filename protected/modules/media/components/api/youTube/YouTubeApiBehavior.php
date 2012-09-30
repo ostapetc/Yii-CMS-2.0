@@ -51,6 +51,18 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         return $this->href;
     }
 
+    /**
+     * @param LocalApi $local_api
+     */
+    public function convertFromLocal($local_api)
+    {
+        $api = $this->getApiModel();
+        $owner = $this->getOwner();
+        $api->title = $owner->title;
+        $api->description = $owner->description;
+//        $api->isNewRecord = true;
+        $api->sendFile($local_api->getServerPath());
+    }
 
     public function getPreview()
     {

@@ -1,12 +1,14 @@
 <?
 $this->widget('media.portlets.Uploader', array(
-    'name'      => 'uploader',
-    'model'     => new MediaAlbum,
-    'preview_width' => '220px',
-    'upload_url' => $tokenUrl,
+    'name'    => 'uploader',
+    'model'   => new User,
+    'tag'     => MediaFile::TAG_ON_MODERATE,
+//    'preview_width' => '220px',
+//    'upload_url' => $tokenUrl,
     'data_type' => 'video',
+//    'multiple' => false,
     'params'   => array(
-        'forceIframeTransport' => true,
+/*        'forceIframeTransport' => true,
         'submit' => "js:function (e, data) {
             var that = $(this),
                 file = data.files[0];
@@ -17,5 +19,6 @@ $this->widget('media.portlets.Uploader', array(
             }, 'json');
             return false;
         }"
+*/
     )
 ));

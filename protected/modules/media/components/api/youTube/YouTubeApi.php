@@ -73,6 +73,32 @@ class YouTubeApi extends ApiAbstract
         return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
     }
 
+    public function sendFile($file)
+    {
+        $uploadUrl = $this->getUploadUrl();
+
+        $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
+
+        $filesource = $tihs->getApi()->newMediaFileSource($video_url);
+        $filesource->setContentType('video/quicktime'); //make sure to set the proper content type.
+        $filesource->setSlug($file);
+
+        $myVideoEntry->setMediaSource($filesource);
+
+        $myVideoEntry->setVideoTitle($this->title);
+        $myVideoEntry->setVideoDescription($this->description);
+
+//        no supported yet
+        $myVideoEntry->setVideoCategory('Sport');
+//        $myVideoEntry->SetVideoTags('cars, funny');
+
+        $newEntry = $this->getApi()->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
+
+        $model = new static;
+        $model->populateRecord($newEntry);
+        return $model;
+    }
+
 
     public function getUploadToken($name)
     {
@@ -95,7 +121,8 @@ class YouTubeApi extends ApiAbstract
         $videoEntry = $this->getApi()->getVideoEntry($this->pk);
         $videoEntry->setVideoDescription($this->description);
         $videoEntry->setVideoTitle($this->title);
-        if($videoEntry->getEditLink()){
+        //maybe need real video? getEditLink is empty now
+        if($videoEntry->getEditLink()) {
             $putUrl = $videoEntry->getEditLink()->getHref();
             $this->getApi()->updateEntry($videoEntry, $putUrl);
             return true;

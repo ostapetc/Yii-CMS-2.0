@@ -13,7 +13,6 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         $this->assets = $this->module->assetsUrl();
     }
 
-
     abstract function getHref();
 
 

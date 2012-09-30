@@ -43,7 +43,8 @@ class LocalFileExtensions
     public static $videoExtensions = array(
         'flv',
         'avi',
-        'mpeg'
+        'mpeg',
+        'wmv',
     );
 
     public static $readableExtensions = array(
