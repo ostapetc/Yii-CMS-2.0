@@ -17,8 +17,6 @@
  * @property LanguagesMessages   $id0
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   LanguageTranslation published()
- * @method   LanguageTranslation sitemap()
  * @method   LanguageTranslation ordered()
  * @method   LanguageTranslation last()
  * 

@@ -13,8 +13,6 @@
  * @property        $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Tag    published()
- * @method   Tag    sitemap()
  * @method   Tag    ordered()
  * @method   Tag    last()
  * 

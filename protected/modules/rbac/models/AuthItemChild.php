@@ -13,8 +13,6 @@
  * @property               $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   AuthItemChild published()
- * @method   AuthItemChild sitemap()
  * @method   AuthItemChild ordered()
  * @method   AuthItemChild last()
  * 

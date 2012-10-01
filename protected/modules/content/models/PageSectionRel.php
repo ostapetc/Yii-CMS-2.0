@@ -15,8 +15,6 @@
  * @property                $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   PageSectionRel published()
- * @method   PageSectionRel sitemap()
  * @method   PageSectionRel ordered()
  * @method   PageSectionRel last()
  * 

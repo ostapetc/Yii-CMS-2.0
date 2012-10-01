@@ -17,8 +17,6 @@
  * @property          $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Favorite published()
- * @method   Favorite sitemap()
  * @method   Favorite ordered()
  * @method   Favorite last()
  * 

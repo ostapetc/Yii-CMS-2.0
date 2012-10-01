@@ -4,6 +4,7 @@
  * !Attributes - атрибуты БД
  * @property string           $language
  * @property string           $status
+ * @property string           $type
  * @property integer          $comments_denied
  * @property string           $id
  * @property string           $user_id
@@ -16,6 +17,8 @@
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                  $href
  * @property                  $content
+ * @property                  $forumUrl
+ * @property                  $lastComment
  * @property                  $errorsFlatArray
  * @property                  $updateUrl
  * @property                  $createUrl
@@ -31,8 +34,6 @@
  * @property PageSection[]    $sections
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Page             published()
- * @method   Page             sitemap()
  * @method   Page             ordered()
  * @method   Page             last()
  * 
