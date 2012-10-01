@@ -104,12 +104,21 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public function parent($model_id, $id)
+    public function parent($model_id, $object_id = null)
     {
-        $alias = $this->getTableAlias();
+        $alias     = $this->getTableAlias();
+        $condition = "$alias.model_id=:model_id";
+        $params    = array(
+            'model_id' => $model_id
+        );
+        if ($object_id !== null)
+        {
+            $condition .= " AND $alias.object_id=:object_id";
+            $params['object_id'] = $object_id;
+        }
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => "$alias.model_id='$model_id' AND $alias.object_id='$id'",
-            'order'     => "$alias.order DESC"
+            'condition' => $condition,
+            'params'    => $params
         ));
         return $this;
     }
@@ -119,15 +128,35 @@ class MediaFile extends ActiveRecord
     {
         $alias = $this->getTableAlias();
         $this->getDbCriteria()->mergeWith(array(
-            'condition' => "$alias.tag='$tag'"
+            'condition' => "$alias.tag=:tag",
+            'params'    => array(
+                'tag' => $tag
+            )
         ));
         return $this;
     }
 
+    public function type($type)
+    {
+        $alias = $this->getTableAlias();
+        $this->getDbCriteria()->mergeWith(array(
+            'condition' => "$alias.type=:type",
+            'params'    => array(
+                'type' => $type
+            )
+        ));
+        return $this;
+    }
 
     public function getDeleteUrl()
     {
         return Yii::app()->createUrl('/media/mediaFileAdmin/delete', array('id' => $this->id));
+    }
+
+
+    public function getApiName()
+    {
+        return $this->_api_name;
     }
 
 
@@ -150,7 +179,7 @@ class MediaFile extends ActiveRecord
         if (!self::$configuration)
         {
             self::$configuration = new CConfiguration(
-                Yii::getPathOfAlias('media.configs') . '/behaviors.php');
+                Yii::getPathOfAlias('media.configs') . '/midiaFile.php');
         }
 
         $this->attachBehavior('api', self::$configuration[$api_name]);
@@ -241,12 +270,21 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public static function getDataProvider($model, $tag, $api = 'local')
+    public function getDataProvider($model = null, $tag = null)
     {
-        $file = new static;
+        $file = clone $this;
+        if ($model instanceof CActiveRecord)
+        {
+            $pk = $model->getIsNewRecord() ? $model->getPrimaryKey() : null;
+            $file->parent(get_class($model), $pk);
+        }
+        if ($tag !== null)
+        {
+            $file->tag($tag);
+        }
+
         return new ActiveDataProvider(get_called_class(), array(
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->tag($tag)->setApi($api)
-                ->ordered()->getDbCriteria(),
+            'criteria' => $file->ordered()->getDbCriteria(),
         ));
     }
 }

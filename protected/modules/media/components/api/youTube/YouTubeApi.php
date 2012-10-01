@@ -47,6 +47,7 @@ class YouTubeApi extends ApiAbstract
         return parent::beforeFind();
     }
 
+
     /**
      * @return Zend_Gdata_YouTube
      */
@@ -54,8 +55,9 @@ class YouTubeApi extends ApiAbstract
     {
         if (!$this->api)
         {
-            $conf       = Yii::app()->params['youTube'];
-            if (!$conf) {
+            $conf = Yii::app()->params['youTube'];
+            if (!$conf)
+            {
                 throw new CException('Pleas add configuration for youtube api, see comments for YouTubeApi');
             }
             $httpClient = Zend_Gdata_ClientLogin::getHttpClient($conf['user'], $conf['pass'], 'youtube');
@@ -64,11 +66,40 @@ class YouTubeApi extends ApiAbstract
         return $this->api;
     }
 
+
     public function getUploadUrl()
     {
-        $conf       = Yii::app()->params['youTube'];
-        return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
+        $conf = Yii::app()->params['youTube'];
+        return "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
     }
+
+    public function sendFile($file)
+    {
+        ignore_user_abort(true);
+        set_time_limit(0);
+
+        $uploadUrl = $this->getUploadUrl();
+
+        $entry = new Zend_Gdata_YouTube_VideoEntry();
+
+        $source = $this->getApi()->newMediaFileSource($file);
+        $source->setContentType('video/quicktime'); //make sure to set the proper content type.
+        $source->setSlug($file);
+
+        $entry->setMediaSource($source);
+
+        $entry->setVideoTitle($this->title);
+        $entry->setVideoDescription($this->description);
+
+//        no supported yet
+        $entry->setVideoCategory('Autos');
+        $entry->SetVideoTags('cars, funny');
+
+        $newEntry = $this->getApi()->insertEntry($entry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
+
+        return $this->populateRecord($newEntry);
+    }
+
 
     public function getUploadToken($name)
     {
@@ -81,14 +112,23 @@ class YouTubeApi extends ApiAbstract
         $myVideoEntry->setVideoCategory('Autos');
 //        $myVideoEntry->SetVideoTags('cars, funny');
 
-        return $this->getApi()->getFormUploadToken($myVideoEntry, 'http://gdata.youtube.com/action/GetUploadToken');
+        return $this->getApi()
+            ->getFormUploadToken($myVideoEntry, 'http://gdata.youtube.com/action/GetUploadToken');
     }
-
 
 
     public function save()
     {
-        return true;
+        $videoEntry = $this->getApi()->getVideoEntry($this->pk);
+        $videoEntry->setVideoDescription($this->description);
+        $videoEntry->setVideoTitle($this->title);
+        //maybe need real video? getEditLink is empty now
+        if($videoEntry->getEditLink()) {
+            $putUrl = $videoEntry->getEditLink()->getHref();
+            $this->getApi()->updateEntry($videoEntry, $putUrl);
+            return true;
+        }
+        return false;
     }
 
 
@@ -132,8 +172,7 @@ class YouTubeApi extends ApiAbstract
                 Yii::app()->cache->set($cache_key, $res, 600);
             }
             return (array)$res;
-        }
-        catch (Exception $e)
+        } catch (Exception $e)
         {
             return array();
         }
@@ -145,12 +184,15 @@ class YouTubeApi extends ApiAbstract
      */
     protected function _populate($entry)
     {
-        $this->pk         = $entry->getVideoId();
-        $this->title      = $entry->getVideoTitle();
-        $rating           = $entry->getVideoRatingInfo();
-        $this->average    = $rating['average'];
-        $this->raters     = $rating['numRaters'];
-        $this->view_count = $entry->getStatistics()->getViewCount();
+        $this->pk      = $entry->getVideoId();
+        $this->title   = $entry->getVideoTitle();
+        $rating        = $entry->getVideoRatingInfo();
+        $this->average = $rating['average'];
+        $this->raters  = $rating['numRaters'];
+        if ($entry->getStatistics())
+        {
+            $this->view_count = $entry->getStatistics()->getViewCount();
+        }
         $this->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
         $author           = reset($entry->getAuthor());
@@ -168,10 +210,12 @@ class YouTubeApi extends ApiAbstract
         }
     }
 
+
     public static function basePath()
     {
         return Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/';
     }
+
 
     /**
      * TODO: how it implementing???
@@ -223,7 +267,6 @@ class YouTubeApi extends ApiAbstract
     {
         $this->beforeFind();
         $entry = $this->getApi()->getVideoEntry($pk);
-        $this->populateRecord($entry);
-        return $this;
+        return $this->populateRecord($entry);
     }
 }

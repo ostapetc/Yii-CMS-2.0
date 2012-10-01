@@ -1,6 +1,14 @@
 <?php
-class LocalFileExtensions
+class FileType
 {
+    const VIDEO = 'video';
+    const AUDIO = 'audio';
+    const ARCHIVE = 'archive';
+    const IMAGE = 'image';
+    const EXCEL = 'excel';
+    const WORD = 'word';
+    const BOOKS = 'books';
+
 
     public static $archiveExtensions = array(
         'zip',
@@ -43,10 +51,11 @@ class LocalFileExtensions
     public static $videoExtensions = array(
         'flv',
         'avi',
-        'mpeg'
+        'mpeg',
+        'wmv',
     );
 
-    public static $readableExtensions = array(
+    public static $bookExtensions = array(
         'pdf',
         'djvu'
     );

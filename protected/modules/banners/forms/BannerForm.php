@@ -1,6 +1,6 @@
 <?php
 
-$pages = Page::model()->published()->findAll("", array('order' => 'title'));
+$pages = Page::model()->findAll("", array('order' => 'title'));
 
 return array(
     'activeForm' => array(

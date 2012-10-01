@@ -21,8 +21,6 @@
  * @property AuthItem[]      $operations
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   AuthItem        published()
- * @method   AuthItem        sitemap()
  * @method   AuthItem        ordered()
  * @method   AuthItem        last()
  * 

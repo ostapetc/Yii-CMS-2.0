@@ -14,7 +14,7 @@ abstract class WebModule extends CWebModule
     {
         if ($this->_assetsUrl === null)
         {
-            $this->_assetsUrl = Yii::app()->getAssetManager()->publish($this->basePath . '/assets');
+            $this->_assetsUrl = Yii::app()->assetManager->publish($this->basePath . '/assets');
         }
 
         return $this->_assetsUrl;

@@ -42,10 +42,10 @@
  * @property int|null       $pages_count
  * @property int|null       $favorites_count
  * @property int|null       $comments_count
+ * @property int|null       $messages_count
+ * @property int|null       $new_messages_count
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   User           published()
- * @method   User           sitemap()
  * @method   User           ordered()
  * @method   User           last()
  * 

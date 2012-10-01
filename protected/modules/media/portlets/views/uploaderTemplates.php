@@ -50,9 +50,7 @@
         </td>
         {{else}}
         <td class="preview">
-            {{if thumbnail_url}}
-            {{html thumbnail_url}}
-            {{/if}}
+            {{html preview}}
         </td>
         <? foreach ($this->fields as $field=> $sett): ?>
         <td style="width: <? echo $sett['size'];?>px;">

@@ -24,8 +24,6 @@
  * @property            $tags
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MediaAlbum published()
- * @method   MediaAlbum sitemap()
  * @method   MediaAlbum ordered()
  * @method   MediaAlbum last()
  * 

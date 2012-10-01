@@ -17,8 +17,6 @@
  * @property          $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Feedback published()
- * @method   Feedback sitemap()
  * @method   Feedback ordered()
  * @method   Feedback last()
  * 

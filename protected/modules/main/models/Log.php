@@ -16,8 +16,6 @@
  * @property         $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Log     published()
- * @method   Log     sitemap()
  * @method   Log     ordered()
  * @method   Log     last()
  * 
@@ -73,10 +71,7 @@ class Log extends ActiveRecord
 		$criteria->compare('message',$this->message,true);
 
 		return new ActiveDataProvider(get_class($this), array(
-			'criteria' => $criteria,
-            'sort'     => array(
-                'defaultOrder' => 'logtime DESC'
-            )
+			'criteria' => $criteria
 		));
 	}
 }

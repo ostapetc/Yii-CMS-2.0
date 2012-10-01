@@ -21,14 +21,14 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         if (!$size)
         {
             $size = array(
-                'width'  => 48,
-                'height' => 48
+                'width'  => 128,
+//                'height' => 200
             );
         }
 
         $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
         $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
-        return ImageHelper::thumb($dir, $name, $size, $crop)->__toString();
+        return ImageHelper::thumb($dir, $name, $size, $crop)->getSrc();
     }
 
 
@@ -69,7 +69,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public function detectType()
     {
         $doc = array(
-            'readable',
+            'book',
             'archive',
             'word',
             'excel'
@@ -92,7 +92,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         foreach ((array)$types as $type)
         {
-            if (!in_array($this->extension, LocalFileExtensions::${$type . 'Extensions'}))
+            if (!in_array($this->extension, FileType::${$type . 'Extensions'}))
             {
                 return false;
             }
@@ -101,13 +101,13 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getIcon()
+    public function getPreview()
     {
-        $folder = $this->assets . '/img/fileIcons/';
+        $folder = $this->assets . '/img/icons/';
         switch (true)
         {
             case $this->typeIs('image'):
-                return $this->getThumb();
+                return array('type' => 'img', 'val' => $this->getThumb());
                 break;
             case $this->typeIs('audio'):
                 $name = 'audio';
@@ -125,7 +125,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
                 break;
         }
-        return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
+        return array('type' => 'img', 'val' => $folder . $name . '.jpg');
     }
 
 

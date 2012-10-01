@@ -12,6 +12,7 @@ class AppManager
 
     public static function init()
     {
+        Yii::setPathOfAlias('webroot', realpath(Yii::getPathOfAlias('application') . '/../'));
         //init PathOfAliaces
         foreach (self::$pathAliaces as $short => $full)
         {

@@ -16,8 +16,6 @@
  * @property         $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Friend  published()
- * @method   Friend  sitemap()
  * @method   Friend  ordered()
  * @method   Friend  last()
  * 

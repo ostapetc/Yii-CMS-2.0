@@ -15,8 +15,6 @@
  * @property        $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Label  published()
- * @method   Label  sitemap()
  * @method   Label  ordered()
  * @method   Label  last()
  * 

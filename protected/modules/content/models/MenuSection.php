@@ -31,8 +31,6 @@
  * @property Page        $page
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MenuSection published()
- * @method   MenuSection sitemap()
  * @method   MenuSection ordered()
  * @method   MenuSection last()
  * 

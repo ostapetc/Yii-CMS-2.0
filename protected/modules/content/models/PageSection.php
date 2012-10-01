@@ -2,29 +2,31 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string        $id
- * @property string        $parent_id
- * @property string        $name
- * @property integer       $order
- * @property string        $date_create
+ * @property string           $id
+ * @property string           $parent_id
+ * @property string           $name
+ * @property integer          $order
+ * @property string           $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property               $href
- * @property               $errorsFlatArray
- * @property               $url
- * @property               $updateUrl
- * @property               $createUrl
- * @property               $deleteUrl
+ * @property                  $commentsCount
+ * @property                  $lastTopic
+ * @property                  $forumUrl
+ * @property                  $errorsFlatArray
+ * @property                  $url
+ * @property                  $updateUrl
+ * @property                  $createUrl
+ * @property                  $deleteUrl
  * 
  * !Relations - связи
- * @property PageSection   $parent
- * @property PageSection[] $childs
+ * @property PageSection      $parent
+ * @property PageSection[]    $childs
+ * @property int|null         $pages_count
+ * @property PageSectionRel[] $pages_sections_rels
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   PageSection   published()
- * @method   PageSection   sitemap()
- * @method   PageSection   ordered()
- * @method   PageSection   last()
+ * @method   PageSection      ordered()
+ * @method   PageSection      last()
  * 
  */
 

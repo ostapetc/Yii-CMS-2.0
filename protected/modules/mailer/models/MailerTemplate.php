@@ -19,8 +19,6 @@
  * @property                $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MailerTemplate published()
- * @method   MailerTemplate sitemap()
  * @method   MailerTemplate ordered()
  * @method   MailerTemplate last()
  * 
