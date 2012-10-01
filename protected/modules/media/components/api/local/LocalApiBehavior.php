@@ -69,7 +69,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public function detectType()
     {
         $doc = array(
-            'readable',
+            'book',
             'archive',
             'word',
             'excel'
@@ -92,7 +92,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         foreach ((array)$types as $type)
         {
-            if (!in_array($this->extension, LocalFileExtensions::${$type . 'Extensions'}))
+            if (!in_array($this->extension, FileType::${$type . 'Extensions'}))
             {
                 return false;
             }

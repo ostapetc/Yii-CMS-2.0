@@ -10,9 +10,16 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     public function __construct()
     {
         $this->module = Yii::app()->getModule('media');
-        $this->assets = $this->module->assetsUrl();
     }
 
+    public function getAssets()
+    {
+        if ($this->assets)
+        {
+            $this->assets = $this->module->assetsUrl();
+        }
+        return $this->assets;
+    }
     abstract function getHref();
 
 

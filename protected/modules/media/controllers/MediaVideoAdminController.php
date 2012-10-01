@@ -6,37 +6,30 @@ class MediaVideoAdminController extends AdminController
         return array(
             "create"        => "Редактировать",
             "manage"        => "Управление альбомами",
-            "localVideos"   => "Управление альбомами",
+            "localFiles"    => "Управление альбомами",
             "localToRemote" => "Управление альбомами",
         );
     }
 
 
-    public function actionLocalVideos($status)
+    public function actionLocalFiles($type)
     {
         $file = new MediaFile('search', 'local');
-        $dp   = $file->getDataProvider();
-
+        $file->getDbCriteria()->mergeWith(array(
+            'condition' => 'target_api IS NULL'
+        ));
+        $dp = $file->type($type)->getDataProvider();
         $this->render('localVideos', array(
             'dp' => $dp
         ));
     }
 
+
     public function actionLocalToRemote($id, $api)
     {
-        $file      = MediaFile::model()->findByPk($id);
-        $local_api = $file->getApi();
-        if ($local_api instanceof LocalApi)
-        {
-            $file->setApi($api);
-            $file->convertFromLocal($local_api);
-            if ($file->save())
-            {
-                echo json_encode(array('status' => 'ok'));
-                return true;
-            }
-        }
-        echo json_encode(array('status' => 'error'));
+        $file             = MediaFile::model()->findByPk($id);
+        $file->target_api = $api;
+        $file->save();
     }
 
 

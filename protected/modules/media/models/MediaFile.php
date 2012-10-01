@@ -136,6 +136,17 @@ class MediaFile extends ActiveRecord
         return $this;
     }
 
+    public function type($type)
+    {
+        $alias = $this->getTableAlias();
+        $this->getDbCriteria()->mergeWith(array(
+            'condition' => "$alias.type=:type",
+            'params'    => array(
+                'type' => $type
+            )
+        ));
+        return $this;
+    }
 
     public function getDeleteUrl()
     {
@@ -168,7 +179,7 @@ class MediaFile extends ActiveRecord
         if (!self::$configuration)
         {
             self::$configuration = new CConfiguration(
-                Yii::getPathOfAlias('media.configs') . '/behaviors.php');
+                Yii::getPathOfAlias('media.configs') . '/midiaFile.php');
         }
 
         $this->attachBehavior('api', self::$configuration[$api_name]);
