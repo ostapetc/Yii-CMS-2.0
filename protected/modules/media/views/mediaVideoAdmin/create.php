@@ -1,7 +1,7 @@
 <?
 $this->widget('media.portlets.Uploader', array(
     'name'    => 'uploader',
-    'model'   => new User,
+    'model'   => new MediaAlbum,
     'tag'     => MediaFile::TAG_ON_MODERATE,
 //    'preview_width' => '220px',
 //    'upload_url' => $tokenUrl,

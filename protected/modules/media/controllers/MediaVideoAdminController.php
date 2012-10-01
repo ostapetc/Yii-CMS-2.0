@@ -4,26 +4,46 @@ class MediaVideoAdminController extends AdminController
     public static function actionsTitles()
     {
         return array(
-            "create"                => "Создать",
-            "view"                  => "Создать",
-            "delete"                => "Удалить",
-            "update"                => "Редактировать",
-            "manage"                => "Управление альбомами",
-            "youTubeUploadCallback" => "Управление альбомами",
-            "localVideos" => "Управление альбомами",
-            "getYouTubeUploadToken" => "Управление альбомами",
+            "create"        => "Редактировать",
+            "manage"        => "Управление альбомами",
+            "localVideos"   => "Управление альбомами",
+            "localToRemote" => "Управление альбомами",
         );
     }
+
 
     public function actionLocalVideos($tag)
     {
         $file = new MediaFile('search', 'local');
-        $dp = $file->getDataProvider(new User, $tag);
+        $dp   = $file->getDataProvider(null, $tag);
 
         $this->render('localVideos', array(
             'dp' => $dp
         ));
     }
+
+    public function actionLocalToRemote($id, $api)
+    {
+        $file      = MediaFile::model()->findByPk($id);
+        $local_api = $file->getApi();
+        if ($local_api instanceof LocalApi)
+        {
+            $file->setApi($api);
+            $file->convertFromLocal($local_api);
+            if ($file->save())
+            {
+                echo json_encode(array('status' => 'ok'));
+                return true;
+            }
+        }
+        echo json_encode(array('status' => 'error'));
+    }
+
+    public function actionCreate()
+    {
+        $this->render('create');
+    }
+
 
     public function actionManage()
     {
@@ -40,60 +60,4 @@ class MediaVideoAdminController extends AdminController
         ));
     }
 
-
-    public function actionCreate()
-    {
-        $this->render('create', array());
-    }
-
-
-    public function actionView($id)
-    {
-        $this->layout     = '//layouts/middle';
-        $model            = $this->loadModel($id);
-        $this->page_title = 'Альбом: ' . $model->title;
-        $form             = new Form('Media.UploadFilesForm', $model);
-        $this->render('view', array(
-            'model' => $model,
-            'form'  => $form
-        ));
-    }
-
-
-    public function actionUpload($model_id, $object_id, $tag)
-    {
-        if ($object_id == 0)
-        {
-            $object_id = 'tmp_' . Yii::app()->user->id;
-        }
-
-        $model            = new MediaFile('insert');
-        $model->object_id = $object_id;
-        $model->model_id  = $model_id;
-        $model->tag       = $tag;
-
-        if ($model->userCanEdit() && $model->save())
-        {
-            $this->sendFilesAsJson(array($model));
-        }
-        else
-        {
-            echo CJSON::encode(array(
-                'textStatus' => $model->error
-            ));
-        }
-    }
-
-
-    public function actionUserAlbums($userId)
-    {
-        $this->layout     = '//layouts/middle';
-        $user             = User::model()->findByPk($userId);
-        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $form             = new Form('media.AlbumForm', $user->getAttachedModel('MediaAlbum'));
-        $this->render('userAlbums', array(
-            'user' => $user,
-            'form' => $form
-        ));
-    }
 }

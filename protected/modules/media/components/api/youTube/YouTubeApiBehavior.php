@@ -33,9 +33,9 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         {
             $this->getApiModel()->title = $this->getOwner()->title;
 //            $this->getApiModel()->description = $this->getOwner()->description;
-            if (!$this->getApiModel()->save()) {
+//            if (!$this->getApiModel()->save()) {
                 //what to do??
-            }
+//            }
         }
         return true;
     }
@@ -56,12 +56,13 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
      */
     public function convertFromLocal($local_api)
     {
-        $api = $this->getApiModel();
+        $api = $this->getApiModel(false);
         $owner = $this->getOwner();
         $api->title = $owner->title;
-        $api->description = $owner->description;
-//        $api->isNewRecord = true;
-        $api->sendFile($local_api->getServerPath());
+        $api->description = $owner->descr;
+        $newApi = $api->sendFile($local_api->getServerPath());
+
+        $this->setPk($newApi->pk);
     }
 
     public function getPreview()

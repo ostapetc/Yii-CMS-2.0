@@ -705,7 +705,7 @@ class TinyImageManager {
 		{
 			$server_url = rtrim(dirname(__FILE__), '/').'/../../';
 			$server_url = realpath($server_url);
-			$server_url = rtrim($server_url, '/').'/img/fileicons/';
+			$server_url = rtrim($server_url, '/').'/img/icons/';
 			$url = '/'.ltrim(substr($server_url, strlen(DIR_ROOT)), '/');
 			
 			$ext = strtolower(end(explode('.', $filename)));

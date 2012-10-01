@@ -103,7 +103,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getPreview()
     {
-        $folder = $this->assets . '/img/fileIcons/';
+        $folder = $this->assets . '/img/icons/';
         switch (true)
         {
             case $this->typeIs('image'):

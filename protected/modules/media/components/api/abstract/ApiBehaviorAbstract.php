@@ -37,12 +37,12 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     /**
      * @return ApiAbstract
      */
-    public function getApiModel()
+    public function getApiModel($initialize = true)
     {
         if ($this->_api_model === null)
         {
             $this->_api_model = Yii::createComponent($this->api_model);
-            if ($this->getPk())
+            if ($initialize && $this->getPk())
             {
                 $this->_api_model = $this->_api_model->findByPk($this->getPk());
             }

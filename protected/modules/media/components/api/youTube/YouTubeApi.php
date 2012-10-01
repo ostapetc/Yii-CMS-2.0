@@ -70,33 +70,34 @@ class YouTubeApi extends ApiAbstract
     public function getUploadUrl()
     {
         $conf = Yii::app()->params['youTube'];
-        return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
+        return "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
     }
 
     public function sendFile($file)
     {
+        ignore_user_abort(true);
+        set_time_limit(0);
+
         $uploadUrl = $this->getUploadUrl();
 
-        $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
+        $entry = new Zend_Gdata_YouTube_VideoEntry();
 
-        $filesource = $tihs->getApi()->newMediaFileSource($video_url);
-        $filesource->setContentType('video/quicktime'); //make sure to set the proper content type.
-        $filesource->setSlug($file);
+        $source = $this->getApi()->newMediaFileSource($file);
+        $source->setContentType('video/quicktime'); //make sure to set the proper content type.
+        $source->setSlug($file);
 
-        $myVideoEntry->setMediaSource($filesource);
+        $entry->setMediaSource($source);
 
-        $myVideoEntry->setVideoTitle($this->title);
-        $myVideoEntry->setVideoDescription($this->description);
+        $entry->setVideoTitle($this->title);
+        $entry->setVideoDescription($this->description);
 
 //        no supported yet
-        $myVideoEntry->setVideoCategory('Sport');
-//        $myVideoEntry->SetVideoTags('cars, funny');
+        $entry->setVideoCategory('Autos');
+        $entry->SetVideoTags('cars, funny');
 
-        $newEntry = $this->getApi()->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
+        $newEntry = $this->getApi()->insertEntry($entry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
 
-        $model = new static;
-        $model->populateRecord($newEntry);
-        return $model;
+        return $this->populateRecord($newEntry);
     }
 
 
