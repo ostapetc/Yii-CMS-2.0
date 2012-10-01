@@ -12,10 +12,10 @@ class MediaVideoAdminController extends AdminController
     }
 
 
-    public function actionLocalVideos($tag)
+    public function actionLocalVideos($status)
     {
         $file = new MediaFile('search', 'local');
-        $dp   = $file->getDataProvider(null, $tag);
+        $dp   = $file->getDataProvider();
 
         $this->render('localVideos', array(
             'dp' => $dp
@@ -38,6 +38,7 @@ class MediaVideoAdminController extends AdminController
         }
         echo json_encode(array('status' => 'error'));
     }
+
 
     public function actionCreate()
     {

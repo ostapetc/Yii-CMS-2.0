@@ -58,7 +58,6 @@ class MediaFile extends ActiveRecord
 
     private $_api_name;
 
-    const TAG_ON_MODERATE = 'on_moderate';
 
     public function __construct($scenario = 'insert', $api_name = 'local')
     {
@@ -107,9 +106,9 @@ class MediaFile extends ActiveRecord
 
     public function parent($model_id, $object_id = null)
     {
-        $alias = $this->getTableAlias();
+        $alias     = $this->getTableAlias();
         $condition = "$alias.model_id=:model_id";
-        $params = array(
+        $params    = array(
             'model_id' => $model_id
         );
         if ($object_id !== null)
@@ -119,7 +118,7 @@ class MediaFile extends ActiveRecord
         }
         $this->getDbCriteria()->mergeWith(array(
             'condition' => $condition,
-            'params' => $params
+            'params'    => $params
         ));
         return $this;
     }
@@ -130,7 +129,7 @@ class MediaFile extends ActiveRecord
         $alias = $this->getTableAlias();
         $this->getDbCriteria()->mergeWith(array(
             'condition' => "$alias.tag=:tag",
-            'params' => array(
+            'params'    => array(
                 'tag' => $tag
             )
         ));
@@ -148,6 +147,7 @@ class MediaFile extends ActiveRecord
     {
         return $this->_api_name;
     }
+
 
     /**
      * @return ApiAbstract
