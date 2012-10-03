@@ -22,4 +22,5 @@ $conf = CMap::mergeArray(require ('main.php'), array(
     }
 ));
 unset($conf['components']['authManager']);
+unset($conf['components']['log']);
 return $conf;
