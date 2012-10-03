@@ -20,12 +20,12 @@
     //NodeJS only for loginned users
     if (!Yii::app()->user->isGuest)
     {
-        $cs->registerScriptFile(
-            $params['nodejs']['host'] . ':' . $params['nodejs']['port'] . '/socket.io/socket.io.js'
-        );
-        $cs->registerScriptFile(
-            Yii::app()->assetManager->publish(APP_PATH . 'components' . DS . 'nodejs' . DS . 'NodeJSClient.js')
-        );
+//        $cs->registerScriptFile(
+//            $params['nodejs']['host'] . ':' . $params['nodejs']['port'] . '/socket.io/socket.io.js'
+//        );
+//        $cs->registerScriptFile(
+//            Yii::app()->assetManager->publish(APP_PATH . 'components' . DS . 'nodejs' . DS . 'NodeJSClient.js')
+//        );
     }
 
     $cs->registerCoreScript('jquery');
@@ -50,13 +50,10 @@
     $cs->registerScriptFile('/js/plugins/errorsNotifier.js');
 
 
-//    $cs->registerCssFile(Yii::app()->assetManager->publish(Yii::getPathOfAlias('webroot.css.site.styles') . '.less'));
 //    $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
-//    $cs->registerScriptFile('/js/plugins/modal/bootstrap-modal.js');
 //    $cs->registerCssFile('/js/plugins/modal/modal.css');
 //    $cs->registerScriptFile('/js/plugins/blockUI/blockUI.js');
 //    $cs->registerScriptFile('/js/plugins/blockUI/loaders.js');
-//    $cs->registerScriptFile('/js/plugins/bootstrap/bootstrap-modal.js');
 //    if (YII_DEBUG)
 //    {
 //        $cs->registerScriptFile('/js/plugins/debug.js');
