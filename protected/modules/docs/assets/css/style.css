@@ -1,7 +1,7 @@
 @import url("reset.css");
 
 h3{
-	font-weight:bold;
+    font-weight:bold;
 }
 
 /*
@@ -117,8 +117,11 @@ hr{
 }
 
 #content{
-    width:      980px;
-    margin:     0 auto;
+    float: left;
+    width:  50%;
+    margin: 0 0 0 20%;
+    padding: 0 0 0 15px;
+    top: 20px;
     text-align: left;
     background: #fff;
 }
@@ -269,68 +272,61 @@ code{
 }
 
 /*menu*/
-#header{ background: #5D5D5D; display: none }
-#header table{ margin: 10px 0 20px 0; }
-#header, #header table, #header tbody, #header tr{ overflow: hidden; }
-#header h3{
-    font-size: 14px;
+#sidebar h3{
+    font-size: 16px;
     color:     #fff;
     margin:    0;
     padding:   0;
 }
-#toogle-menu{
-    background: #fff url(../images/nav_bg.jpg) repeat-x left top;
-    padding:    0 240px 0 0;
-    margin:     0;
-    text-align: right;
-}
-/*#header td:first-child{*/
-/*{*/
-/*background: none*/
-/*}*/
-#header .sep{
-    background: transparent url(../images/nav_separator.jpg) repeat-y left top;
-}
-#header td{
+#sidebar {
+    background: #5D5D5D;
+    position: fixed;
+    float: left;
+    width: 18%;
+    height: 100%;
+    /*overflow-y: scroll;*/
     vertical-align: top;
+    top: 0;
     border:         none !important;
-    width:          25%;
-    padding:        0 0 0 20px;
+    padding:        20px 0 0 20px;
+    box-shadow: 5px 0 20px #888;
+
 }
-#header p{
+#sidebar p{
     color:            #eee;
     background-color: transparent;
     padding:          0;
     margin:           0 0 10px 0;
 }
-#header ul{
-    list-style-image: url(../images/arrow.gif);
+#sidebar ul{
+    /*list-style-image: url(../images/arrow.gif);*/
+    list-style: none;
     padding:          0 0 0 18px;
     margin:           8px 0 12px 0;
 }
-#header li{
+#sidebar li{
     padding: 0;
     margin:  0 0 4px 0;
 }
 
-#header a{
+#sidebar a{
     color:            #eee !important;
     background-color: transparent;
     text-decoration:  none;
     font-weight:      normal;
 }
 
-#header a:visited{
+#sidebar a:visited{
     color:            #eee !important;
     background-color: transparent;
     text-decoration:  none;
 }
 
-#header a:hover{
+#sidebar a:hover{
     color:            #ccc !important;
     text-decoration:  none;
     background-color: transparent;
 }
-#header .no-complete, #header .no-complete:hover{
+#sidebar .no-complete, #sidebar .no-complete:hover{
     color: #999 !important;
 }
