@@ -4,11 +4,11 @@ class MediaAlbumController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            "createUsers"      => "Создать",
             "view"             => "Создать",
             "delete"           => "Удалить",
             "update"           => "Редактировать",
             "manage"           => "Управление альбомами",
+            "createUsers"      => "Создать",
             "userAlbums"       => "Альбомы пользователя",
             "my"               => "Мои Альбомы",
         );
@@ -87,6 +87,7 @@ class MediaAlbumController extends ClientController
         $dp = MediaAlbum::getDataProvider(Yii::app()->user->model);
         $this->render('userAlbums', array('user' => Yii::app()->user->model, 'is_my' => true, 'dp' => $dp));
     }
+
 
     public function actionUserAlbums($user_id = null)
     {

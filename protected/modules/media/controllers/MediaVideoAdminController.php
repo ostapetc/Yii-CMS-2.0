@@ -33,12 +33,6 @@ class MediaVideoAdminController extends AdminController
     }
 
 
-    public function actionCreate()
-    {
-        $this->render('create');
-    }
-
-
     public function actionManage()
     {
         $file  = new MediaFile('search', 'youTube');

@@ -153,10 +153,10 @@ class Uploader extends JuiInputWidget
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.iframe-transport.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-fp.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-ui.js');
-        $cs->registerScriptFile($plugins . 'jFileUpload/cmsUI.fileupload.js');
-        $cs->registerCssFile($plugins . 'jFileUpload/css/jquery.fileupload-ui.css');
         $cs->registerScriptFile($plugins . 'jEditable/jquery.jeditable.js');
         $cs->registerScriptFile($plugins . 'moderniz/moderniz.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload/cmsUI.fileupload.js');
+        $cs->registerCssFile($plugins . 'jFileUpload/css/jquery.fileupload-ui.css');
 
         $params = CJavaScript::encode($this->params);
 

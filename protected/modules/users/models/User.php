@@ -1,6 +1,6 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
  * @property string         $status
  * @property integer        $rating
@@ -17,7 +17,7 @@
  * @property string         $password_recover_code
  * @property string         $password_recover_date
  * @property string         $date_create
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                $userDir
  * @property AuthItem       $role
@@ -34,7 +34,7 @@
  * @property                $updateUrl
  * @property                $createUrl
  * @property                $deleteUrl
- * 
+ *
  * !Relations - связи
  * @property MediaAlbum[]   $file_albums
  * @property int|null       $file_albums_count
@@ -44,11 +44,11 @@
  * @property int|null       $comments_count
  * @property int|null       $messages_count
  * @property int|null       $new_messages_count
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   User           ordered()
  * @method   User           last()
- * 
+ *
  */
 
 class User extends ActiveRecord
@@ -135,6 +135,25 @@ class User extends ActiveRecord
         }
 
         return $dir;
+    }
+
+
+    public function behaviors()
+    {
+        return CMap::mergeArray(
+            parent::behaviors(),
+            array(
+                'FileManager' => array(
+                    'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
+                    'tags' => array(
+                        'videos' => array(
+                            'title' => 'Видео',
+                            'data_type' => 'video'
+                        )
+                    )
+                ),
+            )
+        );
     }
 
 
