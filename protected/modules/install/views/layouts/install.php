@@ -54,7 +54,7 @@
     <div class="navbar navbar-top install-top-menu">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="/">Yii-CMS 2.0 Установка</a>
+                <a class="brand" href="/install.php">Yii-CMS 2.0 Установка</a>
 
                 <div class="nav-collapse">
                     <ul class="nav">

@@ -29,7 +29,7 @@ class InstallHelper
      */
     public static function parseConfig($file, $data)
     {
-        $source = Yii::getPathOfAlias('application.config.'.$file).'.php.tpl';
+        $source = Yii::getPathOfAlias('install.views.templates.'.$file).'.php';
         $target = Yii::getPathOfAlias('application.config.'.$file).'.php';
         self::parseFile($source, $target, $data);
     }

@@ -279,11 +279,10 @@ class CUrlManager extends CApplicationComponent
 	 */
 	public function createUrl($route,$params=array(),$ampersand='&')
 	{
-		unset($params[$this->routeVar]);
+        unset($params[$this->routeVar]);
 		foreach($params as $i=>$param)
 			if($param===null)
 				$params[$i]='';
-
 		if(isset($params['#']))
 		{
 			$anchor='#'.$params['#'];
