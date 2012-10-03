@@ -106,9 +106,10 @@ class InstallController extends ClientController
             Yii::app()->executor->addCommandsFromModules(Yii::app()->getModules());
 
             //run install method
-            foreach (Yii::app()->getModules() as $module => $conf)
+            foreach (Yii::app()->getModules() as $id => $conf)
             {
-                Yii::app()->getModule($module)->install();
+                mkdir(Yii::getPathOfAlias('webroot.upload.' . $id), 0755);
+                Yii::app()->getModule($id)->install();
             }
 
             $model->saveInSession();

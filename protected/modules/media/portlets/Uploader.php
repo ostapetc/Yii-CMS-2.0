@@ -37,16 +37,14 @@ class Uploader extends JuiInputWidget
     public $api = 'local';
     public $maxFileSize = 100000000; //100 * 1000 * 1000
 
-    public $setWatermark = false;
-
     public $upload_url;
     public $assets;
 
-    public $uploadAction = '/media/mediaFileAdmin/upload';
-    public $sortableAction = '/media/mediaFileAdmin/savePriority';
-    public $existFilesAction = '/media/mediaFileAdmin/existFiles';
+    public $upload_action = '/media/mediaFileAdmin/upload';
+    public $sortable_action = '/media/mediaFileAdmin/savePriority';
+    public $exist_files_action = '/media/mediaFileAdmin/existFiles';
 
-    private $allowType = array(
+    private $allow_type = array(
         'document'=> 'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
         'image'   => 'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
         'sound'   => 'js:/(\.|\/)(mp3|wav)$/i',
@@ -109,7 +107,7 @@ class Uploader extends JuiInputWidget
 
         if (!$this->upload_url)
         {
-            $this->upload_url = $this->createUrl($this->uploadAction, array(
+            $this->upload_url = $this->createUrl($this->upload_action, array(
                 'model_id'  => get_class($this->model),
                 'object_id' => $this->model->id ? $this->model->id : 0,
                 'data_type' => $this->data_type,
@@ -122,11 +120,11 @@ class Uploader extends JuiInputWidget
             'url'                     => $this->upload_url,
             'dropZone'                => "js:$('#{$this->id}-drop-zone')",
             'maxFileSize'             => $this->maxFileSize,
-            'acceptFileTypes'         => $this->allowType[$this->data_type],
+            'acceptFileTypes'         => $this->allow_type[$this->data_type],
 //            'maxChunkSize'          => 1*1000*1000,
-            'sortableSaveUrl'         => $this->createUrl($this->sortableAction),
+            'sortableSaveUrl'         => $this->createUrl($this->sortable_action),
             'limitConcurrentUploads'  => 0,
-            'existFilesUrl'           => $this->createUrl($this->existFilesAction, array(
+            'existFilesUrl'           => $this->createUrl($this->exist_files_action, array(
                 'model_id'  => get_class($this->model),
                 'object_id' => $this->model->id ? $this->model->id : 0,
                 'tag'       => $this->tag

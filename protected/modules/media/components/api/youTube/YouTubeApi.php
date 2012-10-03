@@ -21,7 +21,7 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
 class YouTubeApi extends ApiAbstract
 {
-    const UPLOAD_PATH = 'upload/mediaFiles';
+    const UPLOAD_PATH = 'upload/media';
 
     protected $api;
     protected $criteriaClass = 'YouTubeApiCriteria';
