@@ -17,6 +17,10 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
             {
                 for (var i in o.files)
                 {
+                    if (!o.files[i].preview)
+                    {
+                        continue;
+                    }
                     if (o.files[i].preview.type == 'iframe')
                     {
                         o.files[i].preview = '<iframe src="' + o.files[i].preview.val + '" width="100%"></iframe>';
@@ -35,9 +39,9 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         $.blueimpUI.fileupload.prototype._create.call(this); //base constructor
         //no inherited css styles
         $('body')
-            .append(this.element)
-            .append(this.options.uploadTemplate)
-            .append(this.options.downloadTemplate);
+//            .append(this.element)
+            .append('#'+this.options.uploadTemplateId)
+            .append('#'+this.options.downloadTemplateId);
 
 
         this._loadExistingFiles();
