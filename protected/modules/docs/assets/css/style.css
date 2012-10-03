@@ -9,7 +9,7 @@ yiiext CSS
 Alexander Makarov, sam@rmcreative.ru
 */
 body{
-    font:       normal 10pt Helvetica, Arial, sans-serif;
+    font:       normal 10pt Calibri, Helvetica, Arial, sans-serif;
     background: #fff;
     color:      #555;
     text-align: left;
@@ -27,7 +27,6 @@ a:hover{
 
 h1, h2, h3, h4, h5, h6{
     font-weight: bold;
-    font-family: Helvetica, Arial, sans-serif;
 }
 blockquote{
     background: #FBE6F2;
@@ -279,7 +278,8 @@ code{
     padding:   0;
 }
 #sidebar {
-    letter-spacing : 0.2em;
+    /*letter-spacing : 0.07em;*/
+
     background: #5D5D5D;
     position: fixed;
     float: left;
