@@ -1,7 +1,7 @@
 <?php
 class LocalApi extends ApiAbstract
 {
-    const UPLOAD_PATH = 'upload/mediaFiles';
+    const UPLOAD_PATH = 'upload/media';
 
     protected $file_info;
 

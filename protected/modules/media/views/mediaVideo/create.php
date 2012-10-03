@@ -5,5 +5,5 @@ $this->widget('media.portlets.Uploader', array(
     'model'      => $model,
     'tag'        => 'videos',
     'data_type'  => 'video',
-    'upload_url' => $this->createUrl('/media/mediaFile/upload')
+    'upload_action' => $this->createUrl('/media/mediaFile/upload')
 ));
