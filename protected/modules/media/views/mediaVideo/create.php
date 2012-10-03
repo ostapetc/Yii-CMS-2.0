@@ -1,6 +1,6 @@
 <?
 $this->widget('media.portlets.Uploader', array(
-//    'as_modal'   => false,
+    'as_modal'   => false,
     'name'       => 'uploader',
     'model'      => $model,
     'tag'        => 'videos',

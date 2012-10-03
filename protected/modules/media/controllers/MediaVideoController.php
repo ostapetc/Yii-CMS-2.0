@@ -1,5 +1,5 @@
 <?
-class MediaVideoController extends AdminController {
+class MediaVideoController extends ClientController {
 
     public static function actionsTitles()
     {
