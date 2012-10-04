@@ -20,12 +20,12 @@
     //NodeJS only for loginned users
     if (!Yii::app()->user->isGuest)
     {
-//        $cs->registerScriptFile(
-//            $params['nodejs']['host'] . ':' . $params['nodejs']['port'] . '/socket.io/socket.io.js'
-//        );
-//        $cs->registerScriptFile(
-//            Yii::app()->assetManager->publish(APP_PATH . 'components' . DS . 'nodejs' . DS . 'NodeJSClient.js')
-//        );
+        $cs->registerScriptFile(
+            $params['nodejs']['host'] . ':' . $params['nodejs']['port'] . '/socket.io/socket.io.js'
+        );
+        $cs->registerScriptFile(
+            Yii::app()->assetManager->publish(APP_PATH . 'components' . DS . 'nodejs' . DS . 'NodeJSClient.js')
+        );
     }
 
     $cs->registerCoreScript('jquery');

@@ -1,7 +1,7 @@
 <div class="user_photos">
     <div class="btn-toolbar">
         <div class="btn-group">
-            <a class="btn" href="<?= $this->createUrl('userAlbums', array('id' => $model->object_id)) ?>">
+            <a class="btn" href="<?//= $this->createUrl('userAlbums', array('id' => $model->object_id)) ?>">
                 <i class="icon-chevron-left"></i> Назад к Новостям
             </a>
             <?
@@ -28,7 +28,7 @@
         'dataProvider'    => $dp,
         'itemView'        => '_view',
         'itemsTagName'    => 'ul',
-        'sortableEnable'  => $isOwner,
+//        'sortableEnable'  => $isOwner,
         'itemsCssClass'   => 'thumbnails',
         'fancyboxOptions' => array(
             'beforeShow'=> 'js:function() {

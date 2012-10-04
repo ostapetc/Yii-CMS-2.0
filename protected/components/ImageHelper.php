@@ -77,11 +77,19 @@ class ImageHolder //Класс Image занять под расширение
 
 class ImageHelper
 {
-    public static function placeholder(array $size, $text = null)
+    public static function placeholder(array $size, $text = null, $only_url = false)
     {
         $dim = $size['width'].'x'.$size['height'];
         $text = $text ? $text : $dim;
-        return CHtml::image('http://placehold.it/'.$dim.'&text='.urlencode($text), $text, $size);
+        $url = 'http://placehold.it/'.$dim.'&text='.urlencode($text);
+        if ($only_url)
+        {
+            return $url;
+        }
+        else
+        {
+            return CHtml::image($url, $text, $size);
+        }
     }
 
     public static function thumb($dir, $file, array $size, $crop = false)

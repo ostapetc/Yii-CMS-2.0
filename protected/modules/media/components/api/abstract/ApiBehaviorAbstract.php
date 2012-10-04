@@ -6,10 +6,16 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
 
     public $module;
     public $assets;
+    public $sizes = array();
 
     public function __construct()
     {
         $this->module = Yii::app()->getModule('media');
+    }
+
+    public function getSize($alias = null)
+    {
+        return $alias && isset($this->sizes[$alias]) ? $this->sizes[$alias] : array('width' => 64, 'height' => 64);
     }
 
     public function getAssets()
@@ -26,7 +32,7 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     abstract function getUrl();
 
 
-    abstract function getPreview();
+    abstract function getPreview($size_name = null);
 
 
     protected function getPk()

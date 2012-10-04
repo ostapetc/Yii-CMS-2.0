@@ -49,7 +49,7 @@
             <li class="divider"></li>
             <li>
                 <?= CHtml::link('<span class="glyphicon-facetime-video"></span> &nbsp;' . t('Добавить видео'),
-                array('/video/video/create')) ?>
+                array('/media/mediaVideo/my')) ?>
             </li>
         </ul>
     </li>
