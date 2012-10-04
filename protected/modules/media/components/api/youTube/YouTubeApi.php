@@ -70,7 +70,7 @@ class YouTubeApi extends ApiAbstract
     public function getUploadUrl()
     {
         $conf = Yii::app()->params['youTube'];
-        return "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
+        return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
     }
 
     public function sendFile($file)

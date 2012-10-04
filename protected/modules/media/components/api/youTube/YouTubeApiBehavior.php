@@ -65,7 +65,7 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $this->setPk($new_api->pk);
     }
 
-    public function getPreview()
+    public function getPreviewArray()
     {
         $player = $this->getApiModel()->player_url;
         if ($player)

@@ -41,8 +41,8 @@ class MediaAlbumController extends ClientController
         $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
-
-        $dp               = MediaFile::getDataProvider($model, 'files');
+        $file             = new MediaFile;
+        $dp               = $file->getDataProvider($model, 'files');
         $dp->pagination   = false;
 
         $this->render('view', array(
