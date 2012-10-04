@@ -11,9 +11,9 @@
             'attribute' => 'files',
             'data_type' => 'image',
             'title' => 'Добавить фото',
-            'uploadAction' => '/media/mediaFile/upload',
-            'sortableAction' => '/media/mediaFile/savePriority',
-            'existFilesAction' => '/media/mediaFile/existFiles'
+            'upload_action' => '/media/mediaFile/upload',
+            'sortable_action' => '/media/mediaFile/savePriority',
+            'exist_files_action' => '/media/mediaFile/existFiles'
         ));
 
         Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {

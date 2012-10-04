@@ -35,9 +35,9 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         $.blueimpUI.fileupload.prototype._create.call(this); //base constructor
         //no inherited css styles
         $('body')
-            .append(this.element)
-            .append(this.options.uploadTemplate)
-            .append(this.options.downloadTemplate);
+            .append($('#modal_' + this.element.attr('id')))
+            .append($('#' + this.options.uploadTemplateId))
+            .append($('#' + this.options.downloadTemplateId));
 
 
         this._loadExistingFiles();
