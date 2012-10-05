@@ -16,7 +16,6 @@ class PageController extends ClientController
     }
 
 
-
     public static function actionsTitles()
     {
         return array(
@@ -27,10 +26,15 @@ class PageController extends ClientController
             'index'        => 'Все посты',
             'userPages'    => 'Посты пользователя',
             'sectionPages' => 'Посты раздела',
-            'tagPages'     => 'Посты тега'
+            'tagPages'     => 'Посты тега',
+            'sitemap'      => 'Карта сайта'
         );
     }
 
+    public function actionSitemap()
+    {
+        $this->render('sitemap');
+    }
 
     public function subMenuItems()
     {

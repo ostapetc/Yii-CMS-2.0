@@ -37,7 +37,7 @@ class MediaFileController extends ClientController
                 'title'          => $file->title ? $file->title : 'Кликните для редактирования',
                 'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
                 'url'            => $file->getHref(),
-                'preview'        => $file->getPreview(),
+                'preview'        => $file->getPreviewArray(),
                 'delete_url'     => $file->deleteUrl,
                 'delete_type'    => "post",
                 'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(

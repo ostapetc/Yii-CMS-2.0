@@ -60,12 +60,12 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $owner = $this->getOwner();
         $api->title = $owner->title;
         $api->description = $owner->descr;
-        $newApi = $api->sendFile($local_api->getServerPath());
+        $new_api = $api->sendFile($local_api->getServerPath());
 
-        $this->setPk($newApi->pk);
+        $this->setPk($new_api->pk);
     }
 
-    public function getPreview()
+    public function getPreviewArray()
     {
         $player = $this->getApiModel()->player_url;
         if ($player)

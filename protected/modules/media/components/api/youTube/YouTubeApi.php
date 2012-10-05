@@ -21,7 +21,7 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
 class YouTubeApi extends ApiAbstract
 {
-    const UPLOAD_PATH = 'upload/mediaFiles';
+    const UPLOAD_PATH = 'upload/media';
 
     protected $api;
     protected $criteriaClass = 'YouTubeApiCriteria';
@@ -70,7 +70,7 @@ class YouTubeApi extends ApiAbstract
     public function getUploadUrl()
     {
         $conf = Yii::app()->params['youTube'];
-        return "http://uploads.gdata.youtube.com/feeds/api/users/default/uploads";
+        return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
     }
 
     public function sendFile($file)
