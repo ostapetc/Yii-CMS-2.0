@@ -78,6 +78,10 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         }
     }
 
+    public function getPreview($size_name = null)
+    {
+
+    }
 
     public function getUrl()
     {
