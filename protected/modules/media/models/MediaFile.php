@@ -218,7 +218,6 @@ class MediaFile extends ActiveRecord
                 $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->tag($this->tag)
                     ->find();
                 $this->order = $model ? $model->order + 1 : 1;
-                $this->type  = $this->detectType();
             }
 
             return true;

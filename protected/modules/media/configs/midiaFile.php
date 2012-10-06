@@ -8,6 +8,10 @@ return array(
                 'height' => 256
             )
         ),
+        'api_map' => array(
+            'video' => 'youTube',
+
+        ),
         'api_model' => array(
             'class' => 'media.components.api.local.LocalApi'
         )

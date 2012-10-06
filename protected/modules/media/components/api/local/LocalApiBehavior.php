@@ -15,6 +15,9 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         self::TYPE_DOC   => self::TYPE_DOC,
     );
 
+    public $api_map;
+
+
     public function getThumb($size = null, $crop = true)
     {
         if (is_string($size))
@@ -103,7 +106,10 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         switch (true)
         {
             case $this->typeIs('image'):
-                return array('type' => 'img', 'val' => $this->getThumb());
+                return array(
+                    'type' => 'img',
+                    'val'  => $this->getThumb()
+                );
                 break;
             case $this->typeIs('audio'):
                 $name = 'audio';
@@ -118,10 +124,13 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 $name = 'rar';
                 break;
             case $this->typeIs('video'):
-                return array('type' => 'video', 'val' => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true));
+                return array(
+                    'type' => 'video',
+                    'val'  => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true)
+                );
                 break;
             default:
-                if (is_file('.' . $folder . $this->extension . '.jpg') )
+                if (is_file('.' . $folder . $this->extension . '.jpg'))
                 {
                     $name = $this->extension;
                 }
@@ -132,14 +141,19 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 break;
         }
 
-        return array('type' => 'img', 'val' => $folder . $name . '.jpg');
+        return array(
+            'type' => 'img',
+            'val'  => $folder . $name . '.jpg'
+        );
     }
+
 
     public function getPreview($size_name = null)
     {
         $data = $this->getPreviewArray($size_name);
 
-        switch($data['type']) {
+        switch ($data['type'])
+        {
             case 'img':
                 return CHtml::image($data['val']);
                 break;
@@ -164,12 +178,15 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function beforeSave($event)
     {
-        if ($this->getOwner()->getIsNewRecord())
+        $owner = $this->getOwner();
+        if ($owner->getIsNewRecord())
         {
             if ($this->getApiModel()->save('file'))
             {
                 $this->setPk($this->getApiModel()->pk);
-                $this->getOwner()->title = $this->getApiModel()->old_name;
+                $owner->title      = $this->getApiModel()->old_name;
+                $owner->type       = $this->detectType();
+                $owner->target_api = $this->api_map[$owner->type];
                 return true;
             }
             else

@@ -83,7 +83,7 @@ class YouTubeApi extends ApiAbstract
         $entry = new Zend_Gdata_YouTube_VideoEntry();
 
         $source = $this->getApi()->newMediaFileSource($file);
-        $source->setContentType('video/quicktime'); //make sure to set the proper content type.
+//        $source->setContentType('video/quicktime'); //make sure to set the proper content type.
         $source->setSlug($file);
 
         $entry->setMediaSource($source);
