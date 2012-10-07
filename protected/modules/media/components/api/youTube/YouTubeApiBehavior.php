@@ -32,7 +32,7 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         else
         {
             $this->getApiModel()->title = $this->getOwner()->title;
-//            $this->getApiModel()->description = $this->getOwner()->description;
+            $this->getApiModel()->description = $this->getOwner()->descr;
 //            if (!$this->getApiModel()->save()) {
                 //what to do??
 //            }

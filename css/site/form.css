@@ -33,7 +33,8 @@
 }
 
 .editable span{
-    border-bottom: 1px #AAF dashed;
+    border-bottom: 1px #CCF dashed;
+    cursor: pointer;
 }
 
 .editable textarea, .editable input{

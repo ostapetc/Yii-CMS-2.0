@@ -26,11 +26,8 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                         case 'iframe':
                             o.files[i].preview = '<iframe src="' + o.files[i].preview.val + '" width="100%"></iframe>';
                             break;
-                        case 'img':
-                            o.files[i].preview = '<img src="' + o.files[i].preview.val + '" width="100%"></img>';
-                            break;
                         default:
-                            o.files[i].preview = '';
+                            o.files[i].preview = '<img src="' + o.files[i].preview.val + '" width="100%"></img>';
                             break;
                     }
                 }
