@@ -21,12 +21,18 @@ class SherdogGalleryParser extends ContentParserAbstract
 
             foreach ($xpath->query("//div[@class='content']//li/h3[@class='title']/a") as $row)
             {
+                $id = end(explode('-', $row->getAttribute('href')));
+
+                //checko on existing
+                if (MediaAlbum::model()->parent('sherdog.com', $id)->find())
+                {
+                    return true;
+                }
                 $gallery = array(
                     'title' => $row->textContent,
-                    'id'    => end(explode('-', $row->getAttribute('href'))),
+                    'id'    => $id,
                     'imgs'  => $this->parseGalleryPage($row->getAttribute('href')),
                 );
-
                 $this->saveGallery($gallery);
             }
 
