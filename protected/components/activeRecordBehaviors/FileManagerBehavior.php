@@ -42,9 +42,13 @@ class FileManagerBehavior extends ActiveRecordBehavior
         }
     }
 
+
     private function _tmpPrefix()
     {
-        return 'tmp_' . get_class($this->getOwner()) . '_' . Yii::app()->user->id;
+        $prefix = 'tmp_' . get_class($this->getOwner()) . '_';
+        //in console we have no user
+        $prefix .= Yii::app() instanceof CConsoleApplication ? 'console' : Yii::app()->user->id;
+        return  $prefix;
     }
 
     public function findAllAttaches()

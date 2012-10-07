@@ -1,22 +1,10 @@
 <?php
 Yii::import('media.components.api.abstract.*');
 Yii::import('media.components.api.local.*');
-class LocalApiBehavior extends ApiBehaviorAbstract
+class RemoteApiBehavior extends ApiBehaviorAbstract
 {
-    const TYPE_IMG   = 'img';
-    const TYPE_VIDEO = 'video';
-    const TYPE_AUDIO = 'audio';
-    const TYPE_DOC   = 'doc';
-
-    public $types = array(
-        self::TYPE_IMG   => self::TYPE_IMG,
-        self::TYPE_VIDEO => self::TYPE_VIDEO,
-        self::TYPE_AUDIO => self::TYPE_AUDIO,
-        self::TYPE_DOC   => self::TYPE_DOC,
-    );
-
-    public $api_map;
     public $new_record_status;
+
 
     public function getThumb($size = null, $crop = true)
     {
@@ -25,36 +13,15 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             $size = $this->getSize($size);
         }
 
-        $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
+        $dir  = pathinfo($this->getPk(), PATHINFO_DIRNAME);
         $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
         return ImageHelper::thumb($dir, $name, $size, $crop)->getSrc();
     }
 
 
-    public function getServerPath()
-    {
-        return $this->getApiModel()->getServerPath();
-    }
-
-
-    public function getServerDir()
-    {
-        return $this->getApiModel()->getServerDir();
-    }
-
-
-    public function getContent()
-    {
-        if (file_exists($this->getServerPath()))
-        {
-            return file_get_contents($this->getServerPath());
-        }
-    }
-
-
     public function getHref()
     {
-        return '/' . LocalApi::UPLOAD_PATH . '/' . $this->pk;
+        return $this->pk;
     }
 
 
@@ -170,31 +137,15 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getIsFileExist()
-    {
-        $this->getApiModel()->getIsFileExists();
-    }
-
-
     public function beforeSave($event)
     {
         $owner = $this->getOwner();
         if ($owner->getIsNewRecord())
         {
-            if ($this->getApiModel(false)->save('file'))
-            {
-                $this->setPk($this->getApiModel()->pk);
-                $owner->title      = $this->getApiModel()->old_name;
-                $owner->type       = $this->detectType();
-                $owner->target_api = $this->api_map[$owner->type];
-                $owner->status     = $this->new_record_status;
-                return true;
-            }
-            else
-            {
-//                $this->getOwner()->error = $this->getApiModel()->errors;
-                return false;
-            }
+            $this->setPk($this->getApiModel()->pk);
+            $owner->type   = $this->detectType();
+            $owner->status = $this->new_record_status;
+            return true;
         }
         return true;
     }

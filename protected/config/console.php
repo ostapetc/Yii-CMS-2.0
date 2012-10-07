@@ -13,5 +13,13 @@ return CMap::mergeArray(require($config . '.php'), array(
         'remote_upload'    => array(
             'class' => 'media.commands.RemoteUploadCommand',
         ),
+        'parser_runner'    => array(
+            'class' => 'content.commands.ParserRunnerCommand',
+            'parsers' => array(
+                array(
+                    'class' =>  'content.commands.parsers.SherdogGalleryParser'
+                )
+            )
+        ),
     ),
 ));
