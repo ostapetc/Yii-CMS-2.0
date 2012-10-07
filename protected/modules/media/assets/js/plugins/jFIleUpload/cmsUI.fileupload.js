@@ -21,13 +21,14 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                     {
                         continue;
                     }
-                    if (o.files[i].preview.type == 'iframe')
+                    switch (o.files[i].preview.type)
                     {
-                        o.files[i].preview = '<iframe src="' + o.files[i].preview.val + '" width="100%"></iframe>';
-                    }
-                    else if (o.files[i].preview.type == 'img')
-                    {
-                        o.files[i].preview = '<img src="' + o.files[i].preview.val + '" width="100%"></img>';
+                        case 'iframe':
+                            o.files[i].preview = '<iframe src="' + o.files[i].preview.val + '" width="100%"></iframe>';
+                            break;
+                        default:
+                            o.files[i].preview = '<img src="' + o.files[i].preview.val + '" width="100%"></img>';
+                            break;
                     }
                 }
             }

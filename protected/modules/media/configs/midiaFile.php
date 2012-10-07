@@ -8,6 +8,10 @@ return array(
                 'height' => 256
             )
         ),
+        'api_map' => array(
+            'video' => 'youTube',
+        ),
+        'new_record_status' => MediaFile::STATUS_ON_MODERATE,
         'api_model' => array(
             'class' => 'media.components.api.local.LocalApi'
         )

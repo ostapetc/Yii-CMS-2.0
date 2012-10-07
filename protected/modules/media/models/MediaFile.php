@@ -52,6 +52,10 @@
 Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
+    const STATUS_ON_MODERATE = 'on_moderate';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_DELETED = 'deleted';
+
     public static $configuration;
 
     public $error;
@@ -218,7 +222,6 @@ class MediaFile extends ActiveRecord
                 $model       = MediaFile::model()->parent($this->model_id, $this->object_id)->tag($this->tag)
                     ->find();
                 $this->order = $model ? $model->order + 1 : 1;
-                $this->type  = $this->detectType();
             }
 
             return true;

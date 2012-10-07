@@ -13,7 +13,6 @@ class MediaAlbumAdminController extends AdminController
     }
 
 
-
     public function actionCreate()
     {
         $model = new MediaAlbum;

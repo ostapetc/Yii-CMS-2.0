@@ -30,9 +30,10 @@ class MediaFileAdminController extends AdminController
         );
     }
 
+
     protected function sendFilesAsJson($files)
     {
-        $res = array();
+        $res   = array();
         $files = is_array($files) ? $files : array($files);
         foreach ($files as $file)
         {
@@ -52,7 +53,6 @@ class MediaFileAdminController extends AdminController
 
         echo CJSON::encode($res);
     }
-
 
 
     public function actionExistFiles($model_id, $object_id, $tag)

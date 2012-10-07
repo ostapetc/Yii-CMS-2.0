@@ -83,7 +83,7 @@ class YouTubeApi extends ApiAbstract
         $entry = new Zend_Gdata_YouTube_VideoEntry();
 
         $source = $this->getApi()->newMediaFileSource($file);
-        $source->setContentType('video/quicktime'); //make sure to set the proper content type.
+        $source->setContentType('video/x-ms-wmv'); //make sure to set the proper content type.
         $source->setSlug($file);
 
         $entry->setMediaSource($source);
@@ -108,9 +108,9 @@ class YouTubeApi extends ApiAbstract
 //        $myVideoEntry->setVideoDescription($this->description);
 //        $myVideoEntry->setVideoCategory($this->category);
         $myVideoEntry->setVideoTitle($name);
-//        $myVideoEntry->setVideoDescription('d');
+        $myVideoEntry->setVideoDescription('d');
         $myVideoEntry->setVideoCategory('Autos');
-//        $myVideoEntry->SetVideoTags('cars, funny');
+        $myVideoEntry->SetVideoTags('cars, funny');
 
         return $this->getApi()
             ->getFormUploadToken($myVideoEntry, 'http://gdata.youtube.com/action/GetUploadToken');
