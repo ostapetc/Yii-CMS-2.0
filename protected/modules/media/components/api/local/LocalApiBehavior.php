@@ -16,7 +16,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     );
 
     public $api_map;
-
+    public $new_record_status;
 
     public function getThumb($size = null, $crop = true)
     {
@@ -187,6 +187,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 $owner->title      = $this->getApiModel()->old_name;
                 $owner->type       = $this->detectType();
                 $owner->target_api = $this->api_map[$owner->type];
+                $owner->status     = $this->new_record_status;
                 return true;
             }
             else

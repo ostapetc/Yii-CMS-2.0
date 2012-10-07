@@ -52,6 +52,10 @@
 Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
+    const STATUS_ON_MODERATE = 'on_moderate';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_DELETED = 'deleted';
+
     public static $configuration;
 
     public $error;

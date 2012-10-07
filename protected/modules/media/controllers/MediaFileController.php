@@ -5,20 +5,22 @@ class MediaFileController extends ClientController
     {
         return array(
             "downloadFile" => "Скачать файл",
-            "upload" => "Скачать файл",
-            "existFiles" => "Скачать файл",
+            "upload"       => "Скачать файл",
+            "existFiles"   => "Скачать файл",
             "savePriority" => "Скачать файл",
-            "updateAttr" => "Скачать файл",
+            "updateAttr"   => "Скачать файл",
         );
     }
+
 
     public function actions()
     {
         return array(
-            'updateAttr' => array(
-                'class' => 'media.components.UpdateAttrAction',
+            'updateAttr'   => array(
+                'class'      => 'media.components.UpdateAttrAction',
                 'attributes' => array(
-                    'title', 'descr'
+                    'title',
+                    'descr'
                 )
             ),
             'savePriority' => array(
@@ -27,9 +29,11 @@ class MediaFileController extends ClientController
         );
 
     }
+
+
     protected function sendFilesAsJson($files)
     {
-        $res = array();
+        $res   = array();
         $files = is_array($files) ? $files : array($files);
         foreach ($files as $file)
         {
@@ -50,6 +54,7 @@ class MediaFileController extends ClientController
         echo CJSON::encode($res);
     }
 
+
     public function actionExistFiles($model_id, $object_id, $tag)
     {
         if ($object_id == 0)
@@ -60,6 +65,7 @@ class MediaFileController extends ClientController
         $existFiles = MediaFile::model()->parent($model_id, $object_id)->tag($tag)->findAll();
         $this->sendFilesAsJson($existFiles);
     }
+
 
     public function actionSavePriority()
     {
@@ -100,6 +106,7 @@ class MediaFileController extends ClientController
 
     }
 
+
     public $x_send_file_enabled = true;
 
 
@@ -107,7 +114,7 @@ class MediaFileController extends ClientController
     {
         list($hash, $id) = explode('x', $hash);
 
-        $model =  MediaFile::model()->findByPk(intval($id));
+        $model = MediaFile::model()->findByPk(intval($id));
         if (!$model || $model->getHash() != $hash || !$model->getIsFileExist())
         {
             $this->pageNotFound();
