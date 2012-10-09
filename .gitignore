@@ -40,8 +40,12 @@ publish
 
 #my adds
 assets/*
-upload/media/*
-upload/photo/*
+upload/*
+!upload/elrte/
+!upload/fighters/
+!upload/pages/
+!upload/params/
+
 protected/config/development.php
 protected/runtime/*
 
