@@ -1,5 +1,4 @@
 <?
-
 define('DS', DIRECTORY_SEPARATOR);
 define('CONFIG', 'development');
 define('YII_DEBUG', true);
