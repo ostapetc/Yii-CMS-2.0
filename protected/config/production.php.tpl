@@ -20,7 +20,7 @@ return CMap::mergeArray(require('main.php'), array(
             'user' => '{{youtube.user}}',
             'pass' => '{{youtube.pass}}'
         ),
-        'vkontakte' => array(
+        'vk' => array(
             'app' => '{{vk.app}}',
             'key'    => '{{vk.key}}',
         )
