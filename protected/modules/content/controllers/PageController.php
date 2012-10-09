@@ -31,8 +31,13 @@ class PageController extends ClientController
         );
     }
 
+
     public function actionSitemap()
     {
+        Yii::import('content.commands.parsers.VkVideoGroupParser', true);
+        $parser = new VkVideoGroupParser();
+        $parser->parse();
+
         $this->render('sitemap');
     }
 
