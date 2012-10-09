@@ -87,7 +87,7 @@ return array(
             'class' => 'UrlManager'
         ),
         'errorHandler' => array(
-            'class' => 'application.components.ErrorHandler',
+            'class' => 'CErrorHandler',
             'errorAction' => 'main/main/error',
         ),
         'authManager' => array(
