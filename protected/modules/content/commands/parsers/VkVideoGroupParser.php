@@ -8,7 +8,7 @@ class VkVideoGroupParser extends ContentParserAbstract
     {
         Yii::import('application.libs.vk.vkapi', true);
         $conf = Yii::app()->params->vk;
-        $vk = new vkapi($conf['app_id'], $conf['key']);
+        $vk = new vkapi($conf['app'], $conf['key']);
         $res = $vk->api('video.get', array('gid' => 'mma.news'));
         dump($res);
     }
