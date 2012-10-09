@@ -69,7 +69,7 @@
     </div>
     <div class="row-fluid content">
         <?
-        foreach(Yii::app()->user->getFlashes() as $key => $message) {
+        foreach(Yii::app()->user->getFlashes() as $key => $msg) {
             echo Yii::app()->controller->msg($msg, $type);
         }
         ?>
