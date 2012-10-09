@@ -70,10 +70,7 @@
     <div class="row-fluid content">
         <?
         foreach(Yii::app()->user->getFlashes() as $key => $message) {
-            if (in_array($key, Controller::$msg_types))
-            {
-                echo Yii::app()->controller->msg($msg, $type);
-            }
+            echo Yii::app()->controller->msg($msg, $type);
         }
         ?>
         <?= $content ?>
