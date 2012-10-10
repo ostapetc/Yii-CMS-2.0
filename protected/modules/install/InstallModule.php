@@ -10,7 +10,7 @@ class InstallModule extends WebModule
     }
 
 
-    public function getVversion()
+    public function getVersion()
     {
         return '0.0.1';
     }
