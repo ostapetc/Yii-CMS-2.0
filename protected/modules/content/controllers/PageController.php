@@ -27,7 +27,7 @@ class PageController extends ClientController
             'userPages'    => 'Посты пользователя',
             'sectionPages' => 'Посты раздела',
             'tagPages'     => 'Посты тега',
-            'sitemap'      => 'Карта сайта'
+            'sitemap'      => 'Карта сайта',
         );
     }
 
