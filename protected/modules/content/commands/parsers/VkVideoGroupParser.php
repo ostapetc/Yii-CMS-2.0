@@ -24,26 +24,31 @@ class VkVideoGroupParser extends ContentParserAbstract
 
         foreach ($xpath->query("//div[@id='public_videos']/a") as $row)
         {
-            $oid = '-'.end(explode('-', $row->getAttribute('href')));
+            $oid      = '-' . end(explode('-', $row->getAttribute('href')));
             $response = $this->post($this->base . '/al_video.php', array(
-                'act' => 'load_videos_silent',
-                'al' => 1,
+                'act'    => 'load_videos_silent',
+                'al'     => 1,
                 'offset' => 0,
-                'oid' => $oid
+                'oid'    => $oid
             ));
-            $data = CJSON::decode(substr($response, 30)); // some magic
-            foreach ($data['all'] as $video) {
+            $data     = CJSON::decode(substr($response, 30)); // some magic
+            foreach ($data['all'] as $video)
+            {
+                $response = $this->post($this->base . '/al_video.php', array(
+                    'act' => 'video_embed_box',
+                    'al' => 1,
+                    'oid' => $video[0],
+                    'vid' => $video[1]
+                ));
+                dump($response);
+                // WHAT?!?!?!?!?!?!!
 
-                Yii::import('application.libs.vk.vkapi', true);
-                $conf = Yii::app()->params->vk;
-                $vk = new vkapi($conf['app'], $conf['key']);
-                $res = $vk->api('video.get', array('videos' => $video[0] . '_' . $video[1]));
-
-                dump($res);
+//                <iframe src="http://vkontakte.ru/video_ext.php?oid=32327704&id=157733416&hash=6b422c2d7de877e0" width="607" height="360" frameborder="0"></iframe>
             }
 
             break;
         }
+
 
         libxml_clear_errors();
         curl_close($this->ch);
@@ -65,6 +70,7 @@ class VkVideoGroupParser extends ContentParserAbstract
         curl_setopt($this->ch, CURLOPT_URL, $url);
         return $this->curl_redirect_exec($this->ch);
     }
+
 
     public function authorize()
     {
