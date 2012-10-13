@@ -7,6 +7,12 @@ class RemoteApi extends ApiAbstract
     }
 
 
+    public function parse($content)
+    {
+        return false;
+    }
+
+
     function count($criteria)
     {
         throw new CException('not implemented yet');
