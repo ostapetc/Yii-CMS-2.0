@@ -73,6 +73,7 @@ class YouTubeApi extends ApiAbstract
         return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
     }
 
+
     public function sendFile($file)
     {
         ignore_user_abort(true);
@@ -123,7 +124,8 @@ class YouTubeApi extends ApiAbstract
         $videoEntry->setVideoDescription($this->description);
         $videoEntry->setVideoTitle($this->title);
         //maybe need real video? getEditLink is empty now
-        if($videoEntry->getEditLink()) {
+        if ($videoEntry->getEditLink())
+        {
             $putUrl = $videoEntry->getEditLink()->getHref();
             $this->getApi()->updateEntry($videoEntry, $putUrl);
             return true;
@@ -268,5 +270,32 @@ class YouTubeApi extends ApiAbstract
         $this->beforeFind();
         $entry = $this->getApi()->getVideoEntry($pk);
         return $this->populateRecord($entry);
+    }
+
+
+    public function parse($source)
+    {
+        preg_match_all('/(youtu.be\/|\/watch\?v=|\/embed\/)([a-z0-9\-_]+)/i', $source, $matches);
+        if (isset($matches[2]))
+        {
+            $matches[2] = array_values(array_unique($matches[2]));
+            foreach ($matches[2] as $key => $id)
+            {
+                return $id;
+            }
+        }
+        return false;
+    }
+
+
+    public function getThumb($hq = true)
+    {
+        return 'http://i4.ytimg.com/vi/' . $id . '/' . ($hq ? 'hq' : '') . 'default.jpg';
+    }
+
+
+    protected function parseAll()
+    {
+
     }
 }

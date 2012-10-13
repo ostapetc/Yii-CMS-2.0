@@ -53,8 +53,8 @@ Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
     const STATUS_ON_MODERATE = 'on_moderate';
-    const STATUS_ACTIVE = 'active';
-    const STATUS_DELETED = 'deleted';
+    const STATUS_ACTIVE      = 'active';
+    const STATUS_DELETED     = 'deleted';
 
     public static $configuration;
 
@@ -140,6 +140,7 @@ class MediaFile extends ActiveRecord
         return $this;
     }
 
+
     public function type($type)
     {
         $alias = $this->getTableAlias();
@@ -151,6 +152,7 @@ class MediaFile extends ActiveRecord
         ));
         return $this;
     }
+
 
     public function getDeleteUrl()
     {
@@ -173,6 +175,22 @@ class MediaFile extends ActiveRecord
     }
 
 
+    public static function getConfiguration($api_name = null)
+    {
+        if (!self::$configuration)
+        {
+            self::$configuration = new CConfiguration(
+                Yii::getPathOfAlias('media.configs') . '/midiaFile.php');
+        }
+        if ($api_name)
+        {
+            return self::$configuration[$api_name];
+        }
+
+        return self::$configuration;
+    }
+
+
     public function setApi($api_name)
     {
         if (!$api_name)
@@ -180,13 +198,8 @@ class MediaFile extends ActiveRecord
             $api_name = 'local';
         }
         $this->detachBehavior('api');
-        if (!self::$configuration)
-        {
-            self::$configuration = new CConfiguration(
-                Yii::getPathOfAlias('media.configs') . '/midiaFile.php');
-        }
 
-        $this->attachBehavior('api', self::$configuration[$api_name]);
+        $this->attachBehavior('api', $this->getConfiguration($api_name));
 
         $this->api_name = $api_name;
 
@@ -198,6 +211,22 @@ class MediaFile extends ActiveRecord
             )
         ));
         return $this;
+    }
+
+
+    public static function parse($source)
+    {
+        foreach (self::getConfiguration() as $api => $conf)
+        {
+            $model = new MediaFile('create', $api);
+            if ($id = $model->getApi()->parse($source))
+            {
+                $model->remote_id = $id;
+                break;
+            }
+        }
+
+        return $model;
     }
 
 

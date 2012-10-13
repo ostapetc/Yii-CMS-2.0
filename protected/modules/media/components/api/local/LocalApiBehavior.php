@@ -18,6 +18,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public $api_map;
     public $new_record_status;
 
+
     public function getThumb($size = null, $crop = true)
     {
         if (is_string($size))

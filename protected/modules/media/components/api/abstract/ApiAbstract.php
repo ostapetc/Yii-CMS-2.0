@@ -14,6 +14,7 @@ abstract class ApiAbstract extends CModel
 
     abstract function findAll($criteria);
 
+    abstract function parse($criteria);
 
     /**
      * @param array $propas

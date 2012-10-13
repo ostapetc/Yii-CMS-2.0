@@ -48,7 +48,27 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         this._loadExistingFiles();
         this._sortableInit();
         this._jeditableInit();
+        this._linkParserInit();
         this._adaptationToBrowser();
+    },
+    _linkParserInit: function()
+    {
+        var widget = this;
+        widget.element.delegate('.link-parser', 'change', function() {
+            var input = $(this);
+            $.post(
+                widget.options.linkParserUrl,
+                {
+                    content: input.val()
+                },
+                function(data) {
+
+                },
+                'json'
+            );
+            return false;
+        });
+
     },
     _renderExtendedProgress: function(data)
     {

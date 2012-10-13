@@ -34,9 +34,8 @@ class PageController extends ClientController
 
     public function actionSitemap()
     {
-        Yii::import('content.commands.parsers.VkVideoGroupParser', true);
-        $parser = new VkVideoGroupParser();
-        $parser->parse();
+        $r = MediaFile::parse('<iframe width="560" height="315" src="http://www.youtube.com/embed/vYccR2fbESY" frameborder="0" allowfullscreen></iframe>');
+        dump($r);
 
         $this->render('sitemap');
     }
