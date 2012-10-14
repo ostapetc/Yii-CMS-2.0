@@ -11,7 +11,8 @@
                 'model'         => $model,
                 'tag'           => 'videos',
                 'data_type'     => 'video',
-                'upload_action' => $this->createUrl('/media/mediaFile/upload')
+                'upload_action' => '/media/mediaFile/upload',
+                'link_parser_action' => 'media/mediaFile/linkParser'
             ));
 
             Yii::app()->clientScript->registerScript('close_' . $widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {

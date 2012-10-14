@@ -17,6 +17,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
             {
                 for (var i in o.files)
                 {
+
                     if (!o.files[i].preview)
                     {
                         continue;
@@ -55,14 +56,24 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
     {
         var widget = this;
         widget.element.delegate('.link-parser', 'change', function() {
-            var input = $(this);
+            var input = $(this),
+                content = input.val();
+
+            if (!content)
+            {
+                return false;
+            }
+
+            input.prop('disabled', true);
             $.post(
                 widget.options.linkParserUrl,
                 {
-                    content: input.val()
+                    content : content
                 },
                 function(data) {
-
+                    input.val('');
+                    input.prop('disabled', false);
+                    return widget._trigger('done', undefined, {result:data});
                 },
                 'json'
             );
@@ -121,7 +132,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                 return false;
             }
             self.data('editable', true);
-            var action = self.data('save-url'),
+            var action = self.data('save-url').addGetParams({api:self.data('api')}),
                 options = {
                     submitdata: {'attr': self.data('attr')},
                     name: self.data('attr'),
@@ -139,7 +150,6 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                     //                        self.addClass('editable');
                     //                    }
                 };
-
             self.children('span').editable(action, options).click();
             return false;
         });

@@ -10,6 +10,7 @@ class MediaFileAdminController extends AdminController
             "existFiles"   => "Скачать файл",
             "savePriority" => "Скачать файл",
             "updateAttr"   => "Скачать файл",
+            "linkParser"   => "Скачать файл",
         );
     }
 
@@ -31,6 +32,27 @@ class MediaFileAdminController extends AdminController
     }
 
 
+    public function actionLinkParser()
+    {
+        if (isset($_POST['content']))
+        {
+            $model = MediaFile::parse($_POST['content']);
+            if ($model)
+            {
+                $model->save();
+                $this->sendFilesAsJson($model);
+            }
+            else
+            {
+                echo 'error';
+            }
+        }
+        else
+        {
+            $this->forbidden();
+        }
+    }
+
     protected function sendFilesAsJson($files)
     {
         $res   = array();
@@ -43,6 +65,7 @@ class MediaFileAdminController extends AdminController
                 'url'            => $file->getHref(),
                 'preview'        => $file->getPreviewArray(),
                 'delete_url'     => $file->deleteUrl,
+                'api'            => $file->api_name,
                 'delete_type'    => "post",
                 'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
                     'id'  => $file->id,

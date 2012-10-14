@@ -199,7 +199,14 @@ class MediaFile extends ActiveRecord
         }
         $this->detachBehavior('api');
 
-        $this->attachBehavior('api', $this->getConfiguration($api_name));
+        if ($api_name instanceof ApiAbstract)
+        {
+            $this->attachBehavior('api', $api_name);
+        }
+        else
+        {
+            $this->attachBehavior('api', $this->getConfiguration($api_name));
+        }
 
         $this->api_name = $api_name;
 
@@ -222,6 +229,7 @@ class MediaFile extends ActiveRecord
             if ($id = $model->getApi()->parse($source))
             {
                 $model->remote_id = $id;
+//                $model->getApi()->findByPk($id);
                 break;
             }
         }

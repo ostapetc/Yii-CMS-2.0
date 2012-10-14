@@ -43,6 +43,7 @@ class Uploader extends JuiInputWidget
     public $upload_action = '/media/mediaFileAdmin/upload';
     public $sortable_action = '/media/mediaFileAdmin/savePriority';
     public $exist_files_action = '/media/mediaFileAdmin/existFiles';
+    public $link_parser_action = '/media/mediaFileAdmin/linkParser';
 
     private $allow_type = array(
         'document'=> 'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
@@ -123,6 +124,7 @@ class Uploader extends JuiInputWidget
             'acceptFileTypes'         => $this->allow_type[$this->data_type],
 //            'maxChunkSize'          => 1*1000*1000,
             'sortableSaveUrl'         => $this->createUrl($this->sortable_action),
+            'linkParserUrl'         => $this->createUrl($this->link_parser_action),
             'limitConcurrentUploads'  => 0,
             'existFilesUrl'           => $this->createUrl($this->exist_files_action, array(
                 'model_id'  => get_class($this->model),
