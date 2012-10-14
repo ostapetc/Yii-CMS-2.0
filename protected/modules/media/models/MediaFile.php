@@ -1,4 +1,4 @@
--<?php
+<?php
 /**
  *
  * !Attributes - атрибуты БД

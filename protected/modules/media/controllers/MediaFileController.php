@@ -33,6 +33,7 @@ class MediaFileController extends ClientController
 
     protected function sendFilesAsJson($files)
     {
+
         $res   = array();
         $files = is_array($files) ? $files : array($files);
         foreach ($files as $file)
@@ -62,6 +63,7 @@ class MediaFileController extends ClientController
         {
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
+
 
         $existFiles = MediaFile::model()->parent($model_id, $object_id)->tag($tag)->findAll();
         $this->sendFilesAsJson($existFiles);
