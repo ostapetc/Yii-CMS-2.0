@@ -15,7 +15,7 @@ class Configuration extends CConfiguration
     {
         list($module, $config) = explode(".", $alias, 2);
         $module = lcfirst($module);
-        return "{$module}.configs.{$config}";
+        return "{$module}.config.{$config}";
     }
 
 }
