@@ -47,7 +47,9 @@ class MediaFileAdminController extends AdminController
             }
             else
             {
-                echo array('status' => 'error', 'message' => 'Текст не распознан');
+                echo array('status'  => 'error',
+                           'message' => 'Текст не распознан'
+                );
             }
         }
         else
@@ -59,7 +61,7 @@ class MediaFileAdminController extends AdminController
 
     protected function sendFilesAsJson($files)
     {
-        $res   = array();
+        $res = array();
         $files = is_array($files) ? $files : array($files);
         foreach ($files as $file)
         {

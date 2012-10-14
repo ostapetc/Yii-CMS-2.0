@@ -1,4 +1,4 @@
-<?php
+-<?php
 /**
  *
  * !Attributes - атрибуты БД
@@ -107,6 +107,17 @@ class MediaFile extends ActiveRecord
         );
     }
 
+    public function toJson()
+    {
+        return array(
+            'title'      => $this->title ? $this->title : 'Кликните для редактирования',
+            'descr'      => $this->descr ? $this->descr : 'Кликните для редактирования',
+            'url'        => $this->getHref(),
+            'preview'    => $this->getPreviewArray(),
+            'delete_url' => $this->deleteUrl,
+            'api'        => $this->api_name,
+        );
+    }
 
     public function parent($model_id, $object_id = null)
     {

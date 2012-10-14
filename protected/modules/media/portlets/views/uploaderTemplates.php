@@ -65,7 +65,7 @@
         </td>
         {{/if}}
         <td class="delete">
-            <button data-type="${delete_type}" data-url="${delete_url}" class="btn btn-danger btn-small">
+            <button data-type="post" data-url="${delete_url}" class="btn btn-danger btn-small">
                 <i class="icon-remove"></i>
             </button>
         </td>
