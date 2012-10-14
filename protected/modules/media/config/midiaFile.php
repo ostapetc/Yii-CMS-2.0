@@ -52,4 +52,17 @@ return array(
             'class' => 'media.components.api.vk.VkApi'
         )
     ),
+    'vimeo'       => array(
+        'class'     => 'media.components.api.vimeo.VimeoApiBehavior',
+        'icon'      => '/img/icons/vimeo-32.png',
+        'sizes'     => array(
+            'client_gallery' => array(
+                'width'  => 321,
+                'height' => 256
+            )
+        ),
+        'api_model' => array(
+            'class' => 'media.components.api.vimeo.VimeoApi'
+        )
+    ),
 );

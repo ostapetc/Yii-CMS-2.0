@@ -1,24 +1,19 @@
 <?php
-class VkApi extends ApiAbstract
+class VimeoApi extends ApiAbstract
 {
     protected $api;
-    protected $criteriaClass = 'VkApiCriteria';
+    protected $criteriaClass = 'VimeoApiCriteria';
 
     public $pk;
-
-    public $oid;
-    public $id;
-    public $hash;
-    public $hd;
 
 
     public function getPlayerUrl()
     {
-        return 'http://vk.com/video_ext.php?' . http_build_query(array(
-            'oid'  => $this->oid,
-            'id'   => $this->id,
-            'hash' => $this->hash
-        ));
+        return 'http://player.vimeo.com/video/38732855?title=1&' .
+            http_build_query(array(//            'oid'  => $this->oid,
+//            'id'   => $this->id,
+//            'hash' => $this->hash
+            ));
     }
 
 
@@ -111,7 +106,21 @@ class VkApi extends ApiAbstract
 
     public function parse($source)
     {
-        preg_match_all('/(video_ext.php\?)([a-z0-9\-_&=]+)/i', $source, $matches);
+        $regexstr = '~
+         # Match Vimeo link and embed code
+        (?:				            # Group vimeo url
+        	https?:\/\/		        # Either http or https
+        	(?:[\w]+\.)*		    # Optional subdomains
+        	vimeo\.com		        # Match vimeo.com
+        	(?:[\/\w]*\/videos?)?	# Optional video sub directory this handles groups links also
+        	\/			            # Slash before Id
+        	([0-9]+)		        # $1: VIDEO_ID is numeric
+        	[^\s]*			        # Not a space
+        )				            # End group
+        ~ix';
+
+        preg_match($regexstr, $source, $matches);
+        stop($matches);
         if (isset($matches[2]))
         {
             $matches[2] = array_values(array_unique($matches[2]));
