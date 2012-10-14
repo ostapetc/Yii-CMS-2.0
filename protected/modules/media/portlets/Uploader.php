@@ -151,7 +151,7 @@ class Uploader extends JuiInputWidget
 
     public function registerScripts()
     {
-        $plugins = $this->assets . '/js/plugins/';
+        $plugins = $this->assets . '/plugins/';
         $cs      = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery.ui')->registerScriptFile($plugins . 'tmpl/jquery.tmpl.min.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/cors/jquery.postmessage-transport.js');
