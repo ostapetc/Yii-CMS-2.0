@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
 . props.sh
-
 
 cd $deploy_dir
 
@@ -17,22 +15,21 @@ git pull > /dev/null
 
 #rsync
 echo '-----------rsync-----------'
-rsync -azx --delete $deploy_dir $webroot
+rsync -ax --delete $deploy_dir $webroot
 
 
 #configuring
 echo '-----------configuring-----------'
-sed -f /var/overlays/phpenv.com/config.sed ${app_dir}config/constants.php.tpl > ${app_dir}config/constants.php
-sed -f /var/overlays/phpenv.com/config.sed ${app_dir}config/production.php.tpl > ${app_dir}config/production.php
+sed -f ${overlays}production.sed ${app_dir}config/constants.php.tpl > ${app_dir}config/constants.php
+sed -f ${overlays}production.sed ${app_dir}config/production.php.tpl > ${app_dir}config/production.php
 
 chown -R www-data:www-data $deploy_dir
 chown -R www-data:www-data $webroot
 
 
-
 #migate
-#echo '-----------migrate-----------'
-#php $yiic migrate up
+echo '-----------migrate-----------'
+php $yiic migrate up
 
 
 
