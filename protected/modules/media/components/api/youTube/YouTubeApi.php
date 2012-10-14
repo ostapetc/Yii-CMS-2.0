@@ -234,7 +234,8 @@ class YouTubeApi extends ApiAbstract
 
     public function search($props = array())
     {
-        $criteria = new YouTubeApiCriteria(array(
+        $criteria = clone $this->getDbCriteria();
+        $criteria = $criteria->mergeWith(array(
             'select'        => $this->title,
             'category'      => $this->category,
             'author'        => $this->author,
@@ -291,11 +292,5 @@ class YouTubeApi extends ApiAbstract
     public function getThumb($hq = true)
     {
         return 'http://i4.ytimg.com/vi/' . $id . '/' . ($hq ? 'hq' : '') . 'default.jpg';
-    }
-
-
-    protected function parseAll()
-    {
-
     }
 }
