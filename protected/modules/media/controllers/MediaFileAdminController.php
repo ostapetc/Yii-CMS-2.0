@@ -32,19 +32,22 @@ class MediaFileAdminController extends AdminController
     }
 
 
-    public function actionLinkParser()
+    public function actionLinkParser($object_id, $model_id, $tag)
     {
         if (isset($_POST['content']))
         {
             $model = MediaFile::parse($_POST['content']);
             if ($model)
             {
+                $model->object_id = $object_id;
+                $model->model_id  = $model_id;
+                $model->tag       = $tag;
                 $model->save();
                 $this->sendFilesAsJson($model);
             }
             else
             {
-                echo 'error';
+                echo array('status' => 'error', 'message' => 'Текст не распознан');
             }
         }
         else
@@ -52,6 +55,7 @@ class MediaFileAdminController extends AdminController
             $this->forbidden();
         }
     }
+
 
     protected function sendFilesAsJson($files)
     {

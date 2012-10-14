@@ -60,7 +60,8 @@ class Form extends CForm
     public static function getFullAlias($alias)
     {
         list($module, $form) = explode(".", $alias, 2);
-        return "application.modules.{$module}.forms.{$form}";
+        $module = lcfirst($module);
+        return "{$module}.forms.{$form}";
     }
 
 

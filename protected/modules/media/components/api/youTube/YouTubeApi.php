@@ -279,8 +279,7 @@ class YouTubeApi extends ApiAbstract
         preg_match_all('/(youtu.be\/|\/watch\?v=|\/embed\/)([a-z0-9\-_]+)/i', $source, $matches);
         if (isset($matches[2]))
         {
-            $matches[2] = array_values(array_unique($matches[2]));
-            foreach ($matches[2] as $key => $id)
+            foreach ($matches[2] as $id)
             {
                 return $id;
             }

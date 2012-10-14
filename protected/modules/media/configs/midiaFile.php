@@ -39,7 +39,7 @@ return array(
             'class' => 'media.components.api.youTube.YouTubeApi'
         )
     ),
-    'vk'  => array(
+    'vk'       => array(
         'class'     => 'media.components.api.vk.VkApiBehavior',
         'icon'      => '/img/icons/vk-32.png',
         'sizes'     => array(

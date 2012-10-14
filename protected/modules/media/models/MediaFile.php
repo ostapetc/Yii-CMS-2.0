@@ -179,8 +179,7 @@ class MediaFile extends ActiveRecord
     {
         if (!self::$configuration)
         {
-            self::$configuration = new CConfiguration(
-                Yii::getPathOfAlias('media.configs') . '/midiaFile.php');
+            self::$configuration = new Configuration('media.midiaFile');
         }
         if ($api_name)
         {
