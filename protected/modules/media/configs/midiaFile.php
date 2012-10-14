@@ -10,6 +10,9 @@ return array(
         ),
         'api_map' => array(
             'video' => 'youTube',
+            'img' => 'local',
+            'audio' => 'local',
+            'doc' => 'local',
         ),
         'new_record_status' => MediaFile::STATUS_ON_MODERATE,
         'api_model' => array(

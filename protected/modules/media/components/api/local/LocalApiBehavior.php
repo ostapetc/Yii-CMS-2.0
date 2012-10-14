@@ -21,7 +21,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getThumb($size = null, $crop = true)
     {
-        if (is_string($size))
+        if (!is_array($size))
         {
             $size = $this->getSize($size);
         }
