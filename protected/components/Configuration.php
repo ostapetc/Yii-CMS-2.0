@@ -13,9 +13,9 @@ class Configuration extends CConfiguration
 
     public static function getFullAlias($alias)
     {
-        list($module, $form) = explode(".", $alias, 2);
+        list($module, $config) = explode(".", $alias, 2);
         $module = lcfirst($module);
-        return "{$module}.configs.{$form}";
+        return "{$module}.configs.{$config}";
     }
 
 }

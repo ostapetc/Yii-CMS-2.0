@@ -235,7 +235,7 @@ class YouTubeApi extends ApiAbstract
     public function search($props = array())
     {
         $criteria = clone $this->getDbCriteria();
-        $criteria = $criteria->mergeWith(array(
+        $criteria->mergeWith(array(
             'select'        => $this->title,
             'category'      => $this->category,
             'author'        => $this->author,
