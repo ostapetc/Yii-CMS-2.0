@@ -191,7 +191,7 @@ class PageController extends ClientController
         $data_provider = new CActiveDataProvider('Page', array(
             'criteria'   => $criteria,
             'pagination' => array(
-                'pageSize' => '10'
+                'pageSize' => '20'
             )
         ));
 

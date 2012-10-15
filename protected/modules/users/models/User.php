@@ -1,8 +1,7 @@
 <?php
-/**
- *
+/** 
+ * 
  * !Attributes - атрибуты БД
- *
  * @property string         $status
  * @property integer        $rating
  * @property string         $id
@@ -18,7 +17,7 @@
  * @property string         $password_recover_code
  * @property string         $password_recover_date
  * @property string         $date_create
- *
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                $userDir
  * @property AuthItem       $role
@@ -35,7 +34,7 @@
  * @property                $updateUrl
  * @property                $createUrl
  * @property                $deleteUrl
- *
+ * 
  * !Relations - связи
  * @property MediaAlbum[]   $file_albums
  * @property int|null       $file_albums_count
@@ -43,13 +42,13 @@
  * @property int|null       $pages_count
  * @property int|null       $favorites_count
  * @property int|null       $comments_count
- * @property int|null       $messages_count
- * @property int|null       $new_messages_count
- *
+ * 
  * !Scopes - именованные группы условий, возвращают этот АР
+ * @method   User           published()
+ * @method   User           sitemap()
  * @method   User           ordered()
  * @method   User           last()
- *
+ * 
  */
 
 class User extends ActiveRecord
@@ -76,13 +75,6 @@ class User extends ActiveRecord
     const SCENARIO_UPDATE                  = 'Update';
     const SCENARIO_CREATE                  = 'Create';
     const SCENARIO_LOGIN                   = 'Login';
-
-
-    public static $status_list = array(
-        self::STATUS_ACTIVE  => self::STATUS_ACTIVE,
-        self::STATUS_NEW     => self::STATUS_NEW,
-        self::STATUS_BLOCKED => self::STATUS_BLOCKED,
-    );
 
     public $password_c;
 
@@ -131,8 +123,8 @@ class User extends ActiveRecord
 
     public function getUserDir()
     {
-        $dir  = "upload/users/" . $this->id . "/";
-        $path = $_SERVER["DOCUMENT_ROOT"] . $dir;
+        $dir  = "upload/users/".$this->id."/";
+        $path = $_SERVER["DOCUMENT_ROOT"].$dir;
 
         if (!file_exists($path))
         {
@@ -141,22 +133,6 @@ class User extends ActiveRecord
         }
 
         return $dir;
-    }
-
-
-    public function behaviors()
-    {
-        return CMap::mergeArray(parent::behaviors(), array(
-                'FileManager' => array(
-                    'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
-                    'tags'  => array(
-                        'videos' => array(
-                            'title'     => 'Видео',
-                            'data_type' => 'video'
-                        )
-                    )
-                ),
-            ));
     }
 
 
@@ -184,6 +160,7 @@ class User extends ActiveRecord
                     self::SCENARIO_UPDATE
                 )
             ),
+            //array(),
             array(
                 'name',
                 'required',
@@ -198,9 +175,7 @@ class User extends ActiveRecord
                 'max' => 16
             ),
             array(
-                'photo',
-                'safe',
-                'on' => array(
+                'photo', 'safe', 'on' => array(
                     self::SCENARIO_CREATE,
                     self::SCENARIO_REGISTRATION,
                     self::SCENARIO_UPDATE_SELF_DATA,
@@ -213,11 +188,11 @@ class User extends ActiveRecord
                 'pattern' => '/^[a-zа-я0-9 _]+$/i',
                 'message' => t('допустимы русские и латинские буквы, цыфры, пробелы и знак _')
             ),
-            //            array(
-            //                'gender',
-            //                'required',
-            //                'on' => array(self::SCENARIO_REGISTRATION)
-            //            ),
+    //            array(
+    //                'gender',
+    //                'required',
+    //                'on' => array(self::SCENARIO_REGISTRATION)
+    //            ),
             array(
                 'password_c, password',
                 'required',
@@ -265,7 +240,7 @@ class User extends ActiveRecord
                 'password_c',
                 'compare',
                 'compareAttribute' => 'password',
-                'on'               => array(
+                'on' => array(
                     self::SCENARIO_REGISTRATION,
                     self::SCENARIO_CHANGE_PASSWORD,
                     self::SCENARIO_UPDATE,
@@ -331,13 +306,6 @@ class User extends ActiveRecord
                 'filter',
                 'filter' => 'strip_tags'
             ),
-            array(
-                'role',
-                'required',
-                'on' => array(
-                    self::SCENARIO_UPDATE,
-                )
-            ),
 //            array(
 //                'about_self',
 //                'safe',
@@ -350,45 +318,45 @@ class User extends ActiveRecord
     public function relations()
     {
         return array(
-            'file_albums'        => array(
-                self::HAS_MANY,
+            'file_albums' => array(
+                self::HAS_MANY ,
                 'MediaAlbum',
                 'object_id',
-                'condition' => "file_albums.model_id = '" . get_class($this) . "'"
+                'condition' => "file_albums.model_id = '".get_class($this)."'"
             ),
-            'file_albums_count'  => array(
-                self::STAT,
+            'file_albums_count' => array(
+                self::STAT ,
                 'MediaAlbum',
                 'object_id',
-                'condition' => "t.model_id = '" . get_class($this) . "'"
+                'condition' => "t.model_id = '".get_class($this)."'"
             ),
-            'assignment'         => array(
+            'assignment' => array(
                 self::HAS_ONE,
                 'AuthAssignment',
                 'userid'
             ),
-            'role'               => array(
+            'role' => array(
                 self::HAS_ONE,
                 'AuthItem',
-                array('itemname'=> 'name'),
+                array('itemname'=>'name'),
                 'through' => 'assignment'
             ),
-            'pages_count'        => array(
+            'pages_count' => array(
                 self::STAT,
                 'Page',
                 'user_id'
             ),
-            'favorites_count'    => array(
+            'favorites_count' => array(
                 self::STAT,
                 'Favorite',
                 'user_id'
             ),
-            'comments_count'     => array(
+            'comments_count' => array(
                 self::STAT,
                 'Comment',
                 'user_id'
             ),
-            'messages_count'     => array(
+            'messages_count' => array(
                 self::STAT,
                 'Message',
                 'to_user_id',
@@ -434,10 +402,10 @@ class User extends ActiveRecord
     public function attributeLabels()
     {
         return CMap::mergeArray(parent::attributeLabels(), array(
-            'password_c'   => t('Повторите пароль'),
-            'remember_me'  => t('Запомнить меня'),
-            'role'         => t('Роль')
-        ));
+                'password_c'   => t('Повторите пароль'),
+                'remember_me'  => t('Запомнить меня'),
+                'role'         => t('Роль')
+            ));
     }
 
 
@@ -456,7 +424,7 @@ class User extends ActiveRecord
 
         if (!$assigment)
         {
-            $assigment           = new AuthAssignment();
+            $assigment = new AuthAssignment();
             $assigment->itemname = AuthItem::ROLE_DEFAULT;
             $assigment->userid   = $this->id;
             $assigment->save();
@@ -476,23 +444,31 @@ class User extends ActiveRecord
     {
         $photo_src = '/img/icons/user.gif';
 
-        return CHtml::image($photo_src, $this->name, array(
+        return CHtml::image(
+            $photo_src,
+            $this->name,
+            array(
                 'title'  => $this->name,
                 'border' => 0,
                 'width'  => $size,
                 'height' => $size,
                 'class'  => 'img-rounded'
-            ));
+            )
+        );
     }
 
 
     public function getPhotoLink($size = self::PHOTO_SIZE_SMALL)
     {
-        return CHtml::link($this->getPhotoHtml($size), $this->url, array(
+        return CHtml::link(
+            $this->getPhotoHtml($size),
+            $this->url,
+            array(
                 'class'  => 'user-photo-link',
                 'width'  => $size,
                 'height' => $size
-            ));
+            )
+        );
     }
 
 
@@ -505,12 +481,14 @@ class User extends ActiveRecord
         );
     }
 
-
     public function getLink()
     {
-        return CHtml::link($this->name, $this->url, array('class' => 'user-link'));
+        return CHtml::link(
+            $this->name,
+            $this->url,
+            array('class' => 'user-link')
+        );
     }
-
 
     /**
      * TODO: надо придумать авто преобразование даты

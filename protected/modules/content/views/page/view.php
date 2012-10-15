@@ -26,15 +26,50 @@ if (Yii::app()->user->checkAccess('Page_update'))
 <? endif ?>
 
 <? if (($page->status == Page::STATUS_PUBLISHED)  || ($page->user_id == Yii::app()->user->id)): ?>
-    <?
-    $this->renderPartial('_view', array(
-        'data'    => $page,
-        'preview' => false
-    ));
-    ?>
+    <div class="page">
+        <? if ($page->image_src): ?>
+            <?=
+            CHtml::link(
+                CHtml::image($page->image_src, '', array('class' => 'img-polaroid')),
+                $page->url,
+                array(
+                    'class' => 'page-img'
+                )
+            );
+            ?>
+        <? endif ?>
 
-    <br/>
-    <? $this->widget('CommentsPortlet', array('model' => $page)); ?>
+        <?= $page->text ?>
+
+        <?=
+        $this->renderPartial(
+            'application.modules.content.views.pageSection._list',
+            array('sections' => $page->sections)
+        );
+        ?>
+
+        <?=
+        $this->renderPartial(
+            'application.modules.tags.views._list',
+            array('tags' => $page->tags)
+        );
+        ?>
+
+        <?=
+        $this->renderPartial(
+            '_infoPanel',
+            array(
+                'page'    => $page,
+                'preview' => true
+            )
+        );
+        ?>
+
+        <br clear="all" />
+        <br clear="all" />
+
+        <? $this->widget('CommentsPortlet', array('model' => $page)); ?>
+    </div>
 <? endif ?>
 
 
