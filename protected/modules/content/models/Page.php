@@ -156,12 +156,12 @@ class Page extends ActiveRecord
                 'in',
                 'range' => array(0, 1)
             ),
-            array(
-                'image',
-                'file',
-                'types' => 'jpg, png, jpeg, gif',
-                'allowEmpty' => true
-            ),
+//            array(
+//                'image',
+//                'file',
+//                'types' => 'jpg, png, jpeg, gif',
+//                'allowEmpty' => true
+//            ),
             array(
                 'source',
                 'length',
@@ -285,9 +285,9 @@ class Page extends ActiveRecord
     public function uploadFiles()
     {
         return array(
-            'image' => array(
-                'dir' => self::IMAGES_DIR
-            )
+//            'image' => array(
+//                'dir' => self::IMAGES_DIR
+//            )
         );
     }
 
