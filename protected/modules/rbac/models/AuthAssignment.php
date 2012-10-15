@@ -18,8 +18,6 @@
  * @property AuthItem       $role
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   AuthAssignment published()
- * @method   AuthAssignment sitemap()
  * @method   AuthAssignment ordered()
  * @method   AuthAssignment last()
  * 

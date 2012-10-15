@@ -20,11 +20,12 @@ if (!isset($_SERVER['DOCUMENT_ROOT']) || !$_SERVER['DOCUMENT_ROOT'])
     $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../../') . DIRECTORY_SEPARATOR;
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . 'protected' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'constants.php';
+require $_SERVER['DOCUMENT_ROOT'] . 'protected/config/constants.php';
 
-require_once(dirname(__FILE__).'/yii.php');
-require_once LIBRARIES_PATH . 'functions.php';
-require_once LIBRARIES_PATH . 'debug.php';
+require(dirname(__FILE__).'/yii.php');
+
+require LIBRARIES_PATH . '/functions.php';
+require LIBRARIES_PATH. '/debug.php';
 
 $config = $_SERVER['DOCUMENT_ROOT'].'/protected/config/console.php';
 

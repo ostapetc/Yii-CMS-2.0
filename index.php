@@ -18,7 +18,7 @@ require_once LIBRARIES_PATH . 'functions.php';
 require_once LIBRARIES_PATH . 'debug.php';
 
 $config = APP_PATH . 'config' . DS . (defined('ENV') ? ENV : CONFIG) .'.php';
-
+//dump($config );
 Yii::createWebApplication($config)->run();
 
 //$sections = PageSection::model()->forum()->findAll();

@@ -6,21 +6,33 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
 
     public $module;
     public $assets;
+    public $sizes = array();
 
     public function __construct()
     {
         $this->module = Yii::app()->getModule('media');
-        $this->assets = $this->module->assetsUrl();
     }
 
+    public function getSize($alias = null)
+    {
+        return $alias && isset($this->sizes[$alias]) ? $this->sizes[$alias] : array('width' => 64, 'height' => 64);
+    }
 
+    public function getAssets()
+    {
+        if ($this->assets)
+        {
+            $this->assets = $this->module->assetsUrl();
+        }
+        return $this->assets;
+    }
     abstract function getHref();
 
 
     abstract function getUrl();
 
 
-    abstract function getIcon();
+    abstract function getPreview($size_name = null);
 
 
     protected function getPk()
@@ -38,12 +50,12 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     /**
      * @return ApiAbstract
      */
-    public function getApiModel()
+    public function getApiModel($initialize = true)
     {
         if ($this->_api_model === null)
         {
             $this->_api_model = Yii::createComponent($this->api_model);
-            if ($this->getPk())
+            if ($initialize && $this->getPk())
             {
                 $this->_api_model = $this->_api_model->findByPk($this->getPk());
             }
@@ -51,5 +63,10 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         return $this->_api_model;
     }
 
+
+    public function setApiModel($model)
+    {
+        $this->_api_model = $model;
+    }
 }
 

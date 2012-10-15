@@ -43,7 +43,7 @@ class InstallController extends ClientController
             {
                 Yii::app()->user->setState('install_configs', $model->getConfigs());
                 $model->saveInSession();
-                $this->redirect('/install.php/install/install/step2');
+                $this->redirect('/install.php?r=/install/install/step2');
             }
             else if (is_string($db_create_status))
             {
@@ -106,14 +106,15 @@ class InstallController extends ClientController
             Yii::app()->executor->addCommandsFromModules(Yii::app()->getModules());
 
             //run install method
-            foreach (Yii::app()->getModules() as $module => $conf)
+            foreach (Yii::app()->getModules() as $id => $conf)
             {
-                Yii::app()->getModule($module)->install();
+                mkdir(Yii::getPathOfAlias('webroot.upload.' . $id), 0755);
+                Yii::app()->getModule($id)->install();
             }
 
             $model->saveInSession();
             //install base modules
-            $this->redirect('/install.php/install/install/step3');
+            $this->redirect('/install.php?r=/install/install/step3');
         }
 
         $this->render('step2', array('form' => $form));
@@ -129,12 +130,12 @@ class InstallController extends ClientController
 
 //        @unlink(Yii::getPathOfAlias('webroot.insall').'.php');
 //        @unlink(Yii::getPathOfAlias('application.config.install').'.php');
-        $this->redirect('/install.php/install/install/end');
+        $this->redirect('/install.php?r=/install/install/end');
     }
 
     public function actionEnd()
     {
-        $this->redirect('/');
+        $this->redirect('/index.php');
     }
 
     public function actionError()

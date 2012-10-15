@@ -5,20 +5,23 @@ class MediaFileController extends ClientController
     {
         return array(
             "downloadFile" => "Скачать файл",
-            "upload" => "Скачать файл",
-            "existFiles" => "Скачать файл",
+            "upload"       => "Скачать файл",
+            "existFiles"   => "Скачать файл",
             "savePriority" => "Скачать файл",
-            "updateAttr" => "Скачать файл",
+            "updateAttr"   => "Скачать файл",
+            "linkParser"   => "Скачать файл",
         );
     }
+
 
     public function actions()
     {
         return array(
-            'updateAttr' => array(
-                'class' => 'media.components.UpdateAttrAction',
+            'updateAttr'   => array(
+                'class'      => 'media.components.UpdateAttrAction',
                 'attributes' => array(
-                    'title', 'descr'
+                    'title',
+                    'descr'
                 )
             ),
             'savePriority' => array(
@@ -30,18 +33,20 @@ class MediaFileController extends ClientController
 
     protected function sendFilesAsJson($files)
     {
-        $res = array();
-        /** @var $file MediaFile */
-        foreach ((array)$files as $file)
+
+        $res   = array();
+        $files = is_array($files) ? $files : array($files);
+        foreach ($files as $file)
         {
             $res[] = array(
                 'title'          => $file->title ? $file->title : 'Кликните для редактирования',
                 'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
-                'url'            => $file->href,
-                'thumbnail_url'  => $file->getIcon(),
+                'url'            => $file->getHref(),
+                'preview'        => $file->getPreviewArray(),
                 'delete_url'     => $file->deleteUrl,
+                'api'            => $file->api_name,
                 'delete_type'    => "post",
-                'edit_url' => $this->createUrl('/media/mediaFile/updateAttr', array(
+                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
                     'id'  => $file->id,
                 )),
                 'id'             => 'File_' . $file->id,
@@ -51,6 +56,7 @@ class MediaFileController extends ClientController
         echo CJSON::encode($res);
     }
 
+
     public function actionExistFiles($model_id, $object_id, $tag)
     {
         if ($object_id == 0)
@@ -58,9 +64,11 @@ class MediaFileController extends ClientController
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
 
+
         $existFiles = MediaFile::model()->parent($model_id, $object_id)->tag($tag)->findAll();
         $this->sendFilesAsJson($existFiles);
     }
+
 
     public function actionSavePriority()
     {
@@ -101,6 +109,7 @@ class MediaFileController extends ClientController
 
     }
 
+
     public $x_send_file_enabled = true;
 
 
@@ -108,7 +117,7 @@ class MediaFileController extends ClientController
     {
         list($hash, $id) = explode('x', $hash);
 
-        $model =  MediaFile::model()->findByPk(intval($id));
+        $model = MediaFile::model()->findByPk(intval($id));
         if (!$model || $model->getHash() != $hash || !$model->getIsFileExist())
         {
             $this->pageNotFound();

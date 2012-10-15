@@ -1,5 +1,5 @@
 <?
-$img = ImageHelper::thumb($data->path, $data->name, MediaAlbum::$image_size, true);
+$img = $data->getPreview(MediaAlbum::$image_size);
 if ($img) {
 ?>
     <li id="File_<?=$data->id?>" style="width: <?= MediaAlbum::$image_size['width'] ?>px; <?= $index % 4 == 0 ? 'clear:both;' : '' ?>">

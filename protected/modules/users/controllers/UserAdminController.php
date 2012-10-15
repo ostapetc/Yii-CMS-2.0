@@ -147,9 +147,9 @@ class UserAdminController extends AdminController
 
                 AuthAssignment::updateUserRole($model->id, $_POST['User']['role']);
 
-                Implex::refreshXLS(get_class($model));
+//                Implex::refreshXLS(get_class($model));
 
-                $this->redirect('view', array(
+                $this->redirect(array('view',
                     'id'=> $model->id
                 ));
             }
@@ -171,6 +171,6 @@ class UserAdminController extends AdminController
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
 
-        Implex::refreshXLS(get_class($model));
+//        Implex::refreshXLS(get_class($model));
     }
 }

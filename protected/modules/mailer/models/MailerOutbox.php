@@ -26,8 +26,6 @@
  * @property MailerTemplate $template
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MailerOutbox   published()
- * @method   MailerOutbox   sitemap()
  * @method   MailerOutbox   ordered()
  * @method   MailerOutbox   last()
  * 

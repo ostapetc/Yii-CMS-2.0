@@ -21,8 +21,6 @@
  * @property User       $user
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   SiteAction published()
- * @method   SiteAction sitemap()
  * @method   SiteAction ordered()
  * @method   SiteAction last()
  * 

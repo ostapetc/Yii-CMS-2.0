@@ -6,9 +6,10 @@ class Uploader extends JuiInputWidget
 {
     public $model;
     public $title = 'Файлы';
-
+    public $preview_width = '64px';
     public $data_type; //image, sound, video, document
     public $as_modal = true;
+    public $multiple = true;
 
     public $fields = array(
         'title' => array(
@@ -29,22 +30,22 @@ class Uploader extends JuiInputWidget
      * sound: nothing yet
      * video: nothing yet
     */
-    public $options = array();
     public $params = array();
 
     public $tag;
+    public $api = 'local';
     public $maxFileSize = 100000000; //100 * 1000 * 1000
 
-    public $setWatermark = false;
-
-    public $uploadUrl;
+    public $upload_url;
+    public $link_parser_url;
     public $assets;
 
-    public $uploadAction = '/media/mediaFileAdmin/upload';
-    public $sortableAction = '/media/mediaFileAdmin/savePriority';
-    public $existFilesAction = '/media/mediaFileAdmin/existFiles';
+    public $upload_action = '/media/mediaFileAdmin/upload';
+    public $sortable_action = '/media/mediaFileAdmin/savePriority';
+    public $exist_files_action = '/media/mediaFileAdmin/existFiles';
+    public $link_parser_action = '/media/mediaFileAdmin/linkParser';
 
-    private $allowType = array(
+    private $allow_type = array(
         'document'=> 'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
         'image'   => 'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
         'sound'   => 'js:/(\.|\/)(mp3|wav)$/i',
@@ -105,26 +106,33 @@ class Uploader extends JuiInputWidget
         $this->id     = 'uploader_' . get_class($this->model) . $this->tag;
         $this->assets = Yii::app()->getModule('media')->assetsUrl();
 
-        if (!$this->uploadUrl)
+        $url_data = array(
+            'model_id'  => get_class($this->model),
+            'object_id' => $this->model->id ? $this->model->id : 0,
+            'data_type' => $this->data_type,
+            'tag'       => $this->tag,
+        );
+
+        if (!$this->upload_url)
         {
-            $this->uploadUrl = Yii::app()->createUrl($this->uploadAction, array(
-                'model_id'  => get_class($this->model),
-                'object_id' => $this->model->id ? $this->model->id : 0,
-                'data_type' => $this->data_type,
-                'tag'       => $this->tag,
-                'options'   => $this->options
-            ));
+            $this->upload_url = $this->createUrl($this->upload_action, $url_data);
+        }
+
+        if (!$this->link_parser_url)
+        {
+            $this->link_parser_url = $this->createUrl($this->link_parser_action, $url_data);
         }
 
         $default      = array(
-            'url'                       => $this->uploadUrl,
-            'dropZone'                  => "js:$('#{$this->id}-drop-zone')",
-            'maxFileSize'               => $this->maxFileSize,
-            'acceptFileTypes'           => $this->allowType[$this->data_type],
-//            'maxChunkSize'              => 1*1000*1000,
-            'sortableSaveUrl'           => Yii::app()->createUrl($this->sortableAction),
-            'limitConcurrentUploads'    => 0,
-            'existFilesUrl'             => Yii::app()->createUrl($this->existFilesAction, array(
+            'url'                     => $this->upload_url,
+            'dropZone'                => "js:$('#{$this->id}-drop-zone')",
+            'maxFileSize'             => $this->maxFileSize,
+            'acceptFileTypes'         => $this->allow_type[$this->data_type],
+//            'maxChunkSize'          => 1*1000*1000,
+            'sortableSaveUrl'         => $this->createUrl($this->sortable_action),
+            'linkParserUrl'           => $this->link_parser_url,
+            'limitConcurrentUploads'  => 0,
+            'existFilesUrl'           => $this->createUrl($this->exist_files_action, array(
                 'model_id'  => get_class($this->model),
                 'object_id' => $this->model->id ? $this->model->id : 0,
                 'tag'       => $this->tag
@@ -134,9 +142,16 @@ class Uploader extends JuiInputWidget
     }
 
 
+    public function createUrl($url, $params = array())
+    {
+        $params['api'] = $this->api;
+        return Yii::app()->createUrl($url, $params);
+    }
+
+
     public function registerScripts()
     {
-        $plugins = $this->assets . '/js/plugins/';
+        $plugins = $this->assets . '/plugins/';
         $cs      = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery.ui')->registerScriptFile($plugins . 'tmpl/jquery.tmpl.min.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/cors/jquery.postmessage-transport.js');
@@ -145,10 +160,10 @@ class Uploader extends JuiInputWidget
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.iframe-transport.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-fp.js');
         $cs->registerScriptFile($plugins . 'jFileUpload/jquery.fileupload-ui.js');
-        $cs->registerScriptFile($plugins . 'jFileUpload/cmsUI.fileupload.js');
-        $cs->registerCssFile($plugins . 'jFileUpload/css/jquery.fileupload-ui.css');
         $cs->registerScriptFile($plugins . 'jEditable/jquery.jeditable.js');
         $cs->registerScriptFile($plugins . 'moderniz/moderniz.js');
+        $cs->registerScriptFile($plugins . 'jFileUpload/cmsUI.fileupload.js');
+        $cs->registerCssFile($plugins . 'jFileUpload/css/jquery.fileupload-ui.css');
 
         $params = CJavaScript::encode($this->params);
 

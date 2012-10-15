@@ -54,7 +54,7 @@
     <div class="navbar navbar-top install-top-menu">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="/">Yii-CMS 2.0 Установка</a>
+                <a class="brand" href="/install.php">Yii-CMS 2.0 Установка</a>
 
                 <div class="nav-collapse">
                     <ul class="nav">
@@ -69,11 +69,8 @@
     </div>
     <div class="row-fluid content">
         <?
-        foreach(Yii::app()->user->getFlashes() as $key => $message) {
-            if (in_array($key, Controller::$msg_types))
-            {
-                echo Yii::app()->controller->msg($msg, $type);
-            }
+        foreach(Yii::app()->user->getFlashes() as $type => $msg) {
+            echo Yii::app()->controller->msg($msg, $type    );
         }
         ?>
         <?= $content ?>

@@ -7,9 +7,19 @@ return CMap::mergeArray(require($config . '.php'), array(
         'migrate'    => array(
             'class' => 'application.commands.ExtendMigrateCommand',
         ),
-        'doc-block'    => array(
+        'doc_block'    => array(
             'class' => 'ext.docBlock.DocBlockCommand',
-            'config' => '2122'
+        ),
+        'remote_upload'    => array(
+            'class' => 'media.commands.RemoteUploadCommand',
+        ),
+        'parser_runner'    => array(
+            'class' => 'content.commands.ParserRunnerCommand',
+            'parsers' => array(
+                array(
+                    'class' =>  'content.commands.parsers.SherdogGalleryParser'
+                )
+            )
         ),
     ),
 ));

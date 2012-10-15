@@ -45,32 +45,7 @@ return array(
             'class' => 'application.components.bootstrap.components.Bootstrap'
         ),
         'assetManager' => array(
-            'class' => 'AssetManager',
-            'parsers' => array(
-                'sass' => array( // key == the type of file to parse
-                    'class' => 'ext.assetManager.Sass', // path alias to the parser
-                    'output' => 'css', // the file type it is parsed to
-                    'options' => array(
-                        'syntax' => 'sass'
-                    )
-                ),
-                'scss' => array( // key == the type of file to parse
-                    'class' => 'ext.assetManager.Sass', // path alias to the parser
-                    'output' => 'css', // the file type it is parsed to
-                    'options' => array(
-                        'syntax' => 'scss',
-                        'style' => 'compressed'
-                    )
-                ),
-                'less' => array( // key == the type of file to parse
-                    'class' => 'ext.assetManager.Less', // path alias to the parser
-                    'output' => 'css', // the file type it is parsed to
-                    'options' => array(
-                        'syntax' => 'scss',
-                        'style' => 'compressed'
-                    )
-                ),
-            ),
+            'class' => 'CAssetManager',
             'newDirMode' => 0755,
             'newFileMode' => 0644
         ),
@@ -112,7 +87,7 @@ return array(
             'class' => 'UrlManager'
         ),
         'errorHandler' => array(
-            'class' => 'application.components.ErrorHandler',
+            'class' => 'CErrorHandler',
             'errorAction' => 'main/main/error',
         ),
         'authManager' => array(
@@ -143,15 +118,11 @@ return array(
         ),
     ),
     'onBeginRequest' => array('AppManager', 'init'),
-    'params' => array(
+
+    'params'         => array(
         'save_site_actions' => true,
         'multilanguage_support' => false,
         'collect_routes_from_modules' => true,
-        'themes_enabled' => false,
-        'nodejs' => array(
-            'port' => 8888,
-            'host' => 'http://localhost',
-            'ip'   => '127.0.0.1'
-        )
+        'themes_enabled' => false
     )
 );

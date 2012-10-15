@@ -1,11 +1,17 @@
 <?php
 class LocalApi extends ApiAbstract
 {
-    const UPLOAD_PATH = 'upload/mediaFiles';
+    const UPLOAD_PATH = 'upload/media';
 
     protected $file_info;
 
     public $old_name;
+
+
+    public function parse($content)
+    {
+        return false;
+    }
 
 
     public function findAll($criteria)
@@ -19,10 +25,12 @@ class LocalApi extends ApiAbstract
         throw new CException('not implemented yet');
     }
 
+
     public function search($props = array())
     {
         throw new CException('not implemented yet');
     }
+
 
     /**
      * @return string formatted file size
@@ -106,8 +114,11 @@ class LocalApi extends ApiAbstract
     public function findByPk($pk)
     {
         $this->beforeFind();
-        $file = new SplFileInfo($this->basePath() . $pk);
-        return $this->populateRecord($file);
+        $params = array(
+            'file_info' => new SplFileInfo($this->basePath() . $pk),
+            'pk'        => $pk
+        );
+        return $this->populateRecord($params);
     }
 
 
@@ -130,12 +141,10 @@ class LocalApi extends ApiAbstract
     }
 
 
-    /**
-     * @param $fileInfo SplFileInfo
-     */
-    protected function _populate($file_info)
+    protected function _populate($attributes)
     {
-        $this->file_info = $file_info;
+        $this->file_info = $attributes['file_info'];
+        $this->pk        = $attributes['pk'];
     }
 
 

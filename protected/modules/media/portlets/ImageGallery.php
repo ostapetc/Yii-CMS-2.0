@@ -79,11 +79,11 @@ class ImageGallery extends BaseFileListView
     public function registerScripts()
     {
         $id             = $this->htmlOptions['id'];
-        $assets         = $this->assets . '/imageGallery/';
+        $assets         = $this->assets . '/plugins/';
         $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
 //        $montageOptions = CJavaScript::encode(CMap::mergeArray($this->defaultMontageOptions, $this->montageOptions));
         Yii::app()->clientScript
-            ->registerCssFile($assets . 'imageGallery.css')
+            ->registerCssFile($this->assets . '/imageGallery/imageGallery.css')
             ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
             ->registerCssFile($assets . 'fancybox/jquery.fancybox.css')
             ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-thumbs.js')

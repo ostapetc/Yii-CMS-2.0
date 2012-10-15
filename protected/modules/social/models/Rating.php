@@ -10,7 +10,6 @@
  * @property string  $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property         $href
  * @property         $errorsFlatArray
  * @property         $url
  * @property         $updateUrl
@@ -18,8 +17,6 @@
  * @property         $deleteUrl
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Rating  published()
- * @method   Rating  sitemap()
  * @method   Rating  ordered()
  * @method   Rating  last()
  * 

@@ -22,8 +22,6 @@
  * @property Page    $page
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Banner  published()
- * @method   Banner  sitemap()
  * @method   Banner  ordered()
  * @method   Banner  last()
  * 

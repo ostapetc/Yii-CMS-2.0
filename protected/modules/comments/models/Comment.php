@@ -16,6 +16,7 @@
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property         $href
  * @property         $model
+ * @property         $dateCreateValue
  * @property         $errorsFlatArray
  * @property         $url
  * @property         $updateUrl
@@ -26,8 +27,6 @@
  * @property User    $user
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Comment published()
- * @method   Comment sitemap()
  * @method   Comment ordered()
  * @method   Comment last()
  * 

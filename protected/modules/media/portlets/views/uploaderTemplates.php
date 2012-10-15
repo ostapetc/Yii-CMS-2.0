@@ -50,14 +50,12 @@
         </td>
         {{else}}
         <td class="preview">
-            {{if thumbnail_url}}
-            {{html thumbnail_url}}
-            {{/if}}
+            {{html preview}}
         </td>
-        <? foreach ($this->fields as $field=> $sett): ?>
+        <? foreach ($this->fields as $field => $sett): ?>
         <td style="width: <? echo $sett['size'];?>px;">
             <div class="<? echo $field ?> editable" data-attr="<? echo $field;?>" data-editable-type="<? echo $sett['type'];?>"
-                 data-save-url="${edit_url}">
+                 data-save-url="${edit_url}" data-api="${api}">
                 <span>${<? echo $field;?>}</span>
             </div>
         </td>
@@ -67,7 +65,7 @@
         </td>
         {{/if}}
         <td class="delete">
-            <button data-type="${delete_type}" data-url="${delete_url}" class="btn btn-danger btn-small">
+            <button data-type="post" data-url="${delete_url}" class="btn btn-danger btn-small">
                 <i class="icon-remove"></i>
             </button>
         </td>

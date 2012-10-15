@@ -10,6 +10,7 @@
  * @property string  $date_create
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property         $dateCreateValue
  * @property         $errorsFlatArray
  * @property         $url
  * @property         $updateUrl
@@ -21,8 +22,6 @@
  * @property User    $to_user
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Message published()
- * @method   Message sitemap()
  * @method   Message ordered()
  * @method   Message last()
  * 

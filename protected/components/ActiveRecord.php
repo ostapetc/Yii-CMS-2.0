@@ -194,8 +194,6 @@ abstract class ActiveRecord extends CActiveRecord
     {
         $alias = $this->getTableAlias();
         return array(
-            'published' => array('condition' => $alias . '.is_published = 1'),
-            'sitemap'   => array('condition' => $alias . '.is_published = 1'),
             'ordered'   => array('order'     => $alias . '.`order` DESC'),
             'last'      => array('order'     => $alias . '.date_create DESC'),
         );
@@ -214,6 +212,7 @@ abstract class ActiveRecord extends CActiveRecord
 
         return $this;
     }
+
 
     /**
      * @param $num
@@ -253,6 +252,25 @@ abstract class ActiveRecord extends CActiveRecord
         $this->getDbCriteria()->addNotInCondition($row, $values, $operator);
         return $this;
     }
+
+
+    /**
+     * @param $status
+     * @return self
+     */
+    public function status($status)
+    {
+        $alias = $this->getTableAlias();
+        $this->getDbCriteria()->mergeWith(array(
+            'criteria' => "$alias.status=:status",
+            'params' => array(
+                'status' => $status
+            )
+        ));
+
+        return $this;
+    }
+
 
     public function meta()
     {

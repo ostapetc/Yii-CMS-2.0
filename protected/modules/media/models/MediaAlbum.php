@@ -24,8 +24,6 @@
  * @property            $tags
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MediaAlbum published()
- * @method   MediaAlbum sitemap()
  * @method   MediaAlbum ordered()
  * @method   MediaAlbum last()
  * 
@@ -60,6 +58,11 @@ class MediaAlbum extends ActiveRecord
     }
 
 
+    /**
+     * @param string $className
+     *
+     * @return self
+     */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);

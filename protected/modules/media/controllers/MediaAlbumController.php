@@ -4,11 +4,11 @@ class MediaAlbumController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            "createUsers"      => "Создать",
             "view"             => "Создать",
             "delete"           => "Удалить",
             "update"           => "Редактировать",
             "manage"           => "Управление альбомами",
+            "createUsers"      => "Создать",
             "userAlbums"       => "Альбомы пользователя",
             "my"               => "Мои Альбомы",
         );
@@ -41,14 +41,14 @@ class MediaAlbumController extends ClientController
         $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
-
-        $dp               = MediaFile::getDataProvider($model, 'files');
+        $file             = new MediaFile;
+        $dp               = $file->getDataProvider($model, 'files');
         $dp->pagination   = false;
 
         $this->render('view', array(
             'model' => $model,
             'form'  => $form,
-            'dp' => $dp
+            'dp'    => $dp
         ));
     }
 
@@ -85,8 +85,13 @@ class MediaAlbumController extends ClientController
             $this->pageNotFound();
         }
         $dp = MediaAlbum::getDataProvider(Yii::app()->user->model);
-        $this->render('userAlbums', array('user' => Yii::app()->user->model, 'is_my' => true, 'dp' => $dp));
+        $this->render('userAlbums', array(
+            'user'  => Yii::app()->user->model,
+            'is_my' => true,
+            'dp'    => $dp
+        ));
     }
+
 
     public function actionUserAlbums($user_id = null)
     {
@@ -97,9 +102,12 @@ class MediaAlbumController extends ClientController
         $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp               = MediaAlbum::getDataProvider($user);
-        $this->render('userAlbums', array('user' => $user, 'is_my' => false, 'dp' => $dp));
+        $this->render('userAlbums', array(
+            'user'  => $user,
+            'is_my' => false,
+            'dp'    => $dp
+        ));
     }
-
 
 
 }

@@ -15,20 +15,20 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         self::TYPE_DOC   => self::TYPE_DOC,
     );
 
+    public $api_map;
+    public $new_record_status;
+
 
     public function getThumb($size = null, $crop = true)
     {
-        if (!$size)
+        if (!is_array($size))
         {
-            $size = array(
-                'width'  => 48,
-                'height' => 48
-            );
+            $size = $this->getSize($size);
         }
 
         $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
         $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
-        return ImageHelper::thumb($dir, $name, $size, $crop)->__toString();
+        return ImageHelper::thumb($dir, $name, $size, $crop)->getSrc();
     }
 
 
@@ -46,9 +46,9 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getContent()
     {
-        if (file_exists($ths->getServerPath()))
+        if (file_exists($this->getServerPath()))
         {
-            return file_get_contents($ths->getServerPath());
+            return file_get_contents($this->getServerPath());
         }
     }
 
@@ -69,7 +69,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public function detectType()
     {
         $doc = array(
-            'readable',
+            'book',
             'archive',
             'word',
             'excel'
@@ -92,7 +92,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         foreach ((array)$types as $type)
         {
-            if (!in_array($this->extension, LocalFileExtensions::${$type . 'Extensions'}))
+            if (!in_array($this->extension, FileType::${$type . 'Extensions'}))
             {
                 return false;
             }
@@ -101,13 +101,16 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getIcon()
+    public function getPreviewArray($size_name = null)
     {
-        $folder = $this->assets . '/img/fileIcons/';
+        $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/icons/';
         switch (true)
         {
             case $this->typeIs('image'):
-                return $this->getThumb();
+                return array(
+                    'type' => 'img',
+                    'val'  => $this->getThumb()
+                );
                 break;
             case $this->typeIs('audio'):
                 $name = 'audio';
@@ -121,11 +124,44 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             case $this->typeIs('archive'):
                 $name = 'rar';
                 break;
+            case $this->typeIs('video'):
+                return array(
+                    'type' => 'video',
+                    'val'  => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true)
+                );
+                break;
             default:
-                $name = is_file('.' . $folder . $this->extension . '.jpg') ? $this->extension : 'any';
+                if (is_file('.' . $folder . $this->extension . '.jpg'))
+                {
+                    $name = $this->extension;
+                }
+                else
+                {
+                    $name = 'any';
+                }
                 break;
         }
-        return CHtml::image($folder . $name . '.jpg', '', array('height' => 48));
+
+        return array(
+            'type' => 'img',
+            'val'  => $folder . $name . '.jpg'
+        );
+    }
+
+
+    public function getPreview($size_name = null)
+    {
+        $data = $this->getPreviewArray($size_name);
+
+        switch ($data['type'])
+        {
+            case 'img':
+                return CHtml::image($data['val']);
+                break;
+            case 'video':
+                return ImageHelper::placeholder($this->getSize($size_name), 'Video processing');
+                break;
+        }
     }
 
 
@@ -143,17 +179,21 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function beforeSave($event)
     {
-        if ($this->getOwner()->getIsNewRecord())
+        $owner = $this->getOwner();
+        if ($owner->getIsNewRecord())
         {
-            if ($this->getApiModel()->save('file'))
+            if ($this->getApiModel(false)->save('file'))
             {
                 $this->setPk($this->getApiModel()->pk);
-                $this->getOwner()->title = $this->getApiModel()->old_name;
+                $owner->title      = $this->getApiModel()->old_name;
+                $owner->type       = $this->detectType();
+                $owner->target_api = $this->api_map[$owner->type];
+                $owner->status     = $this->new_record_status;
                 return true;
             }
             else
             {
-                $this->getOwner()->error = $this->getApiModel()->error;
+//                $this->getOwner()->error = $this->getApiModel()->errors;
                 return false;
             }
         }

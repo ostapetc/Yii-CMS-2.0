@@ -20,23 +20,35 @@ class FileManagerBehavior extends ActiveRecordBehavior
                 CActiveRecord::HAS_MANY,
                 $storage_class,
                 "object_id",
-                'condition' => "$tag.model_id = '" . get_class($model) . "' AND $tag.tag='$tag'",
-                'order'     => "$tag.order DESC"
+                'condition' => "$tag.model_id=:model_id AND $tag.tag=:tag",
+                'order'     => "$tag.order DESC",
+                'params'    => array(
+                    'model_id' => get_class($model),
+                    'tag' => $tag
+                )
             ));
             $rel = $tag.'_first';
             $model->getMetaData()->addRelation($rel, array(
                 CActiveRecord::HAS_ONE,
                 $storage_class,
                 'object_id',
-                'condition' => "$rel.model_id = '" . get_class($model) . "' AND $rel.tag='$tag'",
-                'order'     => "$rel.order DESC"
+                'condition' => "$rel.model_id=:model_id AND $rel.tag=:tag",
+                'order'     => "$rel.order DESC",
+                'params'    => array(
+                    'model_id' => get_class($model),
+                    'tag' => $tag
+                )
             ));
         }
     }
 
+
     private function _tmpPrefix()
     {
-        return 'tmp_' . get_class($this->getOwner()) . '_' . Yii::app()->user->id;
+        $prefix = 'tmp_' . get_class($this->getOwner()) . '_';
+        //in console we have no user
+        $prefix .= Yii::app() instanceof CConsoleApplication ? 'console' : Yii::app()->user->id;
+        return  $prefix;
     }
 
     public function findAllAttaches()

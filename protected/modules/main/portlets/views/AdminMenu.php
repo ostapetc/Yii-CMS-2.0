@@ -48,7 +48,6 @@
     {
     	continue;
     }
-//    dump($modules);
 //    Yii::app()->controller->widget('Boot');
     ?>
 

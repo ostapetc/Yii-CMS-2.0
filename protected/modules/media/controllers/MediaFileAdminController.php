@@ -10,6 +10,7 @@ class MediaFileAdminController extends AdminController
             "existFiles"   => "Скачать файл",
             "savePriority" => "Скачать файл",
             "updateAttr"   => "Скачать файл",
+            "linkParser"   => "Скачать файл",
         );
     }
 
@@ -31,20 +32,49 @@ class MediaFileAdminController extends AdminController
     }
 
 
+    public function actionLinkParser($object_id, $model_id, $tag)
+    {
+        if (isset($_POST['content']))
+        {
+            $model = MediaFile::parse($_POST['content']);
+            if ($model)
+            {
+                $model->object_id = $object_id;
+                $model->model_id  = $model_id;
+                $model->tag       = $tag;
+                $model->save();
+                $this->sendFilesAsJson($model);
+            }
+            else
+            {
+                echo array('status'  => 'error',
+                           'message' => 'Текст не распознан'
+                );
+            }
+        }
+        else
+        {
+            $this->forbidden();
+        }
+    }
+
+
     protected function sendFilesAsJson($files)
     {
         $res = array();
-        foreach ((array)$files as $file)
+        $files = is_array($files) ? $files : array($files);
+        foreach ($files as $file)
         {
             $res[] = array(
-                'title'          => $file['title'] ? $file['title'] : 'Кликните для редактирования',
-                'descr'          => $file['descr'] ? $file['descr'] : 'Кликните для редактирования',
-                'url'            => $file['href'],
-                'thumbnail_url'  => $file['icon'],
-                'delete_url'     => $file['deleteUrl'],
+                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'url'            => $file->getHref(),
+                'preview'        => $file->getPreviewArray(),
+                'delete_url'     => $file->deleteUrl,
+                'api'            => $file->api_name,
                 'delete_type'    => "post",
                 'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
-                    'id'  => $file['id'],
+                    'id'  => $file->id,
                 )),
                 'id'             => 'File_' . $file->id,
             );

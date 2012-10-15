@@ -36,7 +36,7 @@ abstract class JuiInputWidget extends CJuiInputWidget
         $linkOptions['data-toggle'] = 'modal';
         Yii::app()->controller->beginWidget('BootModal', array(
             'htmlOptions' => array(
-                'id' => $this->getId(),
+                'id' => 'modal_' . $this->getId(),
                 'style' => 'width: auto;',
                 'class' => 'hide',
             )
@@ -45,7 +45,7 @@ abstract class JuiInputWidget extends CJuiInputWidget
         Yii::app()->controller->endWidget('BootModal');
 
         // the link that may open the dialog
-        echo CHtml::link($params['title'], '#'.$this->getId(), $linkOptions);
+        echo CHtml::link($params['title'], '#modal_'.$this->getId(), $linkOptions);
 
     }
 

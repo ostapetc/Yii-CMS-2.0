@@ -37,4 +37,4 @@
     </tbody>
 </table>
 
-<a class="btn" href="<?= $this->createUrl('/install.php/install/install/step1') ?>">Продолжить &rarr;</a>
+<a class="btn" href="<?= '/install.php?r=/install/install/step1' ?>">Продолжить &rarr;</a>
