@@ -32,5 +32,3 @@ echo '-----------migrate-----------'
 php $yiic migrate up
 
 
-
-
