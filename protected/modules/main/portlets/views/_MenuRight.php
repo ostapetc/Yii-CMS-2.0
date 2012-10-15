@@ -49,7 +49,7 @@
             <li class="divider"></li>
             <li>
                 <?= CHtml::link('<span class="glyphicon-facetime-video"></span> &nbsp;' . t('Добавить видео'),
-                array('/media/mediaVideo/my')) ?>
+                array('/media/mediaVideo/userVideos', 'id' => Yii::app()->user->id)) ?>
             </li>
         </ul>
     </li>

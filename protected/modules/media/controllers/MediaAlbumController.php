@@ -10,7 +10,6 @@ class MediaAlbumController extends ClientController
             "manage"           => "Управление альбомами",
             "createUsers"      => "Создать",
             "userAlbums"       => "Альбомы пользователя",
-            "my"               => "Мои Альбомы",
         );
     }
 
@@ -26,7 +25,7 @@ class MediaAlbumController extends ClientController
         $this->performAjaxValidation($model);
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array('my'));
+            $this->redirect(array('view', 'id' => $model->id));
         }
 
         $this->render('createUsers', array(
@@ -77,34 +76,14 @@ class MediaAlbumController extends ClientController
         }
     }
 
-
-    public function actionMy()
-    {
-        if (Yii::app()->user->isGuest)
-        {
-            $this->pageNotFound();
-        }
-        $dp = MediaAlbum::getDataProvider(Yii::app()->user->model);
-        $this->render('userAlbums', array(
-            'user'  => Yii::app()->user->model,
-            'is_my' => true,
-            'dp'    => $dp
-        ));
-    }
-
-
     public function actionUserAlbums($user_id = null)
     {
-        if ($user_id == null || Yii::app()->user->model->id == $user_id)
-        {
-            $this->redirect(array('my'));
-        }
         $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp               = MediaAlbum::getDataProvider($user);
         $this->render('userAlbums', array(
             'user'  => $user,
-            'is_my' => false,
+            'is_my' => Yii::app()->user->model->id == $user_id,
             'dp'    => $dp
         ));
     }
