@@ -6,4 +6,3 @@ action=$(whiptail --clear --menu 'What do you want to do?' 13 30 5 'deploy' '' '
 
 
 
-
