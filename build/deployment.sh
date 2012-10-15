@@ -26,7 +26,6 @@ sed -f ${overlays}production.sed ${app_dir}config/production.php.tpl > ${app_dir
 chown -R www-data:www-data $deploy_dir
 chown -R www-data:www-data $webroot
 
-
 #migate
 echo '-----------migrate-----------'
 php $yiic migrate up
