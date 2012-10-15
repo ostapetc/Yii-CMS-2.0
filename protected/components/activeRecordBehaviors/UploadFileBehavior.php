@@ -60,7 +60,7 @@ class UploadFileBehavior extends ActiveRecordBehavior
             else
             {
                 $validator = new CUrlValidator();
-                if ($validator->validateValue($model->image))
+                if ($validator->validateValue($model->$attr))
                 {
                     $image_data = file_get_contents($model->image);
                     $file_name  = $this->generateFileHashName($model->image);
