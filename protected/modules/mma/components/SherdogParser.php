@@ -1,36 +1,14 @@
-<?
-
-class SportController extends ClientController
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: os
+ * Date: 01.10.12
+ * Time: 21:32
+ * To change this template use File | Settings | File Templates.
+ */
+class ParseFightersCommand extends CConsoleCommand
 {
-    public static function actionsTitles()
-    {
-        return array(
-            'view'  => 'Просмотр вида спорта',
-            'index' => 'Список вид спорта',
-            'parseFighters' => 'ParseFighters'
-        );
-    }
-
-        
-	public function actionView($id)
-	{
-		$this->render('view', array(
-			'model' => $this->loadModel($id),
-		));
-	}
-
-
-	public function actionIndex()
-	{
-		$data_provider = new CActiveDataProvider('Sport');
-
-		$this->render('index', array(
-			'data_provider' => $data_provider,
-		));
-	}
-
-
-    public function actionParseFighters()
+    public function run()
     {
         $this->log('Начинаем парсить бойцов');
 
@@ -69,7 +47,7 @@ class SportController extends ClientController
         }
         else
         {
-            $letter = 'z';
+            $letter = 'a';
             $page   = '1';
         }
 
@@ -110,52 +88,34 @@ class SportController extends ClientController
 
             $xpath = new DOMXPath($doc);
 
-            $name = $xpath->query('//span[@class="fn"]')->item(0);
-            if ($name)
-            {
-                $name = trim($name->nodeValue);
-            }
-            else
+            $name = $this->xpathQuery($xpath, '//span[@class="fn"]');
+            if (!$name)
             {
                 $this->log('Не найдено имя бойца. url: ' . $href, CLogger::LEVEL_WARNING);
                 continue;
             }
 
-            $nickname = $xpath->query('//span[@class="nickname"]')->item(0);
+            $nickname = $this->xpathQuery($xpath, '//span[@class="nickname"]');
             if ($nickname)
             {
-                $nickname = trim(str_replace('"', '', $nickname->nodeValue));
+                $nickname = trim(str_replace('"', '', $nickname));
             }
 
-            $birthday = $xpath->query('//span[@itemprop="birthDate"]')->item(0);
-            if ($birthday)
-            {
-                $birthday = trim($birthday->nodeValue);
-            }
+            $birthday    = $this->xpathQuery($xpath, '//span[@itemprop="birthDate"]');
+            $country     = $this->xpathQuery($xpath, '//strong[@itemprop="nationality"]');
+            $association = $this->xpathQuery($xpath, '//span[@itemprop="name"]');
 
-            $country = $xpath->query('//strong[@itemprop="nationality"]')->item(0);
-            if ($country)
-            {
-                $country = trim($country->nodeValue);
-            }
-
-            $association = $xpath->query('//span[@itemprop="name"]')->item(0);
-            if ($association)
-            {
-                $association = trim($association->nodeValue);
-            }
-
-            $height = $xpath->query('//span[@class="item height"]')->item(0);
+            $height = $this->xpathQuery($xpath, '//span[@class="item height"]');
             if ($height)
             {
-                preg_match('/([0-9\.]+) cm/', $height->nodeValue, $height);
+                preg_match('/([0-9\.]+) cm/', $height, $height);
                 $height = $height[1];
             }
 
-            $weight = $xpath->query('//span[@class="item weight"]')->item(0);
+            $weight = $this->xpathQuery($xpath, '//span[@class="item weight"]');
             if ($weight)
             {
-                preg_match('/([0-9\.]+) kg/', $weight->nodeValue, $weight);
+                preg_match('/([0-9\.]+) kg/', $weight, $weight);
                 $weight = $weight[1];
             }
 
@@ -225,5 +185,15 @@ class SportController extends ClientController
     private function getUrlByLetterAndPage($letter, $page)
     {
         return "http://www.sherdog.com/stats/fightfinder?association=&weight=&SearchTxt={$letter}&page={$page}";
+    }
+
+
+    private function xpathQuery(DOMXPath $xpath, $query)
+    {
+        $node = $xpath->query($query)->item(0);
+        if ($node)
+        {
+            return trim($node->nodeValue);
+        }
     }
 }

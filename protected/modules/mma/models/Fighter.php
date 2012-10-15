@@ -14,6 +14,8 @@ class Fighter extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
+    const PHOTO_SIZE_SMALL = 50;
+    const PHOTO_SIZE_BIG   = 200;
 
 
     public function name()
@@ -126,5 +128,52 @@ class Fighter extends ActiveRecord
         }
 
         return $dir;
+    }
+
+
+    public function getPhotoPath()
+    {
+        if (!$this->image) return;
+
+        $path = $this->photos_dir . $this->image;
+        if (file_exists($path))
+        {
+            return $path;
+        }
+    }
+
+
+    public function getPhotoHtml($size = self::PHOTO_SIZE_SMALL)
+    {
+        $def_photo = '/img/icons/user.gif';
+
+        if ($this->photo_path)
+        {
+            return CHtml::image(
+                $photo_src,
+                $this->name,
+                array(
+                    'title'  => $this->name,
+                    'border' => 0,
+                    'width'  => $size,
+                    'height' => $size,
+                    'class'  => 'img-rounded'
+                )
+            );
+        }
+    }
+
+
+    public function getPhotoLink($size = self::PHOTO_SIZE_SMALL)
+    {
+        return CHtml::link(
+            $this->getPhotoHtml($size),
+            $this->url,
+            array(
+                'class'  => 'user-photo-link',
+                'width'  => $size,
+                'height' => $size
+            )
+        );
     }
 }
