@@ -17,6 +17,8 @@ class MediaVideoController extends ClientController
             $user_id = Yii::app()->user->model->id;
         }
         $user = User::model()->throw404IfNull()->findByPk($user_id);
+//        $a = MediaAlbum::model()->parent(get_class($user), $user->id)->findAll();
+//        dump($a);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp = MediaAlbum::getDataProvider($user);
         $this->render('userVideos', array(

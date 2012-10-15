@@ -40,15 +40,15 @@ abstract class ActiveRecord extends CActiveRecord
     public function behaviors()
     {
         return array(
-            'Languages'  => array(
-                'class' => 'application.components.activeRecordBehaviors.LanguagesBehavior'
-            ),
-            'NullValue'      => array(
-                'class' => 'application.components.activeRecordBehaviors.NullValueBehavior'
-            ),
-            'UserForeignKey' => array(
-                'class' => 'application.components.activeRecordBehaviors.UserForeignKeyBehavior'
-            ),
+//            'Languages'  => array(
+//                'class' => 'application.components.activeRecordBehaviors.LanguagesBehavior'
+//            ),
+//            'NullValue'      => array(
+//                'class' => 'application.components.activeRecordBehaviors.NullValueBehavior'
+//            ),
+//            'UserForeignKey' => array(
+//                'class' => 'application.components.activeRecordBehaviors.UserForeignKeyBehavior'
+//            ),
             'UploadFile'     => array(
                 'class' => 'application.components.activeRecordBehaviors.UploadFileBehavior'
             ),
@@ -234,7 +234,7 @@ abstract class ActiveRecord extends CActiveRecord
      * @param string $operator
      * @return self
      */
-    public function in($row, $values, $operator = 'AND')
+    public function addInCondition($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
         return $this;
