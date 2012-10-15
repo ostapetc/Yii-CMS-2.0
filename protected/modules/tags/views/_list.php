@@ -1,8 +1,13 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: os
- * Date: 08.10.12
- * Time: 23:13
- * To change this template use File | Settings | File Templates.
- */
+<? if ($tags): ?>
+    <ul class="tags">
+        <li><span class="glyphicon-tags"></span></li>
+
+        <? foreach ($tags as $i => $tag): ?>
+            <? if ($i > 0): ?>, <? endif ?>
+            <li>
+                <a rel="tag" href="<?= $this->createUrl("/pages/tag/{$tag->name}"); ?>"><?= $tag->name ?></a>
+            </li>
+        <? endforeach ?>
+    </ul>
+<? endif ?>
+

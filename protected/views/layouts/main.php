@@ -69,8 +69,8 @@
     <? $this->renderPartial('application.views.layouts._modal'); ?>
 
     <div id='main-wrapper'>
-        <? $this->widget('content.portlets.Menu'); ?>
-        <? $this->widget('content.portlets.SubMenu'); ?>
+        <? $this->widget('main.portlets.Menu'); ?>
+        <? $this->widget('main.portlets.SubMenu'); ?>
 
         <div class="container-fluid">
             <div class="row-fluid">

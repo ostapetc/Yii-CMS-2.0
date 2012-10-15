@@ -178,7 +178,7 @@ class ParseFightersCommand extends CConsoleCommand
 
     private function log($msg, $level = CLogger::LEVEL_INFO)
     {
-        Yii::log($msg, $level, 'modules.martialArts.fightersParsing');
+        Yii::log($msg, $level, 'modules.mma.fightersParsing');
     }
 
 

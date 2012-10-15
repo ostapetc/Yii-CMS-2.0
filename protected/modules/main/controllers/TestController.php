@@ -6,7 +6,7 @@
  * Time: 19:26
  * To change this template use File | Settings | File Templates.
  */
-class TestController
+class TestController extends CController
 {
 
 }

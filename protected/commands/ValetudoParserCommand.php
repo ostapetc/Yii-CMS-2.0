@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: os
@@ -6,7 +7,14 @@
  * Time: 22:38
  * To change this template use File | Settings | File Templates.
  */
-class ValetudoParserCommand
-{
 
+class ValetudoParserCommand extends CConsoleCommand
+{
+    public function actionParsePosts()
+    {
+        Yii::import('application.modules.mma.components.*');
+
+        $parser = new ValetudoParser();
+        $parser->parsePosts();
+    }
 }

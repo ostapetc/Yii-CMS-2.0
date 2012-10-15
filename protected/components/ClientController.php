@@ -1,4 +1,5 @@
 <?
+
 abstract class ClientController extends Controller
 {
     public $layout = '//layouts/main';
@@ -53,6 +54,10 @@ abstract class ClientController extends Controller
             array(
                 'label' => t('Фото'),
                 'url'   => '/'
+            ),
+            array(
+                'label' => t('Бойцы'),
+                'url'   => array('/mma/fighter/index')
             ),
             array(
                 'label' => t('Люди'),

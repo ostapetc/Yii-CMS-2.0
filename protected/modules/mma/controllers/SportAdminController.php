@@ -25,7 +25,7 @@ class SportAdminController extends AdminController
 	public function actionCreate()
 	{
 		$model = new Sport();
-		$form  = new Form('martialArts.SportForm', $model);
+		$form  = new Form('mma.SportForm', $model);
 		
 		$this->performAjaxValidation($model);
 
@@ -43,7 +43,7 @@ class SportAdminController extends AdminController
 	public function actionUpdate($id)
 	{
 		$model = $this->loadModel($id);
-        $form  = new Form('martialArts.SportForm', $model);
+        $form  = new Form('mma.SportForm', $model);
 
 	    $this->performAjaxValidation($model);
 

@@ -97,7 +97,7 @@ class Sport extends ActiveRecord
 
     public function getHref()
     {
-        return Yii::app()->createUrl('/martialArts/sport/view', array('id' => $this->id));
+        return Yii::app()->createUrl('/mma/sport/view', array('id' => $this->id));
     }
 
 

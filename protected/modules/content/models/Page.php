@@ -2,6 +2,9 @@
 /** 
  * 
  * !Attributes - атрибуты БД
+ * @property string           $source
+ * @property string           $source_url
+ * @property string           $image
  * @property string           $language
  * @property string           $status
  * @property integer          $comments_denied
@@ -41,6 +44,13 @@
 class Page extends ActiveRecord
 {
     const PAGE_SIZE = 20;
+
+    const TAG_CUT = '{{cut}}';
+
+    const TEXT_PREVIEW_LENGHT = 370;
+
+    const IMAGES_DIR        = '/upload/pages/';
+    const IMAGES_SIZE_SMALL = 200;
 
     const TYPE_POST  = 'post';
     const TYPE_FORUM = 'forum';
@@ -107,24 +117,20 @@ class Page extends ActiveRecord
             array('title, language', 'required'),
             array('language', 'safe'),
             array(
-                'url', 'length',
-                'max' => 250
-            ),
-            array(
                 'title', 'length',
                 'max'=> 200
             ),
             array('text, short_text', 'safe'),
             array('meta_tags, god', 'safe'),
             array(
-                'title, url', 'filter',
+                'title', 'filter',
                 'filter' => 'strip_tags'
             ),
             array(
                 'gallery', 'safe',
             ),
             array(
-                'id, title, url, text, status, date_create', 'safe',
+                'id, title, text, status, date_create', 'safe',
                 'on'=> 'search'
             ),
             array(
@@ -149,6 +155,22 @@ class Page extends ActiveRecord
                 'comments_denied',
                 'in',
                 'range' => array(0, 1)
+            ),
+            array(
+                'image',
+                'file',
+                'types' => 'jpg, png, jpeg, gif',
+                'allowEmpty' => true
+            ),
+            array(
+                'source',
+                'length',
+                'max' => 50
+            ),
+            array(
+                'source_url',
+                'length',
+                'max' => 250
             )
         );
     }
@@ -205,7 +227,6 @@ class Page extends ActiveRecord
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('title', $this->title, true);
-        $criteria->compare('url', $this->url, true);
         $criteria->compare('text', $this->text, true);
         $criteria->compare('status', $this->status);
         $criteria->compare('date_create', $this->date_create, true);
@@ -229,39 +250,6 @@ class Page extends ActiveRecord
                 'sports_ids'   => t('Вид спорта')
             )
         );
-    }
-
-
-    public function getHref()
-    {
-        $url = trim($this->url);
-        if ($url)
-        {
-            if ($url[0] != "/")
-            {
-                $url = "/page/{$url}";
-            }
-
-            return $url;
-        }
-        else
-        {
-            return "/page/" . $this->id;
-        }
-    }
-
-
-    public function beforeSave()
-    {
-        if (parent::beforeSave())
-        {
-            if ($this->url != '/')
-            {
-                $this->url = trim($this->url, "/");
-            }
-
-            return true;
-        }
     }
 
 
@@ -291,6 +279,16 @@ class Page extends ActiveRecord
     {
         $this->updateSectionsRels();
         return parent::afterSave();
+    }
+
+
+    public function uploadFiles()
+    {
+        return array(
+            'image' => array(
+                'dir' => self::IMAGES_DIR
+            )
+        );
     }
 
 
@@ -326,5 +324,36 @@ class Page extends ActiveRecord
                        LIMIT 1";
 
         return Comment::model()->findBySql($sql);
+    }
+
+
+    public function getImageSrc($size = self::IMAGES_SIZE_SMALL)
+    {
+        if (!$this->image) return;
+
+        $thumb = ImageHelper::thumb(
+            self::IMAGES_DIR,
+            $this->image,
+            array('width' => $size, 'height' => $size)
+        );
+
+        if ($thumb)
+        {
+            return $thumb->getSrc();
+        }
+    }
+
+
+    public function getTextPreview()
+    {
+        if (mb_strpos($this->text, self::TAG_CUT) !== false)
+        {
+            $parts = explode(self::TAG_CUT, $this->text);
+            return array_shift($parts);
+        }
+        else
+        {
+            return Yii::app()->text->cut($this->text, self::TEXT_PREVIEW_LENGHT, '...');
+        }
     }
 }

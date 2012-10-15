@@ -42,6 +42,11 @@ publish
 assets/*
 upload/media/*
 upload/photo/*
+upload/pages/*
+upload/banners/*
+upload/fighters/*
+upload/file/*
+upload/params/*
 protected/config/development.php
 protected/runtime/*
 

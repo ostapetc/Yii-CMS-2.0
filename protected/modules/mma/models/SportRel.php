@@ -95,7 +95,7 @@ class SportRel extends ActiveRecord
 
     public function getHref()
     {
-        return Yii::app()->createUrl('/martialArts/sportrel/view', array('id' => $this->id));
+        return Yii::app()->createUrl('/mma/sportrel/view', array('id' => $this->id));
     }
 
 

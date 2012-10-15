@@ -17,7 +17,7 @@ abstract class OsParser extends Component
 
     protected function log($message, $level = 'info')
     {
-        Yii::log($message, $level, 'martialArts.' . get_class($this));
+        Yii::log($message, $level, 'mma.' . get_class($this));
     }
 
 
@@ -51,6 +51,8 @@ abstract class OsParser extends Component
         {
             $this->log("Не могу сохранить модель: ", impode("<br/>", $model->errors_flat_array));
         }
+
+        return $model;
     }
 
 
