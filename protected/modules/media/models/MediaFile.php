@@ -326,6 +326,7 @@ class MediaFile extends ActiveRecord
         if ($model instanceof CActiveRecord)
         {
             $pk = $model->getIsNewRecord() ? $model->getPrimaryKey() : null;
+
             $file->parent(get_class($model), $pk);
         }
         if ($tag !== null)

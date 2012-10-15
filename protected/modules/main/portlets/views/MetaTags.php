@@ -1,6 +1,3 @@
-<style type="text/css">
-    .save_alias, .meta-tags-form{ display: none }
-</style>
 <? $class = get_class($this->model); ?>
 <div id="<? echo $this->id ?>" class="meta-tags-form">
 
