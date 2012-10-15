@@ -197,7 +197,8 @@ class YouTubeApi extends ApiAbstract
         }
         $this->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
-        $author           = reset($entry->getAuthor());
+        $authors          = $entry->getAuthor();
+        $author           = reset($authors);
         $this->author     = $author->getName()->getText();
         $this->author_uri = "http://www.youtube.com/user/" . $this->author;
 
