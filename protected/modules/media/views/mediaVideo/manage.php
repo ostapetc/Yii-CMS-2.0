@@ -67,7 +67,7 @@ $widget = $this->widget('AdminGridView', array(
     {
         $('body').delegate('#youtube-sorter', 'change', function()
         {
-            $('#<?=$widget->getId()?>').yiiListView('update', {url: $(this).val()});
+            $('#modal_<?=$widget->getId()?>').yiiListView('update', {url: $(this).val()});
         });
     });
 

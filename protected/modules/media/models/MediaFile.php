@@ -239,7 +239,8 @@ class MediaFile extends ActiveRecord
             if ($id = $model->getApi()->parse($source))
             {
                 $model->remote_id = $id;
-//                $model->getApi()->findByPk($id);
+                $model->api_name = $api;
+                $model->getApi()->findByPk($id);
                 break;
             }
         }

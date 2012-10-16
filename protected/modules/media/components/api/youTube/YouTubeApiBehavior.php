@@ -78,9 +78,15 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         }
     }
 
-    public function getPreview($size_name = null)
+    public function getPreview($size = array('width' => 128, 'height' => 128))
     {
-
+        $conf = $this->getPreviewArray();
+        if ($conf['type'] == 'iframe')
+        {
+            return CHtml::tag('iframe', CMap::mergeArray($size, array(
+                'src' => $conf['val']
+            )));
+        }
     }
 
     public function getUrl()

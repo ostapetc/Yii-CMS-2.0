@@ -44,7 +44,7 @@
             <li class="divider"></li>
             <li>
                 <?= CHtml::link('<span class="glyphicon-picture"></span> &nbsp;' . t('Фото-альбомы'),
-                array('/media/mediaAlbum/userAlbums')) ?>
+                array('/media/mediaAlbum/userAlbums', 'id' => Yii::app()->user->id)) ?>
             </li>
             <li class="divider"></li>
             <li>

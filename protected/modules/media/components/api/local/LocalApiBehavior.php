@@ -144,7 +144,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreview($size = null)
+    public function getPreview($size = array('width' => 64, 'height' => 64))
     {
         $data = $this->getPreviewArray($size);
 

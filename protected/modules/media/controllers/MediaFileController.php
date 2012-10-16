@@ -31,6 +31,33 @@ class MediaFileController extends ClientController
 
     }
 
+
+    public function actionLinkParser($object_id, $model_id, $tag)
+    {
+        if (isset($_POST['content']))
+        {
+            $model = MediaFile::parse($_POST['content']);
+            if ($model)
+            {
+                $model->object_id = $object_id;
+                $model->model_id  = $model_id;
+                $model->tag       = $tag;
+                $model->save();
+                $this->sendFilesAsJson($model);
+            }
+            else
+            {
+                echo array('status'  => 'error',
+                           'message' => 'Текст не распознан'
+                );
+            }
+        }
+        else
+        {
+            $this->forbidden();
+        }
+    }
+
     protected function sendFilesAsJson($files)
     {
 
