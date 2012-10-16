@@ -10,7 +10,7 @@
 
 class MixfightParserCommand extends CConsoleCommand
 {
-    public function actionParsePosts()
+    public function actionIndex()
     {
         Yii::import('application.modules.mma.components.*');
 

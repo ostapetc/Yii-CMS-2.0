@@ -38,9 +38,7 @@ class ParserController extends ClientController
             p($post);
         }
 
-        $this->render('parsePost', array(
-
-        ));
+        $this->render('parsePost'   );
     }
 
 

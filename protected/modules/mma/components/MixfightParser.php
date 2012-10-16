@@ -96,15 +96,28 @@ class MixfightParser extends OsParser
         $text = preg_replace('|<p class="pubDate">(.*?)</p>|', '', $text);
         $text = $this->stripTags($text, '<strong><b><p><br><object><param><embed><img>');
 
-
-
         $date = $xpath->query('//p[@class="pubDate"]')->item(0)->nodeValue;
+        $date = str_replace(array("\n", "\r", "\t"), null, $date);
 
-        preg_match('/([0-9]+)\s([а-я]+)\s([0-9]+)/', $date, $date);
-        //preg_match('/([0-9]+) ([' . implode('|', $months) . ']) ([0-9]{4})/', $date, $date);
+        preg_match('|([0-9]{2})(.*)([0-9]{4})|', $date, $date);
+        if (count($date) != 4)
+        {
+            $this->log('Хуета с парсингом даты, пропускаем.' . $url, CLogger::LEVEL_ERROR);
+            return;
+        }
 
-        p($date);
-
+        $date[2] = trim($date[2]);
+        if (!in_array($date[2], $months))
+        {
+            v(preg_replace('/\s+/', '', $date[2]));
+            v($months);
+            die;
+            $this->log('Нихуя не определен месяц: ' .$date[2] . '. ' . $url, CLogger::LEVEL_ERROR);
+            return;
+        }
+        die('ee');
+        $date = $date[3] . '-' . $months[$date[3]] . '-' . $date[1];
+        echo $date;
         die;
 
         $page = new Page();                //
