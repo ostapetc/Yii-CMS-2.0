@@ -44,12 +44,12 @@
             <li class="divider"></li>
             <li>
                 <?= CHtml::link('<span class="glyphicon-picture"></span> &nbsp;' . t('Фото-альбомы'),
-                array('/media/mediaAlbum/userAlbums', 'id' => Yii::app()->user->id)) ?>
+                array('/media/mediaAlbum/manage', 'user_id' => Yii::app()->user->id)) ?>
             </li>
             <li class="divider"></li>
             <li>
                 <?= CHtml::link('<span class="glyphicon-facetime-video"></span> &nbsp;' . t('Добавить видео'),
-                array('/media/mediaVideo/userVideos', 'id' => Yii::app()->user->id)) ?>
+                array('/media/mediaVideo/manage', 'user_id' => Yii::app()->user->id)) ?>
             </li>
         </ul>
     </li>

@@ -9,7 +9,7 @@ class MediaAlbumController extends ClientController
             "update"           => "Редактировать",
             "manage"           => "Управление альбомами",
             "createUsers"      => "Создать",
-            "userAlbums"       => "Альбомы пользователя",
+            "manage"       => "Альбомы пользователя",
         );
     }
 
@@ -80,7 +80,7 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionUserAlbums($user_id = null)
+    public function actionManage($user_id = null)
     {
         if ($user_id === null)
         {
