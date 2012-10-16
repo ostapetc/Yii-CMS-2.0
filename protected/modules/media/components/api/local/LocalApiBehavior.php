@@ -19,16 +19,11 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public $new_record_status;
 
 
-    public function getThumb($size = null, $crop = true)
+    public function getThumb($size, $crop = true)
     {
-        if (!is_array($size))
-        {
-            $size = $this->getSize($size);
-        }
-
         $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
         $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
-        return ImageHelper::thumb($dir, $name, $size, $crop)->getSrc();
+        return ImageHelper::thumbSrc($dir, $name, $size, $crop);
     }
 
 
@@ -101,7 +96,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreviewArray($size_name = null)
+    public function getPreviewArray($size = array('width' => 64, 'height' => 64))
     {
         $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/icons/';
         switch (true)
@@ -109,7 +104,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             case $this->typeIs('image'):
                 return array(
                     'type' => 'img',
-                    'val'  => $this->getThumb()
+                    'val'  => $this->getThumb($size)
                 );
                 break;
             case $this->typeIs('audio'):
@@ -127,7 +122,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             case $this->typeIs('video'):
                 return array(
                     'type' => 'video',
-                    'val'  => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true)
+                    'val'  => ImageHelper::placeholder($size, 'Video processing', true)
                 );
                 break;
             default:
@@ -149,17 +144,17 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreview($size_name = null)
+    public function getPreview($size = null)
     {
-        $data = $this->getPreviewArray($size_name);
+        $data = $this->getPreviewArray($size);
 
         switch ($data['type'])
         {
             case 'img':
-                return CHtml::image($data['val']);
+                return CHtml::image($data['val'], '', $size);
                 break;
             case 'video':
-                return ImageHelper::placeholder($this->getSize($size_name), 'Video processing');
+                return ImageHelper::placeholder($size, 'Video processing');
                 break;
         }
     }
