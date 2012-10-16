@@ -4,93 +4,93 @@ class MediaVideoController extends ClientController
 
     public static function actionsTitles()
     {
-        return array(
+        return [
             "manage"    => "Альбомы пользователя",
-        );
+        ];
     }
 
 
     public function subMenuItems()
     {
-        return array(
-            array(
+        return [
+            [
                 'label' => t('Все'),
-                'url'   => array('content/page/index')
-            ),
-            array(
+                'url'   => ['content/page/index']
+            ],
+            [
                 'label' => t('Лучшие'),
-                'url'   => array('content/page/top')
-            ),
-            array(
+                'url'   => ['content/page/top']
+            ],
+            [
                 'label'   => Yii::app()->user->isGuest
                     ? : t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
-                'url'     => array('/page/user/' . Yii::app()->user->id),
+                'url'     => ['/page/user/' . Yii::app()->user->id],
                 'visible' => !Yii::app()->user->isGuest
-            )
-        );
+            ]
+        ];
     }
 
 
     public function sidebars()
     {
-        return array(
-            array(
-                'actions'  => array('create', 'update'),
-                'sidebars' => array(
-                    array(
+        return [
+            [
+                'actions'  => ['create', 'update'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.SectionCreateSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'widget',
                         'tags.portlets.TagCreateSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'partial',
                         'content.views.page._sidebarFormNotices'
-                    )
-                )
-            ),
-            array(
-                'actions'  => array('index'),
-                'sidebars' => array(
-                    array(
+                    ]
+                ]
+            ],
+            [
+                'actions'  => ['index'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.PageSectionsSidebar'
-                    ),
-                    array(
+                    ],
+                    [
                         'widget',
                         'comments.portlets.CommentsSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'widget',
                         'media.portlets.YouTubePlayList'
-                    )
-                    /*array(
+                    ]
+                    /*[
                         'widget',
                         'content.portlets.NavigatorSidebar',
-                    ),*/
-                )
-            ),
-            array(
-                'actions'  => array('view'),
-                'sidebars' => array(
-                    array(
+                    ],*/
+                ]
+            ],
+            [
+                'actions'  => ['view'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.PageInfoSidebar'
-                    )
-                )
-            ),
-            array(
-                'actions'  => array('userPages'),
-                'sidebars' => array(
-                    array(
+                    ]
+                ]
+            ],
+            [
+                'actions'  => ['userPages'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.userPagesSidebar'
-                    )
-                )
-            ),
-        );
+                    ]
+                ]
+            ],
+        ];
     }
 
 
@@ -103,10 +103,10 @@ class MediaVideoController extends ClientController
         $user = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp = MediaFile::model()->getDataProvider($user);
-        $this->render('userVideos', array(
+        $this->render('userVideos', [
             'model' => $user,
             'is_my' => Yii::app()->user->model->id == $user_id,
             'dp'    => $dp
-        ));
+        ]);
     }
 }

@@ -3,115 +3,115 @@ class MediaFileController extends ClientController {
 
     public static function actionsTitles()
     {
-        return array(
+        return [
             "downloadFile" => "Скачать файл",
             "upload"       => "Скачать файл",
             "existFiles"   => "Скачать файл",
             "savePriority" => "Скачать файл",
             "updateAttr"   => "Скачать файл",
             "linkParser"   => "Скачать файл",
-        );
+        ];
     }
 
 
     public function actions()
     {
-        return array(
-            'updateAttr'   => array(
+        return [
+            'updateAttr'   => [
                 'class'      => 'media.components.UpdateAttrAction',
-                'attributes' => array(
+                'attributes' => [
                     'title',
                     'descr'
-                )
-            ),
-            'savePriority' => array(
+                ]
+            ],
+            'savePriority' => [
                 'class' => 'media.components.SavePriorityAction',
-            )
-        );
+            ]
+        ];
 
     }
 
     public function subMenuItems()
     {
-        return array(
-            array(
+        return [
+            [
                 'label' => t('Все'),
-                'url'   => array('content/page/index')
-            ),
-            array(
+                'url'   => ['content/page/index']
+            ],
+            [
                 'label' => t('Лучшие'),
-                'url'   => array('content/page/top')
-            ),
-            array(
+                'url'   => ['content/page/top']
+            ],
+            [
                 'label'   => Yii::app()->user->isGuest
                     ? : t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
-                'url'     => array('/page/user/' . Yii::app()->user->id),
+                'url'     => ['/page/user/' . Yii::app()->user->id],
                 'visible' => !Yii::app()->user->isGuest
-            )
-        );
+            ]
+        ];
     }
 
 
     public function sidebars()
     {
-        return array(
-            array(
-                'actions'  => array('create', 'update'),
-                'sidebars' => array(
-                    array(
+        return [
+            [
+                'actions'  => ['create', 'update'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.SectionCreateSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'widget',
                         'tags.portlets.TagCreateSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'partial',
                         'content.views.page._sidebarFormNotices'
-                    )
-                )
-            ),
-            array(
-                'actions'  => array('index'),
-                'sidebars' => array(
-                    array(
+                    ]
+                ]
+            ],
+            [
+                'actions'  => ['index'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.PageSectionsSidebar'
-                    ),
-                    array(
+                    ],
+                    [
                         'widget',
                         'comments.portlets.CommentsSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'widget',
                         'media.portlets.YouTubePlayList'
-                    )
-                    /*array(
+                    ],
+                    /*[
                         'widget',
                         'content.portlets.NavigatorSidebar',
-                    ),*/
-                )
-            ),
-            array(
-                'actions'  => array('view'),
-                'sidebars' => array(
-                    array(
+                    ],*/
+                ]
+            ],
+            [
+                'actions'  => ['view'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.PageInfoSidebar'
-                    )
-                )
-            ),
-            array(
-                'actions'  => array('userPages'),
-                'sidebars' => array(
-                    array(
+                    ]
+                ]
+            ],
+            [
+                'actions'  => ['userPages'],
+                'sidebars' => [
+                    [
                         'widget',
                         'content.portlets.userPagesSidebar'
-                    )
-                )
-            ),
-        );
+                    ]
+                ]
+            ],
+        ];
     }
 
 
@@ -126,10 +126,10 @@ class MediaFileController extends ClientController {
                 $model->save();
                 $this->sendFilesAsJson($model);
             } else {
-                echo array(
+                echo [
                     'status'  => 'error',
                     'message' => 'Текст не распознан'
-                );
+                ];
             }
         } else {
             $this->forbidden();
@@ -138,11 +138,11 @@ class MediaFileController extends ClientController {
 
     protected function sendFilesAsJson($files)
     {
-
-        $res = array();
-        $files = is_array($files) ? $files : array($files);
+        $res = [];
+        $files = is_array($files ) ? $files : [$files];
         foreach ($files as $file) {
-            $res[] = array(
+
+            $res[] = [
                 'title'          => $file->title ? $file->title : 'Кликните для редактирования',
                 'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
                 'url'            => $file->getHref(),
@@ -150,11 +150,11 @@ class MediaFileController extends ClientController {
                 'delete_url'     => $file->deleteUrl,
                 'api'            => $file->api_name,
                 'delete_type'    => "post",
-                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
+                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', [
                     'id'  => $file->id,
-                )),
+                ]),
                 'id'             => 'File_' . $file->id,
-            );
+            ];
         }
 
         echo CJSON::encode($res);
@@ -172,6 +172,7 @@ class MediaFileController extends ClientController {
         $this->sendFilesAsJson($existFiles);
     }
 
+    /*Secure!
 
     public function actionSavePriority()
     {
@@ -184,7 +185,7 @@ class MediaFileController extends ClientController {
         Yii::app()->db->getCommandBuilder()
             ->createSqlCommand("UPDATE {$files->tableName()} AS t SET t.order = {$case} WHERE t.id IN ({$arr})")
             ->execute();
-    }
+    }*/
 
 
     public function actionUpload($model_id, $object_id, $tag)
@@ -199,11 +200,11 @@ class MediaFileController extends ClientController {
         $model->tag = $tag;
 
         if ($model->save()) {
-            $this->sendFilesAsJson(array($model));
+            $this->sendFilesAsJson($model);
         } else {
-            echo CJSON::encode(array(
+            echo CJSON::encode([
                 'textStatus' => $model->error
-            ));
+            ]);
         }
 
     }
@@ -222,10 +223,10 @@ class MediaFileController extends ClientController {
         }
 
         if ($this->x_send_file_enabled) {
-            Yii::app()->request->xSendFile($model->server_path, array(
+            Yii::app()->request->xSendFile($model->server_path, [
                 'saveName' => $model->name,
                 'terminate'=> false,
-            ));
+            ]);
         } else {
             $this->request->sendFile($model->name, $model->content);
         }

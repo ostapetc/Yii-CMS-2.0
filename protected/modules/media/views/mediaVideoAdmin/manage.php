@@ -1,9 +1,9 @@
 <?
-$this->tabs = array(
+$this->tabs = [
     'Добавить страницу' => $this->createUrl('create')
-);
+];
 
-$urls   = array();
+$urls   = [];
 $params = $_GET;
 foreach (YouTubeApiCriteria::$order_list as $sort => $label)
 {
@@ -13,52 +13,52 @@ foreach (YouTubeApiCriteria::$order_list as $sort => $label)
 }
 $selected = isset($_GET['sort']) ? $_GET['sort'] : YouTubeApiCriteria::ORDER_VIEW_COUNT;
 $filter = CHtml::textField('tyoutube-search');
-$sorter   = 'Сортировать по: ' . CHtml::dropDownList('order', $selected, $urls, array(
+$sorter   = 'Сортировать по: ' . CHtml::dropDownList('order', $selected, $urls, [
     'id' => 'youtube-sorter',
-));
+]);
 /*
-$widget = $this->widget('AdminListView', array(
+$widget = $this->widget('AdminListView', [
     'itemView' => '_manage',
     'dataProvider' => $model->search(),
     'template' => $sorter . "{pager}\n{sorter}\n{items}\n{pager}",
-    'pager' => array(
+    'pager' => [
         'class' => 'AdminLinkPager',
         'no_end' => true
-    )
-));
+    ]
+]);
 */
 
-$widget = $this->widget('AdminGridView', array(
+$widget = $this->widget('AdminGridView', [
     'id'           => 'youtube-grid',
     'dataProvider' => $model->search(),
     'filter'       => $model,
     'template'     => $sorter . '{pagerSelect}{summary}<br/>{items}{pager}',
-    'columns'      => array(
-        array(
+    'columns'      => [
+        [
             'value' => '"<iframe src=".$data->player_url."></iframe>"',
             'type'  => 'raw'
-        ),
-        array(
+        ],
+        [
             'name' => 'title',
             'type' => 'raw'
-        ),
-        array(
+        ],
+        [
             'header' => 'Рейтинги',
             'value'  => '"Показы: ".$data->view_count."<br/>Проголосовало: ".$data->raters."<br/>Рейтинг: ".$data->average',
             'type'   => 'raw'
-        ),
-        array(
+        ],
+        [
             'header' => 'Автор',
             'name'   => 'author',
-            'value'  => 'CHtml::link($data->author, $data->author_uri, array("target"=>"_blank"))',
+            'value'  => 'CHtml::link($data->author, $data->author_uri, ["target"=>"_blank"))',
             'type'   => 'raw'
-        ),
-        array(
+        ],
+        [
             'header' => 'Категория',
             'name'   => 'category',
-        ),
-    ),
-));
+        ],
+    ],
+]);
 ?>
 
 

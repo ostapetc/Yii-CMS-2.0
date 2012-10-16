@@ -1,68 +1,68 @@
 <?php
-return array(
-    'local'    => array(
+return [
+    'local'    => [
         'class'             => 'media.components.api.local.LocalApiBehavior',
-        'sizes'             => array(
-            'client_gallery' => array(
+        'sizes'             => [
+            'client_gallery' => [
                 'width'  => 321,
                 'height' => 256
-            )
-        ),
-        'api_map'           => array(
+            ]
+        ],
+        'api_map'           => [
             'video' => 'youTube',
             'img'   => 'local',
             'audio' => 'local',
             'doc'   => 'local',
-        ),
+        ],
         'new_record_status' => MediaFile::STATUS_ON_MODERATE,
-        'api_model'         => array(
+        'api_model'         => [
             'class' => 'media.components.api.local.LocalApi'
-        )
-    ),
-    'remote'   => array(
+        ]
+    ],
+    'remote'   => [
         'class'             => 'media.components.api.remote.RemoteApiBehavior',
-        'api_model'         => array(
+        'api_model'         => [
             'class' => 'media.components.api.remote.RemoteApi'
-        ),
+        ],
         'new_record_status' => MediaFile::STATUS_ACTIVE,
-    ),
-    'youTube'  => array(
+    ],
+    'youTube'  => [
         'class'     => 'media.components.api.youTube.YouTubeApiBehavior',
         'icon'      => '/img/icons/youtube-32.png',
-        'sizes'     => array(
-            'client_gallery' => array(
+        'sizes'     => [
+            'client_gallery' => [
                 'width'  => 321,
                 'height' => 256
-            )
-        ),
-        'api_model' => array(
+            ]
+        ],
+        'api_model' => [
             'class' => 'media.components.api.youTube.YouTubeApi'
-        )
-    ),
-    'vk'       => array(
+        ]
+    ],
+    'vk'       => [
         'class'     => 'media.components.api.vk.VkApiBehavior',
         'icon'      => '/img/icons/vk-32.png',
-        'sizes'     => array(
-            'client_gallery' => array(
+        'sizes'     => [
+            'client_gallery' => [
                 'width'  => 321,
                 'height' => 256
-            )
-        ),
-        'api_model' => array(
+            ]
+        ],
+        'api_model' => [
             'class' => 'media.components.api.vk.VkApi'
-        )
-    ),
-    'vimeo'       => array(
+        ]
+    ],
+    'vimeo'       => [
         'class'     => 'media.components.api.vimeo.VimeoApiBehavior',
         'icon'      => '/img/icons/vimeo-32.png',
-        'sizes'     => array(
-            'client_gallery' => array(
+        'sizes'     => [
+            'client_gallery' => [
                 'width'  => 321,
                 'height' => 256
-            )
-        ),
-        'api_model' => array(
+            ]
+        ],
+        'api_model' => [
             'class' => 'media.components.api.vimeo.VimeoApi'
-        )
-    ),
-);
+        ]
+    ],
+];

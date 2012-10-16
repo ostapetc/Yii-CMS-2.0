@@ -70,22 +70,22 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $player = $this->getApiModel()->player_url;
         if ($player)
         {
-            return array('type' => 'iframe', 'val' => $player);
+            return ['type' => 'iframe', 'val' => $player];
         }
         else
         {
-            return array('type' => 'img', 'val' => $this->icon);
+            return ['type' => 'img', 'val' => $this->icon];
         }
     }
 
-    public function getPreview($size = array('width' => 128, 'height' => 128))
+    public function getPreview($size = ['width' => 128, 'height' => 128])
     {
         $conf = $this->getPreviewArray();
         if ($conf['type'] == 'iframe')
         {
-            return CHtml::tag('iframe', CMap::mergeArray($size, array(
+            return CHtml::tag('iframe', CMap::mergeArray($size, [
                 'src' => $conf['val']
-            )));
+            ]));
         }
     }
 

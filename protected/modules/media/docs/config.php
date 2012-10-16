@@ -1,6 +1,6 @@
 <?php
-return array(
-    'menu' => array(
+return [
+    'menu' => [
         'media - Медиа-хранилище' => '/media',
-    )
-);
+    ]
+];

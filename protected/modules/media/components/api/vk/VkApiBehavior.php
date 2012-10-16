@@ -48,17 +48,17 @@ class VkApiBehavior extends ApiBehaviorAbstract
         $player = $this->getApiModel()->getPlayerUrl();
         if ($player)
         {
-            return array(
+            return [
                 'type' => 'iframe',
                 'val'  => $player
-            );
+            ];
         }
         else
         {
-            return array(
+            return [
                 'type' => 'img',
                 'val'  => $this->icon
-            );
+            ];
         }
     }
 

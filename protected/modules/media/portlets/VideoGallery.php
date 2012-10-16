@@ -10,19 +10,19 @@ class VideoGallery extends BaseFileListView
     public $enablePagination = false;
 
     public $sortableEnable = true;
-    public $sortableOptions = array(
+    public $sortableOptions = [
         'class'  => 'application.components.zii.behaviors.SortableBehavior',
         'saveUrl'=> '/media/mediaFileAdmin/savePriority'
-    );
+    ];
 
-    public $size = array(
+    public $size = [
         'width'  => 112,
         'height' => 50
-    );
+    ];
 
-    public $htmlOptions = array(
+    public $htmlOptions = [
         'class' => 'video-gallery'
-    );
+    ];
 
 
     public function init()

@@ -3,25 +3,25 @@ class MediaVideoAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "create"        => "Редактировать",
             "manage"        => "Управление альбомами",
             "localFiles"    => "Управление альбомами",
             "localToRemote" => "Управление альбомами",
-        );
+        ];
     }
 
 
     public function actionLocalFiles($type)
     {
         $file = new MediaFile('search', 'local');
-        $file->getDbCriteria()->mergeWith(array(
+        $file->getDbCriteria()->mergeWith([
             'condition' => 'target_api IS NULL'
-        ));
+        ]);
         $dp = $file->type($type)->getDataProvider();
-        $this->render('localVideos', array(
+        $this->render('localVideos', [
             'dp' => $dp
-        ));
+        ]);
     }
 
 
@@ -43,9 +43,9 @@ class MediaVideoAdminController extends AdminController
             $model->setAttributes($_GET[get_class($model)], false);
         }
 
-        $this->render('manage', array(
+        $this->render('manage', [
             "model" => $model
-        ));
+        ]);
     }
 
 }

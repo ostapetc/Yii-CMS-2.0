@@ -34,12 +34,12 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
 
     public function detectType()
     {
-        $doc = array(
+        $doc = [
             'book',
             'archive',
             'word',
             'excel'
-        );
+        ];
         switch (true)
         {
             case $this->typeIs($doc):
@@ -73,10 +73,10 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
         switch (true)
         {
             case $this->typeIs('image'):
-                return array(
+                return [
                     'type' => 'img',
                     'val'  => $this->getThumb()
-                );
+                ];
                 break;
             case $this->typeIs('audio'):
                 $name = 'audio';
@@ -91,10 +91,10 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
                 $name = 'rar';
                 break;
             case $this->typeIs('video'):
-                return array(
+                return [
                     'type' => 'video',
                     'val'  => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true)
-                );
+                ];
                 break;
             default:
                 if (is_file('.' . $folder . $this->extension . '.jpg'))
@@ -108,10 +108,10 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
                 break;
         }
 
-        return array(
+        return [
             'type' => 'img',
             'val'  => $folder . $name . '.jpg'
-        );
+        ];
     }
 
 

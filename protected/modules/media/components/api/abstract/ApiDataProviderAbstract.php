@@ -3,7 +3,7 @@ abstract class ApiDataProviderAbstract extends CActiveDataProvider
 {
     private $_criteria;
 
-    public function __construct($model, $config = array())
+    public function __construct($model, $config = [])
     {
         $modelClass       = get_class($model);
         $this->model      = $model;

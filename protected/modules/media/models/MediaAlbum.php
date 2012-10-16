@@ -37,20 +37,20 @@ class MediaAlbum extends ActiveRecord
     const STATUS_ACTIVE  = 'active';
     const STATUS_DELETED = 'deleted';
 
-    public static $status_options = array(
+    public static $status_options = [
         self::STATUS_ACTIVE  => 'активен',
         self::STATUS_DELETED => 'удален'
-    );
+    ];
 
-    public static $users_page_size = array(
+    public static $users_page_size = [
         'width' => 204,
         'height' => 100
-    );
+   ];
 
-    public static $image_size = array(
+    public static $image_size = [
         'width'  => 150,
         'height' => 80
-    );
+    ];
 
     public function name()
     {
@@ -77,75 +77,75 @@ class MediaAlbum extends ActiveRecord
 
     public function behaviors()
     {
-        return CMap::mergeArray(parent::behaviors(), array(
-            'FileManager' => array(
+        return CMap::mergeArray(parent::behaviors(), [
+            'FileManager' => [
                 'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
-                'tags'  => array(
-                    'files' => array(
+                'tags'  => [
+                    'files' => [
                         'title'     => 'Файлы',
                         'data_type' => 'image'
-                    )
-                )
-            ),
-        ));
+                    ]
+                ]
+            ],
+        ]);
     }
 
 
     public function rules()
     {
-        return array(
-            array(
+        return [
+            [
                 'title, model_id, object_id',
                 'required'
-            ),
-            array(
+            ],
+            [
                 'title',
                 'length',
                 'max'=> 200
-            ),
-            array(
+            ],
+            [
                 'title, descr',
                 'filter',
                 'filter' => 'strip_tags'
-            ),
-            array(
+            ],
+            [
                 'id, title, descr, date_create',
                 'safe',
                 'on'=> 'search'
-            ),
-            array(
+            ],
+            [
                 'files',
                 'safe',
-                'on' => array(
+                'on' => [
                     self::SCENARIO_CREATE_USERS,
                     self::SCENARIO_UPDATE_USERS
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'status',
                 'in',
                 'range' => array_keys(self::$status_options)
-            ),
-        );
+            ],
+        ];
     }
 
 
     public function relations()
     {
-        return array(
-            'tags_rels' => array(
+        return [
+            'tags_rels' => [
                 self::HAS_MANY,
                 'TagRel',
                 'object_id',
                 'condition' => "model_id = '" . get_class($this) . "'"
-            ),
-            'tags'      => array(
+            ],
+            'tags'      => [
                 self::HAS_MANY,
                 'Tag',
                 'tag_id',
                 'through' => 'tags_rels'
-            ),
-        );
+            ],
+        ];
     }
 
 
@@ -157,28 +157,28 @@ class MediaAlbum extends ActiveRecord
         $criteria->compare('descr', $this->descr, true);
         $criteria->compare('status', $this->status, true);
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
             'criteria'   => $criteria,
-            'pagination' => array(
+            'pagination' => [
                 'pageSize' => self::PAGE_SIZE
-            )
-        ));
+            ]
+        ]);
     }
 
 
     public function getHref()
     {
-        return Yii::app()->controller->createUrl('/media/mediaAlbum/view', array('id' => $this->id));
+        return Yii::app()->controller->createUrl('/media/mediaAlbum/view', ['id' => $this->id]);
     }
 
 
     public function parent($model_id, $id)
     {
         $alias = $this->getTableAlias();
-        $this->getDbCriteria()->mergeWith(array(
+        $this->getDbCriteria()->mergeWith([
             'condition' => "$alias.model_id='$model_id' AND $alias.object_id='$id'",
             'order'     => "$alias.order DESC"
-        ));
+        ]);
         return $this;
     }
 
@@ -222,8 +222,8 @@ class MediaAlbum extends ActiveRecord
     public static function getDataProvider($model)
     {
         $file = new static;
-        return new ActiveDataProvider(get_called_class(), array(
+        return new ActiveDataProvider(get_called_class(), [
             'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->last()->getDbCriteria(),
-        ));
+        ]);
     }
 }

@@ -1,21 +1,21 @@
 <?
-return array(
+return [
     'action' => '/media/mediaAlbum/createUsers',
-    'activeForm'           => array(
+    'activeForm'           => [
         'id'            => 'album-form',
-    ),
-    'elements'             => array(
-        'title'    => array(
+    ],
+    'elements'             => [
+        'title'    => [
             'type' => 'text'
-        ),
-        'descr'    => array(
+        ],
+        'descr'    => [
             'type'  => 'text',
-        ),
-    ),
-    'buttons'              => array(
-        'submit' => array(
+        ],
+    ],
+    'buttons'              => [
+        'submit' => [
             'type'  => 'submit',
             'value' => t('сохранить'),
-        )
-    )
-);
+        ]
+    ]
+];

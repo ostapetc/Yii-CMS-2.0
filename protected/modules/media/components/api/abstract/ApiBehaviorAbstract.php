@@ -6,7 +6,7 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
 
     public $module;
     public $assets;
-    public $sizes = array();
+    public $sizes = [];
 
     public function __construct()
     {

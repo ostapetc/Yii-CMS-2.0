@@ -4,8 +4,8 @@ class ImageGallery extends BaseFileListView
 {
     public $emptyText = '';
     public $template = "{items}";
-    public $fancyboxOptions = array();
-    public $defaultFancyboxOptions = array(
+    public $fancyboxOptions = [];
+    public $defaultFancyboxOptions = [
         'openEffect'  => 'fade',
         'closeEffect' => 'fade',
         'closeSpeed'  => 0,
@@ -14,56 +14,56 @@ class ImageGallery extends BaseFileListView
         'minWidth'    => '800px',
         'autoCenter'  => false,
         'mouseWheel'  => false,
-        'helpers'     => array(
-            'title'      => array(
+        'helpers'     => [
+            'title'      => [
                 'type' => 'over'
-            ),
-            'overlay'    => array(
+            ],
+            'overlay'    => [
                 'closeClick' => true,
                 'speedOut'   => 200,
                 'showEarly'  => true
-            ),
-            'media'      => array(),
-            'vkstyle'    => array(),
-            'thumbs' => array(
+            ],
+            'media'      => [],
+            'vkstyle'    => [],
+            'thumbs' => [
                 'width' => 100,
 //                'height' => 50,
                 'position' => 'top'
-            )
-        ),
-    );
+            ]
+        ],
+    ];
 
-    public $montageOptions = array();
-    public $defaultMontageOptions = array(
+    public $montageOptions = [];
+    public $defaultMontageOptions = [
         'margin' => 4,
 //        'minsize'	=> true,
         'liquid' => false,
 //        'fixedHeight' => 130,
 //        'fillLastRow'          => true,
         'alternateHeight'      => true,
-        'alternateHeightRange' => array(
+        'alternateHeightRange' => [
             'min'    => 50,
             'max'    => 100
-        ),
-    );
+        ],
+    ];
     public $itemView = 'media.portlets.views.imageGalleryItem';
     public $itemsTagName = 'div';
     public $enablePagination = false;
 
     public $sortableEnable = true;
-    public $sortableOptions = array(
+    public $sortableOptions = [
         'class'  => 'application.components.zii.behaviors.SortableBehavior',
         'saveUrl'=> '/media/mediaFileAdmin/savePriority'
-    );
+    ];
 
-    public $size = array(
+    public $size = [
         'width'  => 112,
         'height' => 50
-    );
+    ];
 
-    public $htmlOptions = array(
+    public $htmlOptions = [
         'class' => 'image-gallery'
-    );
+    ];
 
 
     public function init()
@@ -81,7 +81,7 @@ class ImageGallery extends BaseFileListView
         $id             = $this->htmlOptions['id'];
         $assets         = $this->assets . '/plugins/';
         $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
-//        $montageOptions = CJavaScript::encode(CMap::mergeArray($this->defaultMontageOptions, $this->montageOptions));
+//        $montageOptions = CJavaScript::encode(CMap::merge[$this->defaultMontageOptions, $this->montageOptions));
         Yii::app()->clientScript
             ->registerCssFile($this->assets . '/imageGallery/imageGallery.css')
             ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')

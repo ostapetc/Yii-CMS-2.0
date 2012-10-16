@@ -11,18 +11,18 @@ class Uploader extends JuiInputWidget
     public $as_modal = true;
     public $multiple = true;
 
-    public $fields = array(
-        'title' => array(
+    public $fields = [
+        'title' => [
             'header' => 'Название',
             'size'   => 150,
             'type'   => 'text',
-        ),
-        'descr' => array(
+        ],
+        'descr' => [
             'header' => 'Описание',
             'size'   => 250,
             'type'   => 'textarea',
-        ),
-    );
+        ],
+    ];
 
     /*
      * image: see http://www.verot.net/php_class_upload_samples.htm or comments in Resizer class
@@ -30,7 +30,7 @@ class Uploader extends JuiInputWidget
      * sound: nothing yet
      * video: nothing yet
     */
-    public $params = array();
+    public $params = [];
 
     public $tag;
     public $api = 'local';
@@ -45,13 +45,13 @@ class Uploader extends JuiInputWidget
     public $exist_files_action = '/media/mediaFileAdmin/existFiles';
     public $link_parser_action = '/media/mediaFileAdmin/linkParser';
 
-    private $allow_type = array(
+    private $allow_type = [
         'document'=> 'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
         'image'   => 'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
         'sound'   => 'js:/(\.|\/)(mp3|wav)$/i',
         'any'     => 'js:/(\.|\/)(.*)$/i',
         'video'   => 'js:/(\.|\/)(mp4|flv|wmv)$/i'
-    );
+    ];
 
     private static $isTemplatesRender = false;
 
@@ -86,13 +86,13 @@ class Uploader extends JuiInputWidget
             throw new CException('Параметр model является обязательным');
         }
 
-        if (!in_array($this->data_type, array(
+        if (!in_array($this->data_type, [
             'image',
             'sound',
             'video',
             'document',
             'any'
-        ), true)
+        ], true)
         )
         {
             throw new CException('Параметр data_type является обязательным  и может принемать значения: image, sound, video, document');
@@ -106,12 +106,12 @@ class Uploader extends JuiInputWidget
         $this->id     = 'uploader_' . get_class($this->model) . $this->tag;
         $this->assets = Yii::app()->getModule('media')->assetsUrl();
 
-        $url_data = array(
+        $url_data = [
             'model_id'  => get_class($this->model),
             'object_id' => $this->model->id ? $this->model->id : 0,
             'data_type' => $this->data_type,
             'tag'       => $this->tag,
-        );
+        ];
 
         if (!$this->upload_url)
         {
@@ -123,7 +123,7 @@ class Uploader extends JuiInputWidget
             $this->link_parser_url = $this->createUrl($this->link_parser_action, $url_data);
         }
 
-        $default      = array(
+        $default      = [
             'url'                     => $this->upload_url,
             'dropZone'                => "js:$('#{$this->id}-drop-zone')",
             'maxFileSize'             => $this->maxFileSize,
@@ -132,17 +132,17 @@ class Uploader extends JuiInputWidget
             'sortableSaveUrl'         => $this->createUrl($this->sortable_action),
             'linkParserUrl'           => $this->link_parser_url,
             'limitConcurrentUploads'  => 0,
-            'existFilesUrl'           => $this->createUrl($this->exist_files_action, array(
+            'existFilesUrl'           => $this->createUrl($this->exist_files_action, [
                 'model_id'  => get_class($this->model),
                 'object_id' => $this->model->id ? $this->model->id : 0,
                 'tag'       => $this->tag
-            )),
-        );
+            ]),
+        ];
         $this->params = CMap::mergeArray($default, $this->params);
     }
 
 
-    public function createUrl($url, $params = array())
+    public function createUrl($url, $params = [])
     {
         $params['api'] = $this->api;
         return Yii::app()->createUrl($url, $params);
@@ -180,12 +180,12 @@ class Uploader extends JuiInputWidget
         }
         if ($this->as_modal)
         {
-            $this->renderDialog('uploader', array(
+            $this->renderDialog('uploader', [
                 'title'      => $this->title,
-                'linkOptions'=> array(
+                'linkOptions'=> [
                     'class'=> 'btn btn-info'
-                )
-            ));
+                ]
+            ]);
         }
         else
         {

@@ -14,11 +14,11 @@ class YouTubePlayList extends Widget
         /** @var $api YouTubeApi */
         $api->title     = $this->request;
         $api->author    = $this->author;
-        $dp             = $api->search(array(
+        $dp             = $api->search([
             'limit' => $this->items_count
-        ));
+        ]);
         $dp->pagination = false;
 
-        $this->render('_youTubeVideo', array('data' => $dp->getData()));
+        $this->render('_youTubeVideo', ['data' => $dp->getData()]);
     }
 }

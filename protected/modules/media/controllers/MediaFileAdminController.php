@@ -3,7 +3,7 @@ class MediaFileAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "delete"       => "Удаление файла",
             "upload"       => "Скачать файл",
             "manage"       => "Скачать файл",
@@ -11,24 +11,24 @@ class MediaFileAdminController extends AdminController
             "savePriority" => "Скачать файл",
             "updateAttr"   => "Скачать файл",
             "linkParser"   => "Скачать файл",
-        );
+        ];
     }
 
 
     public function actions()
     {
-        return array(
-            'updateAttr'   => array(
+        return [
+            'updateAttr'   => [
                 'class'      => 'media.components.UpdateAttrAction',
-                'attributes' => array(
+                'attributes' => [
                     'title',
                     'descr'
-                )
-            ),
-            'savePriority' => array(
+                ]
+            ],
+            'savePriority' => [
                 'class' => 'media.components.SavePriorityAction',
-            )
-        );
+            ]
+        ];
     }
 
 
@@ -47,9 +47,9 @@ class MediaFileAdminController extends AdminController
             }
             else
             {
-                echo array('status'  => 'error',
+                echo ['status'  => 'error',
                            'message' => 'Текст не распознан'
-                );
+                ];
             }
         }
         else
@@ -61,11 +61,11 @@ class MediaFileAdminController extends AdminController
 
     protected function sendFilesAsJson($files)
     {
-        $res = array();
-        $files = is_array($files) ? $files : array($files);
+        $res = [];
+        $files = is_array($files ) ? $files : [$files];
         foreach ($files as $file)
         {
-            $res[] = array(
+            $res[] = [
                 'title'          => $file->title ? $file->title : 'Кликните для редактирования',
                 'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
                 'url'            => $file->getHref(),
@@ -73,11 +73,11 @@ class MediaFileAdminController extends AdminController
                 'delete_url'     => $file->deleteUrl,
                 'api'            => $file->api_name,
                 'delete_type'    => "post",
-                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', array(
+                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', [
                     'id'  => $file->id,
-                )),
+                ]),
                 'id'             => 'File_' . $file->id,
-            );
+            ];
         }
 
         echo CJSON::encode($res);
@@ -110,17 +110,17 @@ class MediaFileAdminController extends AdminController
 
         if ($model->save())
         {
-            $this->sendFilesAsJson(array($model));
+            $this->sendFilesAsJson($model);
         }
         else
         {
-            echo CJSON::encode(array(
+            echo CJSON::encode([
                 'textStatus' => $model->error
-            ));
-
+            ]);
         }
     }
 
+/* SECURE!
 
     public function actionSavePriority()
     {
@@ -134,7 +134,7 @@ class MediaFileAdminController extends AdminController
             ->createSqlCommand("UPDATE {$files->tableName()} AS t SET t.order = {$case} WHERE t.id IN ({$arr})")
             ->execute();
     }
-
+*/
 
     public function actionDelete($id)
     {
@@ -171,6 +171,6 @@ class MediaFileAdminController extends AdminController
             $model->attributes = $_GET['MediaFile'];
         }
 
-        $this->render('manage', array('model' => $model));
+        $this->render('manage', ['model' => $model]);
     }
 }

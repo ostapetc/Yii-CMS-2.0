@@ -12,9 +12,9 @@ class FileList extends BaseFileListView
     public $enablePagination = false;
     public $itemView ='media.portlets.views.filesListItem';
 
-    public $htmlOptions = array(
+    public $htmlOptions = [
         'class' => 'file-list'
-    );
+    ];
 
     public function init()
     {
@@ -26,7 +26,7 @@ class FileList extends BaseFileListView
     {
         if($this->dataProvider->getItemCount() > 0)
         {
-            echo CHtml::tag('div', array('class' => 'header'), $this->header);
+            echo CHtml::tag('div', ['class' => 'header'], $this->header);
         }
     }
 }

@@ -3,14 +3,14 @@ class MediaAlbumController extends ClientController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "view"             => "Создать",
             "delete"           => "Удалить",
             "update"           => "Редактировать",
             "manage"           => "Управление альбомами",
             "createUsers"      => "Создать",
             "manage"       => "Альбомы пользователя",
-        );
+        ];
     }
 
 
@@ -25,16 +25,16 @@ class MediaAlbumController extends ClientController
         $this->performAjaxValidation($model);
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array(
+            $this->redirect([
                 'view',
                 'id' => $model->id
-            ));
+            ]);
         }
 
-        $this->render('createUsers', array(
+        $this->render('createUsers', [
             'user'  => $user,
             'form'  => $form,
-        ));
+        ]);
     }
 
 
@@ -47,11 +47,11 @@ class MediaAlbumController extends ClientController
         $dp               = $file->getDataProvider($model, 'files');
         $dp->pagination   = false;
 
-        $this->render('view', array(
+        $this->render('view', [
             'model' => $model,
             'form'  => $form,
             'dp'    => $dp
-        ));
+        ]);
     }
 
 
@@ -69,13 +69,13 @@ class MediaAlbumController extends ClientController
 
         if ($model->saveFile() && $model->userCanEdit() && $model->save())
         {
-            $this->sendFilesAsJson(array($model));
+            $this->sendFilesAsJson([$model]);
         }
         else
         {
-            echo CJSON::encode(array(
+            echo CJSON::encode([
                 'textStatus' => $model->error
-            ));
+            ]);
         }
     }
 
@@ -89,11 +89,11 @@ class MediaAlbumController extends ClientController
         $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp               = MediaAlbum::getDataProvider($user);
-        $this->render('userAlbums', array(
+        $this->render('userAlbums', [
             'user'  => $user,
             'is_my' => Yii::app()->user->model->id == $user_id,
             'dp'    => $dp
-        ));
+        ]);
     }
 
 

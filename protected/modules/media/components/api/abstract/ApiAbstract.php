@@ -21,7 +21,7 @@ abstract class ApiAbstract extends CModel
      *
      * @return ApiDataProviderAbstract
      */
-    abstract function search($props = array());
+    abstract function search($props = []);
 
 
     abstract function save();
@@ -38,7 +38,7 @@ abstract class ApiAbstract extends CModel
 
     public function behaviors()
     {
-        return array();
+        return [];
     }
 
 
@@ -98,7 +98,7 @@ abstract class ApiAbstract extends CModel
 
     public function populateRecords($data, $callAfterFind = true, $index = null)
     {
-        $records = array();
+        $records = [];
         foreach ($data as $attributes)
         {
             if (($record = $this->populateRecord($attributes, $callAfterFind)) !== null)

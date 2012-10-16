@@ -26,7 +26,7 @@ class LocalApi extends ApiAbstract
     }
 
 
-    public function search($props = array())
+    public function search($props = [])
     {
         throw new CException('not implemented yet');
     }
@@ -66,10 +66,10 @@ class LocalApi extends ApiAbstract
 
     public function attributeNames()
     {
-        return array(
+        return [
             'title',
             'pk',
-        );
+        ];
     }
 
 
@@ -114,10 +114,10 @@ class LocalApi extends ApiAbstract
     public function findByPk($pk)
     {
         $this->beforeFind();
-        $params = array(
+        $params = [
             'file_info' => new SplFileInfo($this->basePath() . $pk),
             'pk'        => $pk
-        );
+        ];
         return $this->populateRecord($params);
     }
 
@@ -201,10 +201,10 @@ class LocalApi extends ApiAbstract
 
         if ($as_array)
         {
-            return array(
+            return [
                 $target_folder,
                 $target_file
-            );
+            ];
         }
         else
         {
@@ -236,10 +236,10 @@ class LocalApi extends ApiAbstract
 
         $target_file = $this->vaultResolveCollision($target_file_name, $target_folder);
 
-        return array(
+        return [
             $target_folder,
             $target_file
-        );
+        ];
     }
 
 

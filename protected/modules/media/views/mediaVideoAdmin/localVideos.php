@@ -1,36 +1,36 @@
 <?
 $id     = 'non-moderated-grid';
 
-$widget = $this->widget('AdminGridView', array(
+$widget = $this->widget('AdminGridView', [
     'id'           => $id,
     'dataProvider' => $dp,
-    'columns'      => array(
-        array(
+    'columns'      => [
+        [
             'name' => 'title',
             'type' => 'raw'
-        ),
-        array(
+        ],
+        [
             'class'    => 'CButtonColumn',
             'header'   => 'Опубликовать',
             'template' => '{youtube}',
-            'buttons'  => array(
-                'youtube' => array(
+            'buttons'  => [
+                'youtube' => [
                     'label'    => 'Опубликовать на YouTube',
-                    'url'      => 'Yii::app()->createUrl("/media/mediaVideoAdmin/localToRemote", array("id"=>$data->id, "api" => "youTube"))',
+                    'url'      => 'Yii::app()->createUrl("/media/mediaVideoAdmin/localToRemote", ["id"=>$data->id, "api" => "youTube"))',
                     'imageUrl' => $this->module->assetsUrl() . '/img/icons/youtube-32.png',
                     'click'    => 'js:function() {
                     	$.get($(this).attr("href"));
                     	$(this).parent().html("Видео отправляется, это займет некоторое время")
                      	return false;
                     }',
-                )
-            )
-        ),
-        array(
+                ]
+            ]
+        ],
+        [
             'class'    => 'CButtonColumn',
             'template' => '{update}{delete}',
-            'deleteButtonUrl' => 'Yii::app()->createUrl("/media/mediaFileAdmin/delete",array("id"=>$data->primaryKey))',
-            'updateButtonUrl' => 'Yii::app()->createUrl("/media/mediaFileAdmin/update",array("id"=>$data->primaryKey))',
-        )
-    ),
-));
+            'deleteButtonUrl' => 'Yii::app()->createUrl("/media/mediaFileAdmin/delete",["id"=>$data->primaryKey))',
+            'updateButtonUrl' => 'Yii::app()->createUrl("/media/mediaFileAdmin/update",["id"=>$data->primaryKey))',
+        ]
+    ],
+]);

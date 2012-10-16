@@ -8,12 +8,12 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     const TYPE_AUDIO = 'audio';
     const TYPE_DOC   = 'doc';
 
-    public $types = array(
+    public $types = [
         self::TYPE_IMG   => self::TYPE_IMG,
         self::TYPE_VIDEO => self::TYPE_VIDEO,
         self::TYPE_AUDIO => self::TYPE_AUDIO,
         self::TYPE_DOC   => self::TYPE_DOC,
-    );
+    ];
 
     public $api_map;
     public $new_record_status;
@@ -63,12 +63,12 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function detectType()
     {
-        $doc = array(
+        $doc = [
             'book',
             'archive',
             'word',
             'excel'
-        );
+        ];
         switch (true)
         {
             case $this->typeIs($doc):
@@ -96,16 +96,16 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreviewArray($size = array('width' => 64, 'height' => 64))
+    public function getPreviewArray($size = ['width' => 64, 'height' => 64])
     {
         $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/icons/';
         switch (true)
         {
             case $this->typeIs('image'):
-                return array(
+                return [
                     'type' => 'img',
                     'val'  => $this->getThumb($size)
-                );
+                ];
                 break;
             case $this->typeIs('audio'):
                 $name = 'audio';
@@ -120,10 +120,10 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 $name = 'rar';
                 break;
             case $this->typeIs('video'):
-                return array(
+                return [
                     'type' => 'video',
                     'val'  => ImageHelper::placeholder($size, 'Video processing', true)
-                );
+                ];
                 break;
             default:
                 if (is_file('.' . $folder . $this->extension . '.jpg'))
@@ -137,14 +137,14 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 break;
         }
 
-        return array(
+        return [
             'type' => 'img',
             'val'  => $folder . $name . '.jpg'
-        );
+        ];
     }
 
 
-    public function getPreview($size = array('width' => 64, 'height' => 64))
+    public function getPreview($size = ['width' => 64, 'height' => 64])
     {
         $data = $this->getPreviewArray($size);
 

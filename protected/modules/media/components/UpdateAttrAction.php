@@ -1,7 +1,7 @@
 <?php
 class UpdateAttrAction extends CAction
 {
-    public $attributes = array();
+    public $attributes = [];
     public $model;
 
     public function run($id)
