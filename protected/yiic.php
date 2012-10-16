@@ -17,15 +17,15 @@ defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
 
 if (!isset($_SERVER['DOCUMENT_ROOT']) || !$_SERVER['DOCUMENT_ROOT'])
 {
-    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../../../') . DIRECTORY_SEPARATOR;
+    $_SERVER['DOCUMENT_ROOT'] = realpath(dirname(__FILE__).'/../') . DIRECTORY_SEPARATOR;
 }
 
 require $_SERVER['DOCUMENT_ROOT'] . 'protected/config/constants.php';
 
-require(dirname(__FILE__).'/yii.php');
+require(LIBRARIES_PATH . '/yii/yii.php');
 
 require LIBRARIES_PATH . '/functions.php';
-require LIBRARIES_PATH. '/debug.php';
+require LIBRARIES_PATH . '/debug.php';
 
 $config = $_SERVER['DOCUMENT_ROOT'].'/protected/config/console.php';
 
