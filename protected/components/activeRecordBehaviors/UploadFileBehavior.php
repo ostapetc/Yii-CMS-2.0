@@ -10,7 +10,6 @@ class UploadFileBehavior extends ActiveRecordBehavior
     public function beforeSave($event)
     {
         $model = $this->getOwner();
-        dump($model->getDbCriteria());
         if (!method_exists($model, "uploadFiles"))
         {
             return false;

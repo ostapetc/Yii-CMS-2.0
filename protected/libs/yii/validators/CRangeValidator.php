@@ -47,7 +47,6 @@ class CRangeValidator extends CValidator
 	 */
 	protected function validateAttribute($object,$attribute)
 	{
-        dump($object->getDbCriteria());
         $value=$object->$attribute;
 		if($this->allowEmpty && $this->isEmpty($value))
 			return;
