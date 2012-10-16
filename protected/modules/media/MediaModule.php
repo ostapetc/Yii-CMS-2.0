@@ -42,8 +42,9 @@ class MediaModule extends WebModule
     public function routes()
     {
         return array(
-            '/photoAlbum/<userId:\d*>' => '/media/mediaAlbum/userAlbums',
-            '/media/mediaAlbum/userAlbums/<id:\d*>' => '/media/mediaAlbum/userAlbums',
+            '/photoAlbum/<id:\d*>' => '/media/mediaAlbum/userAlbums',
+            '/album/<id:\d*>' => '/media/mediaAlbum/view',
+            '/video/<id:\d*>' => '/media/mediaAlbum/userVideos',
         );
     }
 }
