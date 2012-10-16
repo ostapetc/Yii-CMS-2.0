@@ -1,14 +1,14 @@
 <?php
 /**
  * add in configuration
- * 'params'     => array(
- *      'youTube' => array(
+ * 'params'     => [
+ *      'youTube' => [
  *          'user' => '',
  *          'pass' => '',
  *          'app'  => '',
  *          'key'  => ''
- *      )
- * )
+ *      ]
+ * ]
  *
  */
 
@@ -176,7 +176,7 @@ class YouTubeApi extends ApiAbstract
             return (array)$res;
         } catch (Exception $e)
         {
-            return array();
+            return [];
         }
     }
 
@@ -197,7 +197,8 @@ class YouTubeApi extends ApiAbstract
         }
         $this->player_url = $entry->getFlashPlayerUrl();
         /** @var $author Zend_Gdata_App_Extension_Author */
-        $author           = reset($entry->getAuthor());
+        $authors          = $entry->getAuthor();
+        $author           = reset($authors);
         $this->author     = $author->getName()->getText();
         $this->author_uri = "http://www.youtube.com/user/" . $this->author;
 
@@ -232,26 +233,26 @@ class YouTubeApi extends ApiAbstract
     }
 
 
-    public function search($props = array())
+    public function search($props = [])
     {
         $criteria = clone $this->getDbCriteria();
-        $criteria->mergeWith(array(
+        $criteria->mergeWith([
             'select'        => $this->title,
             'category'      => $this->category,
             'author'        => $this->author,
-        ));
+        ]);
 
         $criteria->mergeWith($props);
-        $dp = new YouTubeApiDataProvider(new YouTubeApi(), array(
+        $dp = new YouTubeApiDataProvider(new YouTubeApi(), [
             'criteria' => $criteria
-        ));
+        ]);
         return $dp;
     }
 
 
     public function attributeNames()
     {
-        return array(
+        return [
             'title',
             'img',
             'size',
@@ -262,7 +263,7 @@ class YouTubeApi extends ApiAbstract
             'pk',
             'author',
             'author_uri',
-        );
+        ];
     }
 
 

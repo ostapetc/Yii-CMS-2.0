@@ -7,11 +7,11 @@ class MediaModule extends WebModule
 
     public function init()
     {
-        $this->setImport(array(
+        $this->setImport([
             'media.components.*',
             'media.components.YouTube.*',
             'media.models.*'
-        ));
+        ]);
     }
 
     public function getName()
@@ -34,16 +34,17 @@ class MediaModule extends WebModule
 
     public function adminMenu()
     {
-        return array(
+        return [
             "Все файлы" => "/media/mediaFileAdmin/manage",
-        );
+        ];
     }
 
     public function routes()
     {
-        return array(
-            '/userAlbums/<userId:\d*>' => '/media/mediaAlbum/userAlbums',
-            '/media/mediaAlbum/userAlbums/<id:\d*>' => '/media/mediaAlbum/userAlbums',
-        );
+        return [
+            '/userAlbums/<user_id:\d*>' => '/media/mediaAlbum/manage',
+            '/album/<id:\d*>' => '/media/mediaAlbum/view',
+            '/video/<user_id:\d*>' => '/media/mediaVideo/manage',
+        ];
     }
 }

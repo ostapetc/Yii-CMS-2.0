@@ -3,15 +3,14 @@ class MediaAlbumController extends ClientController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "view"             => "Создать",
             "delete"           => "Удалить",
             "update"           => "Редактировать",
             "manage"           => "Управление альбомами",
             "createUsers"      => "Создать",
-            "userAlbums"       => "Альбомы пользователя",
-            "my"               => "Мои Альбомы",
-        );
+            "manage"       => "Альбомы пользователя",
+        ];
     }
 
 
@@ -26,13 +25,16 @@ class MediaAlbumController extends ClientController
         $this->performAjaxValidation($model);
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array('my'));
+            $this->redirect([
+                'view',
+                'id' => $model->id
+            ]);
         }
 
-        $this->render('createUsers', array(
+        $this->render('createUsers', [
             'user'  => $user,
             'form'  => $form,
-        ));
+        ]);
     }
 
 
@@ -45,11 +47,11 @@ class MediaAlbumController extends ClientController
         $dp               = $file->getDataProvider($model, 'files');
         $dp->pagination   = false;
 
-        $this->render('view', array(
+        $this->render('view', [
             'model' => $model,
             'form'  => $form,
             'dp'    => $dp
-        ));
+        ]);
     }
 
 
@@ -67,46 +69,31 @@ class MediaAlbumController extends ClientController
 
         if ($model->saveFile() && $model->userCanEdit() && $model->save())
         {
-            $this->sendFilesAsJson(array($model));
+            $this->sendFilesAsJson([$model]);
         }
         else
         {
-            echo CJSON::encode(array(
+            echo CJSON::encode([
                 'textStatus' => $model->error
-            ));
+            ]);
         }
     }
 
 
-    public function actionMy()
+    public function actionManage($user_id = null)
     {
-        if (Yii::app()->user->isGuest)
+        if ($user_id === null)
         {
-            $this->pageNotFound();
-        }
-        $dp = MediaAlbum::getDataProvider(Yii::app()->user->model);
-        $this->render('userAlbums', array(
-            'user'  => Yii::app()->user->model,
-            'is_my' => true,
-            'dp'    => $dp
-        ));
-    }
-
-
-    public function actionUserAlbums($user_id = null)
-    {
-        if ($user_id == null || Yii::app()->user->model->id == $user_id)
-        {
-            $this->redirect(array('my'));
+            $user_id = Yii::app()->user->model->id;
         }
         $user             = User::model()->throw404IfNull()->findByPk($user_id);
         $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp               = MediaAlbum::getDataProvider($user);
-        $this->render('userAlbums', array(
+        $this->render('userAlbums', [
             'user'  => $user,
-            'is_my' => false,
+            'is_my' => Yii::app()->user->model->id == $user_id,
             'dp'    => $dp
-        ));
+        ]);
     }
 
 

@@ -83,6 +83,8 @@ class UploadFileBehavior extends ActiveRecordBehavior
                 chmod($file_path, 0777);
                 if ($file_saved && $model->id)
                 {
+
+
                     $object = $model->findByPk($model->id);
                     if ($object->$attr)
                     {

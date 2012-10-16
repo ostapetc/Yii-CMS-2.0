@@ -10,22 +10,22 @@ class FileType
     const BOOKS = 'books';
 
 
-    public static $archiveExtensions = array(
+    public static $archiveExtensions = [
         'zip',
         'rar',
         'tar',
         'gz'
-    );
-    public static $imageExtensions = array(
+    ];
+    public static $imageExtensions = [
         'png',
         'jpeg',
         'jpg',
         'tiff',
         'ief',
         'gif'
-    );
+    ];
 
-    public static $excelExtensions = array(
+    public static $excelExtensions = [
         'xl',
         'xla',
         'xlb',
@@ -38,27 +38,27 @@ class FileType
         'xlt',
         'xlv',
         'xlw'
-    );
-    public static $audioExtensions = array(
+    ];
+    public static $audioExtensions = [
         'wma',
         'mp3'
-    );
-    public static $wordExtensions = array(
+    ];
+    public static $wordExtensions = [
         'doc',
         'dot',
         'docx'
-    );
-    public static $videoExtensions = array(
+    ];
+    public static $videoExtensions = [
         'flv',
         'avi',
         'mpeg',
         'wmv',
-    );
+    ];
 
-    public static $bookExtensions = array(
+    public static $bookExtensions = [
         'pdf',
         'djvu'
-    );
+    ];
 
 
 }

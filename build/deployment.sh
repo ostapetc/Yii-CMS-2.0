@@ -27,10 +27,14 @@ chown -R www-data:www-data $deploy_dir
 chown -R www-data:www-data $webroot
 
 
+#clear
+echo '-----------clear-----------'
+rm -rf ${app_dir}/assets/*
+rm -rf ${app_dir}/protected/runtime/*
+
+
 #migate
 echo '-----------migrate-----------'
 php $yiic migrate up
-
-
 
 

@@ -1,6 +1,6 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
  * @property string         $status
  * @property integer        $rating
@@ -17,7 +17,7 @@
  * @property string         $password_recover_code
  * @property string         $password_recover_date
  * @property string         $date_create
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                $userDir
  * @property AuthItem       $role
@@ -34,7 +34,7 @@
  * @property                $updateUrl
  * @property                $createUrl
  * @property                $deleteUrl
- * 
+ *
  * !Relations - связи
  * @property MediaAlbum[]   $file_albums
  * @property int|null       $file_albums_count
@@ -42,13 +42,13 @@
  * @property int|null       $pages_count
  * @property int|null       $favorites_count
  * @property int|null       $comments_count
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   User           published()
  * @method   User           sitemap()
  * @method   User           ordered()
  * @method   User           last()
- * 
+ *
  */
 
 class User extends ActiveRecord
@@ -120,6 +120,21 @@ class User extends ActiveRecord
         self::GENDER_WOMAN => "Женский"
     );
 
+
+    public function behaviors()
+    {
+        return array(
+            'FileManager' => array(
+                'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
+                'tags' => array(
+                    'videos' => array(
+                        'title' => 'Видео записи',
+                        'data_type' => 'video'
+                    )
+                )
+            ),
+        );
+    }
 
     public function getUserDir()
     {

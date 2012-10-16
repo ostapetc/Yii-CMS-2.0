@@ -11,7 +11,7 @@ class ApiCriteria extends CComponent
      * Constructor.
      * @param array $data criteria initial property values (indexed by property name)
      */
-    public function __construct($data=array())
+    public function __construct($data = [])
     {
         foreach($data as $name=>$value)
             $this->$name=$value;
@@ -45,7 +45,7 @@ class ApiCriteria extends CComponent
         $ref = new ReflectionObject($this);
         $public = $ref->getProperties(ReflectionProperty::IS_PUBLIC);
         $static = $ref->getProperties(ReflectionProperty::IS_STATIC);
-        $res = array();
+        $res = [];
         foreach (array_diff($public, $static) as $prop)
         {
             $res[$prop->name] = $this->{$prop->name};

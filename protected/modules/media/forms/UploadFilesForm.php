@@ -1,30 +1,30 @@
 <?
-return array(
+return [
     'enctype'    => 'multipart/form-data',
     'action' => '/media/mediaAlbum/upload',
-    'activeForm' => array(
+    'activeForm' => [
         'id'            => 'upload-album-form',
-        'clientOptions' => array(
+        'clientOptions' => [
             'validateOnSubmit' => true,
-        ),
-    ),
-    'elements' => array(
-        'files' => array(
+        ],
+    ],
+    'elements' => [
+        'files' => [
             'type'      => 'uploader',
             'data_type' => 'image',
             'title'     => 'Файлы'
-        ),
-        'model_id' => array(
+        ],
+        'model_id' => [
             'type'  => 'hidden',
-        ),
-        'object_id' => array(
+        ],
+        'object_id' => [
             'type'  => 'hidden',
-        ),
-    ),
-    'buttons'              => array(
-        'submit' => array(
+        ],
+    ],
+    'buttons'              => [
+        'submit' => [
             'type'  => 'submit',
             'value' => t('сохранить'),
-        )
-    )
-);
+        ]
+    ]
+];

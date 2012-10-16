@@ -3,13 +3,13 @@ class MediaAlbumAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "create"     => "Создать",
             "view"       => "Создать",
             "delete"     => "Удалить",
             "update"     => "Редактировать",
             "manage"     => "Управление альбомами",
-        );
+        ];
     }
 
 
@@ -42,10 +42,10 @@ class MediaAlbumAdminController extends AdminController
         $model            = $this->loadModel($id);
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
-        $this->render('view', array(
+        $this->render('view', [
             'model' => $model,
             'form'  => $form
-        ));
+        ]);
     }
 
 

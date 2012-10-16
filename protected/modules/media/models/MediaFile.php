@@ -96,7 +96,7 @@ class MediaFile extends ActiveRecord
 
     public function rules()
     {
-        return array( /*            array(
+        return [ /*            [
                 'nameWithoutExt',
                 'length',
                 'min'      => 1,
@@ -104,37 +104,37 @@ class MediaFile extends ActiveRecord
                 'tooShort' => 'Название файла должно быть меньше 1 сим.',
                 'tooLong'  => 'Пожалуйста, сократите наименование файла до 900 сим.'
             ) */
-        );
+        ];
     }
 
     public function toJson()
     {
-        return array(
+        return [
             'title'      => $this->title ? $this->title : 'Кликните для редактирования',
             'descr'      => $this->descr ? $this->descr : 'Кликните для редактирования',
             'url'        => $this->getHref(),
-            'preview'    => $this->getPreviewArray(),
+            'preview'    => $this->getPreview(),
             'delete_url' => $this->deleteUrl,
             'api'        => $this->api_name,
-        );
+        ];
     }
 
     public function parent($model_id, $object_id = null)
     {
         $alias     = $this->getTableAlias();
         $condition = "$alias.model_id=:model_id";
-        $params    = array(
+        $params    = [
             'model_id' => $model_id
-        );
+        ];
         if ($object_id !== null)
         {
             $condition .= " AND $alias.object_id=:object_id";
             $params['object_id'] = $object_id;
         }
-        $this->getDbCriteria()->mergeWith(array(
+        $this->getDbCriteria()->mergeWith([
             'condition' => $condition,
             'params'    => $params
-        ));
+        ]);
         return $this;
     }
 
@@ -142,12 +142,12 @@ class MediaFile extends ActiveRecord
     public function tag($tag)
     {
         $alias = $this->getTableAlias();
-        $this->getDbCriteria()->mergeWith(array(
+        $this->getDbCriteria()->mergeWith([
             'condition' => "$alias.tag=:tag",
-            'params'    => array(
+            'params'    => [
                 'tag' => $tag
-            )
-        ));
+            ]
+        ]);
         return $this;
     }
 
@@ -155,19 +155,19 @@ class MediaFile extends ActiveRecord
     public function type($type)
     {
         $alias = $this->getTableAlias();
-        $this->getDbCriteria()->mergeWith(array(
+        $this->getDbCriteria()->mergeWith([
             'condition' => "$alias.type=:type",
-            'params'    => array(
+            'params'    => [
                 'type' => $type
-            )
-        ));
+            ]
+        ]);
         return $this;
     }
 
 
     public function getDeleteUrl()
     {
-        return Yii::app()->createUrl('/media/mediaFileAdmin/delete', array('id' => $this->id));
+        return Yii::app()->createUrl('/media/mediaFileAdmin/delete', ['id' => $this->id]);
     }
 
 
@@ -221,12 +221,12 @@ class MediaFile extends ActiveRecord
         $this->api_name = $api_name;
 
         $aliace = $this->getTableAlias();
-        $this->dbCriteria->mergeWith(array(
+        $this->dbCriteria->mergeWith([
             'condition' => "$aliace.api_name=:api_name",
-            'params'    => array(
+            'params'    => [
                 'api_name' => $api_name
-            )
-        ));
+            ]
+        ]);
         return $this;
     }
 
@@ -239,7 +239,8 @@ class MediaFile extends ActiveRecord
             if ($id = $model->getApi()->parse($source))
             {
                 $model->remote_id = $id;
-//                $model->getApi()->findByPk($id);
+                $model->api_name = $api;
+                $model->getApi()->findByPk($id);
                 break;
             }
         }
@@ -251,7 +252,7 @@ class MediaFile extends ActiveRecord
     public function getNameWithoutExt()
     {
         $name   = pathinfo($this->remote_id, PATHINFO_FILENAME);
-        $params = array(' ' => '');
+        $params = [' ' => ''];
         if (self::FILE_POSTFIX)
         {
             $params[self::FILE_POSTFIX] = '';
@@ -292,9 +293,9 @@ class MediaFile extends ActiveRecord
             $criteria->mergeWith($crit);
         }
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
             'criteria' => $criteria
-        ));
+        ]);
     }
 
 
@@ -308,9 +309,9 @@ class MediaFile extends ActiveRecord
     public function getDownloadUrl()
     {
         $hash = $this->getHash();
-        return Yii::app()->getController()->createUrl('/media/mediaFile/downloadFile', array(
+        return Yii::app()->getController()->createUrl('/media/mediaFile/downloadFile', [
             'hash' => "{$hash}x{$this->id}",
-        ));
+        ]);
     }
 
 
@@ -334,8 +335,8 @@ class MediaFile extends ActiveRecord
             $file->tag($tag);
         }
 
-        return new ActiveDataProvider(get_called_class(), array(
+        return new ActiveDataProvider(get_called_class(), [
             'criteria' => $file->ordered()->getDbCriteria(),
-        ));
+        ]);
     }
 }

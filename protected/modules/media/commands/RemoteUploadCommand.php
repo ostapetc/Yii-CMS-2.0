@@ -5,12 +5,12 @@ class RemoteUploadCommand extends CConsoleCommand
     public function run()
     {
         $file = new MediaFile('search', 'local');
-        $file->getDbCriteria()->mergeWith(array(
+        $file->getDbCriteria()->mergeWith([
             'condition' => 'target_api IS NOT NULL AND status=:status',
-            'params' => array(
+            'params' => [
                 'status' => MediaFile::STATUS_ACTIVE
-            )
-        ));
+            ]
+        ]);
         $files = $file->findAll();
         foreach ($files as $file)
         {

@@ -7,6 +7,8 @@ class m121007_153730_create_user_parser extends DbMigration
 	    $user = new User();
         $user->id       = 555;
         $user->name     = 'Robot';
+        $user->birthdate = '1900-01-01';
+        $user->gender = User::GENDER_MAN;
         $user->email    = 'robot@factory.com';
         $user->status   = User::STATUS_BLOCKED;
         $user->password = 'Robot';

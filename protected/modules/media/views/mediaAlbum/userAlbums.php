@@ -4,26 +4,26 @@
             <?
             if ($is_my)
             {
-                echo CHtml::link('<i class="icon-plus-sign"></i> '.t('Создать новый альбом'), array('/media/mediaAlbum/createUsers'), array(
+                echo CHtml::link('<i class="icon-plus-sign"></i> '.t('Создать новый альбом'), ['/media/mediaAlbum/createUsers'], [
                     'class'      => 'modal-link btn',
                     'data-title' => 'Создание нового фото-альбома'
-                ));
+                ]);
             }
             ?>
         </div>
     </div>
 
     <?
-    $this->widget('ListView', array(
+    $this->widget('ListView', [
         'id'=>'user_albums',
         'template' => "{pager}\n{items}\n{pager}",
         'dataProvider' => $dp,
         'itemView' => '_album',
         'itemsTagName' => 'ul',
         'itemsCssClass' => 'thumbnails',
-        'htmlOptions' => array(
+        'htmlOptions' => [
             'class' => 'image-gallery'
-        )
-    ));
+        ]
+    ]);
     ?>
 </div>

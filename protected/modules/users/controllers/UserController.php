@@ -382,17 +382,18 @@ class UserController extends ClientController
         {
             $this->redirect(array('/users/user/login'));
         }
-
         $user = $this->loadModel(Yii::app()->user->id);
 
         $form = new Form('users.SelfDataForm', $user);
         $user->scenario = User::SCENARIO_UPDATE_SELF_DATA;
 
         $this->performAjaxValidation($user);
-        if ($form->submitted() && $user->save())
+        if ($form->submitted() )
         {
+            $user->save();;
             $this->redirect($user->url);
         }
+
 
         $this->render('updateSelfData', array(
             'model' => $user,

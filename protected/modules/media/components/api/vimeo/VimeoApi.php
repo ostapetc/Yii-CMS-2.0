@@ -10,10 +10,10 @@ class VimeoApi extends ApiAbstract
     public function getPlayerUrl()
     {
         return 'http://player.vimeo.com/video/38732855?title=1&' .
-            http_build_query(array(//            'oid'  => $this->oid,
+            http_build_query([//            'oid'  => $this->oid,
 //            'id'   => $this->id,
 //            'hash' => $this->hash
-            ));
+            ]);
     }
 
 
@@ -70,20 +70,20 @@ class VimeoApi extends ApiAbstract
     }
 
 
-    public function search($props = array())
+    public function search($props = [])
     {
         $criteria = clone $this->getDbCriteria();
         $criteria->mergeWith($props);
-        $dp = new YouTubeApiDataProvider(new YouTubeApi(), array(
+        $dp = new YouTubeApiDataProvider(new YouTubeApi(), [
             'criteria' => $criteria
-        ));
+        ]);
         return $dp;
     }
 
 
     public function attributeNames()
     {
-        return array(
+        return [
             'title',
             'img',
             'player_url',
@@ -92,7 +92,7 @@ class VimeoApi extends ApiAbstract
             'id',
             'hash',
             'hd'
-        );
+        ];
     }
 
 

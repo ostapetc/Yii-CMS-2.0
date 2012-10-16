@@ -14,11 +14,11 @@ class VkApi extends ApiAbstract
 
     public function getPlayerUrl()
     {
-        return 'http://vk.com/video_ext.php?' . http_build_query(array(
+        return 'http://vk.com/video_ext.php?' . http_build_query([
             'oid'  => $this->oid,
             'id'   => $this->id,
             'hash' => $this->hash
-        ));
+        ]);
     }
 
 
@@ -75,20 +75,20 @@ class VkApi extends ApiAbstract
     }
 
 
-    public function search($props = array())
+    public function search($props = [])
     {
         $criteria = clone $this->getDbCriteria();
         $criteria->mergeWith($props);
-        $dp = new YouTubeApiDataProvider(new YouTubeApi(), array(
+        $dp = new YouTubeApiDataProvider(new YouTubeApi(), [
             'criteria' => $criteria
-        ));
+        ]);
         return $dp;
     }
 
 
     public function attributeNames()
     {
-        return array(
+        return [
             'title',
             'img',
             'player_url',
@@ -97,7 +97,7 @@ class VkApi extends ApiAbstract
             'id',
             'hash',
             'hd'
-        );
+        ];
     }
 
 

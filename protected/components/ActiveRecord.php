@@ -234,7 +234,7 @@ abstract class ActiveRecord extends CActiveRecord
      * @param string $operator
      * @return self
      */
-    public function in($row, $values, $operator = 'AND')
+    public function addInCondition($row, $values, $operator = 'AND')
     {
         $this->getDbCriteria()->addInCondition($row, $values, $operator);
         return $this;

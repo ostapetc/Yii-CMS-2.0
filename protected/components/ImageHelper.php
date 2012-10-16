@@ -1,80 +1,5 @@
 <?
-ini_set("memory_limit", -1); //GD - memory killer
-
-/*Надо рефакторить*/
-class ImageHolder //Класс Image занять под расширение
-{
-    private $_htmlOptions;
-    private $_watermark;
-
-    private $_dir;
-    private $_file;
-    private $_size;
-    private $_crop;
-
-    public function crop()
-    {
-        $this->_crop = true;
-        return $this;
-    }
-
-
-    public function setSize(array $size)
-    {
-        $this->_size = $size;
-        return $this;
-    }
-
-    public function load($dir, $file)
-    {
-        $this->_dir  = $dir;
-        $this->_file = $file;
-        return $this;
-    }
-
-
-    public function __toString()
-    {
-        try
-        {
-            $this->_htmlOptions['width'] = $this->_size['width'];
-            $this->_htmlOptions['height'] = $this->_size['height'];
-
-            return CHtml::image($this->getSrc(), '', $this->_htmlOptions);
-        }
-        catch (Exception $e)
-        {
-            Yii::app()->handleException($e);
-        }
-    }
-
-
-    public function isRealImage()
-    {
-        $src = $this->getSrc();
-        return $src && is_file(Yii::getPathOfAlias('webroot').$src);
-    }
-
-    public function getSrc()
-    {
-        return ImageHelper::process($this->_dir, $this->_file, $this->_size, $this->_crop);
-    }
-
-
-    public function htmlOptions($htmlOptions)
-    {
-        $this->_htmlOptions = $htmlOptions;
-        return $this;
-    }
-
-
-    public function watermark()
-    {
-        $this->_watermark = true;
-        return $this;
-    }
-}
-
+ini_set("memory_limit", '1G'); //GD - memory killer
 class ImageHelper
 {
     public static function placeholder(array $size, $text = null, $only_url = false)
@@ -92,15 +17,15 @@ class ImageHelper
         }
     }
 
+    public static function thumbSrc($dir, $file, array $size, $crop = false)
+    {
+        return static::process($dir, $file, $size, $crop);
+    }
+
     public static function thumb($dir, $file, array $size, $crop = false)
-     {
-         $img = new ImageHolder();
-         $img->load($dir, $file)->setSize($size);
-         if ($crop) {
-             $img->crop();
-         }
-         return $img;
-     }
+    {
+        return CHtml::image(static::process($dir, $file, $size, $crop), '', $size);
+    }
  
 
     public static function process($dir, $file, array $size, $crop = false)
