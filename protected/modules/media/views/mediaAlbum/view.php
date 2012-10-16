@@ -16,8 +16,8 @@
             'exist_files_action' => '/media/mediaFile/existFiles'
         ));
 
-        Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
-                $.fn.yiiListView.update('photos');
+        Yii::app()->clientScript->registerScript('close_'.$widget->getId(), "$('#modal_{$widget->getId()}').on('hide',function(event) {
+            $.fn.yiiListView.update('photos');
         });");
     }
     ?>
