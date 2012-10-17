@@ -16,11 +16,12 @@ $conf = CMap::mergeArray(require ('main.php'), array(
         $assets = Yii::getPathOfAlias('webroot.assets');
         $runtime = Yii::getPathOfAlias('application.runtime');
         try {
-            is_dir($assets) or (@mkdir($assets, 755));
-            is_dir($runtime) or (@mkdir($runtime, 755));
+            is_dir($assets) or (@mkdir($assets, 0755));
+            is_dir($runtime) or (@mkdir($runtime, 0755));
         } catch (Exception $e) {}
     }
 ));
 unset($conf['components']['authManager']);
 unset($conf['components']['log']);
+unset($conf['components']['cache']);
 return $conf;
