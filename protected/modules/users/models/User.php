@@ -339,6 +339,12 @@ class User extends ActiveRecord
                 'object_id',
                 'condition' => "file_albums.model_id = '".get_class($this)."'"
             ),
+            'file_albums_first' => array(
+                self::HAS_ONE ,
+                'MediaAlbum',
+                'object_id',
+                'condition' => "file_albums_first.model_id = '".get_class($this)."'"
+            ),
             'file_albums_count' => array(
                 self::STAT ,
                 'MediaAlbum',

@@ -63,57 +63,32 @@ class PageController extends ClientController
             array(
                 'actions'  => array('create', 'update'),
                 'sidebars' => array(
-                    array(
-                        'widget',
-                        'content.portlets.SectionCreateSidebar',
-                    ),
-                    array(
-                        'widget',
-                        'tags.portlets.TagCreateSidebar',
-                    ),
-                    array(
-                        'partial',
-                        'content.views.page._sidebarFormNotices'
-                    )
+                    'widget' => 'content.portlets.SectionCreateSidebar',
+                    'widget' => 'tags.portlets.TagCreateSidebar',
+                    'partial' => 'content.views.page._sidebarFormNotices'
                 )
             ),
             array(
                 'actions'  => array('index'),
                 'sidebars' => array(
-                    array(
-                        'widget',
-                        'content.portlets.PageSectionsSidebar'
-                    ),
-                    array(
-                        'widget',
-                        'comments.portlets.CommentsSidebar',
-                    ),
-                    array(
-                        'widget',
-                        'media.portlets.YouTubePlayList'
-                    )
-                    /*array(
-                        'widget',
-                        'content.portlets.NavigatorSidebar',
-                    ),*/
+                    'widget' => 'content.portlets.PageSectionsSidebar',
+                    'widget' => 'comments.portlets.CommentsSidebar',
+                    'widget' => 'media.portlets.YouTubePlayList'
+                    /*
+                    'widget' => 'content.portlets.NavigatorSidebar',
+                    */
                 )
             ),
             array(
                 'actions'  => array('view'),
                 'sidebars' => array(
-                    array(
-                        'widget',
-                        'content.portlets.PageInfoSidebar'
-                    )
+                    'widget' => 'content.portlets.PageInfoSidebar'
                 )
             ),
             array(
                 'actions'  => array('userPages'),
                 'sidebars' => array(
-                    array(
-                        'widget',
-                        'content.portlets.userPagesSidebar'
-                    )
+                    'widget' => 'content.portlets.userPagesSidebar'
                 )
             ),
         );

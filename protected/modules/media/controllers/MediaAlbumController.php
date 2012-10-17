@@ -91,19 +91,26 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionManage($user_id = null)
+    public $user;
+
+    public function actionManage($user_id = null, $album_id = null)
     {
         if ($user_id === null)
         {
             $user_id = Yii::app()->user->model->id;
         }
-        $user             = User::model()->throw404IfNull()->findByPk($user_id);
-        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $dp               = MediaAlbum::getDataProvider($user);
+        $this->user = User::model()->throw404IfNull()->findByPk($user_id);
+        if ($album_id === null)
+        {
+            $album = $this->user->file_albums_first;
+        }
+        else
+        {
+            $album = MediaAlbum::model()->throw404IfNull()->findByPk($album_id);
+        }
+
         $this->render('userAlbums', [
-            'user'  => $user,
-            'is_my' => Yii::app()->user->model->id == $user_id,
-            'dp'    => $dp
+            'album'  => $album,
         ]);
     }
 

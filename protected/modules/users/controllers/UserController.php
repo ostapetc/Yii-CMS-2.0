@@ -35,14 +35,8 @@ class UserController extends ClientController
                     'updateSelfData'
                 ),
                 'sidebars' => array(
-                    array(
-                        'widget',
-                        'application.modules.users.portlets.UserPageSidebar'
-                    ),
-                    array(
-                        'widget',
-                        'application.modules.users.portlets.OwnerPageSidebar'
-                    )
+                    'widget' => 'application.modules.users.portlets.UserPageSidebar',
+                    'widget' => 'application.modules.users.portlets.OwnerPageSidebar'
                 ),
             ),
             array(
@@ -50,10 +44,7 @@ class UserController extends ClientController
                     'index'
                 ),
                 'sidebars' => array(
-                    array(
-                        'widget',
-                        'application.modules.users.portlets.UserFilterSidebar'
-                    )
+                    'widget' => 'application.modules.users.portlets.UserFilterSidebar'
                 )
             )
         );

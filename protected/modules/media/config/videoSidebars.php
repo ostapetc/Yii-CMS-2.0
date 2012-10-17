@@ -3,9 +3,8 @@ return [
     [
         'actions'  => ['manage'],
         'sidebars' => [
-            [
-                'widget',
-                'media.portlets.YouTubePlayList',
+            'widget' => [
+                'class' => 'media.portlets.YouTubePlayList',
             ],
         ]
     ],
