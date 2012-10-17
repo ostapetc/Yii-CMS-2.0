@@ -127,6 +127,10 @@ class InstallController extends ClientController
         {
             InstallHelper::parseConfig($file, $data);
         }
+        $webroot = Yii::getPathOfAlias('webroot');
+        $app = Yii::getPathOfAlias('application');
+        chmod($webroot . '/assets', 0777);
+        chmod($app . '/runtime', 0777);
 
 //        @unlink(Yii::getPathOfAlias('webroot.insall').'.php');
 //        @unlink(Yii::getPathOfAlias('application.config.install').'.php');
