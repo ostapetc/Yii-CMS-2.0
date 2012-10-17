@@ -14,6 +14,17 @@ class MediaAlbumController extends ClientController
     }
 
 
+    public function subMenuItems()
+    {
+        return Configuration::getConfigArray('media.submenu');
+    }
+
+
+    public function sidebars()
+    {
+        return Configuration::getConfigArray('media.fileSidebars');
+    }
+
     public function actionCreateUsers()
     {
         $model            = new MediaAlbum(MediaAlbum::SCENARIO_CREATE_USERS);

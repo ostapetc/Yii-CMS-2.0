@@ -1,6 +1,5 @@
 <?
-class MediaVideoController extends ClientController
-{
+class MediaVideoController extends ClientController {
 
     public static function actionsTitles()
     {
@@ -12,96 +11,24 @@ class MediaVideoController extends ClientController
 
     public function subMenuItems()
     {
-        return [
-            [
-                'label' => t('Все'),
-                'url'   => ['content/page/index']
-            ],
-            [
-                'label' => t('Лучшие'),
-                'url'   => ['content/page/top']
-            ],
-            [
-                'label'   => Yii::app()->user->isGuest
-                    ? : t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
-                'url'     => ['/page/user/' . Yii::app()->user->id],
-                'visible' => !Yii::app()->user->isGuest
-            ]
-        ];
+        return Configuration::getConfigArray('media.submenu');
     }
 
 
     public function sidebars()
     {
-        return [
-            [
-                'actions'  => ['create', 'update'],
-                'sidebars' => [
-                    [
-                        'widget',
-                        'content.portlets.SectionCreateSidebar',
-                    ],
-                    [
-                        'widget',
-                        'tags.portlets.TagCreateSidebar',
-                    ],
-                    [
-                        'partial',
-                        'content.views.page._sidebarFormNotices'
-                    ]
-                ]
-            ],
-            [
-                'actions'  => ['index'],
-                'sidebars' => [
-                    [
-                        'widget',
-                        'content.portlets.PageSectionsSidebar'
-                    ],
-                    [
-                        'widget',
-                        'comments.portlets.CommentsSidebar',
-                    ],
-                    [
-                        'widget',
-                        'media.portlets.YouTubePlayList'
-                    ]
-                    /*[
-                        'widget',
-                        'content.portlets.NavigatorSidebar',
-                    ],*/
-                ]
-            ],
-            [
-                'actions'  => ['view'],
-                'sidebars' => [
-                    [
-                        'widget',
-                        'content.portlets.PageInfoSidebar'
-                    ]
-                ]
-            ],
-            [
-                'actions'  => ['userPages'],
-                'sidebars' => [
-                    [
-                        'widget',
-                        'content.portlets.userPagesSidebar'
-                    ]
-                ]
-            ],
-        ];
+        return Configuration::getConfigArray('media.videoSidebars');
     }
 
 
     public function actionManage($user_id = null)
     {
-        if ($user_id === null)
-        {
-            $user_id = Yii::app()->user->model->id;
+        if ($user_id === null) {
+            $user = null;
+        } else {
+            $user = User::model()->throw404IfNull()->findByPk($user_id);
+            $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         }
-        $user = User::model()->throw404IfNull()->findByPk($user_id);
-        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
         $dp = MediaFile::model()->getDataProvider($user);
         $this->render('userVideos', [
             'model' => $user,

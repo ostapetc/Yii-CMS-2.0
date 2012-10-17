@@ -5,19 +5,21 @@
                 <i class="icon-chevron-left"></i> Назад к Новостям
             </a>
             <?
-            $widget = $this->widget('media.portlets.Uploader', [
-                //'as_modal'   => false,
-                'name'          => 'uploader',
-                'model'         => $model,
-                'tag'           => 'videos',
-                'data_type'     => 'video',
-                'upload_action' => '/media/mediaFile/upload',
-                'link_parser_action' => 'media/mediaFile/linkParser'
-            ]);
+            if ($is_my) {
+                $widget = $this->widget('media.portlets.Uploader', [
+                    //'as_modal'   => false,
+                    'name'          => 'uploader',
+                    'model'         => $model,
+                    'tag'           => 'videos',
+                    'data_type'     => 'video',
+                    'upload_action' => '/media/mediaFile/upload',
+                    'link_parser_action' => 'media/mediaFile/linkParser'
+                ]);
 
-            Yii::app()->clientScript->registerScript('close_' . $widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
-                $.fn.yiiListView.update('videos');
-            });");
+                Yii::app()->clientScript->registerScript('close_' . $widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
+                    $.fn.yiiListView.update('videos');
+                });");
+            }
             ?>
         </div>
     </div>
