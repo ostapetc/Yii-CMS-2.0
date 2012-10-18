@@ -1,7 +1,7 @@
 <?php
 return [
     [
-        'actions'  => ['manage'],
+        'actions'  => ['view'],
         'sidebars' => [
             'widget' => [
                 'class' => 'media.portlets.MediaAlbumList',

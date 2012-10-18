@@ -82,6 +82,10 @@ class MediaFile extends ActiveRecord
     }
 
 
+    /**
+     * @param string $className
+     * @return self
+     */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -186,20 +190,14 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public static function getConfiguration($api_name = null)
+    public static function getConfiguration($api_name)
     {
-        if (!self::$configuration)
+        if (!self::$configuration[$api_name])
         {
             self::$configuration = new Configuration('media.midiaFile');
         }
-        if ($api_name)
-        {
-            return self::$configuration[$api_name];
-        }
-
-        return self::$configuration;
+        return self::$configuration[$api_name];
     }
-
 
     public function setApi($api_name)
     {
@@ -321,13 +319,17 @@ class MediaFile extends ActiveRecord
     }
 
 
+    /**
+     * @param null $model
+     * @param null $tag
+     * @return ActiveDataProvider
+     */
     public function getDataProvider($model = null, $tag = null)
     {
         $file = clone $this;
         if ($model instanceof CActiveRecord)
         {
-            $pk = $model->getIsNewRecord() ? $model->getPrimaryKey() : null;
-
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
             $file->parent(get_class($model), $pk);
         }
         if ($tag !== null)

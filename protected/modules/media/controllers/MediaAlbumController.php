@@ -49,21 +49,6 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionView($id)
-    {
-        $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
-        $this->page_title = 'Альбом: ' . $model->title;
-        $form             = new Form('Media.UploadFilesForm', $model);
-        $file             = new MediaFile;
-        $dp               = $file->getDataProvider($model, 'files');
-        $dp->pagination   = false;
-
-        $this->render('view', [
-            'model' => $model,
-            'form'  => $form,
-            'dp'    => $dp
-        ]);
-    }
 
 
     public function actionUpload($model_id, $object_id, $tag)
@@ -91,26 +76,36 @@ class MediaAlbumController extends ClientController
     }
 
 
+    public function actionView($id)
+    {
+        $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
+        $this->page_title = 'Альбом: ' . $model->title;
+        $form             = new Form('Media.UploadFilesForm', $model);
+        $dp               = MediaFile::model()->getDataProvider($model, 'files');
+        $dp->pagination   = false;
+
+        $this->render('view', [
+            'model' => $model,
+            'form'  => $form,
+            'dp'    => $dp
+        ]);
+    }
+
+
     public $user;
 
-    public function actionManage($user_id = null, $album_id = null)
+
+    public function actionManage($user_id = null)
     {
         if ($user_id === null)
         {
             $user_id = Yii::app()->user->model->id;
         }
         $this->user = User::model()->throw404IfNull()->findByPk($user_id);
-        if ($album_id === null)
-        {
-            $album = $this->user->file_albums_first;
-        }
-        else
-        {
-            $album = MediaAlbum::model()->throw404IfNull()->findByPk($album_id);
-        }
 
         $this->render('userAlbums', [
-            'album'  => $album,
+            'dp' => MediaAlbum::getDataProvider($this->user),
+            'is_my'   => false
         ]);
     }
 

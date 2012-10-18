@@ -48,7 +48,7 @@ class MediaAlbum extends ActiveRecord
    ];
 
     public static $image_size = [
-        'width'  => 150,
+        'width'  => 160,
         'height' => 80
     ];
 
@@ -168,7 +168,9 @@ class MediaAlbum extends ActiveRecord
 
     public function getHref()
     {
-        return Yii::app()->controller->createUrl('/media/mediaAlbum/view', ['id' => $this->id]);
+        return Yii::app()->controller->createUrl('/media/mediaAlbum/view', [
+            'id' => $this->id,
+        ]);
     }
 
 
