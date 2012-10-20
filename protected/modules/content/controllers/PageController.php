@@ -75,6 +75,7 @@ class PageController extends ClientController
                         'type' => 'partial',
                         'class' => 'content.views.page._sidebarFormNotices',
                     ),
+                )
             ),
             array(
                 'actions'  => array('index'),

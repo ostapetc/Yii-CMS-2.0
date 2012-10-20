@@ -1,3 +1,4 @@
+<h4>Альбомы</h4>
 <div class="user_albums">
     <div class="btn-toolbar">
         <div class="btn-group">
