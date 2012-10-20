@@ -97,15 +97,17 @@ class MediaAlbumController extends ClientController
 
     public function actionManage($user_id = null)
     {
-        if ($user_id === null)
+        if ($user_id)
         {
-            $user_id = Yii::app()->user->model->id;
+            $this->user = User::model()->throw404IfNull()->findByPk($user_id);
         }
-        $this->user = User::model()->throw404IfNull()->findByPk($user_id);
-
-        $this->render('userAlbums', [
-            'dp' => MediaAlbum::getDataProvider($this->user),
-            'is_my'   => false
+        else
+        {
+            $this->user = new User;
+        }
+        $this->render('manage', [
+            'dp'    => MediaAlbum::getDataProvider($this->user),
+            'is_my' => false
         ]);
     }
 

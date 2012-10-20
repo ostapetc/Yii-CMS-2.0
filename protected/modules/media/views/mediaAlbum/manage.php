@@ -2,7 +2,7 @@
     <div class="btn-toolbar">
         <div class="btn-group">
             <?
-            if ($this->is_my)
+            if ($is_my)
             {
                 echo CHtml::link('<i class="icon-plus-sign"></i> '.t('Создать новый альбом'), ['/media/mediaAlbum/createUsers'], [
                     'class'      => 'modal-link btn',
@@ -18,7 +18,7 @@
         'id'=>'user_albums',
         'template' => "{pager}\n{items}\n{pager}",
         'dataProvider' => $dp,
-        'itemView' => '_mediaAlbums',
+        'itemView' => '_album',
         'itemsTagName' => 'ul',
         'itemsCssClass' => 'thumbnails',
         'htmlOptions' => [

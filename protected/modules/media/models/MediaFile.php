@@ -190,13 +190,21 @@ class MediaFile extends ActiveRecord
     }
 
 
-    public static function getConfiguration($api_name)
+    public static function getConfiguration($api_name = null)
     {
-        if (!self::$configuration[$api_name])
+        if (!self::$configuration)
         {
             self::$configuration = new Configuration('media.midiaFile');
         }
-        return self::$configuration[$api_name];
+
+        if ($api_name)
+        {
+            return self::$configuration[$api_name];
+        }
+        else
+        {
+            return self::$configuration;
+        }
     }
 
     public function setApi($api_name)

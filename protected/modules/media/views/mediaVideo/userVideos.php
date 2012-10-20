@@ -1,9 +1,6 @@
 <div class="user_photos">
     <div class="btn-toolbar">
         <div class="btn-group">
-            <a class="btn" href="<?//= $this->createUrl('userAlbums', ['id' => $model->object_id]) ?>">
-                <i class="icon-chevron-left"></i> Назад к Новостям
-            </a>
             <?
             if ($is_my) {
                 $widget = $this->widget('media.portlets.Uploader', [

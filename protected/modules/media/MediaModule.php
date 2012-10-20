@@ -43,6 +43,7 @@ class MediaModule extends WebModule
     {
         return [
             '/usersAlbums/<user_id:\d*>' => '/media/mediaAlbum/manage',
+            '/usersAlbums/' => '/media/mediaAlbum/manage',
             '/album/<id:\d*>' => '/media/mediaAlbum/view',
             '/usersVideos/<user_id:\d*>' => '/media/mediaVideo/manage',
         ];

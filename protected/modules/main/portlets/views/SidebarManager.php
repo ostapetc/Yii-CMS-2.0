@@ -1,5 +1,7 @@
-<? foreach ($sidebars as $type => $sidebar): ?>
+<? foreach ($sidebars as $sidebar): ?>
     <?
+    $type = $sidebar['type'];
+    unset($sidebar['type']);
 
     if (is_string($sidebar))
     {

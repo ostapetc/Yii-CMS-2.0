@@ -1,7 +1,8 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
+ *
  * @property integer    $id
  * @property string     $model_id
  * @property integer    $object_id
@@ -9,7 +10,7 @@
  * @property string     $descr
  * @property string     $date_create
  * @property integer    $order
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property            $href
  * @property CComponent $owner           the owner component that this behavior is attached to.
@@ -18,15 +19,15 @@
  * @property            $updateUrl
  * @property            $createUrl
  * @property            $deleteUrl
- * 
+ *
  * !Relations - связи
  * @property TagRel[]   $tags_rels
  * @property            $tags
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MediaAlbum ordered()
  * @method   MediaAlbum last()
- * 
+ *
  */
 
 class MediaAlbum extends ActiveRecord
@@ -43,14 +44,15 @@ class MediaAlbum extends ActiveRecord
     ];
 
     public static $users_page_size = [
-        'width' => 260,
+        'width'  => 260,
         'height' => 100
-   ];
+    ];
 
     public static $image_size = [
         'width'  => 160,
         'height' => 80
     ];
+
 
     public function name()
     {
@@ -174,12 +176,22 @@ class MediaAlbum extends ActiveRecord
     }
 
 
-    public function parent($model_id, $id)
+    public function parent($model_id, $object_id)
     {
-        $alias = $this->getTableAlias();
+        $alias     = $this->getTableAlias();
+        $params    = [
+            'model_id' => $model_id
+        ];
+        $condition = "$alias.model_id=:model_id";
+        if ($object_id)
+        {
+            $condition .= " AND $alias.object_id=:object_id";
+            $params['object_id'] = $object_id;
+        }
         $this->getDbCriteria()->mergeWith([
-            'condition' => "$alias.model_id='$model_id' AND $alias.object_id='$id'",
-            'order'     => "$alias.order DESC"
+            'condition' => $condition,
+            'order'     => "$alias.order DESC",
+            'params'    => $params
         ]);
         return $this;
     }
@@ -221,11 +233,17 @@ class MediaAlbum extends ActiveRecord
         $this->isAttachedTo($user ? $user : Yii::app()->user->model);
     }
 
+
     public static function getDataProvider($model)
     {
         $file = new static;
+        if ($model instanceof CActiveRecord)
+        {
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
+            $file->parent(get_class($model), $pk);
+        }
         return new ActiveDataProvider(get_called_class(), [
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->last()->getDbCriteria(),
+            'criteria' => $file->last()->getDbCriteria(),
         ]);
     }
 }

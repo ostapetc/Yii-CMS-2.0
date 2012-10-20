@@ -7,10 +7,12 @@ class MediaAlbumList extends Widget
 
     public function init()
     {
-        $this->dp = MediaAlbum::getDataProvider(Yii::app()->user->getModel());
-        $this->dp->pagination = false;
+        if (!$this->dp) {
+            $this->dp = MediaAlbum::getDataProvider($this->user);
+            $this->dp->pagination = false;
+        }
         $this->render('mediaAlbums', array(
-//            'items' => $dp->getData(),
+            'dp' => $this->dp,
         ));
     }
 
