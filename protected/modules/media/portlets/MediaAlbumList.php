@@ -8,9 +8,9 @@ class MediaAlbumList extends Widget
 
     public function init()
     {
-        $this->render('mediaAlbums', array(
+        $this->render('mediaAlbums', [
             'dp' => $this->dp,
-        ));
+        ]);
     }
 
 }

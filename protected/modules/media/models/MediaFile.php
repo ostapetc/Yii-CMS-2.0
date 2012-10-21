@@ -56,6 +56,18 @@ class MediaFile extends ActiveRecord
     const STATUS_ACTIVE      = 'active';
     const STATUS_DELETED     = 'deleted';
 
+    const TYPE_IMG   = 'img';
+    const TYPE_VIDEO = 'video';
+    const TYPE_AUDIO = 'audio';
+    const TYPE_DOC   = 'doc';
+
+    public $types = [
+        self::TYPE_IMG   => self::TYPE_IMG,
+        self::TYPE_VIDEO => self::TYPE_VIDEO,
+        self::TYPE_AUDIO => self::TYPE_AUDIO,
+        self::TYPE_DOC   => self::TYPE_DOC,
+    ];
+
     public static $configuration;
 
     public $error;
@@ -63,7 +75,7 @@ class MediaFile extends ActiveRecord
     private $_api_name;
 
 
-    public function __construct($scenario = 'insert', $api_name = 'local')
+    public function __construct($scenario = 'insert', $api_name = null)
     {
         $this->_api_name = $api_name;
         parent::__construct($scenario);
@@ -72,7 +84,10 @@ class MediaFile extends ActiveRecord
 
     public function init()
     {
-        $this->setApi($this->_api_name);
+        if ($this->_api_name)
+        {
+            $this->setApi($this->_api_name);
+        }
     }
 
 
@@ -84,6 +99,7 @@ class MediaFile extends ActiveRecord
 
     /**
      * @param string $className
+     *
      * @return self
      */
     public static function model($className = __CLASS__)
@@ -111,6 +127,7 @@ class MediaFile extends ActiveRecord
         ];
     }
 
+
     public function toJson()
     {
         return [
@@ -122,6 +139,7 @@ class MediaFile extends ActiveRecord
             'api'        => $this->api_name,
         ];
     }
+
 
     public function parent($model_id, $object_id = null)
     {
@@ -175,6 +193,17 @@ class MediaFile extends ActiveRecord
     }
 
 
+    public function parentModel($model, $positive = true)
+    {
+        if ($model)
+        {
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
+            return $this->parent(get_class($model), $pk, $positive);
+        }
+        return $this;
+    }
+
+
     public function getApiName()
     {
         return $this->_api_name;
@@ -206,6 +235,7 @@ class MediaFile extends ActiveRecord
             return self::$configuration;
         }
     }
+
 
     public function setApi($api_name)
     {
@@ -245,7 +275,7 @@ class MediaFile extends ActiveRecord
             if ($id = $model->getApi()->parse($source))
             {
                 $model->remote_id = $id;
-                $model->api_name = $api;
+                $model->api_name  = $api;
                 $model->getApi()->findByPk($id);
                 break;
             }
@@ -330,6 +360,7 @@ class MediaFile extends ActiveRecord
     /**
      * @param null $model
      * @param null $tag
+     *
      * @return ActiveDataProvider
      */
     public function getDataProvider($model = null, $tag = null)

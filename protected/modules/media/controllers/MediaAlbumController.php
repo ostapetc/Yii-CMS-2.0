@@ -106,9 +106,11 @@ class MediaAlbumController extends ClientController
         {
             $this->user = new User;
         }
+
+        $album = new MediaAlbum;
         $this->render('manage', [
-            'dp'    => new ActiveDataProvider('MediaAlbum', [
-                'criteria' => MediaAlbum::model()->parentModel($this->user)->getDbCriteria(),
+            'dp'    => new ActiveDataProvider($album, [
+                'criteria' => $album->parentModel($this->user)->getDbCriteria(),
                 'pagination' => false
             ]),
             'is_my' => false

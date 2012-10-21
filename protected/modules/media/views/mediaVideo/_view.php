@@ -1,9 +1,9 @@
 <?
-$img = $data->getPreview(['width' => 310, 'height' => 310]);
+$img = $data->getPreview(['width' => 320, 'height' => 260]);
 
 if ($img) {
 ?>
-    <li id="File_<?=$data->id?>" style="width: 321px;">
+    <li id="File_<?=$data->id?>" style="width: 331px;">
         <?
         echo CHtml::tag('span', [
             "rel" => "album_photos",

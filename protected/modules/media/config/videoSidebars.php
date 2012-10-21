@@ -5,7 +5,11 @@ return [
         'sidebars' => [
             [
                 'type' => 'widget',
-                'class' => 'media.portlets.YouTubePlayList',
+                'class' => 'media.portlets.VideoSearch',
+            ],
+            [
+                'type' => 'widget',
+                'class' => 'media.portlets.VideoPlayList',
             ],
         ]
     ],

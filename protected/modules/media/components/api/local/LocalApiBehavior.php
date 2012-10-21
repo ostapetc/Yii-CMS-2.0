@@ -3,18 +3,6 @@ Yii::import('media.components.api.abstract.*');
 Yii::import('media.components.api.local.*');
 class LocalApiBehavior extends ApiBehaviorAbstract
 {
-    const TYPE_IMG   = 'img';
-    const TYPE_VIDEO = 'video';
-    const TYPE_AUDIO = 'audio';
-    const TYPE_DOC   = 'doc';
-
-    public $types = [
-        self::TYPE_IMG   => self::TYPE_IMG,
-        self::TYPE_VIDEO => self::TYPE_VIDEO,
-        self::TYPE_AUDIO => self::TYPE_AUDIO,
-        self::TYPE_DOC   => self::TYPE_DOC,
-    ];
-
     public $api_map;
     public $new_record_status;
 
@@ -72,13 +60,13 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         switch (true)
         {
             case $this->typeIs($doc):
-                return self::TYPE_DOC;
+                return MediaFile::TYPE_DOC;
             case $this->typeIs('audio'):
-                return self::TYPE_AUDIO;
+                return MediaFile::TYPE_AUDIO;
             case $this->typeIs('video'):
-                return self::TYPE_VIDEO;
+                return MediaFile::TYPE_VIDEO;
             case $this->typeIs('image'):
-                return self::TYPE_IMG;
+                return MediaFile::TYPE_IMG;
         }
     }
 
