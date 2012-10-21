@@ -2,24 +2,28 @@
 /** 
  * 
  * !Attributes - атрибуты БД
- * @property string           $source
- * @property string           $source_url
- * @property string           $image
  * @property string           $language
  * @property string           $status
+ * @property string           $type
  * @property integer          $comments_denied
  * @property string           $id
  * @property string           $user_id
+ * @property string           $source
+ * @property string           $source_url
  * @property string           $title
- * @property string           $url
  * @property string           $text
+ * @property string           $image
  * @property string           $date_create
  * @property integer          $order
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property                  $href
  * @property                  $content
+ * @property                  $forumUrl
+ * @property                  $lastComment
+ * @property                  $imageSrc
+ * @property                  $textPreview
  * @property                  $errorsFlatArray
+ * @property string           $url
  * @property                  $updateUrl
  * @property                  $createUrl
  * @property                  $deleteUrl
@@ -34,8 +38,6 @@
  * @property PageSection[]    $sections
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   Page             published()
- * @method   Page             sitemap()
  * @method   Page             ordered()
  * @method   Page             last()
  * 

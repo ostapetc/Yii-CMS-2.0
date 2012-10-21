@@ -44,13 +44,9 @@ class YiiComponentProperty extends DocBlockLine
     {
         try
         {
-            if ($this->canDraw())
-            {
-                $type    = $this->type ? $this->type : $this->_oldReadType;
-                $comment = $this->comment ? $this->comment : $this->_oldReadComment;
-                return $this->getLine($this->tag, $type, "\$" . $this->name, $comment);
-            }
-            return '';
+            $type    = $this->type ? $this->type : $this->_oldReadType;
+            $comment = $this->comment ? $this->comment : $this->_oldReadComment;
+            return $this->getLine($this->tag, $type, "\$" . $this->name, $comment);
         } catch (Exception $e)
         {
             Yii::app()->handleException($e);
@@ -248,8 +244,9 @@ class YiiComponentProperty extends DocBlockLine
     }
 
 
-    public function setOldValues($properties)
+    public function setOldValues($object)
     {
+        $properties = DocBlockParser::parseClass($object)->properties;
         if (isset($properties[$this->name]))
         {
             $this->_oldReadType    = $properties[$this->name]['type'];

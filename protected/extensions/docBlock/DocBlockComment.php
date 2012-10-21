@@ -19,6 +19,10 @@ class DocBlockComment extends DocBlockLine
     {
     }
 
+    public function setOldValues($object)
+    {
+
+    }
 
     /**
      * @return string combined doc string

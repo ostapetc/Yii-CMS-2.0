@@ -63,6 +63,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
             $props = array_merge($props, $this->$item);
         }
 
+        $props = array_merge($props, $this->getUsers($this->object, $props));
         parent::__construct($props);
     }
 
@@ -139,7 +140,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
         $property->iterator = $this;
         $property->populate($this->object);
         $property->afterPopulate();
-        $property->setOldValues(DocBlockParser::parseClass($this->object)->properties);
+        $property->setOldValues($this->object);
         return $property;
     }
 
@@ -149,7 +150,14 @@ class YiiComponentPropertyIterator extends ArrayIterator
         $result = array();
         foreach ($props as $prop)
         {
-            $result[$prop] = $this->createLineInstance($prop, $optioins);
+            if (is_string($prop))
+            {
+                $result[$prop] = $this->createLineInstance($prop, $optioins);
+            }
+            else
+            {
+                $result[] = $prop;
+            }
         }
         return $result;
     }
@@ -176,6 +184,67 @@ class YiiComponentPropertyIterator extends ArrayIterator
         return $object instanceof CActiveRecord ? array_keys($object->scopes()) : array();
     }
 
+
+    /**
+     * get users properties
+     *
+     * @return array
+     */
+    public function getUsers($object, $props)
+    {
+        //try to get or set all @property from current doc, for finding user writable properties
+        $parser = DocBlockParser::parseClass(get_class($object));
+        $tmp = array();
+        foreach ($parser->properties as $prop => $data)
+        {
+            if (array_key_exists($prop, $props))
+            {
+                continue;
+            }
+
+            try
+            {
+                $object->$prop;
+            }
+            catch(Exception $e)
+            {
+                try
+                {
+                    $object->$prop = true;
+                }
+                catch (Exception $e)
+                {
+                    continue;
+                }
+            }
+            $tmp[] = $prop;
+        }
+
+        $res = $this->instantAll($tmp, $this->propertyOptions);
+
+        $tmp = array();
+        foreach ($parser->methods as $method => $data)
+        {
+            if (array_key_exists($method, $props))
+            {
+                continue;
+            }
+            try
+            {
+                $object->$method();
+            }
+            catch(Exception $e)
+            {
+                continue;
+            }
+
+            $tmp[] = $method;
+        }
+
+        $res = array_merge($res, $this->instantAll($tmp, $this->methodOptions));
+        $this->addComment($res, 'users');
+        return $res;
+    }
 
     /**
      * Get all accessors for object
@@ -206,6 +275,7 @@ class YiiComponentPropertyIterator extends ArrayIterator
                 $props = array_merge($props, $this->getAccessors($object->asa($id)));
             }
         }
+
         return $props;
     }
 
