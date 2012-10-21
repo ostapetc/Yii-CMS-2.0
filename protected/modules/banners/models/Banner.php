@@ -25,10 +25,6 @@
  * @method   Banner  ordered()
  * @method   Banner  last()
  * 
- * !Пользовательские свойства и методы
- * @property         $a
- * @method           b()              sddfasdf
- * 
  */
 
 class Banner extends ActiveRecord
@@ -57,29 +53,6 @@ class Banner extends ActiveRecord
         return 'banners';
     }
 
-    public function __call($name, $params)
-    {
-        if ($name == 'b')
-        {
-            return true;
-        }
-        else
-        {
-            return parent::__call($name, $params);
-        }
-    }
-
-    public function __get($name)
-    {
-        if ($name == 'a')
-        {
-            return true;
-        }
-        else
-        {
-            return parent::__get($name);
-        }
-    }
 
     public function name()
     {
