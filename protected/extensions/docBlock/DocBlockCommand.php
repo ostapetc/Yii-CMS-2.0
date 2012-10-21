@@ -79,11 +79,15 @@ class DocBlockCommand extends CConsoleCommand
             {
                 continue;
             }
-            $docBlock    = $this->getDockBlock($class, $object);
-            $file        = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
-            $content     = file_get_contents($file);
-            $fileContent = substr($content, strpos($content, "class $class"));
-            file_put_contents($file, '<?php' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
+            $docBlock     = $this->getDockBlock($class, $object);
+            $file         = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
+            $content      = file_get_contents($file);
+            $oldDockBlock = substr($content, strlen('<?' . PHP_EOL), strpos($content, "class $class"));
+            if ($docBlock !== $oldDockBlock)
+            {
+                $fileContent  = substr($content, strpos($content, "class $class"));
+                file_put_contents($file, '<?' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-<?php
+<?
 /** 
  * 
  * !Attributes - атрибуты БД
@@ -27,7 +27,7 @@
  * 
  * !Пользовательские свойства и методы
  * @property         $a
- * @method           b()              sdfasdf
+ * @method           b()              sddfasdf
  * 
  */
 
