@@ -1,8 +1,7 @@
 <?php
-/**
- *
+/** 
+ * 
  * !Attributes - атрибуты БД
- *
  * @property integer    $id
  * @property string     $model_id
  * @property integer    $object_id
@@ -10,8 +9,9 @@
  * @property string     $descr
  * @property string     $date_create
  * @property integer    $order
- *
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property            $parentModel
  * @property            $href
  * @property CComponent $owner           the owner component that this behavior is attached to.
  * @property            $errorsFlatArray
@@ -19,15 +19,16 @@
  * @property            $updateUrl
  * @property            $createUrl
  * @property            $deleteUrl
- *
+ * 
  * !Relations - связи
  * @property TagRel[]   $tags_rels
  * @property            $tags
- *
+ * @property int|null   $comments_count
+ * 
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MediaAlbum ordered()
  * @method   MediaAlbum last()
- *
+ * 
  */
 
 class MediaAlbum extends ActiveRecord
