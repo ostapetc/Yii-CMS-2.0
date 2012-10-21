@@ -41,3 +41,12 @@
     ]);
     ?>
 </div>
+<?=
+$this->renderPartial(
+    '_infoPanel',
+    array('page' => $model)
+);
+?>
+<br/>
+<br/>
+<? $this->widget('CommentsPortlet', array('model' => $model)); ?>

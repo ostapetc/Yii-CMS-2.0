@@ -132,21 +132,33 @@ class MediaAlbum extends ActiveRecord
     }
 
 
+    public function getParentModel()
+    {
+        return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
+    }
+
+
     public function relations()
     {
         return [
-            'tags_rels' => [
+            'tags_rels'      => [
                 self::HAS_MANY,
                 'TagRel',
                 'object_id',
                 'condition' => "model_id = '" . get_class($this) . "'"
             ],
-            'tags'      => [
+            'tags'           => [
                 self::HAS_MANY,
                 'Tag',
                 'tag_id',
                 'through' => 'tags_rels'
             ],
+            'comments_count' => array(
+                self::STAT,
+                'Comment',
+                'object_id',
+                'condition' => 'model_id = "Page"'
+            ),
         ];
     }
 
@@ -176,16 +188,28 @@ class MediaAlbum extends ActiveRecord
     }
 
 
-    public function parent($model_id, $object_id)
+    public function parentModel($model, $positive = true)
     {
+        if ($model)
+        {
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
+            return $this->parent(get_class($model), $pk, $positive);
+        }
+        return $this;
+    }
+
+
+    public function parent($model_id, $object_id, $positive = true)
+    {
+        $op        = $positive ? '=' : '<>';
         $alias     = $this->getTableAlias();
         $params    = [
             'model_id' => $model_id
         ];
-        $condition = "$alias.model_id=:model_id";
+        $condition = "$alias.model_id $op :model_id";
         if ($object_id)
         {
-            $condition .= " AND $alias.object_id=:object_id";
+            $condition .= " AND $alias.object_id $op :object_id";
             $params['object_id'] = $object_id;
         }
         $this->getDbCriteria()->mergeWith([
@@ -194,6 +218,12 @@ class MediaAlbum extends ActiveRecord
             'params'    => $params
         ]);
         return $this;
+    }
+
+
+    public function notParent($model_id, $object_id)
+    {
+        return $this->parent($model_id, $object_id, false);
     }
 
 
@@ -233,17 +263,4 @@ class MediaAlbum extends ActiveRecord
         $this->isAttachedTo($user ? $user : Yii::app()->user->model);
     }
 
-
-    public static function getDataProvider($model)
-    {
-        $file = new static;
-        if ($model instanceof CActiveRecord)
-        {
-            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
-            $file->parent(get_class($model), $pk);
-        }
-        return new ActiveDataProvider(get_called_class(), [
-            'criteria' => $file->last()->getDbCriteria(),
-        ]);
-    }
 }

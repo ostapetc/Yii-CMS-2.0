@@ -79,6 +79,7 @@ class MediaAlbumController extends ClientController
     public function actionView($id)
     {
         $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
+        $this->user       = $model->getParentModel();
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
         $dp               = MediaFile::model()->getDataProvider($model, 'files');
@@ -106,7 +107,10 @@ class MediaAlbumController extends ClientController
             $this->user = new User;
         }
         $this->render('manage', [
-            'dp'    => MediaAlbum::getDataProvider($this->user),
+            'dp'    => new ActiveDataProvider('MediaAlbum', [
+                'criteria' => MediaAlbum::model()->parentModel($this->user)->getDbCriteria(),
+                'pagination' => false
+            ]),
             'is_my' => false
         ]);
     }
