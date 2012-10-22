@@ -219,19 +219,20 @@ class MediaAlbum extends ActiveRecord
      * @param bool $positive
      * @return MediaAlbum
      */
-    public function parent($model_id, $object_id = null)
+    public function parent($model_id, $object_id = null, $positive)
     {
         $alias     = $this->getTableAlias();
 
+        $op = $positive ? '=' : '<>';
         $m_key = $alias . '_model_id';
-        $condition = "$alias.model_id=:$m_key";
+        $condition = "$alias.model_id $op :$m_key";
         $params    = [
             $m_key => $model_id
         ];
         if ($object_id !== null)
         {
             $o_key = $alias . '_object_id';
-            $condition .= " AND $alias.object_id=:$o_key";
+            $condition .= " AND $alias.object_id $op :$o_key";
             $params[$o_key] = $object_id;
         }
         $this->getDbCriteria()->mergeWith([

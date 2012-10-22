@@ -1,6 +1,7 @@
 <?php
 $mediaAlbumsDp = function($positive = true) {
     $album = new MediaAlbum;
+    $album->parentModel(Yii::app()->controller->user, $positive);
     return new ActiveDataProvider('MediaAlbum', [
         'criteria'   => $album->parentModel(Yii::app()->controller->user, $positive)->getDbCriteria(),
         'pagination' => false
