@@ -112,7 +112,7 @@ class MediaFileController extends ClientController {
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
 
-        $model = new MediaFile('insert');
+        $model = new MediaFile('insert', 'local');
         $model->object_id = $object_id;
         $model->model_id = $model_id;
         $model->tag = $tag;

@@ -170,7 +170,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
                 $this->setPk($this->getApiModel()->pk);
                 $owner->title      = $this->getApiModel()->old_name;
                 $owner->type       = $this->detectType();
-                $owner->target_api = $this->api_map[$owner->type];
+//                $owner->target_api = $this->api_map[$owner->type];
                 $owner->status     = $this->new_record_status;
                 return true;
             }

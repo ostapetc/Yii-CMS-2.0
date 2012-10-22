@@ -1,6 +1,8 @@
 <?
 class MediaAlbumController extends ClientController
 {
+    public $user;
+
     public static function actionsTitles()
     {
         return [
@@ -93,18 +95,17 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public $user;
-
-
     public function actionManage($user_id = null)
     {
         if ($user_id)
         {
             $this->user = User::model()->throw404IfNull()->findByPk($user_id);
+            $this->page_title = 'Альбомы пользователя: ' . $this->user->getLink();
         }
         else
         {
             $this->user = new User;
+            $this->page_title = 'Альбомы';
         }
 
         $album = new MediaAlbum;
@@ -113,9 +114,8 @@ class MediaAlbumController extends ClientController
                 'criteria' => $album->parentModel($this->user)->getDbCriteria(),
                 'pagination' => false
             ]),
-            'is_my' => false
+            'is_my' => Yii::app()->user->id == $user_id
         ]);
     }
-
 
 }
