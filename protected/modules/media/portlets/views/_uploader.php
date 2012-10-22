@@ -5,8 +5,7 @@
             <span>Добавить файлы...</span>
             <input type="file" name="file" <? echo $this->multiple ? 'multiple=""' : '' ?> />
         </span>
-        <span>Или</span>
-        <input placeholder="Вставьте ссылку на ресурс" type="text" class="link-parser"  />
+        <input placeholder="Вставьте ссылку на ресурс" type="text" class="link-parser" style="display: none;"  />
         <br class="clear"/>
     </div>
     <div id="<? echo $this->id ?>-drop-zone" class="drop-zone">
