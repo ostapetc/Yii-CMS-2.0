@@ -92,9 +92,7 @@
 
 .drop-zone{width: 92%; margin: 10px 0; padding: 20px; border: 1px dashed #999; font-size: 13px}
 /*.drop-zone-hover{border-color: #090; font-weight: bold; font-size: 16px}*/
-.uploader{margin-top: 10px; overflow: hidden !important; width: 750px !important;}
-    .uploader .fileupload-content{overflow-y: auto; max-height: 500px }
-    .uploader .name{width: 300px; overflow: hidden;}
+.uploader{}
     .uploader .progress{background: none;}
     .uploader .link-parser{display: none;}
 

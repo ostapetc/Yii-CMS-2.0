@@ -1,4 +1,4 @@
-<div id="<?= $this->id ?>">
+<div id="<?= $this->id ?>" class="uploader">
     <div class="fileupload-buttonbar">
         <span class="btn btn-success fileinput-button">
             <i class="icon-plus icon-white"></i>
