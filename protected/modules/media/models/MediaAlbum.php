@@ -169,19 +169,22 @@ class MediaAlbum extends ActiveRecord
     }
 
 
-    public function search()
+    public function search($model, $q = null)
     {
-        $criteria = new CDbCriteria;
-        $criteria->compare('id', $this->id, true);
-        $criteria->compare('title', $this->title, true);
-        $criteria->compare('descr', $this->descr, true);
-        $criteria->compare('status', $this->status, true);
+        $album = clone $this;
+        if ($q)
+        {
+            $criteria = $album->getDbCriteria();
+            $criteria->with = ['files'];
+            $criteria->together = true;
+            $criteria->compare('t.title', $q, true, 'OR');
+            $criteria->compare('t.descr', $q, true, 'OR');
+            $criteria->compare('files.title', $q, true, 'OR');
+        }
 
-        return new ActiveDataProvider(get_class($this), [
-            'criteria'   => $criteria,
-            'pagination' => [
-                'pageSize' => self::PAGE_SIZE
-            ]
+        return new ActiveDataProvider($album, [
+            'criteria' => $album->parentModel($this->user)->getDbCriteria(),
+            'pagination' => false
         ]);
     }
 

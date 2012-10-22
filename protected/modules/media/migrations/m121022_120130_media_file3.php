@@ -18,7 +18,7 @@ class m121022_120130_media_file3 extends DbMigration
                 `descr` TEXT NULL COMMENT 'Описание',
                 `order` INT(11) UNSIGNED NOT NULL COMMENT 'Порядок',
                 `type` ENUM('img','video','audio','doc') NULL DEFAULT NULL COMMENT 'Тип файла',
-                `api_name` VARCHAR(50) NULL DEFAULT NULL COMMENT 'API ',
+                `api_name` VARCHAR(50) NULL DEFAULT NULL COMMENT 'API',
                 `target_api` VARCHAR(20) NULL DEFAULT NULL COMMENT 'API в которое нужно сконвертировать',
                 `status` ENUM('on_moderate','active','deleted') NULL DEFAULT NULL COMMENT 'Статус',
                 PRIMARY KEY (`id`)
