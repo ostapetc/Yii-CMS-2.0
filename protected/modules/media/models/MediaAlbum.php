@@ -45,7 +45,7 @@ class MediaAlbum extends ActiveRecord
     ];
 
     public static $users_page_size = [
-        'width'  => 238,
+        'width'  => 218,
         'height' => 100
     ];
 
@@ -194,6 +194,11 @@ class MediaAlbum extends ActiveRecord
     }
 
 
+    /**
+     * @param      $model
+     * @param bool $positive
+     * @return MediaAlbum
+     */
     public function parentModel($model, $positive = true)
     {
         if ($model)
@@ -205,26 +210,34 @@ class MediaAlbum extends ActiveRecord
     }
 
 
-    public function parent($model_id, $object_id, $positive = true)
+    /**
+     * @param      $model_id
+     * @param      $object_id
+     * @param bool $positive
+     * @return MediaAlbum
+     */
+    public function parent($model_id, $object_id = null)
     {
-        $op        = $positive ? '=' : '<>';
         $alias     = $this->getTableAlias();
+
+        $m_key = $alias . '_model_id';
+        $condition = "$alias.model_id=:$m_key";
         $params    = [
-            'model_id' => $model_id
+            $m_key => $model_id
         ];
-        $condition = "$alias.model_id $op :model_id";
-        if ($object_id)
+        if ($object_id !== null)
         {
-            $condition .= " AND $alias.object_id $op :object_id";
-            $params['object_id'] = $object_id;
+            $o_key = $alias . '_object_id';
+            $condition .= " AND $alias.object_id=:$o_key";
+            $params[$o_key] = $object_id;
         }
         $this->getDbCriteria()->mergeWith([
             'condition' => $condition,
-            'order'     => "$alias.order DESC",
             'params'    => $params
         ]);
         return $this;
     }
+
 
 
     public function notParent($model_id, $object_id)

@@ -134,14 +134,17 @@ class MediaFile extends ActiveRecord
     public function parent($model_id, $object_id = null)
     {
         $alias     = $this->getTableAlias();
-        $condition = "$alias.model_id=:model_id";
+
+        $m_key = $alias . '_model_id';
+        $condition = "$alias.model_id=:$m_key";
         $params    = [
-            'model_id' => $model_id
+            $m_key => $model_id
         ];
         if ($object_id !== null)
         {
-            $condition .= " AND $alias.object_id=:object_id";
-            $params['object_id'] = $object_id;
+            $o_key = $alias . '_object_id';
+            $condition .= " AND $alias.object_id=:$o_key";
+            $params[$o_key] = $object_id;
         }
         $this->getDbCriteria()->mergeWith([
             'condition' => $condition,
@@ -154,10 +157,11 @@ class MediaFile extends ActiveRecord
     public function tag($tag)
     {
         $alias = $this->getTableAlias();
+        $t_key = $alias . '_tag';
         $this->getDbCriteria()->mergeWith([
-            'condition' => "$alias.tag=:tag",
+            'condition' => "$alias.tag=:$t_key",
             'params'    => [
-                'tag' => $tag
+                $t_key => $tag
             ]
         ]);
         return $this;

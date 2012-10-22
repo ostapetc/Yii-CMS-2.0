@@ -110,7 +110,7 @@ return array(
                     'connectionID' => 'db',
                     'logTableName' => 'log'
                 ),
-                //*
+                /*
                 array(
                     'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
                     'ipFilters' => array('*'),

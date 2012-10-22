@@ -11,6 +11,10 @@ return [
         'actions'  => ['view'],
         'sidebars' => [
             [
+                'type' => 'widget',
+                'class' => 'media.portlets.AlbumSearch',
+            ],
+            [
                 'type'  => 'widget',
                 'class' => 'media.portlets.MediaAlbumList',
                 'title' => 'Альбомы тогоже пользователя',
@@ -24,4 +28,13 @@ return [
             ],
         ]
     ],
+    [
+        'actions'  => ['manage'],
+        'sidebars' => [
+            [
+                'type' => 'widget',
+                'class' => 'media.portlets.AlbumSearch',
+            ],
+        ]
+    ]
 ];
