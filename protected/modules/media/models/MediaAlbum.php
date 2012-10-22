@@ -1,4 +1,4 @@
-<?
+<?php
 /** 
  * 
  * !Attributes - атрибуты БД
@@ -45,12 +45,17 @@ class MediaAlbum extends ActiveRecord
     ];
 
     public static $users_page_size = [
-        'width'  => 260,
+        'width'  => 218,
         'height' => 100
     ];
 
+    public static $sidebar_size = [
+        'width'  => 250,
+        'height' => 170
+    ];
+
     public static $image_size = [
-        'width'  => 160,
+        'width'  => 161,
         'height' => 80
     ];
 
@@ -164,19 +169,22 @@ class MediaAlbum extends ActiveRecord
     }
 
 
-    public function search()
+    public function search($model, $q = null)
     {
-        $criteria = new CDbCriteria;
-        $criteria->compare('id', $this->id, true);
-        $criteria->compare('title', $this->title, true);
-        $criteria->compare('descr', $this->descr, true);
-        $criteria->compare('status', $this->status, true);
+        $album = clone $this;
+        if ($q)
+        {
+            $criteria = $album->getDbCriteria();
+            $criteria->with = ['files'];
+            $criteria->together = true;
+            $criteria->compare('t.title', $q, true, 'OR');
+            $criteria->compare('t.descr', $q, true, 'OR');
+            $criteria->compare('files.title', $q, true, 'OR');
+        }
 
-        return new ActiveDataProvider(get_class($this), [
-            'criteria'   => $criteria,
-            'pagination' => [
-                'pageSize' => self::PAGE_SIZE
-            ]
+        return new ActiveDataProvider($album, [
+            'criteria' => $album->parentModel($model)->getDbCriteria(),
+            'pagination' => false
         ]);
     }
 
@@ -189,6 +197,11 @@ class MediaAlbum extends ActiveRecord
     }
 
 
+    /**
+     * @param      $model
+     * @param bool $positive
+     * @return MediaAlbum
+     */
     public function parentModel($model, $positive = true)
     {
         if ($model)
@@ -200,26 +213,35 @@ class MediaAlbum extends ActiveRecord
     }
 
 
-    public function parent($model_id, $object_id, $positive = true)
+    /**
+     * @param      $model_id
+     * @param      $object_id
+     * @param bool $positive
+     * @return MediaAlbum
+     */
+    public function parent($model_id, $object_id = null, $positive)
     {
-        $op        = $positive ? '=' : '<>';
         $alias     = $this->getTableAlias();
+
+        $op = $positive ? '=' : '<>';
+        $m_key = $alias . '_model_id';
+        $condition = "$alias.model_id $op :$m_key";
         $params    = [
-            'model_id' => $model_id
+            $m_key => $model_id
         ];
-        $condition = "$alias.model_id $op :model_id";
-        if ($object_id)
+        if ($object_id !== null)
         {
-            $condition .= " AND $alias.object_id $op :object_id";
-            $params['object_id'] = $object_id;
+            $o_key = $alias . '_object_id';
+            $condition .= " AND $alias.object_id $op :$o_key";
+            $params[$o_key] = $object_id;
         }
         $this->getDbCriteria()->mergeWith([
             'condition' => $condition,
-            'order'     => "$alias.order DESC",
             'params'    => $params
         ]);
         return $this;
     }
+
 
 
     public function notParent($model_id, $object_id)

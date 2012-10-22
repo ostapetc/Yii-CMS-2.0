@@ -31,6 +31,7 @@ class MediaVideoController extends ClientController
         if ($user_id === null)
         {
             $this->user = new User;
+            $this->page_title = 'Видео';
         }
         else
         {
@@ -41,8 +42,10 @@ class MediaVideoController extends ClientController
         $file = new MediaFile;
         if ($q)
         {
-            $file->getDbCriteria()->compare('title', $q, true);
+            $file->getDbCriteria()->compare('title', $q, true, 'OR');
+            $file->getDbCriteria()->compare('descr', $q, true, 'OR');
         }
+
         $dp = new ActiveDataProvider($file, [
             'criteria' => $file->parentModel($this->user)->type(MediaFile::TYPE_VIDEO)->getDbCriteria(),
             'pagination' => false
@@ -50,8 +53,9 @@ class MediaVideoController extends ClientController
 
         $this->render('userVideos', [
             'model' => $this->user,
-            'is_my' => Yii::app()->user->model->id == $user_id,
+            'is_my' => Yii::app()->user->id && Yii::app()->user->id == $user_id,
             'dp'    => $dp,
         ]);
     }
 }
+

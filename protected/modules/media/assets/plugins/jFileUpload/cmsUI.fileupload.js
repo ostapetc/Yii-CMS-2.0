@@ -55,31 +55,36 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
     _linkParserInit: function()
     {
         var widget = this;
-        widget.element.delegate('.link-parser', 'change', function() {
-            var input = $(this),
-                content = input.val();
+        if (widget.options.linkParserVisible)
+        {
+            widget.element.find('.fileinput-button').hide();
+            widget.element.find('.link-parser').show();
 
-            if (!content)
-            {
-                return false;
-            }
+            widget.element.delegate('.link-parser', 'change', function() {
+                var input = $(this),
+                    content = input.val();
 
-            input.prop('disabled', true);
-            $.post(
-                widget.options.linkParserUrl,
+                if (!content)
                 {
-                    content : content
-                },
-                function(data) {
-                    input.val('');
-                    input.prop('disabled', false);
-                    return widget._trigger('done', undefined, {result:data});
-                },
-                'json'
-            );
-            return false;
-        });
+                    return false;
+                }
 
+                input.prop('disabled', true);
+                $.post(
+                    widget.options.linkParserUrl,
+                    {
+                        content : content
+                    },
+                    function(data) {
+                        input.val('');
+                        input.prop('disabled', false);
+                        return widget._trigger('done', undefined, {result:data});
+                    },
+                    'json'
+                );
+                return false;
+            });
+        }
     },
     _renderExtendedProgress: function(data)
     {

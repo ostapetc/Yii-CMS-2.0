@@ -90,10 +90,6 @@ class PageController extends ClientController
                     ),
                     array(
                         'type' => 'widget',
-                        'class' => 'media.portlets.YouTubePlayList',
-                    ),
-                    array(
-                        'type' => 'widget',
                         'class' => 'content.portlets.NavigatorSidebar',
                     ),
                 )

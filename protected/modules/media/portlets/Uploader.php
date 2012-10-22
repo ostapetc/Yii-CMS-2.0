@@ -130,6 +130,7 @@ class Uploader extends JuiInputWidget
             'acceptFileTypes'         => $this->allow_type[$this->data_type],
 //            'maxChunkSize'          => 1*1000*1000,
             'sortableSaveUrl'         => $this->createUrl($this->sortable_action),
+            'linkParserVisible'       => $this->data_type == 'video',
             'linkParserUrl'           => $this->link_parser_url,
             'limitConcurrentUploads'  => 0,
             'existFilesUrl'           => $this->createUrl($this->exist_files_action, [
