@@ -126,11 +126,6 @@ class MediaFile extends ActiveRecord
         ];
     }
 
-    public function getHref()
-    {
-        return '';
-    }
-
     public function parent($model_id, $object_id = null)
     {
         $alias     = $this->getTableAlias();
