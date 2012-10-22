@@ -99,6 +99,10 @@ class MediaFile extends ActiveRecord
         return 'media_files';
     }
 
+    public function getParentModel()
+    {
+        return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
+    }
 
     public function rules()
     {
@@ -297,6 +301,31 @@ class MediaFile extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+
+    public function relations()
+    {
+        return [
+            'tags_rels'      => [
+                self::HAS_MANY,
+                'TagRel',
+                'object_id',
+                'condition' => "model_id = '" . get_class($this) . "'"
+            ],
+            'tags'           => [
+                self::HAS_MANY,
+                'Tag',
+                'tag_id',
+                'through' => 'tags_rels'
+            ],
+            'comments_count' => array(
+                self::STAT,
+                'Comment',
+                'object_id',
+                'condition' => 'model_id = "Page"'
+            ),
+        ];
     }
 
 

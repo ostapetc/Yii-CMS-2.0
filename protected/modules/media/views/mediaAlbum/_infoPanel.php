@@ -28,9 +28,6 @@
         </a>
     </div>
 
-    <? if (isset($preview)): ?>
-        <span class="label label-inverse">
-            <?= CHtml::link('читать далее', $page->url, array('class' => 'read-more badge')) ?>
-        </span>
-    <? endif ?>
+    <? $this->widget('CommentsPortlet', array('model' => $page)); ?>
+
 </div>
