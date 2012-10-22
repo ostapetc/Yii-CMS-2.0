@@ -183,7 +183,7 @@ class MediaAlbum extends ActiveRecord
         }
 
         return new ActiveDataProvider($album, [
-            'criteria' => $album->parentModel($this->user)->getDbCriteria(),
+            'criteria' => $album->parentModel($model)->getDbCriteria(),
             'pagination' => false
         ]);
     }
