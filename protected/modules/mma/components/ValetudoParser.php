@@ -50,47 +50,61 @@ class ValetudoParser extends OsParser
                 continue;
             }
 
-            $title = trim($link->textContent);
-
-            $content = $this->getContent($this->web_url . $href);
-            if (!$content)
-            {
-                continue;
-            }
-
-            $doc = new DOMDocument();
-            @$doc->loadHTML($content);
-
-            $path = new DOMXPath($doc);
-
-            $text = $path->query("//div[@class='article-content']");
-            $text = $doc->saveXML($text->item(0));
-            $text = $this->stripTags($text);
-            $text = preg_replace('|Комментарий \[[0-9]+\]|', '', $text);
-
-            $image = $images->item($i);
-            if ($image)
-            {
-                $image = $image->getAttribute('src');
-            }
-
-            if ($image)
-            {
-                $this->log("Не смог спарсить картинку для: {$href}");
-            }
-
-            $page = new Page();
-            $page->source     = $this->source;
-            $page->source_url = $source_url;
-            $page->user_id    = $this->author_id;
-            $page->title      = $title;
-            $page->text       = $text;
-            $page->image      = $image;
-            $page->status     = Page::STATUS_PUBLISHED;
-            $page->type       = Page::TYPE_POST;
-
-            $this->saveModel($page);
+            $this->parseAndSavePost($href);
         }
+    }
+
+
+    public function parseAndSavePost($url)
+    {
+        $source_url = $url;
+
+        if (mb_strpos($url, $this->web_url, null, 'utf-8') === false)
+        {
+            $url = $this->web_url . $url;
+        }
+
+        $content = $this->getContent($url);
+        if (!$content)
+        {
+            $this->log('Не могу получить контент: ' . $url, CLogger::LEVEL_ERROR);
+            return;
+        }
+
+        $doc = new DOMDocument();
+        @$doc->loadHTML($content);
+
+        $xpath = new DOMXPath($doc);
+        echo $url;
+        $title = $xpath->query('');
+        die('eee');
+        $text = $xpath->query("//div[@class='article-content']");
+        $text = $doc->saveXML($text->item(0));
+        $text = $this->stripTags($text);
+        $text = preg_replace('|Комментарий \[[0-9]+\]|', '', $text);
+
+        $image = $images->item($i);
+        if ($image)
+        {
+            $image = $image->getAttribute('src');
+        }
+
+        if ($image)
+        {
+            $this->log("Не смог спарсить картинку для: {$href}");
+        }
+
+        $page = new Page();
+        $page->source     = $this->source;
+        $page->source_url = $source_url;
+        $page->user_id    = $this->author_id;
+        $page->title      = $title;
+        $page->text       = $text;
+        $page->image      = $image;
+        $page->status     = Page::STATUS_PUBLISHED;
+        $page->type       = Page::TYPE_POST;
+
+        $this->saveModel($page);
     }
 }
 

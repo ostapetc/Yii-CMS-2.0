@@ -14,6 +14,7 @@
  * @property string           $url
  * @property string           $text
  * @property string           $date_create
+ * @property string           $date_update
  * @property integer          $order
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
@@ -130,7 +131,7 @@ class Page extends ActiveRecord
                 'gallery', 'safe',
             ),
             array(
-                'id, title, text, status, date_create', 'safe',
+                'id, title, text, status, date_create, date_publish', 'safe',
                 'on'=> 'search'
             ),
             array(
@@ -354,6 +355,31 @@ class Page extends ActiveRecord
         else
         {
             return Yii::app()->text->cut($this->text, self::TEXT_PREVIEW_LENGHT, '...');
+        }
+    }
+
+
+    public function beforeSave()
+    {
+        if (parent::beforeSave())
+        {
+            if ($this->status == self::STATUS_PUBLISHED)
+            {
+                if ($this->isNewRecord)
+                {
+                    $this->date_publish = new CDbExpression('NOW()');
+                }
+                else
+                {
+                    $self = $this->findByPk($this->id);
+                    if ($self->status != self::STATUS_PUBLISHED)
+                    {
+                        $this->date_publish = new CDbExpression('NOW()');
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -40,30 +40,9 @@ if (Yii::app()->user->checkAccess('Page_update'))
         <? endif ?>
 
         <?= $page->text ?>
-
-        <?=
-        $this->renderPartial(
-            'application.modules.content.views.pageSection._list',
-            array('sections' => $page->sections)
-        );
-        ?>
-
-        <?=
-        $this->renderPartial(
-            'application.modules.tags.views._list',
-            array('tags' => $page->tags)
-        );
-        ?>
-
-        <?=
-        $this->renderPartial(
-            '_infoPanel',
-            array(
-                'page'    => $page,
-                'preview' => true
-            )
-        );
-        ?>
+        <? $this->renderPartial('application.modules.content.views.pageSection._list', array('sections' => $page->sections)); ?>
+        <? $this->renderPartial('application.modules.tags.views._list', array('tags' => $page->tags)); ?>
+        <? $this->renderPartial('application.modules.content.views.page._infoPanel', array('page' => $page,'preview' => true)); ?>
 
         <br clear="all" />
         <br clear="all" />

@@ -29,3 +29,13 @@
     <?= CHtml::endForm() ?>
 </div>
 
+<? if (isset($post)): ?>
+        <?
+        v($post); die;
+        ?>
+    <br/>
+    <?= CHtml::link($post->url, $post->url) ?>
+    <br/>
+    <? $this->renderPartial('application.modules.content.views.page.view', array('page' => $post)); ?>
+<? endif ?>
+

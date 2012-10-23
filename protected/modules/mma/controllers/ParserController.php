@@ -24,21 +24,12 @@ class ParserController extends ClientController
     {
         if (isset($_POST['url']) && isset($_POST['parser']))
         {
-            $parser = new $_POST['parser'];
-
-            if ($_POST['parser'] == 'MixfightParser')
-            {
-                $post = $parser->parseAndSavePost($_POST['url'], null, '');
-            }
-            else
-            {
-                $post = $parser->parsePost($_POST['url']);
-            }
-
-            p($post);
+            $post = (new $_POST['parser'])->parsePost($_POST['url'], null, '');
         }
 
-        $this->render('parsePost'   );
+        $this->render('parsePost', array(
+            'post' => isset($post) ? $post : null
+        ));
     }
 
 
@@ -48,5 +39,4 @@ class ParserController extends ClientController
         $cr->addCommands(APP_PATH . 'commands');
         p($cr->run(array('yiic', $command, 'parsePosts')));
     }
-
 }

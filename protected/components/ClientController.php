@@ -25,20 +25,7 @@ abstract class ClientController extends Controller
 
     public function topMenuItems()
     {
-        $sports = Sport::model()->findAll();
-        foreach ($sports as $i => $sport)
-        {
-            $sports[$i] = array(
-                'label' => $sport->name,
-                'url'   => '/' . $sport->caption,
-            );
-        }
-
         return array(
-            array(
-                'label' => t('Спорт'),
-                'items' => $sports
-            ),
             array(
                 'label' => t('Посты'),
                 'url'   => array('content/page/index')
