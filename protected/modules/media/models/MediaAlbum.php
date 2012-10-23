@@ -11,6 +11,7 @@
  * @property integer    $order
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
+ * @property            $parentModel
  * @property            $href
  * @property CComponent $owner           the owner component that this behavior is attached to.
  * @property            $errorsFlatArray
@@ -22,6 +23,7 @@
  * !Relations - связи
  * @property TagRel[]   $tags_rels
  * @property            $tags
+ * @property int|null   $comments_count
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MediaAlbum ordered()
@@ -43,14 +45,20 @@ class MediaAlbum extends ActiveRecord
     ];
 
     public static $users_page_size = [
-        'width' => 204,
+        'width'  => 218,
         'height' => 100
-   ];
+    ];
+
+    public static $sidebar_size = [
+        'width'  => 250,
+        'height' => 170
+    ];
 
     public static $image_size = [
-        'width'  => 150,
+        'width'  => 161,
         'height' => 80
     ];
+
 
     public function name()
     {
@@ -130,56 +138,115 @@ class MediaAlbum extends ActiveRecord
     }
 
 
+    public function getParentModel()
+    {
+        return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
+    }
+
+
     public function relations()
     {
         return [
-            'tags_rels' => [
+            'tags_rels'      => [
                 self::HAS_MANY,
                 'TagRel',
                 'object_id',
                 'condition' => "model_id = '" . get_class($this) . "'"
             ],
-            'tags'      => [
+            'tags'           => [
                 self::HAS_MANY,
                 'Tag',
                 'tag_id',
                 'through' => 'tags_rels'
             ],
+            'comments_count' => array(
+                self::STAT,
+                'Comment',
+                'object_id',
+                'condition' => 'model_id = "Page"'
+            ),
         ];
     }
 
 
-    public function search()
+    public function search($model, $q = null)
     {
-        $criteria = new CDbCriteria;
-        $criteria->compare('id', $this->id, true);
-        $criteria->compare('title', $this->title, true);
-        $criteria->compare('descr', $this->descr, true);
-        $criteria->compare('status', $this->status, true);
+        $album = clone $this;
+        if ($q)
+        {
+            $criteria = $album->getDbCriteria();
+            $criteria->with = ['files'];
+            $criteria->together = true;
+            $criteria->compare('t.title', $q, true, 'OR');
+            $criteria->compare('t.descr', $q, true, 'OR');
+            $criteria->compare('files.title', $q, true, 'OR');
+        }
 
-        return new ActiveDataProvider(get_class($this), [
-            'criteria'   => $criteria,
-            'pagination' => [
-                'pageSize' => self::PAGE_SIZE
-            ]
+        return new ActiveDataProvider($album, [
+            'criteria' => $album->parentModel($model)->getDbCriteria(),
+            'pagination' => false
         ]);
     }
 
 
     public function getHref()
     {
-        return Yii::app()->controller->createUrl('/media/mediaAlbum/view', ['id' => $this->id]);
+        return Yii::app()->controller->createUrl('/media/mediaAlbum/view', [
+            'id' => $this->id,
+        ]);
     }
 
 
-    public function parent($model_id, $id)
+    /**
+     * @param      $model
+     * @param bool $positive
+     * @return MediaAlbum
+     */
+    public function parentModel($model, $positive = true)
     {
-        $alias = $this->getTableAlias();
+        if ($model)
+        {
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
+            return $this->parent(get_class($model), $pk, $positive);
+        }
+        return $this;
+    }
+
+
+    /**
+     * @param      $model_id
+     * @param      $object_id
+     * @param bool $positive
+     * @return MediaAlbum
+     */
+    public function parent($model_id, $object_id = null, $positive)
+    {
+        $alias     = $this->getTableAlias();
+
+        $op = $positive ? '=' : '<>';
+        $m_key = $alias . '_model_id';
+        $condition = "$alias.model_id $op :$m_key";
+        $params    = [
+            $m_key => $model_id
+        ];
+        if ($object_id !== null)
+        {
+            $o_key = $alias . '_object_id';
+            $condition .= " AND $alias.object_id $op :$o_key";
+            $params[$o_key] = $object_id;
+        }
         $this->getDbCriteria()->mergeWith([
-            'condition' => "$alias.model_id='$model_id' AND $alias.object_id='$id'",
-            'order'     => "$alias.order DESC"
+            'condition' => $condition,
+            'params'    => $params
         ]);
         return $this;
+    }
+
+
+
+    public function notParent($model_id, $object_id)
+    {
+        return $this->parent($model_id, $object_id, false);
     }
 
 
@@ -219,11 +286,4 @@ class MediaAlbum extends ActiveRecord
         $this->isAttachedTo($user ? $user : Yii::app()->user->model);
     }
 
-    public static function getDataProvider($model)
-    {
-        $file = new static;
-        return new ActiveDataProvider(get_called_class(), [
-            'criteria' => $file->parent(get_class($model), $model->getPrimaryKey())->last()->getDbCriteria(),
-        ]);
-    }
 }

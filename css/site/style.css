@@ -32,7 +32,7 @@ body {
 
 .modal {
     display: none;
-    width: 700px;
+    max-width: 1000px;
     margin: -220px 0 0 -350px;
 }
 iframe{
@@ -193,4 +193,8 @@ span.italic-12 {
 .pagination ul > li > a, .pagination ul > li > span {
     line-height: 28px !important;
     font-size: 12px;
+}
+
+.sidebar-albums li{
+    padding: 10px 0;
 }

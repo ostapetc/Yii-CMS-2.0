@@ -36,11 +36,11 @@ abstract class ClientController extends Controller
             ),
             array(
                 'label' => t('Видео'),
-                'url'   => '/'
+                'url'   => array('/media/mediaVideo/manage')
             ),
             array(
                 'label' => t('Фото'),
-                'url'   => '/'
+                'url'   => array('/media/mediaAlbum/manage')
             ),
             array(
                 'label' => t('Бойцы'),

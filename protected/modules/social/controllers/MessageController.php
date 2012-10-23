@@ -29,8 +29,8 @@ class MessageController extends ClientController
                 ),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'application.modules.social.portlets.MessageDialogsSidebar'
+                        'type' => 'widget',
+                        'class' => 'application.modules.social.portlets.MessageDialogsSidebar'
                     )
                 )
             )

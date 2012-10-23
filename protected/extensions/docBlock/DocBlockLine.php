@@ -80,8 +80,9 @@ abstract class DocBlockLine extends CComponent
 
     abstract public function getTypeLen();
 
+    abstract public function setOldValues($object);
 
-    public function setOldValues($properties)
+    public function _setOldValues($properties)
     {
         if (isset($properties[$this->name]))
         {

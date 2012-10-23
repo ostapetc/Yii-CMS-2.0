@@ -1,10 +1,7 @@
 <?
 /** @var $item YouTubeApi */
 foreach ($data as $item) {
-    echo CHtml::tag('iframe', [
-        'src' => $item->player_url,
-        'width' => '100%',
-    ], true, true);
+    echo $item->getPreview(['width' => 260, 'height' => 200]);
     echo '<div class="clear"></div>';
     echo '<hr/>';
 }

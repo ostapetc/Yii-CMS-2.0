@@ -5,4 +5,5 @@ return array(
     'accessors'  => '!Accessors - Геттеры и сеттеры класа и его поведений',
     'events'     => '!Events - события',
     'relations'  => '!Relations - связи',
+    'users'      => '!Пользовательские свойства и методы',
 );

@@ -10,7 +10,6 @@ class YiiComponentMethod extends DocBlockLine
 
     public function afterPopulate()
     {
-        $this->name = $this->name . '()';
     }
 
     public function canDraw()
@@ -25,10 +24,10 @@ class YiiComponentMethod extends DocBlockLine
     {
         try
         {
-            if ($this->canDraw())
-            {
-                return $this->getLine($this->tag, $this->type, $this->name, $this->comment);
-            }
+            $type = $this->type ? $this->type : $this->oldType;
+            $comment = $this->comment ? $this->comment : $this->oldComment;
+            return $this->getLine($this->tag, $type, $this->name . '()' , $comment);
+
         } catch (Exception $e)
         {
             Yii::app()->handleException($e);
@@ -90,4 +89,10 @@ class YiiComponentMethod extends DocBlockLine
         }
     }
 
+
+
+    public function setOldValues($object)
+    {
+        parent::_setOldValues(DocBlockParser::parseClass($object)->methods);
+    }
 }

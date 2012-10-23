@@ -1,6 +1,6 @@
-<?php
-/**
- *
+<?
+/** 
+ * 
  * !Attributes - атрибуты БД
  * @property string         $status
  * @property integer        $rating
@@ -17,7 +17,7 @@
  * @property string         $password_recover_code
  * @property string         $password_recover_date
  * @property string         $date_create
- *
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                $userDir
  * @property AuthItem       $role
@@ -34,21 +34,22 @@
  * @property                $updateUrl
  * @property                $createUrl
  * @property                $deleteUrl
- *
+ * 
  * !Relations - связи
  * @property MediaAlbum[]   $file_albums
+ * @property MediaAlbum     $file_albums_first
  * @property int|null       $file_albums_count
  * @property AuthAssignment $assignment
  * @property int|null       $pages_count
  * @property int|null       $favorites_count
  * @property int|null       $comments_count
- *
+ * @property int|null       $messages_count
+ * @property int|null       $new_messages_count
+ * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   User           published()
- * @method   User           sitemap()
  * @method   User           ordered()
  * @method   User           last()
- *
+ * 
  */
 
 class User extends ActiveRecord
@@ -338,6 +339,12 @@ class User extends ActiveRecord
                 'MediaAlbum',
                 'object_id',
                 'condition' => "file_albums.model_id = '".get_class($this)."'"
+            ),
+            'file_albums_first' => array(
+                self::HAS_ONE ,
+                'MediaAlbum',
+                'object_id',
+                'condition' => "file_albums_first.model_id = '".get_class($this)."'"
             ),
             'file_albums_count' => array(
                 self::STAT ,

@@ -1,4 +1,4 @@
-<?php
+<?
 /** 
  * Base model for Install module.
  * 

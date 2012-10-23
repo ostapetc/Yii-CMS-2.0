@@ -1,60 +1,58 @@
 <?php
-/**
- *
+/** 
+ * 
  * !Attributes - атрибуты БД
- *
- * @property string    $id
- * @property string    $object_id
- * @property string    $model_id
- * @property string    $name
- * @property string    $tag
- * @property string    $title
- * @property string    $descr
- * @property string    $order
- * @property string    $path
- * @property string    $type
- *
+ * @property string             $id
+ * @property string             $object_id
+ * @property string             $model_id
+ * @property string             $remote_id
+ * @property string             $tag
+ * @property string             $title
+ * @property string             $descr
+ * @property string             $order
+ * @property string             $type
+ * @property string             $api_name
+ * @property string             $target_api
+ * @property string             $status
+ * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
- * @property           $deleteUrl
- * @property           $isImage
- * @property           $isAudio
- * @property           $isExcel
- * @property           $isWord
- * @property           $isVideo
- * @property           $isArchive
- * @property           $isDocument
- * @property           $isFileExist
- * @property           $icon
- * @property           $handler
- * @property string    $size            formatted file size
- * @property           $extension
- * @property           $nameWithoutExt
- * @property           $content
- * @property           $downloadUrl
- * @property           $hash
- * @property           $href
- * @property           $serverDir
- * @property           $serverPath
- * @property           $errorsFlatArray
- * @property           $url
- * @property           $updateUrl
- * @property           $createUrl
- * @property string    $error           the error message. Null is returned if no error.
- *
+ * @property                    $deleteUrl
+ * @property                    $apiName
+ * @property ApiAbstract        $api
+ * @property                    $configuration
+ * @property                    $nameWithoutExt
+ * @property                    $downloadUrl
+ * @property                    $hash
+ * @property ActiveDataProvider $dataProvider
+ * @property                    $errorsFlatArray
+ * @property                    $url
+ * @property                    $updateUrl
+ * @property                    $createUrl
+ * @property string             $error           the error message. Null is returned if no error.
+ * 
  * !Scopes - именованные группы условий, возвращают этот АР
- * @method   MediaFile published()
- * @method   MediaFile sitemap()
- * @method   MediaFile ordered()
- * @method   MediaFile last()
- *
+ * @method   MediaFile          ordered()
+ * @method   MediaFile          last()
+ * 
  */
 
-Yii::import('media.models.Apis.*');
 class MediaFile extends ActiveRecord
 {
     const STATUS_ON_MODERATE = 'on_moderate';
     const STATUS_ACTIVE      = 'active';
     const STATUS_DELETED     = 'deleted';
+
+    const TYPE_IMG   = 'img';
+    const TYPE_VIDEO = 'video';
+    const TYPE_AUDIO = 'audio';
+    const TYPE_DOC   = 'doc';
+
+    public $types = [
+        self::TYPE_IMG   => self::TYPE_IMG,
+        self::TYPE_VIDEO => self::TYPE_VIDEO,
+        self::TYPE_AUDIO => self::TYPE_AUDIO,
+        self::TYPE_DOC   => self::TYPE_DOC,
+    ];
 
     public static $configuration;
 
@@ -63,7 +61,7 @@ class MediaFile extends ActiveRecord
     private $_api_name;
 
 
-    public function __construct($scenario = 'insert', $api_name = 'local')
+    public function __construct($scenario = 'insert', $api_name = null)
     {
         $this->_api_name = $api_name;
         parent::__construct($scenario);
@@ -72,7 +70,10 @@ class MediaFile extends ActiveRecord
 
     public function init()
     {
-        $this->setApi($this->_api_name);
+        if ($this->_api_name)
+        {
+            $this->setApi($this->_api_name);
+        }
     }
 
 
@@ -82,6 +83,11 @@ class MediaFile extends ActiveRecord
     }
 
 
+    /**
+     * @param string $className
+     *
+     * @return self
+     */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
@@ -93,6 +99,10 @@ class MediaFile extends ActiveRecord
         return 'media_files';
     }
 
+    public function getParentModel()
+    {
+        return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
+    }
 
     public function rules()
     {
@@ -106,6 +116,7 @@ class MediaFile extends ActiveRecord
             ) */
         ];
     }
+
 
     public function toJson()
     {
@@ -122,14 +133,17 @@ class MediaFile extends ActiveRecord
     public function parent($model_id, $object_id = null)
     {
         $alias     = $this->getTableAlias();
-        $condition = "$alias.model_id=:model_id";
+
+        $m_key = $alias . '_model_id';
+        $condition = "$alias.model_id=:$m_key";
         $params    = [
-            'model_id' => $model_id
+            $m_key => $model_id
         ];
         if ($object_id !== null)
         {
-            $condition .= " AND $alias.object_id=:object_id";
-            $params['object_id'] = $object_id;
+            $o_key = $alias . '_object_id';
+            $condition .= " AND $alias.object_id=:$o_key";
+            $params[$o_key] = $object_id;
         }
         $this->getDbCriteria()->mergeWith([
             'condition' => $condition,
@@ -142,10 +156,11 @@ class MediaFile extends ActiveRecord
     public function tag($tag)
     {
         $alias = $this->getTableAlias();
+        $t_key = $alias . '_tag';
         $this->getDbCriteria()->mergeWith([
-            'condition' => "$alias.tag=:tag",
+            'condition' => "$alias.tag=:$t_key",
             'params'    => [
-                'tag' => $tag
+                $t_key => $tag
             ]
         ]);
         return $this;
@@ -171,6 +186,17 @@ class MediaFile extends ActiveRecord
     }
 
 
+    public function parentModel($model, $positive = true)
+    {
+        if ($model)
+        {
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
+            return $this->parent(get_class($model), $pk, $positive);
+        }
+        return $this;
+    }
+
+
     public function getApiName()
     {
         return $this->_api_name;
@@ -192,12 +218,15 @@ class MediaFile extends ActiveRecord
         {
             self::$configuration = new Configuration('media.midiaFile');
         }
+
         if ($api_name)
         {
             return self::$configuration[$api_name];
         }
-
-        return self::$configuration;
+        else
+        {
+            return self::$configuration;
+        }
     }
 
 
@@ -239,7 +268,7 @@ class MediaFile extends ActiveRecord
             if ($id = $model->getApi()->parse($source))
             {
                 $model->remote_id = $id;
-                $model->api_name = $api;
+                $model->api_name  = $api;
                 $model->getApi()->findByPk($id);
                 break;
             }
@@ -275,6 +304,31 @@ class MediaFile extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+
+    public function relations()
+    {
+        return [
+            'tags_rels'      => [
+                self::HAS_MANY,
+                'TagRel',
+                'object_id',
+                'condition' => "model_id = '" . get_class($this) . "'"
+            ],
+            'tags'           => [
+                self::HAS_MANY,
+                'Tag',
+                'tag_id',
+                'through' => 'tags_rels'
+            ],
+            'comments_count' => array(
+                self::STAT,
+                'Comment',
+                'object_id',
+                'condition' => 'model_id = "Page"'
+            ),
+        ];
     }
 
 
@@ -321,13 +375,18 @@ class MediaFile extends ActiveRecord
     }
 
 
+    /**
+     * @param null $model
+     * @param null $tag
+     *
+     * @return ActiveDataProvider
+     */
     public function getDataProvider($model = null, $tag = null)
     {
         $file = clone $this;
         if ($model instanceof CActiveRecord)
         {
-            $pk = $model->getIsNewRecord() ? $model->getPrimaryKey() : null;
-
+            $pk = $model->getIsNewRecord() ? null : $model->getPrimaryKey();
             $file->parent(get_class($model), $pk);
         }
         if ($tag !== null)

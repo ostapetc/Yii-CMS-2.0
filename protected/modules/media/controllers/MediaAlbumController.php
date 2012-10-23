@@ -1,6 +1,8 @@
 <?
 class MediaAlbumController extends ClientController
 {
+    public $user;
+
     public static function actionsTitles()
     {
         return [
@@ -13,6 +15,17 @@ class MediaAlbumController extends ClientController
         ];
     }
 
+
+    public function subMenuItems()
+    {
+        return Configuration::getConfigArray('media.submenu');
+    }
+
+
+    public function sidebars()
+    {
+        return Configuration::getConfigArray('media.fileSidebars');
+    }
 
     public function actionCreateUsers()
     {
@@ -38,21 +51,6 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionView($id)
-    {
-        $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
-        $this->page_title = 'Альбом: ' . $model->title;
-        $form             = new Form('Media.UploadFilesForm', $model);
-        $file             = new MediaFile;
-        $dp               = $file->getDataProvider($model, 'files');
-        $dp->pagination   = false;
-
-        $this->render('view', [
-            'model' => $model,
-            'form'  => $form,
-            'dp'    => $dp
-        ]);
-    }
 
 
     public function actionUpload($model_id, $object_id, $tag)
@@ -80,21 +78,40 @@ class MediaAlbumController extends ClientController
     }
 
 
-    public function actionManage($user_id = null)
+    public function actionView($id)
     {
-        if ($user_id === null)
-        {
-            $user_id = Yii::app()->user->model->id;
-        }
-        $user             = User::model()->throw404IfNull()->findByPk($user_id);
-        $this->page_title = 'Альбомы пользователя ' . $user->getLink();
-        $dp               = MediaAlbum::getDataProvider($user);
-        $this->render('userAlbums', [
-            'user'  => $user,
-            'is_my' => Yii::app()->user->model->id == $user_id,
+        $model            = MediaAlbum::model()->throw404IfNull()->findByPk($id);
+        $this->user       = $model->getParentModel();
+        $this->page_title = 'Альбом: ' . $model->title;
+        $form             = new Form('Media.UploadFilesForm', $model);
+        $dp               = MediaFile::model()->getDataProvider($model, 'files');
+        $dp->pagination   = false;
+
+        $this->render('view', [
+            'model' => $model,
+            'form'  => $form,
             'dp'    => $dp
         ]);
     }
 
+
+    public function actionManage($user_id = null, $q = null)
+    {
+        if ($user_id)
+        {
+            $this->user = User::model()->throw404IfNull()->findByPk($user_id);
+            $this->page_title = 'Альбомы пользователя: ' . $this->user->getLink();
+        }
+        else
+        {
+            $this->user = new User;
+            $this->page_title = 'Альбомы';
+        }
+
+        $this->render('manage', [
+            'dp'    => MediaAlbum::model()->search($this->user, $q),
+            'is_my' => Yii::app()->user->id && Yii::app()->user->id == $user_id
+        ]);
+    }
 
 }

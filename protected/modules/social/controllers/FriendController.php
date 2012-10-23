@@ -47,9 +47,9 @@ class FriendController extends ClientController
                 ),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'application.modules.users.portlets.UserPageSidebar'
-                    ),
+                        'type' => 'widget',
+                        'class' => 'application.modules.users.portlets.UserPageSidebar'
+                    )
                 ),
             ),
             array(
@@ -58,8 +58,8 @@ class FriendController extends ClientController
                 ),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'application.modules.users.portlets.UserFilterSidebar'
+                        'type' => 'widget',
+                        'class' => 'application.modules.users.portlets.UserFilterSidebar'
                     )
                 )
             )

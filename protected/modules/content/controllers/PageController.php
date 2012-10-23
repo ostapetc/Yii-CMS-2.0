@@ -64,46 +64,42 @@ class PageController extends ClientController
                 'actions'  => array('create', 'update'),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'content.portlets.SectionCreateSidebar',
+                        'type' => 'widget',
+                        'content.portlets.SectionCreateSidebar'
                     ),
                     array(
-                        'widget',
-                        'tags.portlets.TagCreateSidebar',
+                        'type' => 'widget',
+                        'class' => 'tags.portlets.TagCreateSidebar',
                     ),
                     array(
-                        'partial',
-                        'content.views.page._sidebarFormNotices'
-                    )
+                        'type' => 'partial',
+                        'class' => 'content.views.page._sidebarFormNotices',
+                    ),
                 )
             ),
             array(
                 'actions'  => array('index'),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'content.portlets.PageSectionsSidebar'
+                        'type' => 'widget',
+                        'class' => 'content.portlets.PageSectionsSidebar',
                     ),
                     array(
-                        'widget',
-                        'comments.portlets.CommentsSidebar',
+                        'type' => 'widget',
+                        'class' => 'comments.portlets.CommentsSidebar',
                     ),
                     array(
-                        'widget',
-                        'media.portlets.YouTubePlayList'
-                    )
-                    /*array(
-                        'widget',
-                        'content.portlets.NavigatorSidebar',
-                    ),*/
+                        'type' => 'widget',
+                        'class' => 'content.portlets.NavigatorSidebar',
+                    ),
                 )
             ),
             array(
                 'actions'  => array('view'),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'content.portlets.PageInfoSidebar'
+                        'type' => 'widget',
+                        'class' => 'content.portlets.PageInfoSidebar'
                     )
                 )
             ),
@@ -111,8 +107,8 @@ class PageController extends ClientController
                 'actions'  => array('userPages'),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'content.portlets.userPagesSidebar'
+                        'type' => 'widget',
+                        'class' => 'content.portlets.userPagesSidebar'
                     )
                 )
             ),

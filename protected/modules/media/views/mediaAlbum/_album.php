@@ -1,4 +1,4 @@
-<li style="width: <?= MediaAlbum::$users_page_size['width']?>px; <?= $index % 3 == 0 ? 'clear:both;' : '' ?>">
+<li style="width: <?= MediaAlbum::$users_page_size['width']?>px;">
     <a href="<?= $data->href ?>" class="thumbnail">
         <?
         if ($data->files_first) {

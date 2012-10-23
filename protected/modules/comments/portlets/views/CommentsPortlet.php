@@ -4,7 +4,6 @@
 
 </div>
 
-
 <?= CHtml::link('', 'comment-form'); ?>
 <?= CHtml::beginForm('/comments/comment/create', 'post', array('id' => 'comment-form', 'style' => 'display: ' . (Yii::app()->user->isGuest ? 'none' : 'block'))) ?>
 <?= CHtml::label('Комментарий', 'Comment[text]', array('label' => 'Комментарий', 'id' => 'comment-label')) ?>

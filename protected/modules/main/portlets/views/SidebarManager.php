@@ -1,16 +1,29 @@
 <? foreach ($sidebars as $sidebar): ?>
     <?
-    list($type, $path) = $sidebar;
+    $type = $sidebar['type'];
+    unset($sidebar['type']);
+
+    if (is_string($sidebar))
+    {
+        $class = $sidebar;
+        $config = [];
+    }
+    else
+    {
+        $class = $sidebar['class'];
+        unset($sidebar['class']);
+        $config = $sidebar;
+    }
 
     try
     {
         if ($type == 'partial')
         {
-            $content = Yii::app()->controller->renderPartial($path, null, true);
+            $content = Yii::app()->controller->renderPartial($class, $confi, true);
         }
         elseif ($type == 'widget')
         {
-            $content = Yii::app()->controller->widget($path, array(), true);
+            $content = Yii::app()->controller->widget($class, $config, true);
         }
 
         if ($content)
@@ -20,7 +33,14 @@
     }
     catch (CException $e)
     {
-        echo $e->getMessage();
+        if (YII_DEBUG)
+        {
+            Yii::app()->handleException($e);
+        }
+        else
+        {
+            echo $e->getMessage();
+        }
     }
     ?>
 <? endforeach ?>

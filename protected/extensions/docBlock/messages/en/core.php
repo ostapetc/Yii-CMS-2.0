@@ -5,4 +5,5 @@ return array(
     'accessors'  => '!Accessors',
     'events'     => '!Events',
     'relations'  => '!Relations',
+    'users'      => '!Users properties and methods',
 );

@@ -36,12 +36,12 @@ class UserController extends ClientController
                 ),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'application.modules.users.portlets.UserPageSidebar'
+                        'type' => 'widget',
+                        'class' => 'application.modules.users.portlets.UserPageSidebar',
                     ),
                     array(
-                        'widget',
-                        'application.modules.users.portlets.OwnerPageSidebar'
+                        'type' => 'widget',
+                        'class' => 'application.modules.users.portlets.OwnerPageSidebar'
                     )
                 ),
             ),
@@ -51,8 +51,8 @@ class UserController extends ClientController
                 ),
                 'sidebars' => array(
                     array(
-                        'widget',
-                        'application.modules.users.portlets.UserFilterSidebar'
+                        'type' => 'widget',
+                        'class' => 'application.modules.users.portlets.UserFilterSidebar'
                     )
                 )
             )
