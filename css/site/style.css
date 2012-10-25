@@ -198,3 +198,76 @@ span.italic-12 {
 .sidebar-albums li{
     padding: 10px 0;
 }
+
+
+
+
+/*-----------------------------INFOPANELL------------------------------------*/
+
+.infopanel-wrapper {
+    width: 100%;
+    margin: 5px 0 0 0;
+}
+.infopanel {
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    float: left;
+    border: 1px solid #E5E5E5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    line-height: 13px !important;
+    clear: both;
+}
+
+.infopanel .label {
+    margin: 5px 5px 0 0;
+    line-height: 16px;
+}
+.infopanel .author {
+    position: relative;
+    margin: 0 10px;
+}
+
+.infopanel .label a {
+    font-weight: normal;
+    padding: 1px 5px 2px;
+}
+
+.infopanel .novote {
+    float: left;
+    margin-right: 15px;
+    font-size: 9px;
+    padding-top: 8px;
+}
+
+.infopanel .voting {
+    float: left;
+    position: relative;
+    margin: 7px 15px 0 0;
+}
+
+
+/*-----------------------------VIDEO GALLERY------------------------------------*/
+
+
+.video-gallery {
+    margin: 10px 0 0 -10px;
+}
+.video-gallery li{
+    margin: 0 0 10px 10px;
+}
+
+.video-gallery .infopanel .published{
+    margin: 0 10px;
+}
+
+.video-gallery .infopanel .favorite{
+    margin: 0 0 0 10px ;
+}
+
+.video-gallery .infopanel .author{
+    margin: 5px 10px 0  20px;
+}

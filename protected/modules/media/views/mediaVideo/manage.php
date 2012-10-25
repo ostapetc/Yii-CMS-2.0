@@ -34,6 +34,9 @@
             'beforeShow'=> 'js:function() {
                 //do some, comments for ex
             }'
+        ],
+        'htmlOptions' => [
+            'class' => 'video-gallery'
         ]
     ]);
     ?>

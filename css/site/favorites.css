@@ -1,7 +1,6 @@
 .favorite {
     float: left;
-    padding: 5px 0;
-    padding-top: 6px;
+    padding: 6px 0 5px 0;
     margin-right: 5px;
 }
 

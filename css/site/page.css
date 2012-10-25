@@ -58,48 +58,9 @@
 /*-----------------------------PAGE INFOPANELL------------------------------------*/
 
 .page .infopanel {
-    position: relative;
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    float: left;
-    border: 1px solid #E5E5E5;
-    padding: 0 11px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    line-height: 13px !important;
-    margin-top: 5px !important;
-    clear: both;
-    width: 650px;
-
+    width: 645px;
 }
 
-.page .infopanel .label {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    line-height: 16px;
-}
-
-.page .infopanel .label a {
-    font-weight: normal;
-    padding: 1px 5px 2px;
-}
-
-.page .infopanel .novote {
-    float: left;
-    margin-right: 15px;
-    font-size: 9px;
-    padding-top: 8px;
-}
-
-.page .infopanel .voting {
-    float: left;
-    position: relative;
-    padding: 0px 5px;
-    margin: 6px 0;
-    margin-right: 23px;
-}
 
 /* еще не голосовал - не подсвечиваем ни чего. стрелки обычные, не затененные. */
 /*.page .infopanel .voting .plus {*/

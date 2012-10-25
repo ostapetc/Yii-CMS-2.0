@@ -13,6 +13,8 @@ Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
  */
 class YouTubeApiBehavior extends ApiBehaviorAbstract
 {
+    const UPLOAD_PATH = 'upload/media';
+
     public $icon;
     public $href;
     protected $api;
@@ -74,9 +76,6 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         return $this->api;
     }
 
-    /**
-     * @param LocalApi $local_api
-     */
     public function convertFromLocal($local_api)
     {
         throw new CException('not implemented yet');
@@ -126,8 +125,6 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $conf = Yii::app()->params['youTube'];
         return "http://uploads.gdata.youtube.com/feeds/api/users/{$conf['user']}/uploads";
     }
-
-    const UPLOAD_PATH = 'upload/media';
 
 
     public function sendFile($file)
