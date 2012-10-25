@@ -1,15 +1,13 @@
 <?
 class MediaVideoController extends ClientController
 {
-
-
     public $user;
-
 
     public static function actionsTitles()
     {
         return [
-            "manage"    => "Альбомы пользователя",
+            "manage" => "Поиск видео",
+            "view"   => "Просмотр видео",
         ];
     }
 
@@ -23,6 +21,12 @@ class MediaVideoController extends ClientController
     public function sidebars()
     {
         return Configuration::getConfigArray('media.videoSidebars');
+    }
+
+    public function actionView($id)
+    {
+        $file = MediaFile::model()->throw404IfNull()->findByPk($id);
+        $this->render('view', ['model' => $file]);
     }
 
 
@@ -51,7 +55,7 @@ class MediaVideoController extends ClientController
             'pagination' => false
         ]);
 
-        $this->render('userVideos', [
+        $this->render('manage', [
             'model' => $this->user,
             'is_my' => Yii::app()->user->id && Yii::app()->user->id == $user_id,
             'dp'    => $dp,

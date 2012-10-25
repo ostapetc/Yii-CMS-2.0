@@ -291,6 +291,6 @@ class YouTubeApi extends ApiAbstract
 
     public function getThumb($hq = true)
     {
-        return 'http://i4.ytimg.com/vi/' . $id . '/' . ($hq ? 'hq' : '') . 'default.jpg';
+        return 'http://i4.ytimg.com/vi/' . $this->pk . '/' . ($hq ? 'hq' : '') . 'default.jpg';
     }
 }

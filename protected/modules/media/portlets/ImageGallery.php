@@ -83,7 +83,6 @@ class ImageGallery extends BaseFileListView
         $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
 //        $montageOptions = CJavaScript::encode(CMap::merge[$this->defaultMontageOptions, $this->montageOptions));
         Yii::app()->clientScript
-            ->registerCssFile($this->assets . '/imageGallery/imageGallery.css')
             ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
             ->registerCssFile($assets . 'fancybox/jquery.fancybox.css')
             ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-thumbs.js')

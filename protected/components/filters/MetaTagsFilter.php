@@ -6,6 +6,7 @@ class MetaTagsFilter extends CFilter
 
     protected function preFilter($filterChain)
     {
+        /** @var $controller Controller */
         $controller = $filterChain->controller;
         if ($this instanceof AdminController)
         {
@@ -15,10 +16,13 @@ class MetaTagsFilter extends CFilter
         if ($val = Yii::app()->request->getParam($this->getParam))
         {
             $class = $controller->getModelClass();
-            $model = CActiveRecord::model($class)->findByAttributes(array($this->findAttribute => $val));
-            if ($model)
+            if ($class)
             {
-                $controller->setMetaTags($model);
+                $model = ActiveRecord::model($class)->findByAttributes(array($this->findAttribute => $val));
+                if ($model)
+                {
+                    $controller->setMetaTags($model);
+                }
             }
         }
         return true;

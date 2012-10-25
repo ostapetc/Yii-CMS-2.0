@@ -67,7 +67,9 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
 
     public function getPreviewArray()
     {
-        $player = $this->getApiModel()->player_url;
+//        $player = $this->getApiModel()->player_url;
+        return ['type' => 'img', 'val' => $this->getApiModel()->getThumb()];
+
         if ($player)
         {
             return ['type' => 'iframe', 'val' => $player];
@@ -85,7 +87,9 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         {
             return CHtml::tag('iframe', CMap::mergeArray($size, [
                 'src' => $conf['val']
-            ]), '', true);
+            ]));
+        } elseif ($conf['type'] == 'img') {
+            return CHtml::image($conf['val'], '', []);
         }
     }
 

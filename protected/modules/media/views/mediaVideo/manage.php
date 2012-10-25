@@ -1,74 +1,40 @@
-<?
-$this->tabs = [
-    'Добавить страницу' => $this->createUrl('create')
-];
+<div class="video-manage">
+    <div class="btn-toolbar">
+        <div class="btn-group">
+            <?
+            if ($is_my) {
+                $widget = $this->widget('media.portlets.Uploader', [
+                    //'as_modal'   => false,
+                    'name'          => 'uploader',
+                    'model'         => $model,
+                    'tag'           => 'videos',
+                    'data_type'     => 'video',
+                    'upload_action' => '/media/mediaFile/upload',
+                    'link_parser_action' => 'media/mediaFile/linkParser'
+                ]);
 
-$urls   = [];
-$params = $_GET;
-foreach (YouTubeApiCriteria::$order_list as $sort => $label)
-{
-    $params['sort'] = $sort;
-    $key            = $this->createUrl('', $params);
-    $urls[$key]     = $label;
-}
-$selected = isset($_GET['sort']) ? $_GET['sort'] : YouTubeApiCriteria::ORDER_VIEW_COUNT;
-$filter = CHtml::textField('tyoutube-search');
-$sorter   = 'Сортировать по: ' . CHtml::dropDownList('order', $selected, $urls, [
-    'id' => 'youtube-sorter',
-]);
-/*
-$widget = $this->widget('AdminListView', array(
-    'itemView' => '_manage',
-    'dataProvider' => $model->search(),
-    'template' => $sorter . "{pager}\n{sorter}\n{items}\n{pager}",
-    'pager' => array(
-        'class' => 'AdminLinkPager',
-        'no_end' => true
-    )
-));
-*/
+                Yii::app()->clientScript->registerScript('close_' . $widget->getId(), "$('#{$widget->getId()}').on('hide',function(event) {
+                    $.fn.yiiListView.update('videos');
+                });");
+            }
+            ?>
+        </div>
+    </div>
+    <?
 
-$widget = $this->widget('AdminGridView', [
-    'id'           => 'youtube-grid',
-    'dataProvider' => $model->search(),
-    'filter'       => $model,
-    'template'     => $sorter . '{pagerSelect}{summary}<br/>{items}{pager}',
-    'columns'      => [
-        [
-            'value' => '"<iframe src=".$data->player_url."></iframe>"',
-            'type'  => 'raw'
-        ],
-        [
-            'name' => 'title',
-            'type' => 'raw'
-        ],
-        [
-            'header' => 'Рейтинги',
-            'value'  => '"Показы: ".$data->view_count."<br/>Проголосовало: ".$data->raters."<br/>Рейтинг: ".$data->average',
-            'type'   => 'raw'
-        ],
-        [
-            'header' => 'Автор',
-            'name'   => 'author',
-            'value'  => 'CHtml::link($data->author, $data->author_uri, array("target"=>"_blank"))',
-            'type'   => 'raw'
-        ],
-        [
-            'header' => 'Категория',
-            'name'   => 'category',
-        ],
-    ],
-]);
-?>
-
-
-<script type="text/javascript">
-    $(document).ready(function()
-    {
-        $('body').delegate('#youtube-sorter', 'change', function()
-        {
-            $('#modal_<?=$widget->getId()?>').yiiListView('update', {url: $(this).val()});
-        });
-    });
-
-</script>
+    //Вынести action titles в провайдер, воспользоваться функцией CController
+    $this->widget('media.portlets.ImageGallery', [
+        'id'              => 'videos',
+        'dataProvider'    => $dp,
+        'itemView'        => '_galleryItem',
+        'itemsTagName'    => 'ul',
+//        'sortableEnable'  => $isOwner,
+        'itemsCssClass'   => 'thumbnails',
+        'fancyboxOptions' => [
+            'beforeShow'=> 'js:function() {
+                //do some, comments for ex
+            }'
+        ]
+    ]);
+    ?>
+</div>

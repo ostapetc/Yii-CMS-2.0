@@ -87,9 +87,25 @@ abstract class Controller extends CController implements ControllerInterface
     }
 
 
+    /**
+     * get model class by controller name or false
+     * try to include it, if can't return false
+     * we can't use autoload for it, because include on non existing file throw error/warning, that shut down app
+     *
+     * @return bool|string class name or false
+     */
     public function getModelClass()
     {
-        return ucfirst(str_replace('Admin', '', $this->id));
+        $class = ucfirst(str_replace('Admin', '', $this->id));
+        if (!class_exists($class, false))
+        {
+            @include($class);
+            if (!class_exists($class, false))
+            {
+                return false;
+            }
+        }
+        return $class;
     }
 
 
