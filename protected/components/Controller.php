@@ -99,7 +99,7 @@ abstract class Controller extends CController implements ControllerInterface
         $class = ucfirst(str_replace('Admin', '', $this->id));
         if (!class_exists($class, false))
         {
-            @include($class);
+            @Yii::autoload($class);
             if (!class_exists($class, false))
             {
                 return false;

@@ -8,6 +8,7 @@ return CMap::mergeArray(require('main.php'), array(
             'password'         => '{{mysql.pass}}',
             'charset'          => 'utf8',
             'enableProfiling'  => true,
+            'initSQLs'         => array('SET NAMES utf8')
         ),
         'log'=> array(
             'class'=> 'CLogRouter',
