@@ -1,14 +1,14 @@
 <?
-class m120701_005442_users_create extends DbMigration
+class m120701_005443_users_create extends DbMigration
 {
     public function up()
     {
         $this->execute("DROP TABLE IF EXISTS `users`");
 
         $this->execute("
-            CREATE TABLE `users` (
+          CREATE TABLE `users` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-                `name` varchar(40) NOT NULL COMMENT 'Имя' DEFAULT '',
+                `name` varchar(40) NOT NULL COMMENT 'Имя'  DEFAULT '',
                 `email` varchar(200) NOT NULL COMMENT 'Email',
                 `password` varchar(60) NOT NULL COMMENT 'Пароль',
                 `birthdate` date DEFAULT NULL COMMENT 'Дата рождения',
@@ -21,6 +21,7 @@ class m120701_005442_users_create extends DbMigration
                 `password_recover_code` varchar(32) DEFAULT NULL,
                 `password_recover_date` timestamp NULL DEFAULT NULL,
                 `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Зарегистрирован',
+                `about_self` TEXT NULL DEFAULT NULL COMMENT 'О себе',
                 PRIMARY KEY (`id`),
                 UNIQUE KEY `email` (`email`)
               ) ENGINE=InnoDB DEFAULT CHARSET=utf8

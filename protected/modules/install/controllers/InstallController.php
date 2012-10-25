@@ -87,7 +87,6 @@ class InstallController extends ClientController
             }
 
             //create admin user
-
             $user = new User;
             list($user->name) = explode('@', $model->admin_email);
             $user->email = $model->admin_email;
@@ -109,7 +108,7 @@ class InstallController extends ClientController
             //run install method
             foreach (Yii::app()->getModules() as $id => $conf)
             {
-                mkdir(Yii::getPathOfAlias('webroot.upload.' . $id), 0755);
+                @mkdir(Yii::getPathOfAlias('webroot.upload.' . $id), 0755, true);
                 Yii::app()->getModule($id)->install();
             }
 

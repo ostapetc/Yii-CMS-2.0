@@ -1,6 +1,6 @@
 <?php
 
-class m121022_120130_media_file3 extends DbMigration
+class m120722_120130_media_file3 extends DbMigration
 {
 	public function up()
 	{

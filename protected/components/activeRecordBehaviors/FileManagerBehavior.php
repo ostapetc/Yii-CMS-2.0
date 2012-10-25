@@ -55,7 +55,6 @@ class FileManagerBehavior extends ActiveRecordBehavior
     {
         $model     = $this->getOwner();
         $object_id = $model->isNewRecord ? $this->_tmpPrefix() : $model->id;
-
         MediaFile::model()->findAllByAttributes(array(
             'object_id' => $object_id,
             'model_id'  => get_class($model)

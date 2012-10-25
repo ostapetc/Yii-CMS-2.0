@@ -35,7 +35,6 @@
  * @method   MediaFile          last()
  *
  */
-
 class MediaFile extends ActiveRecord
 {
     const STATUS_ON_MODERATE = 'on_moderate';
