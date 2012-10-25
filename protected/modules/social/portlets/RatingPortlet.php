@@ -53,7 +53,7 @@ class RatingPortlet extends Portlet
 
         $this->render('RatingPortlet', array(
             'object_id' => $this->model->id,
-            'user_id'   => $this->model->user_id,
+            'user_id'   => $this->model->getUserId(),
             'model_id'  => $model_id,
             'rating'    => $rating,
             'value'     => $value

@@ -278,6 +278,24 @@ class MediaFile extends ActiveRecord
         return $model;
     }
 
+    public function getUserId()
+    {
+        $parent = $this->getParentModel();
+        if ($parent instanceof User)
+        {
+            return $parent->id;
+        }
+        else if ($parent instanceof MediaAlbum)
+        {
+            $albumParent = $parent->getParentModel();
+            if ($albumParent instanceof User)
+            {
+                return $albumParent->id;
+            }
+        }
+        return false;
+    }
+
 
     public function getNameWithoutExt()
     {
