@@ -1,7 +1,7 @@
 <?php
 return [
     'local'    => [
-        'class'             => 'media.components.api.local.LocalApiBehavior',
+        'class'             => 'media.components.api.LocalApiBehavior',
         'sizes'             => [
             'client_gallery' => [
                 'width'  => 321,
@@ -15,54 +15,21 @@ return [
             'doc'   => 'local',
         ],
         'new_record_status' => MediaFile::STATUS_ON_MODERATE,
-        'api_model'         => [
-            'class' => 'media.components.api.local.LocalApi'
-        ]
     ],
     'remote'   => [
-        'class'             => 'media.components.api.remote.RemoteApiBehavior',
-        'api_model'         => [
-            'class' => 'media.components.api.remote.RemoteApi'
-        ],
+        'class'             => 'media.components.api.RemoteApiBehavior',
         'new_record_status' => MediaFile::STATUS_ACTIVE,
     ],
     'youTube'  => [
-        'class'     => 'media.components.api.youTube.YouTubeApiBehavior',
+        'class'     => 'media.components.api.YouTubeApiBehavior',
         'icon'      => '/img/icons/youtube-32.png',
-        'sizes'     => [
-            'client_gallery' => [
-                'width'  => 321,
-                'height' => 256
-            ]
-        ],
-        'api_model' => [
-            'class' => 'media.components.api.youTube.YouTubeApi'
-        ]
     ],
     'vk'       => [
-        'class'     => 'media.components.api.vk.VkApiBehavior',
+        'class'     => 'media.components.api.VkApiBehavior',
         'icon'      => '/img/icons/vk-32.png',
-        'sizes'     => [
-            'client_gallery' => [
-                'width'  => 321,
-                'height' => 256
-            ]
-        ],
-        'api_model' => [
-            'class' => 'media.components.api.vk.VkApi'
-        ]
     ],
     'vimeo'       => [
-        'class'     => 'media.components.api.vimeo.VimeoApiBehavior',
+        'class'     => 'media.components.api.VimeoApiBehavior',
         'icon'      => '/img/icons/vimeo-32.png',
-        'sizes'     => [
-            'client_gallery' => [
-                'width'  => 321,
-                'height' => 256
-            ]
-        ],
-        'api_model' => [
-            'class' => 'media.components.api.vimeo.VimeoApi'
-        ]
     ],
 ];

@@ -47,6 +47,3 @@ $this->renderPartial(
     array('page' => $model)
 );
 ?>
-<br/>
-<br/>
-<? $this->widget('CommentsPortlet', array('model' => $model)); ?>

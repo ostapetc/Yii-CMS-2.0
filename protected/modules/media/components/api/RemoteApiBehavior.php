@@ -1,44 +1,32 @@
 <?php
-Yii::import('media.components.api.abstract.*');
-Yii::import('media.components.api.local.*');
-class LocalApiBehavior extends ApiBehaviorAbstract
+Yii::import('media.components.api.ApiBehaviorAbstract');
+class RemoteApiBehavior extends ApiBehaviorAbstract
 {
-    public $api_map;
     public $new_record_status;
 
 
-    public function getThumb($size, $crop = true)
+
+    public function parse($content)
     {
-        $dir  = '/' . LocalApi::UPLOAD_PATH . '/' . pathinfo($this->getPk(), PATHINFO_DIRNAME);
-        $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
-        return ImageHelper::thumbSrc($dir, $name, $size, $crop);
+        return false;
     }
 
-
-    public function getServerPath()
+    public function getThumb($size = null, $crop = true)
     {
-        return $this->getApiModel()->getServerPath();
-    }
-
-
-    public function getServerDir()
-    {
-        return $this->getApiModel()->getServerDir();
-    }
-
-
-    public function getContent()
-    {
-        if (file_exists($this->getServerPath()))
+        if (is_string($size))
         {
-            return file_get_contents($this->getServerPath());
+            $size = $this->getSize($size);
         }
+
+        $dir  = pathinfo($this->getPk(), PATHINFO_DIRNAME);
+        $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
+        return ImageHelper::thumb($dir, $name, $size, $crop)->getSrc();
     }
 
 
     public function getHref()
     {
-        return '/' . LocalApi::UPLOAD_PATH . '/' . $this->pk;
+        return $this->pk;
     }
 
 
@@ -49,7 +37,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function detectType()
+    public function getType()
     {
         $doc = [
             'book',
@@ -60,13 +48,13 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         switch (true)
         {
             case $this->typeIs($doc):
-                return MediaFile::TYPE_DOC;
+                return self::TYPE_DOC;
             case $this->typeIs('audio'):
-                return MediaFile::TYPE_AUDIO;
+                return self::TYPE_AUDIO;
             case $this->typeIs('video'):
-                return MediaFile::TYPE_VIDEO;
+                return self::TYPE_VIDEO;
             case $this->typeIs('image'):
-                return MediaFile::TYPE_IMG;
+                return self::TYPE_IMG;
         }
     }
 
@@ -84,7 +72,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreviewArray($size = ['width' => 64, 'height' => 64])
+    public function getPreviewArray($size_name = null)
     {
         $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/icons/';
         switch (true)
@@ -92,7 +80,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             case $this->typeIs('image'):
                 return [
                     'type' => 'img',
-                    'val'  => $this->getThumb($size)
+                    'val'  => $this->getThumb()
                 ];
                 break;
             case $this->typeIs('audio'):
@@ -110,7 +98,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             case $this->typeIs('video'):
                 return [
                     'type' => 'video',
-                    'val'  => ImageHelper::placeholder($size, 'Video processing', true)
+                    'val'  => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true)
                 ];
                 break;
             default:
@@ -132,17 +120,17 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreview($size = ['width' => 64, 'height' => 64])
+    public function getPreview($size_name = null)
     {
-        $data = $this->getPreviewArray($size);
+        $data = $this->getPreviewArray($size_name);
 
         switch ($data['type'])
         {
             case 'img':
-                return CHtml::image($data['val'], '', $size);
+                return CHtml::image($data['val']);
                 break;
             case 'video':
-                return ImageHelper::placeholder($size, 'Video processing');
+                return ImageHelper::placeholder($this->getSize($size_name), 'Video processing');
                 break;
         }
     }
@@ -154,31 +142,15 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getIsFileExist()
-    {
-        $this->getApiModel()->getIsFileExists();
-    }
-
-
     public function beforeSave($event)
     {
         $owner = $this->getOwner();
         if ($owner->getIsNewRecord())
         {
-            if ($this->getApiModel(false)->save('file'))
-            {
-                $this->setPk($this->getApiModel()->pk);
-                $owner->title      = $this->getApiModel()->old_name;
-                $owner->type       = $this->detectType();
-//                $owner->target_api = $this->api_map[$owner->type];
-                $owner->status     = $this->new_record_status;
-                return true;
-            }
-            else
-            {
-//                $this->getOwner()->error = $this->getApiModel()->errors;
-                return false;
-            }
+            $this->setPk($this->getApiModel()->pk);
+            $owner->type   = $this->detectType();
+            $owner->status = $this->new_record_status;
+            return true;
         }
         return true;
     }
