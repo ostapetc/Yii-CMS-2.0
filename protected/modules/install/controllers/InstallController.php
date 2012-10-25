@@ -97,7 +97,8 @@ class InstallController extends ClientController
 
             //create admin user
             $user = new User;
-            list($user->name) = ucfirst(explode('@', $model->admin_email));
+            list($user->name) = explode('@', $model->admin_email);
+            $user->name = ucfirst($user->name);
             $user->email = $model->admin_email;
             $user->password = UserIdentity::crypt($model->admin_pass);
             $user->status = User::STATUS_ACTIVE;
