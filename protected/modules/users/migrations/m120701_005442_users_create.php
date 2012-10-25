@@ -8,7 +8,7 @@ class m120701_005441_users_create extends DbMigration
         $this->execute("
             CREATE TABLE `users` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-                `name` varchar(40) NOT NULL COMMENT 'Имя',
+                `name` varchar(40) NOT NULL COMMENT 'Имя' DEFAULT '',
                 `email` varchar(200) NOT NULL COMMENT 'Email',
                 `password` varchar(60) NOT NULL COMMENT 'Пароль',
                 `birthdate` date DEFAULT NULL COMMENT 'Дата рождения',
