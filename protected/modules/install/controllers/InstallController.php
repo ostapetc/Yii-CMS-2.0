@@ -76,13 +76,22 @@ class InstallController extends ClientController
 
             //migrate
             Yii::app()->getModule('users');
+            Yii::app()->executor->migrate('up --module=main');
 
             foreach (Yii::app()->getModules() as $id => $data)
             {
+                if ($id == 'main')
+                {
+                    continue;
+                }
                 Yii::app()->getModule($id);
                 if (is_dir(Yii::getPathOfAlias($id.'.migrations')))
                 {
-                    Yii::app()->executor->migrate('up --module='.$id);
+                    $response = Yii::app()->executor->migrate('up --module='.$id);
+                    if (stripos($response, 'successfully') === false)
+                    {
+                        echo $response;die;
+                    }
                 }
             }
 

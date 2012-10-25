@@ -19,7 +19,7 @@ class m120908_182119_create_test_user extends DbMigration
             (18, 'Test user 18', 'tes18t@mail.ru', '\$2a\$12\$Ga0zOjaIh4Y1qBbTdfYaHOueYVtuT7hg2mZEqkCwHOlJ5mWjQwjQC', NULL, NULL, 'active', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2012-10-17 09:21:21'),
             (19, 'Test user 19', 'tes19t@mail.ru', '\$2a\$12\$lH9fX02a0Sw4BJwmIrEcpus2yY6Sl7D//UptncbsEBEaDQxCoui.y', NULL, NULL, 'active', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2012-10-17 09:21:22'),
                 (20, 'Test user 20', 'tes20t@mail.ru', '\$2a\$12\$88OyiDRsTxLRMHSqFqm2TeauTmPnUx4SWKT3RQ0sCIG7S63IzlIFq', NULL, NULL, 'active', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2012-10-17 09:21:22'),
-            (21, NULL, 'www.pismeco@gmail.com', '\$2a\$12\$7qGwVVfB/O3.FB2UpWVkQuFAm7j6tSu2OPpziOzteQjC0wRx3W6k.', NULL, NULL, 'active', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2012-10-17 09:21:22'),
+            (21, '', 'www.pismeco@gmail.com', '\$2a\$12\$7qGwVVfB/O3.FB2UpWVkQuFAm7j6tSu2OPpziOzteQjC0wRx3W6k.', NULL, NULL, 'active', NULL, NULL, 0, NULL, NULL, NULL, NULL, '2012-10-17 09:21:22'),
             (555, 'Robot', 'robot@factory.com', 'Robot', '1900-01-01', 'man', 'blocked', NULL, '', 0, NULL, NULL, NULL, NULL, '2012-10-22 11:56:24');
 
         ");
