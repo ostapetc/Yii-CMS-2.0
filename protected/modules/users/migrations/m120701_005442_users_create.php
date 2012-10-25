@@ -1,5 +1,5 @@
 <?
-class m120701_005441_users_create extends DbMigration
+class m120701_005442_users_create extends DbMigration
 {
     public function up()
     {
