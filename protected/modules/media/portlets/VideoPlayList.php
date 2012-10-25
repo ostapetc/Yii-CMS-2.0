@@ -7,22 +7,8 @@ class VideoPlayList extends Widget
     public $author;
     public $items_count = 4;
 
-
     public function run()
     {
-        /*
-        $file = new MediaFile('search', 'youTube');
-        $api  = $file->getApi();
-        */
-        /** @var $api YouTubeApi */
-        /*
-        $api->title     = $this->request;
-        $api->author    = $this->author;
-        $dp             = $api->search([
-            'limit' => $this->items_count
-        ]);
-        $dp->pagination = false;
-*/
 
         $file = new MediaFile;
         $dp = new ActiveDataProvider($file, [
@@ -30,7 +16,7 @@ class VideoPlayList extends Widget
             'pagination' => false
         ]);
 
-        $this->render('_youTubeVideo', [
+        $this->render('_videoPlayList', [
             'data' => $dp->getData()
         ]);
     }

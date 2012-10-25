@@ -7,12 +7,11 @@ if ($img) {
 
     <?
     echo CHtml::link($img, ['/media/mediaVideo/view', 'id' => $data->id], [
-        "rel" => "album_photos",
-        "title" => $data->title,
+        "rel" => "album_videos",
         "class" => "thumbnail",
-        "data-object-id" => get_class($data),
-        "data-model-id" => $data->id,
-        "data-model-tag" => 'files',
+//        "data-object-id" => get_class($data),
+//        "data-model-id" => $data->id,
+//        "data-model-tag" => 'files',
     ]);
     ?>
     <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($data->date_create, 'long', 'short') ?></div>
@@ -27,7 +26,7 @@ if ($img) {
             <a href="<?= $user->url ?>" title="Автор текста"><span class="glyphicon-user"></span><?= $user->name ?></a>
             <span title="рейтинг пользователя" class="rating"><?= $user->rating ?></span>
         </div>
-        <? } ?>
+    <? } ?>
 
     <div class="comments">
         <? $title = $data->comments_count ? 'Читать комментарии' : 'Комментировать'; ?>

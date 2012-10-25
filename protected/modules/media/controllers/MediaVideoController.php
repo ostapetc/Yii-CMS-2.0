@@ -26,6 +26,7 @@ class MediaVideoController extends ClientController
     public function actionView($id)
     {
         $file = MediaFile::model()->throw404IfNull()->findByPk($id);
+        $this->setMetaTags($file);
         $this->render('view', ['model' => $file]);
     }
 

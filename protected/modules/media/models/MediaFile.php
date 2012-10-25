@@ -1,6 +1,6 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
  * @property string             $id
  * @property string             $object_id
@@ -14,7 +14,7 @@
  * @property string             $api_name
  * @property string             $target_api
  * @property string             $status
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                    $deleteUrl
  * @property                    $apiName
@@ -29,11 +29,11 @@
  * @property                    $updateUrl
  * @property                    $createUrl
  * @property string             $error           the error message. Null is returned if no error.
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MediaFile          ordered()
  * @method   MediaFile          last()
- * 
+ *
  */
 
 class MediaFile extends ActiveRecord
@@ -269,6 +269,7 @@ class MediaFile extends ActiveRecord
             {
                 $model->remote_id = $id;
                 $model->api_name  = $api;
+                $model->type      = $model->getApi()->getType();
                 $model->getApi()->findByPk($id);
                 break;
             }

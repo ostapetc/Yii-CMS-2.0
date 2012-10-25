@@ -1,7 +1,7 @@
 <?php
 return [
     [
-        'actions'  => ['manage'],
+        'actions'  => ['manage', 'view'],
         'sidebars' => [
             [
                 'type' => 'widget',

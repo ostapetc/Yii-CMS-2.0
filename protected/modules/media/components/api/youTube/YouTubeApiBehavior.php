@@ -15,6 +15,10 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         throw new CException('not implemented yet');
     }
 
+    public function getType()
+    {
+        return MediaFile::TYPE_VIDEO;
+    }
 
     public function getServerDir()
     {
@@ -27,23 +31,8 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $this->setApiModel($model);
         if ($this->getOwner()->getIsNewRecord())
         {
-
-        }
-        else
-        {
-            $this->getApiModel()->title = $this->getOwner()->title;
-            $this->getApiModel()->description = $this->getOwner()->descr;
-//            if (!$this->getApiModel()->save()) {
-                //what to do??
-//            }
         }
         return true;
-    }
-
-
-    public function detectType()
-    {
-        return 'video';
     }
 
     public function getHref()
@@ -65,32 +54,30 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $this->setPk($new_api->pk);
     }
 
-    public function getPreviewArray()
+    public function getPlayer($size = ['width' => 128, 'height' => 128])
     {
-//        $player = $this->getApiModel()->player_url;
-        return ['type' => 'img', 'val' => $this->getApiModel()->getThumb()];
+        $conf = $this->getPreviewArray('iframe');
+        return CHtml::tag('iframe', CMap::mergeArray($size, [
+            'src' => $conf['val']
+        ]));
+    }
 
-        if ($player)
+    public function getPreviewArray($type = 'img')
+    {
+        if ($type == 'iframe')
         {
-            return ['type' => 'iframe', 'val' => $player];
+            return ['type' => 'iframe', 'val' => $this->getApiModel()->player_url];
         }
-        else
+        elseif ($type == 'img')
         {
-            return ['type' => 'img', 'val' => $this->icon];
+            return ['type' => 'img', 'val' => $this->getApiModel()->getThumb()];
         }
     }
 
     public function getPreview($size = ['width' => 128, 'height' => 128])
     {
         $conf = $this->getPreviewArray();
-        if ($conf['type'] == 'iframe')
-        {
-            return CHtml::tag('iframe', CMap::mergeArray($size, [
-                'src' => $conf['val']
-            ]));
-        } elseif ($conf['type'] == 'img') {
-            return CHtml::image($conf['val'], '', []);
-        }
+        return CHtml::image($conf['val'], '', []);
     }
 
     public function getUrl()

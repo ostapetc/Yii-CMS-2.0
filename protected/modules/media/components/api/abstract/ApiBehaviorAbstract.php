@@ -13,6 +13,8 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         $this->module = Yii::app()->getModule('media');
     }
 
+    abstract public function getType();
+
     public function getAssets()
     {
         if ($this->assets)
