@@ -8,9 +8,6 @@ Zend_Loader::loadClass('Zend_Gdata_AuthSub');
 Zend_Loader::loadClass('Zend_Gdata_YouTube_VideoQuery');
 
 
-/**
- * @method YouTubeApi getApiModel
- */
 class YouTubeApiBehavior extends ApiBehaviorAbstract
 {
     const UPLOAD_PATH = 'upload/media';

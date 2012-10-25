@@ -6,7 +6,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public $api_map;
     public $new_record_status;
-
+    public $old_name;
 
     protected $file_info;
 
@@ -193,29 +193,23 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getIsFileExist()
-    {
-        $this->getApiModel()->getIsFileExists();
-    }
-
-
     public function beforeSave($event)
     {
         $owner = $this->getOwner();
         if ($owner->getIsNewRecord())
         {
-            if ($this->getApiModel(false)->save('file'))
+            if ($this->_save('file'))
             {
-                $this->setPk($this->getApiModel()->pk);
-                $owner->title      = $this->getApiModel()->old_name;
-                $owner->type       = $this->detectType();
+                $this->setPk($this->pk);
+                $owner->title      = $this->old_name;
+                $owner->type       = $this->getType();
 //                $owner->target_api = $this->api_map[$owner->type];
                 $owner->status     = $this->new_record_status;
                 return true;
             }
             else
             {
-//                $this->getOwner()->error = $this->getApiModel()->errors;
+//                $this->getOwner()->error = $this->errors;
                 return false;
             }
         }

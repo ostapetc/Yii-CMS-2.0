@@ -207,7 +207,7 @@ class MediaFile extends ActiveRecord
      */
     public function getApi()
     {
-        return $this->asa('api')->getApiModel();
+        return $this->asa('api');
     }
 
 

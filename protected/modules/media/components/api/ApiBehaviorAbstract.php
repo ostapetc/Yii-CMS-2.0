@@ -24,11 +24,6 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
         $this->getOwner()->remote_id = $pk;
     }
 
-    public function setApiModel($model)
-    {
-        $this->_api_model = $model;
-    }
-
 
 }
 

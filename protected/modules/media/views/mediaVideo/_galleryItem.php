@@ -30,15 +30,15 @@ if ($img) {
                     <span title="рейтинг пользователя" class="rating"><?= $user->rating ?></span>
                 </div>
             <? } ?>
-
-            <div class="comments">
-                <? $title = $data->comments_count ? 'Читать комментарии' : 'Комментировать'; ?>
-                <a href="<?= $data->url ?>#comments" title="<?= $title ?>">
-                    <span class="glyphicon-comments"></span>
-                    <span class="all"><?= $data->comments_count ? $data->comments_count : $title ?></span>
-                </a>
-            </div>
         </div>
+    </div>
+
+    <div class="comments">
+        <? $title = $data->comments_count ? 'Читать комментарии' : 'Комментировать'; ?>
+        <a href="<?= $data->url ?>#comments" title="<?= $title ?>">
+            <span class="glyphicon-comments"></span>
+            <span class="all"><?= $data->comments_count ? $data->comments_count : $title ?></span>
+        </a>
     </div>
 </li>
 <? } ?>

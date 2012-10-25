@@ -1,9 +1,6 @@
 <?php
 Yii::import('media.components.api.ApiBehaviorAbstract');
 
-/**
- * @method YouTubeApi getApiModel
- */
 class VkApiBehavior extends ApiBehaviorAbstract
 {
     public $icon;
@@ -53,11 +50,6 @@ class VkApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function detectType()
-    {
-        return 'video';
-    }
-
 
     public function getHref()
     {
@@ -65,17 +57,9 @@ class VkApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function beforeSave($event)
-    {
-        $model = $this->getApiModel()->findByPk($this->getPk());
-        $this->setApiModel($model);
-        return true;
-    }
-
-
     public function getPreviewArray()
     {
-        $player = $this->getApiModel()->getPlayerUrl();
+        $player = $this->getPlayerUrl();
         if ($player)
         {
             return [

@@ -147,8 +147,8 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
         $owner = $this->getOwner();
         if ($owner->getIsNewRecord())
         {
-            $this->setPk($this->getApiModel()->pk);
-            $owner->type   = $this->detectType();
+            $this->setPk($this->pk);
+            $owner->type   = $this->getType();
             $owner->status = $this->new_record_status;
             return true;
         }

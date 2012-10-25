@@ -1,9 +1,6 @@
 <?php
 Yii::import('media.components.api.ApiBehaviorAbstract');
 
-/**
- * @method YouTubeApi getApiModel
- */
 class VimeoApiBehavior extends ApiBehaviorAbstract
 {
     public $icon;
@@ -67,29 +64,16 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function detectType()
-    {
-        return 'video';
-    }
-
-
     public function getHref()
     {
         return $this->href;
     }
 
 
-    public function beforeSave($event)
-    {
-        $model = $this->getApiModel()->findByPk($this->getPk());
-        $this->setApiModel($model);
-        return true;
-    }
-
 
     public function getPreviewArray()
     {
-        $player = $this->getApiModel()->getPlayerUrl();
+        $player = $this->getPlayerUrl();
         if ($player)
         {
             return [

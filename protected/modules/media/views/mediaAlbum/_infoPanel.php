@@ -28,6 +28,7 @@
         </a>
     </div>
 
-    <? $this->widget('CommentsPortlet', array('model' => $page)); ?>
-
 </div>
+    <br/>
+    <br/>
+<? $this->widget('CommentsPortlet', array('model' => $page)); ?>
