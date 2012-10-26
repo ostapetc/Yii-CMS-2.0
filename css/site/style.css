@@ -260,8 +260,14 @@ span.italic-12 {
     margin: 0 0 10px 10px;
 }
 
+.video-gallery .infopanel{
+    width: 300px;
+}
+.video-gallery .infopanel .comments{
+    margin: 7px 5px 0 15px;
+}
 .video-gallery .infopanel .published{
-    margin: 0 10px;
+    margin: 0 5px;
 }
 
 .video-gallery .infopanel .favorite{

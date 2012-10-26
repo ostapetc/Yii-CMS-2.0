@@ -35,22 +35,44 @@ class MediaFileController extends ClientController {
 
     public function actionLinkParser($object_id, $model_id, $tag)
     {
-        if (isset($_POST['content'])) {
-            $model = MediaFile::parse($_POST['content']);
-            if ($model) {
-                $model->object_id = $object_id;
-                $model->model_id = $model_id;
-                $model->tag = $tag;
-                $model->save();
-                $this->sendFilesAsJson($model);
-            } else {
-                echo [
-                    'status'  => 'error',
-                    'message' => 'Текст не распознан'
-                ];
-            }
-        } else {
+        if (!isset($_POST['content'])) {
             $this->forbidden();
+        }
+
+        $model = MediaFile::parse($_POST['content']);
+        if ($model)
+        {
+            $model->object_id = $object_id;
+            $model->model_id = $model_id;
+            $model->tag = $tag;
+            $existsFile = MediaFile::model()->findByAttributes(array(
+                'remote_id' => $model->remote_id,
+                'api_name' => $model->api_name
+            ));
+            if ($existsFile)
+            {
+                echo json_encode([
+                    'errors' => [
+                        [
+                            'error' => 'Видео уже было добавлено на сайт'
+                        ]
+                    ]
+                ]);
+                return;
+            }
+
+            $model->save();
+            $this->sendFilesAsJson($model);
+        }
+        else
+        {
+            echo json_encode([
+                'errors' => [
+                    [
+                        'error' => 'Текст не распознан'
+                    ]
+                ]
+            ]);
         }
     }
 

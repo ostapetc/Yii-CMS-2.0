@@ -261,6 +261,7 @@ class MediaFile extends ActiveRecord
 
     public static function parse($source)
     {
+        $model = null;
         foreach (self::getConfiguration() as $api => $conf)
         {
             $model = new MediaFile('create', $api);
@@ -269,7 +270,6 @@ class MediaFile extends ActiveRecord
                 $model->remote_id = $id;
                 $model->api_name  = $api;
                 $model->type      = $model->getApi()->getType();
-                $model->getApi()->findByPk($id);
                 break;
             }
         }
