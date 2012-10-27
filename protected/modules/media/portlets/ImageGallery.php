@@ -1,6 +1,7 @@
 <?php
 Yii::import('media.portlets.BaseFileListView');
-class ImageGallery extends BaseFileListView
+class
+ImageGallery extends BaseFileListView
 {
     public $emptyText = '';
     public $template = "{items}";
@@ -33,19 +34,6 @@ class ImageGallery extends BaseFileListView
         ],
     ];
 
-    public $montageOptions = [];
-    public $defaultMontageOptions = [
-        'margin' => 4,
-//        'minsize'	=> true,
-        'liquid' => false,
-//        'fixedHeight' => 130,
-//        'fillLastRow'          => true,
-        'alternateHeight'      => true,
-        'alternateHeightRange' => [
-            'min'    => 50,
-            'max'    => 100
-        ],
-    ];
     public $itemView = 'media.portlets.views.imageGalleryItem';
     public $itemsTagName = 'div';
     public $enablePagination = false;
@@ -80,8 +68,8 @@ class ImageGallery extends BaseFileListView
     {
         $id             = $this->htmlOptions['id'];
         $assets         = $this->assets . '/plugins/';
+        if ($this->fancyboxOptions !== false) {
         $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
-//        $montageOptions = CJavaScript::encode(CMap::merge[$this->defaultMontageOptions, $this->montageOptions));
         Yii::app()->clientScript
             ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
             ->registerCssFile($assets . 'fancybox/jquery.fancybox.css')
@@ -91,26 +79,7 @@ class ImageGallery extends BaseFileListView
             ->registerCssFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.css')
             ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')
             ->registerScript($id, "$('#$id a').fancybox($options);");
-/*
-            ->registerCssFile($assets . 'montage/css/style.css')
-            ->registerScriptFile($assets . 'montage/js/jquery.montage.js')
-
-                var container 	= $('#$id'),
-                    imgs		= container.find('img').hide(0),
-                    totalImgs	= imgs.length,
-                    cnt			= 0;
-
-                    imgs.each(function(i) {
-                        var img	= $(this);
-                        $('<img/>').load(function() {
-                            ++cnt;
-                            if( cnt === totalImgs ) {
-                                imgs.show(0);
-                                container.find('.items').montage({$montageOptions})
-                            }
-                        }).attr('src',img.attr('src'));
-                    });
-                    */
+        }
     }
 
 }

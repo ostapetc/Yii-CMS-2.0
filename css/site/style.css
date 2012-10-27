@@ -202,6 +202,30 @@ span.italic-12 {
 
 
 
+/*-----------------------------GALLERY------------------------------------*/
+.gallery-item{
+    position: relative;
+}
+.gallery-title {
+    overflow: hidden;
+    margin: 0 0 4px 0;
+    color: #333;
+}
+.gallery-title span{
+    white-space: nowrap;
+}
+
+.gallery-title::after {
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 50;
+    height: 20px;
+    width: 35px;
+    display: block;
+    background: url(/img/lp_list_gr.png)
+}
 /*-----------------------------INFOPANELL------------------------------------*/
 
 .infopanel-wrapper {

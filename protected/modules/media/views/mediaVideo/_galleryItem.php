@@ -3,14 +3,11 @@ $img = $data->getPreview(['width' => 320, 'height' => 260]);
 
 if ($img) {
 ?>
-<li id="File_<?=$data->id?>" style="width: 331px;">
-
-    <?
-    echo CHtml::link($img, ['/media/mediaVideo/view', 'id' => $data->id], [
-        "rel" => "video_gallery",
-        "class" => "thumbnail",
-    ]);
-    ?>
+<li id="File_<?=$data->id?>" style="width: 331px;" class="gallery-item">
+    <a class="thumbnail" href="<?= $this->createUrl('/media/mediaVideo/view', ['id' => $data->id]) ?>">
+        <div class="gallery-title"><span>slakgjlasglkgl dsfljas fljasf adsfjladsflkf lf lasjf;l kaj;fjadsfkasdf kj</span></div>
+        <?= $img ?>
+    </a>
     <div class="infopanel-wrapper">
         <div class="infopanel">
             <div class="voting">

@@ -45,6 +45,7 @@ class MediaModule extends WebModule
             '/usersAlbums/<user_id:\d*>' => '/media/mediaAlbum/manage',
             '/usersAlbums/' => '/media/mediaAlbum/manage',
             '/album/<id:\d*>' => '/media/mediaAlbum/view',
+            '/video/<id:\d*>' => '/media/mediaVideo/view',
             '/usersVideos/<user_id:\d*>' => '/media/mediaVideo/manage',
         ];
     }

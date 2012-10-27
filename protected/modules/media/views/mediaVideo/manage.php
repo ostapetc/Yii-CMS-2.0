@@ -30,11 +30,7 @@
         'itemsTagName'    => 'ul',
 //        'sortableEnable'  => $isOwner,
         'itemsCssClass'   => 'thumbnails',
-        'fancyboxOptions' => [
-            'beforeShow'=> 'js:function() {
-                //do some, comments for ex
-            }'
-        ],
+        'fancyboxOptions' => false,
         'htmlOptions' => [
             'class' => 'video-gallery'
         ]
