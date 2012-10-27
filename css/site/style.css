@@ -206,16 +206,16 @@ span.italic-12 {
 .gallery-item{
     position: relative;
 }
-.gallery-title {
+.gallery-item .gallery-title {
     overflow: hidden;
     margin: 0 0 4px 0;
     color: #333;
 }
-.gallery-title span{
+.gallery-item .gallery-title span{
     white-space: nowrap;
 }
 
-.gallery-title::after {
+.gallery-item .gallery-title::after {
     content: "";
     position: absolute;
     right: 5px;
@@ -224,7 +224,11 @@ span.italic-12 {
     height: 20px;
     width: 35px;
     display: block;
-    background: url(/img/lp_list_gr.png)
+    background: url(/img/site/gallery_title_shadow.png)
+}
+
+.sidebar-galery-item .gallery-title::after {
+    background: url(/img/site/sb_gallery_title_shadow.png)
 }
 /*-----------------------------INFOPANELL------------------------------------*/
 

@@ -5,7 +5,11 @@ if ($img) {
 ?>
 <li id="File_<?=$data->id?>" style="width: 331px;" class="gallery-item">
     <a class="thumbnail" href="<?= $this->createUrl('/media/mediaVideo/view', ['id' => $data->id]) ?>">
-        <div class="gallery-title"><span>slakgjlasglkgl dsfljas fljasf adsfjladsflkf lf lasjf;l kaj;fjadsfkasdf kj</span></div>
+        <div class="gallery-title">
+            <span>
+                <?= $data->title ?>
+            </span>
+        </div>
         <?= $img ?>
     </a>
     <div class="infopanel-wrapper">
