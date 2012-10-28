@@ -15,6 +15,8 @@ abstract class ActiveRecord extends CActiveRecord
      */
     protected $_throw404IfNull = false;
 
+    public $throw_if_errors;
+
     /**
      * set by chain method asArray()
      * @var bool
@@ -449,6 +451,15 @@ abstract class ActiveRecord extends CActiveRecord
         return $clone;
     }
 
+
+    public function throwIfErrors()
+    {
+        $clone = clone $this;
+        $clone->throw_if_errors = true;
+        return $clone;
+    }
+
+
     public function asArray()
     {
         $clone = clone $this; // please see comments for self::throw404IfNull() about it
@@ -558,5 +569,17 @@ abstract class ActiveRecord extends CActiveRecord
         {
             return $model->$scalar_attribute;
         }
+    }
+
+
+    public function save($runValidation = true, $attributes=null)
+    {
+        $save = parent::save($runValidation, $attributes);
+        if ($this->throw_if_errors && !$save && $this->errors)
+        {
+            throw new CException("Can't save model " . get_class($this) . ': ', print_r($this->errors_flat_array, 1));
+        }
+
+        return $save;
     }
 }

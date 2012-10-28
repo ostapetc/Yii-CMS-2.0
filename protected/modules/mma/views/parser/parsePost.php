@@ -30,9 +30,6 @@
 </div>
 
 <? if (isset($post)): ?>
-        <?
-        v($post); die;
-        ?>
     <br/>
     <?= CHtml::link($post->url, $post->url) ?>
     <br/>

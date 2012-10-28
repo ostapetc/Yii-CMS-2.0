@@ -82,7 +82,7 @@ class MixfightParser extends OsParser
         $text = preg_replace('|<p class="pubDate">(.*?)</p>|', '', $text);
         $text = $this->stripTags($text, '<strong><b><p><br><object><param><embed><img>');
 
-        preg_match('|(2012)/(10)/(23)/|', $url, $date);
+        preg_match('|([0-9]{4})/([0-9]{2})/([0-9]{2})/|', $url, $date);
         if (count($date) != 4)
         {
             $this->log('Пропускаем, непонятная дата: ' . print_r($date, 1), CLogger::LEVEL_ERROR);

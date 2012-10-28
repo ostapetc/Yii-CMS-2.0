@@ -45,6 +45,8 @@ abstract class OsParser extends Component
     {
         if ($model->save())
         {
+            $model->grabImages();
+            $model->grabTagsFromText();
             $this->log("Сохранена модель #{$model->id}");
         }
         else

@@ -55,4 +55,22 @@ class TagRel extends ActiveRecord
 	{
 		return array();
 	}
+
+
+    public static function createIfNotExists($tag_id, ActiveRecord $model)
+    {
+        $attributes = array(
+            'tag_id'    => $tag_id,
+            'object_id' => $model->id,
+            'model_id'  => get_class($model)
+        );
+
+        if (!self::model()->existsByAttributes($attributes))
+        {
+            $rel = new self;
+            $rel->attributes      = $attributes;
+            $rel->throw_if_errors = true;
+            $rel->save();
+        }
+    }
 }

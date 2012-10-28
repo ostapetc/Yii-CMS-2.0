@@ -358,10 +358,12 @@ class Page extends ActiveRecord
         }
     }
 
+
     public function getUserId()
     {
         return $this->user_id;
     }
+
 
     public function beforeSave()
     {
@@ -384,6 +386,78 @@ class Page extends ActiveRecord
             }
 
             return true;
+        }
+    }
+
+
+    public function getTextImageDir()
+    {
+        $dir = $_SERVER['DOCUMENT_ROOT'] . self::IMAGES_DIR . $this->id . DS;
+        if (!is_dir($dir))
+        {
+            mkdir($dir, 0777);
+            chmod($dir, 0777);
+        }
+
+        return $dir;
+    }
+
+
+    public function grabImages()
+    {
+        $doc = new DOMDocument();
+        @$doc->loadHTML($this->text);
+
+        $xpath  = new DOMXPath($doc);
+        $images = $xpath->query('//img');
+
+        foreach ($images as $image)
+        {
+            $src = trim($image->getAttribute('src'));
+            if (mb_substr($src, 0, 4, 'utf-8') == 'http')
+            {
+                $img  = file_get_contents($src);
+                $path = $this->getTextImageDir() . md5($src) . '.' . pathinfo($src, PATHINFO_EXTENSION);
+
+                file_put_contents($path, $img);
+                chmod($path, 0777);
+
+                $path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path);
+                $this->text = str_replace($src, $path, $this->text);
+            }
+            else
+            {
+                die('howto grab ' . $src);
+            }
+        }
+    }
+
+
+    public function grabTagsFromText()
+    {
+        /**
+         * @var $tag DOMElement
+         */
+
+        $doc = new DOMDocument();
+        @$doc->loadHTML($this->text);
+
+        $xpath = new DOMXPath($doc);
+        $tags  = $xpath->query('//strong');
+
+        foreach ($tags as $tag_name)
+        {
+            $tag_name = utf8_decode($tag_name->textContent);
+
+            $tag = Tag::model()->findByAttributes(array('name' => $tag_name));
+            if (!$tag)
+            {
+                $tag = new Tag();
+                $tag->name = $tag_name;
+                $tag->throwIfErrors()->save();
+            }
+
+            $tag_rel = TagRel::createIfNotExists($tag->id, $this);
         }
     }
 }
