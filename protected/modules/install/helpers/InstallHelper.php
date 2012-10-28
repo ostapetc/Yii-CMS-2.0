@@ -12,6 +12,7 @@ class InstallHelper
     public static function parseFile($source, $target, $data)
     {
         $formatted_data = array();
+
         foreach ($data as $key => $val)
         {
             $formatted_data['{{'.$key.'}}'] = $val;

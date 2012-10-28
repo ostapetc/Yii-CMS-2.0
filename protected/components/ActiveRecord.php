@@ -13,13 +13,13 @@ abstract class ActiveRecord extends CActiveRecord
      * set by chain method throw404IfNull()
      * @var bool
      */
-    protected $_throw404IfNull = false;
+    public $throw_404_if_null = false;
 
     /**
      * set by chain method asArray()
      * @var bool
      */
-    protected $_asArray = false;
+    public $as_array = false;
 
     abstract public function name();
 
