@@ -445,14 +445,14 @@ abstract class ActiveRecord extends CActiveRecord
         Yii::app()->user->model will do User::model() for finding record already with our flag
         */
         $clone = clone $this;
-        $clone->_throw404IfNull = true;
+        $clone->throw_404_if_null = true;
         return $clone;
     }
 
     public function asArray()
     {
         $clone = clone $this; // please see comments for self::throw404IfNull() about it
-        $clone->_asArray = true;
+        $clone->as_array = true;
         return $clone;
     }
 
