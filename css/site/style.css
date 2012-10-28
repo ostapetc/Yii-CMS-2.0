@@ -305,3 +305,10 @@ span.italic-12 {
 .video-gallery .infopanel .author{
     margin: 5px 10px 0  20px;
 }
+
+
+/*-----------------------------VIDEO GALLERY------------------------------------*/
+
+.video-playlist li{
+    margin: 0 0 30px 0;
+}

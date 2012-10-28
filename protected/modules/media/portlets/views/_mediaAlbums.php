@@ -8,7 +8,7 @@ if (!$data->files_first)
     <a href="<?= $data->href ?>" class="thumbnail">
         <div class="gallery-title">
             <span>
-                <?= $data->title ?>
+                <?= $data->title ? $data->title : '&nbsp;' ?>
             </span>
         </div>
         <?

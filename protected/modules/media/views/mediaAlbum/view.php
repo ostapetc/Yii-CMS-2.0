@@ -41,9 +41,3 @@
     ]);
     ?>
 </div>
-<?=
-$this->renderPartial(
-    '_infoPanel',
-    array('page' => $model)
-);
-?>

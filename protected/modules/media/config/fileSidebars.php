@@ -1,4 +1,4 @@
-<?php
+<?
 $mediaAlbumsDp = function($positive = true) {
     $album = new MediaAlbum;
     $album->parentModel(Yii::app()->controller->user, $positive);

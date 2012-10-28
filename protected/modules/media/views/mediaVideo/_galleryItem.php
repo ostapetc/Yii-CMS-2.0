@@ -7,7 +7,7 @@ if ($img) {
     <a class="thumbnail" href="<?= $this->createUrl('/media/mediaVideo/view', ['id' => $data->id]) ?>">
         <div class="gallery-title">
             <span>
-                <?= $data->title ?>
+                <?= $data->title ? $data->title : '&nbsp;' ?>
             </span>
         </div>
         <?= $img ?>
