@@ -50,6 +50,7 @@ class Step1 extends AbstractInstallModel
     {
         $conn_string = 'mysql:host=' . $this->db_host . ';' . ($db_must_exists ? 'dbname=' . $this->db_name : '');
         $con = new CDbConnection($conn_string, $this->db_login, $this->db_pass);
+        $con->initSQLs = array("SET NAMES 'utf8' COLLATE 'utf8_general_ci';");
         $con->init();
         return $con;
     }
