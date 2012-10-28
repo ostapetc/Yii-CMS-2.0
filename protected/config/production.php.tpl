@@ -24,6 +24,10 @@ return CMap::mergeArray(require('main.php'), array(
         'vk' => array(
             'app' => '{{vk.app}}',
             'key'    => '{{vk.key}}',
+        ),
+        'nodejs' => array(
+            'host' => '{{node.host}}',
+            'port' => '{{node.port}}'
         )
     )
 

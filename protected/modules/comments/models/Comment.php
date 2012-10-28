@@ -133,6 +133,11 @@ class Comment extends ActiveRecord
     }
 
 
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
     public function getHref()
     {
         return Yii::app()->createUrl('/comments/comment/view', array('id' => $this->id));
