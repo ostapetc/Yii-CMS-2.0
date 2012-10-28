@@ -13,7 +13,7 @@ abstract class ActiveRecord extends CActiveRecord
      * set by chain method throw404IfNull()
      * @var bool
      */
-    protected $_throw404IfNull = false;
+    public $throw_404_if_null = false;
 
     public $throw_if_errors;
 
@@ -21,7 +21,7 @@ abstract class ActiveRecord extends CActiveRecord
      * set by chain method asArray()
      * @var bool
      */
-    protected $_asArray = false;
+    public $as_array = false;
 
     abstract public function name();
 
@@ -447,7 +447,7 @@ abstract class ActiveRecord extends CActiveRecord
         Yii::app()->user->model will do User::model() for finding record already with our flag
         */
         $clone = clone $this;
-        $clone->_throw404IfNull = true;
+        $clone->throw_404_if_null = true;
         return $clone;
     }
 
@@ -463,7 +463,7 @@ abstract class ActiveRecord extends CActiveRecord
     public function asArray()
     {
         $clone = clone $this; // please see comments for self::throw404IfNull() about it
-        $clone->_asArray = true;
+        $clone->as_array = true;
         return $clone;
     }
 
