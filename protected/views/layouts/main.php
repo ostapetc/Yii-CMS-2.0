@@ -16,6 +16,7 @@
     $params = Yii::app()->params;
     $base   = Yii::app()->baseUrl;
     $cs     = Yii::app()->clientScript;
+    $cs->registerCoreScript('jquery');
 
     //NodeJS only for loginned users
     if (!Yii::app()->user->isGuest)
@@ -26,9 +27,11 @@
         $cs->registerScriptFile(
             Yii::app()->assetManager->publish(APP_PATH . 'components' . DS . 'nodejs' . DS . 'NodeJSClient.js')
         );
+        $cs->registerScript('some_id',
+            "$('body').coreNodeJSClient(".CJSON::encode($params['nodejs']).")"
+        );
     }
 
-    $cs->registerCoreScript('jquery');
     Yii::app()->bootstrap->registerScripts();
 
     $cs->registerScriptFile('/js/coreFunctions.js');
@@ -62,6 +65,13 @@
 </head>
 
 <body>
+    <?
+    //user id
+    if (!Yii::app()->user->isGuest)
+    {
+        echo CHtml::hiddenField('app_user_id', Yii::app()->user->id);
+    }
+    ?>
     <? $this->renderPartial('application.modules.main.views.main._hiddenFields') ?>
     <? $this->renderPartial('application.views.layouts._modal'); ?>
 
