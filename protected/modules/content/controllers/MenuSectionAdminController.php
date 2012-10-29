@@ -4,7 +4,7 @@ class MenuSectionAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "update"           => "Редактирование ссылки меню",
             "create"           => "Добавление ссылки меню",
             "view"             => "Просмотр ссылки меню",
@@ -12,7 +12,7 @@ class MenuSectionAdminController extends AdminController
             "sorting"          => "Сортировка",
             "manage"           => "Управление ссылками меню",
             "updateTree"       => "Редактирование дерева",
-        );
+        ];
     }
 
 
@@ -29,12 +29,12 @@ class MenuSectionAdminController extends AdminController
             array_shift($data);
 
             //получаем большие case для update
-            $update            = array();
-            $js_to_sql_mapping = array(
+            $update            = [];
+            $js_to_sql_mapping = [
                 'depth'=> 'level',
                 'left' => 'left',
                 'right'=> 'right'
-            );
+            ];
             foreach ($js_to_sql_mapping as $js_field=> $field)
             {
                 $update_data = CHtml::listData($data, 'item_id', $js_field);
@@ -46,16 +46,16 @@ class MenuSectionAdminController extends AdminController
                 "UPDATE `{$model->tableName()}` as t SET " . implode(', ', $update) .
                     " WHERE {$condition} AND t.id IN ({$in})");
             $command->execute();
-            echo CJSON::encode(array(
+            echo CJSON::encode([
                 'status'  => 'ok',
-                'redirect'=> $this->createUrl('manage', array('menu_id'=> $menu_id))
-            ));
+                'redirect'=> $this->createUrl('manage', ['menu_id'=> $menu_id])
+            ]);
             Yii::app()->end();
         }
-        $this->render('sorting', array(
+        $this->render('sorting', [
             'root_id' => $root_id,
             'menu_id' => $menu_id
-        ));
+        ]);
     }
 
 
@@ -80,14 +80,14 @@ class MenuSectionAdminController extends AdminController
 
         if ($form->submitted('submit') && $model->save())
         {
-            $this->redirect($this->createUrl($back, array('menu_id' => $model->menu_id)));
+            $this->redirect($this->createUrl($back, ['menu_id' => $model->menu_id]));
         }
 
-        $this->render('update', array(
+        $this->render('update', [
             'model' => $model,
             'form'  => $form,
             'back'  => $back
-        ));
+        ]);
     }
 
 
@@ -113,18 +113,18 @@ class MenuSectionAdminController extends AdminController
         if ($form->submitted('submit') && $model->validate())
         {
             $model->appendTo($parent);
-            $this->redirect(array(
+            $this->redirect([
                 $back,
                 'menu_id' => $menu_id
-            ));
+            ]);
         }
 
-        $this->render('create', array(
+        $this->render('create', [
             'model' => $model,
             'menu'  => $menu,
             'form'  => $form,
             'back'  => $back
-        ));
+        ]);
     }
 
 
@@ -132,7 +132,7 @@ class MenuSectionAdminController extends AdminController
     {
         $model = MenuSection::model();
 
-        $links = $model->findAllByAttributes(array('menu_id' => $menu_id));
+        $links = $model->findAllByAttributes(['menu_id' => $menu_id]);
 
         $roles = Role::model()->findAll();
         foreach ($roles as $ind => $role)
@@ -140,11 +140,11 @@ class MenuSectionAdminController extends AdminController
             $roles[$role->name] = $role->description;
         }
 
-        $this->render('view', array(
+        $this->render('view', [
             'links' => $links,
             'roles' => $roles,
             'meta'  => $model->meta()
-        ));
+        ]);
     }
 
 
@@ -179,10 +179,10 @@ class MenuSectionAdminController extends AdminController
             $model->attributes = $_GET['MenuSection'];
         }
 
-        $this->render('manage', array(
+        $this->render('manage', [
             'menu'  => $menu,
             'model' => $model,
             'root'  => $root
-        ));
+        ]);
     }
 }

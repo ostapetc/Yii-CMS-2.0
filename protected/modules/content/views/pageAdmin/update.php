@@ -1,9 +1,9 @@
 <?
 $this->page_title = t('Рекдирование страницы');
 
-$this->tabs = array(
+$this->tabs = [
     'список страниц'    => $this->createUrl('manage'),
-    'просмотр страницы' => $this->createUrl('view', array('id' => $form->model->id))
-);
+    'просмотр страницы' => $this->createUrl('view', ['id' => $form->model->id])
+];
 
 echo $form;

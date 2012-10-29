@@ -12,25 +12,25 @@ class ForumController extends ClientController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             'index'         => t('Главная страница форума'),
             'sectionTopics' => t('Топики раздела')
-        );
+        ];
     }
 
 
     public function subMenuItems()
     {
-        return array(
-            array(
+        return [
+            [
                 'label' => t('Разделы форума'),
-                'url'   => array('/content/forum/index')
-            ),
-            array(
+                'url'   => ['/content/forum/index']
+            ],
+            [
                 'label' => t('Создать топик'),
                 'url'   => '/'
-            )
-        );
+            ]
+        ];
     }
 
 
@@ -40,9 +40,9 @@ class ForumController extends ClientController
 
         $sections = PageSection::model()->forum()->findAll();
 
-        $this->render('index', array(
+        $this->render('index', [
             'sections' => $sections
-        ));
+        ]);
     }
 
 
@@ -54,20 +54,20 @@ class ForumController extends ClientController
         $criteria->compare('status', Page::STATUS_PUBLISHED);
         $criteria->compare('type', Page::TYPE_FORUM);
         $criteria->compare('sections_rels.section_id', $section->id);
-        $criteria->with     = array('sections_rels');
+        $criteria->with     = ['sections_rels'];
         $criteria->together = true;
         $criteria->order    = 'date_create DESC';
 
-        $data_provider = new CActiveDataProvider('Page', array(
+        $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
-            'pagination' => array(
+            'pagination' => [
                 'pageSize' => 15
-            )
-        ));
+            ]
+        ]);
 
-        $this->render('sectionTopics', array(
+        $this->render('sectionTopics', [
             'pages'      => $data_provider->getData(),
             'pagination' => $data_provider->getPagination()
-        ));
+        ]);
     }
 }

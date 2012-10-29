@@ -1,51 +1,51 @@
 <?
-$this->widget('ext.slickmapCss.SlickMap', array(
-    'items' => array(
-        array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-        array('label'=>'Home1', 'url'=>array('site/index'), 'active' => false,
-            'items' => array(
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false,
-                      'items' => array(
-                          array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                          array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                          array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                      )
-                ),
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-            )
-        ),
-        array('label'=>'Home2', 'url'=>array('site/index'), 'active' => false,
-            'items' => array(
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-            )
-        ),
-        array('label'=>'Home3', 'url'=>array('site/index'), 'active' => false),
-        array('label'=>'Home4', 'url'=>array('site/index'), 'active' => false,
-              'items' => array(
-                  array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                  array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                  array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                  array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                  array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                  array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-              )
-        ),
-        array('label'=>'Home5', 'url'=>array('site/index'), 'active' => false,
-            'items' => array(
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false,
-                    'items' => array(
-                        array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                        array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                        array('label'=>'Home0', 'url'=>array('site/index'), 'active' => false),
-                    )
-                ),
-            )
-        ),
-        array('label'=>'Home5', 'url'=>array('site/index'), 'active' => false),
-    )
-));
+$this->widget('ext.slickmapCss.SlickMap', [
+    'items' => [
+        ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+        ['label'=>'Home1', 'url'=>['site/index'], 'active' => false,
+            'items' => [
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false,
+                      'items' => [
+                          ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                          ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                          ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                      ]
+                ],
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+            ]
+        ],
+        ['label'=>'Home2', 'url'=>['site/index'], 'active' => false,
+            'items' => [
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+            ]
+        ],
+        ['label'=>'Home3', 'url'=>['site/index'], 'active' => false],
+        ['label'=>'Home4', 'url'=>['site/index'], 'active' => false,
+              'items' => [
+                  ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                  ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                  ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                  ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                  ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                  ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+              ]
+        ],
+        ['label'=>'Home5', 'url'=>['site/index'], 'active' => false,
+            'items' => [
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                ['label'=>'Home0', 'url'=>['site/index'], 'active' => false,
+                    'items' => [
+                        ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                        ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                        ['label'=>'Home0', 'url'=>['site/index'], 'active' => false],
+                    ]
+                ],
+            ]
+        ],
+        ['label'=>'Home5', 'url'=>['site/index'], 'active' => false],
+    ]
+]);

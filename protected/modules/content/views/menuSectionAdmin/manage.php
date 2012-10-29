@@ -1,41 +1,41 @@
 <?
 $this->page_title = 'Разделы меню :: ' . $menu->name;
 
-$this->tabs = array(
+$this->tabs = [
     "управление меню" => $this->createUrl('/content/menuAdmin/manage'),
-    "добавить раздел" => $this->createUrl('create', array(
+    "добавить раздел" => $this->createUrl('create', [
         'menu_id' => $menu->id,
         'parent_id' => $root->id,
         'back' => 'manage'
-    )),
-    "сортировка" => $this->createUrl('sorting', array(
+    ]),
+    "сортировка" => $this->createUrl('sorting', [
         'root_id' => $root->id,
         'menu_id' => $menu->id
-    )),
-);
+    ]),
+];
 
-$this->widget('AdminGridView', array(
+$this->widget('AdminGridView', [
     'id' => 'menu-section-grid',
     'dataProvider' => $model->search($root->id),
     'filter' => $model,
     'template' => '{summary}<br/>{pager}<br/>{items}<br/>{pager}',
-    'columns' => array(
-        array(
+    'columns' => [
+        [
             'name' => 'title',
             'value' => function ($data)
             {
-                return CHtml::link($data->nbsp_title, Yii::app()->controller->createUrl("update", array(
+                return CHtml::link($data->nbsp_title, Yii::app()->controller->createUrl("update", [
                     "id" => $data->id,
                     'back' => 'manage'
-                )), array(
+                ]), [
                     "level" => $data->level,
                     "class" => "node_link"
-                ));
+                ]);
             },
             'type' => 'raw'
-        ),
+        ],
         'url',
-        array(
+        [
             'header' => 'Принадлежность',
             'type' => 'raw',
             'value' => function($data, $row)
@@ -43,7 +43,7 @@ $this->widget('AdminGridView', array(
                 $img_url = Yii::app()->getModule('content')->assetsUrl() . '/img';
 
                 $src = '';
-                $htmlOptions = array();
+                $htmlOptions = [];
 
                 if ($data->page_id)
                 {
@@ -71,29 +71,28 @@ $this->widget('AdminGridView', array(
                     return CHtml::image($src, $htmlOptions['title'], $htmlOptions);
                 }
             },
-            'htmlOptions' => array('width' => '1px')
-        ),
-        array(
+            'htmlOptions' => ['width' => '1px']
+        ],
+        [
             'class' => 'PublishedColumn',
             'name'  => 'is_published'
-        ),
-        array(
+        ],
+        [
             'class' => 'CButtonColumn',
             'template' => '{create} {update} {delete}',
-            'buttons' => array(
-                'create' => array(
+            'buttons' => [
+                'create' => [
                     'label' => 'добавить дочерний раздел',
                     'imageUrl' => '/img/admin/child.png',
-                    'url' => 'Yii::app()->controller->createUrl("create",array("menu_id" => $data->menu->id, "parent_id" => $data->id, "back" => "manage"))'
-                ),
-                'update' => array(
-                    'url' => 'Yii::app()->controller->createUrl("update",array("id" => $data->id, "back" => "manage"))'
-                )
-            )
-        ),
-    ),
-
-));
+                    'url' => 'Yii::app()->controller->createUrl("create",["menu_id" => $data->menu->id, "parent_id" => $data->id, "back" => "manage"])'
+                ],
+                'update' => [
+                    'url' => 'Yii::app()->controller->createUrl("update",["id" => $data->id, "back" => "manage"])'
+                ]
+            ]
+        ],
+    ],
+]);
 
 
 

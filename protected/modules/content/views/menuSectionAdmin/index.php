@@ -3,12 +3,12 @@ Yii::app()->clientScript->registerScriptFile($this->module->assetsUrl() . '/js/m
 
 $this->page_title = $this->page_title . ' :: ' . $menu->name;
 
-$this->tabs = array(
+$this->tabs = [
     "управление меню" => $this->createUrl("menuAdmin/manage"),
-    "добавить раздел" => $this->createUrl('create', array('menu_id' => $menu->id))
-);
+    "добавить раздел" => $this->createUrl('create', ['menu_id' => $menu->id])
+];
 
-$this->widget('application.components.TreeView',array(
+$this->widget('application.components.TreeView',[
     'url' => '/content/MenuSectionAdmin/AjaxFillTree?menu_id=' . $menu->id,
     'collapsed' => true
-));
+]);

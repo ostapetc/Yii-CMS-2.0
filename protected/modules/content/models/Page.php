@@ -60,11 +60,11 @@ class Page extends ActiveRecord
     const STATUS_PUBLISHED   = 'published';
     const STATUS_DRAFT       = 'draft';
 
-    public static $status_options = array(
+    public static $status_options = [
         self::STATUS_UNPUBLISHED => 'неопубликовано',
         self::STATUS_PUBLISHED   => 'опубликовано',
         self::STATUS_DRAFT       => 'черновик'
-    );
+    ];
 
     public $sections_ids;
 
@@ -93,133 +93,133 @@ class Page extends ActiveRecord
     {
         return CMap::mergeArray(
             parent::behaviors(),
-            array(
-                 'Tag' => array('class' => 'application.components.activeRecordBehaviors.TagBehavior'),
-                 'FileManager' => array(
+            [
+                 'Tag' => ['class' => 'application.components.activeRecordBehaviors.TagBehavior'],
+                 'FileManager' => [
                      'class' => 'application.components.activeRecordBehaviors.FileManagerBehavior',
-                     'tags' => array(
-                         'gallery' => array(
+                     'tags' => [
+                         'gallery' => [
                              'title' => 'Галерея',
                              'data_type' => 'image'
-                         )
-                     )
-                 ),
-                'SportRel' => array(
+                         ]
+                     ]
+                 ],
+                'SportRel' => [
                     'class' => 'application.modules.content.components.activeRecordBehaviors.SportRelBehavior'
-                )
-            )
+                ]
+            ]
         );
     }
 
 
     public function rules()
     {
-        return array(
-            array('title, language', 'required'),
-            array('language', 'safe'),
-            array(
+        return [
+            ['title, language', 'required'],
+            ['language', 'safe'],
+            [
                 'title', 'length',
                 'max'=> 200
-            ),
-            array('text, short_text', 'safe'),
-            array('meta_tags, god', 'safe'),
-            array(
+            ],
+            ['text, short_text', 'safe'],
+            ['meta_tags, god', 'safe'],
+            [
                 'title', 'filter',
                 'filter' => 'strip_tags'
-            ),
-            array(
+            ],
+            [
                 'gallery', 'safe',
-            ),
-            array(
+            ],
+            [
                 'id, title, text, status, date_create, date_publish', 'safe',
                 'on'=> 'search'
-            ),
-            array(
+            ],
+            [
                 'status',
                 'in',
                 'range' => array_keys(self::$status_options)
-            ),
-            array(
+            ],
+            [
                 'user_id',
                 'numerical',
                 'integerOnly' => true
-            ),
-            array(
+            ],
+            [
                 'sections_ids, tags, sports_ids',
                 'safe',
-                'on' => array(
+                'on' => [
                     self::SCENARIO_CREATE,
                     self::SCENARIO_UPDATE
-                )
-            ),
-            array(
+                ]
+            ],
+            [
                 'comments_denied',
                 'in',
-                'range' => array(0, 1)
-            ),
-            array(
+                'range' => [0, 1]
+            ],
+            [
                 'image',
                 'file',
                 'types' => 'jpg, png, jpeg, gif',
                 'allowEmpty' => true
-            ),
-            array(
+            ],
+            [
                 'source',
                 'length',
                 'max' => 50
-            ),
-            array(
+            ],
+            [
                 'source_url',
                 'length',
                 'max' => 250
-            )
-        );
+            ]
+        ];
     }
 
 
     public function relations()
     {
-        return array(
-            'language_model' => array(
+        return [
+            'language_model' => [
                 self::BELONGS_TO,
                 'Language',
                 'language'
-            ),
-            'tags_rels' => array(
+            ],
+            'tags_rels' => [
                 self::HAS_MANY ,
                 'TagRel',
                 'object_id',
                 'condition' => "model_id = 'Page'"
-            ),
-            'tags' => array(
+            ],
+            'tags' => [
                 self::HAS_MANY,
                 'Tag',
                 'tag_id',
                 'through' => 'tags_rels'
-            ),
-            'comments_count' => array(
+            ],
+            'comments_count' => [
                 self::STAT,
                 'Comment',
                 'object_id',
                 'condition' => 'model_id = "Page"'
-            ),
-            'user' => array(
+            ],
+            'user' => [
                 self::BELONGS_TO,
                 'User',
                 'user_id'
-            ),
-            'sections_rels' => array(
+            ],
+            'sections_rels' => [
                 self::HAS_MANY,
                 'PageSectionRel',
                 'page_id'
-            ),
-            'sections' => array(
+            ],
+            'sections' => [
                 self::HAS_MANY,
                 'PageSection',
                 'section_id',
                 'through' => 'sections_rels'
-            )
-        );
+            ]
+        ];
     }
 
 
@@ -233,23 +233,23 @@ class Page extends ActiveRecord
         $criteria->compare('date_create', $this->date_create, true);
         $criteria->compare('language', $this->language, true);
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
              'criteria'   => $criteria,
-             'pagination' => array(
+             'pagination' => [
                  'pageSize' => self::PAGE_SIZE
-             )
-        ));
+             ]
+        ]);
     }
 
     public function attributeLabels()
     {
         return CMap::mergeArray(
             parent::attributeLabels(),
-            array(
+            [
                 'sections_ids' => t('Разделы'),
                 'tags'         => t('Теги'),
                 'sports_ids'   => t('Вид спорта')
-            )
+            ]
         );
     }
 
@@ -260,7 +260,7 @@ class Page extends ActiveRecord
 
         if (Yii::app()->user->checkAccess('PageAdmin_Update'))
         {
-            $content .= "<br/>" . CHtml::link(t('Редактировать'), array('/content/pageAdmin/update/','id'=> $this->id), array('class'=> 'btn btn-danger'));
+            $content .= "<br/>" . CHtml::link(t('Редактировать'), ['/content/pageAdmin/update/','id'=> $this->id], ['class'=> 'btn btn-danger']);
         }
 
         return $content;
@@ -285,11 +285,11 @@ class Page extends ActiveRecord
 
     public function uploadFiles()
     {
-        return array(
-            'image' => array(
+        return [
+            'image' => [
                 'dir' => self::IMAGES_DIR
-            )
-        );
+            ]
+        ];
     }
 
 
@@ -311,7 +311,7 @@ class Page extends ActiveRecord
 
     public function getForumUrl()
     {
-        return Yii::app()->createUrl('/content/forum/viewTopic', array('topic_id' => $this->id));
+        return Yii::app()->createUrl('/content/forum/viewTopic', ['topic_id' => $this->id]);
     }
 
 
@@ -335,7 +335,7 @@ class Page extends ActiveRecord
         $thumb = ImageHelper::thumb(
             self::IMAGES_DIR,
             $this->image,
-            array('width' => $size, 'height' => $size)
+            ['width' => $size, 'height' => $size]
         );
 
         if ($thumb)
@@ -449,7 +449,7 @@ class Page extends ActiveRecord
         {
             $tag_name = utf8_decode($tag_name->textContent);
 
-            $tag = Tag::model()->findByAttributes(array('name' => $tag_name));
+            $tag = Tag::model()->findByAttributes(['name' => $tag_name]);
             if (!$tag)
             {
                 $tag = new Tag();

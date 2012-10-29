@@ -3,27 +3,27 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('content')->a
 
 $menu = Menu::model()->findByPk($this->model->menu_id);
 
-$elements = array(
-    'page_id' => array(
+$elements = [
+    'page_id' => [
         'type'  => 'dropdownlist',
         'items' => CHtml::listData(Page::model()->language($menu->language)->findAll(), 'id', 'title'),
         'empty' => 'Отсутствует',
         'label' => 'На какую страницу ведет пункт меню',
-    ),
-    'title'        => array('type' => 'text'),
-    'url'          => array('type' => 'text'),
-    'is_published' => array('type' => 'checkbox'),
-);
+    ],
+    'title'        => ['type' => 'text'],
+    'url'          => ['type' => 'text'],
+    'is_published' => ['type' => 'checkbox'],
+];
 
-return array(
-    'activeForm' => array(
+return [
+    'activeForm' => [
         'id' => 'menu-link-form'
-    ),
+    ],
     'elements'   => $elements,
-    'buttons'    => array(
-        'submit' => array(
+    'buttons'    => [
+        'submit' => [
             'type'  => 'submit',
             'value' => $this->model->isNewRecord ? 'Добавить' : 'Сохранить'
-        )
-    )
-);
+        ]
+    ]
+];

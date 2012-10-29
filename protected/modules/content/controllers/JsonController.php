@@ -3,12 +3,12 @@ class JsonController extends ClientController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             'go' => 'Просмотр страницы',
             'index' => 'Просмотр страницы',
             'name' => 'Просмотр страницы',
             'model' => 'Главная страница'
-        );
+        ];
     }
 
     public function actionGo()
@@ -23,8 +23,8 @@ class JsonController extends ClientController
         Yii::app()->getClientScript()->registerScriptFile('/js/plugins/jsonRpc.js')
             ->registerScript('tmp', 'ServerApi("tmp", "{$methods})")');
 
-        $page = Page::model()->findByAttributes(array('url' => '/'));
-        $this->render('/page/main', array('page' => $page));
+        $page = Page::model()->findByAttributes(['url' => '/']);
+        $this->render('/page/main', ['page' => $page]);
     }
 
     public function actionIndex()

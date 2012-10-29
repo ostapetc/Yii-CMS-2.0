@@ -36,51 +36,51 @@ class Menu extends ActiveRecord
     
     public function rules()
     {
-        return array(
-            array('name', 'required'),
-            array(
+        return [
+            ['name', 'required'],
+            [
                 'is_published',
                 'numerical',
                 'integerOnly' => true
-            ),
-            array(
+            ],
+            [
                 'language',
                 'length',
                 'max' => 2
-            ),
-            array(
+            ],
+            [
                 'id',
                 'length',
                 'max' => 11
-            ),
-            array(
+            ],
+            [
                 'name, code',
                 'length',
                 'max' => 50
-            ),
-            array(
+            ],
+            [
                 'code',
                 'match',
                 'pattern' => '|^[A-Z_]+$|',
                 'message' => 'заглавными, латиница и знак подчеркивания "_"'
-            ),
-            array(
+            ],
+            [
                 'id, name, is_published',
                 'safe',
                 'on' => 'search'
-            ),
-        );
+            ],
+        ];
     }
 
 
     public function relations()
     {
-        return array(
-            'links' => array(
+        return [
+            'links' => [
                 self::HAS_MANY, 'MenuSection', 'menu_id',
                 'condition' => "lang = '" . Yii::app()->language . "'"
-            ),
-        );
+            ],
+        ];
     }
 
 
@@ -91,9 +91,9 @@ class Menu extends ActiveRecord
         $criteria->compare('name', $this->name, true);
         $criteria->compare('is_published', $this->is_published);
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
             'criteria' => $criteria
-        ));
+        ]);
     }
 
 
@@ -155,10 +155,10 @@ class Menu extends ActiveRecord
 
     public function getPagePath($page_id)
     {
-        $section = MenuSection::model()->findByAttributes(array(
+        $section = MenuSection::model()->findByAttributes([
             'page_id' => $page_id,
             'menu_id' => $this->id
-        ));
+        ]);
 
         return $section->getPath();
     }

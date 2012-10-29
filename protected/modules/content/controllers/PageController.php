@@ -6,19 +6,19 @@ class PageController extends ClientController
     {
         return CMap::mergeArray(
             parent::filters(),
-            array(
-                array(
+            [
+                [
                     'application.modules.social.components.filters.ViewsSaveFilter',
                     'model_id' => 'Page'
-                )
-            )
+                ]
+            ]
         );
     }
 
 
     public static function actionsTitles()
     {
-        return array(
+        return [
             'view'         => 'Просмотр поста',
             'main'         => 'Главная страница',
             'create'       => 'Новый пост',
@@ -28,7 +28,7 @@ class PageController extends ClientController
             'sectionPages' => 'Посты раздела',
             'tagPages'     => 'Посты тега',
             'sitemap'      => 'Карта сайта',
-        );
+        ];
     }
 
 
@@ -39,80 +39,84 @@ class PageController extends ClientController
 
     public function subMenuItems()
     {
-        return array(
-            array(
+        return [
+            [
                 'label' => t('Все'),
-                'url'   => array('content/page/index')
-            ),
-            array(
+                'url'   => ['content/page/index']
+            ],
+            [
                 'label' => t('Лучшие'),
-                'url'   => array('content/page/top')
-            ),
-            array(
+                'url'   => ['content/page/top']
+            ],
+            [
                 'label'   => Yii::app()->user->isGuest ?: t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
-                'url'     => array('/page/user/' . Yii::app()->user->id),
+                'url'     => ['/page/user/' . Yii::app()->user->id],
                 'visible' => !Yii::app()->user->isGuest
-            )
-        );
+            ]
+        ];
     }
 
 
     public function sidebars()
     {
-        return array(
-            array(
-                'actions'  => array('create', 'update'),
-                'sidebars' => array(
-                    array(
+        return [
+            [
+                'actions'  => ['create', 'update'],
+                'sidebars' => [
+                    [
                         'type' => 'widget',
                         'content.portlets.SectionCreateSidebar'
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'widget',
                         'class' => 'tags.portlets.TagCreateSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'partial',
                         'class' => 'content.views.page._sidebarFormNotices',
-                    ),
-                )
-            ),
-            array(
-                'actions'  => array('index'),
-                'sidebars' => array(
-                    array(
+                    ],
+                ]
+            ],
+            [
+                'actions'  => ['index'],
+                'sidebars' => [
+                    [
                         'type' => 'widget',
                         'class' => 'content.portlets.PageSectionsSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'widget',
                         'class' => 'comments.portlets.CommentsSidebar',
-                    ),
-                    array(
+                    ],
+                    [
                         'type' => 'widget',
                         'class' => 'content.portlets.NavigatorSidebar',
-                    ),
-                )
-            ),
-            array(
-                'actions'  => array('view'),
-                'sidebars' => array(
-                    array(
+                    ],
+                ]
+            ],
+            [
+                'actions'  => ['view'],
+                'sidebars' => [
+                    [
                         'type' => 'widget',
                         'class' => 'content.portlets.PageInfoSidebar'
-                    )
-                )
-            ),
-            array(
-                'actions'  => array('userPages'),
-                'sidebars' => array(
-                    array(
+                    ]
+                ]
+            ],
+            [
+                'actions'  => ['userPages'],
+                'sidebars' => [
+                    [
                         'type' => 'widget',
                         'class' => 'content.portlets.userPagesSidebar'
-                    )
-                )
-            ),
-        );
+                    ]
+                ]
+            ],
+            [
+                'type' => 'widget',
+                'class' => 'media.portlets.VideoPlayList',
+            ],
+        ];
     }
 
 
@@ -123,15 +127,15 @@ class PageController extends ClientController
         {
             $this->pageNotFound();
         }
-        $this->render("view", array(
+        $this->render("view", [
             "page" => $page
-        ));
+        ]);
     }
 
 
     public function actionMain()
     {
-        $this->render('main', array());
+        $this->render('main', []);
     }
 
 
@@ -143,12 +147,12 @@ class PageController extends ClientController
 
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array('view', 'id' => $model->id));
+            $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $this->render('create', array(
+        $this->render('create', [
             'form' => $form
-        ));
+        ]);
     }
 
 
@@ -165,12 +169,12 @@ class PageController extends ClientController
         if ($form->submitted() && $model->save())
         {
             $model->updateSectionsRels();
-            $this->redirect(array('view', 'id' => $model->id));
+            $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $this->render('update', array(
+        $this->render('update', [
             'form' => $form
-        ));
+        ]);
     }
 
 
@@ -181,19 +185,19 @@ class PageController extends ClientController
         $criteria = new CDbCriteria();
         $criteria->compare('status', Page::STATUS_PUBLISHED);
         $criteria->compare('type', Page::TYPE_POST);
-        $criteria->with   = array('tags');
+        $criteria->with   = ['tags'];
         $criteria->order  = 'date_create DESC';
 
-        $data_provider = new CActiveDataProvider('Page', array(
+        $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
-            'pagination' => array(
+            'pagination' => [
                 'pageSize' => '20'
-            )
-        ));
+            ]
+        ]);
 
-        $this->render('index', array(
+        $this->render('index', [
             'data_provider' => $data_provider,
-        ));
+        ]);
     }
 
 
@@ -211,28 +215,28 @@ class PageController extends ClientController
 
         $criteria = new CDbCriteria();
 //        $criteria->compare('t.status', Page::STATUS_PUBLISHED);
-//        $criteria->with  = array('tags', 'sections');
+//        $criteria->with  = ['tags', 'sections'];
 //        $criteria->order = 't.date_create DESC';
 //        $criteria->join  = "INNER JOIN {$section_rel_table}
 //                                ON  {$section_rel_table}.section_id = {$section_id}";
 //
-        $data_provider = new CActiveDataProvider('Page', array(
+        $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
-            'pagination' => array(
+            'pagination' => [
               'pageSize' => '10'
-            )
-        ));
+            ]
+        ]);
         //count($data_provider->getTotalItemCount()); die;
-        $this->render('index', array(
+        $this->render('index', [
             'data_provider' => $data_provider,
             'section'       => $section
-        ));
+        ]);
     }
 
 
     public function actionTagPages($tag_name)
     {
-        $tag = Tag::model()->findByAttributes(array('name' => $tag_name));
+        $tag = Tag::model()->findByAttributes(['name' => $tag_name]);
         if (!$tag)
         {
             $this->pageNotFound();
@@ -244,7 +248,7 @@ class PageController extends ClientController
 
         $criteria = new CDbCriteria();
         $criteria->compare('t.status', Page::STATUS_PUBLISHED);
-        $criteria->with = array('tags', 'sections');
+        $criteria->with = ['tags', 'sections'];
 
         $criteria->addCondition("t.id IN (
             SELECT object_id FROM {$tag_rel_table}
@@ -252,17 +256,17 @@ class PageController extends ClientController
                        model_id  = 'Page'
         )");
 
-        $data_provider = new CActiveDataProvider('Page', array(
+        $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
-            'pagination' => array(
+            'pagination' => [
                 'pageSize' => '10'
-            )
-        ));
+            ]
+        ]);
 
-        $this->render('index', array(
+        $this->render('index', [
             'data_provider' => $data_provider,
             'tag'           => $tag
-        ));
+        ]);
     }
 
 
@@ -281,7 +285,7 @@ class PageController extends ClientController
         }
 
         $criteria = new CDbCriteria();
-        $criteria->with  = array('tags');
+        $criteria->with  = ['tags'];
         $criteria->order = 'date_create DESC';
 
         $is_owner = !Yii::app()->user->isGuest && (Yii::app()->user->id == $user->id);
@@ -307,27 +311,27 @@ class PageController extends ClientController
             $criteria->compare('status', Page::STATUS_PUBLISHED);
         }
 
-        $data_provider = new CActiveDataProvider('Page', array(
+        $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
-            'pagination' => array(
+            'pagination' => [
               'pageSize' => '10'
-            )
-        ));
+            ]
+        ]);
 
-        $this->render('userPages', array(
+        $this->render('userPages', [
             'data_provider' => $data_provider,
             'widget'        => $widget,
             'user'          => $user,
             'model'         => isset($model) ? $model : null
-        ));
+        ]);
     }
 
 
     public static function displayWidgets()
     {
-        return array(
+        return [
             'list' => t('показывать списком'),
             'grid' => t('показывать таблицей')
-        );
+        ];
     }   
 }

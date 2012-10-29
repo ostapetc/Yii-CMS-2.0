@@ -67,62 +67,62 @@ class MenuSection extends ActiveRecord
 
     public function behaviors()
     {
-        return CMap::mergeArray(parent::behaviors(), array(
-            'NestedSet'  => array(
+        return CMap::mergeArray(parent::behaviors(), [
+            'NestedSet'  => [
                 'class'          => 'application.components.activeRecordBehaviors.NestedSetBehavior',
                 'leftAttribute'  => 'left',
                 'rightAttribute' => 'right',
                 'levelAttribute' => 'level',
                 'hasManyRoots'   => true
-            )
-        ));
+            ]
+        ]);
     }
 
 
     public function rules()
     {
-        return array(
-            array('menu_id, title', 'required'), array(
+        return [
+            ['menu_id, title', 'required'], [
                 'is_published', 'numerical'
-            ),
-            array(
+            ],
+            [
                 'page_id, menu_id', 'length',
                 'max' => 11
-            ),
-            array(
+            ],
+            [
                 'title', 'length',
                 'max' => 200
-            ),
-            array(
+            ],
+            [
                 'url_info, module_url', 'length',
                 'max' => 300
-            ),
-            array(
+            ],
+            [
                 'module_id', 'length',
                 'max' => 64
-            ),
-            array(
+            ],
+            [
                 'url', 'length',
                 'max' => 200
-            ),
-            array(
+            ],
+            [
                 'title, url', 'filter',
                 'filter' => 'trim'
-            ),
-            array(
+            ],
+            [
                 'id, page_id, menu_id, title, url, is_published', 'safe',
                 'on' => 'search'
-            ),
-        );
+            ],
+        ];
     }
 
 
     public function relations()
     {
-        return array(
-            'menu' => array(self::BELONGS_TO, 'Menu', 'menu_id'),
-            'page' => array(self::BELONGS_TO, 'Page', 'page_id'),
-        );
+        return [
+            'menu' => [self::BELONGS_TO, 'Menu', 'menu_id'],
+            'page' => [self::BELONGS_TO, 'Page', 'page_id'],
+        ];
     }
 
 
@@ -138,11 +138,11 @@ class MenuSection extends ActiveRecord
         $criteria->addCondition($alias . '.root = ' . $root);
         $criteria->addCondition($alias . '.id <> ' . $root);
         $criteria->order = "{$alias}.left";
-        $criteria->with  = array('page', 'menu');
+        $criteria->with  = ['page', 'menu'];
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
             'criteria' => $criteria
-        ));
+        ]);
     }
 
     public function noEmpty()
@@ -186,7 +186,7 @@ class MenuSection extends ActiveRecord
         }
         else if ($this->module_url)
         {
-            $url = Yii::app()->controller->createUrl($this->module_url, array('section_id'=>$this->id));
+            $url = Yii::app()->controller->createUrl($this->module_url, ['section_id'=>$this->id]);
         }
         else
         {
@@ -207,11 +207,11 @@ class MenuSection extends ActiveRecord
     }
 
 
-    public function optionsTree($name = 'name', $id = null, $result = array(), $value = 'id', $spaces = 0, $parent_id = null)
+    public function optionsTree($name = 'name', $id = null, $result = [], $value = 'id', $spaces = 0, $parent_id = null)
     {
-        //        $objects = $this->findAllByAttributes(array(
+        //        $objects = $this->findAllByAttributes([
         //            'menu_id'   => $menu_id
-        //        ));
+        //        ]);
         //
         //        foreach ($objects as $object)
         //        {
@@ -255,7 +255,7 @@ class MenuSection extends ActiveRecord
     }
 
 
-    public function getPath($path = array(), $link = null)
+    public function getPath($path = [], $link = null)
     {
         if (!$link)
         {
@@ -299,10 +299,10 @@ class MenuSection extends ActiveRecord
 
     public function attributeLabels()
     {
-        return CMap::mergeArray(parent::attributeLabels(), array(
+        return CMap::mergeArray(parent::attributeLabels(), [
             'roles' => 'Группы пользователей',
             'url_info' => 'Куда будет вести этот пункт меню',
-        ));
+        ]);
     }
 
 
@@ -358,7 +358,7 @@ class MenuSection extends ActiveRecord
             }
             else if ($item->level > $level)
             {
-                $res .= CHtml::openTag('ul', array('class' => 'depth_' . $item->level)) . "\n";
+                $res .= CHtml::openTag('ul', ['class' => 'depth_' . $item->level]) . "\n";
             }
             else
             {
@@ -371,11 +371,11 @@ class MenuSection extends ActiveRecord
                 }
             }
 
-            $res .= CHtml::openTag('li', array(
+            $res .= CHtml::openTag('li', [
                 'id'   => 'items_' . $item->id,
                 'class'=> 'depth_' . $item->level
-            ));
-            $res .= CHtml::tag('div', array(), CHtml::encode($item->title) . '<a class="drag icon-sortable"></a>');
+            ]);
+            $res .= CHtml::tag('div', [], CHtml::encode($item->title) . '<a class="drag icon-sortable"></a>');
             $level = $item->level;
         }
 

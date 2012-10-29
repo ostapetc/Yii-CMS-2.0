@@ -1,15 +1,15 @@
 <?
 
-return array(
-    'activeForm' => array(
+return [
+    'activeForm' => [
         'id'    => 'menu-form',
-    ),
-    'elements' => array(
-        'name'         => array('type' => 'text'),
-        'code'         => array('type' => 'text'),
-        'is_published' => array('type' => 'checkbox')
-    ),
-    'buttons' => array(
-        'submit' => array('type' => 'submit', 'value' =>  $this->model->isNewRecord ? 'Далее' : 'Сохранить'),
-    )
-);
+    ],
+    'elements' => [
+        'name'         => ['type' => 'text'],
+        'code'         => ['type' => 'text'],
+        'is_published' => ['type' => 'checkbox']
+    ],
+    'buttons' => [
+        'submit' => ['type' => 'submit', 'value' =>  $this->model->isNewRecord ? 'Далее' : 'Сохранить'],
+    ]
+];

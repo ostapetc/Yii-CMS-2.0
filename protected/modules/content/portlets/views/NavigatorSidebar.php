@@ -12,5 +12,5 @@
 <h3>Навигатор</h3>
 <br/>
 
-<?= CHtml::dropdownList('nagigate_section', null, $sections, array('style' => 'width: 260px', 'empty' => 'выберите раздел')) ?>
-<?= CHtml::button('посмотреть', array('class' => 'btn btn-success', 'id' => 'nagigate_section_btn')); ?>
+<?= CHtml::dropdownList('nagigate_section', null, $sections, ['style' => 'width: 260px', 'empty' => 'выберите раздел']) ?>
+<?= CHtml::button('посмотреть', ['class' => 'btn btn-success', 'id' => 'nagigate_section_btn']); ?>

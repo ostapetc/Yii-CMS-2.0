@@ -25,29 +25,29 @@ class ContentModule extends WebModule
 	public function init()
 	{
 
-		$this->setImport(array(
+		$this->setImport([
 			'content.models.*',
 			'content.portlets.*',
-		));
+		]);
 	}
 
 
     public function adminMenu()
     {
-        return array(
+        return [
             'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
             'Добавить страницу' => Yii::app()->createUrl('/content/pageAdmin/create'),
             'Разделы страниц'   => Yii::app()->createUrl('/content/pageSectionAdmin/manage'),
             'Добавить раздел'   => Yii::app()->createUrl('/content/pageSectionAdmin/create'),
             'Управление меню'   => Yii::app()->createUrl('/content/menuAdmin/manage'),
             'Добавить меню'     => Yii::app()->createUrl('/content/menuAdmin/create'),
-        );
+        ];
     }
 
 
     public function routes()
     {
-        $routes = array(
+        $routes = [
             '/'                                     => '/content/page/index',
             '/page/<id:\d+>'                        => '/content/page/view',
             '/page/create'                          => '/content/page/create',
@@ -58,7 +58,7 @@ class ContentModule extends WebModule
             '/forum'                                => '/content/forum/index',
             '/forum/section/<section_id:\d+>/*'     => '/content/forum/sectionTopics',
             '/forum/topic/<topic_id:\d+>/*'         => '/content/forum/viewTopic',
-        );
+        ];
 
         return $routes;
     }

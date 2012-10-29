@@ -1,7 +1,7 @@
 <?
 if (isset($section) && $section)
 {
-    $crumbs = array();
+    $crumbs = [];
 
     if ($section->parent)
     {
@@ -26,7 +26,7 @@ if (count($children) > 1)
         <?
         foreach ($children as $child)
         {
-            echo CHtml::tag('li', array(), CHtml::link($child->title, $child->href));
+            echo CHtml::tag('li', [], CHtml::link($child->title, $child->href));
         }
         ?>
     </ul>
@@ -39,7 +39,7 @@ elseif (count($children) == 1)
 }
 else
 {
-    echo CHtml::tag('div', array(), 'Данная категория пуста');
+    echo CHtml::tag('div', [], 'Данная категория пуста');
 }
 
 

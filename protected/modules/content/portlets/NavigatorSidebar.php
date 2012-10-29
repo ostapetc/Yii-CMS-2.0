@@ -10,8 +10,8 @@ class NavigatorSidebar extends Portlet
 {
     public function renderContent()
     {
-        $this->render('NavigatorSidebar', array(
+        $this->render('NavigatorSidebar', [
             'sections' => PageSection::model()->optionsTree()
-        ));
+        ]);
     }
 }

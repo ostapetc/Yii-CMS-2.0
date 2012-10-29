@@ -2,13 +2,13 @@
 
 <? if ($sections): ?>
     <?
-    $this->widget('BootMenu', array(
+    $this->widget('BootMenu', [
         'items'       => $sections,
         'encodeLabel' => false,
-        'htmlOptions' => array(
+        'htmlOptions' => [
             'id' => 'sections-menu'
-        )
-    ));
+        ]
+    ]);
     ?>
 <? else: ?>
     <span class="italic-12">Разделы отсутствуют</span>

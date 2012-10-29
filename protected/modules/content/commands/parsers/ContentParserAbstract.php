@@ -14,16 +14,16 @@ abstract class ContentParserAbstract extends CComponent
     function multipleThreadsRequest($urls)
     {
         $mh         = curl_multi_init();
-        $curl_array = array();
+        $curl_array = [];
         foreach ($urls as $i => $url)
         {
             $curl_array[$i] = curl_init($url);
-            curl_setopt_array($curl_array[$i], array(
+            curl_setopt_array($curl_array[$i], [
                 CURLOPT_HEADER => false,
                 CURLOPT_POST => false,
                 CURLOPT_SSL_VERIFYPEER => false,
                 CURLOPT_RETURNTRANSFER => true,
-            ));
+            ]);
             curl_multi_add_handle($mh, $curl_array[$i]);
         }
         $running = NULL;
@@ -33,7 +33,7 @@ abstract class ContentParserAbstract extends CComponent
             curl_multi_exec($mh, $running);
         } while ($running > 0);
 
-        $res = array();
+        $res = [];
         foreach ($urls as $i => $url)
         {
             $res[$url] = curl_multi_getcontent($curl_array[$i]);

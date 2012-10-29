@@ -4,21 +4,21 @@ class PageSectionAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             'view'   => 'Просмотр Раздела страниц',
             'create' => 'Создание Раздела страниц',
             'update' => 'Редактирование Раздела страниц',
             'delete' => 'Удаление Раздела страниц',
             'manage' => 'Управление Разделами страниц',
-        );
+        ];
     }
 
         
 	public function actionView($id)
 	{
-		$this->render('view', array(
+		$this->render('view', [
 			'model' => $this->loadModel($id),
-		));
+        ]);
 	}
 
 
@@ -31,12 +31,12 @@ class PageSectionAdminController extends AdminController
 
         if ($form->submitted() && $model->save())
 		{
-            $this->redirect(array('view', 'id' => $model->id));
+            $this->redirect(['view', 'id' => $model->id]);
 		}
 
-		$this->render('create', array(
+		$this->render('create', [
 			'form' => $form,
-		));
+		]);
 	}
 
 
@@ -49,12 +49,12 @@ class PageSectionAdminController extends AdminController
 
         if ($form->submitted() && $model->save())
 		{
-            $this->redirect(array('view', 'id' => $model->id));
+            $this->redirect(['view', 'id' => $model->id]);
 		}
 
-		$this->render('update', array(
+		$this->render('update', [
 			'form' => $form,
-		));
+		]);
 	}
 
 
@@ -69,7 +69,7 @@ class PageSectionAdminController extends AdminController
 
         if(!isset($_GET['ajax']))
         {
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : ['admin']);
         }
 	}
 
@@ -84,9 +84,9 @@ class PageSectionAdminController extends AdminController
             $model->attributes = $_GET['PageSection'];
         }
 
-		$this->render('manage', array(
+		$this->render('manage', [
 			'model' => $model,
-		));
+		]);
 	}
 
 

@@ -20,13 +20,13 @@
 Обрезает `$content` используя плагин [jTruncate](http://www.jeremymartin.name/projects.php?project=jTruncate)
 ~~~
 [php]
-$this->widget('content.portlets.Truncate', array(
+$this->widget('content.portlets.Truncate', [
     'id' => 'index_text',
     'content' => $content
-    'options' => array(
+    'options' => [
         'length' => 1200
-    )
-))
+    ]
+])
 ~~~
 
 **TopMenu**

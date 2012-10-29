@@ -5,7 +5,7 @@ class VkVideoGroupParser extends ContentParserAbstract
 {
     public $base = 'http://vk.com';
 
-    public $groups = array();
+    public $groups = [];
 
     protected $ch;
 
@@ -25,21 +25,21 @@ class VkVideoGroupParser extends ContentParserAbstract
         foreach ($xpath->query("//div[@id='public_videos']/a") as $row)
         {
             $oid      = '-' . end(explode('-', $row->getAttribute('href')));
-            $response = $this->post($this->base . '/al_video.php', array(
+            $response = $this->post($this->base . '/al_video.php', [
                 'act'    => 'load_videos_silent',
                 'al'     => 1,
                 'offset' => 0,
                 'oid'    => $oid
-            ));
+            ]);
             $data     = CJSON::decode(substr($response, 30)); // some magic
             foreach ($data['all'] as $video)
             {
-                $response = $this->post($this->base . '/al_video.php', array(
+                $response = $this->post($this->base . '/al_video.php', [
                     'act' => 'video_embed_box',
                     'al' => 1,
                     'oid' => $video[0],
                     'vid' => $video[1]
-                ));
+                ]);
                 dump($response);
                 // WHAT?!?!?!?!?!?!!
 
@@ -125,10 +125,10 @@ class VkVideoGroupParser extends ContentParserAbstract
         $this->curl_redirect_exec($this->ch);
 
         //формируем запрос
-        $post = array(
+        $post = [
             'email' => $conf['user'],
             'pass'  => $conf['pass']
-        );
+        ];
 
         curl_setopt($this->ch, CURLOPT_POSTFIELDS, http_build_query($post));
 
@@ -151,7 +151,7 @@ class VkVideoGroupParser extends ContentParserAbstract
             if ($exceeded_max_redirects)
             {
                 list($header) = explode("\r\n\r\n", $data, 2);
-                $matches = array();
+                $matches = [];
                 preg_match('/(Location:|URI:)(.*?)\n/', $header, $matches);
                 $url        = trim(array_pop($matches));
                 $url_parsed = parse_url($url);

@@ -1,39 +1,39 @@
 <?
-return array(
+return [
     'enctype'              => 'multipart/form-data',
-    'activeForm'           => array(
+    'activeForm'           => [
         'id'            => 'page-form',
-        'clientOptions' => array('validateOnSubmit' => true),
-    ),
-    'elements'             => array(
-        'title'    => array(
+        'clientOptions' => ['validateOnSubmit' => true],
+    ],
+    'elements'             => [
+        'title'    => [
             'type' => 'text'
-        ),
-//        'url' => array(
+        ],
+//        'url' => [
 //            'type'   => 'alias',
 //            'source' => 'title'
-//        ),
-        'gallery'    => array(
+//        ],
+        'gallery'    => [
             'type'      => 'uploader_modal',
             'data_type' => 'image',
             'title'     => 'Файлы',
-        ),
-        'status'   => array(
+        ],
+        'status'   => [
             'type'  => 'dropdownlist',
             'items' => Page::$status_options
-        ),
-        'tags'     => array(
+        ],
+        'tags'     => [
             'type'  => 'tags',
             'label' => 'Теги'
-        ),
-        'text'     => array(
+        ],
+        'text'     => [
             'type' => 'editor'
-        ),
-    ),
-    'buttons'              => array(
-        'submit' => array(
+        ],
+    ],
+    'buttons'              => [
+        'submit' => [
             'type'  => 'submit',
             'value' => t('сохранить')
-        )
-    )
-);
+        ]
+    ]
+];

@@ -4,17 +4,17 @@ class MenuSectionController extends ClientController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "view"   => "Просмотр страницы",
-        );
+        ];
     }
 
 
     public function actionView($id)
     {
-        $model = $this->loadModel($id, array('published'));
+        $model = $this->loadModel($id, ['published']);
         $model->checkAccess();
-        $children = array();
+        $children = [];
         foreach ($model->children()->findAll() as $child)
         {
             if ($child->checkAccess())
@@ -23,9 +23,9 @@ class MenuSectionController extends ClientController
             }
         }
 
-        $this->render("view", array(
+        $this->render("view", [
             "children"    => $children,
             "section"    => $model
-        ));
+        ]);
     }
 }

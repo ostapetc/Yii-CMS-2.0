@@ -4,21 +4,21 @@ class SidebarAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             'View'   => 'Просмотр сайдбара',
             'Create' => 'Создание сайдбара',
             'Update' => 'Редактирование сайдбара',
             'Delete' => 'Удаление сайдбара',
             'Manage' => 'Управление сайдбарами',
-        );
+        ];
     }
 
         
 	public function actionView($id)
 	{
-		$this->render('view', array(
+		$this->render('view', [
 			'model' => $this->loadModel($id),
-		));
+        ]);
 	}
 
 
@@ -35,13 +35,13 @@ class SidebarAdminController extends AdminController
 			$model->attributes = $_POST['Sidebar'];
 			if($model->save())
             {
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(['view', 'id' => $model->id]);
             }
 		}
 
-		$this->render('create', array(
+		$this->render('create', [
 			'form' => $form,
-		));
+		]);
 	}
 
 
@@ -58,13 +58,13 @@ class SidebarAdminController extends AdminController
 			$model->attributes = $_POST['Sidebar'];
 			if($model->save())
             {
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(['view', 'id' => $model->id]);
             }
 		}
 
-		$this->render('update', array(
+		$this->render('update', [
 			'form' => $form,
-		));
+		]);
 	}
 
 
@@ -74,7 +74,7 @@ class SidebarAdminController extends AdminController
 
         if(!isset($_GET['ajax']))
         {
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : ['admin']);
         }
 	}
 
@@ -88,9 +88,9 @@ class SidebarAdminController extends AdminController
             $model->attributes = $_GET['Sidebar'];
         }
 
-		$this->render('manage', array(
+		$this->render('manage', [
 			'model' => $model,
-		));
+		]);
 	}
 
 }

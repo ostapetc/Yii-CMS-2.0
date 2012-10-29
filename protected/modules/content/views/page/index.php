@@ -1,12 +1,12 @@
 <? $this->page_title = null; ?>
 
 <?
-$this->widget('zii.widgets.CListView', array(
+$this->widget('zii.widgets.CListView', [
     'id'           => 'Page-listView',
     'dataProvider' => $data_provider,
     'summaryText'  => '',
     'itemView'     => '_view',
-    'viewData'     => array('preview' => true),
+    'viewData'     => ['preview' => true],
     'emptyText'    => t('Посты еще не были добавлены')
-));
+]);
 ?>

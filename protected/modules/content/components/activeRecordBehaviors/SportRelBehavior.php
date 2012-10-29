@@ -12,10 +12,10 @@ class SportRelBehavior extends ActiveRecordBehavior
 {
     public function afterSave($event)
     {
-        $attributes = array(
+        $attributes = [
             'object_id' => $this->owner->id,
             'model_id'  => get_class($this->owner)
-        );
+        ];
 
         SportRel::model()->deleteAllByAttributes($attributes);
 

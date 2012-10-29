@@ -4,9 +4,9 @@ class PageSectionController extends ClientController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             'create' => 'Создание раздела страниц',
-        );
+        ];
     }
 
 
@@ -21,15 +21,15 @@ class PageSectionController extends ClientController
         $model->attributes = $_POST['PageSection'];
         if ($model->save())
         {
-            $params = array('done' => true);
+            $params = ['done' => true];
             if (isset($_POST['ajax']))
             {
-                $params['sections'] = CHtml::listData(PageSection::model()->findAll(array('order' => 'name')), 'id', 'name');
+                $params['sections'] = CHtml::listData(PageSection::model()->findAll(['order' => 'name']), 'id', 'name');
             }
         }
         else
         {
-            $params = array('errors' => $model->errors_flat_array);
+            $params = ['errors' => $model->errors_flat_array];
         }
 
         echo CJSON::encode($params);

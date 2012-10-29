@@ -28,11 +28,11 @@ class SherdogGalleryParser extends ContentParserAbstract
                 {
                     return true;
                 }
-                $gallery = array(
+                $gallery = [
                     'title' => $row->textContent,
                     'id'    => $id,
                     'imgs'  => $this->parseGalleryPage($row->getAttribute('href')),
-                );
+                ];
                 $this->saveGallery($gallery);
             }
 
@@ -55,13 +55,13 @@ class SherdogGalleryParser extends ContentParserAbstract
         $xpath = new DOMXPath($doc);
 
         //get urls on photo page
-        $urls = array();
+        $urls = [];
         foreach ($xpath->query("//ul[@id='photo_carousel']//a/@href") as $attr)
         {
             $urls[] = $this->base_url . $attr->nodeValue;
         }
 
-        $imgs = array();
+        $imgs = [];
         foreach ($this->multipleThreadsRequest($urls) as $url => $html)
         {
             if ($html)
@@ -80,10 +80,10 @@ class SherdogGalleryParser extends ContentParserAbstract
         $doc->loadHTML($html);
         $xpath = new DOMXPath($doc);
 
-        return array(
+        return [
             'title' => trim($xpath->query("//div[@class='picture_description']")->item(0)->textContent),
             'img'   => $xpath->query("//div[@class='big_picture']//img/@src")->item(0)->nodeValue
-        );
+        ];
     }
 
 

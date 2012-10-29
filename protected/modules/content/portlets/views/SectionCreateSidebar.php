@@ -45,6 +45,6 @@
 
 <h4>Добавить раздел</h4>
 
-<?= CHtml::textField('name', null, array('placeholder' => 'Название', 'style' => 'width: 250px', 'id' => 'PageSection_name')); ?>
-<?= CHtml::dropdownList('parent_id', null, PageSection::model()->optionsTree(), array('empty' => 'родительский раздел', 'style' => 'width: 260px !important', 'id' => 'PageSection_parent_id')); ?>
-<?= CHtml::button('добавить', array('class' => 'btn btn-success', 'id' => 'PageSection_submit')); ?>
+<?= CHtml::textField('name', null, ['placeholder' => 'Название', 'style' => 'width: 250px', 'id' => 'PageSection_name']); ?>
+<?= CHtml::dropdownList('parent_id', null, PageSection::model()->optionsTree(), ['empty' => 'родительский раздел', 'style' => 'width: 260px !important', 'id' => 'PageSection_parent_id']); ?>
+<?= CHtml::button('добавить', ['class' => 'btn btn-success', 'id' => 'PageSection_submit']); ?>

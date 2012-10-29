@@ -72,52 +72,52 @@ class PageSection extends ActiveRecord
 
     public function rules()
     {
-        return array(
-            array(
+        return [
+            [
                 'name',
                 'required'
-            ),
-            array(
+            ],
+            [
                 'name',
                 'length',
                 'max' => 50
-            ),
-            array(
+            ],
+            [
                 'name',
                 'unique'
-            ),
-            array(
+            ],
+            [
                 'parent_id',
                 'numerical',
                 'integerOnly' => true
-            )
-        );
+            ]
+        ];
     }
 
 
     public function relations()
     {
-        return array(
-            'parent' => array(
+        return [
+            'parent' => [
                 self::BELONGS_TO,
                 'PageSection',
                 'parent_id'
-            ),
-            'childs' => array(
+            ],
+            'childs' => [
                 self::HAS_MANY,
                 'PageSection',
                 'parent_id'
-            ),
-            'pages_count' => array(
+            ],
+            'pages_count' => [
                 self::STAT,
                 'PageSectionRel',
                 'section_id',
-            ),
-            'pages_sections_rels' => array(
+            ],
+            'pages_sections_rels' => [
                 self::HAS_MANY,
                 'PageSectionRel',
                 'section_id'
-            ),
+            ],
 
             /*
              * TODO: придумат как сделать релэшин
@@ -131,7 +131,7 @@ class PageSection extends ActiveRecord
                 //'condition' => 'status = "' . Page::STATUS_PUBLISHED . '"'
             )
             */
-        );
+        ];
     }
 
 
@@ -144,12 +144,12 @@ class PageSection extends ActiveRecord
         $criteria->compare('order', $this->order, true);
         $criteria->compare('date_create', $this->date_create, true);
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
             'criteria'   => $criteria,
-            'pagination' =>array(
+            'pagination' => [
                 'pageSize' => self::PAGE_SIZE
-            )
-        ));
+            ]
+        ]);
     }
 
 
@@ -189,6 +189,6 @@ class PageSection extends ActiveRecord
 
     public function getForumUrl()
     {
-        return Yii::app()->createUrl('/content/forum/sectionTopics/', array('section_id' => $this->id));
+        return Yii::app()->createUrl('/content/forum/sectionTopics/', ['section_id' => $this->id]);
     }
 }

@@ -11,11 +11,11 @@ class UpdatePageAction extends CAction
 
         if ($form->submitted() && $model->save())
         {
-            $this->controller->redirect(array('view', 'id'=> $model->id));
+            $this->controller->redirect(['view', 'id'=> $model->id)];
         }
 
-        $this->controller->render('update', array(
+        $this->controller->render('update', [
             'form' => $form
-        ));
+        ]);
     }
 }

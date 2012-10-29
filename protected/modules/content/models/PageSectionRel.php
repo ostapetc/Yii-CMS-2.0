@@ -46,24 +46,23 @@ class PageSectionRel extends ActiveRecord
 
     public function rules()
     {
-        return array(
-            array(
+        return [
+            [
                 'page_id, section_id',
                 'required'
-            ),
-
-            array(
+            ],
+            [
                 '',
                 'unique'
-            ),
-        );
+            ],
+        ];
     }
 
 
     public function relations()
     {
-        return array(
-        );
+        return [
+        ];
     }
 
 
@@ -74,25 +73,25 @@ class PageSectionRel extends ActiveRecord
         $criteria->compare('page_id', $this->page_id, true);
         $criteria->compare('section_id', $this->section_id, true);
 
-        return new ActiveDataProvider(get_class($this), array(
+        return new ActiveDataProvider(get_class($this), [
             'criteria'   => $criteria,
-            'pagination' =>array(
+            'pagination' => [
                 'pageSize' => self::PAGE_SIZE
-            )
-        ));
+            ]
+        ]);
     }
 
 
     public function getHref()
     {
-        return Yii::app()->createUrl('/content/pagesectionrel/view', array('id' => $this->id));
+        return Yii::app()->createUrl('/content/pagesectionrel/view', ['id' => $this->id]);
     }
 
 
     public function uploadFiles()
     {
-        return array(
-        );
+        return [
+        ];
     }
 
 

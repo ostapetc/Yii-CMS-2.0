@@ -1,21 +1,20 @@
 <?
 
-return array(
-    'activeForm' => array(
+return [
+    'activeForm' => [
         'id' => 'sidebar-form',
-    ),
-    'elements' => array(
-        'title'        => array('type' => 'text'),
-        'html'         => array('type' => 'editor'),
-        'is_published' => array('type' => 'checkbox'),
-
-    ),
-    'buttons' => array(
-        'submit' => array(
+    ],
+    'elements' => [
+        'title'        => ['type' => 'text'],
+        'html'         => ['type' => 'editor'],
+        'is_published' => ['type' => 'checkbox'],
+    ],
+    'buttons' => [
+        'submit' => [
             'type'  => 'submit',
             'value' => $this->model->isNewRecord ? 'создать' : 'сохранить'
-        )
-    )
-);
+        ]
+    ]
+];
 
 

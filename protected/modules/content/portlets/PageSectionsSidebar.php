@@ -12,20 +12,20 @@ class PageSectionsSidebar extends Portlet
     {
         $sections = PageSection::model()->findAll(
             'parent_id = ' . PageSection::ROOT_SECTION_ID_PAGES,
-            array('order' => '`order`')
+            ['order' => '`order`']
         );
 
         foreach ($sections as $id => $name)
         {
-            $sections[$id] = array(
+            $sections[$id] = [
                 'label' => $name,
                 'url'   => 'e',
                 'type'  => 'raw'
-            );
+            ];
         }
 
-        $this->render('PageSectionsSidebar', array(
+        $this->render('PageSectionsSidebar', [
             'sections' => $sections
-        ));
+        ]);
     }
 }

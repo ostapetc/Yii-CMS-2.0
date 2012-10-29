@@ -1,32 +1,32 @@
 <? if ($widget == 'list'): ?>
     <?
-    $this->widget('ListView', array(
+    $this->widget('ListView', [
         'id'           => 'Page-listView',
         'dataProvider' => $data_provider,
         'summaryText'  => '',
         'itemView'     => '_view',
-        'viewData'     => array('preview' => true),
-    ));
+        'viewData'     => ['preview' => true],
+    ]);
     ?>
 <? else: ?>
     <?=
-    $this->widget('BootGridView', array(
+    $this->widget('BootGridView', [
         'id'           => 'email-template-grid',
         'dataProvider' => $data_provider,
         'filter'       => $model,
-        'columns' => array(
+        'columns' => [
             'title',
-            array(
+            [
                 'name'   => 'status',
                 'value'  => '$data->value("status")',
                 'filter' => Page::$status_options
-            ),
+            ],
             'date_create',
-            array(
+            [
                 'class'=>'BootButtonColumn',
-            ),
-        ),
-    ))
+            ],
+        ],
+    ])
     ?>
 <? endif ?>
 

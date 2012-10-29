@@ -5,12 +5,12 @@
 </style>
 
 <?
-$this->widget('BootCrumb', array(
+$this->widget('BootCrumb', [
     'homeLink' => false,
-    'links'    => array(
+    'links'    => [
         t('') => ''
-    )
-));
+    ]
+]);
 ?>
 
 <? if ($pages): ?>
@@ -36,7 +36,7 @@ $this->widget('BootCrumb', array(
                     <? $last_comment = $page->last_comment; ?>
                     <? if ($last_comment): ?>
                         <div style="float:left">
-                            <? $this->renderPartial('application.modules.users.views.user._author', array('user' => $last_comment->user)) ?>
+                            <? $this->renderPartial('application.modules.users.views.user._author', ['user' => $last_comment->user]) ?>
                         </div>
                         <div class="published" style="float:right"><?= $last_comment->value('date_create') ?></div>
                     <? else: ?>
@@ -44,7 +44,7 @@ $this->widget('BootCrumb', array(
                     <? endif ?>
                 </td>
                 <td class="align-center">
-                    <?= Rating::getHtml($page, array('style' => 'float:none')) ?>
+                    <?= Rating::getHtml($page, ['style' => 'float:none']) ?>
                 </td>
                 <td class="align-center">
                     <?= $page->comments_count ?>
@@ -58,9 +58,9 @@ $this->widget('BootCrumb', array(
 
     <div class="pagination">
         <?
-        $this->widget('BootPager', array(
+        $this->widget('BootPager', [
             'pages' => $pagination,
-        ))
+        ])
         ?>
     </div>
 

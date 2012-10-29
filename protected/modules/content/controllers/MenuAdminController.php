@@ -4,12 +4,12 @@ class MenuAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "create" => "Добавление меню",
             "update" => "Редактирование меню",
             "manage" => "Управление меню",
             "delete" => "Удаление меню",
-        );
+        ];
     }
 
 
@@ -29,7 +29,7 @@ class MenuAdminController extends AdminController
             $this->redirect('/content/MenuAdmin/manage/');
         }
 
-        $this->render('create', array('form' => $form));
+        $this->render('create', ['form' => $form]);
     }
 
 
@@ -44,7 +44,7 @@ class MenuAdminController extends AdminController
             $this->redirect($this->createUrl('manage'));
         }
 
-        $this->render('update', array('form' => $form));
+        $this->render('update', ['form' => $form]);
     }
 
 
@@ -58,7 +58,7 @@ class MenuAdminController extends AdminController
             $model->attributes = $_GET['Menu'];
         }
 
-        $this->render('manage', array('model' => $model));
+        $this->render('manage', ['model' => $model]);
     }
 
 

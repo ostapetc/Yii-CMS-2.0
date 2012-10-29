@@ -7,47 +7,47 @@
 <?
 $this->page_title = 'Меню сайта'; 
 
-$this->tabs = array(
+$this->tabs = [
 	'добавить меню' => $this->createUrl('create')
-);
+];
 
-$this->widget('AdminGridView', array(
+$this->widget('AdminGridView', [
 	'id' => 'menu-grid',
 	'dataProvider' => $model->search(),
 	'filter' => $model,
 	'template' => '{summary}<br/>{pager}<br/>{items}<br/>{pager}',
-	'columns'=>array(
-		array(
+	'columns'=> [
+		[
             'name'  => 'name',
             'value' => 'Chtml::link($data->name, array("/content/MenuSectionAdmin/manage", "menu_id" => $data->id))',
             'type'  => 'raw'
-        ),
-        array('name' => 'code'),
-        array(
+        ],
+        ['name' => 'code'],
+        [
             'name'   => 'is_published',
             'value'  => '$data->is_published ? "Да" : "Нет"',
-            'filter' => array(0 => 'Нет', 1 => 'Да')
-        ),
-        array(
+            'filter' => [0 => 'Нет', 1 => 'Да']
+        ],
+        [
             'name'  => 'language',
             'value' => '$data->getLanguageName()'
-        ),
-		array(
+        ],
+		[
 			'class'    => 'CButtonColumn',
             'template' => '{manage} {update}',
-            'buttons'  => array(
-                'manage' => array(
+            'buttons'  => [
+                'manage' => [
                     'label'    => 'управление разделами',
                     'imageUrl' => $this->module->assetsUrl() . '/img/manage.png',
-                    'url'      => 'Yii::app()->createUrl("content/MenuSectionAdmin/manage", array("menu_id" => $data->id))'
-                ),
-//                'links' => array(
+                    'url'      => 'Yii::app()->createUrl("content/MenuSectionAdmin/manage", ["menu_id" => $data->id])'
+                ],
+//                'links' => [
 //                    'label'    => 'ссылки',
 //                    'imageUrl' => $this->module->assetsUrl() . '/img/tree.png',
-//                    'url'      => 'Yii::app()->createUrl("content/MenuSectionAdmin/index", array("menu_id" => $data->id))'
-//                )
-            ),
-		),
-	),
-));
+//                    'url'      => 'Yii::app()->createUrl("content/MenuSectionAdmin/index", ["menu_id" => $data->id])'
+//                ]
+            ],
+		],
+    ],
+]);
 

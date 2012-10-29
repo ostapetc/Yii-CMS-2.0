@@ -5,11 +5,11 @@
                 <? if ($data->image_src): ?>
                     <?=
                     CHtml::link(
-                        CHtml::image($data->image_src, '', array('class' => 'img-polaroid')),
+                        CHtml::image($data->image_src, '', ['class' => 'img-polaroid']),
                         $data->url,
-                        array(
+                        [
                             'class' => 'page-img'
-                        )
+                        ]
                     );
                     ?>
                 <? endif ?>
@@ -20,7 +20,7 @@
                     CHtml::link(
                         CHtml::encode($data->title),
                         $data->url,
-                        array('class' => 'page-title')
+                        ['class' => 'page-title']
                     );
                     ?>
                 </h1>
@@ -34,7 +34,7 @@
                 <?=
                 $this->renderPartial(
                     'application.modules.content.views.pageSection._list',
-                    array('sections' => $data->sections)
+                    ['sections' => $data->sections]
                 );
                 ?>
             </td>
@@ -44,7 +44,7 @@
                 <?=
                 $this->renderPartial(
                     'application.modules.tags.views._list',
-                    array('tags' => $data->tags)
+                    ['tags' => $data->tags]
                 );
                 ?>
             </td>
@@ -54,7 +54,7 @@
                 <?=
                 $this->renderPartial(
                     '_infoPanel',
-                    array('page' => $data)
+                    ['page' => $data]
                 );
                 ?>
             </td>

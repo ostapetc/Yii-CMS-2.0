@@ -26,7 +26,7 @@
                         <?= CHtml::link($section->last_topic->title, $section->last_topic->url) ?> <br/>
 
                         <div style="float:left">
-                            <? $this->renderPartial('application.modules.users.views.user._author', array('user' => $section->last_topic->user)) ?>
+                            <? $this->renderPartial('application.modules.users.views.user._author', ['user' => $section->last_topic->user]) ?>
                         </div>
                         <div class="published" style="float:right"><?= $section->last_topic->value('date_create') ?></div>
                     <? else: ?>

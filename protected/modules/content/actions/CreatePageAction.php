@@ -16,14 +16,14 @@ class CreatePageAction extends CAction
 
         if ($form->submitted() && $model->save())
         {
-            $this->controller->redirect(array(
+            $this->controller->redirect([
                 'view',
                 'id' => $model->id
-            ));
+            ]);
         }
 
-        $this->controller->render('create', array(
+        $this->controller->render('create', [
             'form' => $form
-        ));
+        ]);
     }
 }

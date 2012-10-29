@@ -4,14 +4,14 @@ class PageAdminController extends AdminController
 {
     public static function actionsTitles()
     {
-        return array(
+        return [
             "manage"      => t("Управление страницами"),
             "create"      => t("Добавление страницы"),
             "view"        => t("Просмотр страницы"),
             "update"      => t("Редактирование страницы"),
             "delete"      => t("Удаление страницы"),
             "getJsonData" => t("Получение данных страницы (JSON)")
-        );
+        ];
     }
 
 
@@ -25,9 +25,9 @@ class PageAdminController extends AdminController
             $model->attributes = $_GET['Page'];
         }
 
-        $this->render('manage', array(
+        $this->render('manage', [
             "model" => $model
-        ));
+        ]);
     }
 
 
@@ -39,12 +39,12 @@ class PageAdminController extends AdminController
 
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array(
+            $this->redirect([
                 'view',
                 'id' => $model->id
-            ));
+            ]);
         }
-        $this->render('create', array('form' => $form));
+        $this->render('create', ['form' => $form]);
     }
 
 
@@ -58,7 +58,7 @@ class PageAdminController extends AdminController
         }
         else
         {
-            $this->render('view', array('model' => $model));
+            $this->render('view', ['model' => $model]);
         }
     }
 
@@ -72,15 +72,15 @@ class PageAdminController extends AdminController
 
         if ($form->submitted() && $model->save())
         {
-            $this->redirect(array(
+            $this->redirect([
                 'view',
                 'id' => $model->id
-            ));
+            ]);
         }
 
-        $this->render('update', array(
+        $this->render('update', [
             'form' => $form,
-        ));
+        ]);
     }
 
 
@@ -91,7 +91,7 @@ class PageAdminController extends AdminController
 
         if (!isset($_GET['ajax']))
         {
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : ['admin']);
         }
     }
 

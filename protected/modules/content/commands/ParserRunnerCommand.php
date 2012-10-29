@@ -1,7 +1,7 @@
 <?php
 class ParserRunnerCommand extends CConsoleCommand
 {
-    public $parsers = array();
+    public $parsers = [];
 
     public function run()
     {

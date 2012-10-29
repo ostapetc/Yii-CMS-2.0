@@ -1,27 +1,27 @@
 <?
 
-return array(
-    'activeForm' => array(
+return [
+    'activeForm' => [
         'id'                   => 'pageSection-form',
-        'clientOptions'        => array(
+        'clientOptions'        => [
             'validateOnSubmit'=> true
-        ),
-    ),
-    'elements'  => array(
-        'name' => array(
+        ],
+    ],
+    'elements'  => [
+        'name' => [
             'type' => 'text',
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'type'  => 'dropdownlist',
             'items' => CHtml::listData(PageSection::model()->findAll(($this->model->isNewRecord ? '' : 'id != ' . $this->model->id)), 'id', 'name'),
             'empty' => 'не выбран'
-        )
-    ),
-    'buttons'   => array(
-        'submit' => array(
+        ]
+    ],
+    'buttons'   => [
+        'submit' => [
             'type'  => 'submit',
             'value' => 'сохранить'
-        )
-    )
-);
+        ]
+    ]
+];
 
