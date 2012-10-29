@@ -480,10 +480,10 @@ abstract class ActiveRecord extends CActiveRecord
      */
     public function findByPk($pk,$condition='',$params=array())
     {
-        $method = $this->_asArray ? 'findByPkRaw' : 'findByPk';
+        $method = $this->as_array ? 'findByPkRaw' : 'findByPk';
         $result = parent::$method($pk, $condition, $params);
 
-        if ($this->_throw404IfNull && $result === null)
+        if ($this->throw_404_if_null && $result === null)
         {
             Yii::app()->controller->pageNotFound();
         }
@@ -498,10 +498,10 @@ abstract class ActiveRecord extends CActiveRecord
      */
     public function findByAttributes($attributes,$condition='',$params=array())
     {
-        $method = $this->_asArray ? 'findByAttributesRaw' : 'findByAttributes';
+        $method = $this->as_array ? 'findByAttributesRaw' : 'findByAttributes';
         $result = parent::$method($attributes, $condition, $params);
 
-        if ($this->_throw404IfNull && $result === null)
+        if ($this->throw_404_if_null && $result === null)
         {
             Yii::app()->controller->pageNotFound();
         }
@@ -515,7 +515,7 @@ abstract class ActiveRecord extends CActiveRecord
      */
     public function find($condition='',$params=array())
     {
-        $method = $this->_asArray ? 'findRaw' : 'find';
+        $method = $this->as_array ? 'findRaw' : 'find';
         return parent::$method($condition, $params);
     }
 
@@ -526,7 +526,7 @@ abstract class ActiveRecord extends CActiveRecord
      */
     public function findAll($condition='',$params=array())
     {
-        $method = $this->_asArray ? 'findAllRaw' : 'findAll';
+        $method = $this->as_array ? 'findAllRaw' : 'findAll';
         return parent::$method($condition, $params);
     }
 
@@ -538,7 +538,7 @@ abstract class ActiveRecord extends CActiveRecord
      */
     public function findAllByPk($pk,$condition='',$params=array())
     {
-        $method = $this->_asArray ? 'findAllByPkRaw' : 'findAllByPk';
+        $method = $this->as_array ? 'findAllByPkRaw' : 'findAllByPk';
         return parent::$method($pk, $condition, $params);
     }
 
@@ -550,7 +550,7 @@ abstract class ActiveRecord extends CActiveRecord
      */
     public function findAllByAttributes($attributes,$condition='',$params=array())
     {
-        $method = $this->_asArray ? 'findAllByAttributesRaw' : 'findAllByAttributes';
+        $method = $this->as_array ? 'findAllByAttributesRaw' : 'findAllByAttributes';
         return parent::$method($attributes, $condition, $params);
     }
 
@@ -558,7 +558,7 @@ abstract class ActiveRecord extends CActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        $this->_asArray = $this->_throw404IfNull = false;
+        $this->as_array = $this->throw_404_if_null = false;
     }
 
 
