@@ -15,9 +15,9 @@
         <table class="files">
             <thead>
             <tr>
-                <th style="width:<?php echo $this->preview_width ?>"></th>
+                <th style="width:<?= $this->preview_width ?>"></th>
                 <? foreach ($this->fields as $header) { ?>
-                <th style="width: 250px"><? echo $header['header'];?></th>
+                <th style="width: <?= $header['width'] ?>px"><? echo $header['header'];?></th>
                 <? } ?>
                 <th style="width: 50px"></th>
                 <th style="width: 50px">Удалить</th>

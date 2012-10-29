@@ -6,7 +6,7 @@ class Uploader extends JuiInputWidget
 {
     public $model;
     public $title = 'Файлы';
-    public $preview_width = '64px';
+    public $preview_width = '128px';
     public $data_type; //image, sound, video, document
     public $as_modal = true;
     public $multiple = true;
@@ -14,12 +14,12 @@ class Uploader extends JuiInputWidget
     public $fields = [
         'title' => [
             'header' => 'Название',
-            'size'   => 150,
+            'width'   => 150,
             'type'   => 'text',
         ],
         'descr' => [
             'header' => 'Описание',
-            'size'   => 250,
+            'width'   => 250,
             'type'   => 'textarea',
         ],
     ];

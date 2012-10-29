@@ -13,7 +13,7 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
         },
         downloadTemplate: function(o)
         {
-            if (o.files)
+            if (o.files && o.files.errors == undefined)
             {
                 for (var i in o.files)
                 {
@@ -32,8 +32,9 @@ $.widget('cmsUI.fileupload', $.blueimpUI.fileupload, {
                             break;
                     }
                 }
+                return $.tmpl($('#template-download'), o.files);
             }
-            return $.tmpl($('#template-download'), o.files);
+            return false;
         }
     },
     _create: function()

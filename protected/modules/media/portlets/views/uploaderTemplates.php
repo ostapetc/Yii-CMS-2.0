@@ -49,22 +49,22 @@
             {{/if}}
         </td>
         {{else}}
-        <td class="preview">
+        <td class="preview" style="width:<?= $this->preview_width ?>">
             {{html preview}}
         </td>
         <? foreach ($this->fields as $field => $sett): ?>
-        <td style="width: <? echo $sett['size'];?>px;">
-            <div class="<? echo $field ?> editable" data-attr="<? echo $field;?>" data-editable-type="<? echo $sett['type'];?>"
+        <td style="width: <?= $sett['width'];?>px;">
+            <div class="<?= $field ?> editable" data-attr="<?= $field;?>" data-editable-type="<?= $sett['type'];?>"
                  data-save-url="${edit_url}" data-api="${api}">
-                <span>${<? echo $field;?>}</span>
+                <span>${<?= $field;?>}</span>
             </div>
         </td>
         <? endforeach; ?>
-        <td class="dnd-handler">
+        <td class="dnd-handler" style="width: 50px">
             <i class="icon-sortable"></i>
         </td>
         {{/if}}
-        <td class="delete">
+        <td class="delete" style="width: 50px">
             <button data-type="post" data-url="${delete_url}" class="btn btn-danger btn-small">
                 <i class="icon-remove"></i>
             </button>
