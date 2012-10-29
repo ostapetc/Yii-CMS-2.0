@@ -1,7 +1,8 @@
 <?php
-/** 
- * 
+/**
+ *
  * !Attributes - атрибуты БД
+ *
  * @property integer    $id
  * @property string     $model_id
  * @property integer    $object_id
@@ -9,7 +10,7 @@
  * @property string     $descr
  * @property string     $date_create
  * @property integer    $order
- * 
+ *
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property            $parentModel
  * @property            $href
@@ -19,16 +20,16 @@
  * @property            $updateUrl
  * @property            $createUrl
  * @property            $deleteUrl
- * 
+ *
  * !Relations - связи
  * @property TagRel[]   $tags_rels
  * @property            $tags
  * @property int|null   $comments_count
- * 
+ *
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   MediaAlbum ordered()
  * @method   MediaAlbum last()
- * 
+ *
  */
 
 class MediaAlbum extends ActiveRecord
@@ -109,7 +110,7 @@ class MediaAlbum extends ActiveRecord
             [
                 'title',
                 'length',
-                'max'=> 200
+                'max' => 200
             ],
             [
                 'title, descr',
@@ -119,7 +120,7 @@ class MediaAlbum extends ActiveRecord
             [
                 'id, title, descr, date_create',
                 'safe',
-                'on'=> 'search'
+                'on' => 'search'
             ],
             [
                 'files',
@@ -174,8 +175,8 @@ class MediaAlbum extends ActiveRecord
         $album = clone $this;
         if ($q)
         {
-            $criteria = $album->getDbCriteria();
-            $criteria->with = ['files'];
+            $criteria           = $album->getDbCriteria();
+            $criteria->with     = ['files'];
             $criteria->together = true;
             $criteria->compare('t.title', $q, true, 'OR');
             $criteria->compare('t.descr', $q, true, 'OR');
@@ -183,7 +184,7 @@ class MediaAlbum extends ActiveRecord
         }
 
         return new ActiveDataProvider($album, [
-            'criteria' => $album->parentModel($model)->getDbCriteria(),
+            'criteria'   => $album->parentModel($model)->getDbCriteria(),
             'pagination' => false
         ]);
     }
@@ -200,6 +201,7 @@ class MediaAlbum extends ActiveRecord
     /**
      * @param      $model
      * @param bool $positive
+     *
      * @return MediaAlbum
      */
     public function parentModel($model, $positive = true)
@@ -217,14 +219,15 @@ class MediaAlbum extends ActiveRecord
      * @param      $model_id
      * @param      $object_id
      * @param bool $positive
+     *
      * @return MediaAlbum
      */
     public function parent($model_id, $object_id = null, $positive)
     {
-        $alias     = $this->getTableAlias();
+        $alias = $this->getTableAlias();
 
-        $op = $positive ? '=' : '<>';
-        $m_key = $alias . '_model_id';
+        $op        = $positive ? '=' : '<>';
+        $m_key     = $alias . '_model_id';
         $condition = "$alias.model_id $op :$m_key";
         $params    = [
             $m_key => $model_id
@@ -241,7 +244,6 @@ class MediaAlbum extends ActiveRecord
         ]);
         return $this;
     }
-
 
 
     public function notParent($model_id, $object_id)

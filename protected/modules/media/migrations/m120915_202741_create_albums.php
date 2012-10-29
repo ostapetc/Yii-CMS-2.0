@@ -1,6 +1,6 @@
 <?php
 
-class m120915_202740_create_albums extends DbMigration
+class m120915_202741_create_albums extends DbMigration
 {
     public function up()
     {
@@ -13,6 +13,7 @@ class m120915_202740_create_albums extends DbMigration
                       `object_id` int(11) DEFAULT NULL COMMENT 'ID объекта',
                       `title` varchar(50) DEFAULT NULL COMMENT 'Название',
                       `descr` text COMMENT 'Описание',
+                      `status` ENUM('active', 'deleted') NULL DEFAULT NULL COMMENT 'Статус',
                       `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Создан',
                       `order` int(11) DEFAULT NULL,
                       PRIMARY KEY (`id`)

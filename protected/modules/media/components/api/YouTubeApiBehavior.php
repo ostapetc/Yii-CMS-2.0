@@ -16,20 +16,24 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
     public $href;
     protected $api;
 
+
     public static function basePath()
     {
         return Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/';
     }
+
 
     public function getThumb($hq = true)
     {
         return 'http://i4.ytimg.com/vi/' . $this->pk . '/' . ($hq ? 'hq' : '') . 'default.jpg';
     }
 
+
     public function getType()
     {
         return MediaFile::TYPE_VIDEO;
     }
+
 
     public function getServerDir()
     {
@@ -50,10 +54,12 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         return false;
     }
 
+
     public function getHref()
     {
         return $this->href;
     }
+
 
     /**
      * @return Zend_Gdata_YouTube
@@ -73,12 +79,17 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         return $this->api;
     }
 
+
     public function convertFromLocal($local_api)
     {
         throw new CException('not implemented yet');
     }
 
-    public function getPlayer($size = ['width' => 128, 'height' => 128])
+
+    public function getPlayer($size = [
+        'width'  => 128,
+        'height' => 128
+    ])
     {
         $conf = $this->getPreviewArray('iframe');
         return CHtml::tag('iframe', CMap::mergeArray($size, [
@@ -86,35 +97,47 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         ]));
     }
 
+
     public function getPlayerUrl()
     {
         $entry = $this->getApi()->getVideoEntry($this->getOwner()->remote_id);
         return $entry->getFlashPlayerUrl();
     }
 
+
     public function getPreviewArray($type = 'img')
     {
         if ($type == 'iframe')
         {
-            return ['type' => 'iframe', 'val' => $this->getPlayerUrl()];
+            return [
+                'type' => 'iframe',
+                'val'  => $this->getPlayerUrl()
+            ];
         }
         elseif ($type == 'img')
         {
-            return ['type' => 'img', 'val' => $this->getThumb()];
+            return [
+                'type' => 'img',
+                'val'  => $this->getThumb()
+            ];
         }
     }
 
-    public function getPreview($size = ['width' => 128, 'height' => 128])
+
+    public function getPreview($size = [
+        'width'  => 128,
+        'height' => 128
+    ])
     {
         $conf = $this->getPreviewArray();
         return CHtml::image($conf['val'], '', []);
     }
 
+
     public function getUrl()
     {
         throw new CException('not implemented yet');
     }
-
 
 
     public function getUploadUrl()

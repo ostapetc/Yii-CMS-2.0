@@ -10,11 +10,12 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     public function getPlayerUrl()
     {
         return 'http://player.vimeo.com/video/38732855?title=1&' .
-            http_build_query([//            'oid'  => $this->oid,
+            http_build_query([ //            'oid'  => $this->oid,
 //            'id'   => $this->id,
 //            'hash' => $this->hash
             ]);
     }
+
 
     public function parse($source)
     {
@@ -45,7 +46,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     }
 
 
-
     public function getType()
     {
         return MediaFile::TYPE_VIDEO;
@@ -68,7 +68,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     {
         return $this->href;
     }
-
 
 
     public function getPreviewArray()

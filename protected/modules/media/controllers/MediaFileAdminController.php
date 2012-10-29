@@ -47,8 +47,9 @@ class MediaFileAdminController extends AdminController
             }
             else
             {
-                echo ['status'  => 'error',
-                           'message' => 'Текст не распознан'
+                echo [
+                    'status'  => 'error',
+                    'message' => 'Текст не распознан'
                 ];
             }
         }
@@ -61,22 +62,22 @@ class MediaFileAdminController extends AdminController
 
     protected function sendFilesAsJson($files)
     {
-        $res = [];
-        $files = is_array($files ) ? $files : [$files];
+        $res   = [];
+        $files = is_array($files) ? $files : [$files];
         foreach ($files as $file)
         {
             $res[] = [
-                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
-                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
-                'url'            => $file->getHref(),
-                'preview'        => $file->getPreviewArray(),
-                'delete_url'     => $file->deleteUrl,
-                'api'            => $file->api_name,
-                'delete_type'    => "post",
-                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', [
-                    'id'  => $file->id,
+                'title'       => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'       => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'url'         => $file->getHref(),
+                'preview'     => $file->getPreviewArray(),
+                'delete_url'  => $file->deleteUrl,
+                'api'         => $file->api_name,
+                'delete_type' => "post",
+                'edit_url'    => $this->createUrl('/media/mediaFile/updateAttr', [
+                    'id' => $file->id,
                 ]),
-                'id'             => 'File_' . $file->id,
+                'id'          => 'File_' . $file->id,
             ];
         }
 
@@ -120,21 +121,22 @@ class MediaFileAdminController extends AdminController
         }
     }
 
-/* SECURE!
 
-    public function actionSavePriority()
-    {
-        $ids = array_reverse($_POST['File']);
+    /* SECURE!
 
-        $files = new MediaFile('sort');
+        public function actionSavePriority()
+        {
+            $ids = array_reverse($_POST['File']);
 
-        $case = SqlHelper::arrToCase('id', array_flip($ids), 't');
-        $arr  = implode(',', $ids);
-        Yii::app()->db->getCommandBuilder()
-            ->createSqlCommand("UPDATE {$files->tableName()} AS t SET t.order = {$case} WHERE t.id IN ({$arr})")
-            ->execute();
-    }
-*/
+            $files = new MediaFile('sort');
+
+            $case = SqlHelper::arrToCase('id', array_flip($ids), 't');
+            $arr  = implode(',', $ids);
+            Yii::app()->db->getCommandBuilder()
+                ->createSqlCommand("UPDATE {$files->tableName()} AS t SET t.order = {$case} WHERE t.id IN ({$arr})")
+                ->execute();
+        }
+    */
 
     public function actionDelete($id)
     {

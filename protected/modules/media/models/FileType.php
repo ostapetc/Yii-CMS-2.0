@@ -1,13 +1,13 @@
 <?php
 class FileType
 {
-    const VIDEO = 'video';
-    const AUDIO = 'audio';
+    const VIDEO   = 'video';
+    const AUDIO   = 'audio';
     const ARCHIVE = 'archive';
-    const IMAGE = 'image';
-    const EXCEL = 'excel';
-    const WORD = 'word';
-    const BOOKS = 'books';
+    const IMAGE   = 'image';
+    const EXCEL   = 'excel';
+    const WORD    = 'word';
+    const BOOKS   = 'books';
 
 
     public static $archiveExtensions = [

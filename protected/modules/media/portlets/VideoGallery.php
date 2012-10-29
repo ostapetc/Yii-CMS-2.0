@@ -11,8 +11,8 @@ class VideoGallery extends BaseFileListView
 
     public $sortableEnable = true;
     public $sortableOptions = [
-        'class'  => 'application.components.zii.behaviors.SortableBehavior',
-        'saveUrl'=> '/media/mediaFileAdmin/savePriority'
+        'class'   => 'application.components.zii.behaviors.SortableBehavior',
+        'saveUrl' => '/media/mediaFileAdmin/savePriority'
     ];
 
     public $size = [
@@ -27,7 +27,8 @@ class VideoGallery extends BaseFileListView
 
     public function init()
     {
-        if ($this->sortableEnable) {
+        if ($this->sortableEnable)
+        {
             $this->attachBehavior('sortable', $this->sortableOptions);
         }
         parent::init();
@@ -37,9 +38,10 @@ class VideoGallery extends BaseFileListView
 
     public function registerScripts()
     {
-        $id             = $this->htmlOptions['id'];
-        $assets         = $this->assets . '/imageGallery/';
-        $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
+        $id      = $this->htmlOptions['id'];
+        $assets  = $this->assets . '/imageGallery/';
+        $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions,
+            $this->fancyboxOptions));
     }
 
 }

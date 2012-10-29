@@ -4,11 +4,11 @@ class MediaAlbumAdminController extends AdminController
     public static function actionsTitles()
     {
         return [
-            "create"     => "Создать",
-            "view"       => "Создать",
-            "delete"     => "Удалить",
-            "update"     => "Редактировать",
-            "manage"     => "Управление альбомами",
+            "create" => "Создать",
+            "view"   => "Создать",
+            "delete" => "Удалить",
+            "update" => "Редактировать",
+            "manage" => "Управление альбомами",
         ];
     }
 

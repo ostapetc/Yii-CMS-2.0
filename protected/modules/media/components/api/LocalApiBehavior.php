@@ -10,15 +10,18 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     protected $file_info;
 
+
     public function parse($content)
     {
         return false;
     }
 
+
     public function afterFind($event)
     {
         $this->file_info = new SplFileInfo($this->basePath() . $this->getPk());
     }
+
 
     public function getThumb($size, $crop = true)
     {
@@ -64,6 +67,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         $ret = round($size, 1) . " " . (isset($metrics[$metric]) ? $metrics[$metric] : '??');
         return $ret;
     }
+
 
     public function getContent()
     {
@@ -122,7 +126,9 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreviewArray($size = ['width' => 64, 'height' => 64])
+    public function getPreviewArray($size = ['width'  => 64,
+                                             'height' => 64
+    ])
     {
         $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/icons/';
         switch (true)
@@ -170,7 +176,9 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getPreview($size = ['width' => 64, 'height' => 64])
+    public function getPreview($size = ['width'  => 64,
+                                        'height' => 64
+    ])
     {
         $data = $this->getPreviewArray($size);
 
@@ -200,10 +208,10 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             if ($this->_save('file'))
             {
                 $this->setPk($this->pk);
-                $owner->title      = $this->old_name;
-                $owner->type       = $this->getType();
+                $owner->title = $this->old_name;
+                $owner->type  = $this->getType();
 //                $owner->target_api = $this->api_map[$owner->type];
-                $owner->status     = $this->new_record_status;
+                $owner->status = $this->new_record_status;
                 return true;
             }
             else
@@ -239,6 +247,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     {
         return Yii::getPathOfAlias('webroot') . '/' . self::UPLOAD_PATH . '/';
     }
+
 
     /************FileBalance***********/
 
