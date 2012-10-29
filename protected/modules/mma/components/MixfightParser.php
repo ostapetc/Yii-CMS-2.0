@@ -103,6 +103,6 @@ class MixfightParser extends OsParser
         $page->type         = Page::TYPE_POST;
         $page->date_publish = $date;
 
-        return $this->saveModel($page);
+        return $this->saveModel($page, $this->getWebUrl());
     }
 }

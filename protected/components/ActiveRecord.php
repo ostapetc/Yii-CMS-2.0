@@ -577,7 +577,7 @@ abstract class ActiveRecord extends CActiveRecord
         $save = parent::save($runValidation, $attributes);
         if ($this->throw_if_errors && !$save && $this->errors)
         {
-            throw new CException("Can't save model " . get_class($this) . ': ', print_r($this->errors_flat_array, 1));
+            throw new CException("Can't save model " . get_class($this) . ': ' . print_r($this->errors_flat_array, 1));
         }
 
         return $save;

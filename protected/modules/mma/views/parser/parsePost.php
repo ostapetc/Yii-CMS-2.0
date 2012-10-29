@@ -24,7 +24,7 @@
     ))
     ?>
     <?= CHtml::label('URL', 'url') ?>
-    <?= CHtml::textField('url', '', array('width' => '1300')) ?>
+    <?= CHtml::textField('url', Yii::app()->request->getParam('url'), array('width' => '1300')) ?>
     <?= CHtml::submitButton('ПУСК') ?>
     <?= CHtml::endForm() ?>
 </div>
