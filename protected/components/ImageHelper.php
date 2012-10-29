@@ -97,7 +97,6 @@ class ImageHelper
             {
                 $image->resize($width, $height);
             }
-
             $image->save($thumb_path);
 
             @chmod($thumb_path, 0777);

@@ -55,7 +55,7 @@ class MediaAlbum extends ActiveRecord
     ];
 
     public static $image_size = [
-        'width'  => 161,
+        'width'  => 151,
         'height' => 80
     ];
 

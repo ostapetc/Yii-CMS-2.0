@@ -28,7 +28,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     }
 
 
-
     public function getServerDir()
     {
         return $this->basePath() . pathinfo($this->pk, PATHINFO_DIRNAME) . '/';

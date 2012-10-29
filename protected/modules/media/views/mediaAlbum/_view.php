@@ -2,7 +2,7 @@
 $img = $data->getPreview(MediaAlbum::$image_size);
 if ($img) {
 ?>
-    <li id="File_<?=$data->id?>" class="gallery-item" style="width: <?= MediaAlbum::$image_size['width'] ?>px; ">
+    <li id="File_<?=$data->id?>" class="gallery-item" style="width: <?= MediaAlbum::$image_size['width'] + 10 ?>px;">
         <?
         echo CHtml::link($img, $data->href, [
             "rel" => "album_photos",
@@ -15,3 +15,7 @@ if ($img) {
         ?>
     </li>
 <? } ?>
+<?
+if ($index % 4 == 3) {
+    echo '<div class="clear"></div>';
+}
