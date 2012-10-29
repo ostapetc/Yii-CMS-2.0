@@ -67,10 +67,15 @@ class TagRel extends ActiveRecord
 
         if (!self::model()->existsByAttributes($attributes))
         {
-            $rel = new self;
-            $rel->attributes      = $attributes;
-            $rel->throw_if_errors = true;
-            $rel->save();
+            try {
+                $rel = new self;
+                $rel->attributes      = $attributes;
+                $rel->throw_if_errors = true;
+                $rel->save();
+            }
+            catch (CException $e) {
+                p($attributes); die;
+            }
         }
     }
 }

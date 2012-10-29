@@ -25,6 +25,7 @@ class ParserController extends ClientController
         if (isset($_POST['url']) && isset($_POST['parser']))
         {
             $post = (new $_POST['parser'])->parsePost($_POST['url'], null, '');
+            //p($post);
         }
 
         $this->render('parsePost', array(

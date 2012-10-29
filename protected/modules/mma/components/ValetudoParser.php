@@ -50,12 +50,12 @@ class ValetudoParser extends OsParser
                 continue;
             }
 
-            $this->parseAndSavePost($href);
+            $this->parsePost($href);
         }
     }
 
 
-    public function parseAndSavePost($url)
+    public function parsePost($url)
     {
         $source_url = $url;
 
@@ -64,7 +64,13 @@ class ValetudoParser extends OsParser
             $url = $this->web_url . $url;
         }
 
-        $content = $this->getContent($url);
+        $content = Yii::app()->cache->get($url);
+        if (!$content)
+        {
+            $content = $this->getContent($url);
+            Yii::app()->cache->set($url, $content);
+        }
+
         if (!$content)
         {
             $this->log('Не могу получить контент: ' . $url, CLogger::LEVEL_ERROR);
@@ -75,24 +81,24 @@ class ValetudoParser extends OsParser
         @$doc->loadHTML($content);
 
         $xpath = new DOMXPath($doc);
-        echo $url;
-        $title = $xpath->query('');
-        die('eee');
+
+        $title = trim($xpath->query('//a[@class="contentpagetitle"]')->item(0)->textContent);
+
         $text = $xpath->query("//div[@class='article-content']");
         $text = $doc->saveXML($text->item(0));
         $text = $this->stripTags($text);
         $text = preg_replace('|Комментарий \[[0-9]+\]|', '', $text);
 
-        $image = $images->item($i);
-        if ($image)
-        {
-            $image = $image->getAttribute('src');
-        }
+//        $image = $images->item($i);
+//        if ($image)
+//        {
+//            $image = $image->getAttribute('src');
+//        }
 
-        if ($image)
-        {
-            $this->log("Не смог спарсить картинку для: {$href}");
-        }
+//        if ($image)
+//        {
+//            $this->log("Не смог спарсить картинку для: {$href}");
+//        }
 
         $page = new Page();
         $page->source     = $this->source;
@@ -100,11 +106,11 @@ class ValetudoParser extends OsParser
         $page->user_id    = $this->author_id;
         $page->title      = $title;
         $page->text       = $text;
-        $page->image      = $image;
+//        $page->image      = $image;
         $page->status     = Page::STATUS_PUBLISHED;
         $page->type       = Page::TYPE_POST;
 
-        $this->saveModel($page);
+        return $this->saveModel($page, $this->getWebUrl());
     }
 }
 
