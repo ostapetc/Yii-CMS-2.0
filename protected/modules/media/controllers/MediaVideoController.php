@@ -3,6 +3,7 @@ class MediaVideoController extends ClientController
 {
     public $user;
 
+
     public static function actionsTitles()
     {
         return [
@@ -23,6 +24,7 @@ class MediaVideoController extends ClientController
         return Configuration::getConfigArray('media.videoSidebars');
     }
 
+
     public function actionView($id)
     {
         $file = MediaFile::model()->throw404IfNull()->findByPk($id);
@@ -35,7 +37,7 @@ class MediaVideoController extends ClientController
     {
         if ($user_id === null)
         {
-            $this->user = new User;
+            $this->user       = new User;
             $this->page_title = 'Видео';
         }
         else
@@ -52,7 +54,7 @@ class MediaVideoController extends ClientController
         }
 
         $dp = new ActiveDataProvider($file, [
-            'criteria' => $file->parentModel($this->user)->type(MediaFile::TYPE_VIDEO)->getDbCriteria(),
+            'criteria'   => $file->parentModel($this->user)->type(MediaFile::TYPE_VIDEO)->getDbCriteria(),
             'pagination' => false
         ]);
 

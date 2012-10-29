@@ -7,12 +7,14 @@ class VideoPlayList extends Widget
     public $author;
     public $items_count = 4;
 
+
     public function run()
     {
 
         $file = new MediaFile;
-        $dp = new ActiveDataProvider($file, [
-            'criteria' => $file->parentModel(Yii::app()->controller->user, true)->type(MediaFile::TYPE_VIDEO)->getDbCriteria(),
+        $dp   = new ActiveDataProvider($file, [
+            'criteria'   => $file->parentModel(Yii::app()->controller->user, true)
+                ->type(MediaFile::TYPE_VIDEO)->getDbCriteria(),
             'pagination' => false
         ]);
 

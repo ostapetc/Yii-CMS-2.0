@@ -10,11 +10,12 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     public function getPlayerUrl()
     {
         return 'http://player.vimeo.com/video/38732855?title=1&' .
-            http_build_query([//            'oid'  => $this->oid,
+            http_build_query([ //            'oid'  => $this->oid,
 //            'id'   => $this->id,
 //            'hash' => $this->hash
             ]);
     }
+
 
     public function parse($source)
     {
@@ -32,7 +33,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
         ~ix';
 
         preg_match($regexstr, $source, $matches);
-        stop($matches);
         if (isset($matches[2]))
         {
             $matches[2] = array_values(array_unique($matches[2]));
@@ -43,7 +43,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
         }
         return false;
     }
-
 
 
     public function getType()
@@ -68,7 +67,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     {
         return $this->href;
     }
-
 
 
     public function getPreviewArray()

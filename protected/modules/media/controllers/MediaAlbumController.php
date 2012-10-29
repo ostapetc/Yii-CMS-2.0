@@ -3,15 +3,16 @@ class MediaAlbumController extends ClientController
 {
     public $user;
 
+
     public static function actionsTitles()
     {
         return [
-            "view"             => "Создать",
-            "delete"           => "Удалить",
-            "update"           => "Редактировать",
-            "manage"           => "Управление альбомами",
-            "createUsers"      => "Создать",
-            "manage"       => "Альбомы пользователя",
+            "view"        => "Создать",
+            "delete"      => "Удалить",
+            "update"      => "Редактировать",
+            "manage"      => "Управление альбомами",
+            "createUsers" => "Создать",
+            "manage"      => "Альбомы пользователя",
         ];
     }
 
@@ -26,6 +27,7 @@ class MediaAlbumController extends ClientController
     {
         return Configuration::getConfigArray('media.fileSidebars');
     }
+
 
     public function actionCreateUsers()
     {
@@ -45,12 +47,10 @@ class MediaAlbumController extends ClientController
         }
 
         $this->render('createUsers', [
-            'user'  => $user,
-            'form'  => $form,
+            'user' => $user,
+            'form' => $form,
         ]);
     }
-
-
 
 
     public function actionUpload($model_id, $object_id, $tag)
@@ -99,12 +99,12 @@ class MediaAlbumController extends ClientController
     {
         if ($user_id)
         {
-            $this->user = User::model()->throw404IfNull()->findByPk($user_id);
+            $this->user       = User::model()->throw404IfNull()->findByPk($user_id);
             $this->page_title = 'Альбомы пользователя: ' . $this->user->getLink();
         }
         else
         {
-            $this->user = new User;
+            $this->user       = new User;
             $this->page_title = 'Альбомы';
         }
 

@@ -46,11 +46,11 @@ class Uploader extends JuiInputWidget
     public $link_parser_action = '/media/mediaFileAdmin/linkParser';
 
     private $allow_type = [
-        'document'=> 'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
-        'image'   => 'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
-        'sound'   => 'js:/(\.|\/)(mp3|wav)$/i',
-        'any'     => 'js:/(\.|\/)(.*)$/i',
-        'video'   => 'js:/(\.|\/)(mp4|flv|wmv)$/i'
+        'document' => 'js:/(\.|\/)(svg\+xml|doc|docx|txt|zip|rar|xml)$/i',
+        'image'    => 'js:/(\.|\/)(gif|jpeg|png|jpg|tiff)$/i',
+        'sound'    => 'js:/(\.|\/)(mp3|wav)$/i',
+        'any'      => 'js:/(\.|\/)(.*)$/i',
+        'video'    => 'js:/(\.|\/)(mp4|flv|wmv)$/i'
     ];
 
     private static $isTemplatesRender = false;
@@ -124,16 +124,16 @@ class Uploader extends JuiInputWidget
         }
 
         $default      = [
-            'url'                     => $this->upload_url,
-            'dropZone'                => "js:$('#{$this->id}-drop-zone')",
-            'maxFileSize'             => $this->maxFileSize,
-            'acceptFileTypes'         => $this->allow_type[$this->data_type],
+            'url'                    => $this->upload_url,
+            'dropZone'               => "js:$('#{$this->id}-drop-zone')",
+            'maxFileSize'            => $this->maxFileSize,
+            'acceptFileTypes'        => $this->allow_type[$this->data_type],
 //            'maxChunkSize'          => 1*1000*1000,
-            'sortableSaveUrl'         => $this->createUrl($this->sortable_action),
-            'linkParserVisible'       => $this->data_type == 'video',
-            'linkParserUrl'           => $this->link_parser_url,
-            'limitConcurrentUploads'  => 0,
-            'existFilesUrl'           => $this->createUrl($this->exist_files_action, [
+            'sortableSaveUrl'        => $this->createUrl($this->sortable_action),
+            'linkParserVisible'      => $this->data_type == 'video',
+            'linkParserUrl'          => $this->link_parser_url,
+            'limitConcurrentUploads' => 0,
+            'existFilesUrl'          => $this->createUrl($this->exist_files_action, [
                 'model_id'  => get_class($this->model),
                 'object_id' => $this->model->id ? $this->model->id : 0,
                 'tag'       => $this->tag
@@ -182,9 +182,9 @@ class Uploader extends JuiInputWidget
         if ($this->as_modal)
         {
             $this->renderDialog('uploader', [
-                'title'      => $this->title,
-                'linkOptions'=> [
-                    'class'=> 'btn btn-info'
+                'title'       => $this->title,
+                'linkOptions' => [
+                    'class' => 'btn btn-info'
                 ]
             ]);
         }

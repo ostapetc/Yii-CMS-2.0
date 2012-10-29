@@ -7,7 +7,6 @@ class VkApiBehavior extends ApiBehaviorAbstract
     public $href;
 
 
-
     public function getPlayerUrl()
     {
         return 'http://vk.com/video_ext.php?' . http_build_query([
@@ -32,6 +31,7 @@ class VkApiBehavior extends ApiBehaviorAbstract
         return false;
     }
 
+
     public function getType()
     {
         throw new CException('not implemented yet');
@@ -48,7 +48,6 @@ class VkApiBehavior extends ApiBehaviorAbstract
     {
         throw new CException('not implemented yet');
     }
-
 
 
     public function getHref()

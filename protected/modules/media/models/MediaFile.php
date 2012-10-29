@@ -2,6 +2,7 @@
 /**
  *
  * !Attributes - атрибуты БД
+ *
  * @property string             $id
  * @property string             $object_id
  * @property string             $model_id
@@ -98,10 +99,12 @@ class MediaFile extends ActiveRecord
         return 'media_files';
     }
 
+
     public function getParentModel()
     {
         return ActiveRecord::model($this->model_id)->findByPk($this->object_id);
     }
+
 
     public function rules()
     {
@@ -129,11 +132,12 @@ class MediaFile extends ActiveRecord
         ];
     }
 
+
     public function parent($model_id, $object_id = null)
     {
-        $alias     = $this->getTableAlias();
+        $alias = $this->getTableAlias();
 
-        $m_key = $alias . '_model_id';
+        $m_key     = $alias . '_model_id';
         $condition = "$alias.model_id=:$m_key";
         $params    = [
             $m_key => $model_id
@@ -270,12 +274,13 @@ class MediaFile extends ActiveRecord
                 $model->remote_id = $id;
                 $model->api_name  = $api;
                 $model->type      = $model->getApi()->getType();
-                break;
+                return $model;
             }
         }
 
-        return $model;
+        return false;
     }
+
 
     public function getUserId()
     {

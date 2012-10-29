@@ -16,18 +16,18 @@ ImageGallery extends BaseFileListView
         'autoCenter'  => false,
         'mouseWheel'  => false,
         'helpers'     => [
-            'title'      => [
+            'title'   => [
                 'type' => 'over'
             ],
-            'overlay'    => [
+            'overlay' => [
                 'closeClick' => true,
                 'speedOut'   => 200,
                 'showEarly'  => true
             ],
-            'media'      => [],
-            'vkstyle'    => [],
-            'thumbs' => [
-                'width' => 100,
+            'media'   => [],
+            'vkstyle' => [],
+            'thumbs'  => [
+                'width'    => 100,
 //                'height' => 50,
                 'position' => 'top'
             ]
@@ -40,8 +40,8 @@ ImageGallery extends BaseFileListView
 
     public $sortableEnable = true;
     public $sortableOptions = [
-        'class'  => 'application.components.zii.behaviors.SortableBehavior',
-        'saveUrl'=> '/media/mediaFileAdmin/savePriority'
+        'class'   => 'application.components.zii.behaviors.SortableBehavior',
+        'saveUrl' => '/media/mediaFileAdmin/savePriority'
     ];
 
     public $size = [
@@ -56,7 +56,8 @@ ImageGallery extends BaseFileListView
 
     public function init()
     {
-        if ($this->sortableEnable) {
+        if ($this->sortableEnable)
+        {
             $this->attachBehavior('sortable', $this->sortableOptions);
         }
         parent::init();
@@ -66,19 +67,20 @@ ImageGallery extends BaseFileListView
 
     public function registerScripts()
     {
-        $id             = $this->htmlOptions['id'];
-        $assets         = $this->assets . '/plugins/';
-        if ($this->fancyboxOptions !== false) {
-        $options        = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions, $this->fancyboxOptions));
-        Yii::app()->clientScript
-            ->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
-            ->registerCssFile($assets . 'fancybox/jquery.fancybox.css')
-            ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-thumbs.js')
-            ->registerCssFile($assets . 'fancybox/helpers/jquery.fancybox-thumbs.css')
-            ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-media.js')
-            ->registerCssFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.css')
-            ->registerScriptFile($assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')
-            ->registerScript($id, "$('#$id a').fancybox($options);");
+        $id     = $this->htmlOptions['id'];
+        $assets = $this->assets . '/plugins/';
+        if ($this->fancyboxOptions !== false)
+        {
+            $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions,
+                $this->fancyboxOptions));
+            Yii::app()->clientScript->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
+                ->registerCssFile($assets . 'fancybox/jquery.fancybox.css')->registerScriptFile(
+                $assets . 'fancybox/helpers/jquery.fancybox-thumbs.js')->registerCssFile(
+                $assets . 'fancybox/helpers/jquery.fancybox-thumbs.css')->registerScriptFile(
+                $assets . 'fancybox/helpers/jquery.fancybox-media.js')->registerCssFile(
+                $assets . 'fancybox/helpers/jquery.fancybox-vkstyle.css')->registerScriptFile(
+                $assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')
+                ->registerScript($id, "$('#$id a').fancybox($options);");
         }
     }
 

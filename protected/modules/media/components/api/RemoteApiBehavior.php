@@ -5,11 +5,11 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
     public $new_record_status;
 
 
-
     public function parse($content)
     {
         return false;
     }
+
 
     public function getThumb($size = null, $crop = true)
     {

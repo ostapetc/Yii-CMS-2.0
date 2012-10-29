@@ -1,5 +1,6 @@
 <?
-class MediaFileController extends ClientController {
+class MediaFileController extends ClientController
+{
 
     public static function actionsTitles()
     {
@@ -32,10 +33,10 @@ class MediaFileController extends ClientController {
     }
 
 
-
     public function actionLinkParser($object_id, $model_id, $tag)
     {
-        if (!isset($_POST['content'])) {
+        if (!isset($_POST['content']))
+        {
             $this->forbidden();
         }
 
@@ -43,11 +44,11 @@ class MediaFileController extends ClientController {
         if ($model)
         {
             $model->object_id = $object_id;
-            $model->model_id = $model_id;
-            $model->tag = $tag;
-            $existsFile = MediaFile::model()->findByAttributes(array(
+            $model->model_id  = $model_id;
+            $model->tag       = $tag;
+            $existsFile       = MediaFile::model()->findByAttributes(array(
                 'remote_id' => $model->remote_id,
-                'api_name' => $model->api_name
+                'api_name'  => $model->api_name
             ));
             if ($existsFile)
             {
@@ -76,24 +77,26 @@ class MediaFileController extends ClientController {
         }
     }
 
+
     protected function sendFilesAsJson($files)
     {
-        $res = [];
-        $files = is_array($files ) ? $files : [$files];
-        foreach ($files as $file) {
+        $res   = [];
+        $files = is_array($files) ? $files : [$files];
+        foreach ($files as $file)
+        {
 
             $res[] = [
-                'title'          => $file->title ? $file->title : 'Кликните для редактирования',
-                'descr'          => $file->descr ? $file->descr : 'Кликните для редактирования',
-                'url'            => $file->getHref(),
-                'preview'        => $file->getPreviewArray(),
-                'delete_url'     => $file->deleteUrl,
-                'api'            => $file->api_name,
-                'delete_type'    => "post",
-                'edit_url'       => $this->createUrl('/media/mediaFile/updateAttr', [
-                    'id'  => $file->id,
+                'title'       => $file->title ? $file->title : 'Кликните для редактирования',
+                'descr'       => $file->descr ? $file->descr : 'Кликните для редактирования',
+                'url'         => $file->getHref(),
+                'preview'     => $file->getPreviewArray(),
+                'delete_url'  => $file->deleteUrl,
+                'api'         => $file->api_name,
+                'delete_type' => "post",
+                'edit_url'    => $this->createUrl('/media/mediaFile/updateAttr', [
+                    'id' => $file->id,
                 ]),
-                'id'             => 'File_' . $file->id,
+                'id'          => 'File_' . $file->id,
             ];
         }
 
@@ -103,7 +106,8 @@ class MediaFileController extends ClientController {
 
     public function actionExistFiles($model_id, $object_id, $tag)
     {
-        if ($object_id == 0) {
+        if ($object_id == 0)
+        {
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
 
@@ -111,6 +115,7 @@ class MediaFileController extends ClientController {
         $existFiles = MediaFile::model()->parent($model_id, $object_id)->tag($tag)->findAll();
         $this->sendFilesAsJson($existFiles);
     }
+
 
     /*Secure!
 
@@ -130,18 +135,22 @@ class MediaFileController extends ClientController {
 
     public function actionUpload($model_id, $object_id, $tag)
     {
-        if ($object_id == 0) {
+        if ($object_id == 0)
+        {
             $object_id = 'tmp_' . Yii::app()->user->id;
         }
 
-        $model = new MediaFile('insert', 'local');
+        $model            = new MediaFile('insert', 'local');
         $model->object_id = $object_id;
-        $model->model_id = $model_id;
-        $model->tag = $tag;
+        $model->model_id  = $model_id;
+        $model->tag       = $tag;
 
-        if ($model->save()) {
+        if ($model->save())
+        {
             $this->sendFilesAsJson($model);
-        } else {
+        }
+        else
+        {
             echo CJSON::encode([
                 'textStatus' => $model->error
             ]);
@@ -158,16 +167,20 @@ class MediaFileController extends ClientController {
         list($hash, $id) = explode('x', $hash);
 
         $model = MediaFile::model()->findByPk(intval($id));
-        if (!$model || $model->getHash() != $hash || !$model->getIsFileExist()) {
+        if (!$model || $model->getHash() != $hash || !$model->getIsFileExist())
+        {
             $this->pageNotFound();
         }
 
-        if ($this->x_send_file_enabled) {
+        if ($this->x_send_file_enabled)
+        {
             Yii::app()->request->xSendFile($model->server_path, [
-                'saveName' => $model->name,
-                'terminate'=> false,
+                'saveName'  => $model->name,
+                'terminate' => false,
             ]);
-        } else {
+        }
+        else
+        {
             $this->request->sendFile($model->name, $model->content);
         }
     }
