@@ -33,7 +33,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
         ~ix';
 
         preg_match($regexstr, $source, $matches);
-        stop($matches);
         if (isset($matches[2]))
         {
             $matches[2] = array_values(array_unique($matches[2]));

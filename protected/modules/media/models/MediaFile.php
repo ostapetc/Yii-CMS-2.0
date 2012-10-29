@@ -274,11 +274,11 @@ class MediaFile extends ActiveRecord
                 $model->remote_id = $id;
                 $model->api_name  = $api;
                 $model->type      = $model->getApi()->getType();
-                break;
+                return $model;
             }
         }
 
-        return $model;
+        return false;
     }
 
 
