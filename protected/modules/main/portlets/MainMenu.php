@@ -6,7 +6,7 @@
  * Time: 14:24
  * To change this template use File | Settings | File Templates.
  */
-class Menu extends Portlet
+class MainMenu extends Portlet
 {
     public function renderContent()
     {
