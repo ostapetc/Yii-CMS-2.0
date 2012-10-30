@@ -8,12 +8,17 @@ class MediaAlbumController extends ClientController
     {
         return [
             "view"        => "Создать",
-            "delete"      => "Удалить",
-            "update"      => "Редактировать",
-            "manage"      => "Управление альбомами",
             "createUsers" => "Создать",
             "manage"      => "Альбомы пользователя",
+            "autocomplete" => "Скачать файл",
         ];
+    }
+
+
+    public function actionAutocomplete($term)
+    {
+        $models = MediaAlbum::model()->autocomplete($term)->limit(10)->findAll();
+        echo CJSON::encode(array_values(CHtml::listData($models, 'id', 'title')), 0, 3);
     }
 
 

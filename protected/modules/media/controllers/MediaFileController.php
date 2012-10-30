@@ -32,7 +32,6 @@ class MediaFileController extends ClientController
 
     }
 
-
     public function actionLinkParser($object_id, $model_id, $tag)
     {
         if (!isset($_POST['content']))

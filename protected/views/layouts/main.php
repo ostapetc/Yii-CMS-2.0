@@ -21,6 +21,7 @@
     //NodeJS only for loginned users
     if (!Yii::app()->user->isGuest)
     {
+        /*
         $cs->registerScriptFile(
             'http://' . $params['nodejs']['host'] . ':' . $params['nodejs']['port'] . '/socket.io/socket.io.js'
         );
@@ -30,6 +31,7 @@
         $cs->registerScript('some_id',
             "$('body').coreNodeJSClient(".CJSON::encode($params['nodejs']).")"
         );
+        */
     }
 
     Yii::app()->bootstrap->registerScripts();

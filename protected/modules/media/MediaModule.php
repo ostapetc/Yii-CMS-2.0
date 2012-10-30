@@ -28,7 +28,7 @@ class MediaModule extends WebModule
 
     public function getVersion()
     {
-        return '2.5';
+        return '2.9';
     }
 
 

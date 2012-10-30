@@ -84,6 +84,19 @@ class MediaAlbum extends ActiveRecord
     }
 
 
+    public function autocomplete($term)
+    {
+        $alias = $this->getTableAlias();
+        $this->getDbCriteria()->select = "$alias.id, $alias.title as title";
+        $this->getDbCriteria()->mergeWith([
+            'condition' => "$alias.title LIKE :term OR $alias.descr LIKE :term",
+            'params' => [
+                'term' => '%'.trim($term).'%'
+            ]
+        ]);
+        return $this;
+    }
+
     public function behaviors()
     {
         return CMap::mergeArray(parent::behaviors(), [

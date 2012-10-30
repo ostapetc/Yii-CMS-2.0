@@ -7,11 +7,18 @@ class MediaVideoController extends ClientController
     public static function actionsTitles()
     {
         return [
-            "manage" => "Поиск видео",
-            "view"   => "Просмотр видео",
+            "manage"       => "Поиск видео",
+            "view"         => "Просмотр видео",
+            "autocomplete" => "Скачать файл",
         ];
     }
 
+
+    public function actionAutocomplete($term)
+    {
+        $models = MediaFile::model()->type(MediaFile::TYPE_VIDEO)->autocomplete($term)->limit(10)->findAll();
+        echo CJSON::encode(array_values(CHtml::listData($models, 'id', 'title')), 0, 3);
+    }
 
     public function subMenuItems()
     {
