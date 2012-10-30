@@ -6,7 +6,7 @@ class AppManager
 
     private static $pathAliaces = array(
         'gridColumns' => 'application.components.zii.gridColumns',
-        'bootstrap' => 'application.components.bootstrap2'
+        'bootstrap' => 'application.components.bootstrap'
     );
 
 

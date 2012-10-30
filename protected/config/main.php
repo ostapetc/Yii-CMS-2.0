@@ -26,7 +26,7 @@ return array(
         "application.components.zii.gridColumns.*",
         'application.components.formElements.*',
         'application.components.baseWidgets.*',
-        'application.components.bootstrap2.widgets.*',
+        'application.components.bootstrap.widgets.*',
         'application.components.activeRecordBehaviors.*',
         'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
@@ -42,7 +42,7 @@ return array(
             'translatedMessageTable' => 'languages_translations'
         ),
         'bootstrap' => array(
-            'class' => 'application.components.bootstrap2.components.Bootstrap'
+            'class' => 'application.components.bootstrap.components.Bootstrap'
         ),
         'assetManager' => array(
             'class' => 'CAssetManager',
