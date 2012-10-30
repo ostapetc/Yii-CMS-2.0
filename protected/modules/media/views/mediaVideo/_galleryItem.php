@@ -3,7 +3,7 @@ $img = $data->getPreview(['width' => 320, 'height' => 260]);
 
 if ($img) {
 ?>
-<li id="File_<?=$data->id?>" style="width: 331px;" class="gallery-item">
+<li id="File_<?=$data->id?>" style="width: 331px;" class="gallery-item <?= $index % 2 == 0 ? 'clear' : '' ?>">
     <a class="thumbnail" href="<?= $this->createUrl('/media/mediaVideo/view', ['id' => $data->id]) ?>">
         <div class="gallery-title">
             <span>
