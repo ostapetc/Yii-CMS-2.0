@@ -10,7 +10,7 @@
     ?>
 <? else: ?>
     <?=
-    $this->widget('BootGridView', [
+    $this->widget('GridView', [
         'id'           => 'email-template-grid',
         'dataProvider' => $data_provider,
         'filter'       => $model,
@@ -23,7 +23,7 @@
             ],
             'date_create',
             [
-                'class'=>'BootButtonColumn',
+                'class'=>'TbButtonColumn',
             ],
         ],
     ])

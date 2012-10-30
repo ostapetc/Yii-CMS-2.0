@@ -4,7 +4,7 @@ $this->tabs = [
     'список разделов' => $this->createUrl('manage')
 ];
 
-$this->widget('BootDetailView', [
+$this->widget('DetailView', [
 	'data'=>$model,
 	'attributes'=>[
         'name',

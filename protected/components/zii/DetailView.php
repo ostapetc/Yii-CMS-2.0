@@ -1,5 +1,5 @@
 <?
-class DetailView extends BootDetailView
+class DetailView extends TbDetailView
 {
 
 }

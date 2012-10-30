@@ -1,5 +1,5 @@
 <?
-class AdminListView extends BootListView
+class AdminListView extends TbListView
 {
     public $pager = array(
         'class'   => 'AdminLinkPager'

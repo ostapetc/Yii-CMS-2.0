@@ -20,7 +20,7 @@ switch (true)
         break;
 }
 
-$this->widget('BootListView', array(
+$this->widget('ListView', array(
     'dataProvider' => $data_provider,
     'itemView'     => 'application.modules.users.views.user._view',
     'viewData'     => array(

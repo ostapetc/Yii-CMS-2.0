@@ -1,5 +1,5 @@
 <?
-class NavBar extends BootNavbar
+class NavBar extends TbNavbar
 {
 
 }

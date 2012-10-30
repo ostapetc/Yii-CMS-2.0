@@ -1,5 +1,5 @@
 <?
-class GridView extends BootGridView
+class GridView extends TbGridView
 {
     public $pager = array('class'=> 'LinkPager');
     public $template = '{items}<br/>{pager}';

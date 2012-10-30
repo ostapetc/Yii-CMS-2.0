@@ -9,7 +9,7 @@
             <a href="/" class="brand">Martial Arts</a>
             <div class="nav-collapse">
                 <?
-                $this->widget('BootMenu', array(
+                $this->widget('ClientMenu', array(
                     'items'       => $items
                 ))
                 ?>

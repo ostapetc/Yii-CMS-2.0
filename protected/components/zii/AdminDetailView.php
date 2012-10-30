@@ -2,7 +2,7 @@
 
 Yii::import('zii.widgets.CDetailView');
 
-class AdminDetailView extends BootDetailView
+class AdminDetailView extends TbDetailView
 {
     public function init()
     {

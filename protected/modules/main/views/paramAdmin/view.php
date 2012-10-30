@@ -30,7 +30,7 @@ if ($model->element == Param::ELEMENT_SELECT)
     );
 }
 
-$this->widget('BootDetailView', array(
+$this->widget('DetailView', array(
 	'data'       => $model,
 	'attributes' => $attributes
 ));

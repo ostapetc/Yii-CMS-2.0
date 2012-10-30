@@ -15,7 +15,7 @@ class Form extends CForm
     );
 
     public $defaultActiveFormSettings = array(
-        'class' => 'BootActiveForm',
+        'class' => 'TbActiveForm',
         'enableAjaxValidation'=>true,
         'clientOptions' => array(
             'validateOnType' => true,
@@ -231,13 +231,13 @@ class Form extends CForm
             return false;
         }';
         echo CHtml::link($title, '#' . $options['id'], CMap::mergeArray(array('data-toggle'=> 'modal'), $options['linkOptions']));
-        Yii::app()->controller->beginWidget('BootModal', array(
+        Yii::app()->controller->beginWidget('TbModal', array(
             'htmlOptions' => array(
                 'id' => $options['id']
             )
         ));
         Yii::app()->controller->renderPartial('//layouts/_modalForm', $options);
-        Yii::app()->controller->endWidget('BootModal');
+        Yii::app()->controller->endWidget('TbModal');
 
         return ob_get_clean();
     }

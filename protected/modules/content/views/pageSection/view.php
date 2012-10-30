@@ -1,5 +1,5 @@
 <?
-$this->widget('BootDetailView', [
+$this->widget('DetailView', [
     'data' => $model
 ]);
 ?>
