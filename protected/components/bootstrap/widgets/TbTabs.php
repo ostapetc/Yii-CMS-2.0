@@ -36,6 +36,12 @@ class TbTabs extends CWidget
 	 * @var array the tab configuration.
 	 */
 	public $tabs = array();
+
+	/**
+	 * @var boolean indicates whether to stack navigation items.
+	 */
+	public $stacked = false;
+	/**
 	/**
 	 * @var boolean whether to encode item labels.
 	 */
@@ -85,6 +91,7 @@ class TbTabs extends CWidget
 
 		ob_start();
 		$this->controller->widget('bootstrap.widgets.TbMenu', array(
+			'stacked'=>$this->stacked,
 			'type'=>$this->type,
 			'encodeLabel'=>$this->encodeLabel,
 			'items'=>$items,

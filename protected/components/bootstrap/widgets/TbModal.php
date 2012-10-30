@@ -15,7 +15,7 @@
 class TbModal extends CWidget
 {
 	/**
-	 * @var boolean indicates whether to automatically open the modal. Defaults to 'false'.
+	 * @var boolean indicates whether to automatically open the modal when initialized. Defaults to 'false'.
 	 */
 	public $autoOpen = false;
 	/**

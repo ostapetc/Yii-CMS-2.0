@@ -69,9 +69,6 @@ abstract class TbBaseMenu extends CMenu
 					if (isset($item['items']))
 						$classes[] = $this->getDropdownCssClass();
 
-					if (isset($item['disabled']))
-						$classes[] = 'disabled';
-
 					if (!empty($classes))
 					{
 						$classes = implode(' ', $classes);
@@ -134,7 +131,10 @@ abstract class TbBaseMenu extends CMenu
 
 		if (isset($item['items']) && !empty($item['items']))
 		{
-			$item['url'] = '#';
+			if(empty($item['url']))
+			{
+				$item['url'] = '#';
+			}
 
 			if (isset($item['linkOptions']['class']))
 				$item['linkOptions']['class'] .= ' dropdown-toggle';

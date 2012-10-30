@@ -22,17 +22,17 @@ class TbMenu extends TbBaseMenu
 
 	/**
 	 * @var string the menu type.
-	 * Valid values are 'tabs' and 'pills'.
+	 * Valid values are 'tabs', 'pills', or 'list'.
 	 */
 	public $type;
 	/**
-	 * @var string|array the scrollspy target or configuration.
+	 * @var boolean indicates whether to stack navigation items.
+	 */
+	public $stacked = false;
+	/**
+	 * @var string|array the scrollspy configuration.
 	 */
 	public $scrollspy;
-	/**
-	* @var boolean indicates whether the menu should appear vertically stacked.
-	*/
-	public $stacked = false;
 	/**
 	 * @var boolean indicates whether dropdowns should be dropups instead.
 	 */

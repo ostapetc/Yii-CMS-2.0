@@ -40,6 +40,11 @@ class TbNavbar extends CWidget
 	 */
 	public $brandOptions = array();
 	/**
+	 * @var array navigation items.
+	 * @since 0.9.8
+	 */
+	public $items = array();
+	/**
 	 * @var mixed fix location of the navbar if applicable.
 	 * Valid values are 'top' and 'bottom'. Defaults to 'top'.
 	 * Setting the value to false will make the navbar static.
@@ -55,11 +60,6 @@ class TbNavbar extends CWidget
 	 * @var boolean whether to enable collapsing on narrow screens. Default to false.
 	 */
 	public $collapse = false;
-	/**
-	 * @var array navigation items.
-	 * @since 0.9.8
-	 */
-	public $items = array();
 	/**
 	 * @var array the HTML attributes for the widget container.
 	 */
