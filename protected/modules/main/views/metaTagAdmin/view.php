@@ -1,7 +1,7 @@
 <?
 $model_id = $model->model_id;
 
-$this->widget('BootDetailView', array(
+$this->widget('DetailView', array(
 	'data' => $model,
 	'attributes' => array(
 		array('name' => 'model_id', 'value' => $model_id::name()),

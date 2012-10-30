@@ -2,7 +2,7 @@
 
 <? if ($sections): ?>
     <?
-    $this->widget('BootMenu', [
+    $this->widget('TbMenu', [
         'items'       => $sections,
         'encodeLabel' => false,
         'htmlOptions' => [

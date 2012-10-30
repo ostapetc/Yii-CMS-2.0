@@ -1,6 +1,6 @@
 <?
 
-class AdminLinkPager extends BootPager
+class AdminLinkPager extends TbPager
 {
 
     public $displayFirstAndLast = true;

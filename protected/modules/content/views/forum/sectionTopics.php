@@ -5,7 +5,7 @@
 </style>
 
 <?
-$this->widget('BootCrumb', [
+$this->widget('TbCrumb', [
     'homeLink' => false,
     'links'    => [
         t('') => ''
@@ -58,7 +58,7 @@ $this->widget('BootCrumb', [
 
     <div class="pagination">
         <?
-        $this->widget('BootPager', [
+        $this->widget('LinkPager', [
             'pages' => $pagination,
         ])
         ?>

@@ -1,6 +1,6 @@
 <?
 Yii::import('zii.widgets.CMenu');
-class ClientMenu extends CMenu
+class ClientMenu extends TbMenu
 {
     public function init()
     {

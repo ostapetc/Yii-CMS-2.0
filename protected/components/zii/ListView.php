@@ -1,5 +1,5 @@
 <?
-class ListView extends BootListView
+class ListView extends TbListView
 {
     public $pager = array(
         'class'   => 'LinkPager'

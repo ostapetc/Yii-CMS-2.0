@@ -1,5 +1,5 @@
 <?
-class Crumbs extends BootCrumb
+class Crumbs extends TbCrumb
 {
 
 }

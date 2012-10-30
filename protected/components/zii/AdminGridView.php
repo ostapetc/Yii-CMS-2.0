@@ -3,7 +3,7 @@
 Yii::import("zii.widgets.grid.CGridView");
 
 
-class AdminGridView extends BootGridView
+class AdminGridView extends TbGridView
 {
     public $itemsCssClass = "table table-striped table-bordered table-condensed items";
 

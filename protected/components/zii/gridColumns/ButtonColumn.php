@@ -1,5 +1,5 @@
 <?
-class ButtonColumn extends BootButtonColumn
+class ButtonColumn extends TbButtonColumn
 {
 
 }

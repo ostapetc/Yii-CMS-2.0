@@ -41,7 +41,7 @@
 <?= CHtml::beginForm() ?>
 
 <?
-$this->widget('BootGridView', array(
+$this->widget('GridView', array(
     'dataProvider' => $data_provider,
     'columns'      => array(
         array(

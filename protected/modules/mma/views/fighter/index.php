@@ -1,5 +1,5 @@
 <?
-$this->widget('BootGridView', array(
+$this->widget('GridView', array(
     'dataProvider' => $data_provider,
     'filter'       => new Fighter(),
     'columns' => array(

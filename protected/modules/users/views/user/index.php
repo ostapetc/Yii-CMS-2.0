@@ -9,7 +9,7 @@
 <?
 Yii::app()->clientScript->registerScriptFile('/js/social/friends.js');
 
-$this->widget('BootListView', array(
+$this->widget('ListView', array(
     'dataProvider' => $data_provider,
     'itemView'     => '_view',
     'summaryText'  => 'Показано {start}-{end} из {count}',

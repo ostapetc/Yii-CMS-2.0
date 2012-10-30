@@ -1,5 +1,5 @@
 <?
-class LinkPager extends BootPager
+class LinkPager extends TbPager
 {
     public $displayFirstAndLast = true;
 }
