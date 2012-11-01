@@ -10,7 +10,13 @@ class MediaVideoController extends ClientController
             "manage"       => "Поиск видео",
             "view"         => "Просмотр видео",
             "autocomplete" => "Скачать файл",
+            "v" => "Скачать файл",
         ];
+    }
+
+    public function actionV()
+    {
+        echo 'alert(5); '.$_GET['callback'] . '({content:4})';
     }
 
 

@@ -18,10 +18,7 @@ $.widget('cmsUI.commentList', {
         widget.label = $(widget.options.label_selector, widget.element);
         widget.list = $(widget.options.comments_list_selector, widget.element);
 
-        var $loading_div = $('<div>загрузка комментариев...</div>').css('text-align', 'center');
-
-        widget.list.html($loading_div);
-
+        widget.setLoading();
         widget._initAnswers();
         widget._initForm();
         if (!widget.options.is_hidden)
@@ -35,6 +32,11 @@ $.widget('cmsUI.commentList', {
         $("input[name='Comment[model_id]']", widget.form).val(link.data('model-id'));
         $("input[name='Comment[object_id]']", widget.form).val(link.data('object-id'));
         widget.form.attr('action', link.data('comments-url'));
+    },
+    setLoading: function() {
+        var widget = this;
+        var $loading_div = $('<div>загрузка комментариев...</div>').css('text-align', 'center');
+        widget.list.html($loading_div);
     },
     _initForm:function()
     {
@@ -85,13 +87,16 @@ $.widget('cmsUI.commentList', {
             update_url = opts.url;
         }
 
+        var oid = $("input[name='Comment[object_id]']", widget.form).val(),
+            mid = $("input[name='Comment[model_id]']", widget.form).val();
+
         $.get(update_url, {
-            object_id : $("input[name='Comment[object_id]']", widget.form).val(),
-            model_id  : $("input[name='Comment[model_id]']", widget.form).val()
+            object_id : oid,
+            model_id  : mid
         },
         function(html)
         {
             widget.list.html(html);
-        });
+        }, 'html');
     }
 });
