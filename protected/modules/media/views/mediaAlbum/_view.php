@@ -8,9 +8,12 @@ if ($img) {
             "rel" => "album_photos",
             "title" => $data->title,
             "class" => "thumbnail",
-            "data-object-id" => get_class($data),
-            "data-model-id" => $data->id,
-            "data-model-tag" => 'files',
+            "data-object-id" => $data->id,
+            "data-model-id" => get_class($data),
+            "data-comments-url" => Yii::app()->createUrl('/comments/comment/list', array(
+                'object_id' => $data->id,
+                'model_id' => get_class($data)
+            )),
         ]);
         ?>
     </li>

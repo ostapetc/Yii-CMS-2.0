@@ -9,31 +9,46 @@
 
 Yii::import('zii.widgets.CPortlet');
 
-class CommentsPortlet extends CPortlet
+class CommentsPortlet extends Widget
 {
     public $model;
-
+    public $client_options = [];
+    public $is_hidden = false;
 
     public function init()
     {
         parent::init();
 
-        if (!$this->model instanceof ActiveRecord)
+        if ($this->model === null)
         {
-            throw new CException("Параметр model Должен быть объектом класса ActiveRecord");
+            throw new CException("Параметр model является обязательным");
         }
-
-
     }
 
 
-    public function renderContent()
+    public function run()
     {
-        Yii::app()->clientScript->registerScriptFile('/js/comments/commentsPortlet.js');
+        $cs = Yii::app()->clientScript;
+        $cs->registerScriptFile('/js/comments/commentsPortlet.js');
+        $this->client_options['is_hidden'] = $this->is_hidden;
+        $options = CJavaScript::encode($this->client_options);
+        $cs->registerScript($this->id, "$('#{$this->id}').commentList($options)");
 
-        $this->render('CommentsPortlet', array(
-            'model_id'  => get_class($this->model),
-            'object_id' => $this->model->id
-        ));
+        if ($this->model === false)
+        {
+            $params = [
+                'model_id'  => '',
+                'object_id' => ''
+            ];
+        }
+        else
+        {
+            $params = [
+                'model_id'  => get_class($this->model),
+                'object_id' => $this->model->id
+            ];
+        }
+
+        $this->render('CommentsPortlet', $params);
     }
 }

@@ -1,49 +1,97 @@
-$(function() {
-    var $loading_div   = $('<div>загрузка комментариев...</div>').css('text-align', 'center');
-    var $comments_div  = $('#comments-div');
-    var $comment_label = $('#comment-label');
+$.widget('cmsUI.commentList', {
+    options: {
+        version: '0.2',
+        form_selector: '#comment-form',
+        label_selector: "#comment-label",
+        comments_list_selector: "#comments-div",
+        create_comments_url: "/comments/comment/create",
+        comments_list_url: "/comments/comment/list",
+        is_hidden: false
+    },
+    form : null,
+    label : null,
+    list : null,
+    _create:function()
+    {
+        var widget = this;
+        widget.form = $(widget.options.form_selector, widget.element);
+        widget.label = $(widget.options.label_selector, widget.element);
+        widget.list = $(widget.options.comments_list_selector, widget.element);
 
-    $comments_div.html($loading_div);
+        var $loading_div = $('<div>загрузка комментариев...</div>').css('text-align', 'center');
 
-    loadCommentsList();
+        widget.list.html($loading_div);
 
-    $('a.answer').live('click', function() {
-        var comment_id = $(this).attr('comment_id');
-        var user_name  = $(this).attr('user_name');
+        widget._initAnswers();
+        widget._initForm();
+        if (!widget.options.is_hidden)
+        {
+            widget.loadCommentsList();
+        }
+    },
+    bindTo: function(link)
+    {
+        var widget = this;
+        $("input[name='Comment[model_id]']", widget.form).val(link.data('model-id'));
+        $("input[name='Comment[object_id]']", widget.form).val(link.data('object-id'));
+        widget.form.attr('action', link.data('comments-url'));
+    },
+    _initForm:function()
+    {
+        var widget = this;
 
-        $("input[name='Comment[parent_id]']").val(comment_id);
+        widget.form.submit(function()
+        {
+            var params = {};
 
-        $comment_label.html($comment_label.attr('label') + '<strong> → ' + user_name + '</strong>');
-        $('');
+            widget.form.find('input, textarea').each(function()
+            {
+                params[$(this).attr('name')] = $(this).val();
+            });
 
-        location.href = '#comment-form';
-        return false;
-    });
+            $.post(widget.options.create_comments_url, params, function(res)
+            {
+                widget.loadCommentsList();
+                $("textarea[name='Comment[text]']", widget.form).val("");
+                $("input[name='Comment[parent_id]']", widget.form).val("");
+                widget.label.html(widget.label.attr('label'));
+            });
 
-    $('#comment-form').submit(function() {
-        var params = {};
-
-        $('#comment-form').find('input, textarea').each(function() {
-            params[$(this).attr('name')] = $(this).val();
+            return false;
         });
+    },
+    _initAnswers: function()
+    {
+        var widget = this;
+        $('a.answer').live('click', function()
+        {
+            var comment_id = $(this).attr('comment_id');
+            var user_name  = $(this).attr('user_name');
 
-        $.post('/comments/comment/create', params, function(res) {
-            loadCommentsList();
-            $("textarea[name='Comment[text]']").val("");
-            $("input[name='Comment[parent_id]']").val("");
-            $("#comment-label").html($("#comment-label").attr('label'));
+            $("input[name='Comment[parent_id]']", widget.form).val(comment_id);
+
+            widget.label.html(widget.label.attr('label') + '<strong> → ' + user_name + '</strong>');
+
+            location.href = '#comment-form';
+            return false;
         });
+    },
+    loadCommentsList: function (opts)
+    {
+        //TODO: add cache! or make it outside?
+        var widget = this;
+        var update_url = widget.options.comments_list_url;
+        if (opts && opts.url) {
+            update_url = opts.url;
+        }
 
-        return false;
-    });
-
-    function loadCommentsList() {
-        var object_id = $("input[name='Comment[object_id]']").val();
-        var model_id  = $("input[name='Comment[model_id]']").val();
-
-        $.get('/comments/comment/list/object_id/' + object_id + '/model_id/' + model_id, function(html) {
-            $comments_div.html(html);
+        $.get(update_url, {
+            object_id : $("input[name='Comment[object_id]']", widget.form).val(),
+            model_id  : $("input[name='Comment[model_id]']", widget.form).val()
+        },
+        function(html)
+        {
+            widget.list.html(html);
         });
     }
-
 });
