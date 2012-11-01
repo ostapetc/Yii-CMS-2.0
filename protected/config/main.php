@@ -50,7 +50,7 @@ return array(
             'newFileMode' => 0644
         ),
         'clientScript' => array(
-            'class' => 'CClientScript',
+            'class' => 'ClientScript',
         ),
         'session' => array(
             'autoStart' => true

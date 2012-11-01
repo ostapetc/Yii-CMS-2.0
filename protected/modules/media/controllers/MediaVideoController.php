@@ -16,7 +16,8 @@ class MediaVideoController extends ClientController
 
     public function actionV()
     {
-        echo 'alert(5); '.$_GET['callback'] . '({content:4})';
+        Yii::app()->clientScript->registerScript('ddd', 'alert(5);');
+        $this->renderPartial('v', [], false, true);
     }
 
 
