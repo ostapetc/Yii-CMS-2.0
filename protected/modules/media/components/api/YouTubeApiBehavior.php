@@ -134,12 +134,6 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getUrl()
-    {
-        throw new CException('not implemented yet');
-    }
-
-
     public function getUploadUrl()
     {
         $conf = Yii::app()->params['youTube'];

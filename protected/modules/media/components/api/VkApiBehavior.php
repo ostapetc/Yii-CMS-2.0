@@ -81,10 +81,4 @@ class VkApiBehavior extends ApiBehaviorAbstract
 
     }
 
-
-    public function getUrl()
-    {
-        throw new CException('not implemented yet');
-    }
-
 }

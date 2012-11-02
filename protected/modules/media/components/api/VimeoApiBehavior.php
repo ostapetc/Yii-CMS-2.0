@@ -9,11 +9,7 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
 
     public function getPlayerUrl()
     {
-        return 'http://player.vimeo.com/video/38732855?title=1&' .
-            http_build_query([ //            'oid'  => $this->oid,
-//            'id'   => $this->id,
-//            'hash' => $this->hash
-            ]);
+        return 'http://player.vimeo.com/video/38732855?title=1&';
     }
 
 
@@ -51,18 +47,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getThumb()
-    {
-        throw new CException('not implemented yet');
-    }
-
-
-    public function getServerDir()
-    {
-        throw new CException('not implemented yet');
-    }
-
-
     public function getHref()
     {
         return $this->href;
@@ -92,12 +76,6 @@ class VimeoApiBehavior extends ApiBehaviorAbstract
     public function getPreview($size_name = null)
     {
 
-    }
-
-
-    public function getUrl()
-    {
-        throw new CException('not implemented yet');
     }
 
 }

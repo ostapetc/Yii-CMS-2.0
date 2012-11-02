@@ -30,13 +30,6 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
     }
 
 
-    public function getUrl()
-    {
-        //todo: see download url
-        throw new CException('not implemented yet');
-    }
-
-
     public function getType()
     {
         $doc = [

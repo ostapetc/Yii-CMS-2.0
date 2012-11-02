@@ -8,18 +8,9 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public $new_record_status;
     public $old_name;
 
-    protected $file_info;
-
-
     public function parse($content)
     {
         return false;
-    }
-
-
-    public function afterFind($event)
-    {
-        $this->file_info = new SplFileInfo($this->basePath() . $this->getPk());
     }
 
 
@@ -33,13 +24,13 @@ class LocalApiBehavior extends ApiBehaviorAbstract
 
     public function getServerDir()
     {
-        return $this->basePath() . pathinfo($this->pk, PATHINFO_DIRNAME) . '/';
+        return $this->basePath() . pathinfo($this->getPk(), PATHINFO_DIRNAME) . '/';
     }
 
 
     public function getServerPath()
     {
-        return $this->basePath() . $this->pk;
+        return $this->basePath() . $this->getPk();
     }
 
 
@@ -81,13 +72,6 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public function getHref()
     {
         return '/' . self::UPLOAD_PATH . '/' . $this->pk;
-    }
-
-
-    public function getUrl()
-    {
-        //todo: see download url
-        throw new CException('not implemented yet');
     }
 
 

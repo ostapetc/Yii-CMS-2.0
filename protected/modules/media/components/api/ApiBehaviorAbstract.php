@@ -11,9 +11,6 @@ abstract class ApiBehaviorAbstract extends CActiveRecordBehavior
     abstract function getHref();
 
 
-    abstract function getUrl();
-
-
     abstract function parse($source);
 
 
