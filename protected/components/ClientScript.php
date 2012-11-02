@@ -1,7 +1,6 @@
 <?php
 class ClientScript extends CClientScript
 {
-
     /**
      * add JSONP-supporting functionality
      * using: $.getJSON('url?callback=?', function(html) {alert(html);});
