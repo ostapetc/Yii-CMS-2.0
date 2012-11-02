@@ -94,7 +94,7 @@ class YouTubeApiBehavior extends ApiBehaviorAbstract
         $conf = $this->getPreviewArray('iframe');
         return CHtml::tag('iframe', CMap::mergeArray($size, [
             'src' => $conf['val']
-        ]));
+        ]), '', true);
     }
 
 
