@@ -61,16 +61,17 @@ ImageGallery extends BaseFileListView
             $this->attachBehavior('sortable', $this->sortableOptions);
         }
         parent::init();
-        $this->registerScripts();
     }
 
 
-    public function registerScripts()
+    public function registerScripts($comment_widget_id = null)
     {
         $id     = $this->htmlOptions['id'];
         $assets = $this->assets . '/plugins/';
+
         if ($this->fancyboxOptions !== false)
         {
+            $this->fancyboxOptions['helpers']['vkstyle']['comment_widget_id'] = $comment_widget_id;
             $options = CJavaScript::encode(CMap::mergeArray($this->defaultFancyboxOptions,
                 $this->fancyboxOptions));
             Yii::app()->clientScript->registerScriptFile($assets . 'fancybox/jquery.fancybox.js')
@@ -82,6 +83,18 @@ ImageGallery extends BaseFileListView
                 $assets . 'fancybox/helpers/jquery.fancybox-vkstyle.js')
                 ->registerScript($id, "$('#$id a').fancybox($options);");
         }
+    }
+
+    public function run()
+    {
+        $widget = $this->widget('comments.portlets.CommentsPortlet', array(
+            'model' => false,
+            'is_hidden' => true
+        ));
+
+        $this->registerScripts($widget->getId());
+
+        parent::run();
     }
 
 }

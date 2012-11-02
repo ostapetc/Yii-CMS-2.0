@@ -10,7 +10,14 @@ class MediaVideoController extends ClientController
             "manage"       => "Поиск видео",
             "view"         => "Просмотр видео",
             "autocomplete" => "Скачать файл",
+            "v" => "Скачать файл",
         ];
+    }
+
+    public function actionV()
+    {
+        Yii::app()->clientScript->registerScript('ddd', 'alert(5);');
+        $this->renderPartial('v', [], false, true);
     }
 
 
