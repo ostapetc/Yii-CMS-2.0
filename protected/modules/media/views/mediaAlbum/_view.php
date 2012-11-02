@@ -2,7 +2,7 @@
 $img = $data->getPreview(MediaAlbum::$image_size);
 if ($img) {
 ?>
-    <li id="File_<?=$data->id?>" class="gallery-item <?= $index % 4 == 0 ? 'clear' : '' ?>" style="width: <?= MediaAlbum::$image_size['width'] + 10 ?>px;">
+    <li id="File_<?=$data->id?>" class="gallery-item" style="width: <?= MediaAlbum::$image_size['width'] + 10 ?>px; height: <?= MediaAlbum::$image_size['height'] + 40 ?>px;">
         <?
         echo CHtml::link($img, $data->href, [
             "rel" => "album_photos",
