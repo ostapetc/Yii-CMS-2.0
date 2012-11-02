@@ -313,6 +313,11 @@ span.italic-12 {
     margin: 0 0 30px 0;
 }
 
-.video-view{
+.video-view .video-container{
+    margin: 0 0 10px 0;
+}
+
+.video-view .infopanel{
     margin: 0 0 20px 0;
+    width: 645px
 }

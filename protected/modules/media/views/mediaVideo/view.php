@@ -3,10 +3,15 @@
     <div class="video-container">
         <?= $model->getPlayer(['width' => 670, 'height' => 400]) ?>
     </div>
-</div>
 
-<?
-$this->widget('comments.portlets.CommentsPortlet', array(
-    'model' => $model
-));
-?>
+    <?
+    $this->renderPartial('_infoPanel', ['model' => $model]);
+    ?>
+    <br />
+    <br />
+    <?
+    $this->widget('comments.portlets.CommentsPortlet', array(
+        'model' => $model
+    ));
+    ?>
+</div>
