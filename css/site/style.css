@@ -306,6 +306,9 @@ span.italic-12 {
     margin: 5px 10px 0  20px;
 }
 
+.video-gallery li:nth-child(3n){
+    clear:both;
+}
 
 /*-----------------------------VIDEO GALLERY------------------------------------*/
 
@@ -320,4 +323,12 @@ span.italic-12 {
 .video-view .infopanel{
     margin: 0 0 20px 0;
     width: 645px
+}
+
+/*-----------------------------VIDEO GALLERY------------------------------------*/
+#user-albums li:nth-child(4n) {
+    clear: both;
+}
+#photos-gallery li:nth-child(5n) {
+    clear: both;
 }

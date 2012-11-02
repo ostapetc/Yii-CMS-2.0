@@ -1,4 +1,4 @@
-<li class="gallery-item" style="width: <?= MediaAlbum::$users_page_size['width']?>px; height: <?= MediaAlbum::$users_page_size['height'] + 60 ?>px;">
+<li class="gallery-item" style="width: <?= MediaAlbum::$users_page_size['width']?>px;">
     <a href="<?= $data->href ?>" class="thumbnail">
         <div class="gallery-title">
             <span>

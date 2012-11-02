@@ -29,7 +29,7 @@
     <?
     //Вынести action titles в провайдер, воспользоваться функцией CController
     $this->widget('media.portlets.ImageGallery', [
-        'id'=>'photos',
+        'id'=>'photos-gallery',
         'dataProvider' => $dp,
         'itemView' => '_view',
         'itemsTagName' => 'ul',

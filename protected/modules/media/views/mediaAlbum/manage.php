@@ -15,7 +15,7 @@
 
     <?
     $this->widget('ListView', [
-        'id'=>'user_albums',
+        'id'=>'user-albums',
         'template' => "{pager}\n{items}\n{pager}",
         'dataProvider' => $dp,
         'itemView' => '_album',
