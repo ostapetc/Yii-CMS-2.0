@@ -38,11 +38,9 @@
             //comments
             var comments_widget = $('#' + opts.comment_widget_id);
             F.current.skin.append(comments_widget.show());
-            comments_widget.commentList('bindTo', F.current.element);
+            comments_widget.commentList('bindToLink', F.current.element);
             comments_widget.commentList('setLoading');
-            comments_widget.commentList('loadCommentsList', {
-                url: F.current.element.data('comments-url')
-            });
+            comments_widget.commentList('loadCommentsList');
         },
         beforeClose: function(opts)
         {

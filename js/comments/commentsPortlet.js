@@ -4,7 +4,6 @@ $.widget('cmsUI.commentList', {
         form_selector: '#comment-form',
         label_selector: "#comment-label",
         comments_list_selector: "#comments-div",
-        create_comments_url: "/comments/comment/create",
         comments_list_url: "/comments/comment/list",
         is_hidden: false
     },
@@ -26,18 +25,6 @@ $.widget('cmsUI.commentList', {
             widget.loadCommentsList();
         }
     },
-    bindTo: function(link)
-    {
-        var widget = this;
-        $("input[name='Comment[model_id]']", widget.form).val(link.data('model-id'));
-        $("input[name='Comment[object_id]']", widget.form).val(link.data('object-id'));
-        widget.form.attr('action', link.data('comments-url'));
-    },
-    setLoading: function() {
-        var widget = this;
-        var $loading_div = $('<div>загрузка комментариев...</div>').css('text-align', 'center');
-        widget.list.html($loading_div);
-    },
     _initForm:function()
     {
         var widget = this;
@@ -51,7 +38,7 @@ $.widget('cmsUI.commentList', {
                 params[$(this).attr('name')] = $(this).val();
             });
 
-            $.post(widget.options.create_comments_url, params, function(res)
+            $.post(widget.form.attr('action'), params, function(res)
             {
                 widget.loadCommentsList();
                 $("textarea[name='Comment[text]']", widget.form).val("");
@@ -78,25 +65,32 @@ $.widget('cmsUI.commentList', {
             return false;
         });
     },
+    bindToLink: function(link)
+    {
+        var widget = this;
+        $("input[name='Comment[model_id]']", widget.form).val(link.data('model-id'));
+        $("input[name='Comment[object_id]']", widget.form).val(link.data('object-id'));
+        widget.options.comments_list_url = link.data('comments-url');
+
+    },
+    setLoading: function()
+    {
+        var widget = this;
+        var $loading_div = $('<div>Загрузка комментариев...</div>').css('text-align', 'center');
+        widget.list.html($loading_div);
+    },
     loadCommentsList: function (opts)
     {
         //TODO: add cache! or make it outside?
         var widget = this;
-        var update_url = widget.options.comments_list_url;
-        if (opts && opts.url) {
-            update_url = opts.url;
-        }
-
-        var oid = $("input[name='Comment[object_id]']", widget.form).val(),
-            mid = $("input[name='Comment[model_id]']", widget.form).val();
-
-        $.get(update_url, {
-            object_id : oid,
-            model_id  : mid
-        },
-        function(html)
-        {
-            widget.list.html(html);
-        }, 'html');
+        $.get( widget.options.comments_list_url, {
+                object_id : $("input[name='Comment[object_id]']", widget.form).val(),
+                model_id  : $("input[name='Comment[model_id]']", widget.form).val()
+            },
+            function(html)
+            {
+                widget.list.html(html);
+            }, 'html'
+        );
     }
 });
