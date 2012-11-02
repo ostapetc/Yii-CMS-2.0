@@ -30,7 +30,6 @@ class CommentsPortlet extends Widget
     {
         $cs = Yii::app()->clientScript;
         $cs->registerScriptFile('/js/comments/commentsPortlet.js');
-        $this->client_options['is_hidden'] = $this->is_hidden;
         $options = CJavaScript::encode($this->client_options);
         $cs->registerScript($this->id, "$('#{$this->id}').commentList($options)");
 

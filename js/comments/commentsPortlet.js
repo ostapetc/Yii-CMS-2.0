@@ -4,8 +4,7 @@ $.widget('cmsUI.commentList', {
         form_selector: '#comment-form',
         label_selector: "#comment-label",
         comments_list_selector: "#comments-div",
-        comments_list_url: "/comments/comment/list",
-        is_hidden: false
+        comments_list_url: "/comments/comment/list"
     },
     form : null,
     label : null,
@@ -20,7 +19,7 @@ $.widget('cmsUI.commentList', {
         widget.setLoading();
         widget._initAnswers();
         widget._initForm();
-        if (!widget.options.is_hidden)
+        if (widget.element.is(':visible'))
         {
             widget.loadCommentsList();
         }
