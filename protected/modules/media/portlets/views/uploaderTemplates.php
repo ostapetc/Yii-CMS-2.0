@@ -13,7 +13,7 @@
         {{else}}
         <td class="progress-holder start">
             <div class="progress-animated progress"><div class="bar"></div></div>
-            <button class="hidden">Start</button>
+            <button class="hide">Start</button>
         </td>
         <td class="fileupload-progress progress-extended" colspan="2">
             <div class="progress-extended"></div>
