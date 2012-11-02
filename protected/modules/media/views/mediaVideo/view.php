@@ -4,3 +4,9 @@
         <?= $model->getPlayer(['width' => 670, 'height' => 400]) ?>
     </div>
 </div>
+
+<?
+$this->widget('comments.portlets.CommentsPortlet', array(
+    'model' => $model
+));
+?>

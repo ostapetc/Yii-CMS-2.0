@@ -152,6 +152,7 @@ class Uploader extends JuiInputWidget
 
     public function registerScripts()
     {
+
         $plugins = $this->assets . '/plugins/';
         $cs      = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery.ui')->registerScriptFile($plugins . 'tmpl/jquery.tmpl.min.js');
