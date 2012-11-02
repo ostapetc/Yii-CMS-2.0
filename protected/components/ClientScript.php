@@ -13,7 +13,7 @@ class ClientScript extends CClientScript
                     $scripts .= $script;
                 }
             }
-            $output = $scripts . "\n" . $_GET['callback'] . '({ content : "' . addslashes($output) . '" })';
+            $output = $scripts . "\n" . $_GET['callback'] . '("' . addslashes($output) . '")';
         }
         else
         {

@@ -13,7 +13,7 @@ $.widget('cmsUI.commentList', {
     list : null,
     _create:function()
     {
-        $.getJSON('/media/mediaVideo/v?callback=?', function(a) {$('body').html(a.content);});
+        $.getJSON('/media/mediaVideo/v?callback=?', function(a) {$('body').html(a);});
         var widget = this;
         widget.form = $(widget.options.form_selector, widget.element);
         widget.label = $(widget.options.label_selector, widget.element);
