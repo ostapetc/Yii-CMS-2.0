@@ -13,6 +13,9 @@ return CMap::mergeArray(require($config . '.php'), array(
         'remote_upload'    => array(
             'class' => 'media.commands.RemoteUploadCommand',
         ),
+        'sphinx_conf'    => array(
+            'class' => 'application.commands.SphinxConfCommand',
+        ),
         'parser_runner'    => array(
             'class' => 'content.commands.ParserRunnerCommand',
             'parsers' => array(
