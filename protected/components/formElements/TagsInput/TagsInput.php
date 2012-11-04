@@ -38,7 +38,7 @@ class TagsInput extends InputWidget
                         '$("#' .  $model_class . '_' . $this->element_name . '").tagsInput({
                             "width"            : "98%",
                             "defaultText"      : "' . $this->default_text . '",
-                            "autocomplete_url" : "/main/tag/autoComplete",
+                            "autocomplete_url" : "/tags/tag/autoComplete",
                             "minChars"         : 3
                         });',
                         CClientScript::POS_READY

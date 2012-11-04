@@ -13,15 +13,13 @@ class TagController extends ClientController
 
     public function actionAutoComplete($term)
     {
-        $sql = "SELECT GROUP_CONCAT(name) AS tags_concat
-                       FROM " . Tag::tableName() . "
-                       WHERE name LIKE :term";
-        $term = "%{$term}%";
-
-        $command = Yii::app()->db->createCommand($sql);
-        $command->bindParam(':term', $term, PDO::PARAM_STR);
-
-        echo CJSON::encode(explode(',', $command->queryScalar()));
+        $model = Tag::model();
+        $criteria = new CDbCriteria();
+        $criteria->select = 'name';
+        $criteria->compare('name', $term, true);
+        $model->setDbCriteria($criteria);
+        $result = $model->limit(15)->findAll();
+        echo CJSON::encode(array_values(CHtml::listData($result, 'name', 'name')));
     }
 
 
