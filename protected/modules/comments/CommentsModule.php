@@ -28,7 +28,6 @@ class CommentsModule extends WebModule
 	{
 		$this->setImport(array(
 			'comments.models.*',
-			'comments.portlets.*',
 		));
 	}
 

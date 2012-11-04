@@ -463,4 +463,30 @@ class Page extends ActiveRecord
             TagRel::createIfNotExists($tag->id, $this);
         }
     }
+
+
+    /**
+     * TODO: implementing it!
+     *
+     * @return string
+     */
+    public function getSourceUrl()
+    {
+        return 'http://sherdog.com/fasdfasf/asdfs';
+        return '';
+    }
+
+    public function getSourceLink()
+    {
+        $source_url = $this->getSourceUrl();
+        if ($source_url)
+        {
+            $source_host = parse_url($source_url, PHP_URL_HOST);
+            if ($source_host)
+            {
+                return CHtml::link('Источник: '. $source_host, $source_url, ['class' => 'source-link']);
+            }
+        }
+        return '';
+    }
 }

@@ -27,7 +27,6 @@ class MMaModule extends WebModule
 	{
 		$this->setImport(array(
 			'mma.models.*',
-			'mma.portlets.*',
 		));
 	}
 

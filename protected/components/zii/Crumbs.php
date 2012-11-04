@@ -1,5 +1,5 @@
 <?
-class Crumbs extends TbCrumb
+class Crumbs extends TbBreadcrumbs
 {
 
 }

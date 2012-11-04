@@ -28,7 +28,7 @@ abstract class ClientController extends Controller
         return array(
             array(
                 'label' => t('Посты'),
-                'url'   => array('content/page/index')
+                'url'   => array('/content/page/index')
             ),
             array(
                 'label' => t('Форум'),

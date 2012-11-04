@@ -28,7 +28,6 @@ class RbacModule extends WebModule
 	{
 		$this->setImport(array(
 			'rbac.models.*',
-            'rbac.controllers.*',
 			'rbac.components.*',
 		));
 	}

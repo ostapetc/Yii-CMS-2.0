@@ -32,33 +32,31 @@
     padding-top: 2px;
 }
 
-.page .sections a {
-    color: #999999;
-    font-size: 13px;
-    text-decoration: underline;
+.page .special-info{
+    clear: both;
 }
-
-.page ul.tags {
-    font-family: Verdana,sans-serif;
-    font-size: 10px;
-    margin-bottom: 15px;
+.page .special-info ul {
+    float: left;
     padding: 2px 0 2px 5px;
     margin: 0 0 0 0;
+    font-family: Verdana,sans-serif;
+    font-size: 10px;
 }
 
-.page ul.tags li {
-    color: #999999;
+.page .special-info ul li {
     display: inline;
 }
 
-.page ul.tags li a {
+.page .special-info a {
     color: #666666;
+    font-size: 10px;
     text-decoration: underline;
 }
+
 /*-----------------------------PAGE INFOPANELL------------------------------------*/
 
 .page .infopanel {
-    width: 645px;
+    /*width: 645px;*/
 }
 
 
@@ -197,7 +195,7 @@
     color: #FFF;
 }
 
-.published {
+.page .infopanel .published {
     float: left;
     font-size: 9px;
     margin-right: 22px;
@@ -261,8 +259,11 @@
 .page .infopanel .link a:hover {
     color: #f17d7d;
 }
-
-.page .infopanel .comments {
+.page .infopanel .read-more-wrapper {
+    line-height: 28px;
+    margin: 0 0 0 20px;
+}
+.page .infopanel .comments{
     float: left;
     line-height: 28px;
     margin-left: 17px;
@@ -323,6 +324,11 @@ ul.page-info-sidebar {
     float: left;
     margin-right: 10px;
     margin-bottom: 5px;
+}
+
+.source-link{
+    float: right;
+    padding: 0 1px;
 }
 
 .page table td {

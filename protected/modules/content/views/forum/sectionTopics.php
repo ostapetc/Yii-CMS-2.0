@@ -5,7 +5,7 @@
 </style>
 
 <?
-$this->widget('TbCrumb', [
+$this->widget('Crumbs', [
     'homeLink' => false,
     'links'    => [
         t('') => ''

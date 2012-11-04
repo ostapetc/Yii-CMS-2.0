@@ -27,7 +27,6 @@ class TagsModule extends WebModule
 	{
 		$this->setImport(array(
 			'tags.models.*',
-			'tags.portlets.*',
 		));
 	}
 

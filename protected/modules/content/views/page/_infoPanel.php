@@ -25,9 +25,11 @@
         </div>
 
         <? if (isset($preview)): ?>
-            <span class="label label-inverse">
-                <?= CHtml::link('читать далее', $page->url, ['class' => 'read-more badge']) ?>
-            </span>
+            <div class="read-more-wrapper">
+                <span class="label label-inverse">
+                    <?= CHtml::link('Читать', $page->url, ['class' => 'read-more badge']) ?>
+                </span>
+            </div>
         <? endif ?>
     </div>
 </div>

@@ -15,7 +15,9 @@
 
             <div class="btn_view_site"><a href="/"><? echo t('На сайт'); ?></a></div>
 
-            <div style="float: right;margin-right:20px"><? $this->widget('LanguageSwitcherAdmin'); ?></div>
+            <div style="float: right;margin-right:20px">
+                <? $this->widget('main.portlets.LanguageSwitcherAdmin'); ?>
+            </div>
 
         </hgroup>
     </header>
@@ -55,7 +57,7 @@
     <aside id="sidebar" class="column">
         <? $this->renderPartial('main.views.mainAdmin._search'); ?>
         <hr/>
-        <? $this->widget('AdminMenu'); ?>
+        <? $this->widget('main.portlets.AdminMenu'); ?>
 
         <footer>
             <hr/>

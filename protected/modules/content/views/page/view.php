@@ -40,14 +40,20 @@ if (Yii::app()->user->checkAccess('Page_update'))
         <? endif ?>
 
         <?= $page->text ?>
-        <? $this->renderPartial('application.modules.content.views.pageSection._list', ['sections' => $page->sections]); ?>
-        <? $this->renderPartial('application.modules.tags.views._list', ['tags' => $page->tags]); ?>
-        <? $this->renderPartial('application.modules.content.views.page._infoPanel', ['page' => $page,'preview' => true]); ?>
+
+        <div class="special-info">
+            <? $this->renderPartial('application.modules.content.views.pageSection._list', ['sections' => $page->sections]); ?>
+            <?= $page->getSourceLink() ?>
+        </div>
+        <div class="special-info">
+            <? $this->renderPartial('application.modules.tags.views._list', ['tags' => $page->tags]); ?>
+        </div>
+        <? $this->renderPartial('application.modules.content.views.page._infoPanel', ['page' => $page, 'preview' => true]); ?>
 
         <br clear="all" />
         <br clear="all" />
 
-        <? $this->widget('CommentsPortlet', ['model' => $page]); ?>
+        <? $this->widget('comments.portlets.CommentsPortlet', ['model' => $page]); ?>
     </div>
 <? endif ?>
 
