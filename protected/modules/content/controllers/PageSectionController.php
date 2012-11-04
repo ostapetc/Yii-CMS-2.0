@@ -12,6 +12,8 @@ class PageSectionController extends ClientController
 
     public function actionCreate()
     {
+        $section = PageSection::model()->findByPk(2);
+        dump($section->getLastTopic());
         if (!isset($_POST['PageSection']))
         {
             $this->badRequest();

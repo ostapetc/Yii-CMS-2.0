@@ -115,35 +115,32 @@ class Friend extends ActiveRecord
 
     public static function userFriendsCount($user_id, $is_confirmed = 1, $type = null)
     {
-        $command = Yii::app()->db->createCommand();
-        $command->select('COUNT(*)');
-        $command->from('friends');
+        $model = Friend::model();
 
         switch ($type)
         {
-            case null:
-                $command->where('(user_a_id = :user_id OR user_b_id = :user_id) AND is_confirmed = :is_confirmed', array(
-                    ':user_id'      => $user_id,
-                    ':is_confirmed' => $is_confirmed
-                ));
-                break;
-
             case 'in':
-                $command->where('user_b_id = :user_id AND is_confirmed = :is_confirmed', array(
-                    ':user_id'      => $user_id,
-                    ':is_confirmed' => $is_confirmed
-                ));
+                $count = $model->countByAttributes([
+                    'user_id'      => $user_id,
+                    'is_confirmed' => $is_confirmed
+                ]);
                 break;
 
             case 'out':
-                $command->where('user_a_id = :user_id AND is_confirmed = :is_confirmed', array(
+                $count = $model->countByAttributes([
+                    'user_id'      => $user_id,
+                    'is_confirmed' => $is_confirmed
+                ]);
+                break;
+            default:
+                $count = $model->count('(user_a_id = :user_id OR user_b_id = :user_id) AND is_confirmed = :is_confirmed', [
                     ':user_id'      => $user_id,
                     ':is_confirmed' => $is_confirmed
-                ));
+                ]);
                 break;
         }
 
-        return $command->queryScalar();
+        return $count;
     }
 
 

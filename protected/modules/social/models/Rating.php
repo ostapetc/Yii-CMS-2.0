@@ -27,6 +27,7 @@ class Rating extends ActiveRecord
     const PAGE_SIZE = 20;
 
 
+    public $sum;
 
     public function name()
     {
@@ -123,12 +124,13 @@ class Rating extends ActiveRecord
             $model_id = $model;
         }
 
-        $sql = "SELECT SUM(`value`)
-                       FROM " . self::model()->tableName() . "
-                       WHERE object_id = '{$object_id}' AND
-                             model_id  = '" . $model_id . "'";
+        $rating = static::model()->findByAttributes([
+            'object_id' => $object_id,
+            'model_id' => $model_id
+        ], [
+            'select' => 'SUM(`value`) as sum'
+        ])->sum;
 
-        $rating = Yii::app()->db->createCommand($sql)->queryScalar();
         if (is_null($rating))
         {
             return 0;

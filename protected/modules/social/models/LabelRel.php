@@ -95,10 +95,4 @@ class LabelRel extends ActiveRecord
         return Yii::app()->createUrl('/social/labelrel/view', array('id' => $this->id));
     }
 
-
-    public function uploadFiles()
-    {
-        return array(
-        );
-    }
 }

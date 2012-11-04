@@ -317,14 +317,10 @@ class Page extends ActiveRecord
 
     public function getLastComment()
     {
-        $sql = "SELECT *
-                       FROM comments
-                       WHERE object_id = {$this->id} AND
-                             model_id  = 'Page'
-                       ORDER BY date_create DESC
-                       LIMIT 1";
-
-        return Comment::model()->findBySql($sql);
+        return Comment::model()->last()->findByAttributes([
+            'object_id' => $this->id,
+            'model_id' => get_class($this)
+        ]);
     }
 
 

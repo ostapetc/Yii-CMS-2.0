@@ -118,19 +118,14 @@ class PageSection extends ActiveRecord
                 'PageSectionRel',
                 'section_id'
             ],
-
-            /*
-             * TODO: придумат как сделать релэшин
-             *
             'last_topic' => array(
                 self::HAS_ONE,
                 'Page',
-                array('page_id', 'id'),
+                array('page_id' => 'id'),
                 'through'   => 'pages_sections_rels',
-                //'order'     => 'date_create DESC',
-                //'condition' => 'status = "' . Page::STATUS_PUBLISHED . '"'
+                'order'     => 'last_topic.date_create DESC',
+                'condition' => 'last_topic.status = "' . Page::STATUS_PUBLISHED . '"'
             )
-            */
         ];
     }
 
@@ -170,22 +165,6 @@ class PageSection extends ActiveRecord
 
         return $this->dbConnection->createCommand($sql)->queryScalar();
     }
-
-
-    public function getLastTopic()
-    {
-        $sql = "SELECT pages.*
-                       FROM pages
-                       INNER JOIN pages_sections_rels
-                           ON pages_sections_rels.page_id = pages.id AND
-                              pages_sections_rels.section_id = {$this->id}
-                       WHERE pages.status = '" . Page::STATUS_PUBLISHED . "'
-                       ORDER BY pages.date_create DESC
-                       LIMIT 1";
-
-        return Page::model()->findBySql($sql);
-    }
-
 
     public function getForumUrl()
     {
