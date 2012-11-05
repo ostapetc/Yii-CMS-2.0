@@ -57,7 +57,7 @@ class DGSphinxSearchException extends CException
  *     $searchCriteria->groupby = $groupby;
  *     $searchCriteria->orders = array('f_name' => 'ASC');
  *     $searchCriteria->from = 'firm';
- *     $resIterator = Yii::App()->search->search($searchCriteria); // interator result
+ *     $resIterator = Yii::App()->search->se$searchCriteria); // interator result
  *     or
  *     $resArray = Yii::App()->search->searchRaw($searchCriteria); // array result
  *
@@ -451,7 +451,6 @@ class DGSphinxSearch extends CApplicationComponent
         if ($this->enableProfiling) {
             Yii::beginProfile("Search query: '{$query}' in index: '{$index}'", 'CEXT.DGSphinxSearch.doSearch');
         }
-
 
         $res = $this->client->query($query, $index, $comment);
 
