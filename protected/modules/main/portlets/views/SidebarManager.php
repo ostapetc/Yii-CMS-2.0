@@ -19,7 +19,7 @@
     {
         if ($type == 'partial')
         {
-            $content = Yii::app()->controller->renderPartial($class, $confi, true);
+            $content = Yii::app()->controller->renderPartial($class, $config, true);
         }
         elseif ($type == 'widget')
         {

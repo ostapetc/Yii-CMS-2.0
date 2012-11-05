@@ -3,7 +3,7 @@
     <?
     Yii::app()->clientScript->registerCssFile('/css/site/search.css');
     $this->widget('ListView', [
-        'id'           => 'search',
+        'id'           => 'search-result',
         'dataProvider' => $dp,
         'summaryText'  => '',
         'itemView'     => '_view',
