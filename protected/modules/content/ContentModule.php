@@ -89,7 +89,6 @@ class ContentModule extends WebModule
                         LEFT JOIN pages_sections ON pages_sections_rels.section_id=pages_sections.id
                         GROUP BY pages.id
                     ',
-                'view' => 'pages'
             ],
         ];
     }

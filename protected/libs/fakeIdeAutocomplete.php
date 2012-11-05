@@ -6,6 +6,8 @@
 class Yii extends YiiBase{}
 
 /**
+ * @property SphinxSearch $search
+ * @method SphinxSearch getSearch()
  * @property CDbMessageSource $messages
  * @method CDbMessageSource getMessages()
  * @property Bootstrap $bootstrap

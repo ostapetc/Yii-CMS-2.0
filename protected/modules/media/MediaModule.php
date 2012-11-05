@@ -48,4 +48,21 @@ class MediaModule extends WebModule
             '/usersVideos/<user_id:\d*>' => '/media/mediaVideo/manage',
         ];
     }
+
+    public function getSearchInfo()
+    {
+        return [
+            'files' => [
+                'sql' => '
+                    SELECT
+                        media_files.id,
+                        media_files.id as object_id, "MediaFile" as model_id,
+                        media_files.title, media_files.descr
+
+                        FROM  ' . MediaFile::model()->tableName() . '
+                    ',
+            ],
+        ];
+    }
+
 }

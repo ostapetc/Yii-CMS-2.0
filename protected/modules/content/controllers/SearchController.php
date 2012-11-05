@@ -12,25 +12,17 @@ class SearchController extends ClientController
 
     public function actionIndex()
     {
-        foreach (Yii::app()->getModules() as $id => $config)
-        {
-            $module = Yii::app()->getModule($id);
-            if (!method_exists($module, 'getSearchInfo'))
-            {
-                continue;
-            }
-
-            foreach ($module->getSearchInfo() as $index => $conf)
-            {
-                $conf['view'];
-            }
-
-
-        }
-        $search = Yii::app()->search;
+        $q = Yii::app()->request->getParam('q');
+        $search = Yii::app()->search->client;
+        $search->SetMatchMode(SPH_MATCH_EXTENDED2);
+        $search->SetRankingMode(SPH_RANK_SPH04);
+        $search->SetSortMode(SPH_SORT_RELEVANCE);
+        $a = $search->Query('агрессию', 'index_pages');
+    dump($a);
         $search->select('*')->from('index_pages');
-        //$search->where($expression)
-        //      ->filters(array('project_id' => $this->_city->id))->groupby($groupby)
+        $search->where($q);
+        //->filters(array('project_id' => $this->_city->id));
+//      $search->groupby($groupby)
         //      ->orderby(array('f_name' => 'ASC'))->limit(0, 30);
         $dp = new SphinxDataProvider($search->searchRaw());
 

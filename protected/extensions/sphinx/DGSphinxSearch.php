@@ -154,7 +154,7 @@ class DGSphinxSearch extends CApplicationComponent
      * @var SphinxClient
      * @brief Sphinx client object
      */
-    private $client;
+    public $client;
 
     public function init()
     {
@@ -451,6 +451,7 @@ class DGSphinxSearch extends CApplicationComponent
         if ($this->enableProfiling) {
             Yii::beginProfile("Search query: '{$query}' in index: '{$index}'", 'CEXT.DGSphinxSearch.doSearch');
         }
+
 
         $res = $this->client->query($query, $index, $comment);
 
