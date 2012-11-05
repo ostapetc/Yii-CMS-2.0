@@ -15,7 +15,7 @@ class SearchController extends ClientController
         $q = Yii::app()->request->getParam('q');
         $search = Yii::app()->search;
         $search->setFullText($q);
-        $search->select('*')->from('index_pages');
+        $search->select('*')->from('pages video audio albums');
         //->filters(array('project_id' => $this->_city->id));
 //      $search->groupby($groupby)
         //      ->orderby(array('f_name' => 'ASC'))->limit(0, 30);
@@ -27,10 +27,7 @@ class SearchController extends ClientController
             $dp = $search->setLastCriteria()->setFullText($q)->search();
         }
 
-
         $this->render('index', ['dp' => $dp]);
     }
-
-
 
 }
