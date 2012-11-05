@@ -29,11 +29,11 @@ class SphinxConfCommand extends CConsoleCommand
                 continue;
             }
             /** @var $model ActiveRecord */
-            foreach ($module->getSearchInfo() as $index => $sql)
+            foreach ($module->getSearchInfo() as $index => $conf)
             {
                 //            $sqls  = $this->prepareCommands($models);
                 //            $union = "\n(\n" . implode("\n) UNION (\n", $sqls) . ')';
-                $sql   = 'CREATE OR REPLACE VIEW sphinx_view_' . $index . ' AS (' . $sql .') ';
+                $sql   = 'CREATE OR REPLACE VIEW sphinx_view_' . $index . ' AS (' . $conf['sql'] .') ';
                 Yii::app()->db->createCommand($sql)->execute();
             }
         }

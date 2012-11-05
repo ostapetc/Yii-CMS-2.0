@@ -27,6 +27,7 @@ class ContentModule extends WebModule
 
 		$this->setImport([
 			'content.models.*',
+			'content.components.*',
 		]);
 	}
 
@@ -72,20 +73,24 @@ class ContentModule extends WebModule
     public function getSearchInfo()
     {
         return [
-            'pages' =>
-                '
-                SELECT
-                    pages.id, pages.title, pages.text,
-                    GROUP_CONCAT(DISTINCT tags.name SEPARATOR "|") as tag_names,
-                    GROUP_CONCAT(DISTINCT pages_sections.name SEPARATOR "|") as sections_names
+            'pages' => [
+                'sql' => '
+                    SELECT
+                        pages.id,
+                        pages.id as object_id, "Page" as model_id,
+                        pages.title, pages.text,
+                        GROUP_CONCAT(DISTINCT tags.name SEPARATOR "|") as tag_names,
+                        GROUP_CONCAT(DISTINCT pages_sections.name SEPARATOR "|") as sections_names
 
-                    FROM  ' . Page::model()->tableName() . '
-                    LEFT JOIN tags_rels ON tags_rels.model_id="Page" AND tags_rels.object_id=pages.id
-                    LEFT JOIN tags ON tags_rels.tag_id=tags.id
-                    LEFT JOIN pages_sections_rels ON pages_sections_rels.page_id=pages.id
-                    LEFT JOIN pages_sections ON pages_sections_rels.section_id=pages_sections.id
-                    GROUP BY pages.id
-                '
+                        FROM  ' . Page::model()->tableName() . '
+                        LEFT JOIN tags_rels ON tags_rels.model_id="Page" AND tags_rels.object_id=pages.id
+                        LEFT JOIN tags ON tags_rels.tag_id=tags.id
+                        LEFT JOIN pages_sections_rels ON pages_sections_rels.page_id=pages.id
+                        LEFT JOIN pages_sections ON pages_sections_rels.section_id=pages_sections.id
+                        GROUP BY pages.id
+                    ',
+                'view' => 'pages'
+            ],
         ];
     }
 }
