@@ -24,14 +24,16 @@ class SearchController extends ClientController
         ];
     }
 
+    public $active_indexes;
 
     public function actionIndex()
     {
         $q = Yii::app()->request->getParam('q');
-        $index = Yii::app()->request->getParam('index');
+        $allow_indexes = ['pages', 'video', 'audio', 'albums'];
+        $this->active_indexes = Yii::app()->request->getParam('indexes', $allow_indexes);
         $search = Yii::app()->search;
         $search->setFullText($q);
-        $search->select('*')->from($index ? $index : 'pages video audio albums');
+        $search->select('*')->from(implode(' ', $this->active_indexes));
         //->filters(array('project_id' => $this->_city->id));
 //      $search->groupby($groupby)
         //      ->orderby(array('f_name' => 'ASC'))->limit(0, 30);
@@ -43,7 +45,9 @@ class SearchController extends ClientController
             $dp = $search->setLastCriteria()->setFullText($q)->search();
         }
 
-        $this->render('index', ['dp' => $dp]);
+        $this->render('index', [
+            'dp' => $dp,
+        ]);
     }
 
 }
