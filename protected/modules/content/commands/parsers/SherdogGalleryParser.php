@@ -62,7 +62,7 @@ class SherdogGalleryParser extends ContentParserAbstract
         }
 
         $imgs = [];
-        foreach ($this->multipleThreadsRequest($urls) as $url => $html)
+        foreach (CurlHelper::multi($urls) as $url => $html)
         {
             if ($html)
             {

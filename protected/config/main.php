@@ -68,7 +68,13 @@ return [
             'class'          => 'WebUser'
         ],
         'metaTags'     => [
-            'class' => 'application.modules.main.components.MetaTags'
+            'class' => 'main.components.MetaTags'
+        ],
+        'translator'     => [
+            'class' => 'application.components.Translator',
+            'api' => [
+                'class' => 'ext.translators.YandexTranslate'
+            ]
         ],
         'image'        => [
             'class'  => 'application.extensions.image.CImageComponent',
