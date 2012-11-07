@@ -171,7 +171,7 @@ abstract class CBaseController extends CComponent
 		else
 		{
 			$widget=$this->createWidget($className,$properties);
-            $widget->run();
+			$widget->run();
 			return $widget;
 		}
 	}

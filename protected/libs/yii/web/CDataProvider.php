@@ -144,8 +144,8 @@ abstract class CDataProvider extends CComponent implements IDataProvider
 	 */
 	public function setData($value)
 	{
-        $this->_data=$value;
-    }
+		$this->_data=$value;
+	}
 
 	/**
 	 * Returns the key values associated with the data items.
