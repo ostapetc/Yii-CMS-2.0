@@ -37,6 +37,7 @@ rm -rf ${app_dir}/protected/runtime/*
 echo '-----------migrate-----------'
 php $yiic migrate up
 
+
 #sphinx reindex
 echo '-----------sphinx reindex-----------'
 php $yiic sphinx_conf

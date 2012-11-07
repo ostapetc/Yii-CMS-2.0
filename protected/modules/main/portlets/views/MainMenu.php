@@ -13,8 +13,8 @@
                     'items'       => $items
                 ))
                 ?>
-                <form action="" class="navbar-search pull-left">
-                    <input type="text" placeholder="Поиск" value="<?= $query ?>" class="search-query span2">
+                <form action="<?= $this->createUrl('/content/search/index') ?>" class="navbar-search pull-left">
+                    <input type="text" placeholder="Поиск" name="q" value="<?= $query ?>" class="search-query span2">
                 </form>
                 <? $this->render('_MenuRight') ?>
             </div>

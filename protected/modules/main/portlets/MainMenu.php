@@ -16,7 +16,7 @@ class MainMenu extends Portlet
             $query = trim(strip_tags($_GET['query']));
         }
 
-        $this->render('Menu', array(
+        $this->render('MainMenu', array(
             'items' => Yii::app()->controller->topMenuItems(),
             'query' => $query
         ));
