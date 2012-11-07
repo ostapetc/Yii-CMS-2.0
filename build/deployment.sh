@@ -40,5 +40,5 @@ php $yiic migrate up
 #sphinx reindex
 php $yiic sphinx_conf
 cp $runtime/sphinx/sphinx.conf /etc/sphinxsearch/sphinx.conf
-/etc/sphinxsearch/indexer --all --rotate
+/usr/local/bin/indexer --all --rotate --config /etc/sphinxsearch/sphinx.conf
 /etc/init.d/sphinxsearch restart
