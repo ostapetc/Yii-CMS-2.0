@@ -4,23 +4,17 @@ class SphinxConfCommand extends CConsoleCommand
     public $basePath = 'application.runtime.sphinx';
     public $targetPath = 'application.runtime.sphinx';
 
-    public $indexer = 'E:/tools/sphinx/indexer';
-    public $searchd = 'E:/tools/sphinx/searchd';
-
-
-    public $runSearchd = false;
+    public $indexer = 'indexer';
 
 
     public function actionIndex()
     {
         $this->buildDbViews();
-        $config = $this->getConfig();
-//        $this->runSphinx($config);
+        $this->getConfig();
     }
 
     private function buildDbViews()
     {
-        $res = array();
         foreach (Yii::app()->getModules() as $id => $module)
         {
             $module = Yii::app()->getModule($id);
@@ -90,20 +84,6 @@ class SphinxConfCommand extends CConsoleCommand
     }
 
 
-    private function runSphinx($config_file)
-    {
-        if ($this->runSearchd)
-        {
-            $c      = "{$this->searchd} --config $config_file";
-            $is_win = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
-            $c      = $is_win ? 'start ' . $c : $c . ' &';
-            system($c);
-        }
-
-        //reindex
-        system("{$this->indexer} --config $config_file --all --rotate");
-    }
-
 
     private function getConfig()
     {
@@ -128,7 +108,7 @@ class SphinxConfCommand extends CConsoleCommand
             'DB_NAME'   => 'cms2',
             //TODO: set data from config
             'DB_HOST'   => 'localhost',
-            'BASE_PATH' => 'E:/tools/sphinx',
+            'BASE_PATH' => '/etc/sphinxsearch',
         ));
 
         $file = $target . '/sphinx.conf';
