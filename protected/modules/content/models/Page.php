@@ -49,6 +49,7 @@ class Page extends ActiveRecord
     const TAG_CUT = '{{cut}}';
 
     const TEXT_PREVIEW_LENGHT = 370;
+    const TEXT_SEARCH_LENGHT = 170;
 
     const IMAGES_DIR        = '/upload/pages/';
     const IMAGES_SIZE_SMALL = 200;
@@ -349,6 +350,21 @@ class Page extends ActiveRecord
         }
     }
 
+    public function getTextSearch()
+    {
+        $res = $this->text;
+        if (mb_strpos($this->text, self::TAG_CUT) !== false)
+        {
+            $parts = explode(self::TAG_CUT, $this->text);
+            $res = array_shift($parts);
+        }
+
+        if (strlen($res) > self::TEXT_SEARCH_LENGHT)
+        {
+            $res = Yii::app()->text->cut($this->text, self::TEXT_SEARCH_LENGHT, '...');
+        }
+        return $res;
+    }
 
     public function getUserId()
     {

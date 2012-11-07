@@ -292,8 +292,8 @@
 }
 
 .page {
-    margin-bottom: 40px !important;
-    clear: both !important;
+    margin-bottom: 40px;
+    clear: both;
 }
 
 ul.page-info-sidebar {

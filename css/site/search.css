@@ -1,0 +1,16 @@
+.search-item{
+    margin: 0 0 5px 0;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #CCC;
+}
+
+.search-item .content-type {
+    font-size: 10px;
+}
+.search-item .descr {
+    font-size: 12px;
+}
+
+.search-item .page{
+    margin: 0 0 0 0;
+}

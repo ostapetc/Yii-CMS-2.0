@@ -47,6 +47,54 @@ class TextComponent extends CApplicationComponent
     }
 
 
+    protected $layoutMap = array(
+        'ru' => array(
+            'from' => '`1234567890-=qwertyuiop[]asdfghjkl;\'\\zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|ZXCVBNM<>?ё1234567890-=йцукенгшщзхъфывапролджэ\\ячсмитьбю.Ё!"№;%:?*()_+ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,',
+            'to'   => 'ё1234567890-=йцукенгшщзхъфывапролджэ\\ячсмитьбю.Ё!"№;%:?*()_+ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,`1234567890-=qwertyuiop[]asdfghjkl;\'\\zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|ZXCVBNM<>?'
+        ),
+    );
+
+
+    public function changeLayout($str, $layout = 'ru')
+    {
+        $from = $this->layoutMap[$layout]['from'];
+        $to   = $this->layoutMap[$layout]['to'];
+
+        return $this->mb_strtr($str, $from, $to);
+    }
+
+
+    /**
+     * Multibyte strtr
+     *
+     * @param string $str
+     * @param string $from
+     * @param string $to
+     *
+     * @return string
+     */
+    public function mb_strtr($str, $from, $to)
+    {
+        return strtr($str, array_combine($this->mb_str_split($from), $this->mb_str_split($to)));
+    }
+
+
+    /**
+     * Multibyte str_split
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    public function mb_str_split($str)
+    {
+
+        assert(is_string($str));
+
+        return preg_split('~~u', $str, null, PREG_SPLIT_NO_EMPTY);
+    }
+
+
     /**
      * Translit
      *
@@ -57,76 +105,76 @@ class TextComponent extends CApplicationComponent
     public function translit($string)
     {
         $words = array(
-            "А"  => "A",
-            "Б"  => "B",
-            "В"  => "V",
-            "Г"  => "G",
-            "Д"  => "D",
-            "Е"  => "E",
-            "Ж"  => "J",
-            "З"  => "Z",
-            "И"  => "I",
-            "Й"  => "Y",
-            "К"  => "K",
-            "Л"  => "L",
-            "М"  => "M",
-            "Н"  => "N",
-            "О"  => "O",
-            "П"  => "P",
-            "Р"  => "R",
-            "С"  => "S",
-            "Т"  => "T",
-            "У"  => "U",
-            "Ф"  => "F",
-            "Х"  => "H",
-            "Ц"  => "TS",
-            "Ч"  => "CH",
-            "Ш"  => "SH",
-            "Щ"  => "SCH",
-            "Ъ"  => "",
-            "Ы"  => "YI",
-            "Ь"  => "",
-            "Э"  => "E",
-            "Ю"  => "YU",
-            "Я"  => "YA",
-            "а"  => "a",
-            "б"  => "b",
-            "в"  => "v",
-            "г"  => "g",
-            "д"  => "d",
-            "е"  => "e",
-            "ж"  => "j",
-            "з"  => "z",
-            "и"  => "i",
-            "й"  => "y",
-            "к"  => "k",
-            "л"  => "l",
-            "м"  => "m",
-            "н"  => "n",
-            "о"  => "o",
-            "п"  => "p",
-            "р"  => "r",
-            "с"  => "s",
-            "т"  => "t",
-            "у"  => "u",
-            "ф"  => "f",
-            "х"  => "h",
-            "ц"  => "ts",
-            "ч"  => "ch",
-            "ш"  => "sh",
-            "щ"  => "sch",
-            "ъ"  => "y",
-            "ы"  => "yi",
-            "ь"  => "",
-            "э"  => "e",
-            "ю"  => "yu",
-            "я"  => "ya",
-            " "  => "_",
-            "."  => "",
-            ","  => "",
-            "?"  => "",
-            "!"  => "",
-            ":"  => ""
+            "А" => "A",
+            "Б" => "B",
+            "В" => "V",
+            "Г" => "G",
+            "Д" => "D",
+            "Е" => "E",
+            "Ж" => "J",
+            "З" => "Z",
+            "И" => "I",
+            "Й" => "Y",
+            "К" => "K",
+            "Л" => "L",
+            "М" => "M",
+            "Н" => "N",
+            "О" => "O",
+            "П" => "P",
+            "Р" => "R",
+            "С" => "S",
+            "Т" => "T",
+            "У" => "U",
+            "Ф" => "F",
+            "Х" => "H",
+            "Ц" => "TS",
+            "Ч" => "CH",
+            "Ш" => "SH",
+            "Щ" => "SCH",
+            "Ъ" => "",
+            "Ы" => "YI",
+            "Ь" => "",
+            "Э" => "E",
+            "Ю" => "YU",
+            "Я" => "YA",
+            "а" => "a",
+            "б" => "b",
+            "в" => "v",
+            "г" => "g",
+            "д" => "d",
+            "е" => "e",
+            "ж" => "j",
+            "з" => "z",
+            "и" => "i",
+            "й" => "y",
+            "к" => "k",
+            "л" => "l",
+            "м" => "m",
+            "н" => "n",
+            "о" => "o",
+            "п" => "p",
+            "р" => "r",
+            "с" => "s",
+            "т" => "t",
+            "у" => "u",
+            "ф" => "f",
+            "х" => "h",
+            "ц" => "ts",
+            "ч" => "ch",
+            "ш" => "sh",
+            "щ" => "sch",
+            "ъ" => "y",
+            "ы" => "yi",
+            "ь" => "",
+            "э" => "e",
+            "ю" => "yu",
+            "я" => "ya",
+            " " => "_",
+            "." => "",
+            "," => "",
+            "?" => "",
+            "!" => "",
+            ":" => ""
         );
 
         return strtr($string, $words);

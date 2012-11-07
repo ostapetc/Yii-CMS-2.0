@@ -1,7 +1,7 @@
 <? $this->page_title = null; ?>
 
 <?
-$this->widget('zii.widgets.CListView', [
+$this->widget('ListView', [
     'id'           => 'Page-listView',
     'dataProvider' => $data_provider,
     'summaryText'  => '',
