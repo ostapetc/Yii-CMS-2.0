@@ -33,4 +33,6 @@ class SphinxSearch extends DGSphinxSearch
     {
         return new SphinxDataProvider($data);
     }
+
+
 }

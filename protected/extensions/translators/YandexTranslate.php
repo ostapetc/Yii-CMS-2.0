@@ -4,7 +4,9 @@
  * Идеален для славянских языков, в частности русский <-> украинский
  */
 
-Yii::import('ext.translator.TextSplitter', true);
+Yii::import('ext.translators.TextSplitter', true);
+Yii::import('ext.translators.ITranslator', true);
+
 class YandexTranslate implements ITranslator {
     protected $rootURL = 'http://translate.yandex.ru/tr.json';
     protected $translatePath = '/translate';
