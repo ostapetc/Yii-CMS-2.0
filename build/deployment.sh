@@ -38,6 +38,7 @@ echo '-----------migrate-----------'
 php $yiic migrate up
 
 #sphinx reindex
+echo '-----------sphinx reindex-----------'
 php $yiic sphinx_conf
 sed -f ${overlays}production.sed $runtime/sphinx/sphinx.conf > /etc/sphinxsearch/sphinx.conf
 sudo -u sphinxsearch indexer --all --rotate --config /etc/sphinxsearch/sphinx.conf
