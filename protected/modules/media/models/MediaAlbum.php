@@ -86,16 +86,17 @@ class MediaAlbum extends ActiveRecord
 
     public function autocomplete($term)
     {
-        $alias = $this->getTableAlias();
+        $alias                         = $this->getTableAlias();
         $this->getDbCriteria()->select = "$alias.id, $alias.title as title";
         $this->getDbCriteria()->mergeWith([
             'condition' => "$alias.title LIKE :term OR $alias.descr LIKE :term",
-            'params' => [
-                'term' => '%'.trim($term).'%'
+            'params'    => [
+                'term' => '%' . trim($term) . '%'
             ]
         ]);
         return $this;
     }
+
 
     public function behaviors()
     {
@@ -301,4 +302,17 @@ class MediaAlbum extends ActiveRecord
         $this->isAttachedTo($user ? $user : Yii::app()->user->model);
     }
 
+
+    public function getSourceLink()
+    {
+        if ($this->source_url)
+        {
+            $source_host = parse_url($this->source_url, PHP_URL_HOST);
+            if ($source_host)
+            {
+                return CHtml::link('Источник: ' . $source_host, $this->source_url, ['class' => 'source-link']);
+            }
+        }
+        return '';
+    }
 }

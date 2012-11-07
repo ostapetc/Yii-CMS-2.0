@@ -27,7 +27,6 @@ class ContentModule extends WebModule
 
 		$this->setImport([
 			'content.models.*',
-			'content.portlets.*',
 		]);
 	}
 

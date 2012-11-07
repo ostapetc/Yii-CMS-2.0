@@ -196,7 +196,7 @@ class PageController extends ClientController
         ]);
 
         $this->render('index', [
-            'data_provider' => $data_provider,
+            'data_provider' => $data_provider
         ]);
     }
 

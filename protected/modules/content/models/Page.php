@@ -317,14 +317,10 @@ class Page extends ActiveRecord
 
     public function getLastComment()
     {
-        $sql = "SELECT *
-                       FROM comments
-                       WHERE object_id = {$this->id} AND
-                             model_id  = 'Page'
-                       ORDER BY date_create DESC
-                       LIMIT 1";
-
-        return Comment::model()->findBySql($sql);
+        return Comment::model()->last()->findByAttributes([
+            'object_id' => $this->id,
+            'model_id' => get_class($this)
+        ]);
     }
 
 
@@ -466,5 +462,31 @@ class Page extends ActiveRecord
 
             TagRel::createIfNotExists($tag->id, $this);
         }
+    }
+
+
+    /**
+     * TODO: implementing it!
+     *
+     * @return string
+     */
+    public function getSourceUrl()
+    {
+        return 'http://sherdog.com/fasdfasf/asdfs';
+        return '';
+    }
+
+    public function getSourceLink()
+    {
+        $source_url = $this->getSourceUrl();
+        if ($source_url)
+        {
+            $source_host = parse_url($source_url, PHP_URL_HOST);
+            if ($source_host)
+            {
+                return CHtml::link('Источник: '. $source_host, $source_url, ['class' => 'source-link']);
+            }
+        }
+        return '';
     }
 }

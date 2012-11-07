@@ -475,7 +475,7 @@ class TextComponent extends CApplicationComponent
         $formatted_data = array();
         foreach ($data as $key => $val)
         {
-            $formatted_data['{{' . $key . '}}'] = $val;
+            $formatted_data['{{' . strtoupper($key) . '}}'] = $val;
         }
         return strtr($str, $formatted_data);
     }

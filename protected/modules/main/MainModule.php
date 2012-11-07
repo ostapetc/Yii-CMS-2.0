@@ -29,7 +29,6 @@ class MainModule extends WebModule
         $this->setImport(array(
             'main.models.*',
             'main.components.*',
-            'main.portlets.*'
         ));
     }
 

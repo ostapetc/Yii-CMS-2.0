@@ -166,25 +166,9 @@ class MailerTemplate extends ActiveRecord
     public function replaceMarks($text, User $user)
     {
         $params = Param::model()->getValues();
-        foreach ($params as $name => $value)
-        {
-            $name = '{{' . strtoupper($name). '}}';
-            $text = str_replace($name, $value, $text);
-        }
-
-        $text = str_replace(
-            array(
-                '{{ACTIVATE_ACCOUNT_HREF}}',
-                '{{CHANGE_PASSWORD_HREF}}'
-            ),
-            array(
-                Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code),
-                Yii::app()->createAbsoluteUrl('/changePassword/' . $user->password_recover_code)
-            ),
-            $text
-        );
-
-        return $text;
+        $params['{{ACTIVATE_ACCOUNT_HREF}}'] = Yii::app()->createAbsoluteUrl('/activateAccount/' . $user->activate_code);
+        $params['{{CHANGE_PASSWORD_HREF}}'] = Yii::app()->createAbsoluteUrl('/changePassword/' . $user->password_recover_code);
+        return Yii::app()->text->parseTemplate($text, $params);
     }
 
 

@@ -1,3 +1,8 @@
+.comment {
+    margin-bottom: 9px;
+    clear: both;
+}
+
 .comment .well {
     background-color: #fdfdfd !important;
     box-shadow: none;
@@ -28,10 +33,6 @@
     font-size: 11px;
     margin-right: 10px;
     margin-top: 6px;
-}
-
-.comment {
-    margin-bottom: 9px;
 }
 
 .comment .head {

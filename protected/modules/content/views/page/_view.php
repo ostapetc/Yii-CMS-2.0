@@ -30,32 +30,31 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <?=
-                $this->renderPartial(
-                    'application.modules.content.views.pageSection._list',
-                    ['sections' => $data->sections]
-                );
+            <td colspan="2" class="special-info">
+                <?
+                $this->renderPartial('content.views.pageSection._list', [
+                    'sections' => $data->sections
+                ]);
+                ?>
+                <?= $data->getSourceLink(); ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="special-info">
+                <?
+                $this->renderPartial('tags.views._list', [
+                    'tags' => $data->tags
+                ]);
                 ?>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <?=
-                $this->renderPartial(
-                    'application.modules.tags.views._list',
-                    ['tags' => $data->tags]
-                );
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <?=
-                $this->renderPartial(
-                    '_infoPanel',
-                    ['page' => $data]
-                );
+                <?
+                $this->renderPartial('_infoPanel', [
+                    'page' => $data,
+                    'preview' => true
+                ]);
                 ?>
             </td>
         </tr>
