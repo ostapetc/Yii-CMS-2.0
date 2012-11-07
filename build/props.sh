@@ -7,5 +7,6 @@ webroot=${basedir}www/
 overlays=/var/overlays/phpenv.com/
 
 app_dir=${webroot}protected/
+runtime=${webroot}protected/runtime
 yiic=${app_dir}libs/yii/yiic.php
 

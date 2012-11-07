@@ -37,4 +37,8 @@ rm -rf ${app_dir}/protected/runtime/*
 echo '-----------migrate-----------'
 php $yiic migrate up
 
-
+#sphinx reindex
+php $yiic sphinx_conf
+cp $runtime/sphinx/sphinx.conf /etc/sphinxsearch/sphinx.conf
+/etc/sphinxsearch/indexer --all --rotate
+/etc/init.d/sphinxsearch restart
