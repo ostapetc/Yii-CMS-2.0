@@ -39,6 +39,6 @@ php $yiic migrate up
 
 #sphinx reindex
 php $yiic sphinx_conf
-cp $runtime/sphinx/sphinx.conf /etc/sphinxsearch/sphinx.conf
+sed -f ${overlays}production.sed $runtime/sphinx/sphinx.conf > /etc/sphinxsearch/sphinx.conf
 /usr/local/bin/indexer --all --rotate --config /etc/sphinxsearch/sphinx.conf
 /etc/init.d/sphinxsearch restart

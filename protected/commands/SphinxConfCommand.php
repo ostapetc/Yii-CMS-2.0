@@ -103,11 +103,6 @@ class SphinxConfCommand extends CConsoleCommand
         is_dir($target) || mkdir($target, 0777);
 
         $content = Yii::app()->text->parseTemplate($content, array(
-            'DB_USER'   => Yii::app()->db->username,
-            'DB_PASS'   => Yii::app()->db->password,
-            'DB_NAME'   => 'cms2',
-            //TODO: set data from config
-            'DB_HOST'   => 'localhost',
             'BASE_PATH' => '/etc/sphinxsearch',
         ));
 
