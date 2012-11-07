@@ -60,7 +60,13 @@ class TextComponent extends CApplicationComponent
         $from = $this->layoutMap[$layout]['from'];
         $to   = $this->layoutMap[$layout]['to'];
 
-        return $this->mb_strtr($str, $from, $to);
+        $result = $this->mb_strtr($str, $from, $to);
+        if ($result == $str)
+        {
+            $result = $this->mb_strtr($tr, $to, $from);
+        }
+
+        return $result;
     }
 
 
