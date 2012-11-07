@@ -306,7 +306,7 @@ span.italic-12 {
     margin: 5px 10px 0  20px;
 }
 
-.video-gallery li:nth-child(3n){
+.video-gallery li:nth-child(2n + 1){
     clear:both;
 }
 
@@ -326,9 +326,9 @@ span.italic-12 {
 }
 
 /*-----------------------------VIDEO GALLERY------------------------------------*/
-#user-albums li:nth-child(4n) {
+#user-albums li:nth-child(3n + 1) {
     clear: both;
 }
-#photos-gallery li:nth-child(5n) {
+#photos-gallery li:nth-child(4n + 1) {
     clear: both;
 }
