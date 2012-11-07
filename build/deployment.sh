@@ -41,4 +41,3 @@ php $yiic migrate up
 php $yiic sphinx_conf
 sed -f ${overlays}production.sed $runtime/sphinx/sphinx.conf > /etc/sphinxsearch/sphinx.conf
 /usr/local/bin/indexer --all --rotate --config /etc/sphinxsearch/sphinx.conf
-/etc/init.d/sphinxsearch restart
