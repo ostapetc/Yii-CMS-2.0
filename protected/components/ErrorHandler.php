@@ -8,7 +8,7 @@ class ErrorHandler extends CErrorHandler
 
     public function render($view, $data)
     {
-        if (CONFIG == 'production')
+        if (ENV == 'production')
         {
             try
             {

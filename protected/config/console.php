@@ -1,6 +1,5 @@
 <?
-$config = defined('ENV') ? ENV : CONFIG;
-$config = $config == 'install' ? 'main' : $config;
+$config = ENV == 'install' ? 'main' : ENV;
 return CMap::mergeArray(require($config . '.php'), array(
     'language'   => 'en',
     'commandMap' => array(

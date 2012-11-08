@@ -21,7 +21,7 @@ require_once LIBRARIES_PATH . 'functions.php';
 require_once LIBRARIES_PATH . 'debug.php';
 
 
-$config = APP_PATH . 'config' . DS . (defined('ENV') ? ENV : CONFIG) .'.php';
+$config = APP_PATH . 'config' . DS . ENV  .'.php';
 
 Yii::createWebApplication($config)->run();
 

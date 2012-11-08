@@ -1,6 +1,6 @@
 <?
 define('DS', DIRECTORY_SEPARATOR);
-define('CONFIG', 'development');
+define('ENV', 'development');
 define('YII_DEBUG', true);
 define('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . 'protected' . DS);
 define('RUNTIME_PATH', APP_PATH . 'runtime' . DS);
