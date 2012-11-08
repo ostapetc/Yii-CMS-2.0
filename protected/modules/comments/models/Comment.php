@@ -64,6 +64,10 @@ class Comment extends ActiveRecord
                 'required'
             ),
             array(
+                'text',
+                'antimatValidator'
+            ),
+            array(
                 'root',
                 'numerical',
                 'integerOnly' => true
@@ -83,6 +87,11 @@ class Comment extends ActiveRecord
                 'ObjectExistsValidator'
             )
         );
+    }
+
+    public function antimatValidator($attribute,$params)
+    {
+
     }
 
 

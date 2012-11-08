@@ -63,7 +63,7 @@ class TextComponent extends CApplicationComponent
         $result = $this->mb_strtr($str, $from, $to);
         if ($result == $str)
         {
-            $result = $this->mb_strtr($tr, $to, $from);
+            $result = $this->mb_strtr($str, $to, $from);
         }
 
         return $result;
@@ -94,7 +94,6 @@ class TextComponent extends CApplicationComponent
      */
     public function mb_str_split($str)
     {
-
         assert(is_string($str));
 
         return preg_split('~~u', $str, null, PREG_SPLIT_NO_EMPTY);
@@ -226,7 +225,7 @@ class TextComponent extends CApplicationComponent
      *
      * @return string
      */
-    function antimat($string, $replaces = "<font color=red>цетзура</font> ")
+    function antimat($string, $return_boolean = false, $replaces = "<font color=red>цетзура</font> ")
     {
         //setlocale (LC_ALL, "ru_RU.UTF8");
 
@@ -266,37 +265,31 @@ class TextComponent extends CApplicationComponent
         {
             $blocked = 0;
             /*formating word...*/
-            $str_rep = eregi_replace("[^a-zA-Zа-яА-Яё]", "", strtolower($elems[$i]));
-            for ($j = 0; $j < strlen($str_rep); $j++)
-            {
-                foreach ($let_matches as $key => $value)
-                {
-                    if ($str_rep[$j] == $key)
-                    {
-                        $str_rep[$j] = $value;
-                    }
-                }
-            }
-            /*done*/
+            $str_rep = $this->mb_strtolower($elems[$i]);
 
+            $str_rep = strtr($str_rep, $let_matches);
+
+            /*done*/
             /*here we are trying to find bad word*/
             /*match in the special array*/
             for ($k = 0; $k < count($bad_words); $k++)
             {
-                if (ereg("\*$", $bad_words[$k]))
+                if (preg_match("/^" . $bad_words[$k] . "/i", $str_rep))
                 {
-                    if (ereg("^" . $bad_words[$k], $str_rep))
+                    if ($return_boolean)
                     {
-                        $elems[$i] = array_rand((array)$replaces); //можно рандомные замены напихать сюда
-                        $blocked   = 1;
-                        $counter++;
-                        break;
+                        return true;
                     }
+
+                    $elems[$i] = $replaces; //можно рандомные замены напихать сюда
+
+                    $counter++;
+                    break;
                 }
+
                 if ($str_rep == $bad_words[$k])
                 {
                     $elems[$i] = $this->rand_replace();
-                    $blocked   = 1;
                     $counter++;
                     break;
                 }
@@ -309,7 +302,19 @@ class TextComponent extends CApplicationComponent
         return $string;
     }
 
+    public function mb_strtolower($str)
+    {
+        $chars_hi = 'ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁЂЃЄЅІЇЈЉЊЋЌЎЏҐ';
+        $chars_lo = 'abcdefghijklmnopqrstuvwxyzабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџґ';
+        return $this->mb_strtr($str, $chars_hi, $chars_lo);
+    }
 
+    public function mb_strtoupper($str)
+    {
+        $chars_hi = 'ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁЂЃЄЅІЇЈЉЊЋЌЎЏҐ';
+        $chars_lo = 'abcdefghijklmnopqrstuvwxyzабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџґ';
+        return $this->mb_strtr($str, $chars_lo, $chars_hi);
+    }
     /**
      * Generate given counts of Paragraphs
      *
