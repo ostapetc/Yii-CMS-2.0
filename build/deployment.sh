@@ -23,14 +23,15 @@ echo '-----------configuring-----------'
 sed -f ${overlays}production.sed ${app_dir}config/constants.php.tpl > ${app_dir}config/constants.php
 sed -f ${overlays}production.sed ${app_dir}config/production.php.tpl > ${app_dir}config/production.php
 
-chown -R www-data:www-data $deploy_dir
 chown -R www-data:www-data $webroot
-
 
 #clear
 echo '-----------clear-----------'
-rm -rf ${app_dir}/assets/*
-rm -rf ${app_dir}/protected/runtime/*
+rm -rf ${webroot}assets
+rm -rf ${app_dir}runtime
+
+mkdir -m 777 ${webroot}assets/
+mkdir -m 777 ${app_dir}runtime/
 
 
 #migate
