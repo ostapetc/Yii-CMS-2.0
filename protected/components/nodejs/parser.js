@@ -80,7 +80,8 @@ var parsers = {
 //                            console.log(counters[id]);
 
                             if (--(counters[id]) == 0) {
-                                parsers.sherdog_gallery.download_files(gallery.imgs, function () {
+                                //see https://github.com/caolan/async#map
+                                async.map(gallery.imgs, parsers.sherdog_gallery.download_file, function () {
                                     console.log(gallery);
 //                                  collection.insert(gallery, console.log);
                                 });
@@ -119,9 +120,7 @@ var parsers = {
                     });
                 });
             },
-            download_files: function (imgs, callback) {
-                //see https://github.com/caolan/async#map
-                async.map(imgs, function (img) {
+            download_file: function (img) {
                     var file_name = url.parse(img.url).pathname.split('/').pop();
                     var file = fs.createWriteStream('/tmp/' + file_name);
                     var curl = spawn('curl', [img.url]);
@@ -136,7 +135,6 @@ var parsers = {
                             console.log('Failed: ' + code);
                         }
                     });
-                }, callback);
             }
         }
     }
