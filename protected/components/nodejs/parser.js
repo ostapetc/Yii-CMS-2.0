@@ -120,6 +120,7 @@ var parsers = {
                 });
             },
             download_files: function (imgs, callback) {
+                //see https://github.com/caolan/async#map
                 async.map(imgs, function (img) {
                     var file_name = url.parse(img.url).pathname.split('/').pop();
                     var file = fs.createWriteStream('/tmp/' + file_name);
