@@ -93,6 +93,9 @@ return array(
             'class' => 'CErrorHandler',
             'errorAction' => 'main/main/error',
         ),
+        'db' => array(
+            'class' => 'application.components.DbConnection',
+        ),
         'authManager' => array(
             'class' => 'CDbAuthManager',
             'connectionID' => 'db',
