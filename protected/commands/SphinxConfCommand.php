@@ -104,6 +104,7 @@ class SphinxConfCommand extends CConsoleCommand
 
         $content = Yii::app()->text->parseTemplate($content, array(
             'BASE_PATH' => '/etc/sphinxsearch',
+            'INDEXES_PATH' => '/var/lib/sphinxsearch/data',
         ));
 
         $file = $target . '/sphinx.conf';

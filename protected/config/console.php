@@ -15,6 +15,9 @@ return CMap::mergeArray(require($config . '.php'), array(
         'sphinx_conf'    => array(
             'class' => 'application.commands.SphinxConfCommand',
         ),
+        'try'    => array(
+            'class' => 'mma.commands.SherdogGalleryParser',
+        ),
         'parser_runner'    => array(
             'class' => 'content.commands.ParserRunnerCommand',
             'parsers' => array(
