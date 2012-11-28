@@ -1,5 +1,8 @@
 <?
 $config = ENV == 'install' ? 'main' : ENV;
+
+$_SERVER['DOCUMENT_ROOT'] = realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR;
+
 return CMap::mergeArray(require($config . '.php'), array(
     'language'   => 'en',
     'commandMap' => array(

@@ -1,4 +1,8 @@
 <?
+/**
+ * @property $errors_str string
+ * @property $errors_array array
+ */
 abstract class ActiveRecord extends CActiveRecord
 {
     const SCENARIO_CREATE = 'create';
@@ -383,7 +387,7 @@ abstract class ActiveRecord extends CActiveRecord
     }
 
 
-    public function getErrorsFlatArray()
+    public function getErrorsArray()
     {
         $result = array();
 
@@ -400,6 +404,12 @@ abstract class ActiveRecord extends CActiveRecord
         }
 
         return $result;
+    }
+
+
+    public function getErrorsStr()
+    {
+        return implode("\n", ArrayHelper::extract($this->getErrorsArray(), 'error'));
     }
 
 
