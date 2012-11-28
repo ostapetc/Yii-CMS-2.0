@@ -77,7 +77,7 @@ class FileSystemHelper
 
     public static function deleteFileWithSimilarNames($dir, $file)
     {
-        $dir = trim($dir, '/');
+        //$dir = trim($dir, '/');
         $files = array_merge(array($file), self::findSimilarFiles($dir, $file));
 
         self::unlinkFiles($dir, $files);

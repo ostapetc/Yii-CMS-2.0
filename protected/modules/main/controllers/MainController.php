@@ -5,10 +5,11 @@ class MainController extends ClientController
     public static function actionsTitles() 
     {
         return array(
-            "error"          => "Ошибка на странице",
-            "error404"       => "Страница не найдена",
-            "search"         => "Поиск по сайту",
-            "changeLanguage" => "Смена языка"
+            'error'          => 'Ошибка на странице',
+            'error404'       => 'Страница не найдена',
+            'search'         => 'Поиск по сайту',
+            'changeLanguage' => 'Смена языка',
+            'test'           => 'Тест'
         );
     }
 
@@ -119,5 +120,14 @@ class MainController extends ClientController
     public function actionOff()
     {
         die("site off");
+    }
+
+
+    public function actionTest()
+    {
+        require_once APP_PATH . 'commands/RankingsMmaNewsParserCommand.php';
+
+        $cmd = new RankingsMmaNewsParserCommand();
+        $cmd->run(array());
     }
 }

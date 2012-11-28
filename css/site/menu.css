@@ -94,7 +94,8 @@ small.grey {
 }
 
 .breadcrumb li.active > a, .breadcrumb li > a:hover {
-    background-color: #0088CC;
+    background-color: #020202;
     color: #FFFFFF;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 3px;
+    font-weight: bold;
 }

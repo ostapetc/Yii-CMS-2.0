@@ -1,21 +1,34 @@
 <?
 /**
  * @property $id
- * @property $source_url
- * @property $source_name
+ * @property $sherdog_id
  * @property $name
  * @property $nickname
- * @property $birthday
- * @property $association
+ * @property $birthdate
+ * @property $city
  * @property $height
  * @property $weight
+ * @property $class
+ * @property $association
+ * @property $wins
+ * @property $losses
+ * @property $win_ko
+ * @property $win_submissions
+ * @property $win_decisions
+ * @property $loss_ko
+ * @property $loss_submissions
+ * @property $loss_decisions
+ * @property $image
+ * @property $date_create
+ * @property $date_update
  */
 class Fighter extends ActiveRecord
 {
     const PAGE_SIZE = 20;
 
-    const PHOTO_SIZE_SMALL = 50;
-    const PHOTO_SIZE_BIG   = 200;
+    const IMAGE_DIR = 'upload/fighters/';
+
+    const IMAGE_SIZE_NORMAL = 130;
 
 
     public function name()
@@ -40,36 +53,33 @@ class Fighter extends ActiveRecord
     {
         return array(
             array(
-                'source_url, source_name, source_path, name',
+                'sherdog_id, name',
                 'required'
             ),
             array(
-                'source_url, name, nickname, association, country',
+                'name, nickname, city, association, image',
                 'length',
                 'max' => 100
-            ),
+             ),
             array(
-                'source_name, source_path',
+                'class',
                 'length',
                 'max' => 20
-            ),
+             ),
+
             array(
-                'image',
-                'length',
-                'max' => 150
-            ),
-            array(
-                'source_url',
+                'sherdog_id',
                 'unique'
             ),
             array(
-                'id',
+                'id, sherdog_id, wins, losses, win_ko, win_submissions, win_decisions, loss_ko, loss_submissions, loss_decisions',
                 'numerical',
                 'integerOnly' => true
             ),
             array(
-                'date_create, date_update',
-                'safe'
+                'height, weight',
+                'numerical',
+                'integerOnly' => false
             )
         );
     }
@@ -86,14 +96,26 @@ class Fighter extends ActiveRecord
     {
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('source_url', $this->source_url, true);
-        $criteria->compare('source_name', $this->source_name, true);
+        $criteria->compare('sherdog_id', $this->sherdog_id, true);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('nickname', $this->nickname, true);
-        $criteria->compare('birthday', $this->birthday, true);
-        $criteria->compare('association', $this->association, true);
+        $criteria->compare('birthdate', $this->birthdate, true);
+        $criteria->compare('city', $this->city, true);
         $criteria->compare('height', $this->height, true);
         $criteria->compare('weight', $this->weight, true);
+        $criteria->compare('class', $this->class, true);
+        $criteria->compare('association', $this->association, true);
+        $criteria->compare('wins', $this->wins, true);
+        $criteria->compare('losses', $this->losses, true);
+        $criteria->compare('win_ko', $this->win_ko, true);
+        $criteria->compare('win_submissions', $this->win_submissions, true);
+        $criteria->compare('win_decisions', $this->win_decisions, true);
+        $criteria->compare('loss_ko', $this->loss_ko, true);
+        $criteria->compare('loss_submissions', $this->loss_submissions, true);
+        $criteria->compare('loss_decisions', $this->loss_decisions, true);
+        $criteria->compare('image', $this->image, true);
+        $criteria->compare('date_create', $this->date_create, true);
+        $criteria->compare('date_update', $this->date_update, true);
 
         return new ActiveDataProvider(get_class($this), array(
             'criteria'   => $criteria,
@@ -104,76 +126,78 @@ class Fighter extends ActiveRecord
     }
 
 
-    public function beforeSave()
+    public function uploadFiles()
     {
-        if (parent::beforeSave())
-        {
-            if (!$this->isNewRecord)
-            {
-                $this->date_update = new CDbExpression('NOW()');
-            }
-
-            return true;
-        }
-    }
-
-
-    public static function getPhotosDir()
-    {
-        $dir = $_SERVER['DOCUMENT_ROOT'] . 'upload' . DS . 'fighters' . DS;
-        if (!is_dir($dir))
-        {
-            mkdir($dir, 0777);
-            chmod($dir, 0777);
-        }
-
-        return $dir;
-    }
-
-
-    public function getPhotoPath()
-    {
-        if (!$this->image) return;
-
-        $path = $this->photos_dir . $this->image;
-        if (file_exists($path))
-        {
-            return $path;
-        }
-    }
-
-
-    public function getPhotoHtml($size = self::PHOTO_SIZE_SMALL)
-    {
-        $def_photo = '/img/icons/user.gif';
-
-        if ($this->photo_path)
-        {
-            return CHtml::image(
-                $photo_src,
-                $this->name,
-                array(
-                    'title'  => $this->name,
-                    'border' => 0,
-                    'width'  => $size,
-                    'height' => $size,
-                    'class'  => 'img-rounded'
-                )
-            );
-        }
-    }
-
-
-    public function getPhotoLink($size = self::PHOTO_SIZE_SMALL)
-    {
-        return CHtml::link(
-            $this->getPhotoHtml($size),
-            $this->url,
-            array(
-                'class'  => 'user-photo-link',
-                'width'  => $size,
-                'height' => $size
-            )
+        return array(
+            'image' => array(
+                'dir' => self::IMAGE_DIR
+            ),
         );
+    }
+
+
+    public function getLink()
+    {
+        return CHtml::link($this->full_name, array('/mma/fighter/view', 'id' => $this->id));
+    }
+
+
+    public function getFullName()
+    {
+        $name = $this->name;
+        if ($this->nickname)
+        {
+            $name.= ' "' . $this->nickname . '"';
+        }
+
+        return $name;
+    }
+
+
+    public function getImageSrc($size = IMAGE_SIZE_NORMAL)
+    {
+        if ($this->image)
+        {
+            $path = DOCUMENT_ROOT . self::IMAGE_DIR . $this->image;
+            if (file_exists($path))
+            {
+                return ImageHelper::thumbSrc(self::IMAGE_DIR, $this->image, array('width' => $size, 'height' => null));
+            }
+        }
+    }
+
+
+    public function getImage($size = IMAGE_SIZE_NORMAL)
+    {
+        return CHtml::image($this->getImageSrc($size));
+    }
+
+
+    public function getImageLink($size = self::IMAGE_SIZE_NORMAL)
+    {
+        return CHtml::link($this->getImage($size), $this->url, array('title' => $this->full_name, 'alt' => $this->full_name));
+    }
+
+
+    public function afterFind()
+    {
+        $attrs_zero_if_null = array(
+            'wins',
+            'win_ko',
+            'win_submissions',
+            'win_decisions',
+            'losses',
+            'loss_ko',
+            'loss_submissions',
+            'loss_decisions'
+        );
+
+        foreach ($attrs_zero_if_null as $attr)
+        {
+            if (is_null($this->$attr))
+            {
+                $this->$attr = 0;
+            }
+        }
     }
 }
