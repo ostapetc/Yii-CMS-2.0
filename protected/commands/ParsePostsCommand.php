@@ -20,6 +20,8 @@ class ParsePostsCommand extends CConsoleCommand
             die("Error: needs 'parser' parameter\n");
         }
 
+        require_once APP_PATH . 'modules/mma/components/' . $args[0] . '.php';
+
         $parser = new $args[0];
         $parser->parsePosts();
     }
