@@ -33,6 +33,12 @@ class UserIdentity extends CUserIdentity
         return crypt($str, '$2a$12$' . $salt);
     }
 
+    public static function isCrypted($str)
+    {
+        dump(substr($str, 0, 7));
+        return substr($str, 0, 7) == '$2a$12$';
+    }
+
     /**
      * Compare 1 encrypted and 1 non-encrypted passwords
      *

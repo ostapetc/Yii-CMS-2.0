@@ -5,6 +5,10 @@ class SherdogGalleryParser extends CConsoleCommand
 {
     public function parse()
     {
+        $user = new User();
+        $user->password = 1123;
+        $user->save(false);
+        die;
         $m = new Mongo();
         $db = $m->mma;
         $collection = $db->serdog_gallery;
