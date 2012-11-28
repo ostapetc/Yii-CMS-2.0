@@ -55,6 +55,10 @@ class SherdogGalleryParser extends CConsoleCommand
         $order = 0;
         foreach ($gallery['imgs'] as $img)
         {
+            if (!$img['path'])
+            {
+                continue;
+            }
             $file            = new MediaFile('insert', 'local');
             $file->model_id  = get_class($album);
             $file->object_id = $album->id;
