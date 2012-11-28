@@ -1,6 +1,6 @@
 var CrawlerObject = require("crawler").Crawler,
     crawler = new CrawlerObject({
-        maxConnections: 20
+        maxConnections: 40
     }),
 
     fs = require('fs'),
@@ -9,6 +9,9 @@ var CrawlerObject = require("crawler").Crawler,
     spawn = require('child_process').spawn,
 
     async = require('async');
+
+var upload_path = fs.realpathSync(__dirname + '/../..') + '/runtime/sherdog/';
+fs.existsSync(upload_path) || fs.mkdirSync(upload_path, 0777);
 
 var parse = function (url, callback) {
     crawler.queue([
@@ -28,7 +31,7 @@ var mongo = {
         if (!this.server) {
             var mongodb = require('mongodb');
             that.server = new mongodb.Server("127.0.0.1", 27017, { auto_reconnect: true, w: 'majority' });
-            that.client = new mongodb.Db('parsers', that.server, {safe: true});
+            that.client = new mongodb.Db('mma', that.server, {safe: true});
         }
 
         if (this.opened) {
@@ -42,6 +45,8 @@ var mongo = {
     }
 };
 
+
+var a = 0;
 var parsers = {
         sherdog_video: {
             url: null,
@@ -50,7 +55,7 @@ var parsers = {
             base_url: 'http://www.sherdog.com',
             url: "/pictures",
             parser: function (error, result, $) {
-                $("div.content li h3.title a").each(function (url) {
+                $("div.content li h3.title a:last").each(function (url) {
                     var url = parsers.sherdog_gallery.base_url + $(this).attr('href'),
                         id = url.split('-').pop(),
                         title = $.trim($(this).text()),
@@ -60,7 +65,7 @@ var parsers = {
                     var parse_gallery = function (collection) {
                         var gallery = {
                             title: title,
-                            gallery_id: id,
+                            id: id,
                             imgs: []
                         };
 
@@ -74,12 +79,11 @@ var parsers = {
                                 });
                             }
 
-//                            console.log(counters[id]);
+                            console.log(counters[id]);
 
                             if (--(counters[id]) == 0) {
-                                parsers.sherdog_gallery.download_files(gallery.imgs, function () {
-                                    console.log(gallery);
-//                                  collection.insert(gallery, console.log);
+                                parsers.sherdog_gallery.download_files(gallery.imgs, function (err, results) {
+                                    collection.insert(gallery, function() {});
                                 });
                             }
                         };
@@ -105,7 +109,7 @@ var parsers = {
                     //parser if in mongo we have no it
                     mongo.getClient(function (client) {
                         client.collection('sherdog_gallery', function (err, collection) {
-                            collection.findOne({gallery_id: id}, function (err, item) {
+                            collection.findOne({id: id}, function (err, item) {
                                 if (item) {
                                     return true;
                                 }
@@ -117,18 +121,24 @@ var parsers = {
                 });
             },
             download_files: function (imgs, callback) {
-                async.map(imgs, function (img) {
+                async.map(imgs, function (img, callback) {
                     var file_name = url.parse(img.url).pathname.split('/').pop();
-                    var file = fs.createWriteStream('/tmp/' + file_name);
+                    var file_path = upload_path + file_name;
+                    var file = fs.createWriteStream(file_path);
                     var curl = spawn('curl', [img.url]);
                     curl.stdout.on('data', function (data) {
+                        console.log(file_name);
                         file.write(data);
                     });
                     curl.stdout.on('end', function (data) {
+                        img.path = file_path;
+                        console.log(img);
+                        callback(null, img);
                         file.end();
                     });
                     curl.on('exit', function (code) {
                         if (code != 0) {
+                            callback('Failed: ' + code, null);
                             console.log('Failed: ' + code);
                         }
                     });

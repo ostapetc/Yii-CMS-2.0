@@ -236,7 +236,7 @@ class MediaAlbum extends ActiveRecord
      *
      * @return MediaAlbum
      */
-    public function parent($model_id, $object_id = null, $positive)
+    public function parent($model_id, $object_id = null, $positive = true)
     {
         $alias = $this->getTableAlias();
 
