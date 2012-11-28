@@ -35,7 +35,6 @@ class UserIdentity extends CUserIdentity
 
     public static function isCrypted($str)
     {
-        dump(substr($str, 0, 7));
         return substr($str, 0, 7) == '$2a$12$';
     }
 
