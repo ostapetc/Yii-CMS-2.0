@@ -183,15 +183,11 @@ var parsers = {
                                 });
                             }
 
-//                            console.log(counters[id]);
-
                             if (--(counters[id]) == 0)
                             {
                                 parsers.sherdog_gallery.download_files(gallery.imgs, function()
                                 {
-                                    console.log(gallery);
                                     argv.v && console.log("insert gallery: \n", gallery);
-                                    //                                  collection.insert(gallery);
                                     --count || ((parsers.sherdog_gallery.is_done = true) && done());
                                 });
                             }
@@ -216,7 +212,6 @@ var parsers = {
                             parse(gallery_page, gallery_page_parser);
                         });
                     };
-
 
                     //parser if in mongo we have no it
                     mongo.getClient(function(client)
