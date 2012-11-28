@@ -1,6 +1,7 @@
 <?
 $this->tabs = [
-    'Добавить страницу' => $this->createUrl('create')
+    'Добавить страницу' => $this->createUrl('create'),
+    'Удалить все посты' => $this->createUrl('deleteAll')
 ];
 
 $this->widget('AdminGridView', [

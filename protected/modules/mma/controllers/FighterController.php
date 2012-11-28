@@ -18,19 +18,30 @@ class FighterController extends ClientController
     }
 
 
+    public function sidebars()
+    {
+        return [
+            [
+                'actions'  => ['index'],
+                'sidebars' => [
+                    [
+                        'type'  => 'widget',
+                        'class' => 'content.portlets.SectionCreateSidebar'
+                    ],
+                ]
+            ],
+        ];
+    }
+
+
     public function actionIndex()
     {
         $criteria = new CDbCriteria();
 
-        $data_provider = new CActiveDataProvider('Fighter', array(
-            'criteria'   => $criteria,
-            'pagination' => array(
-                'pageSize' => 15
-            )
-        ));
+        $fighters = Fighter::model()->findAll(array('limit' => 10));
 
-        $this->render('index', array(
-            'data_provider' => $data_provider,
-        ));
+        $this->render('index', [
+            'fighters' => $fighters
+        ]);
     }
 }

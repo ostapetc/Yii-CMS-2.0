@@ -7,6 +7,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
     public $api_map;
     public $new_record_status;
     public $old_name;
+    public $need_upload = true;
 
     public function parse($content)
     {
@@ -189,20 +190,29 @@ class LocalApiBehavior extends ApiBehaviorAbstract
         $owner = $this->getOwner();
         if ($owner->getIsNewRecord())
         {
-            if ($this->_save('file'))
+            if ($this->need_upload)
             {
-                $this->setPk($this->pk);
-                $owner->title = $this->old_name;
-                $owner->type  = $this->getType();
-//                $owner->target_api = $this->api_map[$owner->type];
-                $owner->status = $this->new_record_status;
-                return true;
+                if ($this->_save('file'))
+                {
+                    $this->setPk($this->pk);
+                    $owner->title || $owner->title = $this->old_name;
+                    $owner->type  = $this->getType();
+    //                $owner->target_api = $this->api_map[$owner->type];
+                    $owner->status || $owner->status = $this->new_record_status;
+                }
+                else
+                {
+    //                $this->getOwner()->error = $this->errors;
+                    return false;
+                }
             }
             else
             {
-//                $this->getOwner()->error = $this->errors;
-                return false;
+                $this->pk = $this->moveToVault($this->pk);
+                $owner->type  = $this->getType();
+                $owner->status || $owner->status = $this->new_record_status;
             }
+
         }
         return true;
     }
@@ -309,7 +319,7 @@ class LocalApiBehavior extends ApiBehaviorAbstract
             else
             {
                 $target_file_name =
-                    substr($id, self::$depth * 2) . '.' . pathinfo($src_file, PATHINFO_EXTENSION);
+                    substr($id, self::$depth * 2) . '.' . strtolower(pathinfo($src_file, PATHINFO_EXTENSION));
             }
         }
 

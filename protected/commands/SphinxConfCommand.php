@@ -1,4 +1,8 @@
 <?php
+/**
+ * Using: php yiic sphinx_conf && sudo mv runtime/sphinx/sphinx.conf /etc/sphinxsearch/sphinx.conf && sudo indexer --all --rotate
+ *
+ */
 class SphinxConfCommand extends CConsoleCommand
 {
     public $basePath = 'application.runtime.sphinx';

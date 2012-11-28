@@ -1,0 +1,15 @@
+.label.record {
+    width: 40px !important;
+    text-align: center;
+    line-height: 20px;
+}
+
+.label.record span{
+    font-size: 20px;
+}
+
+.fights-statistic-tbl td:last-child {
+    width: 30px;
+    font-size: 11px;
+    line-height: 11px;
+}

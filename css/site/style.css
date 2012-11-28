@@ -3,7 +3,7 @@ body {
 
     /*background-attachment: fixed;*/
 
-    background-color: #444;
+    /*background-color: #444;*/
     background: url(/img/bg/bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -57,19 +57,19 @@ iframe{
     border-radius: 3px;
 }
 
-.row-fluid .well {
-    background-color: #F9F9F9;
-}
+/*.row-fluid .well {*/
+    /*background-color: #F9F9F9;*/
+/*}*/
 
-.row-fluid .span8.well {
-    background-color: #FFFFFF;
-}
+/*.row-fluid .span8.well {*/
+    /*background-color: #FFFFFF;*/
+/*}*/
 
-.well {
-    border-radius: 6px 6px 6px 6px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    text-shadow: 0 1px 0 #FFFFFF;
-}
+    /*.well {*/
+        /*border-radius: 6px 6px 6px 6px;*/
+        /*border: 1px solid rgba(0, 0, 0, 0.1);*/
+        /*text-shadow: 0 1px 0 #FFFFFF;*/
+    /*}*/
 
 h1 {
     font-size: 18px;
@@ -91,14 +91,14 @@ h1 {
     font-size: 12px;
 }
 
-.well h4 {
-    font-size: 14px;
-    color: #333333;
-    font-weight: normal;
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
+/*.well h4 {*/
+    /*font-size: 14px;*/
+    /*color: #333333;*/
+    /*font-weight: normal;*/
+    /*margin-top: 0;*/
+    /*margin-bottom: 5px;*/
+    /*font-weight: bold;*/
+/*}*/
 
 span.italic-12 {
     font-style: italic;
@@ -162,6 +162,16 @@ span.italic-12 {
 
 .breadcrumb  {
     margin-bottom: 10px;
+
+    background-color: #252a30;
+    background-image: -moz-linear-gradient(top, #252a30, #252a30);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#252a30), to(#252a30));
+    background-image: -webkit-linear-gradient(top, #252a30, #252a30);
+    background-image: -o-linear-gradient(top, #252a30, #252a30);
+    background-image: linear-gradient(to bottom, #252a30, #252a30);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff252a30', endColorstr='#ff252a30', GradientType=0);
+    border-color: transparent;
 }
 
 
@@ -174,9 +184,9 @@ span.italic-12 {
     width: 714px;
 }
 
-.well {
-    margin-bottom: 10px;
-}
+/*.well {*/
+    /*margin-bottom: 10px;*/
+/*}*/
 
 .margin-null {
     margin: 0 0 0 0 !important;
@@ -326,9 +336,14 @@ span.italic-12 {
 }
 
 /*-----------------------------VIDEO GALLERY------------------------------------*/
-#user-albums li:nth-child(3n + 1) {
+#user-albums li:nth-child(2n + 1) {
     clear: both;
 }
-#photos-gallery li:nth-child(4n + 1) {
+#photos-gallery li:nth-child(3n + 1) {
     clear: both;
 }
+
+.well h3 {
+    line-height: 10px;
+}
+

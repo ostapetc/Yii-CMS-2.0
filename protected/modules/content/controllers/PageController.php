@@ -80,14 +80,14 @@ class PageController extends ClientController
             [
                 'actions'  => ['index'],
                 'sidebars' => [
-                    [
-                        'type' => 'widget',
-                        'class' => 'content.portlets.PageSectionsSidebar',
-                    ],
-                    [
-                        'type' => 'widget',
-                        'class' => 'comments.portlets.CommentsSidebar',
-                    ],
+//                    [
+//                        'type' => 'widget',
+//                        'class' => 'content.portlets.PageSectionsSidebar',
+//                    ],
+//                    [
+//                        'type' => 'widget',
+//                        'class' => 'comments.portlets.CommentsSidebar',
+//                    ],
                     [
                         'type' => 'widget',
                         'class' => 'content.portlets.NavigatorSidebar',

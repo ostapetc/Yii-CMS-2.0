@@ -3,44 +3,74 @@ Yii::import('content.commands.parsers.ContentParserAbstract', true);
 
 class SherdogGalleryParser extends CConsoleCommand
 {
-    public function parse()
+    public function actionIndex()
     {
-        $user = new User();
-        $user->password = 1123;
-        $user->save(false);
-        die;
-        $m = new Mongo();
+        $m = new Mongo('localhost:27017');
         $db = $m->mma;
-        $collection = $db->serdog_gallery;
-//        $obj = array( "title" => "Calvin and Hobbes", "author" => "Bill Watterson" );
-//        $collection->insert($obj);
-//        $obj = array( "title" => "XKCD", "online" => true );
-//        $collection->insert($obj);
-        $cursor = $collection->find();
-        foreach ($cursor as $obj) {
-            echo $obj["title"] . "\n";
+        $collection = $db->sherdog_gallery;
+        foreach ($collection->find() as $gallery)
+        {
+            $model = MediaAlbum::model()->findByAttributes([
+                'source' => 'sherdog.com',
+                'source_id' => $gallery['id']
+            ]);
+            if ($model)
+            {
+                continue;
+            }
+            $transaction = Yii::app()->db->beginTransaction();
+            try
+            {
+                $this->saveGallery($gallery);
+                $transaction->commit();
+                $collection->update(['id' => $gallery['id']], [
+                    'status' => 'parsed',
+                ]);
+            }
+            catch(Exception $e)
+            {
+                $transaction->rollback();
+                $collection->remove(['id' => $gallery['id']]);
+                Yii::log($e, CLogger::LEVEL_ERROR);
+            }
         }
-
-//        $this->saveGallery($gallery);
     }
 
     protected function saveGallery($gallery)
     {
+        $user = User::model()->findByAttributes(['email' => 'www.pismeco@gmail.com']);
+
         $album            = new MediaAlbum();
         $album->title     = $gallery['title'];
-        $album->model_id  = 'sherdog.com';
-        $album->object_id = $gallery['id'];
-        $album->save(false);
+        $album->model_id  = get_class($user);
+        $album->object_id = $user->id;
+        $album->source    = 'sherdog.com';
+        $album->source_id = $gallery['id'];
+        $album->status    = MediaAlbum::STATUS_ACTIVE;
+        if (!$album->save())
+        {
+            throw new CException(json_encode($album->getErrors()));
+        }
 
+        $order = 0;
         foreach ($gallery['imgs'] as $img)
         {
-            $file            = new MediaFile('create', 'remote');
+            if (!$img['path'])
+            {
+                continue;
+            }
+            $file            = new MediaFile('insert', 'local');
             $file->model_id  = get_class($album);
             $file->object_id = $album->id;
-            $file->tag       = 'images';
+            $file->tag       = 'files';
             $file->title     = $img['title'];
-            $file->remote_id = $img['img'];
-            $file->save(false);
+            $file->remote_id = $img['path'];
+            $file->order     = ++$order;
+            $file->getApi()->need_upload = false;
+            if (!$file->save())
+            {
+                throw new CException(json_encode($file->getErrors()));
+            }
         }
     }
 }

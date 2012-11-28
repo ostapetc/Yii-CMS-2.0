@@ -21,7 +21,7 @@ class ModelAdminController extends AdminController
         if ($form->submitted() && $model->validate())
         {
             file_put_contents($model->path, $this->actionGetCode($model->attributes, false));
-            chmod($model->path, 0777);
+            @chmod($model->path, 0777);
 
             Yii::app()->user->setFlash(Controller::MSG_SUCCESS, 'Модель создана!');
             $this->redirect($_SERVER['REQUEST_URI']);
