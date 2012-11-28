@@ -336,10 +336,10 @@ span.italic-12 {
 }
 
 /*-----------------------------VIDEO GALLERY------------------------------------*/
-#user-albums li:nth-child(3n + 1) {
+#user-albums li:nth-child(2n + 1) {
     clear: both;
 }
-#photos-gallery li:nth-child(4n + 1) {
+#photos-gallery li:nth-child(3n + 1) {
     clear: both;
 }
 

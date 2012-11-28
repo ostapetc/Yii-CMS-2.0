@@ -1,6 +1,6 @@
 <?
-$modules_includes = [];
-$modules_dirs     = scandir(MODULES_PATH);
+$modules_includes = array();
+$modules_dirs = scandir(MODULES_PATH);
 
 foreach ($modules_dirs as $module)
 {
@@ -12,12 +12,12 @@ foreach ($modules_dirs as $module)
     $modules[] = $module;
 }
 
-return [
-    'language'       => 'ru',
-    'basePath'       => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name'           => '',
-    'preload'        => ['log'],
-    'import'         => [
+return array(
+    'language' => 'ru',
+    'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+    'name' => '',
+    'preload' => array('log'),
+    'import' => array(
         'application.components.*',
         'application.components.interfaces.*',
         'application.components.Form',
@@ -30,118 +30,105 @@ return [
         'application.components.activeRecordBehaviors.*',
         'application.libs.helpers.*',
         'application.extensions.yiidebugtb.*',
-    ],
-    'modules'        => $modules,
-    'components'     => [
-        'executor'     => [
+    ),
+    'modules' => $modules,
+    'components' => array(
+        'executor' => array(
             'class' => 'application.components.CommandExecutor',
-        ],
-        'messages'     => [
-            'class'                  => 'CDbMessageSource',
-            'sourceMessageTable'     => 'languages_messages',
+        ),
+        'messages' => array(
+            'class' => 'CDbMessageSource',
+            'sourceMessageTable' => 'languages_messages',
             'translatedMessageTable' => 'languages_translations'
-        ],
-        'bootstrap'    => [
+        ),
+        'bootstrap' => array(
             'class' => 'application.components.bootstrap.components.Bootstrap'
-        ],
-        'search'       => [
-            'class'             => 'ext.sphinx.SphinxSearch',
-            'server'            => '127.0.0.1',
-            'port'              => 9312,
-            'maxQueryTime'      => 3000,
-            'enableProfiling'   => 0,
-            'enableResultTrace' => 0,
-        ],
-        'assetManager' => [
-            'class'       => 'CAssetManager',
-            'newDirMode'  => 0755,
+        ),
+        'assetManager' => array(
+            'class' => 'CAssetManager',
+            'newDirMode' => 0755,
             'newFileMode' => 0644
-        ],
-        'clientScript' => [
-            'class' => 'ClientScript',
-        ],
-        'session'      => [
+        ),
+        'clientScript' => array(
+            'class' => 'CClientScript',
+        ),
+        'session' => array(
             'autoStart' => true
-        ],
-        'user'         => [
+        ),
+        'user' => array(
             'allowAutoLogin' => true,
-            'class'          => 'WebUser'
-        ],
-        'metaTags'     => [
-            'class' => 'main.components.MetaTags'
-        ],
-        'translator'     => [
-            'class' => 'application.components.Translator',
-            'api' => [
-                'class' => 'ext.translators.YandexTranslate'
-            ]
-        ],
-        'image'        => [
-            'class'  => 'application.extensions.image.CImageComponent',
+            'class' => 'WebUser'
+        ),
+        'metaTags' => array(
+            'class' => 'application.modules.main.components.MetaTags'
+        ),
+        'image' => array(
+            'class' => 'application.extensions.image.CImageComponent',
             'driver' => 'GD'
-        ],
-        'dater'        => [
+        ),
+        'dater' => array(
             'class' => 'application.components.DaterComponent'
-        ],
-        'text'         => [
+        ),
+        'text' => array(
             'class' => 'application.components.TextComponent'
-        ],
-        'request'      => [
-            'class'                  => 'HttpRequest',
-            'enableCsrfValidation'   => false,
-            'noCsrfValidationRoutes' => [
+        ),
+        'request' => array(
+            'class' => 'HttpRequest',
+            'enableCsrfValidation' => false,
+            'noCsrfValidationRoutes' => array(
                 '^services/api/soap.*$',
                 '^services/api/json.*$',
-            ],
-            'csrfTokenName'          => 'token',
+            ),
+            'csrfTokenName' => 'token',
+        ),
+        'search' => [
+            'class' => 'ext.sphinx.SphinxSearch'
         ],
-        'urlManager'   => [
-            'urlFormat'      => 'path',
+        'urlManager' => array(
+            'urlFormat' => 'path',
             'showScriptName' => false,
-            'class'          => 'UrlManager'
-        ],
-        'errorHandler' => [
-            'class'       => 'CErrorHandler',
+            'class' => 'UrlManager'
+        ),
+        'errorHandler' => array(
+            'class' => 'CErrorHandler',
             'errorAction' => 'main/main/error',
-        ],
-        'authManager'  => [
-            'class'           => 'CDbAuthManager',
-            'connectionID'    => 'db',
-            'itemTable'       => 'auth_items',
+        ),
+        'db' => array(
+            'class' => 'application.components.DbConnection',
+        ),
+        'authManager' => array(
+            'class' => 'CDbAuthManager',
+            'connectionID' => 'db',
+            'itemTable' => 'auth_items',
             'assignmentTable' => 'auth_assignments',
-            'itemChildTable'  => 'auth_items_childs',
-            'defaultRoles'    => ['guest']
-        ],
-        'cache'        => [
+            'itemChildTable' => 'auth_items_childs',
+            'defaultRoles' => array('guest')
+        ),
+        'cache' => array(
             'class' => 'system.caching.CFileCache',
-        ],
-        'log'          => [
+        ),
+        'log' => array(
             'class'  => 'CLogRouter',
-            'routes' => [
-                [
+            'routes' => array(
+                array(
                     'class'        => 'CDbLogRoute',
                     'levels'       => 'info, error, warning',
                     'connectionID' => 'db',
                     'logTableName' => 'log'
-                ],
-                /*
-                [
+                )
+                /*array(
                     'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters' => ['*'),
-                ]
-                /**/
-            ],
-        ],
-    ],
-    'onBeginRequest' => [
-        'AppManager',
-        'init'
-    ],
+                    'ipFilters' => array('*'),
+                )*/
+            ),
+        ),
+    ),
+    'onBeginRequest' => array('AppManager', 'init'),
 
-    'params'         => [
-        'save_site_actions'           => true,
-        'multilanguage_support'       => false,
+    'params'         => array(
+        'save_site_actions' => true,
+        'multilanguage_support' => false,
         'collect_routes_from_modules' => true,
-        'themes_enabled'              => false
-    ]
-];
+        'themes_enabled' => false
+    )
+);

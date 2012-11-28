@@ -15,7 +15,6 @@ abstract class BaseFileListView extends ListView
         if ($this->dataProvider === null)
         {
             $this->dataProvider             = MediaFile::getDataProvider($this->model, $this->tag);
-            $this->dataProvider->pagination = false;
         }
 
         $this->assets = Yii::app()->getModule('media')->assetsUrl();

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Using: php yiic sphinx_conf && sudo mv runtime/sphinx/sphinx.conf /etc/sphinxsearch/sphinx.conf && sudo indexer --all --rotate
+ *
+ */
 class SphinxConfCommand extends CConsoleCommand
 {
     public $basePath = 'application.runtime.sphinx';
@@ -104,6 +108,12 @@ class SphinxConfCommand extends CConsoleCommand
 
         $content = Yii::app()->text->parseTemplate($content, array(
             'BASE_PATH' => '/etc/sphinxsearch',
+            'LOG_PATH' => '/var/log/sphinxsearch',
+            'INDEXES_PATH' => '/var/lib/sphinxsearch/data',
+            'MYSQL_HOST' => Yii::app()->db->getDbHost(),
+            'MYSQL_DB_NAME' => Yii::app()->db->getDbName(),
+            'MYSQL_USER' => Yii::app()->db->username,
+            'MYSQL_PASS' => Yii::app()->db->password,
         ));
 
         $file = $target . '/sphinx.conf';

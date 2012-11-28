@@ -35,6 +35,14 @@
         'itemsTagName' => 'ul',
         'sortableEnable' => $isOwner,
         'itemsCssClass' => 'thumbnails',
+        'enablePagination' => true,
+        'pager' => [
+            'class'   => 'ext.yiinfinite-scroll.YiinfiniteScroller',
+            'contentSelector' => '#photos-gallery ul.thumbnails',
+            'itemSelector' => 'li.gallery-item',
+            'loadingText' => false,
+            'donetext' => false,
+    ],
         'fancyboxOptions' => [
             'beforeShow'=> 'js:function() {
                 //do some, comments for ex
