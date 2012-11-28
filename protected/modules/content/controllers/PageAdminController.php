@@ -10,7 +10,8 @@ class PageAdminController extends AdminController
             "view"        => t("Просмотр страницы"),
             "update"      => t("Редактирование страницы"),
             "delete"      => t("Удаление страницы"),
-            "getJsonData" => t("Получение данных страницы (JSON)")
+            "getJsonData" => t("Получение данных страницы (JSON)"),
+            "deleteAll"   => t("Удалить все посты")
         ];
     }
 
@@ -99,5 +100,12 @@ class PageAdminController extends AdminController
     public function actionGetJsonData($id)
     {
         echo CJSON::encode($this->loadModel($id));
+    }
+
+
+    public function actionDeleteAll()
+    {
+        Page::model()->deleteAll();
+        $this->redirect('manage');
     }
 }
