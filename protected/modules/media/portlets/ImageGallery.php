@@ -4,7 +4,7 @@ class
 ImageGallery extends BaseFileListView
 {
     public $emptyText = '';
-    public $template = "{items}";
+    public $template = "{items}<div style='clear:both'></div>{pager}";
     public $fancyboxOptions = [];
     public $defaultFancyboxOptions = [
         'openEffect'  => 'fade',
@@ -36,7 +36,8 @@ ImageGallery extends BaseFileListView
 
     public $itemView = 'media.portlets.views.imageGalleryItem';
     public $itemsTagName = 'div';
-    public $enablePagination = false;
+//    public $enablePagination = false;
+
 
     public $sortableEnable = true;
     public $sortableOptions = [
@@ -66,6 +67,7 @@ ImageGallery extends BaseFileListView
 
     public function registerScripts($comment_widget_id = null)
     {
+
         $id     = $this->htmlOptions['id'];
         $assets = $this->assets . '/plugins/';
 
@@ -87,13 +89,13 @@ ImageGallery extends BaseFileListView
 
     public function run()
     {
+
         $widget = $this->widget('comments.portlets.CommentsPortlet', array(
             'model' => false,
             'is_hidden' => true
         ));
 
         $this->registerScripts($widget->getId());
-
         parent::run();
     }
 

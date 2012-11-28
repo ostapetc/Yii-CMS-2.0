@@ -56,8 +56,8 @@ class MediaAlbum extends ActiveRecord
     ];
 
     public static $image_size = [
-        'width'  => 151,
-        'height' => 80
+        'width'  => 208,
+        'height' => 120
     ];
 
 
@@ -199,7 +199,6 @@ class MediaAlbum extends ActiveRecord
 
         return new ActiveDataProvider($album, [
             'criteria'   => $album->parentModel($model)->getDbCriteria(),
-            'pagination' => false
         ]);
     }
 

@@ -21,7 +21,6 @@ class MediaAlbumController extends ClientController
         echo CJSON::encode(array_values(CHtml::listData($models, 'id', 'title')), 0, 3);
     }
 
-
     public function subMenuItems()
     {
         return Configuration::getConfigArray('media.submenu');
@@ -90,13 +89,21 @@ class MediaAlbumController extends ClientController
         $this->page_title = 'Альбом: ' . $model->title;
         $form             = new Form('Media.UploadFilesForm', $model);
         $dp               = MediaFile::model()->getDataProvider($model, 'files');
-        $dp->pagination   = false;
+        $dp->getPagination()->pageSize = 18;
 
-        $this->render('view', [
-            'model' => $model,
-            'form'  => $form,
-            'dp'    => $dp
-        ]);
+        if (Yii::app()->request->isAjaxRequest) {
+            $this->renderPartial('view', [
+                'model' => $model,
+                'form'  => $form,
+                'dp'    => $dp
+            ]);
+        } else {
+            $this->render('view', [
+                'model' => $model,
+                'form'  => $form,
+                'dp'    => $dp
+            ]);
+        }
     }
 
 
