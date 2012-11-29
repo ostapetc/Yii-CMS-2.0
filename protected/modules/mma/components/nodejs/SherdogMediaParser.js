@@ -188,9 +188,9 @@ var parsers = {
 
                             if (--(counters[id]) == 0)
                             {
-                                parsers.sherdog_gallery.download_files(gallery.imgs, function()
+                                parsers.sherdog_gallery.download_files(gallery.imgs, iterator, function(err, results)
                                 {
-                                    collection.insert(gallery, function(err, data) {
+                                    collection.insert(results, function(err, data) {
                                         argv.v && console.log("insert gallery: \n", data);
                                         --count || ((parsers.sherdog_gallery.is_done = true) && done());
                                     });
@@ -249,8 +249,9 @@ var parsers = {
                     {
                         file.write(data);
                     });
-                    curl.stdout.on('end', function(data)
+                    curl.stdout.on('end', function()
                     {
+                        img.path = file_path;
                         argv.v && console.log('Download image: ' + file_path);
                         file.end();
                         callback(null, img);
