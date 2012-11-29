@@ -11,6 +11,7 @@ var argv = require('optimist').argv,
 
     async = require('async');
 
+var base_dir = fs.realpathSync(__dir + '/../../../../runtime/');
 
 var parse = function(url, callback)
 {
@@ -241,7 +242,7 @@ var parsers = {
                 async.map(imgs, function(img)
                 {
                     var file_name = url.parse(img.url).pathname.split('/').pop();
-                    var file_path = '/tmp/' + file_name;
+                    var file_path = base_dir + file_name;
                     var file = fs.createWriteStream(file_path);
                     var curl = spawn('curl', [img.url]);
                     curl.stdout.on('data', function(data)
