@@ -6,7 +6,7 @@
  * Time: 17:33
  * To change this template use File | Settings | File Templates.
  */
-class RatingPortlet extends Portlet
+class RatingWidget extends Portlet
 {
     public $model;
 
@@ -51,7 +51,7 @@ class RatingPortlet extends Portlet
             );
         }
 
-        $this->render('RatingPortlet', array(
+        $this->render('RatingWidget', array(
             'object_id' => $this->model->id,
             'user_id'   => $this->model->getUserId(),
             'model_id'  => $model_id,
