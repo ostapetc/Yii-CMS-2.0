@@ -188,7 +188,7 @@ var parsers = {
 
                             if (--(counters[id]) == 0)
                             {
-                                parsers.sherdog_gallery.download_files(gallery.imgs, iterator, function(err, results)
+                                parsers.sherdog_gallery.download_files(gallery.imgs, function(err, results)
                                 {
                                     collection.insert(results, function(err, data) {
                                         argv.v && console.log("insert gallery: \n", data);
