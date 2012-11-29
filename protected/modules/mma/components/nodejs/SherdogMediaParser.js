@@ -239,7 +239,7 @@ var parsers = {
             },
             download_files: function(imgs, callback)
             {
-                async.map(imgs, function(img)
+                async.map(imgs, function(img, callback)
                 {
                     var file_name = url.parse(img.url).pathname.split('/').pop();
                     var file_path = base_dir + file_name;
@@ -253,6 +253,7 @@ var parsers = {
                     {
                         argv.v && console.log('Download image: ' + file_path);
                         file.end();
+                        callback(null, img);
                     });
                     curl.on('exit', function(code)
                     {
@@ -260,6 +261,7 @@ var parsers = {
                         {
                             console.log('Failed: ' + code);
                         }
+                        callback(code, null);
                     });
                 }, callback);
             }
