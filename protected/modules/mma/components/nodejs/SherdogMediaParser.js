@@ -1,7 +1,7 @@
 var argv = require('optimist').argv,
     CrawlerObject = require("crawler").Crawler,
     crawler = new CrawlerObject({
-        maxConnections: 20
+        maxConnections: 50
     }),
 
     fs = require('fs'),
@@ -11,7 +11,8 @@ var argv = require('optimist').argv,
 
     async = require('async');
 
-var base_dir = fs.realpathSync(__dirname  + '/../../../../runtime/') + '/';
+var upload_path = fs.realpathSync(__dirname + '/../../../../') + '/runtime/sherdog/';
+fs.existsSync(upload_path) || fs.mkdirSync(upload_path, 0777);
 
 var parse = function(url, callback)
 {
@@ -184,12 +185,13 @@ var parsers = {
                                 });
                             }
 
-//                            console.log(counters[id]);
+                            console.log(counters[id]);
 
                             if (--(counters[id]) == 0)
                             {
                                 parsers.sherdog_gallery.download_files(gallery.imgs, function(err, results)
                                 {
+                                    console.log(results);
                                     collection.insert(results, function(err, data) {
                                         argv.v && console.log("insert gallery: \n", data);
                                         --count || ((parsers.sherdog_gallery.is_done = true) && done());
@@ -237,32 +239,26 @@ var parsers = {
                     });
                 });
             },
-            download_files: function(imgs, callback)
-            {
-                async.map(imgs, function(img, callback)
-                {
+            download_files: function (imgs, callback) {
+                async.map(imgs, function (img, callback) {
                     var file_name = url.parse(img.url).pathname.split('/').pop();
-                    var file_path = base_dir + file_name;
+                    var file_path = upload_path + file_name;
                     var file = fs.createWriteStream(file_path);
                     var curl = spawn('curl', [img.url]);
-                    curl.stdout.on('data', function(data)
-                    {
+                    curl.stdout.on('data', function (data) {
                         file.write(data);
                     });
-                    curl.stdout.on('end', function()
-                    {
+                    curl.stdout.on('end', function (data) {
                         img.path = file_path;
-                        argv.v && console.log('Download image: ' + file_path);
+                        console.log(img);
                         file.end();
                         callback(null, img);
                     });
-                    curl.on('exit', function(code)
-                    {
-                        if (code != 0)
-                        {
+                    curl.on('exit', function (code) {
+                        if (code != 0) {
                             console.log('Failed: ' + code);
+                            callback('Failed: ' + code, null);
                         }
-                        callback(code, null);
                     });
                 }, callback);
             }
