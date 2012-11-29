@@ -249,8 +249,8 @@ var parsers = {
                         file.write(data);
                     });
                     curl.stdout.on('end', function (data) {
+                        argv.v && console.log('Download file:' + file_path);
                         img.path = file_path;
-                        console.log(img);
                         file.end();
                         callback(null, img);
                     });
