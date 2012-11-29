@@ -177,6 +177,6 @@ class Rating extends ActiveRecord
             $html_options['class'] = "rating-value {$class}";
         }
 
-        return CHtml::tag('div', $html_options, $rating_value);
+        return CHtml::tag('span', $html_options, $rating_value);
     }
 }

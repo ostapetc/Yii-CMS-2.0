@@ -11,20 +11,20 @@ $minus_na  = (int) $value < 0 ? 'glyphicon-na' : '';
 $plus_na   = (int) $value > 0 ? 'glyphicon-na' : '';
 ?>
 
-<div class="rating">
+<span class="rating">
     <?= $rating ?>
 
     <? if (Yii::app()->user->isGuest): ?>
-        <div title="<?= $labels['not_guest'] ?>" class="rating-vote minus-na glyphicon-thumbs-down"></div>
-        <div title="<?= $labels['not_guest'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></div>
+        <span title="<?= $labels['not_guest'] ?>" class="rating-vote minus-na glyphicon-thumbs-down"></span>
+        <span title="<?= $labels['not_guest'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></span>
     <? else: ?>
         <? if ($user_id != Yii::app()->user->id): ?>
-            <div title="<?= $labels['minus'] ?>" class="rating-vote minus glyphicon-thumbs-down <?= $minus_na ?>" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
-            <div title="<?= $labels['plus'] ?>" class="rating-vote plus glyphicon-thumbs-up <?= $plus_na ?>" value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></div>
+            <span title="<?= $labels['minus'] ?>" class="rating-vote minus glyphicon-thumbs-down <?= $minus_na ?>" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></span>
+            <span title="<?= $labels['plus'] ?>" class="rating-vote plus glyphicon-thumbs-up <?= $plus_na ?>" value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></span>
         <? else: ?>
-            <div title="<?= $labels['not_owner'] ?>" class="rating-vote minus glyphicon-thumbs-down glyphicon-na"></div>
-            <div title="<?= $labels['not_owner'] ?>" class="rating-vote plus glyphicon-thumbs-up glyphicon-na"></div>
+            <span title="<?= $labels['not_owner'] ?>" class="rating-vote minus glyphicon-thumbs-down glyphicon-na"></span>
+            <span title="<?= $labels['not_owner'] ?>" class="rating-vote plus glyphicon-thumbs-up glyphicon-na"></span>
         <? endif ?>
     <? endif ?>
-</div>
+</span>
 

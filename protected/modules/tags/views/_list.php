@@ -1,13 +1,11 @@
 <? if ($tags): ?>
-    <ul class="tags">
-        <li><span class="glyphicon-tags"></span></li>
-
-        <? foreach ($tags as $i => $tag): ?>
-            <? if ($i > 0): ?>, <? endif ?>
-            <li>
-                <a rel="tag" href="<?= $this->createUrl("/pages/tag/{$tag->name}"); ?>"><?= $tag->name ?></a>
-            </li>
-        <? endforeach ?>
-    </ul>
+    <div class="tags-box">
+        <p>
+            <span class="tags-title">Теги:</span>
+            <? foreach ($tags as $i => $tag): ?>
+                <a href="<?= $this->createUrl("/pages/tag/{$tag->name}"); ?>"><span class="label label-info"><?= $tag->name ?></span></a>
+            <? endforeach ?>
+        </p>
+    </div>
 <? endif ?>
 

@@ -25,7 +25,6 @@ if (function_exists('get_called_class') === false)
     }
 }
 
-
 if (function_exists('lcfirst') === false)
 {
     function lcfirst($str)
@@ -35,14 +34,7 @@ if (function_exists('lcfirst') === false)
     }
 }
 
-
-function t($message)
+function t($msg, $num = null)
 {
-    $translated_message = Yii::t('main', $message);
-    if ($translated_message != $message)
-    {
-        return $translated_message;
-    }
-
-    return $message;
+    return Yii::t('app', $msg, $num);
 }

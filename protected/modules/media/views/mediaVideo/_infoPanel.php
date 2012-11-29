@@ -1,12 +1,12 @@
 <div class="infopanel-wrapper">
     <div class="infopanel">
         <div class="voting">
-            <? $this->widget('social.portlets.RatingPortlet', array('model' => $model)); ?>
+            <? $this->widget('social.portlets.RatingWidget', array('model' => $model)); ?>
         </div>
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($model->date_create, 'long', 'short') ?></div>
 
-        <? $this->widget('social.portlets.FavoritePortlet', array('model' => $model)); ?>
+        <?= $this->widget('social.portlets.FavoriteWidget', array('model' => $model)); ?>
 
         <div class="comments">
             <span class="glyphicon-comments"></span>

@@ -1,18 +1,12 @@
-.rating {
-    float: right;
-}
 .rating-value {
-    float: left;
     font-weight: bold;
     line-height: 15px;
     margin-right: 5px;
-    display: block;
 }
 
 .rating-vote {
     width: 14px;
     height: 14px;
-    float: left;
     margin-left: 4px;
 }
 

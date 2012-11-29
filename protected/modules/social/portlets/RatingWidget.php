@@ -6,7 +6,7 @@
  * Time: 17:33
  * To change this template use File | Settings | File Templates.
  */
-class RatingWidget extends Portlet
+class RatingWidget extends Widget
 {
     public $model;
 
@@ -24,7 +24,7 @@ class RatingWidget extends Portlet
     }
 
 
-    public function renderContent()
+    public function run()
     {
         if (isset($this->model->rating))
         {

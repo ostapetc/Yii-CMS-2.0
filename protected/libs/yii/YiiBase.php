@@ -570,6 +570,16 @@ class YiiBase
 	 * @return string the translated message
 	 * @see CMessageSource
 	 */
+
+    public static function d($m, $d)
+    {
+        if ($m == '{n} comments')
+        {
+            v($d);
+            die;
+        }
+    }
+
 	public static function t($category,$message,$params=array(),$source=null,$language=null)
 	{
 		if(self::$_app!==null)

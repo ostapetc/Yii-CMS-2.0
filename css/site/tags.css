@@ -1,0 +1,15 @@
+.tags-box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tags-box .label {
+    font-weight: normal;
+    font-size: 11px;
+    padding: 1px 4px;
+}
+
+.tags-box .tags-title {
+    font-size: 12px;
+    font-weight: bold;;
+}

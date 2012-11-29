@@ -505,4 +505,13 @@ class Page extends ActiveRecord
         }
         return '';
     }
+
+
+    public function getDateCreateValue()
+    {
+        return $this->getSmartDate($this->date_create);
+    }
 }
+
+
+

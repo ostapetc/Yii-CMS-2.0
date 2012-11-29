@@ -6,7 +6,7 @@
  * Time: 18:47
  * To change this template use File | Settings | File Templates.
  */
-class FavoritePortlet extends Portlet
+class FavoriteWidget extends Widget
 {
     public $model;
 
@@ -26,7 +26,7 @@ class FavoritePortlet extends Portlet
     }
 
 
-    public function renderContent()
+    public function run()
     {
         $object_id = $this->model->id;
         $model_id  = get_class($this->model);
@@ -42,7 +42,7 @@ class FavoritePortlet extends Portlet
             $added = Favorite::model()->exists("user_id = ". Yii::app()->user->id . " AND object_id = {$object_id} AND model_id = '{$model_id}'");
         }
 
-        $this->render('FavoritePortlet', array(
+        $this->render('FavoriteWidget', array(
             'model_id'  => $model_id,
             'object_id' => $object_id,
             'model'     => $this->model,

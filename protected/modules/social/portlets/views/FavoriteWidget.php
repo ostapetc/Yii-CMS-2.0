@@ -17,5 +17,4 @@
     ?>
 <? endif ?>
 
-
-<span title="<?= $count_msg ?>" class="favs_count" id="favs_count_<?= $object_id ?>_<?= $model_id ?>"><?= $count ?></span>
+<a href="#"  title="<?= $count_msg ?>" class="favs_count" id="favs_count_<?= $object_id ?>_<?= $model_id ?>"><?= $count ?> в избранном</a>

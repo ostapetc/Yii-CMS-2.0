@@ -20,11 +20,11 @@
 }
 
 .favs_count {
-    float: left;
-    font-size: 9px;
-    line-height: 28px;
+    /*float: left;*/
+    /*font-size: 9px;*/
+    /*line-height: 28px;*/
     cursor: help;
-    display: block;
-    position: relative;
-    overflow: hidden;
+
+    /*position: relative;*/
+    /*overflow: hidden;*/
 }
