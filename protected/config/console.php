@@ -19,7 +19,7 @@ return CMap::mergeArray(require($config . '.php'), array(
             'class' => 'application.commands.SphinxConfCommand',
         ),
         'try'    => array(
-            'class' => 'mma.commands.SherdogGalleryParser',
+            'class' => 'mma.commands.SherdogMediaParser',
         ),
         'parser_runner'    => array(
             'class' => 'content.commands.ParserRunnerCommand',

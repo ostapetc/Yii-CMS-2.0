@@ -1,7 +1,7 @@
 <?php
 Yii::import('media.components.api.ApiBehaviorAbstract');
-class RemoteApiBehavior extends ApiBehaviorAbstract
-{
+class RemoteApiBehavior extends ApiBehaviorAbstract {
+
     public $new_record_status;
 
 
@@ -13,12 +13,14 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
 
     public function getThumb($size = null, $crop = true)
     {
-        if (is_string($size))
-        {
-            $size = $this->getSize($size);
+        if (is_string($size)) {
+            $size = [
+                'width'  => 64,
+                'height' => 64
+            ];
         }
 
-        $dir  = pathinfo($this->getPk(), PATHINFO_DIRNAME);
+        $dir = pathinfo($this->getPk(), PATHINFO_DIRNAME);
         $name = pathinfo($this->getPk(), PATHINFO_BASENAME);
         return ImageHelper::thumb($dir, $name, $size, $crop)->getSrc();
     }
@@ -38,38 +40,38 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
             'word',
             'excel'
         ];
-        switch (true)
-        {
+        switch (true) {
             case $this->typeIs($doc):
-                return self::TYPE_DOC;
+                return MediaFile::TYPE_DOC;
             case $this->typeIs('audio'):
-                return self::TYPE_AUDIO;
+                return MediaFile::TYPE_AUDIO;
             case $this->typeIs('video'):
-                return self::TYPE_VIDEO;
+                return MediaFile::TYPE_VIDEO;
             case $this->typeIs('image'):
-                return self::TYPE_IMG;
+                return MediaFile::TYPE_IMG;
         }
     }
 
 
     protected function typeIs($types)
     {
-        foreach ((array)$types as $type)
-        {
-            if (!in_array($this->extension, FileType::${$type . 'Extensions'}))
-            {
+        foreach ((array)$types as $type) {
+            if (!in_array($this->extension, FileType::${$type . 'Extensions'})) {
                 return false;
             }
         }
         return true;
     }
 
+    public function getPlayer($size = null)
+    {
+
+    }
 
     public function getPreviewArray($size_name = null)
     {
         $folder = Yii::app()->getModule('media')->assetsUrl() . '/img/icons/';
-        switch (true)
-        {
+        switch (true) {
             case $this->typeIs('image'):
                 return [
                     'type' => 'img',
@@ -91,16 +93,16 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
             case $this->typeIs('video'):
                 return [
                     'type' => 'video',
-                    'val'  => ImageHelper::placeholder($this->getSize($size_name), 'Video processing', true)
+                    'val'  => ImageHelper::placeholder( [
+                        'width'  => 64,
+                        'height' => 64
+                    ], 'Video processing', true)
                 ];
                 break;
             default:
-                if (is_file('.' . $folder . $this->extension . '.jpg'))
-                {
+                if (is_file('.' . $folder . $this->extension . '.jpg')) {
                     $name = $this->extension;
-                }
-                else
-                {
+                } else {
                     $name = 'any';
                 }
                 break;
@@ -117,13 +119,15 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
     {
         $data = $this->getPreviewArray($size_name);
 
-        switch ($data['type'])
-        {
+        switch ($data['type']) {
             case 'img':
                 return CHtml::image($data['val']);
                 break;
             case 'video':
-                return ImageHelper::placeholder($this->getSize($size_name), 'Video processing');
+                return ImageHelper::placeholder($size = [
+                    'width'  => 64,
+                    'height' => 64
+                ], 'Video processing');
                 break;
         }
     }
@@ -138,10 +142,9 @@ class RemoteApiBehavior extends ApiBehaviorAbstract
     public function beforeSave($event)
     {
         $owner = $this->getOwner();
-        if ($owner->getIsNewRecord())
-        {
+        if ($owner->getIsNewRecord()) {
             $this->setPk($this->pk);
-            $owner->type   = $this->getType();
+            $owner->type = $this->getType();
             $owner->status = $this->new_record_status;
             return true;
         }

@@ -560,5 +560,21 @@ class User extends ActiveRecord
                 return 'label-important';
         }
     }
+
+    protected function beforeSave()
+    {
+        if (parent::beforeSave())
+        {
+            if ($this->isNewRecord)
+            {
+                if (UserIdentity::isCrypted($this->password))
+                {
+                    $this->password = UserIdentity::crypt($this->password);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 }
 
