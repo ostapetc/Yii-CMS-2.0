@@ -88,17 +88,19 @@ var parsers = {
                             id: id
                         };
 
-                        var save = function(gallery)
+                        var save = function(video)
                         {
-                            argv.v && console.log("insert video: \n", video);
-                            //                                  collection.insert(gallery);
-                            --count || ((parsers.sherdog_video.is_done = true) && done());
+                            collection.insert(video, function(err, data) {
+                                argv.v && console.log("insert video: \n", data);
+                                --count || ((parsers.sherdog_video.is_done = true) && done());
+                            });
                         };
 
 
                         parse(url, function(error, result, $)
                         {
                             var src = $('.body_content iframe').attr('src');
+
                             if (src)
                             {
                                 parse(src, function(error, result, $)
@@ -118,7 +120,7 @@ var parsers = {
                                 }
                                 else
                                 {
-                                    console.log("can't parse url: " + url);
+                                    argv.v && console.log("can't parse url: " + url);
                                     --count || ((parsers.sherdog_video.is_done = true) && done());
                                 }
                             }
@@ -141,9 +143,7 @@ var parsers = {
                             });
                         });
                     });
-
                 });
-
             }
         },
         sherdog_gallery: {

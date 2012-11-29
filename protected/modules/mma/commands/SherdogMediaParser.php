@@ -29,9 +29,8 @@ class SherdogMediaParser extends CConsoleCommand
             {
                 $this->saveVideo($video);
                 $transaction->commit();
-                $collection->update(['id' => $video['id']], [
-                    'status' => 'parsed',
-                ]);
+                $video['status'] = 'parsed';
+                $collection->update(['id' => $video['id']], $video);
             }
             catch(Exception $e)
             {
@@ -44,6 +43,10 @@ class SherdogMediaParser extends CConsoleCommand
 
     protected function saveVideo($video)
     {
+        if (isset($video['status']) && $video['status'] == 'parsed')
+        {
+            return true;
+        }
         $user = User::model()->findByAttributes(['email' => 'www.pismeco@gmail.com']);
 
         $file            = new MediaFile('insert', 'remote');
@@ -51,7 +54,8 @@ class SherdogMediaParser extends CConsoleCommand
         $file->object_id = $user->id;
         $file->tag       = 'files';
         $file->title     = $video['title'];
-        $file->remote_id = $video['path'];
+        $file->type      = MediaFile::TYPE_VIDEO;
+        $file->remote_id = $video['url'];
         if (!$file->save())
         {
             throw new CException(json_encode($file->getErrors()));
@@ -63,6 +67,10 @@ class SherdogMediaParser extends CConsoleCommand
         $collection = $db->sherdog_gallery;
         foreach ($collection->find() as $gallery)
         {
+            if (isset($gallery['status']) && $gallery['status'] == 'parsed')
+            {
+                continue;
+            }
             $model = MediaAlbum::model()->findByAttributes([
                 'source' => 'sherdog.com',
                 'source_id' => $gallery['id']
@@ -76,9 +84,8 @@ class SherdogMediaParser extends CConsoleCommand
             {
                 $this->saveGallery($gallery);
                 $transaction->commit();
-                $collection->update(['id' => $gallery['id']], [
-                    'status' => 'parsed',
-                ]);
+                $gallery['status'] = 'parsed';
+                $collection->update(['id' => $gallery['id']], $gallery);
             }
             catch(Exception $e)
             {

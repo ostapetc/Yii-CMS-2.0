@@ -53,6 +53,7 @@ class FileType
         'avi',
         'mpeg',
         'wmv',
+        'mp4',
     ];
 
     public static $bookExtensions = [
