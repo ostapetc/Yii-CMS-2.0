@@ -1,7 +1,7 @@
 var argv = require('optimist').argv,
     CrawlerObject = require("crawler").Crawler,
     crawler = new CrawlerObject({
-        maxConnections: 50
+        maxConnections: 10
     }),
 
     fs = require('fs'),
@@ -185,14 +185,14 @@ var parsers = {
                                 });
                             }
 
-                            console.log(counters[id]);
+                            argv.v && console.log(counters[id]);
 
                             if (--(counters[id]) == 0)
                             {
                                 parsers.sherdog_gallery.download_files(gallery.imgs, function(err, results)
                                 {
-                                    console.log(results);
-                                    collection.insert(results, function(err, data) {
+                                    gallery.imgs = results;
+                                    collection.insert(gallery, function(err, data) {
                                         argv.v && console.log("insert gallery: \n", data);
                                         --count || ((parsers.sherdog_gallery.is_done = true) && done());
                                     });
