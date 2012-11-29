@@ -63,6 +63,10 @@ class RemoteApiBehavior extends ApiBehaviorAbstract {
         return true;
     }
 
+    public function getPlayer($size = null)
+    {
+
+    }
 
     public function getPreviewArray($size_name = null)
     {
