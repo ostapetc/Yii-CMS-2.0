@@ -11,7 +11,7 @@ var argv = require('optimist').argv,
 
     async = require('async');
 
-var base_dir = fs.realpathSync(__dir + '/../../../../runtime/');
+var base_dir = fs.realpathSync(__dirname  + '/../../../../runtime/') + '/';
 
 var parse = function(url, callback)
 {
@@ -190,10 +190,10 @@ var parsers = {
                             {
                                 parsers.sherdog_gallery.download_files(gallery.imgs, function()
                                 {
-                                    console.log(gallery);
-                                    argv.v && console.log("insert gallery: \n", gallery);
-                                    //                                  collection.insert(gallery);
-                                    --count || ((parsers.sherdog_gallery.is_done = true) && done());
+                                    collection.insert(gallery, function(err, data) {
+                                        argv.v && console.log("insert gallery: \n", data);
+                                        --count || ((parsers.sherdog_gallery.is_done = true) && done());
+                                    });
                                 });
                             }
                         };
