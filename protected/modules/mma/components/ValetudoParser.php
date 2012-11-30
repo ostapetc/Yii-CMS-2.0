@@ -61,15 +61,20 @@ class ValetudoParser extends OsParser
 
         if (mb_strpos($url, $this->web_url, null, 'utf-8') === false)
         {
+            $url = parse_url($url , PHP_URL_PATH);
             $url = $this->web_url . $url;
         }
 
-        $content = Yii::app()->cache->get($url);
-        if (!$content)
-        {
-            $content = $this->getContent($url);
-            Yii::app()->cache->set($url, $content);
-        }
+        $content = $this->getContent($url);
+        //echo $content; die;
+        //$content = iconv('windows-1251', 'utf-8', $content);
+
+//        $content = Yii::app()->cache->get($url);
+//        if (!$content)
+//        {
+//            $content = $this->getContent($url);
+//            Yii::app()->cache->set($url, $content);
+//        }
 
         if (!$content)
         {
@@ -111,6 +116,15 @@ class ValetudoParser extends OsParser
         $page->type       = Page::TYPE_POST;
 
         return $this->saveModel($page, $this->getWebUrl());
+    }
+
+
+    protected function getContent($path)
+    {
+        $content = parent::getContent($path);
+        $content = mb_convert_encoding($content, 'utf-8', mb_detect_encoding($content));
+        $content = mb_convert_encoding($content, 'html-entities', 'utf-8');
+        return $content;
     }
 }
 

@@ -23,7 +23,7 @@ abstract class OsParser extends Component
 
     protected function getContent($path)
     {
-        $content = @file_get_contents($path);
+        $content = file_get_contents($path);
         if ($content !== false)
         {
             return $content;

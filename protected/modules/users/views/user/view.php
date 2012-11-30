@@ -11,12 +11,9 @@ $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
     <div class="label <?= $model->rating_css_class ?>">рейтинг <?= $model->rating ?></div>
 </div>
 
-
-
 <br clear="all" />
 
 <div style="clear:left;margin-top: 10px !important;margin-bottom: 5px;">
-
     <? if (!Yii::app()->user->isGuest && (Yii::app()->user->id != $model->id)): ?>
         <?=
         CHtml::link('Отправить сообщение', array('/social/message/index', 'to_user_id' => $model->id), array('class' => 'btn btn-mini btn-primary'));
@@ -32,7 +29,6 @@ $users_status = Friend::getUsersStatus($model->id, Yii::app()->user->id);
         CHtml::link(t('Добавить в друзья'), '/', array('class' => 'btn btn-mini btn-success'));
         ?>
     <? endif ?>
-
 </div>
 
 <table class="table table-striped profile-table">

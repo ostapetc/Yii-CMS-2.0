@@ -71,11 +71,6 @@ iframe{
         /*text-shadow: 0 1px 0 #FFFFFF;*/
     /*}*/
 
-h1 {
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 20px;
-}
 
 
 .alert p {
@@ -346,4 +341,17 @@ span.italic-12 {
 .well h3 {
     line-height: 10px;
 }
+
+.list-view {
+    padding-top: 0;
+}
+
+h1 {
+    margin-top: 0 !important;
+    line-height: 18px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 0 !important;
+}
+
 

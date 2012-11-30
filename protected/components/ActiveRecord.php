@@ -592,4 +592,32 @@ abstract class ActiveRecord extends CActiveRecord
 
         return $save;
     }
+
+
+    public static function getSmartDate($date_time)
+    {
+        $curr = date('Y-m-d');
+        $date = date('Y-m-d', strtotime($date_time));
+
+        switch (true)
+        {
+            case $curr == $date:
+                return 'сегодня';
+
+            case date('Y-m-d', strtotime('-1 day')) == $date:
+                return 'вчера';
+
+            case date('Y-m-d', strtotime('-2 day')) == $date:
+                return 'позавчера';
+
+            case date('Y-m-d', strtotime('-3 day')) == $date:
+                return '3 дня назад';
+
+            case date('Y-m-d', strtotime('-4 day')) == $date:
+                return '4 дня назад';
+
+            default:
+                return Yii::app()->dateFormatter->formatDateTime(strtotime($date_time), 'short', 'short');
+        }
+    }
 }

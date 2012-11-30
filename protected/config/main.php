@@ -13,6 +13,7 @@ foreach ($modules_dirs as $module)
 }
 
 return array(
+    'sourceLanguage' => 'en_US',
     'language' => 'ru',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => '',
@@ -37,9 +38,9 @@ return array(
             'class' => 'application.components.CommandExecutor',
         ),
         'messages' => array(
-            'class' => 'CDbMessageSource',
-            'sourceMessageTable' => 'languages_messages',
-            'translatedMessageTable' => 'languages_translations'
+            'class' => 'CPhpMessageSource',
+//            'sourceMessageTable' => 'languages_messages',
+//            'translatedMessageTable' => 'languages_translations'
         ),
         'bootstrap' => array(
             'class' => 'application.components.bootstrap.components.Bootstrap'
