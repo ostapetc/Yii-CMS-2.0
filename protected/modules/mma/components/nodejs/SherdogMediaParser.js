@@ -139,6 +139,7 @@ var parsers = {
                             {
                                 if (item)
                                 {
+                                    --count || ((parsers.sherdog_video.is_done = true) && done());
                                     return true;
                                 }
                                 parse_video(collection);
@@ -230,6 +231,7 @@ var parsers = {
                             {
                                 if (item)
                                 {
+                                    --count || ((parsers.sherdog_gallery.is_done = true) && done());
                                     return true;
                                 }
 
