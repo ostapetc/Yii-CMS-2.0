@@ -5,7 +5,7 @@ var mongo  = require('mongodb'),
     Db     = mongo.Db;
 
 var server = new Server('127.0.0.1', 27017, {auto_reconnect: true, w: 'majority'});
-var db     = new Db('mma', server, {safe: true});
+var db     = new Db('mma', server);
 
 var pages = {};
 
