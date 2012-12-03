@@ -13,6 +13,10 @@ db.open(function(err, db) {
     if(!err) {
         console.log("We are connected");
     }
+    else {
+        console.log('Mongo Error: ' + err);
+        return false;
+    }
 
     db.createCollection('fighters', function(err, collection) {
         var c = new Crawler({
