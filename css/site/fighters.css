@@ -1,45 +1,45 @@
-.label.record {
+.fighter-view-small .label.record {
     width: 40px !important;
     text-align: center;
     line-height: 20px;
 }
 
-.label.record span{
+.fighter-view-small .label.record span{
     font-size: 20px;
 }
 
-.fights-statistic-tbl td:last-child {
+.fighter-view-small .fights-statistic-tbl td:last-child {
     width: 30px;
     font-size: 11px;
     line-height: 11px;
 }
 
-.method-label-small {
+.fighter-view-small .method-label-small {
     text-transform: uppercase;
     font-size: 9px !important;
     font-weight: bold;
 }
 
-.progress-small {
+.fighter-view-small .progress-small {
     margin-bottom: 2px !important;
     height: 13px;
     width: 70px;
 }
 
-.fighter-country {
+.fighter-view-small .fighter-country {
     font-size: 12px;
     font-weight: bold;
     color: #f5f5f5;
     display: block;
 }
 
-.fighter-age {
+.fighter-view-small .fighter-age {
     font-size: 13px;
     color: #f5f5f5;
     display: block;
 }
 
-.fighter-params {
+.fighter-view-small .fighter-params {
     font-size: 11px;
     font-weight: bold;
 }
@@ -49,28 +49,28 @@
     display: block;
 }
 
-.fighter-class {
+.fighter-view-small .fighter-class {
     font-size: 12px;
     color: #DD514C;
 }
 
-.fighter-media {
+.fighter-view-small .fighter-media {
     line-height: 16px;
 }
 
-.fighter-media span {
+.fighter-view-small .fighter-media span {
     font-size: 13px;
     font-weight: bold;
     color: #f5f5f5;
 }
 
-.fighter-media a {
+.fighter-view-small .fighter-media a {
     font-size: 12px;
     margin-bottom: 2px;
     color: #ADAFAE;
     text-decoration: underline;
 }
 
-.fighter-media a, .fighter-media span  {
+.fighter-view-small .fighter-media a, .fighter-media span  {
     display: block;
 }

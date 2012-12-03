@@ -30,6 +30,21 @@ class Fighter extends ActiveRecord
 
     const IMAGE_SIZE_NORMAL = 120;
 
+    public static $class_options = array(
+        'Super Heavyweight' => '',
+        'Welterweight'      => '',
+        'Light Heavyweight' => '',
+        'Middleweight'      => '',
+        'Bantamweight'      => '',
+        'Featherweight'     => '',
+        'Lightweight'       => '',
+        'Flyweight'         => '',
+        'Strawweight'       => '',
+        'Heavyweight'       => '',
+        'Atomweight'        => '',
+        'N/A'               => '',
+    );
+
 
     public function name()
     {

@@ -1,4 +1,4 @@
-<div class="well" style="width: 635px;padding:10px">
+<div class="well fighter-view-small" style="width: 635px;padding:10px">
     <table cellpadding="0" cellspacing="0" border="0">
             <tr valign="top">
                 <td style="width: 140px">

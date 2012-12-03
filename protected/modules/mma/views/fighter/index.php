@@ -8,7 +8,7 @@
     }
 </style>
 
-<? $this->page_title = 'TOP 10 Sherdog.com' ?>
+<? $this->page_title = 'Популярные за последнее время' ?>
 
 <? foreach ($fighters as $foghter): ?>
     <? $this->renderPartial('_viewSmall', array('fighter' => $foghter)) ?>
