@@ -1,21 +1,8 @@
-.favorite {
-    float: left;
-    padding: 6px 0 5px 0;
-    margin-right: 5px;
-}
-
-.favorite a {
-    width: 15px;
-    height: 13px;
-    display: block;
-    margin-top: 1px;
-}
-
-.favorite a.guest, .favorite a.guest {
+a.guest.favorite, a.favorite.guest {
     cursor: help;
 }
 
-.favorite a.user, .favorite a.added {
+a.favorite, a.favorite.added {
     cursor: pointer;
 }
 

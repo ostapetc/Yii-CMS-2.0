@@ -2,7 +2,7 @@
     <? if ($data->image_src): ?>
         <?=
         CHtml::link(
-            CHtml::image($data->image_src, '', ['class' => 'img-polaroid']),
+            CHtml::image($data->image_src, '', ['class' => 'img-rounded']),
             $data->url,
             [
                 'class' => 'page-img'
@@ -15,16 +15,6 @@
 
     <?= $data->text_preview ?>
 
-    <?
-    $this->renderPartial('_infoPanel', [
-        'page'    => $data,
-        'preview' => true
-    ]);
-    ?>
-
-    <?
-    $this->renderPartial('tags.views._list', [
-        'tags' => $data->tags
-    ]);
-    ?>
+    <? $this->renderPartial('_infoPanel', ['page' => $data,'preview' => true]); ?>
+    <? $this->renderPartial('tags.views._list', ['tags' => $data->tags]); ?>
 </div>

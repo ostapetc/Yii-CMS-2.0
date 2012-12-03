@@ -66,15 +66,6 @@ class ValetudoParser extends OsParser
         }
 
         $content = $this->getContent($url);
-        //echo $content; die;
-        //$content = iconv('windows-1251', 'utf-8', $content);
-
-//        $content = Yii::app()->cache->get($url);
-//        if (!$content)
-//        {
-//            $content = $this->getContent($url);
-//            Yii::app()->cache->set($url, $content);
-//        }
 
         if (!$content)
         {
@@ -94,16 +85,24 @@ class ValetudoParser extends OsParser
         $text = $this->stripTags($text);
         $text = preg_replace('|Комментарий \[[0-9]+\]|', '', $text);
 
-//        $image = $images->item($i);
-//        if ($image)
-//        {
-//            $image = $image->getAttribute('src');
-//        }
+        $image  = null;
+        $images = $xpath->query("//div[@class='article-content']/*/img");
+        if ($images->length > 0)
+        {
+            /**
+             * @var $image DomElement
+             */
+            $image      = $images->item(0);
+            $image_html = $doc->saveHTML($image);
+            $image      = $image->getAttribute('src');
 
-//        if ($image)
-//        {
-//            $this->log("Не смог спарсить картинку для: {$href}");
-//        }
+            if (mb_substr($image, 0, 4, 'utf-8') != 'http')
+            {
+                $image = $this->web_url . $image;
+            }
+
+            $text = str_replace($image_html, '', $text);
+        }
 
         $page = new Page();
         $page->source     = $this->source;
@@ -111,7 +110,7 @@ class ValetudoParser extends OsParser
         $page->user_id    = $this->author_id;
         $page->title      = $title;
         $page->text       = $text;
-//        $page->image      = $image;
+        $page->image      = $image;
         $page->status     = Page::STATUS_PUBLISHED;
         $page->type       = Page::TYPE_POST;
 

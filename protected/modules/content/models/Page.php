@@ -1,4 +1,4 @@
-<?php
+    <?php
 /** 
  * 
  * !Attributes - атрибуты БД
@@ -173,7 +173,7 @@ class Page extends ActiveRecord
                 'source_url',
                 'length',
                 'max' => 250
-            )
+            ),
         );
     }
 
@@ -219,6 +219,18 @@ class Page extends ActiveRecord
                 'PageSection',
                 'section_id',
                 'through' => 'sections_rels'
+            ),
+            'views_count' => array(
+                self::STAT,
+                'View',
+                'object_id',
+                'condition' => 'model_id = "Page    "'
+            ),
+            'favorites_count' => array(
+                self::STAT,
+                'Favorite',
+                'object_id',
+                'condition' => 'model_id = "Page    "'
             )
         );
     }

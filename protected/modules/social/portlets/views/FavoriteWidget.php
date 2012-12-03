@@ -12,7 +12,7 @@
         'title'     => $user_msg,
         'model_id'  => $model_id,
         'object_id' => $object_id,
-        'class'     => 'user ' . ($added ? 'glyphicon-star' : 'glyphicon-dislikes')
+        'class'     => 'favorite ' . ($added ? 'glyphicon-star' : 'glyphicon-dislikes')
     ));
     ?>
 <? endif ?>

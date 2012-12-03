@@ -2,16 +2,7 @@
 $this->page_title = $page->title;
 if (Yii::app()->user->checkAccess('Page_update'))
 {
-    $link = CHtml::link(
-        "",
-        $this->createUrl('update', ['id' => $page->id]),
-        [
-            'class' => 'page-update  glyphicon-pencil',
-            'title' => 'редактировать'
-        ]
-    );
 
-    $this->page_title.= "&nbsp;&nbsp;" . $link;
 }
 ?>
 
@@ -30,7 +21,7 @@ if (Yii::app()->user->checkAccess('Page_update'))
         <? if ($page->image_src): ?>
             <?=
             CHtml::link(
-                CHtml::image($page->image_src, '', ['class' => 'img-polaroid']),
+                CHtml::image($page->image_src, '', ['class' => 'img-rounded']),
                 $page->url,
                 [
                     'class' => 'page-img'
@@ -41,16 +32,9 @@ if (Yii::app()->user->checkAccess('Page_update'))
 
         <?= $page->text ?>
 
-        <div class="special-info">
-            <? $this->renderPartial('application.modules.content.views.pageSection._list', ['sections' => $page->sections]); ?>
-            <?= $page->getSourceLink() ?>
-        </div>
-        <div class="special-info">
-            <? $this->renderPartial('application.modules.tags.views._list', ['tags' => $page->tags]); ?>
-        </div>
         <? $this->renderPartial('application.modules.content.views.page._infoPanel', ['page' => $page, 'preview' => true]); ?>
+        <? $this->renderPartial('tags.views._list', ['tags' => $page->tags]); ?>
 
-        <br clear="all" />
         <br clear="all" />
 
         <? $this->widget('comments.portlets.CommentsPortlet', ['model' => $page]); ?>

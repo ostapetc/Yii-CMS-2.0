@@ -168,14 +168,8 @@ class Comment extends ActiveRecord
     }
 
 
-    public function formatDateCreate()
-    {
-        return Yii::app()->dateFormatter->formatDateTime(strtotime($this->date_create), 'long', 'short');
-    }
-
-
     public function getDateCreateValue()
     {
-        return date('d.m.Y h:i', strtotime($this->date_create));
+        return $this->getSmartDate($this->date_create);
     }
 }
