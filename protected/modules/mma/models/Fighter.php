@@ -31,18 +31,17 @@ class Fighter extends ActiveRecord
     const IMAGE_SIZE_NORMAL = 120;
 
     public static $class_options = array(
-        'Super Heavyweight' => '',
-        'Welterweight'      => '',
-        'Light Heavyweight' => '',
-        'Middleweight'      => '',
-        'Bantamweight'      => '',
-        'Featherweight'     => '',
-        'Lightweight'       => '',
-        'Flyweight'         => '',
-        'Strawweight'       => '',
-        'Heavyweight'       => '',
-        'Atomweight'        => '',
-        'N/A'               => '',
+        'Super Heavyweight' => 'cупертяжелый вес',
+        'Welterweight'      => 'полусредний вес',
+        'Light Heavyweight' => 'полутяжелый вес',
+        'Middleweight'      => 'средний вес',
+        'Bantamweight'      => 'легчайший вес',
+        'Featherweight'     => 'полулегкий вес',
+        'Lightweight'       => 'легкий вес',
+        'Flyweight'         => 'наилегчайший вес',
+        'Strawweight'       => 'минимальный вес',
+        'Heavyweight'       => 'тяжелый вес',
+        'Atomweight'        => 'atomweight',
     );
 
 
@@ -295,7 +294,10 @@ class Fighter extends ActiveRecord
 
     public function getClassValue()
     {
-        return $this->class ? $this->class : CHtml::tag('span', ['class' => 'null'], 'неизвестно');
+        return ($this->class && array_key_exists($this->class, self::$class_options)) ?
+            self::$class_options[$this->class] :
+            CHtml::tag('span', ['class' => 'null'], 'вес. категория неизвестна');
     }
 }
+
 
