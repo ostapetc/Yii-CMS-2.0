@@ -6,7 +6,7 @@
 
         <div class="published"><?= Yii::app()->dateFormatter->formatDateTime($model->date_create, 'long', 'short') ?></div>
 
-        <?= $this->widget('social.portlets.FavoriteWidget', array('model' => $model)); ?>
+        <? $this->widget('social.portlets.FavoriteWidget', array('model' => $model)); ?>
 
         <div class="comments">
             <span class="glyphicon-comments"></span>
