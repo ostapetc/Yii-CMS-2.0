@@ -26,7 +26,7 @@ class FighterController extends ClientController
                 'sidebars' => [
                     [
                         'type'  => 'widget',
-                        'class' => 'content.portlets.SectionCreateSidebar'
+                        'class' => 'mma.portlets.FightersFilterSidebar'
                     ],
                 ]
             ],
