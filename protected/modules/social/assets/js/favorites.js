@@ -1,5 +1,5 @@
 $(function() {
-    $('.favorite a.user').live('click', function() {
+    $('a.favorite').live('click', function() {
         var object_id = $(this).attr('object_id');
         var model_id  = $(this).attr('model_id');
         var link      = $(this);

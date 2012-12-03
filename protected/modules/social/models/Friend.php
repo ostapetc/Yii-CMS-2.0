@@ -121,14 +121,14 @@ class Friend extends ActiveRecord
         {
             case 'in':
                 $count = $model->countByAttributes([
-                    'user_id'      => $user_id,
+                    'user_a_id'    => $user_id,
                     'is_confirmed' => $is_confirmed
                 ]);
                 break;
 
             case 'out':
                 $count = $model->countByAttributes([
-                    'user_id'      => $user_id,
+                    'user_b_id'    => $user_id,
                     'is_confirmed' => $is_confirmed
                 ]);
                 break;

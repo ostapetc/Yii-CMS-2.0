@@ -4,16 +4,14 @@
 }
 
 .comment .well {
-    background-color: #fdfdfd !important;
-    box-shadow: none;
     padding: 8px 12px;
+    background-color: #252A30 !important;
 }
 
 .comment .user-link {
-    color: #666666;
     display: block;
     float: left;
-    font-weight: bold;
+    font-size: 13px;
     margin-right: 10px;
     text-decoration: underline;
     margin-top: 4px;
@@ -30,7 +28,7 @@
     color: #999999;
     display: block;
     float: left;
-    font-size: 11px;
+    font-size: 13px;
     margin-right: 10px;
     margin-top: 6px;
 }
@@ -42,7 +40,7 @@
 
 .comment a.answer {
     text-decoration: underline;
-    font-size: 11px;
+    font-size: 13px;
     margin-top: 5px !important;
     float: left;
 }

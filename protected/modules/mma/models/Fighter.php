@@ -28,7 +28,7 @@ class Fighter extends ActiveRecord
 
     const IMAGE_DIR = 'upload/fighters/';
 
-    const IMAGE_SIZE_NORMAL = 130;
+    const IMAGE_SIZE_NORMAL = 120;
 
 
     public function name()
@@ -167,15 +167,18 @@ class Fighter extends ActiveRecord
     }
 
 
-    public function getImage($size = IMAGE_SIZE_NORMAL)
+    public function getImage($size = IMAGE_SIZE_NORMAL, $html_options = array())
     {
-        return CHtml::image($this->getImageSrc($size));
+        return CHtml::image($this->getImageSrc($size), '', $html_options);
     }
 
 
     public function getImageLink($size = self::IMAGE_SIZE_NORMAL)
     {
-        return CHtml::link($this->getImage($size), $this->url, array('title' => $this->full_name, 'alt' => $this->full_name));
+        return CHtml::link($this->getImage($size, array('class' => 'img-rounded')), $this->url, array(
+            'title' => $this->full_name,
+            'alt'   => $this->full_name,
+        ));
     }
 
 
@@ -200,4 +203,84 @@ class Fighter extends ActiveRecord
             }
         }
     }
+
+
+    public function getWinKoPercent()
+    {
+        return 100;
+    }
+
+
+    public function getLossKoPercent()
+    {
+        return 50;
+    }
+
+
+    public function getWinSubmissionPercent()
+    {
+        return 30;
+    }
+
+
+    public function winDecisionsPercent()
+    {
+        return 20;
+    }
+
+
+    public function getWinDecisionsPercent()
+    {
+        return 15;
+    }
+
+
+    public function getLossSubmissionPercent()
+    {
+        return 25;
+    }
+
+
+    public function getLossDecisionsPercent()
+    {
+        return 5;
+    }
+
+
+    public function getAge()
+    {
+        if ($this->birthdate)
+        {
+            return t('{n} years_old', date('Y') - date('Y', strtotime($this->birthdate)));
+        }
+        else
+        {
+            return "возраст неизвестен";
+        }
+    }
+
+
+    public function getWeightValue()
+    {
+        return $this->weight ? number_format($this->weight, 1) . ' кг' : CHtml::tag('span', ['class' => 'null'], 'неизвестно');
+    }
+
+
+    public function getHeightValue()
+    {
+        return $this->height ? number_format($this->height, 1) . ' см' : CHtml::tag('span', ['class' => 'null'], 'неизвестно');
+    }
+
+
+    public function getClubLink()
+    {
+        return $this->association ? CHtml::link($this->association) : CHtml::tag('span', ['class' => 'null'], 'неизвестно');
+    }
+
+
+    public function getClassValue()
+    {
+        return $this->class ? $this->class : CHtml::tag('span', ['class' => 'null'], 'неизвестно');
+    }
 }
+

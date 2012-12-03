@@ -301,3 +301,9 @@
     font-size: 13px !important;
 }
 
+.page-info-sidebar .badge {
+    font-size: 10px !important;
+    padding: 1px 4px !important;
+}
+
+
