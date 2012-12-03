@@ -152,7 +152,7 @@ var parsers = {
         sherdog_gallery: {
             base_url: 'http://www.sherdog.com',
             url: "/pictures",
-            enable: true,
+            enable: false,
             is_done: false,
             parser: function(error, result, $)
             {

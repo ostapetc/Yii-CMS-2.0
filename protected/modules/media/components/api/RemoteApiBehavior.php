@@ -65,6 +65,18 @@ class RemoteApiBehavior extends ApiBehaviorAbstract {
 
     public function getPlayer($size = null)
     {
+        $owner = $this->getOwner();
+        switch (true)
+        {
+            case $owner->type == MediaFile::TYPE_VIDEO:
+                return Yii::app()->controller->widget('media.portlets.VideoPlayer', [
+                    'src' => $this->getHref(),
+                    'title' => $owner->title,
+                    'size'  => $size
+                ], true);
+            default:
+                return '';
+        }
 
     }
 
@@ -93,10 +105,7 @@ class RemoteApiBehavior extends ApiBehaviorAbstract {
             case $this->typeIs('video'):
                 return [
                     'type' => 'video',
-                    'val'  => ImageHelper::placeholder( [
-                        'width'  => 64,
-                        'height' => 64
-                    ], 'Video processing', true)
+                    'val'  => $this->pk
                 ];
                 break;
             default:
@@ -115,19 +124,20 @@ class RemoteApiBehavior extends ApiBehaviorAbstract {
     }
 
 
-    public function getPreview($size_name = null)
+    public function getPreview($size = null)
     {
-        $data = $this->getPreviewArray($size_name);
+        $data = $this->getPreviewArray($size);
 
         switch ($data['type']) {
             case 'img':
                 return CHtml::image($data['val']);
                 break;
             case 'video':
-                return ImageHelper::placeholder($size = [
-                    'width'  => 64,
-                    'height' => 64
-                ], 'Video processing');
+                return CHtml::tag('div', [
+//                    "data-video" => $data['val'],
+                    "data-width"  => 64,
+                    "data-height" => 64
+                ], true, true);
                 break;
         }
     }
