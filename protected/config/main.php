@@ -116,11 +116,11 @@ return array(
                     'levels'       => 'info, error, warning',
                     'connectionID' => 'db',
                     'logTableName' => 'log'
-                )
-                /*array(
-                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters' => array('*'),
-                )*/
+                ),
+//                array(
+//                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                    'ipFilters' => array('*'),
+//                )
             ),
         ),
     ),

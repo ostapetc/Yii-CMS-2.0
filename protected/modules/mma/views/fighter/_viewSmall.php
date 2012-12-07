@@ -2,7 +2,7 @@
     <table cellpadding="0" cellspacing="0" border="0">
             <tr valign="top">
                 <td style="width: 140px">
-                    <?= $fighter->getImageLink() ?>
+                    <?= $fighter->getImageLink(Fighter::IMAGE_SIZE_NORMAL) ?>
                 </td>
                 <td valign="top" style="padding-left: 7px;width: 260px">
                     <table border="0" cellpadding="0" cellspacing="0">
@@ -15,43 +15,47 @@
                         <? foreach(array('wins', 'losses') as $label):  ?>
                             <?
                             $attr_prefix              = $label == 'wins' ? 'win_' : 'loss_';
+
                             $ko_attr_percent          = $attr_prefix . 'ko_percent';
-                            $submissions_attr_percent = $attr_prefix . 'submission_percent';
+                            $submissions_attr_percent = $attr_prefix . 'submissions_percent';
                             $decisions_attr_percent   = $attr_prefix . 'decisions_percent';
 
+                            $ko_attr_value          = $attr_prefix . 'ko';
+                            $submissions_attr_value = $attr_prefix . 'submissions';
+                            $decisions_attr_value   = $attr_prefix . 'decisions';
                             ?>
                             <tr valign="top">
                                 <td style="width: 50px">
-                                    <span class="label record">
+                                    <span class="label record <?= $label ?>">
                                         <?= $label ?> <br/>
-                                        <span><?= $fighter->wins ?></span>
+                                        <span><?= $fighter->$label ?></span>
                                     </span>
                                 </td>
                                 <td>
                                     <table  class="fights-statistic-tbl" border="0">
                                         <tr>
                                             <td style="width: 75px">
-                                                <div class="progress progress-danger active progress-small">
+                                                <div class="progress progress-danger active">
                                                     <div class="bar" style="width: <?= $fighter->$ko_attr_percent?>%;"></div>
                                                 </div>
                                             </td>
-                                            <td class="method-label-small">ko/tko</td>
+                                            <td class="method-label-small"><?= $fighter->$ko_attr_value ?> ko/tko</td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="progress progress-success active progress-small">
+                                                <div class="progress progress-success active">
                                                     <div class="bar" style="width: <?= $fighter->$submissions_attr_percent ?>%;"></div>
                                                 </div>
                                             </td>
-                                            <td class="method-label-small">сдачей</td>
+                                            <td class="method-label-small"><?= $fighter->$submissions_attr_value ?> сдачей</td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="progress progress-warning active progress-small">
+                                                <div class="progress progress-warning active">
                                                     <div class="bar" style="width: <?= $fighter->$decisions_attr_percent ?>%;"></div>
                                                 </div>
                                             </td>
-                                            <td class="method-label-small">решением</td>
+                                            <td class="method-label-small"><?= $fighter->$decisions_attr_value ?> решением</td>
                                         </tr>
                                     </table>
                                 </td>

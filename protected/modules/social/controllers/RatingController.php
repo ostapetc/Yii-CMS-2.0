@@ -8,6 +8,18 @@
  */
 class RatingController extends ClientController
 {
+    public function accessRules()
+    {
+        return array(
+            array(
+                'allow',
+                'actions' => ['create'],
+                'users'   => [User::ROLE_USER]
+            )
+        );
+    }
+
+
     public static function actionsTitles()
     {
         return array(

@@ -25,3 +25,8 @@
 .rating-value.grey {
     color: #808080;
 }
+
+.rating {
+    line-height: 10px;
+    font-size: 12px;
+}

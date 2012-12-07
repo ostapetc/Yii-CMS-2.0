@@ -1,3 +1,12 @@
+.label.record.losses, .method-label.losses  {
+    color: #ADAFAE !important;
+}
+
+.label.record.wins, .method-label.wins  {
+    color: #F5F5F5 !important;
+}
+
+/*Fighter small view*/
 .fighter-view-small .label.record {
     width: 40px !important;
     text-align: center;
@@ -9,7 +18,7 @@
 }
 
 .fighter-view-small .fights-statistic-tbl td:last-child {
-    width: 30px;
+    width: 70px;
     font-size: 11px;
     line-height: 11px;
 }
@@ -20,7 +29,7 @@
     font-weight: bold;
 }
 
-.fighter-view-small .progress-small {
+.fighter-view-small .progress {
     margin-bottom: 2px !important;
     height: 13px;
     width: 70px;
@@ -73,4 +82,69 @@
 
 .fighter-view-small .fighter-media a, .fighter-media span  {
     display: block;
+}
+
+/*Fighter big view*/
+.fighter-view-big .label.record {
+    width: 80px !important;
+    height: 67px;
+    height: 67px;
+    text-align: center;
+    line-height: 30px;
+    margin-bottom: 10px;
+    margin-right: 7px;
+}
+
+.fighter-view-big .label.record span{
+    font-size: 35px;
+}
+
+.fighter-view-big .fights-statistic-tbl td:last-child {
+    width: 30px;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.fighter-view-big .method-label {
+    text-transform: uppercase;
+    font-size: 13px !important;
+    font-weight: bold;
+    white-space: nowrap !important;
+}
+
+.fighter-view-big .progress {
+    margin-bottom: 2px !important;
+    width: 450px;
+    margin-right: 7px;
+    /*height: 13px;*/
+    /*width: 70px;*/
+}
+
+.fighter-view-big .fighter-country {
+    font-size: 15px;
+    font-weight: bold;
+    color: #f5f5f5;
+    display: block;
+}
+
+.fighter-view-big .fighter-age {
+    font-size: 15px;
+    color: #f5f5f5;
+    display: block;
+}
+
+.fighter-view-big .fighter-params {
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+}
+
+.fighter-club {
+    font-size: 13px;
+    display: block;
+}
+
+.fighter-view-big .fighter-class {
+    font-size: 15px;
+    color: #DD514C;
 }

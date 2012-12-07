@@ -41,7 +41,10 @@ class MMaModule extends WebModule
     public function routes()
     {
         return array(
-            '/fighters' => '/mma/fighter/index'
+            '/fighters'             => '/mma/fighter/index',
+            '/fighters/<url_id:.*>' => '/mma/fighter/view'
         );
+
+        //[a-zA-Zа-яА-Я0-9]+-[0-9]
     }
 }

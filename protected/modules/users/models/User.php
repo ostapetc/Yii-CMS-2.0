@@ -67,6 +67,10 @@ class User extends ActiveRecord
     const GENDER_MAN   = "man";
     const GENDER_WOMAN = "woman";
 
+    const ROLE_ADMIN = 'admin';
+    const ROLE_GUEST = 'guest';
+    const ROLE_USER  = 'user';
+
     const SCENARIO_CHANGE_PASSWORD_REQUEST = 'ChangePasswordRequest';
     const SCENARIO_ACTIVATE_REQUEST        = 'ActivateRequest';
     const SCENARIO_UPDATE_SELF_DATA        = 'UpdateSelfData';
@@ -357,12 +361,6 @@ class User extends ActiveRecord
                 'AuthAssignment',
                 'userid'
             ),
-            'role' => array(
-                self::HAS_ONE,
-                'AuthItem',
-                array('itemname'=>'name'),
-                'through' => 'assignment'
-            ),
             'pages_count' => array(
                 self::STAT,
                 'Page',
@@ -404,19 +402,9 @@ class User extends ActiveRecord
         $criteria->compare('gender', $this->gender, true);
         $criteria->compare('status', $this->status, true);
         $criteria->compare('date_create', $this->date_create, true);
-        $criteria->with = 'role';
 
         return new ActiveDataProvider(get_class($this), array(
-            'criteria' => $criteria,
-            'sort'     => array(
-                'attributes' => array(
-                    'role' => array(
-                        'asc'  => 'role.name',
-                        'desc' => 'role.name DESC'
-                    ),
-                    '*'
-                )
-            )
+            'criteria' => $criteria
         ));
     }
 
@@ -426,7 +414,6 @@ class User extends ActiveRecord
         return CMap::mergeArray(parent::attributeLabels(), array(
                 'password_c'   => t('Повторите пароль'),
                 'remember_me'  => t('Запомнить меня'),
-                'role'         => t('Роль')
             ));
     }
 
@@ -435,30 +422,6 @@ class User extends ActiveRecord
     {
         $this->activate_code = md5($this->id . $this->name . $this->email . time(true) . rand(5, 10));
         return $this->activate_code;
-    }
-
-
-    public function getRole()
-    {
-        $assigment = AuthAssignment::model()->findByAttributes(array(
-            'userid' => $this->id
-        ));
-
-        if (!$assigment)
-        {
-            $assigment = new AuthAssignment();
-            $assigment->itemname = AuthItem::ROLE_DEFAULT;
-            $assigment->userid   = $this->id;
-            $assigment->save();
-        }
-
-        return $assigment->role;
-    }
-
-
-    public function isRootRole()
-    {
-        return $this->role->name == AuthItem::ROLE_ROOT;
     }
 
 
@@ -560,6 +523,7 @@ class User extends ActiveRecord
                 return 'label-important';
         }
     }
+
 
     protected function beforeSave()
     {

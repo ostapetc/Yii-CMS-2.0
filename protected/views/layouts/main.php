@@ -56,6 +56,8 @@
     $cs->registerScriptFile('/js/plugins/toastmessage/javascript/jquery.toastmessage.js');
     $cs->registerCssFile('/js/plugins/toastmessage/resources/css/jquery.toastmessage.css');
     $cs->registerScriptFile('/js/plugins/errorsNotifier.js');
+    $cs->registerScriptFile('/js/plugins/jquery.checkRights.js');
+    $cs->registerScriptFile('/js/site/ready.js');
 
 
 //    $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
@@ -77,7 +79,7 @@
         echo CHtml::hiddenField('app_user_id', Yii::app()->user->id);
     }
     ?>
-    <? $this->renderPartial('application.modules.main.views.main._hiddenFields') ?>
+
     <? $this->renderPartial('application.views.layouts._modal'); ?>
 
     <div id='main-wrapper'>

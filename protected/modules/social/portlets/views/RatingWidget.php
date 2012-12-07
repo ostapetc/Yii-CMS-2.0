@@ -12,19 +12,26 @@ $plus_na   = (int) $value > 0 ? 'glyphicon-na' : '';
 ?>
 
 <span class="rating">
-    <?= $rating ?>
-
-    <? if (Yii::app()->user->isGuest): ?>
-        <span title="<?= $labels['not_guest'] ?>" class="rating-vote minus-na glyphicon-thumbs-down"></span>
-        <span title="<?= $labels['not_guest'] ?>" class="rating-vote plus-na glyphicon-thumbs-up"></span>
-    <? else: ?>
-        <? if ($user_id != Yii::app()->user->id): ?>
-            <span title="<?= $labels['minus'] ?>" class="rating-vote minus glyphicon-thumbs-down <?= $minus_na ?>" value="-1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></span>
-            <span title="<?= $labels['plus'] ?>" class="rating-vote plus glyphicon-thumbs-up <?= $plus_na ?>" value="1" object_id="<?= $object_id ?>" model_id="<?= $model_id ?>"></span>
-        <? else: ?>
-            <span title="<?= $labels['not_owner'] ?>" class="rating-vote minus glyphicon-thumbs-down glyphicon-na"></span>
-            <span title="<?= $labels['not_owner'] ?>" class="rating-vote plus glyphicon-thumbs-up glyphicon-na"></span>
-        <? endif ?>
-    <? endif ?>
+   <?= $rating ?>
+   <?=
+   CHtml::tag('span', array(
+       'title'       => $labels['minus'],
+       'class'       => "rating-vote minus glyphicon-thumbs-down",
+       'data-value'  => '-1',
+       'data-object' => $object_id,
+       'data-model'  => $model_id,
+       'data-role'   => 'user'
+   ), '')
+   ?>
+   <?=
+   CHtml::tag('span', array(
+       'title'       => $labels['plus'],
+       'class'       => "rating-vote plus glyphicon-thumbs-up",
+       'data-value'  => '1',
+       'data-object' => $object_id,
+       'data-model'  => $model_id,
+       'data-role'   => 'user'
+   ), '')
+   ?>
 </span>
 

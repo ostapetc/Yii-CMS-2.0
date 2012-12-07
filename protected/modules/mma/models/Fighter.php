@@ -152,7 +152,13 @@ class Fighter extends ActiveRecord
 
     public function getLink()
     {
-        return CHtml::link($this->full_name, array('/mma/fighter/view', 'id' => $this->id));
+        return CHtml::link($this->full_name, array('/mma/fighter/view', 'url_id' => $this->url_id));
+    }
+
+
+    public function getUrlId()
+    {
+        return Yii::app()->text->toUrl($this->full_name) . '-' . $this->id;
     }
 
 
@@ -168,26 +174,30 @@ class Fighter extends ActiveRecord
     }
 
 
-    public function getImageSrc($size = IMAGE_SIZE_NORMAL)
+    public function getImageSrc($size = null)
     {
         if ($this->image)
         {
-            $path = DOCUMENT_ROOT . self::IMAGE_DIR . $this->image;
-            if (file_exists($path))
+            $href = self::IMAGE_DIR . $this->image;
+            if ($size)
             {
                 return ImageHelper::thumbSrc(self::IMAGE_DIR, $this->image, array('width' => $size, 'height' => null));
+            }
+            else
+            {
+                return '/' . $href;
             }
         }
     }
 
 
-    public function getImage($size = IMAGE_SIZE_NORMAL, $html_options = array())
+    public function getImage($size = null, $html_options = array())
     {
         return CHtml::image($this->getImageSrc($size), '', $html_options);
     }
 
 
-    public function getImageLink($size = self::IMAGE_SIZE_NORMAL)
+    public function getImageLink($size = null)
     {
         return CHtml::link($this->getImage($size, array('class' => 'img-rounded')), $this->url, array(
             'title' => $this->full_name,
@@ -221,43 +231,54 @@ class Fighter extends ActiveRecord
 
     public function getWinKoPercent()
     {
-        return 100;
+        return $this->getPercent($this->win_ko, $this->wins);
     }
 
 
     public function getLossKoPercent()
     {
-        return 50;
+        return $this->getPercent($this->loss_ko, $this->losses);
     }
 
 
-    public function getWinSubmissionPercent()
+    public function getWinSubmissionsPercent()
     {
-        return 30;
+        return $this->getPercent($this->win_submissions, $this->wins);
     }
 
 
     public function winDecisionsPercent()
     {
-        return 20;
+        return $this->getPercent($this->win_decisions, $this->wins);
     }
 
 
     public function getWinDecisionsPercent()
     {
-        return 15;
+        return $this->getPercent($this->win_decisions, $this->wins);
     }
 
 
-    public function getLossSubmissionPercent()
+    public function getLossSubmissionsPercent()
     {
-        return 25;
+        return $this->getPercent($this->loss_submissions, $this->losses);
     }
 
 
     public function getLossDecisionsPercent()
     {
-        return 5;
+        return $this->getPercent($this->loss_decisions, $this->losses);
+    }
+
+
+    protected function getPercent($count, $total)
+    {
+        if (is_null($count) || is_null($total) || ($total == 0))
+        {
+            return 0;
+        }
+
+        return number_format($count * 100 / $total);
     }
 
 
