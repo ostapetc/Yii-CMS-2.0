@@ -30,7 +30,6 @@ class CommentsPortlet extends Widget
     {
         $cs = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery.ui');
-        $cs->registerScriptFile('/js/comments/commentsPortlet.js');
         $options = CJavaScript::encode($this->client_options);
         $cs->registerScript($this->id, "$('#{$this->id}').commentList($options)");
 

@@ -65,7 +65,7 @@ abstract class ClientController extends Controller
     {
         if (Yii::app()->user->isGuest)
         {
-            $this->redirect(array('/users/user/login'));
+            $this->redirect(array('/users/session/create'));
         }
         else
         {

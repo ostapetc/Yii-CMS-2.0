@@ -125,9 +125,9 @@ class MainController extends ClientController
 
     public function actionTest()
     {
-        require_once APP_PATH . 'commands/RankingsMmaNewsParserCommand.php';
+        require_once APP_PATH . 'commands/ImportEventsFightsFromMongoCommand.php';
 
-        $cmd = new RankingsMmaNewsParserCommand();
+        $cmd = new ImportEventsFightsFromMongoCommand('ImportEventsFightsFromMongoCommand', new CConsoleCommandRunner());
         $cmd->run(array());
     }
 }

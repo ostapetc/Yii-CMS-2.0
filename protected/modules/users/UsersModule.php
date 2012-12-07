@@ -55,10 +55,10 @@ class UsersModule extends WebModule
     {
         return array(
             '/admin/login/*'             => '/users/userAdmin/login',
-            '/login'                     => '/users/user/login',
+            '/login'                     => '/users/session/create',
             '/user/<id:\d*>'             => '/users/user/view',
             '/user/updateSelfData'       => '/users/user/updateSelfData',
-            '/logout'                    => '/users/user/logout',
+            '/logout'                    => '/users/session/delete',
             '/registration'              => '/users/user/registration',
             '/activateAccount/<code:.*>' => '/users/user/activateAccount',
             '/activateAccountRequest'    => '/users/user/activateAccountRequest',

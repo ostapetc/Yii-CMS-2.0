@@ -37,6 +37,8 @@ abstract class Controller extends CController implements ControllerInterface
             array('application.components.filters.StatisticFilter'),
             array('application.components.filters.ThemeFilter'),
             array('application.components.filters.ReturnUrlFilter'),
+            array('application.components.filters.JavaScriptYiiFilter'),
+            'accessControl'
         );
     }
 
@@ -265,12 +267,14 @@ abstract class Controller extends CController implements ControllerInterface
     {
         if (Yii::app()->request->getParam('modal'))
         {
-            $this->layout = false;
+            $this->layout = '//layouts/modal';
+
         }
-        if (Yii::app()->request->getParam('iframe'))
+        else if (Yii::app()->request->getParam('iframe'))
         {
             $this->layout = '//layouts/iframe';
         }
+
         return parent::render($view, $data, $return);
     }
 }

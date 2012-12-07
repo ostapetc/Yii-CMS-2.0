@@ -8,11 +8,18 @@
  */
 class RatingController extends ClientController
 {
+    public function accessRules()
+    {
+        return [
+            ['allow', 'actions' => ['create'], 'users' => ['user']],
+            ['deny',  'actions' => ['create'], 'users' => ['*']]
+        ];
+    }
+
+
     public static function actionsTitles()
     {
-        return array(
-            'create' => 'Добавление рейтинга'
-        );
+        return ['create' => 'Добавление рейтинга'];
     }
 
 

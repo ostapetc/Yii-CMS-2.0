@@ -43,7 +43,7 @@ class TextComponent extends CApplicationComponent
      */
     public function toUrl($string)
     {
-        return str_replace(" ", "_", self::translit($string));
+        return str_replace([" ", '"', "'"], ["_", '', ''], self::translit($string));
     }
 
 

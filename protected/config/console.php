@@ -1,4 +1,6 @@
 <?
+date_default_timezone_set('Europe/Moscow');
+
 $config = ENV == 'install' ? 'main' : ENV;
 
 $_SERVER['DOCUMENT_ROOT'] = realpath(__DIR__ . '/../../') . DIRECTORY_SEPARATOR;

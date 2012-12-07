@@ -34,7 +34,7 @@
                 ?>
 
                 <?= $user_name ?>
-                <a href="<? echo $this->createUrl('/users/user/logout'); ?>" class="underline float_right"><? echo t('Выйти'); ?></a>
+                <a href="<? echo $this->createUrl('/users/session/delete'); ?>" class="underline float_right"><? echo t('Выйти'); ?></a>
             </p>
         </div>
         <div class="breadcrumbs_container">

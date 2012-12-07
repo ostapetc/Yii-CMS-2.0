@@ -97,14 +97,14 @@ return array(
         'db' => array(
             'class' => 'application.components.DbConnection',
         ),
-        'authManager' => array(
-            'class' => 'CDbAuthManager',
-            'connectionID' => 'db',
-            'itemTable' => 'auth_items',
-            'assignmentTable' => 'auth_assignments',
-            'itemChildTable' => 'auth_items_childs',
-            'defaultRoles' => array('guest')
-        ),
+//        'authManager' => array(
+//            'class' => 'CDbAuthManager',
+//            'connectionID' => 'db',
+//            'itemTable' => 'auth_items',
+//            'assignmentTable' => 'auth_assignments',
+//            'itemChildTable' => 'auth_items_childs',
+//            'defaultRoles' => array('guest')
+//        ),
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),
@@ -116,11 +116,11 @@ return array(
                     'levels'       => 'info, error, warning',
                     'connectionID' => 'db',
                     'logTableName' => 'log'
-                )
-                /*array(
-                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
-                    'ipFilters' => array('*'),
-                )*/
+                ),
+//                array(
+//                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                    'ipFilters' => array('*'),
+//                )
             ),
         ),
     ),
