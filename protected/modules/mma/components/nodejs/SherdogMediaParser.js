@@ -108,6 +108,7 @@ var parsers = {
                                 parse(src, function(error, result, $)
                                 {
                                     video.url = $('meta[property="og:video"]').attr('content');
+                                    video.preview = $('meta[property="og:image"]').attr('content');
                                     save(video);
                                 });
                             }
@@ -152,7 +153,7 @@ var parsers = {
         sherdog_gallery: {
             base_url: 'http://www.sherdog.com',
             url: "/pictures",
-            enable: false,
+            enable: true,
             is_done: false,
             parser: function(error, result, $)
             {
