@@ -19,8 +19,6 @@ class RatingWidget extends Widget
         {
             throw new CException("Параметр model Должен быть объектом класса ActiveRecord");
         }
-
-        Yii::app()->clientScript->registerScriptFile('/js/rating/rating.js');
     }
 
 

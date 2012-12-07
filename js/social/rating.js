@@ -1,5 +1,7 @@
 $(function() {
     $('.rating-vote.minus, .rating-vote.plus').click(function() {
+        if ($(this).hasClass('auth-failed')) return false;
+
         var that  = $(this);
         var value = $(this).data('value');
 
@@ -12,17 +14,8 @@ $(function() {
             'Rating[value]'     : value
         };
 
-        console.log(params);
-
         $.post('/social/rating/create', params, function(rating_html) {
             that.parent().find('.rating-value').replaceWith(rating_html);
-
-            if (parseInt(value)) {
-               //that.add
-            }
-            else {
-
-            }
         });
     });
 });

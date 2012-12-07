@@ -17,9 +17,9 @@ return array(
             'type' => 'password',
             'id'   => 'login_password_input'
         ),
-        'remember_me' => array(
-            'type' => 'checkbox'
-        )
+//        'remember_me' => array(
+//            'type' => 'checkbox'
+//        )
     ),
     'buttons' => array(
         'submit' => array(

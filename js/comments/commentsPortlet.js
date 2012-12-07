@@ -53,8 +53,8 @@ $.widget('cmsUI.commentList', {
         var widget = this;
         $('a.answer').live('click', function()
         {
-            var comment_id = $(this).attr('comment_id');
-            var user_name  = $(this).attr('user_name');
+            var comment_id = $(this).data('comment');
+            var user_name  = $(this).data('user');
 
             $("input[name='Comment[parent_id]']", widget.form).val(comment_id);
 

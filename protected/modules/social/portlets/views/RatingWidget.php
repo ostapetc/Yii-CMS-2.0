@@ -20,7 +20,7 @@ $plus_na   = (int) $value > 0 ? 'glyphicon-na' : '';
        'data-value'  => '-1',
        'data-object' => $object_id,
        'data-model'  => $model_id,
-       'data-role'   => 'user'
+       'data-role'   => User::ROLE_USER
    ), '')
    ?>
    <?=
@@ -30,7 +30,7 @@ $plus_na   = (int) $value > 0 ? 'glyphicon-na' : '';
        'data-value'  => '1',
        'data-object' => $object_id,
        'data-model'  => $model_id,
-       'data-role'   => 'user'
+       'data-role'   => User::ROLE_USER
    ), '')
    ?>
 </span>

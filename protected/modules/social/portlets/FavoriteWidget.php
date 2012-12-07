@@ -19,10 +19,6 @@ class FavoriteWidget extends Widget
         {
             throw new CException("Параметр model Должен быть объектом класса ActiveRecord");
         }
-
-        Yii::app()->clientScript->registerScriptFile(
-            Yii::app()->getModule('social')->assetsUrl() . '/js/favorites.js'
-        );
     }
 
 

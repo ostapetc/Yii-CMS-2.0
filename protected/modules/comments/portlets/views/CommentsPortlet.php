@@ -1,8 +1,6 @@
 <a name="comments" xmlns="http://www.w3.org/1999/html"></a>
 <div id="<?= $this->getId() ?>" class="comment-list-wrapper <?= $this->is_hidden ? 'hide' : '' ?>">
-    <div id="comments-div">
-
-    </div>
+    <div id="comments-div"></div>
 
     <?= CHtml::link('', 'comment-form'); ?>
     <?= CHtml::beginForm('/comments/comment/create', 'post', array('id' => 'comment-form', 'style' => 'display: ' . (Yii::app()->user->isGuest ? 'none' : 'block'))) ?>
@@ -15,10 +13,10 @@
     <?= CHtml::endForm() ?>
 
     <? if (Yii::app()->user->isGuest): ?>
-        <blockquote>
+        <div class="alert alert-info">
             <p>Только зарегистрированные пользователи могут оставлять комментарии.</p>
             <p><?= Chtml::link('Войдите', '#', array('class' => 'login-link')) ?>, пожалуйста.</p>
-        </blockquote>
+        </div>
     <? endif ?>
 
 </div>

@@ -17,6 +17,7 @@
     $base   = Yii::app()->baseUrl;
     $cs     = Yii::app()->clientScript;
     $cs->registerCoreScript('jquery');
+    $cs->registerCoreScript('jquery.ui');
 
     //NodeJS only for loginned users
     if (!Yii::app()->user->isGuest)
@@ -55,19 +56,19 @@
     #toasmessage plugin, message notifier
     $cs->registerScriptFile('/js/plugins/toastmessage/javascript/jquery.toastmessage.js');
     $cs->registerCssFile('/js/plugins/toastmessage/resources/css/jquery.toastmessage.css');
-    $cs->registerScriptFile('/js/plugins/errorsNotifier.js');
+    $cs->registerScriptFile('/js/plugins/ajaxSetup.js');
     $cs->registerScriptFile('/js/plugins/jquery.checkRights.js');
+
+    #social
+    $cs->registerScriptFile('/js/social/favorites.js');
+    $cs->registerScriptFile('/js/social/rating.js');
+
+    #comments
+    $cs->registerScriptFile('/js/comments/commentsPortlet.js');
+
     $cs->registerScriptFile('/js/site/ready.js');
 
 
-//    $cs->registerCssFile((Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css'));
-//    $cs->registerCssFile('/js/plugins/modal/modal.css');
-//    $cs->registerScriptFile('/js/plugins/blockUI/blockUI.js');
-//    $cs->registerScriptFile('/js/plugins/blockUI/loaders.js');
-//    if (YII_DEBUG)
-//    {
-//        $cs->registerScriptFile('/js/plugins/debug.js');
-//    }
     ?>
 </head>
 
@@ -79,8 +80,6 @@
         echo CHtml::hiddenField('app_user_id', Yii::app()->user->id);
     }
     ?>
-
-    <? $this->renderPartial('application.views.layouts._modal'); ?>
 
     <div id='main-wrapper'>
         <? $this->widget('main.portlets.MainMenu'); ?>

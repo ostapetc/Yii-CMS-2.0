@@ -10,15 +10,11 @@ class UserController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            'login'                  => t('Авторизация'),
-            'logout'                 => t('Выход'),
-            'view'                   => t('Страница пользователя'),
-            'edit'                   => t('Редактирование личных данных'),
-            'registration'           => t('Регистрация'),
+            'view'             => t('Страница пользователя'),
+            'edit'             => t('Редактирование личных данных'),
+            'create'           => t('Регистрация'),
             'activateAccount'        => t('Активация аккаунта'),
             'activateAccountRequest' => t('Запрос на активацию аккаунта'),
-            'changePassword'         => t('Смена пароля'),
-            'changePasswordRequest'  => t('Запрос на смену пароля'),
             'updateSelfData'         => t('Редактирование личных данных'),
             'index'                  => t('Люди'),
             'getUserId'              => t('Получить User ID')
@@ -84,58 +80,6 @@ class UserController extends ClientController
                 'visible' => !Yii::app()->user->isGuest
             )
         );
-    }
-
-
-    public function actionLogin()
-    {
-        $model = new User(User::SCENARIO_LOGIN);
-
-        $this->performAjaxValidation($model);
-
-        $form = new Form('users.LoginForm', $model);
-
-        if (isset($_POST['User']['email']) && isset($_POST['User']["password"]) && !isset($_POST['ajax']))
-        {
-            $model->attributes = $_POST['User'];
-
-            if ($model->validate())
-            {
-                $identity = new UserIdentity($model->email, $model->password);
-                if ($identity->authenticate())
-                {
-                    Yii::app()->user->setFlash('success', t('Вы успешно авторизованы'));
-                    $this->redirect(Yii::app()->user->model->url);
-                }
-                else
-                {
-                    $auth_error = $identity->errorCode;
-                    if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
-                    {
-                        $auth_error.= '<br/>' . CHtml::link('Не пришло письмо? Активировать аккаунт повторно?', '/activateAccountReques');
-                    }
-                    else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
-                    {
-                        $auth_error.= '<br/>' . CHtml::link('Восстановить пароль', 'changePasswordRequest');
-                    }
-
-                    Yii::app()->user->setFlash('error', $auth_error);
-
-                    $this->redirect('/login');
-                }
-            }
-        }
-
-        $this->render('login', array(
-            'form' => $form
-        ));
-    }
-
-
-    public function actionLogout()
-    {
-        Yii::app()->user->logout();
-        $this->redirect(Yii::app()->homeUrl);
     }
 
 
@@ -269,103 +213,6 @@ class UserController extends ClientController
     }
 
 
-    public function actionChangePasswordRequest()
-    {
-        MailerTemplate::checkRequired(UsersModule::MAILER_TEMPLATE_CHANGE_PASSWORD);
-
-        $model = new User(User::SCENARIO_CHANGE_PASSWORD_REQUEST);
-        $form  = new Form('users.ChangePasswordRequestForm', $model);
-
-        $this->performAjaxValidation($model);
-
-        if (isset($_POST['User']))
-        {
-            $model->attributes = $_POST['User'];
-            if ($model->validate())
-            {
-                $user = User::model()->find("email = '{$model->email}'");
-                if ($user)
-                {
-                    if ($user->status == User::STATUS_ACTIVE)
-                    {
-                        $user->password_recover_code = md5($user->password . $user->email . $user->id . time());
-                        $user->password_recover_date = new CDbExpression('NOW()');
-                        $user->save();
-
-                        $outbox = new MailerOutbox();
-                        $outbox->template_id = MailerTemplate::model()->getIdByCode(UsersModule::MAILER_TEMPLATE_CHANGE_PASSWORD);
-                        $outbox->user_id     = $user->id;
-                        $outbox->save();
-
-                        Yii::app()->user->setFlash('success', 'На ваш Email отправлено письмо с дальнейшими инструкциями.');
-
-                    }
-                    else if ($user->status == User::STATUS_NEW)
-                    {
-                        Yii::app()->user->setFlash('error', UserIdentity::ERROR_NOT_ACTIVE);
-                    }
-                    else
-                    {
-                        Yii::app()->user->setFlash('error', UserIdentity::ERROR_BLOCKED);
-                    }
-                }
-                else
-                {
-                    Yii::app()->user->setFlash('error', UserIdentity::ERROR_UNKNOWN_EMAIL);
-                }
-
-                $this->redirect($_SERVER['REQUEST_URI']);
-            }
-        }
-
-        $this->render("changePasswordRequest", array(
-            'form' => $form,
-        ));
-    }
-
-
-    public function actionChangePassword($code)
-    {
-        $model = new User(User::SCENARIO_CHANGE_PASSWORD);
-        $form  = new Form('users.ChangePasswordForm', $model);
-
-        $this->performAjaxValidation($model);
-
-        $user = User::model()->findByAttributes(array('password_recover_code' => $code));
-        if (!$user)
-        {
-            Yii::app()->user->setFlash('error', 'Неверная ссылка изменения пароля');
-            $this->redirect('/login');
-        }
-        else
-        {
-            if (strtotime($user->password_recover_date) + 24 * 3600 > time())
-            {
-                if ($form->submited())
-                {
-                    $user->password_recover_code = null;
-                    $user->password_recover_date = null;
-                    $user->password              = md5($_POST['User']['password']);
-                    $user->save();
-
-                    Yii::app()->user->setFlash('success', 'Ваш пароль успешно изменен, вы можете авторизоваться!');
-
-                    $this->redirect('/login');
-                }
-            }
-            else
-            {
-                Yii::app()->user->setFlash('error', 'С момента запроса на восстановление пароля прошло больше суток');
-                $this->redirect('/login');
-            }
-        }
-
-        $this->render('changePassword', array(
-            'model' => $model,
-            'form'  => $form
-        ));
-    }
-
     public function actionView($id)
     {
         $this->page_title = '';
@@ -376,11 +223,12 @@ class UserController extends ClientController
         ));
     }
 
+
     public function actionUpdateSelfData()
     {
         if (Yii::app()->user->isGuest)
         {
-            $this->redirect(array('/users/user/login'));
+            $this->redirect(array('/users/session/create'));
         }
         $user = $this->loadModel(Yii::app()->user->id);
 
@@ -423,15 +271,6 @@ class UserController extends ClientController
         $this->render('index', array(
             'data_provider' => $data_provider
         ));
-    }
-
-
-    public function actionGetUserId()
-    {
-        if (!Yii::app()->user->isGuest)
-        {
-            echo Yii::app()->user->id;
-        }
     }
 }
 

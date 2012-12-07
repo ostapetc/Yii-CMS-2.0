@@ -14,6 +14,10 @@ $(function() {
                 }
             }
             catch(e){}
+
+            if (jQuery().checkRights) {
+                $('body').checkRights();
+            }
         },
 
         'error' : function(res) {

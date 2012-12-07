@@ -4,6 +4,8 @@ class WebUser extends CWebUser
 {
     private $_model = null;
 
+    public $loginUrl=array('/users/session/create');
+
 
     public function getRole()
     {

@@ -267,12 +267,14 @@ abstract class Controller extends CController implements ControllerInterface
     {
         if (Yii::app()->request->getParam('modal'))
         {
-            $this->layout = false;
+            $this->layout = '//layouts/modal';
+
         }
-        if (Yii::app()->request->getParam('iframe'))
+        else if (Yii::app()->request->getParam('iframe'))
         {
             $this->layout = '//layouts/iframe';
         }
+
         return parent::render($view, $data, $return);
     }
 }

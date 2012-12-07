@@ -1,6 +1,6 @@
 <ul class="nav pull-right" style="margin-right: 0;">
     <? if (Yii::app()->user->isGuest): ?>
-        <li><?= CHtml::link(t('Войти'), array('/users/user/login'), array(
+        <li><?= CHtml::link(t('Войти'), array('/users/session/create'), array(
             'class'      => 'modal-link',
             'data-title' => 'Авторизация'
         )); ?></li>
@@ -30,7 +30,7 @@
             </li>
             <li class="divider"></li>
             <li><?= CHtml::link('<span class="glyphicon-new-window"></span> &nbsp;' . t('Выйти'),
-                array('/users/user/logout')) ?></li>
+                array('/users/session/delete')) ?></li>
         </ul>
     </li>
 
