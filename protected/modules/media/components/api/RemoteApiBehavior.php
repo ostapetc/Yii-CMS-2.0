@@ -72,7 +72,8 @@ class RemoteApiBehavior extends ApiBehaviorAbstract {
                 return Yii::app()->controller->widget('media.portlets.VideoPlayer', [
                     'src' => $this->getHref(),
                     'title' => $owner->title,
-                    'size'  => $size
+                    'size'  => $size,
+                    'poster'  => $owner->preview
                 ], true);
             default:
                 return '';

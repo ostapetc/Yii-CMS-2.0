@@ -1,5 +1,5 @@
 <div id="jp_gui_container" class="jp-video jp-video-360p">
-    <div data-video="<?= $this->src; ?>" data-poster="" data-gui="#jp_gui_container" data-width='670' data-height="320"></div>
+    <div data-video="<?= $this->src; ?>" data-poster="" data-poster="<?= $this->poster ?>" data-gui="#jp_gui_container" data-width='670' data-height="320"></div>
     <div class="jp-type-single">
         <div class="jp-jplayer"></div>
         <div class="jp-gui">
