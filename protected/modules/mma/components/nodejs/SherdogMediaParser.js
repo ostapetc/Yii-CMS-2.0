@@ -243,27 +243,50 @@ var parsers = {
                 });
             },
             download_files: function (imgs, callback) {
-                async.map(imgs, function (img, callback) {
-                    var file_name = url.parse(img.url).pathname.split('/').pop();
-                    var file_path = upload_path + file_name;
-                    var file = fs.createWriteStream(file_path);
-                    var curl = spawn('curl', [img.url]);
-                    curl.stdout.on('data', function (data) {
-                        file.write(data);
-                    });
-                    curl.stdout.on('end', function (data) {
-                        argv.v && console.log('Download file:' + file_path);
-                        img.path = file_path;
-                        file.end();
-                        callback(null, img);
-                    });
-                    curl.on('exit', function (code) {
-                        if (code != 0) {
-                            console.log('Failed: ' + code);
-                            callback('Failed: ' + code, null);
+                var results, chunks = [],chunk = 50;
+                for (var i=0, j=imgs.length; i<j; i+=chunk) {
+                    chunks.push(imgs.slice(i,i+chunk)) ;
+                }
+                var map = function(imgs)
+                {
+                    async.map(imgs, function (img, callback) {
+                        var file_name = url.parse(img.url).pathname.split('/').pop();
+                        var file_path = upload_path + file_name;
+                        var file = fs.createWriteStream(file_path);
+                        var curl = spawn('curl', [img.url]);
+                        curl.stdout.on('data', function (data) {
+                            file.write(data);
+                        });
+                        curl.stdout.on('end', function (data) {
+                            argv.v && console.log('Download file:' + file_path);
+                            img.path = file_path;
+                            file.end();
+                            callback(null, img);
+                        });
+                        curl.on('exit', function (code) {
+                            if (code != 0) {
+                                console.log('Failed: ' + code);
+                                callback('Failed: ' + code, null);
+                            }
+                        });
+                    }, (function(err, res) {
+                        if (chunks.length > 0)
+                        {
+                            for (var i in res)
+                            {
+                                results.push(res[i]);
+                            }
+                            return function() {
+                                map(chunks.pop());
+                            }
                         }
-                    });
-                }, callback);
+                        else
+                        {
+                            return callback;
+                        }
+                    })());
+                };
+                map(chunks.pop());
             }
         }
     }
