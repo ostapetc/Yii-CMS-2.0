@@ -16,8 +16,35 @@ class MainMenu extends Portlet
             $query = trim(strip_tags($_GET['query']));
         }
 
+        $items = array(
+            array(
+                'label' => t('Посты'),
+                'url'   => array('/content/page/index')
+            ),
+            array(
+                'label' => t('Q&A'),
+                'url'   => array('/content/qa/index')
+            ),
+            array(
+                'label' => t('Видео'),
+                'url'   => array('/media/mediaVideo/manage')
+            ),
+            array(
+                'label' => t('Фото'),
+                'url'   => array('/media/mediaAlbum/manage')
+            ),
+            array(
+                'label' => t('Бойцы'),
+                'url'   => array('/mma/fighter/index')
+            ),
+            array(
+                'label' => t('Люди'),
+                'url'   => array('/users/user/index')
+            ),
+        );
+
         $this->render('MainMenu', array(
-            'items' => Yii::app()->controller->topMenuItems(),
+            'items' => $items,
             'query' => $query
         ));
     }

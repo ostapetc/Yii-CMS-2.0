@@ -23,35 +23,10 @@ abstract class ClientController extends Controller
     }
 
 
-    public function topMenuItems()
-    {
-        return array(
-            array(
-                'label' => t('Посты'),
-                'url'   => array('/content/page/index')
-            ),
-            array(
-                'label' => t('Форум'),
-                'url'   => array('/content/forum/index')
-            ),
-            array(
-                'label' => t('Видео'),
-                'url'   => array('/media/mediaVideo/manage')
-            ),
-            array(
-                'label' => t('Фото'),
-                'url'   => array('/media/mediaAlbum/manage')
-            ),
-            array(
-                'label' => t('Бойцы'),
-                'url'   => array('/mma/fighter/index')
-            ),
-            array(
-                'label' => t('Люди'),
-                'url'   => array('/users/user/index')
-            ),
-        );
-    }
+//    public function topMenuItems()
+//    {
+//
+//    }
 
 
     public function subMenuItems()

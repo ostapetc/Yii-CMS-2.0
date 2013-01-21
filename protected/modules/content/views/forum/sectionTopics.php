@@ -30,7 +30,7 @@ $this->widget('Crumbs', [
                     <span class="glyphicon glyphicon-bookmark "></span>
                 </td>
                 <td>
-                    <?= CHtml::link($page->title, $page->forum_url) ?>
+                    <?= CHtml::link($page->title, '') ?>
                 </td>
                 <td>
                     <? $last_comment = $page->last_comment; ?>

@@ -48,14 +48,6 @@ abstract class OsParser extends Component
             $model->grabImages($web_url);
             $model->grabTagsFromText();
             $this->log("Сохранена модель #{$model->id}");
-
-            foreach (array(3, 13) as $section_id)
-            {
-                $rel = new PageSectionRel();
-                $rel->section_id = $section_id;
-                $rel->page_id    = $model->id;
-                $rel->throwIfErrors()->save();
-            }
         }
         else
         {

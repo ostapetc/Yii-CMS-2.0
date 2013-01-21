@@ -1,14 +1,29 @@
 <?
-$form = include "UserForm.php";
+return array(
+    'activeForm' => array(
+        'id'                   => 'registration-form',
+        'enableAjaxValidation' => true,
+    ),
+    'elements' => array(
+        'name'  => array(
+            'type' => 'text'
+        ),
+        'email' => array(
+            'type' => 'text',
+        ),
+        'password' => array(
+            'type' => 'password',
+        ),
+        'password_c' => array(
+            'type' => 'password',
+        ),
+    ),
+    'buttons' => array(
+        'submit' => array(
+            'type'  => 'submit',
+            'value' => t('Войти')
+        )
+    )
+);
 
-$form['activeForm']['id'] = 'registration-form';
 
-unset($form['elements']['status']);
-unset($form['elements']['role']);
-unset($form['elements']['captcha']);
-unset($form['elements']['birthdate']);
-unset($form['elements']['gender']);
-
-$form['buttons']['submit']['value'] = 'Зарегистрироваться';
-
-return $form;

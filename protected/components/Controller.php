@@ -268,8 +268,9 @@ abstract class Controller extends CController implements ControllerInterface
         if (Yii::app()->request->getParam('modal'))
         {
             $this->layout = '//layouts/modal';
-
+            Yii::app()->clientScript->scriptMap = ['jquery.js' => false];
         }
+
         else if (Yii::app()->request->getParam('iframe'))
         {
             $this->layout = '//layouts/iframe';

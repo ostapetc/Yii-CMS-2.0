@@ -19,7 +19,7 @@
                     <span class="glyphicon glyphicon-announcement "></span>
                 </td>
                 <td>
-                    <?= CHtml::link($section->name, $section->forum_url) ?>
+                    <?= CHtml::link($section->name, '') ?>
                 </td>
                 <td>
                     <? if ($section->last_topic): ?>

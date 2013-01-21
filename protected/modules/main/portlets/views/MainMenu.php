@@ -10,11 +10,11 @@
             <div class="nav-collapse">
                 <?
                 $this->widget('ClientMenu', array(
-                    'items'       => $items
+                    'items' => $items
                 ))
                 ?>
                 <form action="<?= $this->createUrl('/content/search/index') ?>" class="navbar-search pull-left">
-                    <input type="text" placeholder="Поиск" name="q" value="<?= $query ?>" class="search-query span2">
+                    <input type="text" placeholder="Поиск" name="q" value="<?= $query ?>" class="search-query span2" style="width: 223px">
                 </form>
                 <? $this->render('_MenuRight') ?>
             </div>

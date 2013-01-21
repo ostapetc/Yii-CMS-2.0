@@ -364,3 +364,20 @@ h1 {
 }
 
 
+.modal-body {
+    max-height: 600px;
+}
+
+#modal-window {
+    margin-top: -20% !important;
+}
+
+.tags-link {
+    display: inline-block !important;
+    font-weight: bold;
+    margin-right: 20px !important;
+    width: 160px !important;
+    color: #ADAFAE;
+}
+
+

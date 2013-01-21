@@ -2,11 +2,7 @@
 return array(
     'activeForm' => array(
         'id'                   => 'login-form',
-        'enableAjaxValidation' => true,
-        'clientOptions'        => array(
-            'validateOnSubmit' => true,
-            'validateOnChange' => true
-        )
+        'enableAjaxValidation' => true
     ),
     'elements' => array(
         'email' => array(
