@@ -1,4 +1,3 @@
-
 <?php
 
 class m121128_112626_add_preview_columns_files extends DbMigration
@@ -7,7 +6,7 @@ class m121128_112626_add_preview_columns_files extends DbMigration
 	{
         $this->execute('
             ALTER TABLE `media_files`
-                ADD COLUMN `preview` VARCHAR(250) NULL,
+                ADD COLUMN `preview` VARCHAR(250) NULL
         ');
 	}
 
