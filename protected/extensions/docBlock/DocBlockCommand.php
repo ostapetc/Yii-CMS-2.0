@@ -79,14 +79,25 @@ class DocBlockCommand extends CConsoleCommand
             {
                 continue;
             }
+            if ($object instanceof CActiveRecord) {
+                return false;
+            }
+
             $docBlock     = $this->getDockBlock($class, $object);
             $file         = $fileInfo->getPath() . '/' . $fileInfo->getFileName();
             $content      = file_get_contents($file);
-            $oldDockBlock = substr($content, strlen('<?' . PHP_EOL), strpos($content, "class $class"));
+            $start        = strpos($content, '/**');
+            $secondStart = strpos($content, 'class '.$class);
+            $end          = strpos($content, '*/') + strlen('*/');
+            if ($secondStart < $start) {
+                $end = $start = $secondStart;
+            }
+            $oldDockBlock = substr($content, $start, $end);
             if ($docBlock !== $oldDockBlock)
             {
-                $fileContent  = substr($content, strpos($content, "class $class"));
-                file_put_contents($file, '<?' . PHP_EOL . $docBlock . PHP_EOL . $fileContent);
+                $fileBeginContent = substr($content, 0, $start);
+                $fileContent  = substr($content, $end);
+                file_put_contents($file, $fileBeginContent . $docBlock . $fileContent);
             }
         }
     }
@@ -108,6 +119,7 @@ class DocBlockCommand extends CConsoleCommand
         try
         {
             $reflection = new ReflectionClass($class);
+
             if (!$reflection->isInstantiable() || !$reflection->isSubclassOf($this->baseClass))
             {
                 return false;
@@ -136,9 +148,9 @@ class DocBlockCommand extends CConsoleCommand
         $result = "/** \n";
         foreach (explode("\n", $this->getRawDockBlock($parser, $props)) as $line)
         {
-            $result .= " * " . trim($line) . "\n";
+            $result .= " * " . trim($line) . PHP_EOL;
         }
-        return $result . " */\n";
+        return $result . " */";
     }
 
 

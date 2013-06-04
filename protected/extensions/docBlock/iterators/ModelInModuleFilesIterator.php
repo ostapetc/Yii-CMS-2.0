@@ -18,6 +18,7 @@ class ModelInModuleFilesIterator extends AppendIterator
 
             $flags = FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS;
             $this->append(new RecursiveDirectoryIterator($modelsDir, $flags));
+            Yii::import($id.'.models.*');
         }
     }
 }
