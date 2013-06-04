@@ -37,6 +37,7 @@ class PageController extends ClientController
         $this->render('sitemap');
     }
 
+
     public function subMenuItems()
     {
         return [
@@ -49,9 +50,13 @@ class PageController extends ClientController
                 'url'   => ['content/page/top']
             ],
             [
-                'label'   => Yii::app()->user->isGuest ?: t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
+                'label'   => Yii::app()->user->isGuest ? : t('Ваши') . '(' . Page::model()->count('user_id = ' . Yii::app()->user->id) . ')',
                 'url'     => ['/page/user/' . Yii::app()->user->id],
                 'visible' => !Yii::app()->user->isGuest
+            ],
+            [
+                'label' => 'Создать пост',
+                'url'   => ['create']
             ]
         ];
     }
@@ -64,15 +69,11 @@ class PageController extends ClientController
                 'actions'  => ['create', 'update'],
                 'sidebars' => [
                     [
-                        'type' => 'widget',
-                        'content.portlets.SectionCreateSidebar'
-                    ],
-                    [
-                        'type' => 'widget',
+                        'type'  => 'widget',
                         'class' => 'tags.portlets.TagCreateSidebar',
                     ],
                     [
-                        'type' => 'partial',
+                        'type'  => 'partial',
                         'class' => 'content.views.page._sidebarFormNotices',
                     ],
                 ]
@@ -80,25 +81,14 @@ class PageController extends ClientController
             [
                 'actions'  => ['index'],
                 'sidebars' => [
-//                    [
-//                        'type' => 'widget',
-//                        'class' => 'content.portlets.PageSectionsSidebar',
-//                    ],
-//                    [
-//                        'type' => 'widget',
-//                        'class' => 'comments.portlets.CommentsSidebar',
-//                    ],
-                    [
-                        'type' => 'widget',
-                        'class' => 'content.portlets.NavigatorSidebar',
-                    ],
+
                 ]
             ],
             [
                 'actions'  => ['view'],
                 'sidebars' => [
                     [
-                        'type' => 'widget',
+                        'type'  => 'widget',
                         'class' => 'content.portlets.PageInfoSidebar'
                     ]
                 ]
@@ -107,13 +97,13 @@ class PageController extends ClientController
                 'actions'  => ['userPages'],
                 'sidebars' => [
                     [
-                        'type' => 'widget',
+                        'type'  => 'widget',
                         'class' => 'content.portlets.userPagesSidebar'
                     ]
                 ]
             ],
             [
-                'type' => 'widget',
+                'type'  => 'widget',
                 'class' => 'media.portlets.VideoPlayList',
             ],
         ];
@@ -185,8 +175,8 @@ class PageController extends ClientController
         $criteria = new CDbCriteria();
         $criteria->compare('status', Page::STATUS_PUBLISHED);
         $criteria->compare('type', Page::TYPE_POST);
-        $criteria->with   = ['tags'];
-        $criteria->order  = 'date_create DESC';
+        $criteria->with  = ['tags'];
+        $criteria->order = 'date_create DESC';
 
         $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
@@ -197,39 +187,6 @@ class PageController extends ClientController
 
         $this->render('index', [
             'data_provider' => $data_provider
-        ]);
-    }
-
-
-    public function actionSectionPages($section_id)
-    {
-        $section = PageSection::model()->findByPk($section_id);
-        if (!$section)
-        {
-            $this->pageNotFound();
-        }
-
-        $this->page_title = $section->name;
-
-        $section_rel_table = PageSectionRel::model()->tableName();
-
-        $criteria = new CDbCriteria();
-//        $criteria->compare('t.status', Page::STATUS_PUBLISHED);
-//        $criteria->with  = ['tags', 'sections'];
-//        $criteria->order = 't.date_create DESC';
-//        $criteria->join  = "INNER JOIN {$section_rel_table}
-//                                ON  {$section_rel_table}.section_id = {$section_id}";
-//
-        $data_provider = new CActiveDataProvider('Page', [
-            'criteria'   => $criteria,
-            'pagination' => [
-              'pageSize' => '10'
-            ]
-        ]);
-        //count($data_provider->getTotalItemCount()); die;
-        $this->render('index', [
-            'data_provider' => $data_provider,
-            'section'       => $section
         ]);
     }
 
@@ -284,7 +241,7 @@ class PageController extends ClientController
             $this->pageNotFound();
         }
 
-        $criteria = new CDbCriteria();
+        $criteria        = new CDbCriteria();
         $criteria->with  = ['tags'];
         $criteria->order = 'date_create DESC';
 
@@ -314,7 +271,7 @@ class PageController extends ClientController
         $data_provider = new CActiveDataProvider('Page', [
             'criteria'   => $criteria,
             'pagination' => [
-              'pageSize' => '10'
+                'pageSize' => '10'
             ]
         ]);
 
@@ -333,5 +290,5 @@ class PageController extends ClientController
             'list' => t('показывать списком'),
             'grid' => t('показывать таблицей')
         ];
-    }   
+    }
 }

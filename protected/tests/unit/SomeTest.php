@@ -1,6 +1,6 @@
 <?
  
-class SomeTest extends CTestCase
+class SomeTest extends CDbTestCase
 {
     public function testOne()
     {

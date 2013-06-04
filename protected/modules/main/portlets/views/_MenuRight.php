@@ -1,11 +1,12 @@
 <ul class="nav pull-right" style="margin-right: 0;">
     <? if (Yii::app()->user->isGuest): ?>
-        <li><?= CHtml::link(t('Войти'), array('/users/session/create'), array(
-            'class'      => 'modal-link',
-            'data-title' => 'Авторизация'
-        )); ?></li>
+        <li>
+            <?= CHtml::link(t('Войти'), ['/users/session/create'], ['class' => 'modal-link']);?>
+        </li>
         <li class="divider-vertical"></li>
-        <li><?= CHtml::link(t('Регистрация'), array('/users/user/registration')); ?></li>
+        <li>
+            <?= CHtml::link(t('Регистрация'), ['/users/user/registration'], ['class' => 'modal-link']);?>
+        </li>
     <? else: ?>
     <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle user-menu" href="#"><b class="caret"></b></a>

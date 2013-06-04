@@ -28,28 +28,8 @@ class SessionController extends ClientController
 
         if ($form->submitted() && $model->validate())
         {
-            $identity = new UserIdentity($model->email, $model->password);
-            if ($identity->authenticate())
-            {
-                Yii::app()->user->setFlash('success', t('Вы успешно авторизованы'));
-                $this->redirect(Yii::app()->user->model->url);
-            }
-            else
-            {
-                $auth_error = $identity->errorCode;
-                if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
-                {
-                    $auth_error.= '<br/>' . CHtml::link('Не пришло письмо? Активировать аккаунт повторно?', '/activateAccountReques');
-                }
-                else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
-                {
-                    $auth_error.= '<br/>' . CHtml::link('Восстановить пароль', 'changePasswordRequest');
-                }
-
-                Yii::app()->user->setFlash('error', $auth_error);
-
-                $this->redirect('/login');
-            }
+            Yii::app()->user->setFlash('success', t('Вы успешно авторизованы'));
+            $this->redirect(Yii::app()->user->model->url);
         }
 
         $this->render('create', array(

@@ -16,6 +16,7 @@
  * @property string           $date_create
  * @property string           $date_update
  * @property integer          $order
+ * @property string           $type
  * 
  * !Accessors - Геттеры и сеттеры класа и его поведений
  * @property                  $href
@@ -31,8 +32,6 @@
  * @property Tag[]            $tags
  * @property int|null         $comments_count
  * @property User             $user
- * @property PageSectionRel[] $sections_rels
- * @property PageSection[]    $sections
  * 
  * !Scopes - именованные группы условий, возвращают этот АР
  * @method   Page             published()
@@ -54,8 +53,8 @@ class Page extends ActiveRecord
     const IMAGES_DIR        = '/upload/pages/';
     const IMAGES_SIZE_SMALL = 200;
 
-    const TYPE_POST  = 'post';
-    const TYPE_FORUM = 'forum';
+    const TYPE_POST = 'post';
+    const TYPE_QA   = 'qa';
 
     const STATUS_UNPUBLISHED = 'unpublished';
     const STATUS_PUBLISHED   = 'published';
@@ -174,6 +173,10 @@ class Page extends ActiveRecord
                 'length',
                 'max' => 250
             ),
+            array(
+                'type',
+                'unsafe'
+            )
         );
     }
 
@@ -208,17 +211,6 @@ class Page extends ActiveRecord
                 self::BELONGS_TO,
                 'User',
                 'user_id'
-            ),
-            'sections_rels' => array(
-                self::HAS_MANY,
-                'PageSectionRel',
-                'page_id'
-            ),
-            'sections' => array(
-                self::HAS_MANY,
-                'PageSection',
-                'section_id',
-                'through' => 'sections_rels'
             ),
             'views_count' => array(
                 self::STAT,
@@ -303,28 +295,6 @@ class Page extends ActiveRecord
                 'dir' => self::IMAGES_DIR
             )
         );
-    }
-
-
-    public function updateSectionsRels()
-    {
-        if (!is_array($this->sections_ids)) return;
-
-        PageSectionRel::model()->deleteAll('page_id = ' . $this->id);
-
-        foreach ($this->sections_ids as $section_id)
-        {
-            $rel = new PageSectionRel();
-            $rel->section_id = $section_id;
-            $rel->page_id    = $this->id;
-            $rel->save();
-        }
-    }
-
-
-    public function getForumUrl()
-    {
-        return Yii::app()->createUrl('/content/forum/viewTopic', array('topic_id' => $this->id));
     }
 
 

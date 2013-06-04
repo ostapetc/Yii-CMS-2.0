@@ -50,7 +50,13 @@ class Tag extends ActiveRecord
 
 	public function relations()
 	{
-		return array();
+		return array(
+            'rels_count' => [
+                self::STAT,
+                'TagRel',
+                'tag_id'
+            ]
+        );
 	}
 
 

@@ -84,7 +84,8 @@ class MailerOutbox extends ActiveRecord
             array('email', 'email'),
             array('template_id', 'numerical', 'integerOnly' => true),
             array('user_id', 'numerical', 'integerOnly' => true),
-            array('status', 'in', 'range' => self::$status_list),
+            array('status', 'default', 'value' => self::STATUS_QUEUE),
+            array('status', 'in', 'range' => array_keys(self::$status_list)),
 			array('id, email, status, log, subject, body, date_create, date_send', 'safe', 'on' => 'search'),
 		);
 	}

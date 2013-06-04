@@ -10,9 +10,9 @@ class UserController extends ClientController
     public static function actionsTitles()
     {
         return array(
-            'view'             => t('Страница пользователя'),
-            'edit'             => t('Редактирование личных данных'),
-            'create'           => t('Регистрация'),
+            'view'                   => t('Страница пользователя'),
+            'update'                 => t('Редактирование личных данных'),
+            'registration'            => t('Регистрация'),
             'activateAccount'        => t('Активация аккаунта'),
             'activateAccountRequest' => t('Запрос на активацию аккаунта'),
             'updateSelfData'         => t('Редактирование личных данных'),
@@ -90,40 +90,21 @@ class UserController extends ClientController
      */
     public function actionRegistration()
     {
-        MailerTemplate::checkRequired(UsersModule::MAILER_TEMPLATE_REGISTRATION);
-        Param::checkRequired(UsersModule::PARAM_REGISTRATION_DONE_MESSAGE);
-
         $user = new User(User::SCENARIO_REGISTRATION);
         $form = new Form('users.RegistrationForm', $user);
 
         $this->performAjaxValidation($user);
 
-        if (isset($_POST['User']))
+        if ($form->submitted() && $user->validate())
         {
-            $user->attributes = $_POST['User'];
-            if ($user->validate())
-            {
-                $user->password = md5($user->password);
-                $user->generateActivateCode();
-                $user->activate_date = new CDbExpression('NOW()');
+            $user->password      = md5($user->password);
+            $user->activate_date = new CDbExpression('NOW()');
+            $user->throwIfErrors();
+            $user->save(false);
 
-                if ($user->save(false))
-                {
-                    $outbox = new MailerOutbox();
-                    $outbox->user_id     = $user->id;
-                    $outbox->template_id = MailerTemplate::model()->getIdByCode(UsersModule::MAILER_TEMPLATE_REGISTRATION);
-                    $outbox->save();
+            Yii::app()->user->setFlash('success', 'Вы успешно зарегистрированы');
 
-                    $assignment = new AuthAssignment();
-                    $assignment->itemname = AuthItem::ROLE_DEFAULT;
-                    $assignment->userid   = $user->id;
-                    $assignment->save();
-
-                    Yii::app()->user->setFlash('success', Param::model()->getValue(UsersModule::PARAM_REGISTRATION_DONE_MESSAGE));
-
-                    $this->redirect('/');
-                }
-            }
+            $this->redirect('/');
         }
 
         $this->render('registration', array('form' => $form));

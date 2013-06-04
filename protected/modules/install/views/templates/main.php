@@ -13,6 +13,7 @@ foreach ($modules_dirs as $module)
 }
 
 return array(
+    'sourceLanguage' => 'en_US',
     'language' => 'ru',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => '',
@@ -37,12 +38,19 @@ return array(
             'class' => 'application.components.CommandExecutor',
         ),
         'messages' => array(
-            'class' => 'CDbMessageSource',
-            'sourceMessageTable' => 'languages_messages',
-            'translatedMessageTable' => 'languages_translations'
+            'class' => 'CPhpMessageSource',
+//            'class' => 'CDbMessageSource',
+//            'sourceMessageTable' => 'languages_messages',
+//            'translatedMessageTable' => 'languages_translations'
         ),
         'bootstrap' => array(
             'class' => 'application.components.bootstrap.components.Bootstrap'
+        ),
+        'search' => [
+            'class' => 'ext.sphinx.SphinxSearch'
+        ],
+        'db' => array(
+            'class' => 'application.components.DbConnection',
         ),
         'assetManager' => array(
             'class' => 'CAssetManager',
@@ -90,14 +98,14 @@ return array(
             'class' => 'CErrorHandler',
             'errorAction' => 'main/main/error',
         ),
-        'authManager' => array(
-            'class' => 'CDbAuthManager',
-            'connectionID' => 'db',
-            'itemTable' => 'auth_items',
-            'assignmentTable' => 'auth_assignments',
-            'itemChildTable' => 'auth_items_childs',
-            'defaultRoles' => array('guest')
-        ),
+//        'authManager' => array(
+//            'class' => 'CDbAuthManager',
+//            'connectionID' => 'db',
+//            'itemTable' => 'auth_items',
+//            'assignmentTable' => 'auth_assignments',
+//            'itemChildTable' => 'auth_items_childs',
+//            'defaultRoles' => array('guest')
+//        ),
         'cache' => array(
             'class' => 'system.caching.CFileCache',
         ),

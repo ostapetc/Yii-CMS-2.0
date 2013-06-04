@@ -56,6 +56,7 @@ class SherdogMediaParser extends CConsoleCommand
         $file->title     = $video['title'];
         $file->type      = MediaFile::TYPE_VIDEO;
         $file->remote_id = $video['url'];
+        $file->preview   = $video['preview'];
         if (!$file->save())
         {
             throw new CException(json_encode($file->getErrors()));

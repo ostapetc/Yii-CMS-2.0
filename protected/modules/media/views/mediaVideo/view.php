@@ -3,7 +3,7 @@
     <div class="video-container">
         <?= $model->getPlayer([
             'width'=> 670,
-            'height' => 360
+            'height' => 360,
         ]);
         ?>
     </div>

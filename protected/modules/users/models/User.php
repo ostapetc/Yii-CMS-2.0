@@ -89,6 +89,12 @@ class User extends ActiveRecord
 
     public $activate_code;
 
+    public static $roles = array(
+        self::ROLE_USER,
+        self::ROLE_GUEST,
+        self::ROLE_ADMIN
+    );
+
 
     public function name()
     {
@@ -326,11 +332,20 @@ class User extends ActiveRecord
                 'filter',
                 'filter' => 'strip_tags'
             ),
-//            array(
-//                'about_self',
-//                'safe',
-//                'on' => self::SCENARIO_UPDATE_SELF_DATA
-//            )
+            array(
+                'email',
+                'authenticate',
+                'on' => self::SCENARIO_LOGIN
+            ),
+            array(
+                'role',
+                'unsafe'
+            ),
+            array(
+                'role',
+                'in',
+                'range' => self::$roles
+            )
         );
     }
 
@@ -539,6 +554,30 @@ class User extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+
+    public function authenticate()
+    {
+        $identity = new UserIdentity($this->email, $this->password);
+        if ($identity->authenticate())
+        {
+            return true;
+        }
+        else
+        {
+            $auth_error = $identity->errorCode;
+            if ($auth_error == UserIdentity::ERROR_NOT_ACTIVE)
+            {
+                $auth_error.= '<br/>' . CHtml::link('Не пришло письмо? Активировать аккаунт повторно?', '/activateAccountReques');
+            }
+            else if ($auth_error == UserIdentity::ERROR_UNKNOWN)
+            {
+                $auth_error.= '<br/>' . CHtml::link('Восстановить пароль', 'changePasswordRequest');
+            }
+
+            $this->addError('email', $auth_error);
+        }
     }
 }
 

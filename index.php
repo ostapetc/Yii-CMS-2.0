@@ -22,3 +22,5 @@ $config = APP_PATH . 'config' . DS . ENV  .'.php';
 
 Yii::createWebApplication($config)->run();
 
+new CModelEvent();
+

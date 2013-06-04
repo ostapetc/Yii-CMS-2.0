@@ -54,7 +54,7 @@ class UserIdentity extends CUserIdentity
     public function authenticate($admin_panel = false)
     {
         $user = User::model()->findByAttributes(array("email" => $this->username));
-
+        v($this->checkPassword($user->password, $this->password)); die;
         if (!$user || !$this->checkPassword($user->password, $this->password))
         {
             $this->errorCode = self::ERROR_UNKNOWN;

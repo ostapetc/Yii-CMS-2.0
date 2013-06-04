@@ -37,8 +37,6 @@ class ContentModule extends WebModule
         return [
             'Список страниц'    => Yii::app()->createUrl('/content/pageAdmin/manage'),
             'Добавить страницу' => Yii::app()->createUrl('/content/pageAdmin/create'),
-            'Разделы страниц'   => Yii::app()->createUrl('/content/pageSectionAdmin/manage'),
-            'Добавить раздел'   => Yii::app()->createUrl('/content/pageSectionAdmin/create'),
             'Управление меню'   => Yii::app()->createUrl('/content/menuAdmin/manage'),
             'Добавить меню'     => Yii::app()->createUrl('/content/menuAdmin/create'),
         ];
@@ -55,9 +53,9 @@ class ContentModule extends WebModule
             '/page/user/<user_id:\d+>/*'            => '/content/page/userPages',
             '/page/tag/<tag_name:[a-zA-Zа-яА-Я ]+>' => '/content/page/tagPages',
             '/page/section/<section_id:\d+>/*'      => '/content/page/sectionPages',
-            '/forum'                                => '/content/forum/index',
-            '/forum/section/<section_id:\d+>/*'     => '/content/forum/sectionTopics',
-            '/forum/topic/<topic_id:\d+>/*'         => '/content/forum/viewTopic',
+            '/qa'                                   => '/content/qa/index',
+            '/qa/tag/<tag_id:\d+>'                  => '/content/qa/index',
+            '/qa/create'                            => '/content/qa/create'
         ];
 
         return $routes;
